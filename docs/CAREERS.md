@@ -28,8 +28,8 @@ Director decisions, 2026-11-03:
 
 ## Rules (`CareerRules`)
 - **Promotion** is asked for from the career menu. It succeeds when performance has reached the rank's `promote_at`. Asking too early costs you performance and the boss's goodwill.
-- **At year end:** each career pays its rank's pay, adds stress, raises the career stat and drifts performance by -8 to +12 plus a career-stat bonus.
-- **Firing:** performance of 15 or less at year end gets you fired (flag `fired`).
+- **At year end:** each career pays its rank's pay, adds stress, raises the career stat and drifts performance by -12 to +10 plus a career-stat bonus.
+- **Firing:** performance of 30 or less at year end gets you fired (flag `fired`).
 - **Gang career:** heat rises by 6 per rank each year, and the chance of arrest is heat × 0.5%. An arrest ends the career and sets the flags `juvie` and `criminal_record`.
 
 ## Cards
