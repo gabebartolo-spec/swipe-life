@@ -1,0 +1,430 @@
+{
+ "res": 1024,
+ "px_per_m": 264.82758620689657,
+ "ground": [
+  512.0,
+  957.79
+ ],
+ "pivots": {
+  "chest": [
+   512.0,
+   616.17
+  ],
+  "foot_l": [
+   557.02,
+   894.23
+  ],
+  "foot_r": [
+   466.98,
+   894.23
+  ],
+  "forearm_l": [
+   615.28,
+   552.61
+  ],
+  "forearm_r": [
+   408.72,
+   552.61
+  ],
+  "hand_l": [
+   631.17,
+   640.0
+  ],
+  "hand_r": [
+   392.83,
+   640.0
+  ],
+  "head": [
+   512.0,
+   437.35
+  ],
+  "pelvis": [
+   512.0,
+   616.17
+  ],
+  "shin_l": [
+   554.37,
+   783.01
+  ],
+  "shin_r": [
+   469.63,
+   783.01
+  ],
+  "thigh_l": [
+   554.37,
+   671.78
+  ],
+  "thigh_r": [
+   469.63,
+   671.78
+  ],
+  "upper_arm_l": [
+   599.39,
+   465.21
+  ],
+  "upper_arm_r": [
+   424.61,
+   465.21
+  ]
+ },
+ "rest_deg": {
+  "chest": 90.0,
+  "foot_l": -90.0,
+  "foot_r": -90.0,
+  "forearm_l": -79.7,
+  "forearm_r": -100.3,
+  "hand_l": -83.66,
+  "hand_r": -96.34,
+  "head": 90.0,
+  "pelvis": -52.7,
+  "shin_l": -88.64,
+  "shin_r": -91.36,
+  "thigh_l": -90.0,
+  "thigh_r": -90.0,
+  "upper_arm_l": -79.7,
+  "upper_arm_r": -100.3
+ },
+ "sprites": {
+  "body__chest": {
+   "layer": "body",
+   "piece": "chest",
+   "rect": [
+    423,
+    415,
+    178,
+    272
+   ],
+   "raw": false
+  },
+  "body__foot_l": {
+   "layer": "body",
+   "piece": "foot_l",
+   "rect": [
+    520,
+    861,
+    74,
+    92
+   ],
+   "raw": false
+  },
+  "body__foot_r": {
+   "layer": "body",
+   "piece": "foot_r",
+   "rect": [
+    430,
+    861,
+    74,
+    92
+   ],
+   "raw": false
+  },
+  "body__forearm_l": {
+   "layer": "body",
+   "piece": "forearm_l",
+   "rect": [
+    591,
+    518,
+    65,
+    157
+   ],
+   "raw": false
+  },
+  "body__forearm_r": {
+   "layer": "body",
+   "piece": "forearm_r",
+   "rect": [
+    368,
+    518,
+    65,
+    157
+   ],
+   "raw": false
+  },
+  "body__hand_l": {
+   "layer": "body",
+   "piece": "hand_l",
+   "rect": [
+    609,
+    611,
+    55,
+    116
+   ],
+   "raw": false
+  },
+  "body__hand_r": {
+   "layer": "body",
+   "piece": "hand_r",
+   "rect": [
+    360,
+    611,
+    55,
+    116
+   ],
+   "raw": false
+  },
+  "body__head": {
+   "layer": "body",
+   "piece": "head",
+   "rect": [
+    398,
+    256,
+    228,
+    213
+   ],
+   "raw": false
+  },
+  "body__pelvis": {
+   "layer": "body",
+   "piece": "pelvis",
+   "rect": [
+    430,
+    580,
+    164,
+    141
+   ],
+   "raw": false
+  },
+  "body__shin_l": {
+   "layer": "body",
+   "piece": "shin_l",
+   "rect": [
+    526,
+    744,
+    58,
+    189
+   ],
+   "raw": false
+  },
+  "body__shin_r": {
+   "layer": "body",
+   "piece": "shin_r",
+   "rect": [
+    439,
+    743,
+    58,
+    191
+   ],
+   "raw": false
+  },
+  "body__thigh_l": {
+   "layer": "body",
+   "piece": "thigh_l",
+   "rect": [
+    524,
+    628,
+    61,
+    199
+   ],
+   "raw": false
+  },
+  "body__thigh_r": {
+   "layer": "body",
+   "piece": "thigh_r",
+   "rect": [
+    439,
+    628,
+    61,
+    199
+   ],
+   "raw": false
+  },
+  "body__upper_arm_l": {
+   "layer": "body",
+   "piece": "upper_arm_l",
+   "rect": [
+    574,
+    428,
+    67,
+    162
+   ],
+   "raw": false
+  },
+  "body__upper_arm_r": {
+   "layer": "body",
+   "piece": "upper_arm_r",
+   "rect": [
+    383,
+    428,
+    67,
+    162
+   ],
+   "raw": false
+  },
+  "face__head": {
+   "layer": "face",
+   "piece": "head",
+   "rect": [
+    439,
+    353,
+    146,
+    51
+   ],
+   "raw": true
+  },
+  "hair_back__head": {
+   "layer": "hair_back",
+   "piece": "head",
+   "rect": [
+    394,
+    222,
+    236,
+    237
+   ],
+   "raw": false
+  },
+  "hair_front__head": {
+   "layer": "hair_front",
+   "piece": "head",
+   "rect": [
+    388,
+    256,
+    248,
+    217
+   ],
+   "raw": false
+  },
+  "sweater__chest": {
+   "layer": "sweater",
+   "piece": "chest",
+   "rect": [
+    414,
+    406,
+    196,
+    293
+   ],
+   "raw": false
+  },
+  "sweater__forearm_l": {
+   "layer": "sweater",
+   "piece": "forearm_l",
+   "rect": [
+    581,
+    502,
+    84,
+    188
+   ],
+   "raw": false
+  },
+  "sweater__forearm_r": {
+   "layer": "sweater",
+   "piece": "forearm_r",
+   "rect": [
+    359,
+    502,
+    84,
+    188
+   ],
+   "raw": false
+  },
+  "sweater__upper_arm_l": {
+   "layer": "sweater",
+   "piece": "upper_arm_l",
+   "rect": [
+    564,
+    413,
+    87,
+    192
+   ],
+   "raw": false
+  },
+  "sweater__upper_arm_r": {
+   "layer": "sweater",
+   "piece": "upper_arm_r",
+   "rect": [
+    373,
+    413,
+    87,
+    192
+   ],
+   "raw": false
+  },
+  "tee__chest": {
+   "layer": "tee",
+   "piece": "chest",
+   "rect": [
+    416,
+    409,
+    191,
+    287
+   ],
+   "raw": false
+  },
+  "tee__upper_arm_l": {
+   "layer": "tee",
+   "piece": "upper_arm_l",
+   "rect": [
+    565,
+    415,
+    79,
+    174
+   ],
+   "raw": false
+  },
+  "tee__upper_arm_r": {
+   "layer": "tee",
+   "piece": "upper_arm_r",
+   "rect": [
+    380,
+    415,
+    79,
+    173
+   ],
+   "raw": false
+  },
+  "trousers__pelvis": {
+   "layer": "trousers",
+   "piece": "pelvis",
+   "rect": [
+    420,
+    573,
+    184,
+    158
+   ],
+   "raw": false
+  },
+  "trousers__shin_l": {
+   "layer": "trousers",
+   "piece": "shin_l",
+   "rect": [
+    519,
+    731,
+    74,
+    202
+   ],
+   "raw": false
+  },
+  "trousers__shin_r": {
+   "layer": "trousers",
+   "piece": "shin_r",
+   "rect": [
+    431,
+    731,
+    74,
+    201
+   ],
+   "raw": false
+  },
+  "trousers__thigh_l": {
+   "layer": "trousers",
+   "piece": "thigh_l",
+   "rect": [
+    516,
+    616,
+    77,
+    223
+   ],
+   "raw": false
+  },
+  "trousers__thigh_r": {
+   "layer": "trousers",
+   "piece": "thigh_r",
+   "rect": [
+    431,
+    616,
+    77,
+    223
+   ],
+   "raw": false
+  }
+ }
+}

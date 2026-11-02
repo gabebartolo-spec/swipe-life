@@ -22,7 +22,25 @@ from mathutils import Vector
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from build_clay_room import g2b, hexc  # noqa: E402
 
-OUT = sys.argv[sys.argv.index("--") + 1]
+ARGS = sys.argv[sys.argv.index("--") + 1 :]
+OUT = ARGS[0]
+AGE = ARGS[1] if len(ARGS) > 1 else "child"
+# approved age bands (build_clay_girl.py --age, clay_sets_front.png): the child is modelled, other ages
+# rescale the body below the neck (sx width, sy height) and the head (h) about the neck
+SX, SY, H = {"baby": (1.12, 0.55, 0.95), "child": (1, 1, 1), "teen": (0.95, 1.35, 0.9), "adult": (1, 1.5, 0.86)}[AGE]
+NECK = 1.27  # points above this belong to the head
+
+
+def T(p):
+    """Age transform of a modelled point -> (point, radius factor, per-axis stretch); copied from build_clay_girl."""
+    x, y, z = p
+    if y > NECK:
+        return (x * H, NECK * SY + (y - NECK) * H, z * H), H, (1, 1, 1)
+    f = (SX + SY) / 2
+    if y < 0.15:  # feet keep their shape
+        return (x * SX, y * SY, z * SX), f, (1, 1, 1)
+    return (x * SX, y * SY, z * SX), f, (SX / f, SY / f, SX / f)
+
 NEUTRAL = "cccccc"  # tinted pieces: grey clay, colour comes from the shader
 FACE = {"eyes": "2b2024", "blush": "f0a0a0", "mouth": "8a3a3a"}
 
@@ -45,9 +63,10 @@ def j(name, s=1):
 
 
 def sphere(key, at, r, scale=(1, 1, 1), segs=32):
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=r, location=g2b(*at), segments=segs, ring_count=segs // 2)
+    at, f, st = T(tuple(at))
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=r * f, location=g2b(*at), segments=segs, ring_count=segs // 2)
     ob = bpy.context.object
-    ob.scale = (scale[0], scale[2], scale[1])
+    ob.scale = (scale[0] * st[0], scale[2] * st[2], scale[1] * st[1])
     PARTS.setdefault(key, []).append(ob)
 
 
@@ -155,8 +174,8 @@ def fuse():
         ob["clay_color"] = FACE.get(mask, NEUTRAL) if layer == "face" else NEUTRAL
         kind = piece[:-2] if piece[-2] == "_" else piece
         flip = -1 if piece.endswith("_r") else 1
-        ob["pivot"] = list(j(PIVOT[kind], flip))
-        ob["end"] = list(j(END[kind], flip))
+        ob["pivot"] = list(T(j(PIVOT[kind], flip))[0])
+        ob["end"] = list(T(j(END[kind], flip))[0])
         if layer == "face":
             continue
         r = ob.modifiers.new("fuse", "REMESH")

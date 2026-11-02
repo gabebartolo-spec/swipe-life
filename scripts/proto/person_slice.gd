@@ -1,9 +1,11 @@
 extends Node2D
 ## Vertical slice of modular people (docs/PEOPLE.md §10 step 1): three children in the bedroom at
 ## ~180 px/m, one top tinted three ways, waving. `-- --top=sweater` swaps the top;
+## `--ages` lines up baby, child, teen and adult instead (one body each, ~130 px/m).
 ## `--seq=<n> --out=<dir>` saves n frames at 12 fps and quits.
 
 const PX_PER_M := 180.0
+const AGES := ["baby", "child_f_skinny", "teen_f_skinny", "adult_f_skinny"]
 const SKINS := ["f2c9a5", "c58c66", "7a4a32"]
 const HAIRS := ["6b4430", "1e1a18", "d9a441"]
 const TINTS := {
@@ -24,7 +26,9 @@ func _ready() -> void:
 	room.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	add_child(room)
-	for i in 3:
+	var ages := args.has("ages")
+	for n in 4 if ages else 3:
+		var i := n % 3
 		var p := Person.new()
 		var t: Array = TINTS[top][i]
 		p.look = {
@@ -36,6 +40,10 @@ func _ready() -> void:
 		}
 		p.position = Vector2(140 + 220 * i, 560)
 		p.scale = Vector2.ONE * PX_PER_M / 264.8
+		if ages:
+			p.shape = AGES[n]
+			p.position = Vector2(100 + 170 * n, 580)
+			p.scale = Vector2.ONE * 130.0 / 264.8
 		add_child(p)
 		p.play("res://assets/people/clips/wave.json")
 	if args.has("seq"):
