@@ -361,6 +361,14 @@ func _test_career_cards() -> void:
 	_check(not state.careers.has("job") and state.flags.has("quit"), "leave effect")
 	_check(state.partner.get("name") == crush, "date effect")
 	_check(state.careers.special.id == "musician", "leaving the job touched the special")
+	var breakup := {"id": "b", "left": {"label": "End it", "partner": "end"}}
+	state.flags["dating_work_partner"] = true
+	deck.choose(breakup, "left", state)
+	_check(state.partner.is_empty(), "breakup kept the partner")
+	_check(not state.flags.has("dating_work_partner"), "breakup kept the dating flag")
+	cdb.errors.clear()
+	cdb._check_card({"id": "p", "left": {"label": "x", "partner": "keep"}}, "p", {})
+	_check(not cdb.errors.is_empty(), "bad 'partner' value passed")
 	state.free()
 
 

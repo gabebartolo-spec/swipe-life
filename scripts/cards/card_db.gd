@@ -8,7 +8,16 @@ const CARD_KEYS := [
 	"id", "text", "ages", "weight", "requires", "left", "right", "up", "once", "room"
 ]
 const CHOICE_KEYS := [
-	"label", "effects", "set_flags", "clear_flags", "result", "risk", "death", "job", "coworker"
+	"label",
+	"effects",
+	"set_flags",
+	"clear_flags",
+	"result",
+	"risk",
+	"death",
+	"job",
+	"coworker",
+	"partner"
 ]
 const REQUIRES_KEYS := ["stats", "flags", "not_flags", "job", "rank", "coworker"]
 const JOB_KEYS := ["performance", "rank", "meter", "leave", "date"]  # docs/CAREERS.md
@@ -106,6 +115,8 @@ func _check_choice(ch, where: String) -> void:
 	for k in ch.get("job", {}):
 		if k not in JOB_KEYS:
 			errors.append("%s.job: unknown key '%s'" % [where, k])
+	if ch.has("partner") and ch.partner != "end":
+		errors.append("%s: 'partner' must be \"end\"" % where)
 	for role in ch.get("coworker", {}):
 		_check_role(role, where + ".coworker")
 	if ch.has("death"):
