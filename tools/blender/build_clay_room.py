@@ -193,7 +193,12 @@ def bake_ao():
         bpy.context.view_layer.objects.active = ob
         for m in list(ob.modifiers):
             bpy.ops.object.modifier_apply(modifier=m.name)
-        bpy.ops.object.shade_smooth()
+        # mobile budget: cap each prop at ~1500 vertices (collapse keeps the soft silhouette)
+        if len(ob.data.vertices) > 1500:
+            d = ob.modifiers.new("budget", "DECIMATE")
+            d.ratio = 1500 / len(ob.data.vertices)
+            bpy.ops.object.modifier_apply(modifier="budget")
+        ob.data.shade_smooth()
         ob.data.color_attributes.new("Col", "FLOAT_COLOR", "POINT")
         ob.data.attributes.active_color = ob.data.color_attributes["Col"]
         mat = bpy.data.materials.new(ob.name)
@@ -215,5 +220,6 @@ if __name__ == "__main__":
     bpy.ops.wm.read_factory_settings(use_empty=True)
     build()
     bake_ao()
-    bpy.ops.export_scene.gltf(filepath=sys.argv[sys.argv.index("--") + 1], export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE")
+    bpy.ops.export_scene.gltf(filepath=sys.argv[sys.argv.index("--") + 1], export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE", export_texcoords=False
+    )
     print("EXPORTED", len(bpy.context.scene.objects))

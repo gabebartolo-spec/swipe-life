@@ -117,7 +117,7 @@ def bake_ao():
         bpy.context.view_layer.objects.active = ob
         for mod in list(ob.modifiers):
             bpy.ops.object.modifier_apply(modifier=mod.name)
-        bpy.ops.object.shade_smooth()
+        ob.data.shade_smooth()
         ob.data.color_attributes.new("Col", "FLOAT_COLOR", "POINT")
         ob.data.attributes.active_color = ob.data.color_attributes["Col"]
         ob.data.materials.append(bpy.data.materials.new(ob.name))
@@ -142,5 +142,6 @@ def bake_ao():
 bpy.ops.wm.read_factory_settings(use_empty=True)
 to_meshes(build())
 bake_ao()
-bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE")
+bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE", export_texcoords=False
+    )
 print("EXPORTED", OUT, [(o.name, len(o.data.vertices)) for o in bpy.context.scene.objects])
