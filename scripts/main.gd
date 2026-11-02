@@ -99,6 +99,7 @@ func _update_age(season := true) -> void:
 	if not ills.is_empty():
 		text += "\n" + ", ".join(ills)
 	$Dollhouse/AgeLabel.text = text
+	$Dollhouse.show_room(GameState.age, $Dollhouse.room if $Dollhouse.room else "bedroom")
 	strip.refresh()
 
 
@@ -114,6 +115,7 @@ func _deal() -> void:
 		GameState.quarter += 1
 		_deal()
 		return
+	$Dollhouse.show_room(GameState.age, c.get("room", "bedroom"))
 	swipe_card.show()
 	swipe_card.position = Vector2(MARGIN, MARGIN)
 	swipe_card.show_card(c, GameState.super_like_available)

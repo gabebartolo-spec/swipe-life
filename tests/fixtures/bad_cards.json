@@ -5,5 +5,6 @@
   { "id": "bad_key", "text": "d", "ages": [0, 1], "left": { "label": "x", "effect": { "health": 5 } }, "right": { "label": "y" } },
   { "id": "bad_age", "text": "e", "ages": [16, 30], "left": { "label": "x" }, "right": { "label": "y" } },
   { "id": "bad_chance", "text": "f", "ages": [0, 1], "left": { "label": "x", "risk": { "chance": 2 } }, "right": { "label": "y" } },
-  { "id": "no_right", "text": "g", "ages": [0, 1], "left": { "label": "x" } }
+  { "id": "no_right", "text": "g", "ages": [0, 1], "left": { "label": "x" } },
+  {"id": "bad_room", "text": "x", "ages": [0, 1], "room": "attic", "left": {"label": "a"}, "right": {"label": "b"}}
 ]

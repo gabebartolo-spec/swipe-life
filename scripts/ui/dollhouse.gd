@@ -1,0 +1,86 @@
+class_name Dollhouse
+extends ColorRect
+## Childhood home (GDD §10.6): one prerendered clay room at a time. A card's `room` picks the room
+## (default bedroom); the view slides across the house to it. The bedroom changes with age band.
+
+const ROOMS := {
+	"bedroom": Vector2(0, 0),
+	"bathroom": Vector2(1, 0),
+	"living": Vector2(0, 1),
+	"kitchen": Vector2(1, 1)
+}
+const PAN_TIME := 0.4
+const ROOM_DIR := "res://assets/house/rooms"
+
+var room := ""
+var band := ""
+var _view: TextureRect
+var _tween: Tween
+
+
+func _ready() -> void:
+	clip_contents = true
+	resized.connect(_fit_views)
+	_view = _make_view()
+
+
+## Age band of the bedroom (director 2026-11-03): baby 0–3, child 4–12, teen 13–17.
+static func band_for(age: int) -> String:
+	if age <= 3:
+		return "baby"
+	return "child" if age <= 12 else "teen"
+
+
+static func texture_path(room_id: String, band_id: String) -> String:
+	return ROOM_DIR.path_join("room_%s_%s.png" % [room_id, band_id])
+
+
+func show_room(age: int, room_id: String = "bedroom") -> void:
+	if not ROOMS.has(room_id):
+		room_id = "bedroom"
+	var new_band := band_for(age)
+	if room_id == room and new_band == band:
+		return
+	var tex := load(texture_path(room_id, new_band)) as Texture2D
+	if room == "" or room_id == room:  # first show or same room at a new age: no pan
+		_view.texture = tex
+	else:
+		_pan_to(tex, ROOMS[room_id] - ROOMS[room])
+	room = room_id
+	band = new_band
+
+
+## Slides the old room out and the new one in along the iso direction between them on the 2x2
+## plan: world +x reads as screen right-down, world +z as screen left-down.
+func _pan_to(tex: Texture2D, step: Vector2) -> void:
+	if _tween:
+		_tween.kill()
+		for v in get_children():
+			if v is TextureRect and v != _view:
+				v.queue_free()
+	var dir := Vector2(step.x - step.y, (step.x + step.y) * 0.5).normalized() * size
+	var old := _view
+	_view = _make_view()
+	_view.texture = tex
+	_view.position = dir
+	_tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_tween.tween_property(old, "position", -dir, PAN_TIME)
+	_tween.tween_property(_view, "position", Vector2.ZERO, PAN_TIME)
+	_tween.chain().tween_callback(old.queue_free)
+
+
+func _make_view() -> TextureRect:
+	var v := TextureRect.new()
+	v.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	v.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(v)
+	move_child(v, 0)  # stay under AgeLabel
+	v.size = size
+	return v
+
+
+func _fit_views() -> void:
+	for v in get_children():
+		if v is TextureRect:
+			v.size = size

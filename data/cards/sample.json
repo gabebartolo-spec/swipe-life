@@ -7,7 +7,7 @@
     "right": { "label": "Nap", "effects": { "health": 3, "relationships": 2 } }
   },
   {
-    "id": "baby_first_word",
+    "id": "baby_first_word", "room": "living",
     "text": "Everyone is waiting for your first word.",
     "ages": [0, 2],
     "left": { "label": "\"Mama\"", "effects": { "relationships": 5 } },
@@ -16,7 +16,7 @@
             "result": "Nobody believes it happened.", "set_flags": ["gifted"] }
   },
   {
-    "id": "toddler_broccoli",
+    "id": "toddler_broccoli", "room": "kitchen",
     "text": "Dinner is broccoli. Again.",
     "ages": [2, 4],
     "left": { "label": "Throw it", "effects": { "happiness": 5, "health": -3 },
@@ -26,7 +26,7 @@
             "risk": { "chance": 0.2, "effects": { "happiness": -10 }, "result": "Stomach ache. Never again." } }
   },
   {
-    "id": "toddler_stairs",
+    "id": "toddler_stairs", "room": "living",
     "text": "The stairs gate is open.",
     "ages": [1, 3],
     "weight": 5,
@@ -70,7 +70,7 @@
             "death": { "chance": 0.02, "cause": "Fell from a tree" } }
   },
   {
-    "id": "teen_haircut",
+    "id": "teen_haircut", "room": "bathroom",
     "text": "You could cut your own hair. How hard can it be?",
     "ages": [12, 17],
     "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 4 }, "result": "Bold." },
