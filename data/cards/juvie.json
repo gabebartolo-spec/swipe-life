@@ -35,10 +35,5 @@
    "requires": {"flags": ["criminal_record"], "not_flags": ["juvie"]},
    "left": {"label": "Pretend you didn't want to go", "effects": {"happiness": -5, "stress": 4}},
    "right": {"label": "Ask the principal for a reference", "effects": {"stress": 7, "karma": 2},
-             "risk": {"chance": 0.5, "effects": {"happiness": -6}, "result": "The principal says no. Politely."}}},
-  {"id": "record_expunge", "text": "A legal aid lawyer says a juvenile record can be sealed if you stay clean.", "ages": [16, 17],
-   "requires": {"flags": ["criminal_record"], "not_flags": ["juvie"], "stats": {"karma": [50, 100]}}, "weight": 5,
-   "left": {"label": "Too much paperwork", "effects": {"stress": 3}},
-   "right": {"label": "Do the paperwork", "effects": {"smarts": 2, "happiness": 8, "stress": 8}, "clear_flags": ["criminal_record"],
-             "result": "Sealed. A door creaks back open."}}
+             "risk": {"chance": 0.5, "effects": {"happiness": -6}, "result": "The principal says no. Politely."}}}
 ]
