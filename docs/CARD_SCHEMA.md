@@ -34,6 +34,7 @@ Cards live in `data/cards/*.json`. Each file holds an array of cards, usually on
 | `left`, `right` | yes | The two choices (§3.1). |
 | `up` | no | The super-like choice (§3.2, §3.4). If it is missing, the card cannot be super-liked. |
 | `once` | no (true) | The card is drawn at most once per life. |
+| `room` | no (`bedroom`) | Dollhouse room shown with the card: `bedroom`, `bathroom`, `living`, `kitchen` (GDD §10.6). |
 
 Each choice has these fields:
 

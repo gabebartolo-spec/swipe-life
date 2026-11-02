@@ -15,6 +15,7 @@ func _init() -> void:
 	_test_life_rules()
 	_test_save_round_trip()
 	_test_actions()
+	_test_dollhouse()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -169,3 +170,14 @@ func _test_actions() -> void:
 	var bad := ActionDB.new()
 	bad._check({"id": "x", "tab": "moon", "label": "x", "ages": [1, 2], "effects": {}}, "x", {})
 	_check(bad.errors.size() >= 2, "bad action passed")
+
+
+func _test_dollhouse() -> void:
+	var bands := []
+	for age in [0, 3, 4, 12, 13, 17]:
+		bands.append(Dollhouse.band_for(age))
+	_check(bands == ["baby", "baby", "child", "child", "teen", "teen"], "age bands %s" % [bands])
+	for room in Dollhouse.ROOMS:
+		for band in ["baby", "child", "teen"]:
+			var path := Dollhouse.texture_path(room, band)
+			_check(ResourceLoader.exists(path), "missing room still " + path)

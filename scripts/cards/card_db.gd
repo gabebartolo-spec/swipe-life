@@ -4,7 +4,9 @@ extends RefCounted
 
 const CARD_DIR := "res://data/cards"
 const MAX_AGE := 17  # first playable ends at 18 (docs/ROADMAP.md)
-const CARD_KEYS := ["id", "text", "ages", "weight", "requires", "left", "right", "up", "once"]
+const CARD_KEYS := [
+	"id", "text", "ages", "weight", "requires", "left", "right", "up", "once", "room"
+]
 const CHOICE_KEYS := ["label", "effects", "set_flags", "clear_flags", "result", "risk", "death"]
 const REQUIRES_KEYS := ["stats", "flags", "not_flags"]
 const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
@@ -56,6 +58,8 @@ func _check_card(c: Dictionary, where: String, ids: Dictionary) -> void:
 		and ages[1] <= MAX_AGE
 	):
 		errors.append("%s: 'ages' must be [min, max] within 0-%d" % [where, MAX_AGE])
+	if c.has("room") and not c.room in ["bedroom", "bathroom", "living", "kitchen"]:
+		errors.append("%s: unknown room '%s'" % [where, c.room])
 	if c.has("weight") and not (c.weight is float and c.weight > 0):
 		errors.append("%s: 'weight' must be a positive number" % where)
 	if c.has("requires"):
