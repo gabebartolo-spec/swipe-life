@@ -1,0 +1,981 @@
+[
+  {
+    "id": "t13_group_project",
+    "text": "Group project. Nobody else has opened the file.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Do it all",
+      "effects": {
+        "smarts": 4,
+        "stress": 8
+      }
+    },
+    "right": {
+      "label": "Wait them out",
+      "effects": {
+        "stress": 3,
+        "smarts": -2
+      },
+      "result": "Deadline day. Panic in four browsers."
+    },
+    "up": {
+      "label": "Do it all, put only your name",
+      "effects": {
+        "smarts": 6,
+        "karma": -6,
+        "relationships": -6
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "relationships": -8,
+          "stress": 5
+        },
+        "result": "The group finds out."
+      }
+    }
+  },
+  {
+    "id": "t13_report_card",
+    "text": "Your report card is on the fridge. Someone put it there.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Hide it",
+      "effects": {
+        "stress": 5
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "relationships": -6
+        },
+        "result": "Hiding it made it worse."
+      }
+    },
+    "right": {
+      "label": "Own it",
+      "effects": {
+        "relationships": 4,
+        "stress": -2
+      }
+    }
+  },
+  {
+    "id": "t13_braces",
+    "text": "The dentist says braces.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Argue",
+      "effects": {
+        "happiness": 2,
+        "relationships": -3
+      },
+      "result": "You get them anyway."
+    },
+    "right": {
+      "label": "Fine",
+      "effects": {
+        "looks": 5,
+        "happiness": -4,
+        "money": -40
+      }
+    }
+  },
+  {
+    "id": "t13_voice_crack",
+    "text": "Your voice cracks in the middle of reading aloud.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Laugh it off",
+      "effects": {
+        "relationships": 4,
+        "happiness": 2
+      }
+    },
+    "right": {
+      "label": "Never speak again",
+      "effects": {
+        "stress": 5,
+        "happiness": -3
+      }
+    }
+  },
+  {
+    "id": "t13_first_phone",
+    "text": "Your parents finally hand you a phone. It has rules attached.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Read the rules",
+      "effects": {
+        "relationships": 5,
+        "karma": 2
+      }
+    },
+    "right": {
+      "label": "Skip to the apps",
+      "effects": {
+        "happiness": 6,
+        "stress": 2
+      }
+    }
+  },
+  {
+    "id": "t13_group_chat",
+    "text": "The class group chat is roasting a kid who is not in it.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Stay quiet",
+      "effects": {
+        "karma": -2
+      }
+    },
+    "right": {
+      "label": "Tell them to stop",
+      "effects": {
+        "karma": 6,
+        "relationships": -2
+      }
+    },
+    "up": {
+      "label": "Add the kid and back them up",
+      "effects": {
+        "karma": 10,
+        "relationships": 3
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "relationships": -8,
+          "stress": 6
+        },
+        "result": "Now they roast you too."
+      }
+    }
+  },
+  {
+    "id": "t13_screen_time",
+    "text": "Your screen time this week: nine hours a day.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Delete an app",
+      "effects": {
+        "stress": -4,
+        "smarts": 2,
+        "happiness": -2
+      }
+    },
+    "right": {
+      "label": "That can't be right",
+      "effects": {
+        "happiness": 2,
+        "health": -2
+      }
+    }
+  },
+  {
+    "id": "t13_crush_notes",
+    "text": "You have a crush. Their name is in your notebook margin. Twice.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Rip out the page",
+      "effects": {
+        "stress": -2
+      },
+      "result": "Safe. For now."
+    },
+    "right": {
+      "label": "Tell your best friend",
+      "effects": {
+        "relationships": 3
+      },
+      "risk": {
+        "chance": 0.35,
+        "effects": {
+          "stress": 8,
+          "happiness": -4
+        },
+        "result": "By lunch, the whole year knows."
+      }
+    }
+  },
+  {
+    "id": "t13_crush_dance",
+    "text": "School dance. Your crush is standing alone by the snacks.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Stay with friends",
+      "effects": {
+        "happiness": -1
+      }
+    },
+    "right": {
+      "label": "Go say hi",
+      "effects": {
+        "happiness": 5,
+        "relationships": 3
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "happiness": -6
+        },
+        "result": "They were waiting for someone else."
+      }
+    },
+    "up": {
+      "label": "Ask them to dance",
+      "effects": {
+        "happiness": 12,
+        "looks": 2
+      },
+      "risk": {
+        "chance": 0.45,
+        "effects": {
+          "happiness": -10,
+          "stress": 6
+        },
+        "result": "A polite no. In front of everyone."
+      }
+    }
+  },
+  {
+    "id": "t13_crush_reply",
+    "text": "Your crush replied with just \"lol\".",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Analyse it for an hour",
+      "effects": {
+        "stress": 6
+      },
+      "result": "Still unclear."
+    },
+    "right": {
+      "label": "Send a meme back",
+      "effects": {
+        "happiness": 4,
+        "relationships": 2
+      }
+    }
+  },
+  {
+    "id": "t13_sibling_hoodie",
+    "text": "Your sibling took your hoodie and your charger. Without asking.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Take them back, loudly",
+      "effects": {
+        "stress": -2,
+        "relationships": -4
+      }
+    },
+    "right": {
+      "label": "Let it go",
+      "effects": {
+        "karma": 3,
+        "stress": 2
+      }
+    }
+  },
+  {
+    "id": "t13_sibling_secret",
+    "text": "You catch your sibling sneaking in after midnight.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Tell your parents",
+      "effects": {
+        "relationships": -5,
+        "karma": 2
+      }
+    },
+    "right": {
+      "label": "Keep quiet",
+      "effects": {
+        "relationships": 5
+      },
+      "risk": {
+        "chance": 0.25,
+        "effects": {
+          "relationships": -6,
+          "stress": 4
+        },
+        "result": "Your parents find out you knew."
+      }
+    }
+  },
+  {
+    "id": "t13_family_dinner",
+    "text": "Family dinner. Phones go in the basket.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Sneak yours out",
+      "effects": {
+        "happiness": 2,
+        "relationships": -4
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "relationships": -4
+        },
+        "result": "Basket for a week."
+      }
+    },
+    "right": {
+      "label": "Actually talk",
+      "effects": {
+        "relationships": 6,
+        "stress": -2
+      }
+    }
+  },
+  {
+    "id": "t13_parents_argue",
+    "text": "Your parents are arguing in the next room again.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Headphones on",
+      "effects": {
+        "stress": 3
+      }
+    },
+    "right": {
+      "label": "Go in and say something",
+      "effects": {
+        "relationships": 2,
+        "stress": 5
+      },
+      "result": "They stop. For now."
+    }
+  },
+  {
+    "id": "t13_new_kid",
+    "text": "A new kid moved in down the street. They don't know anyone.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Not your problem",
+      "effects": {
+        "karma": -2
+      }
+    },
+    "right": {
+      "label": "Show them around",
+      "effects": {
+        "relationships": 7,
+        "karma": 4,
+        "happiness": 3
+      }
+    }
+  },
+  {
+    "id": "t13_friend_drift",
+    "text": "Your oldest friend has a new group. You weren't invited.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Find your own people",
+      "effects": {
+        "relationships": 2,
+        "happiness": -2
+      }
+    },
+    "right": {
+      "label": "Ask what's going on",
+      "effects": {
+        "relationships": 4,
+        "stress": 3
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "happiness": -6
+        },
+        "result": "\"We just grew apart, I guess.\""
+      }
+    }
+  },
+  {
+    "id": "t13_sleepover_film",
+    "text": "Sleepover. Someone puts on a horror film you're too young for.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Fake being asleep",
+      "effects": {
+        "stress": 2
+      }
+    },
+    "right": {
+      "label": "Watch every second",
+      "effects": {
+        "happiness": 4
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "stress": 6,
+          "health": -2
+        },
+        "result": "No sleep for a week."
+      }
+    }
+  },
+  {
+    "id": "t13_exam_week",
+    "text": "Exams start Monday. It is Friday night.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Go out",
+      "effects": {
+        "happiness": 6,
+        "smarts": -3,
+        "stress": 4
+      }
+    },
+    "right": {
+      "label": "Study",
+      "effects": {
+        "smarts": 6,
+        "stress": 4,
+        "happiness": -2
+      }
+    },
+    "up": {
+      "label": "Study all weekend, no sleep",
+      "effects": {
+        "smarts": 10,
+        "health": -4
+      },
+      "risk": {
+        "chance": 0.35,
+        "effects": {
+          "smarts": -4,
+          "stress": 8
+        },
+        "result": "You fall asleep in the exam."
+      }
+    }
+  },
+  {
+    "id": "t13_teacher_gift",
+    "text": "A teacher says you have a real gift for their subject.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Shrug it off",
+      "effects": {
+        "happiness": 1
+      }
+    },
+    "right": {
+      "label": "Join their after-school club",
+      "effects": {
+        "smarts": 6,
+        "relationships": 3,
+        "stress": 2
+      }
+    }
+  },
+  {
+    "id": "t13_detention",
+    "text": "Detention. The only other kid there is the scariest kid in school.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Say nothing",
+      "effects": {
+        "stress": 2
+      }
+    },
+    "right": {
+      "label": "Offer them gum",
+      "effects": {
+        "relationships": 4
+      },
+      "result": "Turns out they collect stamps."
+    }
+  },
+  {
+    "id": "t13_picture_day",
+    "text": "A spot has appeared on your nose. It's picture day.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Pop it",
+      "effects": {
+        "looks": -3,
+        "happiness": 2
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "looks": -4
+        },
+        "result": "Worse. Much worse."
+      }
+    },
+    "right": {
+      "label": "Leave it alone",
+      "effects": {
+        "stress": 3,
+        "looks": 1
+      }
+    }
+  },
+  {
+    "id": "t13_skincare",
+    "text": "A video says you need a ten-step skincare routine.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Soap is fine",
+      "effects": {
+        "money": 5
+      }
+    },
+    "right": {
+      "label": "Buy the lot",
+      "effects": {
+        "looks": 3,
+        "money": -40,
+        "happiness": 3
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "looks": -4,
+          "health": -2
+        },
+        "result": "Your skin hates step seven."
+      }
+    }
+  },
+  {
+    "id": "t13_growth_spurt",
+    "text": "You grew so fast your trousers stop above your ankles.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Wear them anyway",
+      "effects": {
+        "looks": -3,
+        "money": 5
+      }
+    },
+    "right": {
+      "label": "Ask for new clothes",
+      "effects": {
+        "looks": 3,
+        "relationships": -1
+      }
+    }
+  },
+  {
+    "id": "t13_old_guitar",
+    "text": "There's an old guitar in the cupboard nobody plays.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Leave it",
+      "effects": {
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Teach yourself",
+      "effects": {
+        "smarts": 3,
+        "happiness": 4,
+        "stress": -2
+      }
+    }
+  },
+  {
+    "id": "t13_sketchbook",
+    "text": "You filled a whole sketchbook in a month.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Keep it private",
+      "effects": {
+        "happiness": 4,
+        "stress": -3
+      }
+    },
+    "right": {
+      "label": "Post your best one",
+      "effects": {
+        "happiness": 3
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "happiness": -5
+        },
+        "result": "One rude comment. It's all you can see."
+      }
+    },
+    "up": {
+      "label": "Enter the town art contest",
+      "effects": {
+        "happiness": 8,
+        "career": 3
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "happiness": -4
+        },
+        "result": "Honourable mention. Fourteenth of fourteen."
+      }
+    }
+  },
+  {
+    "id": "t13_tryouts",
+    "text": "Try-outs for the school team are tomorrow.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Skip it",
+      "effects": {
+        "stress": -2
+      }
+    },
+    "right": {
+      "label": "Try out",
+      "effects": {
+        "health": 5,
+        "relationships": 3
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "happiness": -5
+        },
+        "result": "Not this year."
+      }
+    }
+  },
+  {
+    "id": "t13_pocket_money",
+    "text": "You ask for more pocket money. Your parent asks what for.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "\"Stuff\"",
+      "effects": {
+        "relationships": -2
+      },
+      "result": "No."
+    },
+    "right": {
+      "label": "Offer to do more chores",
+      "effects": {
+        "money": 30,
+        "stress": 2,
+        "relationships": 3
+      }
+    }
+  },
+  {
+    "id": "t13_found_wallet",
+    "text": "You find a wallet on the bus. There's cash in it.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Keep the cash",
+      "effects": {
+        "money": 40,
+        "karma": -10
+      }
+    },
+    "right": {
+      "label": "Hand it in",
+      "effects": {
+        "karma": 8
+      },
+      "result": "The owner sends a thank-you card."
+    }
+  },
+  {
+    "id": "t13_birthday_money",
+    "text": "Birthday money from a relative you've met twice.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Spend it today",
+      "effects": {
+        "happiness": 6,
+        "money": 20
+      }
+    },
+    "right": {
+      "label": "Save it",
+      "effects": {
+        "money": 50,
+        "smarts": 1
+      }
+    }
+  },
+  {
+    "id": "t13_fever",
+    "text": "You wake up with a fever on a school day. A real one.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Go in anyway",
+      "effects": {
+        "health": -5,
+        "karma": -2
+      },
+      "result": "Half your class is off by Thursday."
+    },
+    "right": {
+      "label": "Stay in bed",
+      "effects": {
+        "health": 4,
+        "smarts": -1
+      }
+    }
+  },
+  {
+    "id": "t13_energy_drink",
+    "text": "Everyone at school is drinking energy drinks.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Pass",
+      "effects": {
+        "health": 2
+      }
+    },
+    "right": {
+      "label": "Try one",
+      "effects": {
+        "happiness": 3,
+        "stress": 3
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "health": -4,
+          "stress": 3
+        },
+        "result": "Heart racing. Not in the fun way."
+      }
+    }
+  },
+  {
+    "id": "t13_first_concert",
+    "text": "Your favourite band is playing in the city. Your parents say \"maybe\".",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Drop it",
+      "effects": {
+        "happiness": -3
+      }
+    },
+    "right": {
+      "label": "Pitch it with slides",
+      "effects": {
+        "smarts": 2,
+        "relationships": 3
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "happiness": -4
+        },
+        "result": "Great slides. Still no."
+      }
+    }
+  },
+  {
+    "id": "t13_road_trip",
+    "text": "The family is driving eight hours to visit relatives.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Sulk the whole way",
+      "effects": {
+        "relationships": -4
+      }
+    },
+    "right": {
+      "label": "Pick the music",
+      "effects": {
+        "happiness": 4,
+        "relationships": 3
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "relationships": -3
+        },
+        "result": "Nobody likes your music."
+      }
+    }
+  },
+  {
+    "id": "t13_goat",
+    "text": "A goat is standing in your front garden. Nobody on the street owns a goat.",
+    "ages": [
+      13,
+      15
+    ],
+    "room": "living",
+    "left": {
+      "label": "Shut the curtains",
+      "effects": {
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Name it",
+      "effects": {
+        "happiness": 6
+      },
+      "result": "It eats the name tag."
+    },
+    "up": {
+      "label": "Ride it to school",
+      "effects": {
+        "happiness": 10,
+        "relationships": 5
+      },
+      "risk": {
+        "chance": 0.6,
+        "effects": {
+          "health": -6
+        },
+        "result": "The goat disagrees."
+      }
+    }
+  },
+  {
+    "id": "t13_rumour",
+    "text": "There's a rumour going round about you. It isn't true.",
+    "ages": [
+      13,
+      15
+    ],
+    "left": {
+      "label": "Ignore it",
+      "effects": {
+        "stress": 5
+      }
+    },
+    "right": {
+      "label": "Find who started it",
+      "effects": {
+        "relationships": -2,
+        "stress": 2
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "happiness": -4
+        },
+        "result": "It was your friend."
+      }
+    }
+  }
+]

@@ -1,0 +1,1133 @@
+[
+  {
+    "id": "t16_learner_permit",
+    "text": "You're old enough for a learner permit.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Not yet",
+      "effects": {
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Study, then book the test",
+      "effects": {
+        "smarts": 3,
+        "money": -20,
+        "stress": 3
+      },
+      "set_flags": [
+        "learner_permit"
+      ]
+    },
+    "up": {
+      "label": "Book it for tomorrow",
+      "effects": {
+        "happiness": 5,
+        "money": -20
+      },
+      "set_flags": [
+        "learner_permit"
+      ],
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "happiness": -5,
+          "money": -20
+        },
+        "result": "Failed. Pay again, pass next time."
+      }
+    }
+  },
+  {
+    "id": "t16_first_lesson",
+    "text": "First driving lesson. A parent grips the passenger seat.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "requires": {
+      "flags": [
+        "learner_permit"
+      ]
+    },
+    "left": {
+      "label": "Go slow",
+      "effects": {
+        "stress": 3,
+        "relationships": 2
+      }
+    },
+    "right": {
+      "label": "Show off",
+      "effects": {
+        "happiness": 4
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "relationships": -6,
+          "money": -80
+        },
+        "result": "The bin didn't move. The car did."
+      }
+    }
+  },
+  {
+    "id": "t16_parallel_park",
+    "text": "Parallel parking. Attempt number seven.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "requires": {
+      "flags": [
+        "learner_permit"
+      ]
+    },
+    "left": {
+      "label": "Park far away instead",
+      "effects": {
+        "stress": -2
+      }
+    },
+    "right": {
+      "label": "Attempt eight",
+      "effects": {
+        "smarts": 3,
+        "stress": 4
+      },
+      "result": "Nailed it. Nobody saw."
+    }
+  },
+  {
+    "id": "t16_driving_test",
+    "text": "Driving test day. The examiner hasn't smiled once.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "requires": {
+      "flags": [
+        "learner_permit"
+      ]
+    },
+    "left": {
+      "label": "Drive like a grandparent",
+      "effects": {
+        "stress": 4,
+        "karma": 2
+      },
+      "set_flags": [
+        "licence"
+      ],
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "happiness": -6
+        },
+        "result": "Too slow. Pass anyway, barely."
+      }
+    },
+    "right": {
+      "label": "Drive normally",
+      "effects": {
+        "happiness": 8
+      },
+      "set_flags": [
+        "licence"
+      ],
+      "risk": {
+        "chance": 0.35,
+        "effects": {
+          "happiness": -8,
+          "stress": 5
+        },
+        "result": "A roundabout nearly ends you. Scraped a pass."
+      }
+    }
+  },
+  {
+    "id": "t16_borrow_car",
+    "text": "You ask to borrow the car for the night.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "kitchen",
+    "requires": {
+      "flags": [
+        "licence"
+      ]
+    },
+    "left": {
+      "label": "Take the bus",
+      "effects": {
+        "money": -5
+      }
+    },
+    "right": {
+      "label": "Promise to fill it up",
+      "effects": {
+        "happiness": 6,
+        "money": -30,
+        "relationships": 3
+      },
+      "risk": {
+        "chance": 0.15,
+        "effects": {
+          "money": -150,
+          "relationships": -8
+        },
+        "result": "A scrape on the bumper."
+      }
+    }
+  },
+  {
+    "id": "t16_crowded_car",
+    "text": "A friend with a brand-new licence offers a lift. Seven people, five seats.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "weight": 5,
+    "left": {
+      "label": "Walk",
+      "effects": {
+        "karma": 2,
+        "relationships": -2
+      }
+    },
+    "right": {
+      "label": "Squeeze in",
+      "effects": {
+        "happiness": 4
+      },
+      "risk": {
+        "chance": 0.1,
+        "effects": {
+          "health": -15
+        },
+        "result": "A sudden stop. Bruises all over."
+      }
+    }
+  },
+  {
+    "id": "t16_final_exams",
+    "text": "Final exams in a month. Your future, apparently, depends on it.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Make a schedule",
+      "effects": {
+        "smarts": 7,
+        "stress": 5
+      }
+    },
+    "right": {
+      "label": "Wing it",
+      "effects": {
+        "happiness": 3,
+        "smarts": -2
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "stress": 8
+        },
+        "result": "Week before: full panic."
+      }
+    },
+    "up": {
+      "label": "Study group every night",
+      "effects": {
+        "smarts": 10,
+        "relationships": 4,
+        "stress": 6
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "smarts": -3
+        },
+        "result": "Mostly snacks. Not much study."
+      }
+    }
+  },
+  {
+    "id": "t16_subjects",
+    "text": "Time to choose subjects. Your parents have opinions.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Pick what they want",
+      "effects": {
+        "relationships": 4,
+        "happiness": -4
+      }
+    },
+    "right": {
+      "label": "Pick what you love",
+      "effects": {
+        "happiness": 6,
+        "relationships": -3,
+        "smarts": 2
+      }
+    }
+  },
+  {
+    "id": "t16_answers_sale",
+    "text": "Someone's selling the exam answers in a chat.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Buy them",
+      "effects": {
+        "money": -30,
+        "karma": -10
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "stress": 10,
+          "relationships": -8
+        },
+        "result": "Fake. And your name is on a list now."
+      }
+    },
+    "right": {
+      "label": "Report it",
+      "effects": {
+        "karma": 6,
+        "relationships": -3
+      }
+    }
+  },
+  {
+    "id": "t16_blank_essay",
+    "text": "An essay is due at 9 a.m. It's midnight and the page is empty.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Write anything",
+      "effects": {
+        "smarts": 4,
+        "health": -3,
+        "stress": 4
+      }
+    },
+    "right": {
+      "label": "Ask for an extension",
+      "effects": {
+        "stress": -2,
+        "relationships": -1
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "stress": 4
+        },
+        "result": "\"No.\""
+      }
+    }
+  },
+  {
+    "id": "t16_open_day",
+    "text": "Open day at a faraway college. It looks amazing.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "left": {
+      "label": "Too far",
+      "effects": {
+        "stress": -2
+      }
+    },
+    "right": {
+      "label": "Go",
+      "effects": {
+        "smarts": 3,
+        "happiness": 4,
+        "money": -30
+      }
+    }
+  },
+  {
+    "id": "t16_scholarship",
+    "text": "There's a scholarship. The essay question is \"Who are you?\"",
+    "ages": [
+      16,
+      17
+    ],
+    "requires": {
+      "stats": {
+        "smarts": [
+          50,
+          100
+        ]
+      }
+    },
+    "left": {
+      "label": "Too hard",
+      "effects": {
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Write it honestly",
+      "effects": {
+        "smarts": 5,
+        "stress": 4
+      },
+      "risk": {
+        "chance": 0.6,
+        "effects": {
+          "happiness": -4
+        },
+        "result": "Shortlisted, then not."
+      }
+    },
+    "up": {
+      "label": "Write it as a poem",
+      "effects": {
+        "smarts": 4,
+        "happiness": 4,
+        "money": 300
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "happiness": -3,
+          "money": -300
+        },
+        "result": "Bold. Rejected."
+      }
+    }
+  },
+  {
+    "id": "t16_party_question",
+    "text": "Your crush asks if you're going to the party on Saturday.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "\"Probably not\"",
+      "effects": {
+        "stress": -2,
+        "happiness": -2
+      }
+    },
+    "right": {
+      "label": "\"Are you?\"",
+      "effects": {
+        "happiness": 5,
+        "relationships": 3
+      }
+    },
+    "up": {
+      "label": "\"Only if you are\"",
+      "effects": {
+        "happiness": 10,
+        "looks": 2
+      },
+      "set_flags": [
+        "teen_dating"
+      ],
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "happiness": -8
+        },
+        "result": "\"Oh. I'm bringing someone.\""
+      }
+    }
+  },
+  {
+    "id": "t16_first_date",
+    "text": "First date. You've got enough money for one milkshake.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "kitchen",
+    "requires": {
+      "flags": [
+        "teen_dating"
+      ]
+    },
+    "left": {
+      "label": "Two straws",
+      "effects": {
+        "happiness": 8,
+        "relationships": 5,
+        "money": -8
+      }
+    },
+    "right": {
+      "label": "Say you're not thirsty",
+      "effects": {
+        "karma": 3,
+        "money": -8,
+        "happiness": 2
+      }
+    }
+  },
+  {
+    "id": "t16_meet_parents",
+    "text": "Your parents want to meet the person you're seeing.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "requires": {
+      "flags": [
+        "teen_dating"
+      ]
+    },
+    "left": {
+      "label": "Keep stalling",
+      "effects": {
+        "stress": 4
+      }
+    },
+    "right": {
+      "label": "Invite them to dinner",
+      "effects": {
+        "relationships": 5
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "stress": 6
+        },
+        "result": "The baby photos come out."
+      }
+    }
+  },
+  {
+    "id": "t16_text_breakup",
+    "text": "They broke up with you. By text.",
+    "ages": [
+      16,
+      17
+    ],
+    "weight": 5,
+    "requires": {
+      "flags": [
+        "teen_dating"
+      ]
+    },
+    "left": {
+      "label": "Sad songs for a week",
+      "effects": {
+        "happiness": -6,
+        "stress": -2
+      },
+      "clear_flags": [
+        "teen_dating"
+      ]
+    },
+    "right": {
+      "label": "Delete every photo",
+      "effects": {
+        "happiness": -3,
+        "stress": 3
+      },
+      "clear_flags": [
+        "teen_dating"
+      ]
+    }
+  },
+  {
+    "id": "t16_house_party",
+    "text": "Party at a house where the parents are away.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Stay home",
+      "effects": {
+        "stress": -2,
+        "relationships": -2
+      }
+    },
+    "right": {
+      "label": "Go",
+      "effects": {
+        "happiness": 7,
+        "relationships": 5
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "relationships": -6,
+          "stress": 6
+        },
+        "result": "Police at the door. Your parents get a call."
+      }
+    },
+    "up": {
+      "label": "Go, stay till sunrise",
+      "effects": {
+        "happiness": 12,
+        "relationships": 6,
+        "health": -5
+      },
+      "risk": {
+        "chance": 0.45,
+        "effects": {
+          "relationships": -8,
+          "stress": 6
+        },
+        "result": "Grounded for a month."
+      }
+    }
+  },
+  {
+    "id": "t16_mystery_cup",
+    "text": "At a party, someone hands you a cup. You don't know what's in it.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "left": {
+      "label": "Put it down",
+      "effects": {
+        "health": 2,
+        "karma": 2
+      }
+    },
+    "right": {
+      "label": "Drink it",
+      "effects": {
+        "happiness": 4
+      },
+      "risk": {
+        "chance": 0.35,
+        "effects": {
+          "health": -8,
+          "happiness": -4
+        },
+        "result": "Sick in the garden. Phones out."
+      }
+    }
+  },
+  {
+    "id": "t16_sneeze_photo",
+    "text": "A photo of you mid-sneeze is going round the school.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Lie low",
+      "effects": {
+        "stress": 4
+      }
+    },
+    "right": {
+      "label": "Make it your profile picture",
+      "effects": {
+        "happiness": 5,
+        "relationships": 5
+      },
+      "result": "Respect."
+    }
+  },
+  {
+    "id": "t16_views",
+    "text": "One of your videos got ten thousand views overnight.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Log off for a bit",
+      "effects": {
+        "stress": -3
+      }
+    },
+    "right": {
+      "label": "Post every day now",
+      "effects": {
+        "happiness": 4,
+        "stress": 6,
+        "looks": 2
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "happiness": -6
+        },
+        "result": "Views drop to twelve."
+      }
+    }
+  },
+  {
+    "id": "t16_friend_moving",
+    "text": "Your best friend is moving away at the end of the year.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "left": {
+      "label": "Pretend it's fine",
+      "effects": {
+        "stress": 5
+      }
+    },
+    "right": {
+      "label": "Make a list of things to do first",
+      "effects": {
+        "happiness": 7,
+        "relationships": 6
+      }
+    }
+  },
+  {
+    "id": "t16_friend_secret",
+    "text": "Your friend tells you something they've never told anyone.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Change the subject",
+      "effects": {
+        "relationships": -4
+      }
+    },
+    "right": {
+      "label": "Listen",
+      "effects": {
+        "relationships": 8,
+        "karma": 4
+      }
+    }
+  },
+  {
+    "id": "t16_sibling_maths",
+    "text": "Your younger sibling is failing maths. They won't ask for help.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "left": {
+      "label": "Their problem",
+      "effects": {
+        "stress": -1,
+        "karma": -2
+      }
+    },
+    "right": {
+      "label": "Tutor them quietly",
+      "effects": {
+        "karma": 5,
+        "relationships": 5,
+        "smarts": 2
+      }
+    }
+  },
+  {
+    "id": "t16_tight_money",
+    "text": "A parent lost their job. Money is tight at home.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Stop asking for things",
+      "effects": {
+        "relationships": 4,
+        "stress": 4
+      }
+    },
+    "right": {
+      "label": "Offer your savings",
+      "effects": {
+        "money": -100,
+        "relationships": 10,
+        "karma": 6
+      }
+    }
+  },
+  {
+    "id": "t16_curfew",
+    "text": "You're home an hour after curfew. The lights are on.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "left": {
+      "label": "Tell the truth",
+      "effects": {
+        "relationships": 2,
+        "stress": 2
+      },
+      "result": "Grounded, but they believe you."
+    },
+    "right": {
+      "label": "Blame the bus",
+      "effects": {
+        "karma": -3
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "relationships": -8
+        },
+        "result": "They check the timetable."
+      }
+    }
+  },
+  {
+    "id": "t16_get_fit",
+    "text": "You catch yourself in the mirror and decide to get fit.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Tomorrow",
+      "effects": {
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Start today",
+      "effects": {
+        "health": 6,
+        "looks": 3,
+        "stress": -2
+      }
+    },
+    "up": {
+      "label": "Train twice a day",
+      "effects": {
+        "health": 8,
+        "looks": 6
+      },
+      "risk": {
+        "chance": 0.35,
+        "effects": {
+          "health": -6
+        },
+        "result": "Pulled something. Couch for a week."
+      }
+    }
+  },
+  {
+    "id": "t16_3am_scroll",
+    "text": "It's 3 a.m. and you're still scrolling.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Phone across the room",
+      "effects": {
+        "health": 3,
+        "stress": -2
+      }
+    },
+    "right": {
+      "label": "One more video",
+      "effects": {
+        "health": -3,
+        "happiness": 2
+      }
+    }
+  },
+  {
+    "id": "t16_hair_dye",
+    "text": "You want to dye your hair a colour that doesn't occur in nature.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Maybe not",
+      "effects": {
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Do it at home",
+      "effects": {
+        "happiness": 6
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "looks": -6
+        },
+        "result": "Patchy. And slightly green."
+      }
+    },
+    "up": {
+      "label": "Salon, the works",
+      "effects": {
+        "looks": 8,
+        "happiness": 8,
+        "money": -80
+      }
+    }
+  },
+  {
+    "id": "t16_savings",
+    "text": "You've saved up a decent amount.",
+    "ages": [
+      16,
+      17
+    ],
+    "requires": {
+      "stats": {
+        "money": [
+          200,
+          1000000000
+        ]
+      }
+    },
+    "left": {
+      "label": "New phone",
+      "effects": {
+        "happiness": 6,
+        "money": -200
+      }
+    },
+    "right": {
+      "label": "Keep saving",
+      "effects": {
+        "smarts": 2,
+        "stress": -1
+      }
+    }
+  },
+  {
+    "id": "t16_prize_text",
+    "text": "A text says you won a prize. Just pay a small fee.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Delete it",
+      "effects": {
+        "smarts": 2
+      }
+    },
+    "right": {
+      "label": "Pay it",
+      "effects": {
+        "money": -50,
+        "smarts": -2
+      },
+      "result": "There is no prize."
+    }
+  },
+  {
+    "id": "t16_shelter",
+    "text": "The animal shelter needs weekend volunteers.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "left": {
+      "label": "No time",
+      "effects": {
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Sign up",
+      "effects": {
+        "karma": 6,
+        "happiness": 5,
+        "stress": -2
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "money": -20
+        },
+        "result": "You come home with a cat. Unplanned."
+      }
+    }
+  },
+  {
+    "id": "t16_walkout",
+    "text": "Students are walking out of class for a cause you care about.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "living",
+    "left": {
+      "label": "Stay in class",
+      "effects": {
+        "smarts": 1
+      }
+    },
+    "right": {
+      "label": "Walk out",
+      "effects": {
+        "karma": 4,
+        "relationships": 4
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "stress": 4
+        },
+        "result": "Detention for everyone."
+      }
+    }
+  },
+  {
+    "id": "t16_formal",
+    "text": "The end-of-year dance is coming. You have nothing to wear.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "Skip it",
+      "effects": {
+        "happiness": -3
+      }
+    },
+    "right": {
+      "label": "Borrow something",
+      "effects": {
+        "happiness": 5,
+        "relationships": 3
+      }
+    },
+    "up": {
+      "label": "Make your own outfit",
+      "effects": {
+        "looks": 6,
+        "happiness": 8
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "looks": -4
+        },
+        "result": "A seam gives up during the slow song."
+      }
+    }
+  },
+  {
+    "id": "t16_after_school",
+    "text": "Everyone keeps asking what you'll do after school.",
+    "ages": [
+      16,
+      17
+    ],
+    "left": {
+      "label": "\"No idea\"",
+      "effects": {
+        "stress": 3,
+        "happiness": 1
+      }
+    },
+    "right": {
+      "label": "Make a five-year plan",
+      "effects": {
+        "smarts": 3,
+        "stress": 3,
+        "career": 2
+      }
+    }
+  },
+  {
+    "id": "t16_raccoon",
+    "text": "A raccoon is sitting at the kitchen table like it lives here.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Back away slowly",
+      "effects": {
+        "stress": 3
+      }
+    },
+    "right": {
+      "label": "Offer it toast",
+      "effects": {
+        "happiness": 6,
+        "karma": 2
+      },
+      "result": "It takes the toast and the butter knife."
+    },
+    "up": {
+      "label": "Film it",
+      "effects": {
+        "happiness": 8
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "health": -4
+        },
+        "result": "The raccoon does not consent."
+      }
+    }
+  },
+  {
+    "id": "t16_wisdom_tooth",
+    "text": "A wisdom tooth is coming in. Your whole jaw aches.",
+    "ages": [
+      16,
+      17
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Tough it out",
+      "effects": {
+        "health": -4,
+        "stress": 3
+      }
+    },
+    "right": {
+      "label": "See the dentist",
+      "effects": {
+        "health": 5,
+        "money": -60
+      },
+      "result": "Puffy cheeks for three days."
+    }
+  }
+]
