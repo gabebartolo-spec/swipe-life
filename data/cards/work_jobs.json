@@ -185,7 +185,7 @@
     "id": "work_breakup", "ages": [14, 17], "weight": 6, "requires": { "job": "job", "flags": ["work_job_dating"] },
     "text": "{crush} says \"we should talk\" in the walk-in freezer. That's never good.",
     "left": { "label": "Break up", "effects": { "happiness": -10, "stress": 8, "relationships": -6 }, "coworker": { "crush": -15 },
-              "clear_flags": ["work_job_dating", "dating_work_partner"], "set_flags": ["work_job_awkward"],
+              "clear_flags": ["work_job_dating"], "partner": "end", "set_flags": ["work_job_awkward"],
               "result": "You still have four hours left on shift." },
     "right": { "label": "Fight for it", "effects": { "stress": 7 }, "coworker": { "crush": 6 },
                "risk": { "chance": 0.4, "effects": { "happiness": -12, "relationships": -4 }, "result": "It didn't work. Back to the fryer." } }
@@ -219,7 +219,7 @@
   {
     "id": "partner_breakup", "ages": [14, 17], "weight": 4, "requires": { "flags": ["dating_work_partner"] },
     "text": "{partner} thinks you've grown apart.",
-    "left": { "label": "Agree. End it.", "effects": { "happiness": -10, "stress": 6, "relationships": -5 }, "clear_flags": ["dating_work_partner"] },
+    "left": { "label": "Agree. End it.", "effects": { "happiness": -10, "stress": 6, "relationships": -5 }, "partner": "end" },
     "right": { "label": "Ask for another chance", "effects": { "stress": 7 },
                "risk": { "chance": 0.5, "effects": { "happiness": -12 }, "result": "They'd already decided." } }
   },

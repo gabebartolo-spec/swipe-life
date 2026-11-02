@@ -100,6 +100,9 @@ func _apply(ch: Dictionary, state, slot := "") -> void:
 		state.flags[f] = true
 	for f in ch.get("clear_flags", []):
 		state.flags.erase(f)
+	if ch.get("partner") == "end":  # a breakup ends the partner record (docs/CAREERS.md)
+		state.partner = {}
+		state.flags.erase("dating_work_partner")
 	if slot == "" or not state.careers.has(slot):
 		return
 	var entry: Dictionary = state.careers[slot]

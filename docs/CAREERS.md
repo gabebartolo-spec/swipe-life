@@ -48,6 +48,7 @@ The card then acts on the slot that matched.
 
 **Choice keys:**
 - `coworker`: `{role: affinity delta}`
+- `partner`: `"end"` (a breakup: you are single again and `dating_work_partner` is cleared)
 - `job`: `{performance, rank, meter, date: true (the crush becomes your partner), leave: "<flag>"}`
 
 **Text placeholders:** `{boss}` `{rival}` `{crush}` `{friend}` `{job}` (the current title) and `{partner}`.
