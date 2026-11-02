@@ -27,7 +27,8 @@ const STAFF := {
 static func apply(career: Dictionary, state, rng: RandomNumberGenerator) -> bool:
 	var cost := int(career.get("cost", 0))
 	var held: Dictionary = state.careers.get(career.kind, {})
-	if state.stats.money < cost or held.get("id") == career.id:
+	# a free job is open even when you are in debt
+	if (cost > 0 and state.stats.money < cost) or held.get("id") == career.id:
 		return false
 	state.change_stat("money", -cost)
 	state.careers[career.kind] = {
