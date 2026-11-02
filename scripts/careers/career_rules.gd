@@ -12,6 +12,15 @@ const DRIFT := [-8, 12]  # yearly random change in performance
 const HEAT_PER_RANK := 6  # a gang job heats up every year, more at higher ranks
 const ARREST_PER_HEAT := 0.005  # arrest chance per point of heat (heat 100 = 50%)
 const RECORD := "criminal_record"  # set by an arrest; careers can bar it with not_flags
+const WORK_HARD := {"performance": 10, "stress": 6}
+const DATE_AT := 60  # crush affinity needed for a flirt to turn into dating
+## Career menu staff actions: affinity change, stress, and optional cost and performance.
+const STAFF := {
+	"talk": {"affinity": 8, "stress": 2, "line": "You had a good chat with %s."},
+	"gift": {"affinity": 15, "stress": 1, "cost": 10, "line": "%s loved the gift."},
+	"argue": {"affinity": -15, "stress": 5, "performance": -3, "line": "You and %s had it out."},
+	"flirt": {"affinity": 12, "stress": 3, "line": "%s blushed."},
+}
 
 
 ## Starts a career in its slot, replacing what was there. False if already held or unaffordable.
@@ -127,3 +136,35 @@ static func _year(state, slot, entry, career, rng, results: Array) -> void:
 		leave(state, slot, "fired")
 		state.change_stat("happiness", -10)
 		results.append("You were let go from %s." % career.label)
+
+
+## Career menu: put in extra hours. Performance up, and it costs stress (GDD §6.6).
+static func work_hard(state, slot: String) -> String:
+	var entry: Dictionary = state.careers[slot]
+	change_performance(entry, WORK_HARD.performance)
+	state.change_stat("stress", WORK_HARD.stress)
+	return "You put in the extra hours as %s." % title(entry)
+
+
+## Staff actions open to a role (flirting is only with the crush).
+static func staff_acts(role: String) -> Array:
+	return STAFF.keys().filter(func(a): return a != "flirt" or role == "crush")
+
+
+## Career menu: talk to, gift, argue with or flirt with a coworker. Returns the result line,
+## or "" when the player can't afford it. Flirting with a crush who likes you enough starts dating.
+static func staff(state, slot: String, role: String, act: String) -> String:
+	var entry: Dictionary = state.careers[slot]
+	var fx: Dictionary = STAFF[act]
+	if state.stats.money < fx.get("cost", 0):
+		return ""
+	state.change_stat("money", -fx.get("cost", 0))
+	state.change_stat("stress", fx.stress)
+	Coworkers.change(entry.coworkers, role, fx.affinity)
+	change_performance(entry, fx.get("performance", 0))
+	var who: String = entry.coworkers[role].name
+	if act == "flirt" and entry.coworkers.crush.affinity >= DATE_AT and state.partner.is_empty():
+		date_crush(state, slot)
+		state.change_stat("happiness", 10)
+		return "%s said yes. You're going out!" % who
+	return fx.line % who

@@ -32,7 +32,7 @@ func _ready() -> void:
 	adb.load_dir()
 	for e in adb.errors:
 		push_error(e)
-	menu = YearMenu.new(adb)
+	menu = YearMenu.new(adb, careers)
 	menu.acted.connect(strip.refresh)
 
 	strip.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 10)
