@@ -14,6 +14,7 @@ func _init() -> void:
 	_test_sim()
 	_test_life_rules()
 	_test_save_round_trip()
+	_test_actions()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -139,3 +140,32 @@ func _test_save_round_trip() -> void:
 	)
 	a.free()
 	b.free()
+
+
+func _test_actions() -> void:
+	var db := ActionDB.new()
+	db.load_dir()
+	_check(db.errors.is_empty(), "action errors: %s" % "; ".join(db.errors))
+	print("actions: %d valid" % db.actions.size())
+	# age gates (GDD §6.7): a 3-year-old has nothing, a 15-year-old has clubs, study and a job
+	_check(ActionDB.tabs_at(3).is_empty(), "a 3-year-old sees a menu tab")
+	var ids := []
+	for t in ActionDB.tabs_at(15):
+		for a in db.available(t, 15):
+			ids.append(a.id)
+	for want in ["club", "study", "part_time"]:
+		_check(want in ids, "15-year-old can't see %s" % want)
+	_check("shop" not in ActionDB.tabs_at(17), "shop open before 18")
+	# money limits actions (§6.5); every action adds Stress (§6.6)
+	var state := GameStateScript.new()
+	state.new_life()
+	var doctor: Dictionary = db.actions.filter(func(a): return a.id == "doctor")[0]
+	_check(not ActionDB.perform(doctor, state), "doctor without money")
+	state.stats.money = 25
+	_check(ActionDB.perform(doctor, state) and state.stats.money == 5, "doctor cost wrong")
+	_check(state.stats.stress > 0, "action added no stress")
+	state.free()
+	# the validator rejects an action without stress or with a bad tab
+	var bad := ActionDB.new()
+	bad._check({"id": "x", "tab": "moon", "label": "x", "ages": [1, 2], "effects": {}}, "x", {})
+	_check(bad.errors.size() >= 2, "bad action passed")

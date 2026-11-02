@@ -66,10 +66,11 @@
 - 6.3 People: talk to, gift, date or argue with characters in your life.
 - 6.4 Job board: apply for jobs and courses.
 - 6.5 There is no action limit per year; money is the only limit.
-- 6.6 Balance: each activity costs time and adds Stress or has another downside, so buying stats every year
-  has a price beyond money.
+- 6.6 Balance: every action adds Stress; that is its time cost (there is no time budget). Repeating actions in
+  one year piles up Stress (and the illness risk of §4.5), so buying stats every year has a price beyond money.
 - 6.7 The menu is age-gated: options unlock as the character grows (a baby has almost none; the full menu is
-  open by 18). The exact unlock ages are an open question (§13).
+  open by 18). Tabs unlock at: Activities 5, People 10, Jobs 14, Shop 18. Each action also has its own age range
+  inside its tab (e.g. crushes from 14). Actions live in `data/actions/*.json`.
 
 ## 7. Setting and tone
 
@@ -118,7 +119,7 @@
 
 ## 13. Open questions (ask the director; do not decide)
 
-1. The age at which each between-year menu option unlocks (§6.7).
+None.
 
 ## 14. Change log
 
@@ -129,3 +130,4 @@
   with ~200 cards (§12.3, `docs/ROADMAP.md`).
 - 2026-11-03: Card JSON schema approved (§12.2, `docs/CARD_SCHEMA.md`).
 - 2026-11-03: Mental illness rule and numbers (§4.5).
+- 2026-11-03: Menu unlock ages (§6.7) and Stress as the time cost (§6.6); §13.1 closed.
