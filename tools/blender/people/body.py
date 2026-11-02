@@ -104,6 +104,8 @@ def torso(layer, grow, mask="R"):
     sphere((layer, "chest", mask), (0, 1.1, 0), 0.29 + grow, (1.0, 0.8, 0.62))
     sphere((layer, "chest", mask), (0, 0.92, 0), 0.2 + grow, (1.0, 0.9, 0.7))
     sphere((layer, "chest", mask), (0, 1.27, 0), 0.22 + grow, (1.05, 0.42, 0.7))
+    if layer in ("tee", "sweater"):  # tops: a wide flat band squares off the hem at the hips (no leotard point)
+        sphere((layer, "chest", mask), (0, 0.8, 0), 0.24 + grow, (1.2, 0.28, 0.72))
 
 
 def body():
