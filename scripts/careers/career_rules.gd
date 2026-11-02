@@ -6,7 +6,7 @@ extends RefCounted
 ## Promotion is asked for from the career menu; year end pays, fires and (gang) arrests.
 
 const START_PERFORMANCE := 50
-const AFTER_PROMOTION := 40  # a new rank starts you lower down
+const AFTER_PROMOTION := 50  # a new rank starts you lower down
 const FIRE_AT := 30  # performance at or below this at year end: fired
 const DRIFT := [-12, 10]  # yearly random change in performance
 const HEAT_PER_RANK := 6  # a gang job heats up every year, more at higher ranks
