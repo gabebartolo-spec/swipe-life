@@ -107,15 +107,14 @@
 
 - 12.1 Godot 4.7.2, Android, portrait 720×1280, touch-first (mouse emulates touch in the editor).
 - 12.2 Cards, events, items and activities live in JSON data files, not hard-coded in scripts. The exact
-  schema is proposed to the director by the first card-system task.
+  schema is in `docs/CARD_SCHEMA.md` (approved 2026-11-03).
 - 12.3 Launch target: about 300 cards. The first playable (birth to 18, `docs/ROADMAP.md`) has about 200
   cards for ages 0–17.
 - 12.4 Repo conventions are in `CLAUDE.md` (branches, PRs, CI, LFS, no keystores in git).
 
 ## 13. Open questions (ask the director; do not decide)
 
-1. The JSON card schema (§12.2), once proposed.
-2. The age at which each between-year menu option unlocks (§6.7).
+1. The age at which each between-year menu option unlocks (§6.7).
 
 ## 14. Change log
 
@@ -124,3 +123,4 @@
   activity balance (§6.6), autosave (§8.3), legacy (§9.3), layout (§10.5), JSON + ~300 cards (§12.2–12.3).
 - 2026-11-03: Art style picked: 2D clay cut-outs (§10.4). Age-gated menu (§6.7). First playable = birth to 18
   with ~200 cards (§12.3, `docs/ROADMAP.md`).
+- 2026-11-03: Card JSON schema approved (§12.2, `docs/CARD_SCHEMA.md`).
