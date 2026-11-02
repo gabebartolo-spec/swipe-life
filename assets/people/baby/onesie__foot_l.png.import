@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5w2w8abblmjh"
-path="res://.godot/imported/trousers__shin_l.png-9ebe87e4611d97fea7cccefbf4b4c666.ctex"
+uid="uid://bkrdcg16phvad"
+path="res://.godot/imported/onesie__foot_l.png-b19af43a3d1e69cbe891e9e3e7ea072a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/people/baby/trousers__shin_l.png"
-dest_files=["res://.godot/imported/trousers__shin_l.png-9ebe87e4611d97fea7cccefbf4b4c666.ctex"]
+source_file="res://assets/people/baby/onesie__foot_l.png"
+dest_files=["res://.godot/imported/onesie__foot_l.png-b19af43a3d1e69cbe891e9e3e7ea072a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8qpi0vi2ayyp"
-path="res://.godot/imported/tee__chest.png-52ce6525da452670a1985ffe046c8535.ctex"
+uid="uid://ql4wad8mhpth"
+path="res://.godot/imported/onesie__shin_r.png-fc313f17a9968eeb99cd9c83acedb037.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/people/baby/tee__chest.png"
-dest_files=["res://.godot/imported/tee__chest.png-52ce6525da452670a1985ffe046c8535.ctex"]
+source_file="res://assets/people/baby/onesie__shin_r.png"
+dest_files=["res://.godot/imported/onesie__shin_r.png-fc313f17a9968eeb99cd9c83acedb037.ctex"]
 
 [params]
 

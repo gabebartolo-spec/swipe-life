@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byq68f60blxbj"
-path="res://.godot/imported/hair_back__head.png-deb5e146046469d8386cb274ee860078.ctex"
+uid="uid://dxpuu4oh5ejar"
+path="res://.godot/imported/onesie__pelvis.png-958db7a181f3d15e8dda621a68e2c2eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/people/baby/hair_back__head.png"
-dest_files=["res://.godot/imported/hair_back__head.png-deb5e146046469d8386cb274ee860078.ctex"]
+source_file="res://assets/people/baby/onesie__pelvis.png"
+dest_files=["res://.godot/imported/onesie__pelvis.png-958db7a181f3d15e8dda621a68e2c2eb.ctex"]
 
 [params]
 

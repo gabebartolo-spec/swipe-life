@@ -42,6 +42,12 @@ func _ready() -> void:
 		p.scale = Vector2.ONE * PX_PER_M / 264.8
 		if ages:
 			p.shape = AGES[n]
+			if n == 0:  # the baby wears a onesie and a wisp of hair
+				p.look = {
+					"body": [Color(SKINS[0])],
+					"hair_front": [Color(HAIRS[0])],
+					"onesie": [Color("f2e6a0")],
+				}
 			p.position = Vector2(100 + 170 * n, 580)
 			p.scale = Vector2.ONE * 130.0 / 264.8
 		add_child(p)
