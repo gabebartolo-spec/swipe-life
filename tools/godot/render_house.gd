@@ -1,0 +1,76 @@
+extends SceneTree
+## Renders assets/house/house.glb with the approved clay look (scenes/proto/clay_room_baked.tscn)
+## to one PNG per age band, each with every activity layer shown.
+## Run: godot --path . --resolution 1080x900 -s tools/godot/render_house.gd -- <out_dir>
+
+const CLAY := preload("res://shaders/clay.gdshader")
+const GLOWS := {"fairy": 1.2, "lamp_glow": 1.0}
+const BANDS := ["baby", "child", "teen"]
+
+var _house: Node3D
+
+
+func _initialize() -> void:
+	var out: String = OS.get_cmdline_user_args()[0]
+	var root3d := Node3D.new()
+	root.add_child(root3d)
+	var env := Environment.new()
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = Color(0.85, 0.86, 0.9)
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color = Color(1, 0.96, 0.92)
+	env.ambient_light_energy = 0.35
+	env.tonemap_mode = 2
+	var we := WorldEnvironment.new()
+	we.environment = env
+	root3d.add_child(we)
+	var sun := DirectionalLight3D.new()
+	sun.light_color = Color(1, 0.95, 0.88)
+	sun.light_energy = 0.75
+	sun.shadow_enabled = true
+	sun.shadow_blur = 2.0
+	root3d.add_child(sun)
+	sun.look_at_from_position(Vector3(14, 16, 10), Vector3(4, 0, 4))
+	for z: float in [1.6, 6.2]:
+		var glow := OmniLight3D.new()
+		glow.light_color = Color(1, 0.85, 0.6)
+		glow.light_energy = 0.7
+		glow.omni_range = 4.5
+		glow.position = Vector3(1, 2.4, z)
+		root3d.add_child(glow)
+	var cam := Camera3D.new()
+	cam.projection = Camera3D.PROJECTION_ORTHOGONAL
+	cam.size = 10.0
+	var basis := Basis(
+		Vector3(0.707107, 0, -0.707107), Vector3(-0.408248, 0.816497, -0.408248), Vector3(0.57735, 0.57735, 0.57735)
+	)
+	cam.transform = Transform3D(basis, Vector3(4, 0.9, 4) + basis.z * 20.0)
+	root3d.add_child(cam)
+	root.msaa_3d = Viewport.MSAA_4X
+	_house = (load("res://assets/house/house.glb") as PackedScene).instantiate()
+	root3d.add_child(_house)
+	for mi: MeshInstance3D in _house.find_children("*", "MeshInstance3D", true, false):
+		var m := ShaderMaterial.new()
+		m.shader = CLAY
+		m.set_shader_parameter("albedo", Color.WHITE)
+		m.set_shader_parameter("use_vertex_color", true)
+		m.set_shader_parameter("contact_ao", 0.0)
+		m.set_shader_parameter("boil_fps", 0.0)
+		for key: String in GLOWS:
+			if key in String(mi.name):
+				m.set_shader_parameter("emission", GLOWS[key])
+		mi.material_override = m
+	_render(out)
+
+
+func _render(out: String) -> void:
+	DirAccess.make_dir_recursive_absolute(out)
+	for band: String in BANDS:
+		for mi: MeshInstance3D in _house.find_children("*", "MeshInstance3D", true, false):
+			var n := String(mi.name)
+			mi.visible = not n.begins_with("bed_") or n.begins_with("bed_%s__" % band)
+		for i in 20:
+			await process_frame
+		root.get_texture().get_image().save_png(out.path_join("house_%s.png" % band))
+		print("saved ", band)
+	quit()

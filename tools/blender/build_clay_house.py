@@ -1,21 +1,20 @@
-"""Build the childhood home (GDD §10.6) as a clay dollhouse and prerender it to layered PNGs (§10.4).
+"""Build the childhood home (GDD §10.6) as a clay dollhouse and export it for the Godot layer render.
 
 Run headless:
-  blender -b --factory-startup --python tools/blender/build_clay_house.py -- <out_dir>
+  blender -b --factory-startup --python tools/blender/build_clay_house.py -- <out.glb>
 
-Four rooms in a 2x2 front cutaway: bedroom and bathroom upstairs, living room and kitchen downstairs.
-Every prop is clay-modelled with build_clay_room.py's helpers and gets baked AO in its vertex colours.
-Each layer renders alone on the same isometric camera with a transparent background, so Godot can
-stack them without re-aligning anything:
-  shell      walls, floors, windows (always shown)
+Four rooms on one level in a 2x2 plan, seen in true isometric like the approved clay bedroom test:
+bedroom at the back, bathroom right, living room left, kitchen at the front. Back walls are full
+height; interior walls are cut low so every room shows. Props carry baked AO in their vertex colours.
+
+Every object is named "<layer>__<prop>":
+  shell      floors, walls, windows (always shown)
   base       living room, kitchen, bathroom furniture (always shown)
-  bed_<band> bedroom furniture for one age band: baby, child, teen (§10.8)
+  bed_<band> bedroom for one age band: baby, child, teen (§10.8)
   act_<id>   props left by an activity, keyed by the action id in data/actions (§10.8)
-Writes <out_dir>/<layer>.png and <out_dir>/house.json (canvas size, layer list).
-Axes are Godot's: x right (0..6), y up, z toward the camera (0..3).
+Coordinates are Godot's (x, y up, z); the helpers convert to Blender.
 """
 
-import json
 import math
 import os
 import sys
@@ -23,226 +22,197 @@ import sys
 import bpy
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import numpy as np  # noqa: E402
-from build_clay_room import ball, box, cloth, hexc, tube  # noqa: E402
+import build_clay_room as R  # noqa: E402
 
-RES = (1080, 900)  # dollhouse strip: ~45% of a 1080x1920 portrait screen (§10.5)
-W, D, H = 6.0, 3.0, 2.6  # house width, depth, storey height
-UP = H + 0.2  # upstairs floor level
-WALL, CREAM, WOOD = "e6d9c6", "f3ead8", "c98a55"
+S, M = 8.0, 4.0
+WALL_H, LOW_H = 2.8, 0.7
+WALL, CREAM, WOOD, DARKWOOD = "efe3cf", "f3ead8", "d9935a", "b8743f"
+LAYERS = {}
 
-LAYERS = {}  # layer name -> object names
+
+box, ball, tube, cloth = R.box, R.ball, R.tube, R.cloth  # all take Godot (x, y up, z) coordinates
 
 
 def layer(name):
-    """Everything built after this call, until the next call, belongs to the named layer."""
     LAYERS[name] = set()
     layer.current = name
 
 
 def tag():
-    for ob in bpy.context.scene.objects:
-        if ob.type == "MESH" and not any(ob.name in s for s in LAYERS.values()):
+    for ob in list(bpy.context.scene.objects):
+        if ob.type == "MESH" and "__" not in ob.name:
+            ob.name = f"{layer.current}__{ob.name}"
             LAYERS[layer.current].add(ob.name)
-
-
-def window(x, y, z_wall=0.03, w=1.0, h=0.9):
-    """Window on the back wall, centre (x, y)."""
-    box(f"win_frame{x}{y}", (x, y, z_wall), (w + 0.2, h + 0.2, 0.12), "fbf8f2", bevel=0.05)
-    box(f"win_pane{x}{y}", (x, y, z_wall + 0.05), (w, h, 0.04), "fff3d6", bevel=0.01, subd=0, lump=0)
-    box(f"win_bar{x}{y}", (x, y, z_wall + 0.08), (0.06, h, 0.04), "fbf8f2", bevel=0.02)
-    box(f"win_sill{x}{y}", (x, y - h / 2 - 0.08, z_wall + 0.12), (w + 0.3, 0.08, 0.26), "fbf8f2", bevel=0.03)
 
 
 def shell():
     layer("shell")
-    for i, (y, floor) in enumerate(((0.0, "c98a55"), (UP, "d9b48a"))):
-        box(f"slab{i}", (W / 2, y - 0.12, D / 2), (W + 0.4, 0.24, D + 0.2), WALL, bevel=0.1)
-        tints = [floor, "bf7f4a", "d29560"] if i == 0 else [floor, "cfa87c", "e0c095"]
-        for p in range(12):
-            box(f"plank{i}_{p}", (0.25 + p * 0.5, y + 0.02, D / 2), (0.46, 0.06, D - 0.05), tints[p % 3],
-                bevel=0.025, seed=p + i * 12)
-    box("roof_slab", (W / 2, 2 * UP - 0.08, D / 2), (W + 0.4, 0.2, D + 0.2), "c45c4a", bevel=0.1)
-    box("wall_back", (W / 2, UP, -0.15), (W + 0.4, 2 * UP, 0.3), WALL, bevel=0.15)
-    box("wall_left", (-0.15, UP, D / 2), (0.3, 2 * UP, D + 0.2), WALL, bevel=0.15)
-    box("wall_right", (W + 0.15, UP, D / 2), (0.3, 2 * UP, D + 0.2), WALL, bevel=0.15)
-    for y in (0.0, UP):  # room divider with a door gap at the front
-        box(f"divider{y}", (W / 2, y + H / 2, 0.85), (0.16, H, 1.7), WALL, bevel=0.06)
-    # wallpaper tints per room, set into the back wall
-    for (x, y, col) in ((1.5, UP, "dfe6d2"), (4.5, UP, "d6e4ea"), (1.5, 0, "f0dcc4"), (4.5, 0, "f2e8c8")):
-        box(f"paper{x}{y}", (x, y + H / 2, 0.01), (2.8, H - 0.1, 0.02), col, bevel=0.01, subd=1, lump=0.004)
-    window(1.2, UP + 1.5, w=0.9)
-    window(4.4, UP + 1.6, w=0.6, h=0.6)
-    window(1.0, 1.5)
-    window(4.6, 1.55, w=0.8, h=0.7)
+    box("slab", (S / 2, -0.2, S / 2), (S + 0.3, 0.4, S + 0.3), "f6eddd", bevel=0.14)
+    for i in range(8):
+        box(f"bplank{i}", (2, 0.02, 0.25 + i * 0.5), (M, 0.06, 0.46), ["d9935a", "cf8650", "e09f66"][i % 3],
+            bevel=0.025, seed=i)
+        box(f"lplank{i}", (0.25 + i * 0.5, 0.02, 6), (0.46, 0.06, M), ["c98a55", "bf7f4a", "d29560"][i % 3],
+            bevel=0.025, seed=i)
+    for i in range(8):
+        for j in range(8):
+            box(f"btile{i}_{j}", (M + 0.25 + i * 0.5, 0.02, 0.25 + j * 0.5), (0.46, 0.05, 0.46),
+                ["f6f1e8", "cfe3e6"][(i + j) % 2], bevel=0.02, subd=1, lump=0.004, seed=i * 9 + j)
+            box(f"ktile{i}_{j}", (M + 0.25 + i * 0.5, 0.02, M + 0.25 + j * 0.5), (0.46, 0.05, 0.46),
+                ["f3ead8", "e8c9a0"][(i + j) % 2], bevel=0.02, subd=1, lump=0.004, seed=i * 7 + j)
+    box("wall_x", (-0.15, WALL_H / 2, S / 2), (0.3, WALL_H, S + 0.3), WALL, bevel=0.14)
+    box("wall_z", (S / 2, WALL_H / 2, -0.15), (S + 0.3, WALL_H, 0.3), WALL, bevel=0.14)
+    box("paper_bx", (0.01, 1.5, 2), (0.02, 2.5, 3.9), "e4ead7", bevel=0.01, subd=1, lump=0.004)
+    box("paper_bz", (2, 1.5, 0.01), (3.9, 2.5, 0.02), "e4ead7", bevel=0.01, subd=1, lump=0.004)
+    box("paper_tz", (6, 1.5, 0.01), (3.9, 2.5, 0.02), "dbeaf0", bevel=0.01, subd=1, lump=0.004)
+    box("paper_lx", (0.01, 1.5, 6), (0.02, 2.5, 3.9), "f4e2c8", bevel=0.01, subd=1, lump=0.004)
+    box("iwall_a", (M, LOW_H / 2, 1.2), (0.2, LOW_H, 2.4), WALL, bevel=0.08)
+    box("iwall_b", (M, LOW_H / 2, 6.6), (0.2, LOW_H, 2.8), WALL, bevel=0.08)
+    box("iwall_c", (1.2, LOW_H / 2, M), (2.4, LOW_H, 0.2), WALL, bevel=0.08)
+    box("iwall_d", (6.6, LOW_H / 2, M), (2.8, LOW_H, 0.2), WALL, bevel=0.08)
+    for n, z in (("wb", 1.6), ("wl", 6.2)):
+        box(f"{n}_frame", (0.03, 1.6, z), (0.12, 1.26, 1.46), "fbf8f2", bevel=0.05)
+        box(f"{n}_win_pane", (0.07, 1.6, z), (0.05, 1.1, 1.3), "fff3d6", bevel=0.01, subd=0, lump=0)
+        box(f"{n}_sill", (0.15, 1.0, z), (0.3, 0.08, 1.6), "fbf8f2", bevel=0.03)
+        for k, dz in (("a", -0.8), ("b", 0.8)):
+            box(f"{n}_curtain_{k}", (0.12, 1.55, z + dz), (0.08, 1.6, 0.32), "f1e4cf", bevel=0.04, lump=0.02)
+    box("wt_frame", (6.6, 1.9, 0.03), (1.06, 0.86, 0.12), "fbf8f2", bevel=0.05)
+    box("wt_win_pane", (6.6, 1.9, 0.07), (0.9, 0.7, 0.05), "fff3d6", bevel=0.01, subd=0, lump=0)
     tag()
 
 
 def base():
     layer("base")
-    # living room (downstairs left): sofa, rug, TV, lamp
-    cloth("living_rug", (1.5, 0.08, 1.9), (2.2, 0.04, 1.4), "d9a3a0", folds=0.005)
-    box("sofa_base", (1.4, 0.3, 0.55), (1.9, 0.45, 0.8), "7f9fb8", bevel=0.14)
-    box("sofa_back", (1.4, 0.75, 0.25), (1.9, 0.6, 0.25), "7f9fb8", bevel=0.12)
-    for i, x in enumerate((0.45, 2.35)):
-        box(f"sofa_arm{i}", (x, 0.52, 0.55), (0.25, 0.5, 0.8), "6f8fa8", bevel=0.1)
-    ball("cushion", (0.85, 0.7, 0.5), 0.22, "e0b45a", scale=(1, 0.9, 0.38), lump=0.015)
-    # TV on a low stand against the left wall, facing into the room (never between camera and sofa)
-    box("tv_stand", (0.25, 0.22, 1.75), (0.4, 0.4, 1.2), WOOD, bevel=0.05)
-    box("tv", (0.22, 0.75, 1.75), (0.08, 0.62, 0.95), "4a4d55", bevel=0.04)
-    box("tv_screen", (0.27, 0.75, 1.75), (0.02, 0.52, 0.84), "6a7a8a", bevel=0.01, subd=1, lump=0)
-    # kitchen (downstairs right): counter, fridge, table
-    # the right wall's outside hides anything tall against it, so the fridge stands by the divider
-    box("fridge", (3.5, 0.85, 0.4), (0.7, 1.7, 0.7), "fbf8f2", bevel=0.08)
-    box("fridge_handle", (3.78, 1.1, 0.76), (0.04, 0.4, 0.04), "a9b0a2", bevel=0.015)
-    box("counter", (4.85, 0.45, 0.35), (1.9, 0.9, 0.6), "f3ead8", bevel=0.05)
-    box("counter_top", (4.85, 0.93, 0.35), (2.0, 0.08, 0.66), "a9b0a2", bevel=0.03)
-    tube("pot", (4.4, 1.07, 0.35), 0.14, 0.2, "c45c4a")
-    tube("herb_pot", (5.3, 1.05, 0.3), 0.09, 0.16, "c8693f")
-    ball("herb", (5.3, 1.2, 0.3), 0.12, "6f9e57", scale=(1, 0.7, 1), seed=3)
-    tube("table_top", (4.4, 0.72, 2.0), 0.55, 0.07, WOOD)
-    tube("table_leg", (4.4, 0.36, 2.0), 0.06, 0.7, "bf7f4a")
-    for i, (dx, dz) in enumerate(((-0.75, 0.0), (0.75, 0.0))):
-        box(f"stool{i}", (4.4 + dx, 0.45, 2.0 + dz), (0.4, 0.08, 0.4), CREAM, bevel=0.04)
-        tube(f"stool_leg{i}", (4.4 + dx, 0.22, 2.0 + dz), 0.04, 0.44, "bf7f4a")
-    ball("fruit_bowl", (4.4, 0.8, 2.0), 0.18, "f4efe6", scale=(1, 0.4, 1))
+    # living room
+    box("rug_l", (2.2, 0.08, 6), (2.6, 0.04, 2.0), "d9a3a0", bevel=0.02, lump=0.004)
+    box("sofa_base", (0.55, 0.3, 6), (0.85, 0.45, 2.0), "7f9fb8", bevel=0.14)
+    box("sofa_back", (0.22, 0.75, 6), (0.25, 0.65, 2.0), "7f9fb8", bevel=0.12)
+    for i, z in enumerate((4.95, 7.05)):
+        box(f"sofa_arm{i}", (0.55, 0.52, z), (0.85, 0.5, 0.26), "6f8fa8", bevel=0.1)
+    ball("cushion_a", (0.45, 0.74, 5.45), 0.22, "e0b45a", scale=(0.4, 0.9, 1))
+    ball("cushion_b", (0.45, 0.74, 6.55), 0.22, "e8dccb", scale=(0.4, 0.9, 1), seed=2)
+    box("coffee_top", (2.1, 0.45, 6), (0.9, 0.08, 1.3), WOOD, bevel=0.04)
+    for i, (dx, dz) in enumerate(((-0.35, -0.55), (0.35, -0.55), (-0.35, 0.55), (0.35, 0.55))):
+        tube(f"coffee_leg{i}", (2.1 + dx, 0.22, 6 + dz), 0.04, 0.42, DARKWOOD)
+    tube("mug", (2.0, 0.56, 5.8), 0.07, 0.14, "f4efe6")
+    box("tv_unit", (3.55, 0.25, 6), (0.5, 0.5, 1.6), DARKWOOD, bevel=0.05)
+    box("tv", (3.55, 0.95, 6), (0.08, 0.7, 1.15), "4a4d55", bevel=0.04)
+    tube("pot_l", (0.4, 0.25, 7.6), 0.22, 0.5, "c8693f")
+    for i, o in enumerate([(0, 0.75, 0), (0.15, 0.62, 0.08), (-0.14, 0.65, -0.06), (0.04, 0.95, 0.1)]):
+        ball(f"leaf_l{i}", (0.4 + o[0], o[1], 7.6 + o[2]), 0.2, "6f9e57", scale=(1, 0.6, 1), seed=i)
+    # kitchen
+    box("counter", (5.9, 0.45, 4.45), (2.6, 0.9, 0.6), CREAM, bevel=0.05)
+    box("counter_top", (5.9, 0.93, 4.45), (2.7, 0.08, 0.66), "a9b0a2", bevel=0.03)
+    box("stove", (6.4, 0.98, 4.45), (0.6, 0.03, 0.5), "4a4d55", bevel=0.01)
+    tube("pan", (6.3, 1.1, 4.45), 0.15, 0.22, "c45c4a")
+    tube("kettle", (5.1, 1.08, 4.4), 0.11, 0.22, "e0b45a")
+    box("fridge", (7.55, 0.9, 4.5), (0.7, 1.8, 0.7), "fbf8f2", bevel=0.08)
+    tube("table_top", (6, 0.72, 6.3), 0.62, 0.07, WOOD)
+    tube("table_leg", (6, 0.36, 6.3), 0.07, 0.7, DARKWOOD)
+    for i, (dx, dz) in enumerate(((-0.85, 0), (0.85, 0), (0, 0.85))):
+        box(f"chair{i}", (6 + dx, 0.45, 6.3 + dz), (0.42, 0.08, 0.42), CREAM, bevel=0.04)
+        tube(f"chair_leg{i}", (6 + dx, 0.22, 6.3 + dz), 0.04, 0.44, DARKWOOD)
     for i, col in enumerate(("e0a24a", "c45c4a", "7fae6a")):
-        ball(f"fruit{i}", (4.3 + i * 0.1, 0.88, 2.0 + (i - 1) * 0.06), 0.07, col, lump=0, seed=i)
-    # bathroom (upstairs right): tub, toilet, sink, mirror
-    # sink and mirror on the back wall, tub beside it, toilet against the right wall facing in
-    box("sink", (3.65, UP + 0.85, 0.3), (0.6, 0.2, 0.45), "fbf8f2", bevel=0.08)
-    tube("sink_pedestal", (3.65, UP + 0.4, 0.25), 0.1, 0.75, "fbf8f2")
-    tube("tap", (3.65, UP + 1.0, 0.12), 0.03, 0.14, "a9b0a2")
-    box("mirror_frame", (3.65, UP + 1.6, 0.04), (0.6, 0.75, 0.05), "c98a55", bevel=0.03)
-    box("mirror", (3.65, UP + 1.6, 0.07), (0.48, 0.62, 0.03), "cfe3ea", bevel=0.015, subd=1, lump=0)
-    box("tub", (4.85, UP + 0.32, 0.5), (1.5, 0.6, 0.8), "fbf8f2", bevel=0.18)
-    box("tub_water", (4.85, UP + 0.58, 0.5), (1.25, 0.06, 0.58), "a9d0e0", bevel=0.05, lump=0.004)
-    ball("duck", (4.6, UP + 0.68, 0.55), 0.08, "f3d36b", scale=(1.2, 0.9, 1), lump=0)
-    box("toilet_base", (3.5, UP + 0.22, 1.95), (0.5, 0.44, 0.42), "fbf8f2", bevel=0.12)
-    box("toilet_seat", (3.55, UP + 0.47, 1.95), (0.52, 0.06, 0.44), "e6eef0", bevel=0.03)
-    box("toilet_tank", (3.25, UP + 0.7, 1.95), (0.2, 0.5, 0.5), "fbf8f2", bevel=0.08)
-    cloth("bath_mat", (4.7, UP + 0.07, 1.4), (1.0, 0.04, 0.5), "a9c2a2", folds=0.006)
+        ball(f"fruit{i}", (5.9 + i * 0.1, 0.84, 6.3), 0.075, col, lump=0, seed=i)
+    # bathroom
+    box("tub", (7.2, 0.32, 1.1), (1.3, 0.6, 2.0), "fbf8f2", bevel=0.18)
+    box("tub_water", (7.2, 0.64, 1.1), (1.05, 0.06, 1.75), "a9d0e0", bevel=0.05, subd=1, lump=0)
+    ball("duck", (7.0, 0.74, 1.4), 0.08, "f3d36b", lump=0)
+    box("sink", (5.2, 0.85, 0.3), (0.7, 0.2, 0.5), "fbf8f2", bevel=0.08)
+    tube("sink_ped", (5.2, 0.4, 0.25), 0.11, 0.75, "fbf8f2")
+    box("mirror", (5.2, 1.65, 0.05), (0.6, 0.75, 0.05), "cfe3ea", bevel=0.03)
+    box("toilet", (6.1, 0.22, 0.42), (0.42, 0.44, 0.52), "fbf8f2", bevel=0.12)
+    box("toilet_tank", (6.1, 0.7, 0.15), (0.5, 0.5, 0.2), "fbf8f2", bevel=0.08)
+    box("bath_mat", (6.3, 0.07, 1.8), (0.9, 0.04, 0.6), "a9c2a2", bevel=0.02)
+    box("towel", (4.6, 1.0, 0.08), (0.5, 0.45, 0.05), "e58f5a", bevel=0.03, lump=0.02)
     tag()
 
 
-def bedroom_common(band):
-    cloth(f"bed_rug_{band}", (1.5, UP + 0.08, 1.9), (1.8, 0.04, 1.3), "e6c0b4", folds=0.005)
+def fairy(band):
+    for i in range(12):
+        y = 2.45 - 0.18 * math.sin(math.pi * (i % 6) / 6)
+        ball(f"fairy_{band}{i}", (0.6 + i * 0.28, y, 0.08), 0.05, "ffc860", lump=0, seed=i)
 
 
-def bed_baby():
+def bedrooms():
     layer("bed_baby")
-    bedroom_common("baby")
-    # crib: slatted box with a soft mattress, a mobile above, blocks on the rug
-    box("crib_base", (1.0, UP + 0.45, 0.7), (1.3, 0.12, 0.8), "f3ead8", bevel=0.04)
-    box("crib_mattress", (1.0, UP + 0.56, 0.7), (1.18, 0.12, 0.68), "cfe0ea", bevel=0.06)
+    fairy("baby")
+    box("crib_base", (1.2, 0.45, 0.7), (1.4, 0.12, 0.85), CREAM, bevel=0.04)
+    box("crib_mattress", (1.2, 0.56, 0.7), (1.28, 0.12, 0.72), "cfe0ea", bevel=0.06)
     for i in range(9):
-        x = 0.4 + i * 0.15
-        for z in (0.36, 1.04):
-            tube(f"crib_slat{i}_{z}", (x, UP + 0.65, z), 0.025, 0.7, "f3ead8")
-    for z in (0.36, 1.04):
-        box(f"crib_rail{z}", (1.0, UP + 1.0, z), (1.32, 0.06, 0.06), "f3ead8", bevel=0.025)
-    tube("mobile_rod", (1.0, UP + 1.85, 0.7), 0.015, 0.7, "8a6a55")
-    for i, col in enumerate(("f3d36b", "e58f5a", "9fb6d2")):
-        a = i * 2 * math.pi / 3
-        ball(f"mobile_{i}", (1.0 + 0.25 * math.cos(a), UP + 1.45, 0.7 + 0.25 * math.sin(a)), 0.08, col, lump=0)
+        for z in (0.32, 1.08):
+            tube(f"slat{i}_{z}", (0.56 + i * 0.16, 0.72, z), 0.025, 0.65, CREAM)
+    for z in (0.32, 1.08):
+        box(f"rail{z}", (1.2, 1.06, z), (1.42, 0.06, 0.06), CREAM, bevel=0.025)
+    ball("teddy_body", (2.9, 0.3, 2.0), 0.21, "c98a55", scale=(1, 1.1, 0.9))
+    ball("teddy_head", (2.9, 0.62, 2.02), 0.15, "c98a55")
+    for i, dx in enumerate((-0.11, 0.11)):
+        ball(f"teddy_ear{i}", (2.9 + dx, 0.75, 2.0), 0.055, "a8703f", lump=0)
+    ball("teddy_snout", (2.9, 0.59, 2.16), 0.06, "e6c49a", lump=0)
     for i, col in enumerate(("c45c4a", "e0b45a", "5c7a5a", "4e6a8a")):
-        box(f"block{i}", (1.6 + (i % 2) * 0.24, UP + 0.18 + (i // 2) * 0.2, 2.0 + (i % 2) * 0.05),
-            (0.2, 0.2, 0.2), col, bevel=0.03, seed=i)
-    ball("teddy_body", (2.35, UP + 0.28, 1.4), 0.2, "c98a55", scale=(1, 1.1, 0.9))
-    ball("teddy_head", (2.35, UP + 0.58, 1.42), 0.14, "c98a55")
-    for i, dx in enumerate((-0.1, 0.1)):
-        ball(f"teddy_ear{i}", (2.35 + dx, UP + 0.7, 1.4), 0.055, "a8703f", lump=0)
-    ball("teddy_snout", (2.35, UP + 0.55, 1.55), 0.06, "e6c49a", lump=0)
+        box(f"block{i}", (2.1 + (i % 2) * 0.24, 0.2 + (i // 2) * 0.2, 2.5), (0.2, 0.2, 0.2), col, bevel=0.03)
+    box("changer", (0.35, 0.45, 3.1), (0.6, 0.9, 1.0), "fbf6ec", bevel=0.06)
     tag()
-
-
-def bed_child():
     layer("bed_child")
-    bedroom_common("child")
-    box("kid_bed", (0.85, UP + 0.25, 0.9), (1.4, 0.35, 1.6), "e58f5a", bevel=0.08)
-    cloth("kid_duvet", (0.85, UP + 0.47, 1.05), (1.45, 0.1, 1.2), "f3d36b", folds=0.03, droop=0.2)
-    ball("kid_pillow", (0.85, UP + 0.52, 0.35), 0.25, "fbf6ec", scale=(1.2, 0.4, 0.7))
-    box("toy_box", (2.3, UP + 0.25, 0.4), (0.8, 0.5, 0.5), "5c7a5a", bevel=0.07)
-    ball("toy_ball", (2.1, UP + 0.6, 0.4), 0.13, "c45c4a", lump=0)
+    fairy("child")
+    box("kid_bed", (0.85, 0.25, 1.1), (1.3, 0.38, 1.9), "e58f5a", bevel=0.09)
+    box("kid_duvet", (0.88, 0.48, 1.35), (1.36, 0.1, 1.3), "f3d36b", bevel=0.05, lump=0.02)
+    ball("kid_pillow", (0.85, 0.52, 0.5), 0.26, "fbf6ec", scale=(1.2, 0.4, 0.7))
+    box("toy_box", (2.9, 0.28, 0.4), (0.9, 0.55, 0.55), "5c7a5a", bevel=0.07)
+    ball("toy_ball", (2.65, 0.75, 0.4), 0.14, "c45c4a", lump=0)
+    box("shelf_c", (2.0, 1.55, 0.18), (1.2, 0.07, 0.34), WOOD, bevel=0.03)
+    for i, col in enumerate(("c45c4a", "e0b45a", "4e6a8a", "7fae6a")):
+        box(f"picbook{i}", (1.6 + i * 0.22, 1.75, 0.18), (0.18, 0.34, 0.28), col, bevel=0.025)
     tag()
-
-
-def bed_teen():
     layer("bed_teen")
-    bedroom_common("teen")
-    box("teen_bed", (0.95, UP + 0.28, 0.95), (1.6, 0.4, 1.8), "b8743f", bevel=0.08)
-    cloth("teen_duvet", (0.95, UP + 0.53, 1.15), (1.65, 0.1, 1.35), "9fb6d2", folds=0.03, droop=0.22)
-    ball("teen_pillow", (0.95, UP + 0.58, 0.35), 0.28, "fbf6ec", scale=(1.2, 0.36, 0.7))
-    box("desk_top", (2.3, UP + 0.75, 0.35), (1.0, 0.08, 0.6), WOOD, bevel=0.03)
-    for x in (1.88, 2.72):
-        box(f"desk_leg{x}", (x, UP + 0.37, 0.35), (0.08, 0.74, 0.5), "bf7f4a", bevel=0.03)
-    box("poster_t", (2.25, UP + 1.45, 0.04), (0.5, 0.7, 0.04), "4e6a8a", bevel=0.02)
-    ball("poster_t_star", (2.25, UP + 1.5, 0.08), 0.13, "f3d36b", scale=(1, 1, 0.25))
+    fairy("teen")
+    box("teen_bed", (1.0, 0.3, 1.3), (1.7, 0.42, 2.3), DARKWOOD, bevel=0.09)
+    box("teen_mattress", (1.0, 0.58, 1.32), (1.58, 0.26, 2.15), CREAM, bevel=0.1)
+    box("teen_duvet", (1.05, 0.76, 1.65), (1.72, 0.12, 1.5), "9fb6d2", bevel=0.06, lump=0.02)
+    box("desk_top", (3.0, 1.0, 0.45), (1.5, 0.08, 0.75), WOOD, bevel=0.04)
+    box("desk_drawers", (3.5, 0.5, 0.45), (0.5, 0.95, 0.7), "c98a55", bevel=0.05)
+    box("laptop", (2.9, 1.07, 0.5), (0.6, 0.04, 0.4), "c4c7cc", bevel=0.02)
+    box("laptop_lid", (2.9, 1.28, 0.3), (0.6, 0.4, 0.04), "9fa4ab", bevel=0.02)
+    ball("lamp_glow_t", (3.5, 1.52, 0.35), 0.12, "fff0cc", scale=(1, 0.75, 1))
+    box("poster_t", (0.03, 1.75, 3.1), (0.04, 0.85, 0.65), "4e6a8a", bevel=0.02)
+    box("backpack", (1.9, 0.33, 2.9), (0.48, 0.62, 0.32), "b88a5a", bevel=0.15)
     tag()
 
 
 def activities():
-    layer("act_club")  # sports club: a ball by the sofa
-    ball("club_ball", (2.5, 0.2, 1.3), 0.18, "f3ead8", lump=0.01)
-    ball("club_ball_patch", (2.5, 0.3, 1.42), 0.07, "4a4d55", scale=(1, 1, 0.5), lump=0)
+    layer("act_club")
+    ball("club_ball", (3.0, 0.2, 7.3), 0.2, "f3ead8", lump=0.01)
     tag()
-    layer("act_study")  # study: a stack of books on the kitchen table
+    layer("act_study")
     for i, col in enumerate(("4e6a8a", "c45c4a", "e0b45a")):
-        box(f"study_book{i}", (4.15, 0.8 + i * 0.07, 2.15), (0.4 - i * 0.03, 0.06, 0.3), col, bevel=0.02, seed=i)
+        box(f"study_book{i}", (5.7, 0.8 + i * 0.07, 6.6), (0.42 - i * 0.03, 0.06, 0.32), col, bevel=0.02)
     tag()
-    layer("act_play_toys")  # toys: a toy train on the living room rug
+    layer("act_play_toys")
     for i, col in enumerate(("c45c4a", "4e6a8a", "e0b45a")):
-        box(f"train{i}", (1.1 + i * 0.32, 0.2, 1.85), (0.28, 0.2, 0.2), col, bevel=0.05, seed=i)
-        for dx in (-0.08, 0.08):
-            tube(f"wheel{i}{dx}", (1.1 + i * 0.32 + dx, 0.1, 1.97), 0.05, 0.03, "4a4d55", rot=(math.pi / 2, 0, 0))
+        box(f"train{i}", (2.6, 0.2, 5.3 + i * 0.36), (0.22, 0.22, 0.32), col, bevel=0.05)
     tag()
-
-
-def camera():
-    scene = bpy.context.scene
-    cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam"))
-    scene.collection.objects.link(cam)
-    cam.data.type = "ORTHO"
-    cam.data.ortho_scale = 8.0
-    # isometric-ish from the front right, looking down 30 degrees; Blender: -Y is Godot +z (toward camera)
-    yaw, pitch = math.radians(18), math.radians(14)
-    centre = (W / 2 + 0.05, -D / 2, UP - 0.25)  # Blender coordinates
-    dist = 30
-    cam.location = (centre[0] + dist * math.sin(yaw) * math.cos(pitch),
-                    centre[1] - dist * math.cos(yaw) * math.cos(pitch),
-                    centre[2] + dist * math.sin(pitch))
-    cam.rotation_euler = (math.pi / 2 - pitch, 0, yaw)
-    scene.camera = cam
-
-
-def _prep(ob):
-    bpy.context.view_layer.objects.active = ob
-    for m in list(ob.modifiers):
-        bpy.ops.object.modifier_apply(modifier=m.name)
-    if len(ob.data.vertices) > 1500:  # mobile-era budget kept from the room; these become PNGs anyway
-        d = ob.modifiers.new("budget", "DECIMATE")
-        d.ratio = 1500 / len(ob.data.vertices)
-        bpy.ops.object.modifier_apply(modifier="budget")
-    ob.data.shade_smooth()
-    ob.data.color_attributes.new("Col", "FLOAT_COLOR", "POINT")
-    ob.data.attributes.active_color = ob.data.color_attributes["Col"]
-    ob.data.materials.append(bpy.data.materials.new(ob.name))
 
 
 def bake_groups():
-    """AO per layer: the shell and base bake together; each other layer bakes with only the shell and
-    base around it, so the crib never leaves a ghost shadow under the teen bed."""
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
     scene.cycles.samples = 64
-    scene.cycles.device = "CPU"
     scene.render.bake.target = "VERTEX_COLORS"
     obs = {o.name: o for o in scene.objects if o.type == "MESH"}
     for ob in obs.values():
-        _prep(ob)
+        bpy.context.view_layer.objects.active = ob
+        for m in list(ob.modifiers):
+            bpy.ops.object.modifier_apply(modifier=m.name)
+        if len(ob.data.vertices) > 1500:  # mobile budget: room GLB under ~7 MB
+            d = ob.modifiers.new("budget", "DECIMATE")
+            d.ratio = 1500 / len(ob.data.vertices)
+            bpy.ops.object.modifier_apply(modifier="budget")
+        ob.data.shade_smooth()
+        ob.data.color_attributes.new("Col", "FLOAT_COLOR", "POINT")
+        ob.data.attributes.active_color = ob.data.color_attributes["Col"]
+        ob.data.materials.append(bpy.data.materials.new(ob.name))
     fixed = LAYERS["shell"] | LAYERS["base"]
-    groups = [fixed] + [m for n, m in LAYERS.items() if n not in ("shell", "base")]
-    for members in groups:
+    for name, members in [("fixed", fixed)] + [(n, m) for n, m in LAYERS.items() if n not in ("shell", "base")]:
+        bpy.ops.object.select_all(action="DESELECT")
         for n, ob in obs.items():
             ob.hide_render = n not in members and n not in fixed
             ob.select_set(n in members)
@@ -250,54 +220,11 @@ def bake_groups():
         bpy.ops.object.bake(type="AO")
     for ob in obs.values():
         ob.hide_render = False
-        base = hexc(ob["clay_color"])
+        c = R.hexc(ob["clay_color"]) if "clay_color" in ob else (0.8, 0.8, 0.8)
         for d in ob.data.color_attributes["Col"].data:
             ao = 0.35 + 0.65 * d.color[0]
-            d.color = (base[0] * ao, base[1] * ao, base[2] * ao, 1.0)
+            d.color = (c[0] * ao, c[1] * ao, c[2] * ao, 1.0)
         ob.data.materials.clear()
-
-
-def _pixels(path):
-    img = bpy.data.images.load(path)
-    a = np.empty(len(img.pixels), dtype=np.float32)
-    img.pixels.foreach_get(a)
-    bpy.data.images.remove(img)
-    return a.reshape(-1, 4)
-
-
-def render(out):
-    """Workbench ignores holdouts, so each prop layer renders together with the shell (walls hide what
-    they should) and then loses every pixel that matches the shell-only render. Workbench is noise-free,
-    so hidden pixels match exactly; edge pixels keep a partial alpha."""
-    scene = bpy.context.scene
-    scene.render.engine = "BLENDER_WORKBENCH"
-    scene.display.shading.light = "STUDIO"
-    scene.display.shading.color_type = "VERTEX"
-    scene.view_settings.view_transform = "Standard"
-    scene.view_settings.exposure = 0.9
-    scene.render.film_transparent = True
-    scene.render.resolution_x, scene.render.resolution_y = RES
-    scene.render.image_settings.color_mode = "RGBA"
-    os.makedirs(out, exist_ok=True)
-    meshes = [o for o in scene.objects if o.type == "MESH"]
-    shell_png = os.path.join(out, "shell.png")
-    for name, members in LAYERS.items():
-        for o in meshes:
-            o.hide_render = o.name not in members and o.name not in LAYERS["shell"]
-        scene.render.filepath = os.path.join(out, name + ".png")
-        bpy.ops.render.render(write_still=True)
-        if name == "shell":
-            continue
-        px, sh = _pixels(scene.render.filepath), _pixels(shell_png)
-        diff = np.abs(px - sh).max(axis=1)
-        px[:, 3] *= np.clip(diff * 12.0, 0.0, 1.0)
-        img = bpy.data.images.new(name, RES[0], RES[1], alpha=True)
-        img.pixels.foreach_set(px.ravel())
-        img.filepath_raw = scene.render.filepath
-        img.file_format = "PNG"
-        img.save()
-        bpy.data.images.remove(img)
-    json.dump({"res": list(RES), "layers": list(LAYERS)}, open(os.path.join(out, "house.json"), "w"), indent=1)
 
 
 if __name__ == "__main__":
@@ -305,11 +232,9 @@ if __name__ == "__main__":
     bpy.ops.wm.read_factory_settings(use_empty=True)
     shell()
     base()
-    bed_baby()
-    bed_child()
-    bed_teen()
+    bedrooms()
     activities()
     bake_groups()
-    camera()
-    render(OUT)
+    bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE",
+                              export_materials="NONE", export_texcoords=False)
     print("HOUSE", {k: len(v) for k, v in LAYERS.items()})
