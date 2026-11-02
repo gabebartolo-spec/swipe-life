@@ -10,6 +10,42 @@ Rules for every milestone:
 - Exit criteria are things the director sees on the phone or in a capture.
 - The GDD wins over this file. If they conflict, ask the director.
 
+## Status (2026-11-03) — start here
+| Milestone | State |
+|---|---|
+| M0 Foundations | Done (#9) |
+| M1 Card engine | Done (#10) |
+| M2 Swipe UI and stats | Done (#11) |
+| M3 Life rules | Done (#12) |
+| M4 Between-year menu | Done (#13) |
+| M5 Clay home scene | **Not started.** Director has not picked M5 or M6 next: ask. |
+| M6 ~200 cards | **Not started.** Only 10 sample cards in `data/cards/sample.json`. |
+| M7 Release candidate | Not started. |
+
+Open with the director:
+- Card rewrites: the director may fill in the "Your rewrite" column of the card doc
+  (https://claude.ai/artifact/GttfUkHETGzrYHbmESQvfS). Copy any rewrites into `data/cards/sample.json`.
+- The 10 actions in `data/actions/actions.json` are placeholders, also open for rewrite.
+
+Where the code lives:
+- Rules: `scripts/cards/` (`card_db.gd` loader/validator, `deck.gd`, `life_rules.gd`). State and save: `scripts/autoload/`.
+- Menu: `scripts/menu/action_db.gd`, `scripts/ui/year_menu.gd`. Main loop: `scripts/main.gd`.
+- Clay cut-out art pipeline: `tools/blender/build_clay_girl.py --cutout`, `tools/blender/render_cutouts.py`,
+  `shaders/clay_cutout.gdshader`, demo `scenes/proto/clay_cutout.tscn`.
+
+How to run and check (Godot 4.7.2):
+- Tests: `godot --headless --path . --script res://tests/run_tests.gd` (run `--import` first after new class_names).
+- Lint before pushing: `gdformat` and `gdlint` (max line 100).
+- Debug launch args after `--`: `--autoplay`, `--set=age=8,stress=95,...` (new life only; delete
+  `%APPDATA%/Godot/app_userdata/Swipe Life/life.json` first or the save resumes).
+- Capture frames: `--write-movie <dir>/f.png --fixed-fps 10 --quit-after 200 -- --autoplay`.
+
+Builds:
+- Android: CI workflow builds the debug APK and signed AAB (keystore kept outside the repo, never commit it).
+- Web (itch.io): private Restricted page https://veniceissinking.itch.io/swipe-life, channel `html5`.
+  Update: `godot --headless --path . --export-release "Web" build/web/index.html`, then
+  `butler push build/web veniceissinking/swipe-life:html5 --userversion <ver>`. The director owns the butler login.
+
 ## M0 Foundations
 - Merge or close PR #7. Either way, keep the clay cut-out pipeline: `tools/blender/build_clay_girl.py --cutout`,
   `tools/blender/render_cutouts.py` and `shaders/clay_cutout.gdshader`.
