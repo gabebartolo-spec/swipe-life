@@ -25,7 +25,7 @@ const PARENT := {
 }
 ## Draw order (PEOPLE.md §5): a z per body part, +1 for garments over skin, +2 for outerwear.
 const PART_Z := {
-	"pelvis": 16,
+	"pelvis": 6,  # behind the thighs: its hip lobes would hang over the legs
 	"chest": 20,
 	"head": 32,
 	"upper_arm": 28,
