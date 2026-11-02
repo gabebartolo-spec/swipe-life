@@ -108,7 +108,7 @@ func _check_choice(ch, where: String) -> void:
 	for s in ch.get("effects", {}):
 		_check_stat(s, where)
 	if ch.has("risk"):
-		_unknown_keys(ch.risk, ["chance", "effects", "result"], where + ".risk")
+		_unknown_keys(ch.risk, ["chance", "effects", "result", "partner"], where + ".risk")
 		_check_chance(ch.risk.get("chance"), where + ".risk")
 		for s in ch.risk.get("effects", {}):
 			_check_stat(s, where + ".risk")

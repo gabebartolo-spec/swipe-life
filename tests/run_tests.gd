@@ -366,6 +366,10 @@ func _test_career_cards() -> void:
 	deck.choose(breakup, "left", state)
 	_check(state.partner.is_empty(), "breakup kept the partner")
 	_check(not state.flags.has("dating_work_partner"), "breakup kept the dating flag")
+	state.partner = {"name": "Sam"}
+	var fail := {"id": "r", "left": {"label": "Plead", "risk": {"chance": 1.0, "partner": "end"}}}
+	deck.choose(fail, "left", state)
+	_check(state.partner.is_empty(), "failed risk kept the partner")
 	cdb.errors.clear()
 	cdb._check_card({"id": "p", "left": {"label": "x", "partner": "keep"}}, "p", {})
 	_check(not cdb.errors.is_empty(), "bad 'partner' value passed")

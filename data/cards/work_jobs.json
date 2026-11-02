@@ -221,7 +221,7 @@
     "text": "{partner} thinks you've grown apart.",
     "left": { "label": "Agree. End it.", "effects": { "happiness": -10, "stress": 6, "relationships": -5 }, "partner": "end" },
     "right": { "label": "Ask for another chance", "effects": { "stress": 7 },
-               "risk": { "chance": 0.5, "effects": { "happiness": -12 }, "result": "They'd already decided." } }
+               "risk": { "chance": 0.5, "effects": { "happiness": -12 }, "partner": "end", "result": "They'd already decided." } }
   },
 
   {
