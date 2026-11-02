@@ -12,7 +12,7 @@ const DRIFT := [-12, 10]  # yearly random change in performance
 const HEAT_PER_RANK := 6  # a gang job heats up every year, more at higher ranks
 const ARREST_PER_HEAT := 0.005  # arrest chance per point of heat (heat 100 = 50%)
 const RECORD := "criminal_record"  # set by an arrest; careers can bar it with not_flags
-const WORK_HARD := {"performance": 10, "stress": 6}
+const WORK_HARD := {"performance": 10, "stress": 5}
 const DATE_AT := 60  # crush affinity needed for a flirt to turn into dating
 ## Career menu staff actions: affinity change, stress, and optional cost and performance.
 const STAFF := {
