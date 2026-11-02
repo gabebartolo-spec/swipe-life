@@ -58,7 +58,7 @@ jobs:
           export GODOT_ANDROID_KEYSTORE_RELEASE_PATH="$RUNNER_TEMP/release.keystore"
           "$GODOT" --headless --install-android-build-template --export-release "Android AAB" build/swipe-life.aab
           test -s build/swipe-life.aab
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: swipe-life-android
           path: build/*
