@@ -19,7 +19,7 @@ Rules for every milestone:
 | M3 Life rules | Done (#12) |
 | M4 Between-year menu | Done (#13) |
 | M5 Clay home scene | In progress (#16, #18, #20, #22, #23): dollhouse one room at a time, modular clay people. Exit (director approves captures per age band) not met yet. |
-| M6 ~200 cards | In progress: 130 cards (10 samples, 120 career and juvie). The age-band batches are not written yet. |
+| M6 ~200 cards | Done (#28, #31): 343 cards across every age band; the 1,000-life sim draws every age-band card. |
 | Careers, teen phase (§6.8) | Done (#17, #19, #21, #24, #25): Career menu, 12 careers, 120 work and juvie cards. |
 | M7 Release candidate | Not started. |
 
