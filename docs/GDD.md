@@ -104,7 +104,8 @@
 - 10.5 Screen layout (portrait): the dollhouse fills the top ~45%, a strip of stat bars sits below it, and
   the card fills the bottom half.
 - 10.6 Childhood home (ages 0–17, director 2026-11-03): a 2x2 cutaway of four rooms: bedroom, living room,
-  kitchen, bathroom.
+  kitchen, bathroom. The dollhouse shows one room at a time at full scale; the camera moves between rooms
+  (director 2026-11-03).
 - 10.7 The player is a girl or a boy, set at birth; every age band has a character set for each.
 - 10.8 Before 18 (Shop locked, §6.7) the scene changes with age (e.g. crib → bed → desk) and with activities,
   which leave props in the house (e.g. a ball from the sports club, books from studying).
@@ -137,3 +138,4 @@ None.
 - 2026-11-03: Mental illness rule and numbers (§4.5).
 - 2026-11-03: Menu unlock ages (§6.7) and Stress as the time cost (§6.6); §13.1 closed.
 - 2026-11-03: Childhood home rooms (§10.6), girl or boy at birth (§10.7), pre-18 scene changes (§10.8).
+- 2026-11-03: Dollhouse shows one room at a time, camera moves between rooms (§10.6).

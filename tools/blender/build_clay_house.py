@@ -321,6 +321,23 @@ def activities():
 
 
 
+def rooms():
+    """One room at a time (GDD 10.6): each room's own slab and full-height back walls."""
+    papers = {"bedroom": (None, None), "bathroom": ("dbeaf0", None), "living": (None, "f4e2c8"),
+              "kitchen": ("f6efdc", "f6efdc")}
+    for room, (x0, z0) in {"bedroom": (0, 0), "bathroom": (M, 0), "living": (0, M), "kitchen": (M, M)}.items():
+        layer(f"room_{room}")
+        box("slab", (x0 + M / 2, -0.2, z0 + M / 2), (M + 0.3, 0.4, M + 0.3), "f6eddd", bevel=0.14)
+        box("wall_x", (x0 - 0.15, WALL_H / 2, z0 + M / 2 - 0.15), (0.3, WALL_H, M + 0.3), WALL, bevel=0.14)
+        box("wall_z", (x0 + M / 2 - 0.15, WALL_H / 2, z0 - 0.15), (M + 0.3, WALL_H, 0.3), WALL, bevel=0.14)
+        px, pz = papers[room]
+        if px:
+            box("paper_x", (x0 + 0.01, 1.5, z0 + M / 2), (0.02, 2.5, 3.9), px, bevel=0.01, subd=1, lump=0.004)
+        if pz:
+            box("paper_z", (x0 + M / 2, 1.5, z0 + 0.01), (3.9, 2.5, 0.02), pz, bevel=0.01, subd=1, lump=0.004)
+        tag()
+
+
 def bake_groups():
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
@@ -344,6 +361,8 @@ def bake_groups():
         bpy.ops.object.select_all(action="DESELECT")
         for n, ob in obs.items():
             ob.hide_render = n not in members and n not in fixed
+            if name.startswith("room_") and n.startswith("shell__") and ("slab" in n or "wall_" in n):
+                ob.hide_render = True  # the room's own slab/walls replace these; coincident faces bake black
             ob.select_set(n in members)
         bpy.context.view_layer.objects.active = obs[next(iter(members))]
         bpy.ops.object.bake(type="AO")
@@ -363,6 +382,7 @@ if __name__ == "__main__":
     base()
     bedrooms()
     activities()
+    rooms()
     bake_groups()
     bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE",
                               export_materials="NONE", export_texcoords=False)

@@ -6,8 +6,18 @@ extends SceneTree
 const CLAY := preload("res://shaders/clay.gdshader")
 const GLOWS := {"fairy": 1.2, "lamp_glow": 1.0, "glow_screen": 0.5}
 const BANDS := ["baby", "child", "teen"]
+## One room at a time (GDD 10.6): room centre on the floor plan.
+const ROOMS := {
+	"bedroom": Vector2(2, 2),
+	"bathroom": Vector2(6, 2),
+	"living": Vector2(2, 6),
+	"kitchen": Vector2(6, 6)
+}
+const ROOM_SIZE := 5.6
 
 var _house: Node3D
+var _cam: Camera3D
+var _warm := false
 
 
 func _initialize() -> void:
@@ -38,11 +48,14 @@ func _initialize() -> void:
 		glow.omni_range = 4.5
 		glow.position = Vector3(1, 2.4, z)
 		root3d.add_child(glow)
-	var cam := Camera3D.new()
+	_cam = Camera3D.new()
+	var cam := _cam
 	cam.projection = Camera3D.PROJECTION_ORTHOGONAL
-	cam.size = 10.0
+	cam.size = ROOM_SIZE
 	var basis := Basis(
-		Vector3(0.707107, 0, -0.707107), Vector3(-0.408248, 0.816497, -0.408248), Vector3(0.57735, 0.57735, 0.57735)
+		Vector3(0.707107, 0, -0.707107),
+		Vector3(-0.408248, 0.816497, -0.408248),
+		Vector3(0.57735, 0.57735, 0.57735)
 	)
 	cam.transform = Transform3D(basis, Vector3(4, 0.9, 4) + basis.z * 20.0)
 	root3d.add_child(cam)
@@ -65,12 +78,36 @@ func _initialize() -> void:
 
 func _render(out: String) -> void:
 	DirAccess.make_dir_recursive_absolute(out)
+	for i in 10:
+		await process_frame  # let the GLB transforms settle before reading AABBs
 	for band: String in BANDS:
-		for mi: MeshInstance3D in _house.find_children("*", "MeshInstance3D", true, false):
-			var n := String(mi.name)
-			mi.visible = not n.begins_with("bed_") or n.begins_with("bed_%s__" % band)
-		for i in 20:
-			await process_frame
-		root.get_texture().get_image().save_png(out.path_join("house_%s.png" % band))
-		print("saved ", band)
+		for room: String in ROOMS:
+			var c: Vector2 = ROOMS[room]
+			_show_room(room, band, c)
+			_cam.transform.origin = Vector3(c.x, 1.0, c.y) + _cam.transform.basis.z * 20.0
+			for i in 20 if _warm else 90:
+				await process_frame
+			root.get_texture().get_image().save_png(out.path_join("room_%s_%s.png" % [room, band]))
+			_warm = true
+			print("saved ", room, " ", band)
 	quit()
+
+
+## Shows one room: its own slab and back walls, its props for this age band; hides the shared shell
+## pieces and every other room.
+func _show_room(room: String, band: String, c: Vector2) -> void:
+	for mi: MeshInstance3D in _house.find_children("*", "MeshInstance3D", true, false):
+		var n := String(mi.name)
+		var p := mi.global_transform * mi.get_aabb().get_center()
+		var inside := absf(p.x - c.x) < 2.1 and absf(p.z - c.y) < 2.1
+		if n.begins_with("room_"):
+			mi.visible = n.begins_with("room_%s__" % room)
+		elif (
+			n.begins_with("shell__")
+			and (n.contains("slab") or n.contains("wall_") or n.contains("iwall"))
+		):
+			mi.visible = false
+		elif n.begins_with("bed_"):
+			mi.visible = inside and n.begins_with("bed_%s__" % band)
+		else:
+			mi.visible = inside
