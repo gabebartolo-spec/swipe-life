@@ -43,8 +43,12 @@
 - 4.2 The list is open: the director may add more.
 - 4.3 Every stat except Money is a 0–100 bar. Money is a plain number.
 - 4.4 Karma/Reputation is hidden from the player. All other stats are visible.
-- 4.5 Stress rises from activities (§6.5). How stats affect each other beyond the rules in this document:
-  ask the director.
+- 4.5 Stress rises from activities (§6.5). High Stress or low Happiness can cause mental illnesses, which are
+  very sticky. Checked at each year end from age 6:
+  - Anxiety: starts when Stress ≥ 70, chance 10% + 1% per point above 70. Each year: Stress +5, Health −3.
+    Lifts with a 15% chance per year, only while Stress < 40.
+  - Depression: starts when Happiness ≤ 30, chance 10% + 1% per point below 30. Each year: Happiness −5,
+    Health −3. Lifts with a 15% chance per year, only while Happiness > 60.
 
 ## 5. Life span
 
@@ -124,3 +128,4 @@
 - 2026-11-03: Art style picked: 2D clay cut-outs (§10.4). Age-gated menu (§6.7). First playable = birth to 18
   with ~200 cards (§12.3, `docs/ROADMAP.md`).
 - 2026-11-03: Card JSON schema approved (§12.2, `docs/CARD_SCHEMA.md`).
+- 2026-11-03: Mental illness rule and numbers (§4.5).

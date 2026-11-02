@@ -1,6 +1,7 @@
 extends VBoxContainer
 ## Layout (GDD §10.5) and year loop (GDD §2): 4 cards, the between-year menu, then age +1.
-## Run with `-- --autoplay` to swipe automatically (captures and soak tests).
+## Run with `-- --autoplay` to swipe automatically (captures and soak tests), and
+## `-- --set=age=8,health=5,stress=90` to start a new life at that age with those stats
 
 const MARGIN := 40.0
 const RESULT_TIME := 1.4
@@ -10,12 +11,13 @@ var strip := StatStrip.new()
 var swipe_card := SwipeCard.new()
 var message := Label.new()
 var year_button := Button.new()
+var new_life_button := Button.new()
 var autoplay := "--autoplay" in OS.get_cmdline_user_args()
 
 
 func _ready() -> void:
-	if not SaveSystem.load_life():
-		GameState.new_life()
+	if not SaveSystem.load_life():  # resume at the last year boundary (GDD §8.2–8.3)
+		_new_life()
 	var db := CardDB.new()
 	db.load_dir()
 	for e in db.errors:
@@ -43,22 +45,48 @@ func _ready() -> void:
 	year_button.pressed.connect(_next_year)
 	$Card.add_child(year_button)
 
+	new_life_button.text = "New life"
+	new_life_button.add_theme_font_size_override("font_size", 36)
+	new_life_button.custom_minimum_size = year_button.custom_minimum_size
+	new_life_button.pressed.connect(_restart)
+	new_life_button.hide()
+	$Card.add_child(new_life_button)
+
 	await get_tree().process_frame
 	var area: Vector2 = $Card.size
 	swipe_card.position = Vector2(MARGIN, MARGIN)
 	swipe_card.size = area - Vector2(MARGIN, MARGIN) * 2
-	year_button.position = (area - year_button.custom_minimum_size) / 2 + Vector2(0, 120)
+	# both buttons sit below the message, which keeps the space above them
+	year_button.position = Vector2((area.x - year_button.custom_minimum_size.x) / 2, area.y - 140)
+	new_life_button.position = year_button.position
+	message.offset_bottom = -150
 	_deal()
 
 
-func _update_age() -> void:
-	$Dollhouse/AgeLabel.text = (
-		"Age %d  ·  %s"
-		% [
-			GameState.age,
-			["Spring", "Summer", "Autumn", "Winter", "Year end"][mini(GameState.quarter, 4)]
-		]
-	)
+func _new_life() -> void:
+	GameState.new_life()
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--set="):
+			for pair in arg.trim_prefix("--set=").split(","):
+				var kv := pair.split("=")
+				if kv[0] == "age":
+					GameState.age = int(kv[1])
+				else:
+					GameState.stats[kv[0]] = int(kv[1])
+	SaveSystem.save()
+
+
+func _update_age(season := true) -> void:
+	var text := "Age %d" % GameState.age
+	if season:
+		text += "  ·  " + ["Spring", "Summer", "Autumn", "Winter", "Year end"][GameState.quarter]
+	var ills := []
+	for id in LifeRules.ILLNESSES:
+		if GameState.flags.has(id):
+			ills.append(id.capitalize())
+	if not ills.is_empty():
+		text += "\n" + ", ".join(ills)
+	$Dollhouse/AgeLabel.text = text
 	strip.refresh()
 
 
@@ -103,7 +131,13 @@ func _on_chosen(side: String) -> void:
 
 func _year_end() -> void:
 	swipe_card.hide()
-	message.text = "Year %d is over." % GameState.age
+	var out := LifeRules.year_end(GameState, deck.rng)
+	_update_age()
+	if out.died:
+		_end("You died at %d.\n%s." % [GameState.age, out.cause])
+		return
+	out.results.append("Year %d is over." % GameState.age)
+	message.text = "\n\n".join(out.results)
 	year_button.show()
 	if autoplay:
 		await get_tree().create_timer(0.8).timeout
@@ -117,11 +151,44 @@ func _next_year() -> void:
 	if GameState.age > CardDB.MAX_AGE:
 		_end("You turned 18.\nTo be continued...")
 		return
+	SaveSystem.save()  # GDD §8.3: autosave when the between-year menu closes
 	_deal()
 
 
-func _end(text: String) -> void:
+## Life summary, at death or at 18. The save is cleared: this life is over.
+func _end(headline: String) -> void:
 	swipe_card.hide()
 	year_button.hide()
+	SaveSystem.clear()
+	var lines := []
+	for st in StatStrip.SHORT:
+		lines.append("%s %d" % [StatStrip.SHORT[st], GameState.stats[st]])
+	var text := (
+		"%s\n\n%s\n%s\n%s"
+		% [
+			headline,
+			"  ·  ".join(lines.slice(0, 4)),
+			"  ·  ".join(lines.slice(4)),
+			StatStrip.money_text(GameState.stats.money),
+		]
+	)
+	var ills := []
+	for id in LifeRules.ILLNESSES:
+		if GameState.flags.has(id):
+			ills.append(id)
+	if not ills.is_empty():
+		text += "\nLiving with " + " and ".join(ills)
+	message.add_theme_font_size_override("font_size", 28)
 	message.text = text
-	_update_age()
+	_update_age(false)
+	new_life_button.show()
+	if autoplay:
+		await get_tree().create_timer(2.0).timeout
+		_restart()
+
+
+func _restart() -> void:
+	new_life_button.hide()
+	message.add_theme_font_size_override("font_size", 34)
+	_new_life()
+	_deal()

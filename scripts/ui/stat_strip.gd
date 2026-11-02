@@ -56,4 +56,8 @@ func refresh() -> void:
 	for s in bars:
 		create_tween().tween_property(bars[s], "value", GameState.stats[s], 0.3)
 		values[s].text = "%s %d" % [SHORT[s], GameState.stats[s]]
-	money_label.text = "$%d" % GameState.stats.money
+	money_label.text = money_text(GameState.stats.money)
+
+
+static func money_text(m: int) -> String:
+	return "-$%d" % -m if m < 0 else "$%d" % m
