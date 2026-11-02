@@ -5,8 +5,39 @@ extends Node2D
 const SCALE := 67.0
 const OUTLINE := 3.0
 ## Painter's order (indices into RoomLayout.BOXES); the character is drawn at -1, spheres last.
-const ORDER := [0, 1, 2, 8, 9, 10, 11, 19, 20, 21, 22, 3, 13, 14, 15, 16, 12, 17, 18,
-		4, 5, 6, 7, 25, 26, 27, 28, 23, 24, -1, 29]
+const ORDER := [
+	0,
+	1,
+	2,
+	8,
+	9,
+	10,
+	11,
+	19,
+	20,
+	21,
+	22,
+	3,
+	13,
+	14,
+	15,
+	16,
+	12,
+	17,
+	18,
+	4,
+	5,
+	6,
+	7,
+	25,
+	26,
+	27,
+	28,
+	23,
+	24,
+	-1,
+	29
+]
 
 
 func _ready() -> void:
