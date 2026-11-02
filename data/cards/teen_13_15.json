@@ -133,7 +133,7 @@
       "label": "Skip to the apps",
       "effects": {
         "happiness": 3,
-        "stress": 2
+        "stress": -2
       }
     }
   },

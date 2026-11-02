@@ -18,7 +18,7 @@
    "label": "It's a phone!",
    "effects": {
     "happiness": 3,
-    "stress": 2
+    "stress": -2
    }
   }
  },
