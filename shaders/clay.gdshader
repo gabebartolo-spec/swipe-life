@@ -4,6 +4,8 @@ shader_type spatial;
 
 uniform vec3 albedo : source_color = vec3(0.8);
 uniform float emission = 0.0;
+// Blender-baked props: colour and AO come from the mesh's vertex colours.
+uniform bool use_vertex_color = false;
 // 1 = darken near the floor (fake contact AO; Mobile renderer has no SSAO).
 uniform float contact_ao = 1.0;
 uniform float lump = 0.012;
@@ -57,8 +59,9 @@ void fragment() {
 	NORMAL = normalize(abs(det) * NORMAL - sign(det) * (dhx * r1 + dhy * r2));
 
 	float ao = mix(1.0, mix(0.72, 1.0, smoothstep(0.0, 0.45, wpos.y)), contact_ao);
-	ALBEDO = albedo * (0.94 + 0.12 * noise(wpos * 1.7)) * ao;
-	EMISSION = albedo * emission;
+	vec3 base = use_vertex_color ? albedo * COLOR.rgb : albedo;
+	ALBEDO = base * (0.94 + 0.12 * noise(wpos * 1.7)) * ao;
+	EMISSION = base * emission;
 }
 
 void light() {

@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/proto/clay_room.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/clay/room.glb" id="3"]
+[ext_resource type="PackedScene" path="res://assets/clay/girl.glb" id="4"]
+[ext_resource type="Script" path="res://scripts/proto/capture.gd" id="2"]
+
+[sub_resource type="Environment" id="env"]
+background_mode = 1
+background_color = Color(0.85, 0.86, 0.9, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.96, 0.92, 1)
+ambient_light_energy = 0.35
+tonemap_mode = 2
+
+[node name="ClayRoom" type="Node3D"]
+script = ExtResource("1")
+baked_room = ExtResource("3")
+baked_girl = ExtResource("4")
+
+[node name="Env" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+light_color = Color(1, 0.95, 0.88, 1)
+light_energy = 0.75
+shadow_enabled = true
+shadow_blur = 2.0
+
+[node name="WindowGlow" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0, 2.4, 2.0)
+light_color = Color(1, 0.85, 0.6, 1)
+light_energy = 0.7
+omni_range = 4.5
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.408248, 0.57735, 0, 0.816497, 0.57735, -0.707107, -0.408248, 0.57735, 13, 11.6, 13)
+projection = 1
+size = 8.4
+
+[node name="Capture" type="Node" parent="."]
+script = ExtResource("2")

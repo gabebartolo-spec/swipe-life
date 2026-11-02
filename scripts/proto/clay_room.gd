@@ -9,18 +9,57 @@ const CREAM := Color("f3ead8")
 const SKIN := Color("f2c9a5")
 const HAIR := Color("6b4430")
 
+const GLOWS := {"fairy": 3.0, "win_pane": 0.9, "laptop_screen": 0.25}
+
+## Room modelled in Blender with baked AO (tools/blender/build_clay_room.py); empty = code props.
+@export var baked_room: PackedScene
+## Clay girl sculpted in Blender (tools/blender/build_clay_girl.py); empty = code character.
+@export var baked_girl: PackedScene
+
 var _materials := {}
 
 
 func _ready() -> void:
 	get_viewport().msaa_3d = Viewport.MSAA_4X
 	$Sun.look_at_from_position(Vector3(9, 12, 8), Vector3(3, 0, 3))
-	_build_shell()
-	_build_bed()
-	_build_window()
-	_build_desk()
-	_build_props()
-	_build_character(Vector3(3.1, 0.06, 3.6))
+	if baked_room:
+		_use_baked(baked_room.instantiate())
+
+	else:
+		_build_shell()
+		_build_bed()
+		_build_window()
+		_build_desk()
+		_build_props()
+	var feet := Vector3(3.1, 0.06, 3.6)
+	if baked_girl:
+		var girl: Node3D = baked_girl.instantiate()
+		girl.position = feet
+		girl.rotation.y = PI / 4
+		_use_baked(girl)
+	else:
+		_build_character(feet)
+	if "--front" in OS.get_cmdline_user_args():  # close-up for checking the character
+		$Camera.size = 3.0
+		$Camera.look_at_from_position(feet + Vector3(6, 1.1, 6), feet + Vector3(0, 1.1, 0))
+
+
+func _use_baked(room: Node3D) -> void:
+	add_child(room)
+	for mi: MeshInstance3D in room.find_children("*", "MeshInstance3D"):
+		var glow := 0.0
+		for prefix: String in GLOWS:
+			if mi.name.begins_with(prefix):
+				glow = GLOWS[prefix]
+		var m := ShaderMaterial.new()
+		m.shader = CLAY
+		m.set_shader_parameter("albedo", Color.WHITE)
+		m.set_shader_parameter("use_vertex_color", true)
+		m.set_shader_parameter("contact_ao", 0.0)
+		m.set_shader_parameter("emission", glow)
+		if mi.name.begins_with("skin"):  # fingerprint ridges read as wrinkles on a face
+			m.set_shader_parameter("bump", 0.15)
+		mi.material_override = m
 
 
 func _build_shell() -> void:
