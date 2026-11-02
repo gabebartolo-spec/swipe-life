@@ -19,9 +19,13 @@ sys.path.append(__import__("os").path.dirname(__file__))
 from build_clay_room import g2b, hexc  # noqa: E402  (shared colour/axis helpers)
 
 OUT = sys.argv[sys.argv.index("--") + 1]
-# --apose: arms out at ~45 degrees for Mixamo's auto-rigger; exports FBX instead of GLB.
+# --apose: arms out ~30 degrees below horizontal (lower and the remesh fuses them to the torso) for Mixamo's auto-rigger; exports FBX instead of GLB.
 APOSE = "--apose" in sys.argv
-WRIST, HAND = ((0.78, 0.92, 0.02), (0.86, 0.84, 0.03)) if APOSE else ((0.45, 0.8, 0.02), (0.47, 0.68, 0.03))
+# --cutout: each arm as three separate rigid clay pieces (upper sleeve, lower sleeve, hand) with round
+# overlapping joints, for flat 2D cut-out animation (tools/blender/render_cutouts.py). Pivots go in glTF extras.
+CUTOUT = "--cutout" in sys.argv
+ELBOW = (0.39, 1.02, 0.01)
+WRIST, HAND = ((0.68, 1.0, 0.02), (0.75, 0.93, 0.03)) if APOSE else ((0.45, 0.8, 0.02), (0.47, 0.68, 0.03))
 
 PARTS = {
     "skin": "f2c9a5",
@@ -37,6 +41,8 @@ PARTS = {
 
 # Face details are too small for metaballs (they fall under the threshold): plain beads.
 BLOBS = ("skin", "sweater", "jeans", "socks", "hair")
+COLOURS = {}  # cut-out piece -> PARTS colour name
+PIVOTS = {}  # cut-out piece -> joint it turns about (Godot axes)
 
 
 def bead(name, at, radius, scale):
@@ -64,10 +70,24 @@ def build():
     m = {k: [] for k in BLOBS}
     for s in (-1, 1):
         # socks/feet, jeans legs, sweater sleeves, hands
-        blob(m["socks"], (0.15 * s, 0.08, 0.05), 0.13, (0.85, 0.6, 1.25))
-        line(m["jeans"], (0.15 * s, 0.2, 0), (0.14 * s, 0.7, 0), 0.14, 9)
-        line(m["sweater"], (0.33 * s, 1.22, 0), (WRIST[0] * s, *WRIST[1:]), 0.12, 9)
-        blob(m["skin"], (HAND[0] * s, *HAND[1:]), 0.1)
+        blob(m["socks"], (0.17 * s, 0.08, 0.05), 0.13, (0.85, 0.6, 1.25))
+        # legs 0.08 apart so the voxel remesh does not web them together
+        line(m["jeans"], (0.17 * s, 0.2, 0), (0.15 * s, 0.7, 0), 0.13, 9)
+        shoulder, wrist, hand = (0.33 * s, 1.24, 0), (WRIST[0] * s, *WRIST[1:]), (HAND[0] * s, *HAND[1:])
+        if CUTOUT:
+            side = "Left" if s > 0 else "Right"
+            elbow = (ELBOW[0] * s, *ELBOW[1:])
+            for name, colour, a, b, r, n in (("Arm", "sweater", shoulder, elbow, 0.12, 5),
+                                             ("ForeArm", "sweater", elbow, wrist, 0.115, 5)):
+                m[side + name] = []
+                line(m[side + name], a, b, r, n)
+                COLOURS[side + name], PIVOTS[side + name] = colour, a
+            m[side + "Hand"] = []
+            blob(m[side + "Hand"], hand, 0.1)
+            COLOURS[side + "Hand"], PIVOTS[side + "Hand"] = "skin", wrist
+        else:
+            line(m["sweater"], shoulder, wrist, 0.12, 9)
+            blob(m["skin"], hand, 0.1)
         # face details: eyes, blush
         bead("eyes", (0.14 * s, 1.64, 0.43), 0.05, (0.8, 1.15, 0.5))
         bead("blush", (0.25 * s, 1.55, 0.38), 0.06, (1, 0.55, 0.35))
@@ -99,15 +119,18 @@ def to_meshes(m):
         ob = bpy.context.object
         bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
         ob.name = name
-        ob["clay_color"] = PARTS[name]
+        ob["clay_color"] = PARTS[COLOURS.get(name, name)]
+        if name in PIVOTS:
+            ob["pivot"] = list(PIVOTS[name])
         r = ob.modifiers.new("fuse", "REMESH")
         r.mode = "VOXEL"
         r.voxel_size = 0.012
+        d = ob.modifiers.new("decimate", "DECIMATE")
+        d.ratio = 0.25
+        # smooth after decimate: the other order left pits (dark specks after the AO bake) at seams
         r = ob.modifiers.new("smooth", "CORRECTIVE_SMOOTH")
         r.iterations = 8
         r.use_only_smooth = True
-        d = ob.modifiers.new("decimate", "DECIMATE")
-        d.ratio = 0.25
 
 
 def bake_ao():
@@ -146,8 +169,12 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 to_meshes(build())
 bake_ao()
 if APOSE:
+    # Mixamo's rigger fails ("error while generating motion") on multi-object uploads: join first.
+    bpy.ops.object.select_all(action="SELECT")
+    bpy.context.view_layer.objects.active = bpy.context.scene.objects[0]
+    bpy.ops.object.join()
     bpy.ops.export_scene.fbx(filepath=OUT, colors_type="LINEAR")
 else:
-    bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE", export_texcoords=False
-    )
+    bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE", export_texcoords=False,
+                              export_extras=True)
 print("EXPORTED", OUT, [(o.name, len(o.data.vertices)) for o in bpy.context.scene.objects])

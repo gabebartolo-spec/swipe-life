@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/proto/clay_cutout.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/proto/capture.gd" id="2"]
+
+[node name="Root" type="Node"]
+
+[node name="ClayCutout" type="Node2D" parent="."]
+script = ExtResource("1")
+
+[node name="Capture" type="Node" parent="."]
+script = ExtResource("2")

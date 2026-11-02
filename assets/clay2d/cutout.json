@@ -1,0 +1,404 @@
+{
+ "res": 768,
+ "pivots": {
+  "body": [
+   384.0,
+   728.28
+  ],
+  "LeftArm": [
+   471.39,
+   399.89
+  ],
+  "LeftForeArm": [
+   487.28,
+   458.15
+  ],
+  "LeftHand": [
+   503.17,
+   516.41
+  ],
+  "RightArm": [
+   296.61,
+   399.89
+  ],
+  "RightForeArm": [
+   280.72,
+   458.15
+  ],
+  "RightHand": [
+   264.83,
+   516.41
+  ]
+ },
+ "fps": 12,
+ "poses": [
+  {
+   "LeftArm": 0.1438,
+   "LeftForeArm": 0.1788,
+   "LeftHand": -0.3194,
+   "RightArm": -0.0006,
+   "RightForeArm": -0.303,
+   "RightHand": 0.2465
+  },
+  {
+   "LeftArm": 0.1434,
+   "LeftForeArm": 0.1794,
+   "LeftHand": -0.3123,
+   "RightArm": -0.001,
+   "RightForeArm": -0.3016,
+   "RightHand": 0.248
+  },
+  {
+   "LeftArm": 0.144,
+   "LeftForeArm": 0.1803,
+   "LeftHand": -0.2915,
+   "RightArm": 0.0021,
+   "RightForeArm": -0.2968,
+   "RightHand": 0.2407
+  },
+  {
+   "LeftArm": 0.143,
+   "LeftForeArm": 0.1798,
+   "LeftHand": -0.2698,
+   "RightArm": -0.0028,
+   "RightForeArm": -0.2892,
+   "RightHand": 0.2314
+  },
+  {
+   "LeftArm": 0.142,
+   "LeftForeArm": 0.1838,
+   "LeftHand": -0.2733,
+   "RightArm": 0.0132,
+   "RightForeArm": -0.2689,
+   "RightHand": 0.1806
+  },
+  {
+   "LeftArm": 0.1423,
+   "LeftForeArm": 0.1879,
+   "LeftHand": -0.2729,
+   "RightArm": 0.1114,
+   "RightForeArm": -0.2756,
+   "RightHand": 0.2383
+  },
+  {
+   "LeftArm": 0.1421,
+   "LeftForeArm": 0.1825,
+   "LeftHand": -0.2658,
+   "RightArm": 0.2479,
+   "RightForeArm": -0.1488,
+   "RightHand": 0.7213
+  },
+  {
+   "LeftArm": 0.1408,
+   "LeftForeArm": 0.1769,
+   "LeftHand": -0.2626,
+   "RightArm": 0.4263,
+   "RightForeArm": 1.4357,
+   "RightHand": 0.0737
+  },
+  {
+   "LeftArm": 0.1415,
+   "LeftForeArm": 0.1825,
+   "LeftHand": -0.2728,
+   "RightArm": 0.6592,
+   "RightForeArm": 2.1335,
+   "RightHand": 0.1097
+  },
+  {
+   "LeftArm": 0.1505,
+   "LeftForeArm": 0.1895,
+   "LeftHand": -0.3021,
+   "RightArm": 0.9262,
+   "RightForeArm": 2.6165,
+   "RightHand": 0.1108
+  },
+  {
+   "LeftArm": 0.1644,
+   "LeftForeArm": 0.2175,
+   "LeftHand": -0.3223,
+   "RightArm": 1.0889,
+   "RightForeArm": 2.9627,
+   "RightHand": 0.1198
+  },
+  {
+   "LeftArm": 0.1697,
+   "LeftForeArm": 0.2492,
+   "LeftHand": -0.331,
+   "RightArm": 1.0571,
+   "RightForeArm": 2.8374,
+   "RightHand": 0.1736
+  },
+  {
+   "LeftArm": 0.1569,
+   "LeftForeArm": 0.254,
+   "LeftHand": -0.3381,
+   "RightArm": 0.8973,
+   "RightForeArm": 2.1126,
+   "RightHand": 0.3937
+  },
+  {
+   "LeftArm": 0.1391,
+   "LeftForeArm": 0.2305,
+   "LeftHand": -0.3726,
+   "RightArm": 0.7969,
+   "RightForeArm": 1.6874,
+   "RightHand": -0.0914
+  },
+  {
+   "LeftArm": 0.0901,
+   "LeftForeArm": 0.2264,
+   "LeftHand": -0.3497,
+   "RightArm": 0.7818,
+   "RightForeArm": 1.7762,
+   "RightHand": -0.442
+  },
+  {
+   "LeftArm": 0.0536,
+   "LeftForeArm": 0.2009,
+   "LeftHand": -0.3377,
+   "RightArm": 0.8193,
+   "RightForeArm": 2.1607,
+   "RightHand": -0.1975
+  },
+  {
+   "LeftArm": 0.0257,
+   "LeftForeArm": 0.2289,
+   "LeftHand": -0.3568,
+   "RightArm": 1.0282,
+   "RightForeArm": 2.6236,
+   "RightHand": 0.1446
+  },
+  {
+   "LeftArm": 0.0328,
+   "LeftForeArm": 0.3055,
+   "LeftHand": -0.3681,
+   "RightArm": 1.162,
+   "RightForeArm": 2.9618,
+   "RightHand": 0.2069
+  },
+  {
+   "LeftArm": 0.0956,
+   "LeftForeArm": 0.3148,
+   "LeftHand": -0.3338,
+   "RightArm": 1.146,
+   "RightForeArm": 2.7637,
+   "RightHand": 0.2226
+  },
+  {
+   "LeftArm": 0.1457,
+   "LeftForeArm": 0.2909,
+   "LeftHand": -0.3179,
+   "RightArm": 1.0662,
+   "RightForeArm": 2.1924,
+   "RightHand": 0.3361
+  },
+  {
+   "LeftArm": 0.1538,
+   "LeftForeArm": 0.2835,
+   "LeftHand": -0.3361,
+   "RightArm": 0.9643,
+   "RightForeArm": 1.6864,
+   "RightHand": 0.0677
+  },
+  {
+   "LeftArm": 0.1278,
+   "LeftForeArm": 0.2702,
+   "LeftHand": -0.3632,
+   "RightArm": 0.8951,
+   "RightForeArm": 1.616,
+   "RightHand": -0.4935
+  },
+  {
+   "LeftArm": 0.087,
+   "LeftForeArm": 0.2517,
+   "LeftHand": -0.373,
+   "RightArm": 0.7767,
+   "RightForeArm": 1.773,
+   "RightHand": -0.5074
+  },
+  {
+   "LeftArm": 0.0537,
+   "LeftForeArm": 0.2228,
+   "LeftHand": -0.3485,
+   "RightArm": 0.6843,
+   "RightForeArm": 2.0529,
+   "RightHand": -0.2206
+  },
+  {
+   "LeftArm": 0.0487,
+   "LeftForeArm": 0.2166,
+   "LeftHand": -0.3571,
+   "RightArm": 0.6207,
+   "RightForeArm": 2.541,
+   "RightHand": 0.1361
+  },
+  {
+   "LeftArm": 0.0771,
+   "LeftForeArm": 0.2067,
+   "LeftHand": -0.3238,
+   "RightArm": 0.5489,
+   "RightForeArm": -3.0972,
+   "RightHand": 0.1081
+  },
+  {
+   "LeftArm": 0.1259,
+   "LeftForeArm": 0.1773,
+   "LeftHand": -0.3028,
+   "RightArm": 0.4517,
+   "RightForeArm": -2.6295,
+   "RightHand": -0.0963
+  },
+  {
+   "LeftArm": 0.1468,
+   "LeftForeArm": 0.1758,
+   "LeftHand": -0.3052,
+   "RightArm": 0.3735,
+   "RightForeArm": -2.3098,
+   "RightHand": -0.0704
+  },
+  {
+   "LeftArm": 0.1369,
+   "LeftForeArm": 0.2075,
+   "LeftHand": -0.3347,
+   "RightArm": 0.2962,
+   "RightForeArm": -1.8074,
+   "RightHand": 0.0774
+  },
+  {
+   "LeftArm": 0.138,
+   "LeftForeArm": 0.2022,
+   "LeftHand": -0.3205,
+   "RightArm": 0.2181,
+   "RightForeArm": -1.0321,
+   "RightHand": -0.0758
+  },
+  {
+   "LeftArm": 0.1454,
+   "LeftForeArm": 0.1749,
+   "LeftHand": -0.3012,
+   "RightArm": 0.1577,
+   "RightForeArm": -0.5979,
+   "RightHand": -0.0209
+  },
+  {
+   "LeftArm": 0.1471,
+   "LeftForeArm": 0.1627,
+   "LeftHand": -0.2928,
+   "RightArm": 0.1095,
+   "RightForeArm": -0.3675,
+   "RightHand": 0.047
+  },
+  {
+   "LeftArm": 0.1461,
+   "LeftForeArm": 0.1752,
+   "LeftHand": -0.2997,
+   "RightArm": 0.0584,
+   "RightForeArm": -0.2457,
+   "RightHand": 0.0933
+  },
+  {
+   "LeftArm": 0.1485,
+   "LeftForeArm": 0.1912,
+   "LeftHand": -0.3088,
+   "RightArm": 0.0201,
+   "RightForeArm": -0.2114,
+   "RightHand": 0.1359
+  },
+  {
+   "LeftArm": 0.1485,
+   "LeftForeArm": 0.2094,
+   "LeftHand": -0.3319,
+   "RightArm": -0.009,
+   "RightForeArm": -0.2174,
+   "RightHand": 0.1944
+  },
+  {
+   "LeftArm": 0.1447,
+   "LeftForeArm": 0.2073,
+   "LeftHand": -0.345,
+   "RightArm": -0.0246,
+   "RightForeArm": -0.2239,
+   "RightHand": 0.2315
+  },
+  {
+   "LeftArm": 0.1394,
+   "LeftForeArm": 0.2054,
+   "LeftHand": -0.3461,
+   "RightArm": -0.0056,
+   "RightForeArm": -0.2532,
+   "RightHand": 0.2279
+  },
+  {
+   "LeftArm": 0.1381,
+   "LeftForeArm": 0.1975,
+   "LeftHand": -0.3499,
+   "RightArm": -0.0023,
+   "RightForeArm": -0.2749,
+   "RightHand": 0.2333
+  },
+  {
+   "LeftArm": 0.1375,
+   "LeftForeArm": 0.1875,
+   "LeftHand": -0.3379,
+   "RightArm": -0.0109,
+   "RightForeArm": -0.2886,
+   "RightHand": 0.2465
+  },
+  {
+   "LeftArm": 0.1345,
+   "LeftForeArm": 0.1893,
+   "LeftHand": -0.3294,
+   "RightArm": -0.0122,
+   "RightForeArm": -0.3024,
+   "RightHand": 0.2471
+  },
+  {
+   "LeftArm": 0.1313,
+   "LeftForeArm": 0.1942,
+   "LeftHand": -0.328,
+   "RightArm": -0.0133,
+   "RightForeArm": -0.3082,
+   "RightHand": 0.244
+  },
+  {
+   "LeftArm": 0.1308,
+   "LeftForeArm": 0.1893,
+   "LeftHand": -0.3337,
+   "RightArm": -0.0174,
+   "RightForeArm": -0.3019,
+   "RightHand": 0.2483
+  },
+  {
+   "LeftArm": 0.1324,
+   "LeftForeArm": 0.1838,
+   "LeftHand": -0.3269,
+   "RightArm": -0.0174,
+   "RightForeArm": -0.3011,
+   "RightHand": 0.2453
+  },
+  {
+   "LeftArm": 0.1351,
+   "LeftForeArm": 0.1825,
+   "LeftHand": -0.3225,
+   "RightArm": -0.0141,
+   "RightForeArm": -0.3021,
+   "RightHand": 0.2431
+  },
+  {
+   "LeftArm": 0.1378,
+   "LeftForeArm": 0.1795,
+   "LeftHand": -0.3208,
+   "RightArm": -0.0097,
+   "RightForeArm": -0.3035,
+   "RightHand": 0.2434
+  },
+  {
+   "LeftArm": 0.142,
+   "LeftForeArm": 0.1781,
+   "LeftHand": -0.3198,
+   "RightArm": -0.0036,
+   "RightForeArm": -0.3039,
+   "RightHand": 0.2468
+  }
+ ]
+}
