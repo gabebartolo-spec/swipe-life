@@ -107,7 +107,19 @@
   kitchen, bathroom. The dollhouse shows one room at a time at full scale; the camera moves between rooms
   (director 2026-11-03). Each card names its room (`room`, default bedroom); the view slides across the
   house to it (~0.4 s). The bedroom's age bands: baby 0–3, child 4–12, teen 13–17.
-- 10.7 The player is a girl or a boy, set at birth; every age band has a character set for each.
+- 10.7 The player is a girl or a boy, set at birth. People are **modular, like Lego** (director 2026-11-03):
+  every person is assembled from interchangeable parts.
+  - Body: 4 age sizes (baby, child, teenager, adult); a female and a male shape; from child up, tall or short
+    and fat, skinny or athletic (the baby has one body).
+  - Clothing mixes and matches with no gender constraints. Slots: top, bottom, shoes, full-body (replaces top
+    and bottom, e.g. onesie, dress), outerwear over the top, headwear, glasses.
+  - Any item and hair can be any colour: parts are rendered once in neutral clay and tinted in game.
+  - Also modular: haircuts, facial hair, skin tones, eye and brow shapes, ageing
+    details (grey hair, wrinkles, baldness), body extras (freckles, scars, tattoos).
+  - A look is inherited from the parents plus randomness, and improves with lifestyle (e.g. becoming
+    athletic through exercise, plastic surgery). Attractiveness is the Looks stat (§4.1), not a separate part.
+  - People are seen from the front only (director 2026-11-03); motion stays in the front plane.
+  - Architecture: `docs/PEOPLE.md`.
 - 10.8 Before 18 (Shop locked, §6.7) the scene changes with age (e.g. crib → bed → desk) and with activities,
   which leave props in the house (e.g. a ball from the sports club, books from studying).
 
@@ -141,3 +153,4 @@ None.
 - 2026-11-03: Childhood home rooms (§10.6), girl or boy at birth (§10.7), pre-18 scene changes (§10.8).
 - 2026-11-03: Dollhouse shows one room at a time, camera moves between rooms (§10.6).
 - 2026-11-03: Card picks the room, slide pan, bedroom age bands 0–3 / 4–12 / 13–17 (§10.6).
+- 2026-11-03: Modular people (§10.7): body sizes, shapes, mix-and-match clothing slots, tinted parts, extras; looks inherited + random, improved by lifestyle.
