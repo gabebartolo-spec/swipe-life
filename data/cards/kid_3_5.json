@@ -1,0 +1,962 @@
+[
+  {
+    "id": "k3_supermarket_tantrum",
+    "text": "The checkout has sweets at exactly your eye level.",
+    "ages": [
+      3,
+      4
+    ],
+    "left": {
+      "label": "Lie on the floor",
+      "effects": {
+        "happiness": 3,
+        "relationships": -4,
+        "stress": 2
+      },
+      "result": "Strangers stare. You hold the pose."
+    },
+    "right": {
+      "label": "Walk away",
+      "effects": {
+        "karma": 2,
+        "relationships": 3,
+        "happiness": -2
+      }
+    },
+    "up": {
+      "label": "Negotiate like a pro",
+      "effects": {
+        "smarts": 3,
+        "happiness": 4
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "relationships": -3
+        },
+        "result": "No deal. Now you're both sulking."
+      }
+    }
+  },
+  {
+    "id": "k3_imaginary_friend",
+    "text": "A friend only you can see moves in. His name is Gerald.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "bedroom",
+    "left": {
+      "label": "Ignore Gerald",
+      "effects": {
+        "happiness": -2
+      }
+    },
+    "right": {
+      "label": "Set a place for Gerald",
+      "effects": {
+        "happiness": 4,
+        "smarts": 1
+      },
+      "set_flags": [
+        "imaginary_friend"
+      ]
+    }
+  },
+  {
+    "id": "k3_gerald_blame",
+    "text": "Somebody drew on the wall. Gerald, probably.",
+    "ages": [
+      4,
+      5
+    ],
+    "requires": {
+      "flags": [
+        "imaginary_friend"
+      ]
+    },
+    "room": "living",
+    "left": {
+      "label": "Blame Gerald",
+      "effects": {
+        "happiness": 2,
+        "karma": -3
+      },
+      "risk": {
+        "chance": 0.6,
+        "effects": {
+          "relationships": -3
+        },
+        "result": "Gerald has no crayons. You do."
+      }
+    },
+    "right": {
+      "label": "Confess",
+      "effects": {
+        "karma": 3,
+        "relationships": 2,
+        "stress": 2
+      }
+    }
+  },
+  {
+    "id": "k3_gerald_leaves",
+    "text": "Gerald says he's moving away. He packed a tiny invisible bag.",
+    "ages": [
+      5,
+      5
+    ],
+    "requires": {
+      "flags": [
+        "imaginary_friend"
+      ]
+    },
+    "left": {
+      "label": "Beg him to stay",
+      "effects": {
+        "happiness": -3,
+        "stress": 2
+      }
+    },
+    "right": {
+      "label": "Wave goodbye",
+      "effects": {
+        "happiness": -1,
+        "smarts": 2
+      },
+      "result": "Gerald waves back. Probably.",
+      "clear_flags": [
+        "imaginary_friend"
+      ]
+    }
+  },
+  {
+    "id": "k3_daycare_first_day",
+    "text": "First day at daycare. Your parent is edging toward the door.",
+    "ages": [
+      3,
+      3
+    ],
+    "left": {
+      "label": "Grab their leg",
+      "effects": {
+        "stress": 4,
+        "relationships": 2
+      },
+      "result": "They peel you off, one finger at a time."
+    },
+    "right": {
+      "label": "March inside",
+      "effects": {
+        "relationships": 3,
+        "happiness": 2,
+        "stress": 1
+      }
+    }
+  },
+  {
+    "id": "k3_nap_time",
+    "text": "Nap time. Everyone is lying down. You are not tired.",
+    "ages": [
+      3,
+      4
+    ],
+    "left": {
+      "label": "Pretend to sleep",
+      "effects": {
+        "health": 2,
+        "karma": 1
+      },
+      "result": "You wake up an hour later. Suspicious."
+    },
+    "right": {
+      "label": "Whisper to the next mat",
+      "effects": {
+        "relationships": 3,
+        "health": -1
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "stress": 3
+        },
+        "result": "The teacher heard that."
+      }
+    }
+  },
+  {
+    "id": "k3_bedtime_stall",
+    "text": "It's bedtime. You need water. And a story. And another water.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "bedroom",
+    "left": {
+      "label": "Go to sleep",
+      "effects": {
+        "health": 3,
+        "relationships": 2
+      }
+    },
+    "right": {
+      "label": "One more thing",
+      "effects": {
+        "happiness": 3,
+        "health": -2,
+        "relationships": -2
+      }
+    },
+    "up": {
+      "label": "Request an epic tale",
+      "effects": {
+        "smarts": 3,
+        "happiness": 3
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "health": -3
+        },
+        "result": "The tale had nine sequels."
+      }
+    }
+  },
+  {
+    "id": "k3_monster_closet",
+    "text": "Something in the closet just moved.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "bedroom",
+    "left": {
+      "label": "Hide under the blanket",
+      "effects": {
+        "stress": 4
+      },
+      "result": "The blanket holds. Monsters fear blankets."
+    },
+    "right": {
+      "label": "Open the closet",
+      "effects": {
+        "stress": -2,
+        "happiness": 2
+      },
+      "result": "It was a coat. A very rude coat."
+    }
+  },
+  {
+    "id": "k3_picky_peas",
+    "text": "There's a pea touching your potatoes. Unacceptable.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Refuse the plate",
+      "effects": {
+        "health": -2,
+        "happiness": 1,
+        "relationships": -2
+      }
+    },
+    "right": {
+      "label": "Eat around it",
+      "effects": {
+        "health": 2,
+        "smarts": 1
+      }
+    }
+  },
+  {
+    "id": "k3_mystery_green",
+    "text": "A green thing is on your fork. Nobody will say what it is.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Spit it out",
+      "effects": {
+        "happiness": 2,
+        "health": -1,
+        "relationships": -2
+      }
+    },
+    "right": {
+      "label": "Try it",
+      "effects": {
+        "health": 3,
+        "happiness": -1
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "happiness": -3
+        },
+        "result": "It was exactly as bad as it looked."
+      }
+    }
+  },
+  {
+    "id": "k3_playground_slide",
+    "text": "The big slide. The big kids use it.",
+    "ages": [
+      3,
+      5
+    ],
+    "left": {
+      "label": "Stay on the small one",
+      "effects": {
+        "happiness": 1,
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Climb the big one",
+      "effects": {
+        "happiness": 5,
+        "health": -1
+      },
+      "risk": {
+        "chance": 0.15,
+        "effects": {
+          "health": -5
+        },
+        "result": "Bumped knee. Brave face."
+      }
+    }
+  },
+  {
+    "id": "k3_sandbox_shovel",
+    "text": "A kid in the sandbox has the good shovel.",
+    "ages": [
+      3,
+      4
+    ],
+    "left": {
+      "label": "Grab it",
+      "effects": {
+        "happiness": 3,
+        "karma": -3,
+        "relationships": -3
+      }
+    },
+    "right": {
+      "label": "Ask to share",
+      "effects": {
+        "relationships": 4,
+        "karma": 2
+      }
+    },
+    "up": {
+      "label": "Build a better one from sticks",
+      "effects": {
+        "smarts": 4,
+        "happiness": 2
+      },
+      "result": "Engineering at age three."
+    }
+  },
+  {
+    "id": "k3_first_friend",
+    "text": "A kid on the swings says you're best friends now. Just like that.",
+    "ages": [
+      3,
+      5
+    ],
+    "left": {
+      "label": "Shrug",
+      "effects": {
+        "happiness": -1
+      }
+    },
+    "right": {
+      "label": "Best friends forever",
+      "effects": {
+        "relationships": 5,
+        "happiness": 3
+      },
+      "set_flags": [
+        "preschool_bestie"
+      ]
+    }
+  },
+  {
+    "id": "k3_bestie_fight",
+    "text": "Your best friend says you can't come to their pretend castle.",
+    "ages": [
+      4,
+      5
+    ],
+    "requires": {
+      "flags": [
+        "preschool_bestie"
+      ]
+    },
+    "left": {
+      "label": "Build your own castle",
+      "effects": {
+        "happiness": 1,
+        "relationships": -2
+      }
+    },
+    "right": {
+      "label": "Say sorry, whatever it was",
+      "effects": {
+        "relationships": 4,
+        "karma": 1
+      }
+    }
+  },
+  {
+    "id": "k3_bestie_sleepover",
+    "text": "Your best friend's parent asks if you want to stay the night.",
+    "ages": [
+      5,
+      5
+    ],
+    "requires": {
+      "flags": [
+        "preschool_bestie"
+      ]
+    },
+    "room": "living",
+    "left": {
+      "label": "Stay home",
+      "effects": {
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Pack a bag",
+      "effects": {
+        "relationships": 4,
+        "happiness": 3
+      },
+      "risk": {
+        "chance": 0.35,
+        "effects": {
+          "stress": 4,
+          "relationships": -1
+        },
+        "result": "Midnight call. Someone has to come get you."
+      }
+    }
+  },
+  {
+    "id": "k3_why_phase",
+    "text": "Why is the sky up? Why are feet? Why why why?",
+    "ages": [
+      3,
+      5
+    ],
+    "left": {
+      "label": "Stop asking",
+      "effects": {
+        "stress": -1,
+        "smarts": -1
+      }
+    },
+    "right": {
+      "label": "Keep asking",
+      "effects": {
+        "smarts": 4,
+        "relationships": -2
+      },
+      "result": "A tired parent stares at the ceiling."
+    }
+  },
+  {
+    "id": "k3_haircut",
+    "text": "Haircut day. The scissors are very close to your ears.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Squirm",
+      "effects": {
+        "looks": -3,
+        "happiness": 1
+      },
+      "result": "It's... uneven."
+    },
+    "right": {
+      "label": "Sit still",
+      "effects": {
+        "looks": 3,
+        "stress": 2
+      }
+    },
+    "up": {
+      "label": "Cut it yourself first",
+      "effects": {
+        "happiness": 4,
+        "looks": -6
+      },
+      "result": "Bold. Very bold."
+    }
+  },
+  {
+    "id": "k3_bath_time",
+    "text": "Bath time. You have decided you are a fish now.",
+    "ages": [
+      3,
+      4
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Refuse the bath",
+      "effects": {
+        "health": -2,
+        "happiness": 1
+      }
+    },
+    "right": {
+      "label": "Splash everything",
+      "effects": {
+        "happiness": 4,
+        "relationships": -2,
+        "health": 1
+      },
+      "result": "The bathroom is a lake."
+    }
+  },
+  {
+    "id": "k3_potty_holdout",
+    "text": "You have to go. But you're SO busy playing.",
+    "ages": [
+      3,
+      3
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Keep playing",
+      "effects": {
+        "happiness": 1,
+        "looks": -2
+      },
+      "risk": {
+        "chance": 0.6,
+        "effects": {
+          "stress": 4
+        },
+        "result": "Too late."
+      }
+    },
+    "right": {
+      "label": "Run for it",
+      "effects": {
+        "health": 2,
+        "karma": 1
+      }
+    }
+  },
+  {
+    "id": "k3_dress_yourself",
+    "text": "You want to dress yourself today.",
+    "ages": [
+      3,
+      5
+    ],
+    "left": {
+      "label": "Let them choose",
+      "effects": {
+        "looks": 2,
+        "happiness": -2
+      }
+    },
+    "right": {
+      "label": "Rain boots and a tutu",
+      "effects": {
+        "happiness": 5,
+        "looks": -1
+      },
+      "result": "You look like a legend."
+    }
+  },
+  {
+    "id": "k3_new_sibling",
+    "text": "A baby is coming home. Everyone says you're a big kid now.",
+    "ages": [
+      3,
+      5
+    ],
+    "weight": 4,
+    "requires": {
+      "not_flags": [
+        "has_sibling"
+      ]
+    },
+    "room": "living",
+    "left": {
+      "label": "Demand they return it",
+      "effects": {
+        "relationships": -3,
+        "happiness": -2
+      },
+      "result": "No returns."
+    },
+    "right": {
+      "label": "Bring it a toy",
+      "effects": {
+        "relationships": 5,
+        "karma": 2
+      }
+    }
+  },
+  {
+    "id": "k3_art_masterpiece",
+    "text": "You painted a picture. It is mostly brown.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Hide it",
+      "effects": {
+        "happiness": -2
+      }
+    },
+    "right": {
+      "label": "Gift it",
+      "effects": {
+        "relationships": 4,
+        "happiness": 2
+      },
+      "result": "It goes on the fridge. Honored forever."
+    }
+  },
+  {
+    "id": "k3_counting_show",
+    "text": "A grown-up asks you to count to ten in front of everybody.",
+    "ages": [
+      3,
+      4
+    ],
+    "left": {
+      "label": "Hide behind a leg",
+      "effects": {
+        "stress": 2
+      }
+    },
+    "right": {
+      "label": "Count loudly",
+      "effects": {
+        "smarts": 3,
+        "relationships": 2
+      },
+      "result": "You skip seven. Nobody minds."
+    }
+  },
+  {
+    "id": "k3_lost_toy",
+    "text": "Your favourite stuffed rabbit is gone.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "bedroom",
+    "left": {
+      "label": "Cry until found",
+      "effects": {
+        "stress": 3,
+        "relationships": -1
+      },
+      "result": "Found in the fridge. Somehow."
+    },
+    "right": {
+      "label": "Search methodically",
+      "effects": {
+        "smarts": 3,
+        "stress": -1
+      }
+    }
+  },
+  {
+    "id": "k3_dog_meet",
+    "text": "A big dog trots over in the park.",
+    "ages": [
+      3,
+      5
+    ],
+    "left": {
+      "label": "Back away",
+      "effects": {
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Ask before petting",
+      "effects": {
+        "happiness": 4,
+        "smarts": 1
+      }
+    },
+    "up": {
+      "label": "Hug it immediately",
+      "effects": {
+        "happiness": 6
+      },
+      "risk": {
+        "chance": 0.2,
+        "effects": {
+          "health": -4,
+          "stress": 3
+        },
+        "result": "The dog did not want a hug."
+      }
+    }
+  },
+  {
+    "id": "k3_bug_collection",
+    "text": "You found a beetle. You'd like to keep it. Forever.",
+    "ages": [
+      4,
+      5
+    ],
+    "room": "bedroom",
+    "left": {
+      "label": "Let it go",
+      "effects": {
+        "karma": 3
+      }
+    },
+    "right": {
+      "label": "Bring it to bed",
+      "effects": {
+        "happiness": 4,
+        "relationships": -2
+      },
+      "result": "It escapes. It's in the house now."
+    }
+  },
+  {
+    "id": "k3_show_and_tell",
+    "text": "Show and tell. You have nothing to show.",
+    "ages": [
+      4,
+      5
+    ],
+    "left": {
+      "label": "Show your scab",
+      "effects": {
+        "relationships": 3,
+        "looks": -1
+      },
+      "result": "The whole class gasps. Respect."
+    },
+    "right": {
+      "label": "Tell a made-up story",
+      "effects": {
+        "smarts": 3,
+        "karma": -1
+      }
+    }
+  },
+  {
+    "id": "k3_pet_fish",
+    "text": "The class fish needs feeding while the teacher is out.",
+    "ages": [
+      4,
+      5
+    ],
+    "left": {
+      "label": "A tiny pinch",
+      "effects": {
+        "karma": 2,
+        "smarts": 1
+      }
+    },
+    "right": {
+      "label": "The whole jar",
+      "effects": {
+        "happiness": 2,
+        "karma": -2
+      },
+      "risk": {
+        "chance": 0.5,
+        "effects": {
+          "stress": 4
+        },
+        "result": "The fish is having a hard week."
+      }
+    }
+  },
+  {
+    "id": "k3_crayon_snack",
+    "text": "A purple crayon looks delicious today.",
+    "ages": [
+      3,
+      3
+    ],
+    "weight": 5,
+    "left": {
+      "label": "Resist",
+      "effects": {
+        "smarts": 1
+      }
+    },
+    "right": {
+      "label": "Just a taste",
+      "effects": {
+        "happiness": 2,
+        "health": -2
+      },
+      "result": "Tastes like purple. Disappointing."
+    }
+  },
+  {
+    "id": "k3_grandparent_visit",
+    "text": "A grandparent arrives with pockets full of something.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "living",
+    "left": {
+      "label": "Hide shyly",
+      "effects": {
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Run for a hug",
+      "effects": {
+        "relationships": 4,
+        "happiness": 3
+      },
+      "result": "Candy. The pockets had candy."
+    }
+  },
+  {
+    "id": "k3_doctor_shot",
+    "text": "The doctor has a needle and a sticker.",
+    "ages": [
+      3,
+      5
+    ],
+    "left": {
+      "label": "Fight it",
+      "effects": {
+        "stress": 4,
+        "health": 2,
+        "relationships": -2
+      }
+    },
+    "right": {
+      "label": "Be brave",
+      "effects": {
+        "health": 3,
+        "happiness": 1
+      },
+      "result": "You get two stickers."
+    }
+  },
+  {
+    "id": "k3_sharing_song",
+    "text": "Everyone has to hold hands and sing a song.",
+    "ages": [
+      3,
+      4
+    ],
+    "left": {
+      "label": "Refuse to sing",
+      "effects": {
+        "relationships": -2,
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Sing loudest",
+      "effects": {
+        "happiness": 3,
+        "relationships": 2
+      },
+      "result": "Wrong words. Full heart."
+    }
+  },
+  {
+    "id": "k3_king_of_couch",
+    "text": "You declare the couch a kingdom. You are its ruler.",
+    "ages": [
+      4,
+      5
+    ],
+    "room": "living",
+    "left": {
+      "label": "Abdicate for dinner",
+      "effects": {
+        "health": 1
+      }
+    },
+    "right": {
+      "label": "Defend the realm",
+      "effects": {
+        "happiness": 5,
+        "relationships": -1
+      },
+      "result": "A parent invades. The kingdom falls."
+    }
+  },
+  {
+    "id": "k3_learn_to_ride",
+    "text": "Someone's taking the training wheels off your bike.",
+    "ages": [
+      5,
+      5
+    ],
+    "left": {
+      "label": "Put them back",
+      "effects": {
+        "stress": -1,
+        "happiness": -1
+      }
+    },
+    "right": {
+      "label": "Ride",
+      "effects": {
+        "happiness": 5,
+        "health": 2
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "health": -4
+        },
+        "result": "You meet the pavement. Then you ride."
+      }
+    }
+  },
+  {
+    "id": "k3_nightmare",
+    "text": "You woke up from a bad dream. The hall is dark.",
+    "ages": [
+      3,
+      5
+    ],
+    "room": "bedroom",
+    "left": {
+      "label": "Stay in bed",
+      "effects": {
+        "stress": 3,
+        "smarts": 1
+      }
+    },
+    "right": {
+      "label": "Go to their room",
+      "effects": {
+        "stress": -3,
+        "relationships": 2,
+        "health": -1
+      },
+      "result": "You sleep sideways across both of them."
+    }
+  }
+]
