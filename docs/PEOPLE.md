@@ -29,6 +29,11 @@
      - skinny: torso 0.85, limbs 0.82
      - athletic: shoulder/chest 1.12, waist 0.95, upper arm/thigh 1.10 (real geometry, not scale.x)
      - fat: belly bead 1.35 pushed +z, hips 1.2, upper arm 1.25, thigh 1.3, neck 1.2
+- **Torso (director 2026-11-03, "they look really fat"):** never one ball. A rib ball (0, 1.1) r 0.29 ×(1, 0.8, 0.62)
+  over a waist ball (0, 0.92) r 0.2 ×(1, 0.9, 0.7), widest at the ribs; pelvis r 0.24 ×(1.05, 0.55, 0.75) with hip
+  lobes r 0.11 at x ±0.14, drawn behind the thighs. Age width SX: teen 0.86, adult 0.9. Garments add 0.03–0.035.
+- **Hair:** every cut whose fringe is separate lumps gets a crown shell (hair_front, (0, 2.0, 0.02) r 0.47
+  ×(1.08, 0.42, 1)) so no scalp shows between them; the head occluder trims it to the top.
 - **Height in Godot:** tall 1.07, short 0.93 on bone length. Legs take 60%, torso 30%, neck 10%; the head is never scaled.
   - The child pivot offset and the piece's `Layers.scale.y` are both multiplied by s_len.
   - A 7% stretch cannot be seen at 300–450 px.
