@@ -303,6 +303,7 @@ func _test_career_year_end() -> void:
 	_check(not state.careers.has("job") and state.flags.has("fired"), "not fired at 0")
 	_check(not state.flags.has("work_job_dating"), "work flags survived leaving")
 	_check(state.partner.get("name") == crush, "partner lost with the job")
+	_check(state.flags.has("dating_work_partner"), "dating set no partner flag")
 	_check(state.careers.has("special"), "firing the job ended the special too")
 	# a gang career heats up until the police step in: juvie and a record
 	state.stats.karma = 10
