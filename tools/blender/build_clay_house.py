@@ -75,55 +75,136 @@ def shell():
         box(f"{n}_sill", (0.15, 1.0, z), (0.3, 0.08, 1.6), "fbf8f2", bevel=0.03)
         for k, dz in (("a", -0.8), ("b", 0.8)):
             box(f"{n}_curtain_{k}", (0.12, 1.55, z + dz), (0.08, 1.6, 0.32), "f1e4cf", bevel=0.04, lump=0.02)
+        tube(f"{n}_rod", (0.16, 2.38, z), 0.03, 2.0, "8a6a55", rot=(math.radians(90), 0, 0))
+        box(f"{n}_bar_v", (0.1, 1.6, z), (0.04, 1.1, 0.05), "fbf8f2", bevel=0.015)
+        box(f"{n}_bar_h", (0.1, 1.6, z), (0.04, 0.05, 1.3), "fbf8f2", bevel=0.015)
+        tube(f"{n}_sillpot", (0.18, 1.1, z + 0.35), 0.07, 0.13, "c8693f")
+        ball(f"{n}_sillleaf", (0.18, 1.24, z + 0.35), 0.1, "7fae6a", scale=(1, 0.8, 1))
     box("wt_frame", (6.6, 1.9, 0.03), (1.06, 0.86, 0.12), "fbf8f2", bevel=0.05)
     box("wt_win_pane", (6.6, 1.9, 0.07), (0.9, 0.7, 0.05), "fff3d6", bevel=0.01, subd=0, lump=0)
     tag()
 
 
+def chair(n, x, z, face, col=CREAM):
+    """Kitchen chair; face = direction the sitter looks, as (dx, dz)."""
+    box(f"{n}_seat", (x, 0.46, z), (0.44, 0.07, 0.44), col, bevel=0.04)
+    box(f"{n}_back", (x - face[0] * 0.2, 0.75, z - face[1] * 0.2),
+        (0.44 if face[0] == 0 else 0.07, 0.5, 0.07 if face[0] == 0 else 0.44), col, bevel=0.04)
+    for i, (dx, dz) in enumerate(((-0.17, -0.17), (0.17, -0.17), (-0.17, 0.17), (0.17, 0.17))):
+        tube(f"{n}_leg{i}", (x + dx, 0.22, z + dz), 0.03, 0.44, DARKWOOD)
+
+
+def books(n, x, y, z, count, along_x=True, seed=0):
+    cols = ("c45c4a", "e0b45a", "4e6a8a", "7fae6a", "8a5a7a", "e58f5a", "5c7a5a")
+    for i in range(count):
+        h = 0.26 + 0.06 * ((i * 7 + seed) % 3)
+        c = (x + i * 0.11, y + h / 2, z) if along_x else (x, y + h / 2, z + i * 0.11)
+        s = (0.09, h, 0.24) if along_x else (0.24, h, 0.09)
+        box(f"{n}{i}", c, s, cols[(i + seed) % len(cols)], bevel=0.02, seed=i)
+
+
+def plant(n, x, z, r=0.2, pot="c8693f", h=0.42):
+    tube(f"{n}_pot", (x, h / 2, z), r, h, pot)
+    for i, (dx, dy, dz) in enumerate(((0, 0.3, 0), (0.16, 0.18, 0.06), (-0.15, 0.2, -0.05), (0.05, 0.42, 0.1),
+                                      (-0.08, 0.36, 0.14), (0.1, 0.3, -0.14))):
+        ball(f"{n}_leaf{i}", (x + dx, h + dy * r / 0.2, z + dz * r / 0.2), r * 0.95,
+             "6f9e57" if i % 2 else "7fae6a", scale=(1, 0.6, 1), seed=i)
+
+
 def base():
     layer("base")
-    # living room
-    box("rug_l", (2.2, 0.08, 6), (2.6, 0.04, 2.0), "d9a3a0", bevel=0.02, lump=0.004)
-    box("sofa_base", (0.55, 0.3, 6), (0.85, 0.45, 2.0), "7f9fb8", bevel=0.14)
-    box("sofa_back", (0.22, 0.75, 6), (0.25, 0.65, 2.0), "7f9fb8", bevel=0.12)
-    for i, z in enumerate((4.95, 7.05)):
-        box(f"sofa_arm{i}", (0.55, 0.52, z), (0.85, 0.5, 0.26), "6f8fa8", bevel=0.1)
-    ball("cushion_a", (0.45, 0.74, 5.45), 0.22, "e0b45a", scale=(0.4, 0.9, 1))
-    ball("cushion_b", (0.45, 0.74, 6.55), 0.22, "e8dccb", scale=(0.4, 0.9, 1), seed=2)
-    box("coffee_top", (2.1, 0.45, 6), (0.9, 0.08, 1.3), WOOD, bevel=0.04)
+    # ---- living room (x 0..4, z 4..8)
+    cloth("rug_l", (2.0, 0.07, 6.1), (2.6, 0.04, 2.3), "d9a3a0", folds=0.004)
+    cloth("rug_l_in", (2.0, 0.09, 6.1), (2.1, 0.03, 1.8), "ecc6b8", folds=0.004)
+    box("sofa_base", (0.55, 0.28, 6.1), (0.9, 0.42, 2.1), "7f9fb8", bevel=0.14)
+    for i, z in enumerate((5.6, 6.6)):
+        box(f"sofa_seat{i}", (0.62, 0.55, z), (0.78, 0.18, 0.98), "8fb0c8", bevel=0.09)
+    box("sofa_back", (0.22, 0.8, 6.1), (0.28, 0.75, 2.1), "7f9fb8", bevel=0.13)
+    for i, z in enumerate((4.98, 7.22)):
+        box(f"sofa_arm{i}", (0.55, 0.55, z), (0.9, 0.55, 0.26), "6f8fa8", bevel=0.11)
+    ball("cushion_a", (0.42, 0.85, 5.5), 0.24, "e0b45a", scale=(0.4, 0.9, 1))
+    ball("cushion_b", (0.42, 0.85, 6.7), 0.24, "e8dccb", scale=(0.4, 0.9, 1), seed=2)
+    cloth("throw", (0.75, 0.66, 6.85), (0.6, 0.05, 0.7), "c45c4a", folds=0.03, droop=0.1)
+    box("coffee_top", (2.0, 0.42, 6.1), (0.85, 0.08, 1.3), WOOD, bevel=0.04)
+    box("coffee_shelf", (2.0, 0.14, 6.1), (0.75, 0.05, 1.2), DARKWOOD, bevel=0.02)
     for i, (dx, dz) in enumerate(((-0.35, -0.55), (0.35, -0.55), (-0.35, 0.55), (0.35, 0.55))):
-        tube(f"coffee_leg{i}", (2.1 + dx, 0.22, 6 + dz), 0.04, 0.42, DARKWOOD)
-    tube("mug", (2.0, 0.56, 5.8), 0.07, 0.14, "f4efe6")
-    box("tv_unit", (3.55, 0.25, 6), (0.5, 0.5, 1.6), DARKWOOD, bevel=0.05)
-    box("tv", (3.55, 0.95, 6), (0.08, 0.7, 1.15), "4a4d55", bevel=0.04)
-    tube("pot_l", (0.4, 0.25, 7.6), 0.22, 0.5, "c8693f")
-    for i, o in enumerate([(0, 0.75, 0), (0.15, 0.62, 0.08), (-0.14, 0.65, -0.06), (0.04, 0.95, 0.1)]):
-        ball(f"leaf_l{i}", (0.4 + o[0], o[1], 7.6 + o[2]), 0.2, "6f9e57", scale=(1, 0.6, 1), seed=i)
-    # kitchen
-    box("counter", (5.9, 0.45, 4.45), (2.6, 0.9, 0.6), CREAM, bevel=0.05)
-    box("counter_top", (5.9, 0.93, 4.45), (2.7, 0.08, 0.66), "a9b0a2", bevel=0.03)
-    box("stove", (6.4, 0.98, 4.45), (0.6, 0.03, 0.5), "4a4d55", bevel=0.01)
-    tube("pan", (6.3, 1.1, 4.45), 0.15, 0.22, "c45c4a")
-    tube("kettle", (5.1, 1.08, 4.4), 0.11, 0.22, "e0b45a")
-    box("fridge", (7.55, 0.9, 4.5), (0.7, 1.8, 0.7), "fbf8f2", bevel=0.08)
-    tube("table_top", (6, 0.72, 6.3), 0.62, 0.07, WOOD)
-    tube("table_leg", (6, 0.36, 6.3), 0.07, 0.7, DARKWOOD)
-    for i, (dx, dz) in enumerate(((-0.85, 0), (0.85, 0), (0, 0.85))):
-        box(f"chair{i}", (6 + dx, 0.45, 6.3 + dz), (0.42, 0.08, 0.42), CREAM, bevel=0.04)
-        tube(f"chair_leg{i}", (6 + dx, 0.22, 6.3 + dz), 0.04, 0.44, DARKWOOD)
+        tube(f"coffee_leg{i}", (2.0 + dx, 0.21, 6.1 + dz), 0.04, 0.42, DARKWOOD)
+    tube("mug", (1.9, 0.53, 5.75), 0.07, 0.14, "f4efe6")
+    box("magazine", (2.1, 0.47, 6.35), (0.38, 0.02, 0.3), "4e6a8a", bevel=0.01)
+    box("tv_unit", (3.55, 0.27, 6.1), (0.5, 0.54, 1.7), DARKWOOD, bevel=0.05)
+    box("tv", (3.6, 0.92, 6.1), (0.1, 0.64, 1.05), "55595f", bevel=0.05)
+    books("tv_books", 3.5, 0.54, 6.75, 3, along_x=False)
+    tube("speaker", (3.55, 0.7, 5.45), 0.08, 0.32, "4a4d55")
+    box("low_shelf", (1.3, 0.3, 4.35), (2.0, 0.6, 0.38), WOOD, bevel=0.05)
+    books("shelf_books", 0.5, 0.6, 4.35, 7)
+    plant("plant_shelf", 1.85, 4.35, r=0.12, h=0.25)
+    tube("lamp_pole", (0.35, 0.8, 7.6), 0.025, 1.6, "8a6a55")
+    tube("lamp_base", (0.35, 0.03, 7.6), 0.18, 0.05, "8a6a55")
+    tube("lamp_glow_shade", (0.35, 1.62, 7.6), 0.22, 0.3, "fff0cc")
+    plant("plant_l", 3.5, 7.5, r=0.22, h=0.45)
+    box("frame_l", (0.03, 1.85, 5.2), (0.05, 0.55, 0.45), "f6efe2", bevel=0.02)
+    box("frame_l_art", (0.06, 1.85, 5.2), (0.03, 0.42, 0.33), "7fae6a", bevel=0.015)
+    box("frame_l2", (0.03, 1.75, 7.2), (0.05, 0.42, 0.55), "f6efe2", bevel=0.02)
+    box("frame_l2_art", (0.06, 1.75, 7.2), (0.03, 0.3, 0.43), "e0a24a", bevel=0.015)
+    # ---- kitchen (x 4..8, z 4..8)
+    box("counter", (5.85, 0.45, 4.45), (2.5, 0.9, 0.6), CREAM, bevel=0.05)
+    box("counter_top", (5.85, 0.93, 4.45), (2.6, 0.08, 0.66), "a9b0a2", bevel=0.03)
+    for i in range(4):
+        box(f"cab_door{i}", (4.95 + i * 0.6, 0.45, 4.76), (0.54, 0.72, 0.03), "ead9bd", bevel=0.02)
+        box(f"cab_knob{i}", (5.15 + i * 0.6, 0.65, 4.79), (0.06, 0.06, 0.04), "8a6a55", bevel=0.02)
+    box("stove", (6.4, 0.98, 4.45), (0.62, 0.03, 0.52), "4a4d55", bevel=0.01)
+    tube("pan", (6.3, 1.1, 4.45), 0.16, 0.22, "c45c4a")
+    tube("pan_lid", (6.3, 1.23, 4.45), 0.17, 0.04, "a9b0a2")
+    tube("kettle", (5.05, 1.08, 4.4), 0.11, 0.22, "e0b45a")
+    tube("jar_a", (5.45, 1.05, 4.3), 0.07, 0.18, "f4efe6")
+    tube("jar_b", (5.62, 1.03, 4.3), 0.06, 0.14, "e8c9a0")
+    box("board", (5.9, 0.98, 4.5), (0.42, 0.03, 0.3), WOOD, bevel=0.01)
+    box("fridge", (7.55, 0.95, 4.5), (0.72, 1.9, 0.72), "fbf8f2", bevel=0.1)
+    box("fridge_split", (7.55, 1.3, 4.87), (0.68, 0.02, 0.02), "d8dde0", bevel=0.01)
+    box("fridge_handle", (7.3, 1.55, 4.88), (0.05, 0.38, 0.05), "a9b0a2", bevel=0.02)
+    ball("magnet_a", (7.65, 1.7, 4.87), 0.05, "c45c4a", scale=(1, 1, 0.4), lump=0)
+    box("note", (7.75, 1.5, 4.87), (0.16, 0.2, 0.01), "f3d36b", bevel=0.005)
+    box("dresser", (7.65, 0.45, 6.4), (0.55, 0.9, 1.5), "9fb6a2", bevel=0.06)
+    box("dresser_top", (7.65, 0.93, 6.4), (0.62, 0.06, 1.58), WOOD, bevel=0.03)
+    for i in range(3):
+        ball(f"plate{i}", (7.6, 1.15, 5.95 + i * 0.35), 0.15, ("f4efe6", "cfe3e6", "f3d36b")[i],
+             scale=(0.25, 1, 1), lump=0)
+    plant("plant_k", 7.6, 7.55, r=0.2, h=0.4)
+    cloth("rug_k", (5.6, 0.07, 6.3), (2.0, 0.03, 2.0), "e0b45a", folds=0.004)
+    tube("table_top", (5.6, 0.74, 6.3), 0.7, 0.07, WOOD)
+    tube("table_leg", (5.6, 0.37, 6.3), 0.08, 0.7, DARKWOOD)
+    tube("table_foot", (5.6, 0.04, 6.3), 0.32, 0.06, DARKWOOD)
+    chair("chair_w", 4.75, 6.3, (1, 0))
+    chair("chair_n", 5.6, 5.45, (0, 1))
+    chair("chair_e", 6.45, 6.3, (-1, 0))
+    ball("fruit_bowl", (5.45, 0.82, 6.15), 0.2, "f4efe6", scale=(1, 0.4, 1))
     for i, col in enumerate(("e0a24a", "c45c4a", "7fae6a")):
-        ball(f"fruit{i}", (5.9 + i * 0.1, 0.84, 6.3), 0.075, col, lump=0, seed=i)
-    # bathroom
-    box("tub", (7.2, 0.32, 1.1), (1.3, 0.6, 2.0), "fbf8f2", bevel=0.18)
-    box("tub_water", (7.2, 0.64, 1.1), (1.05, 0.06, 1.75), "a9d0e0", bevel=0.05, subd=1, lump=0)
-    ball("duck", (7.0, 0.74, 1.4), 0.08, "f3d36b", lump=0)
-    box("sink", (5.2, 0.85, 0.3), (0.7, 0.2, 0.5), "fbf8f2", bevel=0.08)
-    tube("sink_ped", (5.2, 0.4, 0.25), 0.11, 0.75, "fbf8f2")
-    box("mirror", (5.2, 1.65, 0.05), (0.6, 0.75, 0.05), "cfe3ea", bevel=0.03)
-    box("toilet", (6.1, 0.22, 0.42), (0.42, 0.44, 0.52), "fbf8f2", bevel=0.12)
-    box("toilet_tank", (6.1, 0.7, 0.15), (0.5, 0.5, 0.2), "fbf8f2", bevel=0.08)
-    box("bath_mat", (6.3, 0.07, 1.8), (0.9, 0.04, 0.6), "a9c2a2", bevel=0.02)
-    box("towel", (4.6, 1.0, 0.08), (0.5, 0.45, 0.05), "e58f5a", bevel=0.03, lump=0.02)
+        ball(f"fruit{i}", (5.35 + i * 0.1, 0.9, 6.15 + (i - 1) * 0.05), 0.075, col, lump=0, seed=i)
+    # ---- bathroom (x 4..8, z 0..4)
+    box("tub", (7.2, 0.33, 1.15), (1.3, 0.62, 2.0), "fbf8f2", bevel=0.18)
+    box("tub_water", (7.2, 0.66, 1.15), (1.02, 0.05, 1.7), "a9d0e0", bevel=0.05, subd=1, lump=0)
+    ball("duck", (7.0, 0.75, 1.45), 0.09, "f3d36b", scale=(1.2, 0.9, 1), lump=0)
+    ball("foam_a", (7.4, 0.72, 0.8), 0.14, "fbf8f2", scale=(1, 0.4, 1))
+    ball("foam_b", (7.25, 0.72, 0.6), 0.11, "fbf8f2", scale=(1, 0.4, 1), seed=2)
+    tube("tub_tap", (7.2, 0.85, 0.15), 0.04, 0.25, "a9b0a2")
+    box("sink", (5.0, 0.86, 0.32), (0.72, 0.18, 0.52), "fbf8f2", bevel=0.08)
+    tube("sink_ped", (5.0, 0.4, 0.25), 0.11, 0.78, "fbf8f2")
+    tube("tap", (5.0, 1.03, 0.12), 0.03, 0.16, "a9b0a2")
+    tube("soap", (5.25, 1.0, 0.2), 0.04, 0.1, "e58f5a")
+    box("mirror_frame", (5.0, 1.68, 0.04), (0.66, 0.82, 0.05), WOOD, bevel=0.03)
+    box("mirror", (5.0, 1.68, 0.07), (0.52, 0.68, 0.03), "cfe3ea", bevel=0.015, subd=1, lump=0)
+    tube("toilet_bowl", (6.0, 0.22, 0.5), 0.22, 0.42, "fbf8f2")
+    tube("toilet_seat", (6.0, 0.45, 0.5), 0.24, 0.05, "e6eef0")
+    box("toilet_tank", (6.0, 0.72, 0.17), (0.5, 0.5, 0.22), "fbf8f2", bevel=0.08)
+    box("bath_shelf", (6.0, 1.45, 0.12), (0.7, 0.05, 0.22), WOOD, bevel=0.02)
+    for i, col in enumerate(("e58f5a", "9fb6d2", "7fae6a")):
+        tube(f"bottle{i}", (5.8 + i * 0.2, 1.56, 0.12), 0.045, 0.18, col)
+    cloth("bath_mat", (6.1, 0.06, 1.7), (1.0, 0.04, 0.65), "a9c2a2", folds=0.006)
+    tube("towel_rail", (4.2, 1.15, 1.6), 0.02, 0.8, "a9b0a2", rot=(math.radians(90), 0, 0))
+    box("towel", (4.22, 0.95, 1.6), (0.05, 0.42, 0.6), "e58f5a", bevel=0.03, lump=0.02)
+    tube("basket", (4.5, 0.25, 3.45), 0.22, 0.5, "d9b98a")
+    cloth("basket_clothes", (4.5, 0.53, 3.45), (0.38, 0.06, 0.38), "9fb6d2", folds=0.03)
+    plant("plant_b", 7.55, 3.5, r=0.16, h=0.34)
     tag()
 
 
@@ -131,65 +212,113 @@ def fairy(band):
     for i in range(12):
         y = 2.45 - 0.18 * math.sin(math.pi * (i % 6) / 6)
         ball(f"fairy_{band}{i}", (0.6 + i * 0.28, y, 0.08), 0.05, "ffc860", lump=0, seed=i)
+    cloth(f"rug_{band}", (2.2, 0.07, 2.3), (2.0, 0.04, 1.6), "e6c0b4", folds=0.004)
+    cloth(f"rug_{band}_in", (2.2, 0.09, 2.3), (1.6, 0.03, 1.2), "f1d8cc", folds=0.004)
 
 
 def bedrooms():
     layer("bed_baby")
     fairy("baby")
-    box("crib_base", (1.2, 0.45, 0.7), (1.4, 0.12, 0.85), CREAM, bevel=0.04)
-    box("crib_mattress", (1.2, 0.56, 0.7), (1.28, 0.12, 0.72), "cfe0ea", bevel=0.06)
+    box("crib_base", (1.2, 0.42, 0.75), (1.45, 0.12, 0.88), CREAM, bevel=0.04)
+    box("crib_mattress", (1.2, 0.54, 0.75), (1.32, 0.12, 0.76), "cfe0ea", bevel=0.06)
+    cloth("crib_blanket", (1.4, 0.63, 0.8), (0.75, 0.05, 0.66), "f3d36b", folds=0.02)
+    ball("crib_pillow", (0.75, 0.66, 0.75), 0.16, "fbf6ec", scale=(0.8, 0.4, 1.2))
     for i in range(9):
-        for z in (0.32, 1.08):
-            tube(f"slat{i}_{z}", (0.56 + i * 0.16, 0.72, z), 0.025, 0.65, CREAM)
-    for z in (0.32, 1.08):
-        box(f"rail{z}", (1.2, 1.06, z), (1.42, 0.06, 0.06), CREAM, bevel=0.025)
+        for z in (0.33, 1.17):
+            tube(f"slat{i}_{z}", (0.58 + i * 0.155, 0.75, z), 0.025, 0.62, CREAM)
+    for z in (0.33, 1.17):
+        box(f"rail{z}", (1.2, 1.07, z), (1.45, 0.06, 0.06), CREAM, bevel=0.025)
+    for i, x in enumerate((0.47, 1.93)):
+        box(f"crib_end{i}", (x, 0.62, 0.75), (0.08, 1.1, 0.9), CREAM, bevel=0.035)
+    tube("mobile_arm", (1.93, 1.45, 0.75), 0.02, 0.6, CREAM)
+    tube("mobile_rod", (1.6, 1.75, 0.75), 0.015, 0.7, "8a6a55", rot=(0, math.radians(90), 0))
+    for i, col in enumerate(("f3d36b", "e58f5a", "9fb6d2")):
+        ball(f"mobile_{i}", (1.35 + i * 0.2, 1.58, 0.75), 0.08, col, lump=0)
     ball("teddy_body", (2.9, 0.3, 2.0), 0.21, "c98a55", scale=(1, 1.1, 0.9))
     ball("teddy_head", (2.9, 0.62, 2.02), 0.15, "c98a55")
     for i, dx in enumerate((-0.11, 0.11)):
         ball(f"teddy_ear{i}", (2.9 + dx, 0.75, 2.0), 0.055, "a8703f", lump=0)
     ball("teddy_snout", (2.9, 0.59, 2.16), 0.06, "e6c49a", lump=0)
     for i, col in enumerate(("c45c4a", "e0b45a", "5c7a5a", "4e6a8a")):
-        box(f"block{i}", (2.1 + (i % 2) * 0.24, 0.2 + (i // 2) * 0.2, 2.5), (0.2, 0.2, 0.2), col, bevel=0.03)
+        box(f"block{i}", (2.0 + (i % 2) * 0.24, 0.2 + (i // 2) * 0.2, 2.5), (0.2, 0.2, 0.2), col, bevel=0.03)
     box("changer", (0.35, 0.45, 3.1), (0.6, 0.9, 1.0), "fbf6ec", bevel=0.06)
+    box("changer_pad", (0.35, 0.95, 3.1), (0.52, 0.08, 0.85), "cfe0ea", bevel=0.04)
+    box("nappies", (0.35, 1.06, 3.45), (0.3, 0.14, 0.2), "fbf8f2", bevel=0.04)
+    tube("bottle", (0.32, 1.09, 2.8), 0.04, 0.2, "f6f1e8")
+    box("chair_rock", (3.0, 0.35, 0.7), (0.7, 0.2, 0.7), "e8dccb", bevel=0.08)
+    box("chair_rock_back", (3.0, 0.75, 0.38), (0.7, 0.7, 0.14), "e8dccb", bevel=0.08)
+    ball("chair_rock_cush", (3.0, 0.5, 0.7), 0.26, "e0b45a", scale=(1, 0.3, 1))
     tag()
     layer("bed_child")
     fairy("child")
-    box("kid_bed", (0.85, 0.25, 1.1), (1.3, 0.38, 1.9), "e58f5a", bevel=0.09)
-    box("kid_duvet", (0.88, 0.48, 1.35), (1.36, 0.1, 1.3), "f3d36b", bevel=0.05, lump=0.02)
-    ball("kid_pillow", (0.85, 0.52, 0.5), 0.26, "fbf6ec", scale=(1.2, 0.4, 0.7))
+    box("kid_bed", (0.85, 0.24, 1.15), (1.3, 0.36, 2.0), "e58f5a", bevel=0.09)
+    box("kid_head", (0.85, 0.62, 0.2), (1.3, 0.75, 0.14), "e58f5a", bevel=0.07)
+    box("kid_mattress", (0.85, 0.47, 1.17), (1.2, 0.18, 1.85), CREAM, bevel=0.07)
+    cloth("kid_duvet", (0.88, 0.6, 1.45), (1.32, 0.09, 1.25), "f3d36b", folds=0.03, droop=0.18)
+    ball("kid_pillow", (0.85, 0.64, 0.5), 0.26, "fbf6ec", scale=(1.2, 0.4, 0.7))
+    ball("plush", (1.15, 0.75, 0.62), 0.13, "9fb6d2")
     box("toy_box", (2.9, 0.28, 0.4), (0.9, 0.55, 0.55), "5c7a5a", bevel=0.07)
+    box("toy_box_lid", (2.9, 0.58, 0.35), (0.95, 0.06, 0.6), "6f8f6a", bevel=0.03)
     ball("toy_ball", (2.65, 0.75, 0.4), 0.14, "c45c4a", lump=0)
+    box("toy_car", (2.3, 0.15, 2.7), (0.4, 0.18, 0.22), "4e6a8a", bevel=0.06)
     box("shelf_c", (2.0, 1.55, 0.18), (1.2, 0.07, 0.34), WOOD, bevel=0.03)
-    for i, col in enumerate(("c45c4a", "e0b45a", "4e6a8a", "7fae6a")):
-        box(f"picbook{i}", (1.6 + i * 0.22, 1.75, 0.18), (0.18, 0.34, 0.28), col, bevel=0.025)
+    books("picbook", 1.55, 1.59, 0.18, 7)
+    box("drawing", (3.25, 1.55, 0.03), (0.5, 0.4, 0.03), "fbf8f2", bevel=0.01)
+    ball("drawing_sun", (3.15, 1.6, 0.06), 0.08, "f3d36b", scale=(1, 1, 0.3), lump=0)
+    box("kid_desk", (0.35, 0.3, 3.1), (0.55, 0.6, 0.9), "9fb6d2", bevel=0.05)
+    box("crayons", (0.38, 0.63, 3.0), (0.25, 0.05, 0.15), "e0b45a", bevel=0.02)
     tag()
     layer("bed_teen")
     fairy("teen")
-    box("teen_bed", (1.0, 0.3, 1.3), (1.7, 0.42, 2.3), DARKWOOD, bevel=0.09)
-    box("teen_mattress", (1.0, 0.58, 1.32), (1.58, 0.26, 2.15), CREAM, bevel=0.1)
-    box("teen_duvet", (1.05, 0.76, 1.65), (1.72, 0.12, 1.5), "9fb6d2", bevel=0.06, lump=0.02)
+    box("teen_bed", (1.0, 0.28, 1.3), (1.7, 0.4, 2.3), DARKWOOD, bevel=0.09)
+    box("teen_head", (1.0, 0.82, 0.2), (1.7, 1.15, 0.14), DARKWOOD, bevel=0.08)
+    box("teen_mattress", (1.0, 0.56, 1.32), (1.58, 0.24, 2.15), CREAM, bevel=0.1)
+    cloth("teen_duvet", (1.05, 0.73, 1.7), (1.72, 0.11, 1.45), "9fb6d2", folds=0.035, droop=0.25)
+    ball("teen_pillow_a", (0.65, 0.8, 0.55), 0.3, "fbf6ec", scale=(1.0, 0.36, 0.7))
+    ball("teen_pillow_b", (1.35, 0.8, 0.58), 0.3, "a9c2a2", scale=(1.0, 0.36, 0.7), seed=1)
     box("desk_top", (3.0, 1.0, 0.45), (1.5, 0.08, 0.75), WOOD, bevel=0.04)
     box("desk_drawers", (3.5, 0.5, 0.45), (0.5, 0.95, 0.7), "c98a55", bevel=0.05)
-    box("laptop", (2.9, 1.07, 0.5), (0.6, 0.04, 0.4), "c4c7cc", bevel=0.02)
-    box("laptop_lid", (2.9, 1.28, 0.3), (0.6, 0.4, 0.04), "9fa4ab", bevel=0.02)
+    for i, z in enumerate((0.2, 0.7)):
+        tube(f"desk_leg{i}", (2.35, 0.5, z), 0.04, 0.95, DARKWOOD)
+    box("laptop", (2.9, 1.06, 0.5), (0.6, 0.04, 0.4), "c4c7cc", bevel=0.02)
+    box("laptop_lid", (2.9, 1.27, 0.3), (0.6, 0.4, 0.04), "9fa4ab", bevel=0.02)
+    box("laptop_glow_screen", (2.9, 1.27, 0.33), (0.52, 0.32, 0.02), "dfe8f0", bevel=0.01, subd=1, lump=0)
+    tube("lamp_stem_t", (3.55, 1.3, 0.3), 0.02, 0.45, CREAM)
     ball("lamp_glow_t", (3.5, 1.52, 0.35), 0.12, "fff0cc", scale=(1, 0.75, 1))
-    box("poster_t", (0.03, 1.75, 3.1), (0.04, 0.85, 0.65), "4e6a8a", bevel=0.02)
-    box("backpack", (1.9, 0.33, 2.9), (0.48, 0.62, 0.32), "b88a5a", bevel=0.15)
+    tube("desk_mug", (3.3, 1.1, 0.65), 0.06, 0.12, "f4efe6")
+    box("chair_t_seat", (2.9, 0.52, 1.2), (0.55, 0.1, 0.55), CREAM, bevel=0.06)
+    box("chair_t_back", (2.9, 0.88, 1.45), (0.55, 0.6, 0.1), CREAM, bevel=0.06)
+    tube("chair_t_stem", (2.9, 0.26, 1.2), 0.04, 0.45, "5a5a62")
+    tube("chair_t_foot", (2.9, 0.03, 1.2), 0.3, 0.05, "5a5a62")
+    box("shelf_t", (2.9, 1.95, 0.18), (1.4, 0.07, 0.34), WOOD, bevel=0.03)
+    books("teen_book", 2.3, 1.99, 0.18, 9, seed=2)
+    box("poster_t", (0.03, 1.8, 3.1), (0.04, 0.85, 0.65), "e58f5a", bevel=0.02)
+    ball("poster_t_sun", (0.06, 1.85, 3.1), 0.18, "f3d36b", scale=(0.25, 1, 1))
+    box("backpack", (1.9, 0.3, 2.9), (0.45, 0.58, 0.3), "c45c4a", bevel=0.14)
+    box("backpack_pocket", (1.9, 0.22, 3.07), (0.32, 0.25, 0.06), "a8483a", bevel=0.05)
+    cloth("hoodie", (2.6, 0.1, 3.3), (0.6, 0.07, 0.45), "5a7aa0", folds=0.05)
     tag()
 
 
 def activities():
     layer("act_club")
-    ball("club_ball", (3.0, 0.2, 7.3), 0.2, "f3ead8", lump=0.01)
+    ball("club_ball", (3.0, 0.2, 7.0), 0.2, "f3ead8", lump=0.01)
+    for i, (dx, dz) in enumerate(((0, 0.18), (0.13, 0.08), (-0.13, 0.08))):
+        ball(f"club_patch{i}", (3.0 + dx, 0.33, 7.0 + dz), 0.06, "4a4d55", scale=(1, 0.5, 1), lump=0)
     tag()
     layer("act_study")
     for i, col in enumerate(("4e6a8a", "c45c4a", "e0b45a")):
-        box(f"study_book{i}", (5.7, 0.8 + i * 0.07, 6.6), (0.42 - i * 0.03, 0.06, 0.32), col, bevel=0.02)
+        box(f"study_book{i}", (5.3, 0.82 + i * 0.07, 6.6), (0.42 - i * 0.03, 0.06, 0.32), col, bevel=0.02)
+    box("notebook", (5.95, 0.79, 6.15), (0.32, 0.02, 0.42), "fbf8f2", bevel=0.01)
     tag()
     layer("act_play_toys")
     for i, col in enumerate(("c45c4a", "4e6a8a", "e0b45a")):
-        box(f"train{i}", (2.6, 0.2, 5.3 + i * 0.36), (0.22, 0.22, 0.32), col, bevel=0.05)
+        box(f"train{i}", (2.7, 0.2, 5.3 + i * 0.36), (0.22, 0.22, 0.32), col, bevel=0.05)
+        for dz in (-0.09, 0.09):
+            tube(f"wheel{i}{dz}", (2.82, 0.1, 5.3 + i * 0.36 + dz), 0.06, 0.03, "4a4d55",
+                 rot=(0, math.radians(90), 0))
     tag()
+
 
 
 def bake_groups():

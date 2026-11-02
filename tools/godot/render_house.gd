@@ -4,7 +4,7 @@ extends SceneTree
 ## Run: godot --path . --resolution 1080x900 -s tools/godot/render_house.gd -- <out_dir>
 
 const CLAY := preload("res://shaders/clay.gdshader")
-const GLOWS := {"fairy": 1.2, "lamp_glow": 1.0}
+const GLOWS := {"fairy": 1.2, "lamp_glow": 1.0, "glow_screen": 0.5}
 const BANDS := ["baby", "child", "teen"]
 
 var _house: Node3D
