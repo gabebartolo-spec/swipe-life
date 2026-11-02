@@ -19,6 +19,9 @@ sys.path.append(__import__("os").path.dirname(__file__))
 from build_clay_room import g2b, hexc  # noqa: E402  (shared colour/axis helpers)
 
 OUT = sys.argv[sys.argv.index("--") + 1]
+# --apose: arms out at ~45 degrees for Mixamo's auto-rigger; exports FBX instead of GLB.
+APOSE = "--apose" in sys.argv
+WRIST, HAND = ((0.78, 0.92, 0.02), (0.86, 0.84, 0.03)) if APOSE else ((0.45, 0.8, 0.02), (0.47, 0.68, 0.03))
 
 PARTS = {
     "skin": "f2c9a5",
@@ -63,8 +66,8 @@ def build():
         # socks/feet, jeans legs, sweater sleeves, hands
         blob(m["socks"], (0.15 * s, 0.08, 0.05), 0.13, (0.85, 0.6, 1.25))
         line(m["jeans"], (0.15 * s, 0.2, 0), (0.14 * s, 0.7, 0), 0.14, 9)
-        line(m["sweater"], (0.33 * s, 1.22, 0), (0.45 * s, 0.8, 0.02), 0.12, 9)
-        blob(m["skin"], (0.47 * s, 0.68, 0.03), 0.1)
+        line(m["sweater"], (0.33 * s, 1.22, 0), (WRIST[0] * s, *WRIST[1:]), 0.12, 9)
+        blob(m["skin"], (HAND[0] * s, *HAND[1:]), 0.1)
         # face details: eyes, blush
         bead("eyes", (0.14 * s, 1.64, 0.43), 0.05, (0.8, 1.15, 0.5))
         bead("blush", (0.25 * s, 1.55, 0.38), 0.06, (1, 0.55, 0.35))
@@ -142,6 +145,9 @@ def bake_ao():
 bpy.ops.wm.read_factory_settings(use_empty=True)
 to_meshes(build())
 bake_ao()
-bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE", export_texcoords=False
+if APOSE:
+    bpy.ops.export_scene.fbx(filepath=OUT, colors_type="LINEAR")
+else:
+    bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE", export_texcoords=False
     )
 print("EXPORTED", OUT, [(o.name, len(o.data.vertices)) for o in bpy.context.scene.objects])
