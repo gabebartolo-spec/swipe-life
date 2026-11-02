@@ -31,7 +31,7 @@
   "left": {
    "label": "Pull it now",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "health": -1
    },
    "result": "Blood on the sandwich. Worth it."
@@ -39,7 +39,7 @@
   "right": {
    "label": "Save it for your pillow",
    "effects": {
-    "happiness": 2,
+    "happiness": 1,
     "money": 2
    },
    "result": "There is a coin under it. Nobody explains how."
@@ -61,7 +61,7 @@
   "right": {
    "label": "Take a bow",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "relationships": 1
    }
   }
@@ -83,7 +83,7 @@
   "right": {
    "label": "Try some",
    "effects": {
-    "happiness": 2,
+    "happiness": 1,
     "health": -2
    },
    "result": "Tastes like sad paper."
@@ -122,7 +122,7 @@
   "right": {
    "label": "Bring the cat",
    "effects": {
-    "happiness": 4,
+    "happiness": 2,
     "relationships": 2
    },
    "risk": {
@@ -177,7 +177,7 @@
    "label": "Stand your ground",
    "effects": {
     "stress": -3,
-    "happiness": 3
+    "happiness": 2
    },
    "risk": {
     "chance": 0.3,
@@ -221,7 +221,7 @@
    "label": "Sit down",
    "effects": {
     "relationships": 4,
-    "happiness": 2
+    "happiness": 1
    }
   }
  },
@@ -236,7 +236,7 @@
   "left": {
    "label": "Name it after your teacher",
    "effects": {
-    "happiness": 3
+    "happiness": 2
    },
    "set_flags": [
     "pet_fish"
@@ -245,7 +245,7 @@
   "right": {
    "label": "Name it Fish",
    "effects": {
-    "happiness": 2,
+    "happiness": 1,
     "smarts": -1
    },
    "set_flags": [
@@ -255,7 +255,7 @@
   "up": {
    "label": "Promise to love it forever",
    "effects": {
-    "happiness": 5,
+    "happiness": 3,
     "karma": 2
    },
    "risk": {
@@ -390,7 +390,7 @@
    "label": "Go all out",
    "effects": {
     "health": 3,
-    "happiness": 3
+    "happiness": 2
    },
    "risk": {
     "chance": 0.3,
@@ -403,7 +403,7 @@
   "up": {
    "label": "Run in the sack",
    "effects": {
-    "happiness": 4,
+    "happiness": 2,
     "karma": -2
    },
    "result": "Disqualified. Legendary."
@@ -419,7 +419,7 @@
   "left": {
    "label": "Walk carefully",
    "effects": {
-    "happiness": 2,
+    "happiness": 1,
     "stress": 1
    }
   },
@@ -427,7 +427,7 @@
    "label": "Glue it on",
    "effects": {
     "karma": -3,
-    "happiness": 3
+    "happiness": 2
    },
    "risk": {
     "chance": 0.5,
@@ -456,7 +456,7 @@
    "label": "Go",
    "effects": {
     "relationships": 4,
-    "happiness": 3
+    "happiness": 2
    },
    "risk": {
     "chance": 0.3,
@@ -493,7 +493,7 @@
    "label": "Make it scarier",
    "effects": {
     "relationships": 3,
-    "happiness": 2
+    "happiness": 1
    }
   },
   "up": {
@@ -530,7 +530,7 @@
   "right": {
    "label": "Just five friends",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "relationships": 1
    }
   }
@@ -598,7 +598,7 @@
   "right": {
    "label": "Eat your way out",
    "effects": {
-    "happiness": 4,
+    "happiness": 2,
     "health": -1
    },
    "result": "Best cake of your life."
@@ -622,7 +622,7 @@
    "label": "Do it",
    "effects": {
     "health": 2,
-    "happiness": 3
+    "happiness": 2
    },
    "risk": {
     "chance": 0.4,
@@ -673,7 +673,7 @@
    "label": "Jump in",
    "effects": {
     "health": 3,
-    "happiness": 2
+    "happiness": 1
    },
    "risk": {
     "chance": 0.2,
@@ -702,7 +702,7 @@
    "label": "Okay",
    "effects": {
     "relationships": 4,
-    "happiness": 2
+    "happiness": 1
    },
    "set_flags": [
     "k6_best_friend"
@@ -760,7 +760,7 @@
    "risk": {
     "chance": 0.3,
     "effects": {
-     "happiness": 8,
+     "happiness": 4,
      "money": -30
     },
     "result": "It works. The puppy chews everything."
@@ -785,7 +785,7 @@
   "right": {
    "label": "Let it roam",
    "effects": {
-    "happiness": 4
+    "happiness": 2
    },
    "risk": {
     "chance": 0.4,
@@ -842,7 +842,7 @@
    "risk": {
     "chance": 0.5,
     "effects": {
-     "happiness": 3
+     "happiness": 2
     },
     "result": "You are now a slightly bigger tree."
    }
@@ -850,7 +850,7 @@
   "right": {
    "label": "Be the best tree",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "relationships": 2
    }
   },
@@ -858,7 +858,7 @@
    "label": "Ad-lib a line as the tree",
    "effects": {
     "relationships": 5,
-    "happiness": 4
+    "happiness": 2
    },
    "risk": {
     "chance": 0.4,
@@ -912,7 +912,7 @@
   "right": {
    "label": "Trade",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "health": -1
    }
   }
@@ -941,7 +941,7 @@
   "up": {
    "label": "Leave it a snack",
    "effects": {
-    "happiness": 3
+    "happiness": 2
    },
    "result": "The snack is gone by morning. The dog looks guilty."
   }
@@ -1032,14 +1032,14 @@
   "left": {
    "label": "Stay in pyjamas",
    "effects": {
-    "happiness": 2,
+    "happiness": 1,
     "stress": -3
    }
   },
   "right": {
    "label": "Build a snow fort",
    "effects": {
-    "happiness": 4,
+    "happiness": 2,
     "health": 1
    }
   }

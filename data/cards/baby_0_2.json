@@ -17,7 +17,7 @@
     "right": {
       "label": "Float",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "health": 2
       },
       "result": "You fall asleep in a towel."
@@ -60,7 +60,7 @@
       "label": "Grab it hard",
       "effects": {
         "relationships": 4,
-        "happiness": 2
+        "happiness": 1
       },
       "result": "The giant makes a noise like a kettle."
     }
@@ -83,7 +83,7 @@
       "label": "Smile",
       "effects": {
         "relationships": 5,
-        "happiness": 2
+        "happiness": 1
       },
       "result": "They run to tell everyone."
     }
@@ -106,7 +106,7 @@
       "label": "Pick it up, suck it",
       "effects": {
         "health": -3,
-        "happiness": 3
+        "happiness": 2
       },
       "result": "Floor flavor."
     }
@@ -164,7 +164,7 @@
     "right": {
       "label": "Kick everywhere",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "relationships": -3
       },
       "result": "Wallpaper is involved."
@@ -209,7 +209,7 @@
       "label": "Drift off",
       "effects": {
         "health": 2,
-        "happiness": 2,
+        "happiness": 1,
         "relationships": 2
       }
     }
@@ -271,7 +271,7 @@
     "up": {
       "label": "Say the dog's name",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "relationships": -2,
         "smarts": 2
       },
@@ -299,7 +299,7 @@
     "right": {
       "label": "Use it on everything",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "relationships": -4,
         "stress": 2
       }
@@ -345,7 +345,7 @@
     "left": {
       "label": "Pots and pans",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "relationships": -2
       },
       "result": "A drum solo nobody asked for."
@@ -375,7 +375,7 @@
       "label": "Let go",
       "effects": {
         "health": 3,
-        "happiness": 3
+        "happiness": 2
       },
       "risk": {
         "chance": 0.3,
@@ -410,7 +410,7 @@
     "right": {
       "label": "Climb",
       "effects": {
-        "happiness": 4
+        "happiness": 2
       },
       "risk": {
         "chance": 0.2,
@@ -446,7 +446,7 @@
     "up": {
       "label": "Blow raspberries",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "looks": -2
       },
       "result": "Green everywhere. Worth it."
@@ -487,7 +487,7 @@
       "label": "Pat gently",
       "effects": {
         "karma": 3,
-        "happiness": 2
+        "happiness": 1
       }
     },
     "right": {
@@ -556,7 +556,7 @@
     "right": {
       "label": "Take it back",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "relationships": -3
       }
     }
@@ -631,7 +631,7 @@
     "up": {
       "label": "Laugh so hard you hiccup",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "relationships": 3
       }
     }
@@ -653,7 +653,7 @@
     "right": {
       "label": "Splash it to death",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "looks": 1
       },
       "result": "The bathroom floor is a lake."
@@ -670,7 +670,7 @@
     "left": {
       "label": "Wear it as a hat",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "relationships": -1
       }
     },
@@ -700,7 +700,7 @@
     "right": {
       "label": "Draw on the wall",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "relationships": -4
       },
       "result": "A masterpiece. Nobody agrees."
@@ -746,7 +746,7 @@
     "right": {
       "label": "Chase it",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "health": 1
       }
     }
@@ -768,7 +768,7 @@
     "right": {
       "label": "Take theirs",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "karma": -3,
         "relationships": -2
       },
@@ -785,7 +785,7 @@
     "left": {
       "label": "Stay hidden",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "smarts": 1
       }
     },
@@ -793,7 +793,7 @@
       "label": "Yell where you are",
       "effects": {
         "relationships": 3,
-        "happiness": 2
+        "happiness": 1
       },
       "result": "Found instantly. Proud anyway."
     }
@@ -814,7 +814,7 @@
     "right": {
       "label": "Keep chewing",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "health": -2
       }
     },
@@ -846,7 +846,7 @@
       "label": "Kiss it",
       "effects": {
         "looks": 2,
-        "happiness": 3
+        "happiness": 2
       },
       "result": "Slobber on glass. Friendship forever."
     }

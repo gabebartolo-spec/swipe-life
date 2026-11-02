@@ -9,7 +9,7 @@
     "left": {
       "label": "Lie on the floor",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "relationships": -4,
         "stress": 2
       },
@@ -27,7 +27,7 @@
       "label": "Negotiate like a pro",
       "effects": {
         "smarts": 3,
-        "happiness": 4
+        "happiness": 2
       },
       "risk": {
         "chance": 0.5,
@@ -55,7 +55,7 @@
     "right": {
       "label": "Set a place for Gerald",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "smarts": 1
       },
       "set_flags": [
@@ -79,7 +79,7 @@
     "left": {
       "label": "Blame Gerald",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "karma": -3
       },
       "risk": {
@@ -149,7 +149,7 @@
       "label": "March inside",
       "effects": {
         "relationships": 3,
-        "happiness": 2,
+        "happiness": 1,
         "stress": 1
       }
     }
@@ -202,7 +202,7 @@
     "right": {
       "label": "One more thing",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "health": -2,
         "relationships": -2
       }
@@ -211,7 +211,7 @@
       "label": "Request an epic tale",
       "effects": {
         "smarts": 3,
-        "happiness": 3
+        "happiness": 2
       },
       "risk": {
         "chance": 0.3,
@@ -241,7 +241,7 @@
       "label": "Open the closet",
       "effects": {
         "stress": -2,
-        "happiness": 2
+        "happiness": 1
       },
       "result": "It was a coat. A very rude coat."
     }
@@ -281,7 +281,7 @@
     "left": {
       "label": "Spit it out",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "health": -1,
         "relationships": -2
       }
@@ -318,7 +318,7 @@
     "right": {
       "label": "Climb the big one",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "health": -1
       },
       "risk": {
@@ -340,7 +340,7 @@
     "left": {
       "label": "Grab it",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "karma": -3,
         "relationships": -3
       }
@@ -356,7 +356,7 @@
       "label": "Build a better one from sticks",
       "effects": {
         "smarts": 4,
-        "happiness": 2
+        "happiness": 1
       },
       "result": "Engineering at age three."
     }
@@ -378,7 +378,7 @@
       "label": "Best friends forever",
       "effects": {
         "relationships": 5,
-        "happiness": 3
+        "happiness": 2
       },
       "set_flags": [
         "preschool_bestie"
@@ -435,7 +435,7 @@
       "label": "Pack a bag",
       "effects": {
         "relationships": 4,
-        "happiness": 3
+        "happiness": 2
       },
       "risk": {
         "chance": 0.35,
@@ -496,7 +496,7 @@
     "up": {
       "label": "Cut it yourself first",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "looks": -6
       },
       "result": "Bold. Very bold."
@@ -520,7 +520,7 @@
     "right": {
       "label": "Splash everything",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "relationships": -2,
         "health": 1
       },
@@ -574,7 +574,7 @@
     "right": {
       "label": "Rain boots and a tutu",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "looks": -1
       },
       "result": "You look like a legend."
@@ -628,7 +628,7 @@
       "label": "Gift it",
       "effects": {
         "relationships": 4,
-        "happiness": 2
+        "happiness": 1
       },
       "result": "It goes on the fridge. Honored forever."
     }
@@ -695,14 +695,14 @@
     "right": {
       "label": "Ask before petting",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "smarts": 1
       }
     },
     "up": {
       "label": "Hug it immediately",
       "effects": {
-        "happiness": 6
+        "happiness": 3
       },
       "risk": {
         "chance": 0.2,
@@ -731,7 +731,7 @@
     "right": {
       "label": "Bring it to bed",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "relationships": -2
       },
       "result": "It escapes. It's in the house now."
@@ -777,7 +777,7 @@
     "right": {
       "label": "The whole jar",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "karma": -2
       },
       "risk": {
@@ -806,7 +806,7 @@
     "right": {
       "label": "Just a taste",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "health": -2
       },
       "result": "Tastes like purple. Disappointing."
@@ -830,7 +830,7 @@
       "label": "Run for a hug",
       "effects": {
         "relationships": 4,
-        "happiness": 3
+        "happiness": 2
       },
       "result": "Candy. The pockets had candy."
     }
@@ -876,7 +876,7 @@
     "right": {
       "label": "Sing loudest",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "relationships": 2
       },
       "result": "Wrong words. Full heart."
@@ -899,7 +899,7 @@
     "right": {
       "label": "Defend the realm",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "relationships": -1
       },
       "result": "A parent invades. The kingdom falls."
@@ -922,7 +922,7 @@
     "right": {
       "label": "Ride",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "health": 2
       },
       "risk": {

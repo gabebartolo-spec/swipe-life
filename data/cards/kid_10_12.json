@@ -17,7 +17,7 @@
   "right": {
    "label": "It's a phone!",
    "effects": {
-    "happiness": 6,
+    "happiness": 3,
     "stress": 2
    }
   }
@@ -61,7 +61,7 @@
   "right": {
    "label": "Name your crush",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "stress": 4
    },
    "risk": {
@@ -79,7 +79,7 @@
   "up": {
    "label": "Write \"u\" and pass it back",
    "effects": {
-    "happiness": 6,
+    "happiness": 3,
     "relationships": 3
    },
    "set_flags": [
@@ -110,13 +110,13 @@
    "label": "Analyse it for a week",
    "effects": {
     "stress": 4,
-    "happiness": 2
+    "happiness": 1
    }
   },
   "right": {
    "label": "Nod back, cool",
    "effects": {
-    "happiness": 4,
+    "happiness": 2,
     "looks": 1
    }
   }
@@ -138,7 +138,7 @@
   "right": {
    "label": "Go",
    "effects": {
-    "happiness": 5,
+    "happiness": 3,
     "relationships": 4,
     "money": -30
    },
@@ -169,7 +169,7 @@
   "right": {
    "label": "Go look",
    "effects": {
-    "happiness": 4,
+    "happiness": 2,
     "relationships": 3
    },
    "risk": {
@@ -183,7 +183,7 @@
   "up": {
    "label": "Pretend to be the ghost",
    "effects": {
-    "happiness": 7,
+    "happiness": 4,
     "relationships": 2,
     "karma": -2
    },
@@ -341,7 +341,7 @@
   "left": {
    "label": "Take the long way",
    "effects": {
-    "happiness": 4,
+    "happiness": 2,
     "stress": -2
    },
    "risk": {
@@ -377,14 +377,14 @@
   "right": {
    "label": "Wear it proudly",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "looks": -1
    }
   },
   "up": {
    "label": "Lose it in a day",
    "effects": {
-    "happiness": 2,
+    "happiness": 1,
     "relationships": -4
    },
    "result": "The spare key moves to a secret spot."
@@ -407,7 +407,7 @@
   "right": {
    "label": "Dance in the kitchen",
    "effects": {
-    "happiness": 5,
+    "happiness": 3,
     "stress": -3
    },
    "risk": {
@@ -461,7 +461,7 @@
   "left": {
    "label": "Not worth it",
    "effects": {
-    "happiness": 2
+    "happiness": 1
    }
   },
   "right": {
@@ -527,7 +527,7 @@
   "right": {
    "label": "Film it",
    "effects": {
-    "happiness": 4,
+    "happiness": 2,
     "relationships": 2
    },
    "risk": {
@@ -558,7 +558,7 @@
   "right": {
    "label": "Turn off the report",
    "effects": {
-    "happiness": 2,
+    "happiness": 1,
     "health": -2
    }
   }
@@ -581,7 +581,7 @@
   "right": {
    "label": "Dare",
    "effects": {
-    "happiness": 4
+    "happiness": 2
    },
    "risk": {
     "chance": 0.3,
@@ -610,7 +610,7 @@
   "right": {
    "label": "Bow",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "relationships": -2
    }
   }
@@ -713,7 +713,7 @@
    "label": "Absolutely not",
    "effects": {
     "relationships": -3,
-    "happiness": 2
+    "happiness": 1
    }
   },
   "right": {
@@ -755,7 +755,7 @@
   "up": {
    "label": "Promise to walk it every day",
    "effects": {
-    "happiness": 7,
+    "happiness": 4,
     "stress": 4,
     "money": -40
    },
@@ -780,7 +780,7 @@
    "label": "Go bold",
    "effects": {
     "looks": 3,
-    "happiness": 3
+    "happiness": 2
    },
    "risk": {
     "chance": 0.35,
@@ -808,7 +808,7 @@
   "right": {
    "label": "Jump",
    "effects": {
-    "happiness": 5,
+    "happiness": 3,
     "relationships": 3
    },
    "risk": {
@@ -862,7 +862,7 @@
    "effects": {
     "karma": -4,
     "relationships": -3,
-    "happiness": 2
+    "happiness": 1
    }
   }
  },
@@ -883,7 +883,7 @@
   "right": {
    "label": "Push for the lock",
    "effects": {
-    "happiness": 3,
+    "happiness": 2,
     "relationships": -3
    }
   }
@@ -992,7 +992,7 @@
   "up": {
    "label": "Honk back",
    "effects": {
-    "happiness": 6,
+    "happiness": 3,
     "relationships": 2
    },
    "result": "The goose respects you now. Maybe."
@@ -1015,7 +1015,7 @@
   "right": {
    "label": "Test it",
    "effects": {
-    "happiness": 5
+    "happiness": 3
    },
    "risk": {
     "chance": 0.4,
@@ -1042,7 +1042,7 @@
   "right": {
    "label": "Shrug",
    "effects": {
-    "happiness": 2,
+    "happiness": 1,
     "relationships": 2
    },
    "risk": {

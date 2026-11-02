@@ -3,7 +3,7 @@
     "id": "baby_night_cry",
     "text": "It is 3 a.m. You have an opinion about this.",
     "ages": [0, 1],
-    "left": { "label": "Cry", "effects": { "happiness": 3, "relationships": -2 } },
+    "left": { "label": "Cry", "effects": { "happiness": 2, "relationships": -2 } },
     "right": { "label": "Nap", "effects": { "health": 3, "relationships": 2 } }
   },
   {
@@ -19,7 +19,7 @@
     "id": "toddler_broccoli", "room": "kitchen",
     "text": "Dinner is broccoli. Again.",
     "ages": [2, 4],
-    "left": { "label": "Throw it", "effects": { "happiness": 5, "health": -3 },
+    "left": { "label": "Throw it", "effects": { "happiness": 3, "health": -3 },
               "result": "It hits the dog. The dog is delighted." },
     "right": { "label": "Eat it", "effects": { "health": 5, "happiness": -5 } },
     "up": { "label": "Eat it all, ask for more", "effects": { "health": 10, "looks": 2 },
@@ -30,7 +30,7 @@
     "text": "The stairs gate is open.",
     "ages": [1, 3],
     "weight": 5,
-    "left": { "label": "Climb", "effects": { "happiness": 5 },
+    "left": { "label": "Climb", "effects": { "happiness": 3 },
               "risk": { "chance": 0.3, "effects": { "health": -15 }, "result": "Down you go." } },
     "right": { "label": "Wait for help", "effects": { "relationships": 2 } }
   },
@@ -47,7 +47,7 @@
     "ages": [6, 10],
     "requires": { "flags": ["first_friend"] },
     "left": { "label": "Stay home", "effects": { "stress": -3 } },
-    "right": { "label": "Go", "effects": { "happiness": 8, "relationships": 5 } }
+    "right": { "label": "Go", "effects": { "happiness": 4, "relationships": 5 } }
   },
   {
     "id": "child_test_answers",
@@ -63,7 +63,7 @@
     "ages": [10, 15],
     "weight": 3,
     "left": { "label": "No thanks", "effects": { "relationships": -3 } },
-    "right": { "label": "Climb", "effects": { "happiness": 5, "relationships": 5 },
+    "right": { "label": "Climb", "effects": { "happiness": 3, "relationships": 5 },
                "risk": { "chance": 0.25, "effects": { "health": -25 }, "result": "The branch says no." } },
     "up": { "label": "Climb to the very top", "effects": { "relationships": 15, "looks": 3 },
             "risk": { "chance": 0.4, "effects": { "health": -40 }, "result": "A long way down." },
@@ -73,7 +73,7 @@
     "id": "teen_haircut", "room": "bathroom",
     "text": "You could cut your own hair. How hard can it be?",
     "ages": [12, 17],
-    "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 4 }, "result": "Bold." },
+    "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 2 }, "result": "Bold." },
     "right": { "label": "Pay someone", "effects": { "money": -20, "looks": 5 } }
   },
   {

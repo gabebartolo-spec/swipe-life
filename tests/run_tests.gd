@@ -115,6 +115,13 @@ func _test_life_rules() -> void:
 	# Health 0 ends a life (GDD §5.3a)
 	state.new_life()
 	_check(deck.choose({"left": {"effects": {"health": -100}}}, "left", state).died, "HP 0 lived")
+	# pocket money: none before 6, $10 from 6, $20 from 10 (GDD §4.3)
+	state.new_life()
+	for a in [[5, 0], [6, 10], [10, 20]]:
+		state.age = a[0]
+		var before: int = state.stats.money
+		LifeRules.year_end(state, rng)
+		_check(state.stats.money - before == a[1], "pocket money at %d" % a[0])
 	# high Stress starts anxiety; it holds while Stress stays high, and drains Health
 	state.new_life()
 	state.age = 10
@@ -267,7 +274,7 @@ func _test_career_year_end() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 3
 	var state = _make_state()
-	# F1 costs $120 up front, so only a rich teen can join: money is the only limit (GDD §6.5)
+	# F1 costs $140 up front, so only a rich teen can join: money is the only limit (GDD §6.5)
 	state.stats.money = 119
 	_check(not CareerRules.apply(db.by_id.formula1, state, rng), "F1 without money")
 	# one regular job and one special at once; a second job replaces the first
