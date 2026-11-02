@@ -7,6 +7,7 @@ const MARGIN := 40.0
 const RESULT_TIME := 1.4
 
 var deck: Deck
+var careers := CareerDB.new()
 var menu: YearMenu
 var strip := StatStrip.new()
 var swipe_card := SwipeCard.new()
@@ -24,6 +25,9 @@ func _ready() -> void:
 	for e in db.errors:
 		push_error(e)
 	deck = Deck.new(db.cards)
+	careers.load_dir()
+	for e in careers.errors:
+		push_error(e)
 	var adb := ActionDB.new()
 	adb.load_dir()
 	for e in adb.errors:
@@ -145,7 +149,11 @@ func _on_chosen(side: String) -> void:
 
 func _year_end() -> void:
 	swipe_card.hide()
-	var out := LifeRules.year_end(GameState, deck.rng)
+	var out := CareerRules.year_end(GameState, careers, deck.rng)
+	var life := LifeRules.year_end(GameState, deck.rng)
+	out.results.append_array(life.results)
+	out.died = life.died
+	out.cause = life.cause
 	_update_age()
 	if out.died:
 		_end("You died at %d.\n%s." % [GameState.age, out.cause])

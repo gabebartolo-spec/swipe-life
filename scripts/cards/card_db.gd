@@ -7,8 +7,12 @@ const MAX_AGE := 17  # first playable ends at 18 (docs/ROADMAP.md)
 const CARD_KEYS := [
 	"id", "text", "ages", "weight", "requires", "left", "right", "up", "once", "room"
 ]
-const CHOICE_KEYS := ["label", "effects", "set_flags", "clear_flags", "result", "risk", "death"]
-const REQUIRES_KEYS := ["stats", "flags", "not_flags"]
+const CHOICE_KEYS := [
+	"label", "effects", "set_flags", "clear_flags", "result", "risk", "death", "job", "coworker"
+]
+const REQUIRES_KEYS := ["stats", "flags", "not_flags", "job", "rank", "coworker"]
+const JOB_KEYS := ["performance", "rank", "meter", "leave", "date"]  # docs/CAREERS.md
+const ROLES := ["boss", "rival", "crush", "friend"]
 const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
 
 var cards: Array = []
@@ -66,6 +70,20 @@ func _check_card(c: Dictionary, where: String, ids: Dictionary) -> void:
 		_unknown_keys(c.requires, REQUIRES_KEYS, where + ".requires")
 		for s in c.requires.get("stats", {}):
 			_check_stat(s, where + ".requires")
+		var rank = c.requires.get("rank", [0, 0])
+		if not (rank is Array and rank.size() == 2 and 0 <= rank[0] and rank[0] <= rank[1]):
+			errors.append("%s.requires: 'rank' must be [min, max]" % where)
+		if c.requires.has("rank") and not c.requires.has("job"):
+			errors.append("%s.requires: 'rank' needs 'job'" % where)
+		for role in c.requires.get("coworker", {}):
+			_check_role(role, where + ".requires.coworker")
+		if c.requires.has("coworker") and not c.requires.has("job"):
+			errors.append("%s.requires: 'coworker' needs 'job'" % where)
+		var job_card: bool = c.requires.has("job")
+		for side in ["left", "right", "up"]:
+			var ch = c.get(side, {})
+			if ch is Dictionary and (ch.has("job") or ch.has("coworker")) and not job_card:
+				errors.append("%s.%s: job effects need requires.job" % [where, side])
 	for side in ["left", "right", "up"]:
 		if c.has(side):
 			_check_choice(c[side], "%s.%s" % [where, side])
@@ -85,6 +103,11 @@ func _check_choice(ch, where: String) -> void:
 		_check_chance(ch.risk.get("chance"), where + ".risk")
 		for s in ch.risk.get("effects", {}):
 			_check_stat(s, where + ".risk")
+	for k in ch.get("job", {}):
+		if k not in JOB_KEYS:
+			errors.append("%s.job: unknown key '%s'" % [where, k])
+	for role in ch.get("coworker", {}):
+		_check_role(role, where + ".coworker")
 	if ch.has("death"):
 		_unknown_keys(ch.death, ["chance", "cause"], where + ".death")
 		_check_chance(ch.death.get("chance"), where + ".death")
@@ -95,6 +118,11 @@ func _check_choice(ch, where: String) -> void:
 func _check_chance(v, where: String) -> void:
 	if not (v is float and v >= 0.0 and v <= 1.0):
 		errors.append("%s: 'chance' must be 0-1" % where)
+
+
+func _check_role(role: String, where: String) -> void:
+	if role not in ROLES:
+		errors.append("%s: unknown coworker role '%s'" % [where, role])
 
 
 func _check_stat(s: String, where: String) -> void:
