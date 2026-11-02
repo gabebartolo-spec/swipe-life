@@ -7,8 +7,8 @@ extends RefCounted
 
 const START_PERFORMANCE := 50
 const AFTER_PROMOTION := 40  # a new rank starts you lower down
-const FIRE_AT := 15  # performance at or below this at year end: fired
-const DRIFT := [-8, 12]  # yearly random change in performance
+const FIRE_AT := 30  # performance at or below this at year end: fired
+const DRIFT := [-12, 10]  # yearly random change in performance
 const HEAT_PER_RANK := 6  # a gang job heats up every year, more at higher ranks
 const ARREST_PER_HEAT := 0.005  # arrest chance per point of heat (heat 100 = 50%)
 const RECORD := "criminal_record"  # set by an arrest; careers can bar it with not_flags

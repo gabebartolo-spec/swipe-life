@@ -267,7 +267,8 @@ func _test_career_year_end() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 3
 	var state = _make_state()
-	# F1 costs $300 up front: money is the only limit (GDD §6.5)
+	# F1 costs $120 up front, so only a rich teen can join: money is the only limit (GDD §6.5)
+	state.stats.money = 119
 	_check(not CareerRules.apply(db.by_id.formula1, state, rng), "F1 without money")
 	# one regular job and one special at once; a second job replaces the first
 	_check(CareerRules.apply(db.by_id.retail, state, rng), "can't take the retail job")
