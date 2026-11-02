@@ -71,6 +71,14 @@
 - 6.7 The menu is age-gated: options unlock as the character grows (a baby has almost none; the full menu is
   open by 18). Tabs unlock at: Activities 5, People 10, Jobs 14, Shop 18. Each action also has its own age range
   inside its tab (e.g. crushes from 14). Actions live in `data/actions/*.json`.
+- 6.8 Careers (teen phase, ages 14–17; spec in `docs/CAREERS.md`). The Jobs tab is the **Career** menu, with
+  submenus to advance your standing, deal with staff and look for other work; drama arrives as cards.
+  - You hold at most one regular job and one special career at a time.
+  - Each career has four named coworkers: boss, rival, crush and friend.
+  - Special careers: AFL, Formula 1, Basketball, Musician, Actor and Gangster (army and cop dropped).
+  - A gang arrest sends you to juvie and gives you a permanent criminal record (no sealing).
+  - A partner met at work stays your partner after the job ends; a breakup ends the partner.
+  - Adult careers come later on the same data.
 
 ## 7. Setting and tone
 
@@ -154,3 +162,5 @@ None.
 - 2026-11-03: Dollhouse shows one room at a time, camera moves between rooms (§10.6).
 - 2026-11-03: Card picks the room, slide pan, bedroom age bands 0–3 / 4–12 / 13–17 (§10.6).
 - 2026-11-03: Modular people (§10.7): body sizes, shapes, mix-and-match clothing slots, tinted parts, extras; looks inherited + random, improved by lifestyle.
+- 2026-11-03: Teen careers (§6.8): career menu, one job + one special, named coworkers, six specials, juvie
+  and a permanent record, work partners carry over, breakups end the partner.

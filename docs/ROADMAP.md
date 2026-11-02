@@ -20,6 +20,7 @@ Rules for every milestone:
 | M4 Between-year menu | Done (#13) |
 | M5 Clay home scene | **Not started.** Director has not picked M5 or M6 next: ask. |
 | M6 ~200 cards | **Not started.** Only 10 sample cards in `data/cards/sample.json`. |
+| Careers, teen phase (§6.8) | Done (#17, #19, #21): Career menu, 12 careers, 120 work and juvie cards. |
 | M7 Release candidate | Not started. |
 
 Open with the director:
@@ -98,6 +99,11 @@ Builds:
 - Each band goes to the director as a readable list before it merges.
 - **Exit:** a headless sim of 1,000 lives shows that every card is reachable, no life gets stuck, and stat ranges
   stay sane.
+
+## Careers, teen phase (ages 14–17)
+- Data, rules and tests: `data/careers/`, `scripts/careers/`, spec `docs/CAREERS.md`.
+- Career menu in the Jobs tab; work drama, romance, special-career and juvie cards in `data/cards/`.
+- **Exit:** the sim holds at least 6 kinds of job across 100 lives and every career is reachable (tests).
 
 ## M7 Age-18 release candidate
 - Balance pass using the sim's numbers.
