@@ -64,6 +64,8 @@
 - 6.5 There is no action limit per year; money is the only limit.
 - 6.6 Balance: each activity costs time and adds Stress or has another downside, so buying stats every year
   has a price beyond money.
+- 6.7 The menu is age-gated: options unlock as the character grows (a baby has almost none; the full menu is
+  open by 18). The exact unlock ages are an open question (§13).
 
 ## 7. Setting and tone
 
@@ -91,9 +93,9 @@
 - 10.2 The scene changes live in response to decisions and purchases (e.g. new furniture, a partner moving in,
   a bigger house).
 - 10.3 Style: a toon look with lots of personality, made entirely by Claude Code (no artist, no bought assets).
-- 10.4 The style is chosen by test: build the same one-room prototype twice,
-  (a) 3D cel-shaded (simple models, 2–3 tone toon shading, ink outlines) and (b) 2D flat vector.
-  Show the director screenshots of both; the director picks. Until then no other scene art is made.
+- 10.4 Chosen style (director, 2026-11-03): flat 2D **clay cut-outs**. Clay pieces are modelled and lit in
+  Blender, prerendered to PNGs, and turned on pivots in Godot, posed on twos (12 fps) with a clay boil shader.
+  Motion is copied from proven clips (e.g. Mixamo), never improvised.
 - 10.5 Screen layout (portrait): the dollhouse fills the top ~45%, a strip of stat bars sits below it, and
   the card fills the bottom half.
 
@@ -106,16 +108,19 @@
 - 12.1 Godot 4.7.2, Android, portrait 720×1280, touch-first (mouse emulates touch in the editor).
 - 12.2 Cards, events, items and activities live in JSON data files, not hard-coded in scripts. The exact
   schema is proposed to the director by the first card-system task.
-- 12.3 Launch target: about 300 cards.
+- 12.3 Launch target: about 300 cards. The first playable (birth to 18, `docs/ROADMAP.md`) has about 200
+  cards for ages 0–17.
 - 12.4 Repo conventions are in `CLAUDE.md` (branches, PRs, CI, LFS, no keystores in git).
 
 ## 13. Open questions (ask the director; do not decide)
 
-1. Art style pick after the §10.4 prototypes.
-2. The JSON card schema (§12.2), once proposed.
+1. The JSON card schema (§12.2), once proposed.
+2. The age at which each between-year menu option unlocks (§6.7).
 
 ## 14. Change log
 
 - 2026-11-02: Document created from the director's answers (§1–§12).
 - 2026-11-02: Answered open questions: childhood (§2.5), super like (§3.4), stats (§4.3–4.5), death (§5.3),
   activity balance (§6.6), autosave (§8.3), legacy (§9.3), layout (§10.5), JSON + ~300 cards (§12.2–12.3).
+- 2026-11-03: Art style picked: 2D clay cut-outs (§10.4). Age-gated menu (§6.7). First playable = birth to 18
+  with ~200 cards (§12.3, `docs/ROADMAP.md`).
