@@ -11,27 +11,27 @@
    650.33
   ],
   "foot_l": [
-   554.77,
+   550.72,
    900.59
   ],
   "foot_r": [
-   469.23,
+   473.28,
    900.59
   ],
   "forearm_l": [
-   610.12,
+   600.82,
    593.13
   ],
   "forearm_r": [
-   413.88,
+   423.18,
    593.13
   ],
   "hand_l": [
-   625.21,
+   614.49,
    671.78
   ],
   "hand_r": [
-   398.79,
+   409.51,
    671.78
   ],
   "head": [
@@ -43,27 +43,27 @@
    650.33
   ],
   "shin_l": [
-   552.25,
+   548.44,
    800.49
   ],
   "shin_r": [
-   471.75,
+   475.56,
    800.49
   ],
   "thigh_l": [
-   552.25,
+   548.44,
    700.38
   ],
   "thigh_r": [
-   471.75,
+   475.56,
    700.38
   ],
   "upper_arm_l": [
-   595.02,
+   587.16,
    514.47
   ],
   "upper_arm_r": [
-   428.98,
+   436.84,
    514.47
   ]
  },
@@ -71,28 +71,28 @@
   "chest": 90.0,
   "foot_l": -90.0,
   "foot_r": -90.0,
-  "forearm_l": -79.14,
-  "forearm_r": -100.86,
-  "hand_l": -83.31,
-  "hand_r": -96.69,
+  "forearm_l": -80.14,
+  "forearm_r": -99.86,
+  "hand_l": -83.94,
+  "hand_r": -96.06,
   "head": 90.0,
-  "pelvis": -51.19,
-  "shin_l": -88.56,
-  "shin_r": -91.44,
+  "pelvis": -53.94,
+  "shin_l": -88.7,
+  "shin_r": -91.3,
   "thigh_l": -90.0,
   "thigh_r": -90.0,
-  "upper_arm_l": -79.14,
-  "upper_arm_r": -100.86
+  "upper_arm_l": -80.14,
+  "upper_arm_r": -99.86
  },
  "sprites": {
   "body__chest": {
    "layer": "body",
    "piece": "chest",
    "rect": [
-    427,
+    445,
     469,
-    170,
-    244
+    134,
+    225
    ],
    "raw": false
   },
@@ -100,10 +100,10 @@
    "layer": "body",
    "piece": "foot_l",
    "rect": [
-    520,
+    518,
     871,
-    69,
-    83
+    66,
+    82
    ],
    "raw": false
   },
@@ -111,10 +111,10 @@
    "layer": "body",
    "piece": "foot_r",
    "rect": [
-    435,
-    870,
-    69,
-    84
+    440,
+    871,
+    66,
+    82
    ],
    "raw": false
   },
@@ -122,10 +122,10 @@
    "layer": "body",
    "piece": "forearm_l",
    "rect": [
-    587,
-    561,
-    61,
-    142
+    580,
+    562,
+    55,
+    141
    ],
    "raw": false
   },
@@ -133,10 +133,10 @@
    "layer": "body",
    "piece": "forearm_r",
    "rect": [
-    376,
-    561,
-    61,
-    142
+    389,
+    562,
+    55,
+    141
    ],
    "raw": false
   },
@@ -144,9 +144,9 @@
    "layer": "body",
    "piece": "hand_l",
    "rect": [
-    605,
+    596,
     646,
-    51,
+    46,
     104
    ],
    "raw": false
@@ -155,9 +155,9 @@
    "layer": "body",
    "piece": "hand_r",
    "rect": [
-    368,
+    382,
     646,
-    51,
+    46,
     104
    ],
    "raw": false
@@ -177,10 +177,10 @@
    "layer": "body",
    "piece": "pelvis",
    "rect": [
-    433,
-    617,
-    158,
-    128
+    453,
+    631,
+    118,
+    109
    ],
    "raw": false
   },
@@ -188,10 +188,10 @@
    "layer": "body",
    "piece": "shin_l",
    "rect": [
-    526,
-    765,
-    54,
-    171
+    525,
+    766,
+    50,
+    170
    ],
    "raw": false
   },
@@ -199,9 +199,9 @@
    "layer": "body",
    "piece": "shin_r",
    "rect": [
-    443,
+    450,
     765,
-    55,
+    49,
     171
    ],
    "raw": false
@@ -210,9 +210,9 @@
    "layer": "body",
    "piece": "thigh_l",
    "rect": [
-    523,
-    662,
-    58,
+    522,
+    661,
+    53,
     178
    ],
    "raw": false
@@ -221,10 +221,10 @@
    "layer": "body",
    "piece": "thigh_r",
    "rect": [
-    443,
-    661,
-    58,
-    179
+    449,
+    662,
+    53,
+    177
    ],
    "raw": false
   },
@@ -232,10 +232,10 @@
    "layer": "body",
    "piece": "upper_arm_l",
    "rect": [
-    571,
-    481,
-    64,
-    146
+    565,
+    482,
+    58,
+    144
    ],
    "raw": false
   },
@@ -243,9 +243,9 @@
    "layer": "body",
    "piece": "upper_arm_r",
    "rect": [
-    390,
+    401,
     481,
-    63,
+    58,
     146
    ],
    "raw": false
@@ -277,9 +277,9 @@
    "piece": "head",
    "rect": [
     382,
-    297,
+    281,
     260,
-    228
+    244
    ],
    "raw": false
   },
@@ -287,10 +287,10 @@
    "layer": "sweater",
    "piece": "chest",
    "rect": [
-    419,
-    461,
-    186,
-    264
+    437,
+    464,
+    151,
+    242
    ],
    "raw": false
   },
@@ -298,9 +298,9 @@
    "layer": "sweater",
    "piece": "forearm_l",
    "rect": [
-    578,
+    572,
     548,
-    80,
+    72,
     169
    ],
    "raw": false
@@ -309,9 +309,9 @@
    "layer": "sweater",
    "piece": "forearm_r",
    "rect": [
-    366,
+    380,
     548,
-    80,
+    73,
     169
    ],
    "raw": false
@@ -320,9 +320,9 @@
    "layer": "sweater",
    "piece": "upper_arm_l",
    "rect": [
-    561,
+    557,
     467,
-    83,
+    74,
     173
    ],
    "raw": false
@@ -331,9 +331,9 @@
    "layer": "sweater",
    "piece": "upper_arm_r",
    "rect": [
-    380,
+    393,
     467,
-    83,
+    74,
     173
    ],
    "raw": false
@@ -342,10 +342,10 @@
    "layer": "tee",
    "piece": "chest",
    "rect": [
-    421,
-    464,
-    182,
-    258
+    439,
+    465,
+    146,
+    237
    ],
    "raw": false
   },
@@ -353,10 +353,10 @@
    "layer": "tee",
    "piece": "upper_arm_l",
    "rect": [
-    563,
+    558,
     470,
-    74,
-    156
+    68,
+    155
    ],
    "raw": false
   },
@@ -364,10 +364,10 @@
    "layer": "tee",
    "piece": "upper_arm_r",
    "rect": [
-    387,
+    398,
     470,
-    74,
-    155
+    68,
+    156
    ],
    "raw": false
   },
@@ -375,10 +375,10 @@
    "layer": "trousers",
    "piece": "pelvis",
    "rect": [
-    426,
-    611,
-    172,
-    142
+    446,
+    625,
+    132,
+    127
    ],
    "raw": false
   },
@@ -386,10 +386,10 @@
    "layer": "trousers",
    "piece": "shin_l",
    "rect": [
-    518,
+    517,
     753,
-    71,
-    183
+    64,
+    181
    ],
    "raw": false
   },
@@ -397,9 +397,9 @@
    "layer": "trousers",
    "piece": "shin_r",
    "rect": [
-    435,
+    442,
     753,
-    71,
+    65,
     182
    ],
    "raw": false
@@ -410,7 +410,7 @@
    "rect": [
     515,
     650,
-    74,
+    67,
     201
    ],
    "raw": false
@@ -419,9 +419,9 @@
    "layer": "trousers",
    "piece": "thigh_r",
    "rect": [
-    435,
+    442,
     650,
-    74,
+    67,
     201
    ],
    "raw": false

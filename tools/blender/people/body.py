@@ -27,7 +27,7 @@ OUT = ARGS[0]
 AGE = ARGS[1] if len(ARGS) > 1 else "child"
 # approved age bands (build_clay_girl.py --age, clay_sets_front.png): the child is modelled, other ages
 # rescale the body below the neck (sx width, sy height) and the head (h) about the neck
-SX, SY, H = {"baby": (1.12, 0.55, 0.95), "child": (1, 1, 1), "teen": (0.95, 1.35, 0.9), "adult": (1, 1.5, 0.86)}[AGE]
+SX, SY, H = {"baby": (1.12, 0.55, 0.95), "child": (1, 1, 1), "teen": (0.86, 1.35, 0.9), "adult": (0.9, 1.5, 0.86)}[AGE]
 NECK = 1.27  # points above this belong to the head
 
 
@@ -100,15 +100,17 @@ def limb_ring(key, a, b, t, rad, n=12, r=0.03):
 
 
 def torso(layer, grow, mask="R"):
-    sphere((layer, "chest", mask), (0, 1.02, 0), 0.35 + grow, (0.95, 0.95, 0.72))
-    sphere((layer, "chest", mask), (0, 1.27, 0), 0.22 + grow, (1.05, 0.42, 0.75))
+    # slim: widest at the ribs, narrowing to the waist (director: the one-ball belly read as fat)
+    sphere((layer, "chest", mask), (0, 1.1, 0), 0.29 + grow, (1.0, 0.8, 0.62))
+    sphere((layer, "chest", mask), (0, 0.92, 0), 0.2 + grow, (1.0, 0.9, 0.7))
+    sphere((layer, "chest", mask), (0, 1.27, 0), 0.22 + grow, (1.05, 0.42, 0.7))
 
 
 def body():
     torso("body", 0)
-    sphere(("body", "pelvis", "R"), (0, 0.78, 0), 0.28, (1.1, 0.6, 0.85))
+    sphere(("body", "pelvis", "R"), (0, 0.78, 0), 0.24, (1.05, 0.55, 0.75))
     for s in (-1, 1):
-        sphere(("body", "pelvis", "R"), (0.15 * s, 0.72, 0), 0.12)
+        sphere(("body", "pelvis", "R"), (0.14 * s, 0.72, 0), 0.11)
     sphere(("body", "head", "R"), J["head_c"], 0.47, (1.05, 0.95, 1.0))
     chain(("body", "head", "R"), (0, 1.3, 0), (0, 1.46, 0), 0.09, 3)
     for s, side in ((1, "l"), (-1, "r")):
@@ -143,9 +145,9 @@ def sweater():
 
 
 def trousers():
-    sphere(("trousers", "pelvis", "R"), (0, 0.78, 0), 0.31, (1.1, 0.6, 0.85))
+    sphere(("trousers", "pelvis", "R"), (0, 0.78, 0), 0.27, (1.05, 0.55, 0.75))
     for s, side in ((1, "l"), (-1, "r")):
-        sphere(("trousers", "pelvis", "R"), (0.15 * s, 0.72, 0), 0.145)
+        sphere(("trousers", "pelvis", "R"), (0.14 * s, 0.72, 0), 0.14)
         chain(("trousers", "thigh_" + side, "R"), j("hip", s), j("knee", s), 0.14)
         chain(("trousers", "shin_" + side, "R"), j("knee", s), (0.17 * s, 0.2, 0), 0.13)
 
@@ -153,11 +155,11 @@ def trousers():
 def onesie():
     """Full-body item (baby, as approved in clay_sets_front): top, legs and feet in one colour."""
     torso("onesie", 0.035)
-    sphere(("onesie", "pelvis", "R"), (0, 0.78, 0), 0.31, (1.1, 0.6, 0.85))
+    sphere(("onesie", "pelvis", "R"), (0, 0.78, 0), 0.27, (1.05, 0.55, 0.75))
     for s, side in ((1, "l"), (-1, "r")):
         chain(("onesie", "upper_arm_" + side, "R"), j("shoulder", s), j("elbow", s), 0.13)
         chain(("onesie", "forearm_" + side, "R"), j("elbow", s), j("wrist", s), 0.125)
-        sphere(("onesie", "pelvis", "R"), (0.15 * s, 0.72, 0), 0.145)
+        sphere(("onesie", "pelvis", "R"), (0.14 * s, 0.72, 0), 0.14)
         chain(("onesie", "thigh_" + side, "R"), j("hip", s), j("knee", s), 0.14)
         chain(("onesie", "shin_" + side, "R"), j("knee", s), j("ankle", s), 0.13)
         sphere(("onesie", "foot_" + side, "R"), j("toe", s), 0.15, (0.85, 0.6, 1.25))
@@ -173,6 +175,8 @@ def hair():
     # bob: cap over the back and top (drawn behind the head), fringe and side curtains in front
     sphere(("hair_back", "head", "R"), (0, 1.82, -0.1), 0.5, (1.03, 0.92, 0.95))
     sphere(("hair_back", "head", "R"), (0, 1.55, -0.3), 0.3, (1.1, 1.0, 0.7))
+    # crown shell: covers the scalp between the fringe lumps (the head occludes all but its top)
+    sphere(("hair_front", "head", "R"), (0, 2.0, 0.02), 0.47, (1.08, 0.42, 1.0))
     sphere(("hair_front", "head", "R"), (-0.12, 2.0, 0.2), 0.24, (1.3, 0.55, 1.0))
     sphere(("hair_front", "head", "R"), (0.16, 1.96, 0.26), 0.2, (1.1, 0.5, 0.8))
     for s in (-1, 1):
