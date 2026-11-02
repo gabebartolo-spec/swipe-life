@@ -1,0 +1,20 @@
+# Godot
+.godot/
+/android/
+*.translation
+export_credentials.cfg
+/build/
+
+# Android outputs and signing (never commit keys)
+*.apk
+*.aab
+*.idsig
+*.keystore
+*.jks
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

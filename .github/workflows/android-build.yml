@@ -1,0 +1,69 @@
+name: Android build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install Godot and export templates
+        run: |
+          base="https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable"
+          curl -fsSL -o godot.zip "$base/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          curl -fsSL -o templates.tpz "$base/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          unzip -q godot.zip -d "$HOME/godot"
+          dest="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$dest" && unzip -q templates.tpz -d /tmp/tpl && mv /tmp/tpl/templates/* "$dest/"
+          echo "GODOT=$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64" >> "$GITHUB_ENV"
+      - name: Debug keystore
+        run: |
+          keytool -genkeypair -v -keystore "$RUNNER_TEMP/debug.keystore" -storepass android -alias androiddebugkey \
+            -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          {
+            echo "GODOT_ANDROID_KEYSTORE_DEBUG_PATH=$RUNNER_TEMP/debug.keystore"
+            echo "GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey"
+            echo "GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android"
+          } >> "$GITHUB_ENV"
+      - name: Import
+        run: '"$GODOT" --headless --import'
+      - name: Export debug APK
+        run: |
+          mkdir -p build
+          "$GODOT" --headless --export-debug "Android" build/swipe-life-debug.apk
+          test -s build/swipe-life-debug.apk
+      - name: Export signed release AAB
+        if: env.HAS_KEYSTORE == 'true'
+        env:
+          HAS_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          GODOT_ANDROID_KEYSTORE_RELEASE_USER: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/release.keystore"
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PATH="$RUNNER_TEMP/release.keystore"
+          "$GODOT" --headless --install-android-build-template --export-release "Android AAB" build/swipe-life.aab
+          test -s build/swipe-life.aab
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swipe-life-android
+          path: build/*
+      - name: Attach to GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" build/* --generate-notes
