@@ -10,7 +10,8 @@ const UNBOUNDED_STATS := ["money"]  # GDD §4.3: every other stat is 0–100
 var age := 0
 var quarter := 0  # 0–3: which of the year's 4 cards is next (GDD §2.1)
 var stats := {}
-var flags := {}
+var flags := {}  # also holds illnesses (LifeRules.ILLNESSES)
+var used := {}  # card ids drawn this life ("once" cards never repeat)
 var super_like_available := true  # one per year (GDD §3.3)
 
 
@@ -22,6 +23,7 @@ func new_life() -> void:
 	age = 0
 	quarter = 0
 	flags = {}
+	used = {}
 	super_like_available = true
 	stats = {}
 	for s in STATS:
@@ -39,6 +41,7 @@ func to_dict() -> Dictionary:
 		"quarter": quarter,
 		"stats": stats,
 		"flags": flags,
+		"used": used,
 		"super_like_available": super_like_available,
 	}
 
@@ -47,6 +50,7 @@ func from_dict(d: Dictionary) -> void:
 	age = int(d.age)
 	quarter = int(d.quarter)
 	flags = d.flags
+	used = d.get("used", {})
 	super_like_available = d.super_like_available
 	for s in STATS:
-		stats[s] = int(d.stats.get(s, stats[s]))
+		stats[s] = int(d.stats.get(s, stats.get(s, 0)))

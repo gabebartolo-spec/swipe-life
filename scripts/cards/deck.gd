@@ -3,7 +3,6 @@ extends RefCounted
 ## Draws cards by age, requirements and weight, and applies a chosen side (GDD §2–§3, §5.3b).
 
 var cards: Array
-var used := {}  # ids drawn this life ("once" cards never repeat)
 var rng := RandomNumberGenerator.new()
 
 
@@ -18,7 +17,7 @@ func _init(card_list: Array, seed_value: int = -1) -> void:
 func eligible(state) -> Array:
 	var out := []
 	for c in cards:
-		if c.get("once", true) and used.has(c.id):
+		if c.get("once", true) and state.used.has(c.id):
 			continue
 		if state.age < c.ages[0] or state.age > c.ages[1]:
 			continue
@@ -38,9 +37,9 @@ func draw(state):
 	for c in pool:
 		roll -= c.get("weight", 10.0)
 		if roll <= 0.0:
-			used[c.id] = true
+			state.used[c.id] = true
 			return c
-	used[pool[-1].id] = true
+	state.used[pool[-1].id] = true
 	return pool[-1]
 
 
@@ -59,6 +58,9 @@ func choose(card: Dictionary, side: String, state) -> Dictionary:
 	if ch.has("death") and rng.randf() < ch.death.chance:
 		out.died = true
 		out.cause = ch.death.cause
+	elif state.stats.health <= 0:  # GDD §5.3a
+		out.died = true
+		out.cause = "Your health gave out"
 	return out
 
 

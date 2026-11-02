@@ -12,6 +12,8 @@ func _init() -> void:
 	_test_cards_valid()
 	_test_bad_cards_rejected()
 	_test_sim()
+	_test_life_rules()
+	_test_save_round_trip()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -72,9 +74,68 @@ func _test_sim() -> void:
 					deaths += 1
 					dead = true
 					break
+			if not dead and LifeRules.year_end(state, deck.rng).died:
+				deaths += 1
+				dead = true
 			state.age += 1
 		state.free()
 	print(
 		"sim: %d lives, %d cards drawn, %d empty slots, %d deaths" % [LIVES, drawn, empty, deaths]
 	)
 	_check(drawn > 0, "sim drew no cards")
+
+
+func _test_life_rules() -> void:
+	var state := GameStateScript.new()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 1
+	# a risky card's death roll ends a life (GDD §5.3b)
+	state.new_life()
+	var deck := Deck.new([], 1)
+	var card := {"left": {"death": {"chance": 1.0, "cause": "Test"}}}
+	_check(deck.choose(card, "left", state).died, "risky card did not kill")
+	# Health 0 ends a life (GDD §5.3a)
+	state.new_life()
+	_check(deck.choose({"left": {"effects": {"health": -100}}}, "left", state).died, "HP 0 lived")
+	# high Stress starts anxiety; it holds while Stress stays high, and drains Health
+	state.new_life()
+	state.age = 10
+	state.stats.stress = 100
+	var years := 0
+	while not state.flags.has("anxiety") and years < 50:
+		LifeRules.year_end(state, rng)
+		years += 1
+	_check(state.flags.has("anxiety"), "stress 100 never caused anxiety")
+	state.stats.health = 100
+	for y in 10:
+		LifeRules.year_end(state, rng)
+	_check(state.flags.has("anxiety"), "anxiety lifted while stress was high")
+	_check(
+		state.stats.health == 70,
+		"anxiety drained %d health, expected 30" % (100 - state.stats.health)
+	)
+	# no onset before age 6
+	state.new_life()
+	state.stats.happiness = 0
+	for y in 6:
+		state.age = y
+		LifeRules.year_end(state, rng)
+	_check(not state.flags.has("depression"), "depression before age 6")
+	state.free()
+
+
+func _test_save_round_trip() -> void:
+	var a := GameStateScript.new()
+	a.new_life()
+	a.age = 7
+	a.flags["anxiety"] = true
+	a.used["baby_first_word"] = true
+	a.change_stat("money", 120)
+	var b := GameStateScript.new()
+	b.from_dict(JSON.parse_string(JSON.stringify(a.to_dict())))
+	_check(b.age == 7 and b.stats.money == 120, "save lost age or money")
+	_check(
+		b.flags.has("anxiety") and b.used.has("baby_first_word"), "save lost flags or used cards"
+	)
+	a.free()
+	b.free()
