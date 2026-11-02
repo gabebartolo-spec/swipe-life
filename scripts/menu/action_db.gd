@@ -1,7 +1,8 @@
 class_name ActionDB
 extends RefCounted
 ## Loads and validates the between-year actions (GDD §6). Tabs unlock by age (§6.7); every action
-## adds Stress (§6.6), which is its time cost: there is no other limit but money (§6.5).
+## changes Stress (§6.6): effort adds it (its time cost), fun and rest lower it. Money is the only
+## other limit (§6.5).
 
 const ACTION_DIR := "res://data/actions"
 const TABS := {"activities": 5, "people": 10, "jobs": 14, "shop": 18}  # tab -> unlock age (§6.7)
@@ -64,8 +65,8 @@ func _check(a: Dictionary, where: String, ids: Dictionary) -> void:
 	for s in fx:
 		if s not in STATS:
 			errors.append("%s: unknown stat '%s'" % [where, s])
-	if not fx.get("stress", 0) > 0:
-		errors.append("%s: every action must add stress (GDD §6.6)" % where)
+	if fx.get("stress", 0) == 0:
+		errors.append("%s: every action must change stress (GDD §6.6)" % where)
 
 
 ## Tabs open at this age, in menu order.

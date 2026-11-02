@@ -67,7 +67,8 @@
 - 6.3 People: talk to, gift, date or argue with characters in your life.
 - 6.4 Job board: apply for jobs and courses.
 - 6.5 There is no action limit per year; money is the only limit.
-- 6.6 Balance: every action adds Stress; that is its time cost (there is no time budget). Repeating actions in
+- 6.6 Balance: effort, fear and conflict add Stress; that is their time cost (there is no time budget). Fun
+  and rest (toys, friends, family, treats) lower it, on actions and card choices alike. Repeating effort in
   one year piles up Stress (and the illness risk of §4.5), so buying stats every year has a price beyond money.
 - 6.7 The menu is age-gated: options unlock as the character grows (a baby has almost none; the full menu is
   open by 18). Tabs unlock at: Activities 5, People 10, Jobs 14, Shop 18. Each action also has its own age range
@@ -165,5 +166,6 @@ None.
 - 2026-11-03: Modular people (§10.7): body sizes, shapes, mix-and-match clothing slots, tinted parts, extras; looks inherited + random, improved by lifestyle.
 - 2026-11-03: Teen careers (§6.8): career menu, one job + one special, named coworkers, six specials, juvie
   and a permanent record, work partners carry over, breakups end the partner.
+- 2026-11-03: Fun relieves Stress (§6.6): toys -3, friends -3, parents -2; pure-fun card choices -2.
 - 2026-11-03: M7 balance: pocket money (§4.3); card Happiness gains halved; F1 open to the richest ~10% of
   teens ($140); yearly performance drift -12..+10 and firing at 30 or less; gang unchanged.

@@ -192,7 +192,7 @@ func _test_actions() -> void:
 		_check(want in ids, "15-year-old can't see %s" % want)
 	_check("jobs" in ActionDB.tabs_at(15), "no career tab at 15")
 	_check("shop" not in ActionDB.tabs_at(17), "shop open before 18")
-	# money limits actions (§6.5); every action adds Stress (§6.6)
+	# money limits actions (§6.5); effort adds Stress, fun lowers it (§6.6)
 	var state := GameStateScript.new()
 	state.new_life()
 	var doctor: Dictionary = db.actions.filter(func(a): return a.id == "doctor")[0]
@@ -200,6 +200,10 @@ func _test_actions() -> void:
 	state.stats.money = 25
 	_check(ActionDB.perform(doctor, state) and state.stats.money == 5, "doctor cost wrong")
 	_check(state.stats.stress > 0, "action added no stress")
+	var stressed: int = state.stats.stress
+	var toys: Dictionary = db.actions.filter(func(a): return a.id == "play_toys")[0]
+	ActionDB.perform(toys, state)
+	_check(state.stats.stress < stressed, "playing with toys didn't lower stress")
 	state.free()
 	# the validator rejects an action without stress or with a bad tab
 	var bad := ActionDB.new()
