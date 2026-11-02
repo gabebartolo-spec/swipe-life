@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckqkmxn6pc0du"
-path="res://.godot/imported/trousers__pelvis.png-bf775a0e1a4865b743bccb43803691d6.ctex"
+uid="uid://cx05gqry6q6gl"
+path="res://.godot/imported/onesie__forearm_r.png-89b4e73e12ca54207b75958f2c6dc398.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/people/baby/trousers__pelvis.png"
-dest_files=["res://.godot/imported/trousers__pelvis.png-bf775a0e1a4865b743bccb43803691d6.ctex"]
+source_file="res://assets/people/baby/onesie__forearm_r.png"
+dest_files=["res://.godot/imported/onesie__forearm_r.png-89b4e73e12ca54207b75958f2c6dc398.ctex"]
 
 [params]
 

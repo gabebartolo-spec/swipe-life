@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhfw6qhatxn3h"
-path="res://.godot/imported/sweater__upper_arm_r.png-14bcfd9cca82024bd36006311dfbc70d.ctex"
+uid="uid://dckwbv2cc5ans"
+path="res://.godot/imported/onesie__shin_l.png-eb7d9e53b4153c4cab832f1351103a65.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/people/baby/sweater__upper_arm_r.png"
-dest_files=["res://.godot/imported/sweater__upper_arm_r.png-14bcfd9cca82024bd36006311dfbc70d.ctex"]
+source_file="res://assets/people/baby/onesie__shin_l.png"
+dest_files=["res://.godot/imported/onesie__shin_l.png-eb7d9e53b4153c4cab832f1351103a65.ctex"]
 
 [params]
 

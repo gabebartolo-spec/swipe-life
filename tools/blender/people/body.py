@@ -150,6 +150,25 @@ def trousers():
         chain(("trousers", "shin_" + side, "R"), j("knee", s), (0.17 * s, 0.2, 0), 0.13)
 
 
+def onesie():
+    """Full-body item (baby, as approved in clay_sets_front): top, legs and feet in one colour."""
+    torso("onesie", 0.035)
+    sphere(("onesie", "pelvis", "R"), (0, 0.78, 0), 0.31, (1.1, 0.6, 0.85))
+    for s, side in ((1, "l"), (-1, "r")):
+        chain(("onesie", "upper_arm_" + side, "R"), j("shoulder", s), j("elbow", s), 0.13)
+        chain(("onesie", "forearm_" + side, "R"), j("elbow", s), j("wrist", s), 0.125)
+        sphere(("onesie", "pelvis", "R"), (0.15 * s, 0.72, 0), 0.145)
+        chain(("onesie", "thigh_" + side, "R"), j("hip", s), j("knee", s), 0.14)
+        chain(("onesie", "shin_" + side, "R"), j("knee", s), j("ankle", s), 0.13)
+        sphere(("onesie", "foot_" + side, "R"), j("toe", s), 0.15, (0.85, 0.6, 1.25))
+        sphere(("onesie", "foot_" + side, "R"), j("ankle", s), 0.11)
+
+
+def wisp():
+    """Baby hair: a wisp on top (build_clay_girl.py --age baby)."""
+    sphere(("hair_front", "head", "R"), (0.05, 2.1, 0.12), 0.14, (1.3, 0.5, 1.0))
+
+
 def hair():
     # bob: cap over the back and top (drawn behind the head), fringe and side curtains in front
     sphere(("hair_back", "head", "R"), (0, 1.82, -0.1), 0.5, (1.03, 0.92, 0.95))
@@ -222,10 +241,14 @@ def bake_ao():
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 body()
-tee()
-sweater()
-trousers()
-hair()
+if AGE == "baby":
+    onesie()
+    wisp()
+else:
+    tee()
+    sweater()
+    trousers()
+    hair()
 fuse()
 bake_ao()
 bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE",

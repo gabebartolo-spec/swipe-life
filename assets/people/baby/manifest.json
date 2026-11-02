@@ -261,41 +261,52 @@
    ],
    "raw": true
   },
-  "hair_back__head": {
-   "layer": "hair_back",
-   "piece": "head",
-   "rect": [
-    382,
-    517,
-    260,
-    263
-   ],
-   "raw": false
-  },
   "hair_front__head": {
    "layer": "hair_front",
    "piece": "head",
    "rect": [
-    375,
-    555,
-    274,
-    240
+    387,
+    545,
+    249,
+    243
    ],
    "raw": false
   },
-  "sweater__chest": {
-   "layer": "sweater",
+  "onesie__chest": {
+   "layer": "onesie",
    "piece": "chest",
    "rect": [
     402,
-    740,
+    754,
     220,
-    125
+    111
    ],
    "raw": false
   },
-  "sweater__forearm_l": {
-   "layer": "sweater",
+  "onesie__foot_l": {
+   "layer": "onesie",
+   "piece": "foot_l",
+   "rect": [
+    530,
+    917,
+    66,
+    50
+   ],
+   "raw": false
+  },
+  "onesie__foot_r": {
+   "layer": "onesie",
+   "piece": "foot_r",
+   "rect": [
+    429,
+    917,
+    65,
+    50
+   ],
+   "raw": false
+  },
+  "onesie__forearm_l": {
+   "layer": "onesie",
    "piece": "forearm_l",
    "rect": [
     591,
@@ -305,8 +316,8 @@
    ],
    "raw": false
   },
-  "sweater__forearm_r": {
-   "layer": "sweater",
+  "onesie__forearm_r": {
+   "layer": "onesie",
    "piece": "forearm_r",
    "rect": [
     342,
@@ -316,63 +327,8 @@
    ],
    "raw": false
   },
-  "sweater__upper_arm_l": {
-   "layer": "sweater",
-   "piece": "upper_arm_l",
-   "rect": [
-    571,
-    757,
-    95,
-    72
-   ],
-   "raw": false
-  },
-  "sweater__upper_arm_r": {
-   "layer": "sweater",
-   "piece": "upper_arm_r",
-   "rect": [
-    358,
-    757,
-    94,
-    72
-   ],
-   "raw": false
-  },
-  "tee__chest": {
-   "layer": "tee",
-   "piece": "chest",
-   "rect": [
-    405,
-    741,
-    214,
-    122
-   ],
-   "raw": false
-  },
-  "tee__upper_arm_l": {
-   "layer": "tee",
-   "piece": "upper_arm_l",
-   "rect": [
-    573,
-    758,
-    85,
-    66
-   ],
-   "raw": false
-  },
-  "tee__upper_arm_r": {
-   "layer": "tee",
-   "piece": "upper_arm_r",
-   "rect": [
-    366,
-    758,
-    85,
-    64
-   ],
-   "raw": false
-  },
-  "trousers__pelvis": {
-   "layer": "trousers",
+  "onesie__pelvis": {
+   "layer": "onesie",
    "piece": "pelvis",
    "rect": [
     411,
@@ -382,30 +338,30 @@
    ],
    "raw": false
   },
-  "trousers__shin_l": {
-   "layer": "trousers",
+  "onesie__shin_l": {
+   "layer": "onesie",
    "piece": "shin_l",
    "rect": [
     520,
     874,
-    82,
-    74
+    81,
+    81
    ],
    "raw": false
   },
-  "trousers__shin_r": {
-   "layer": "trousers",
+  "onesie__shin_r": {
+   "layer": "onesie",
    "piece": "shin_r",
    "rect": [
-    422,
+    423,
     874,
-    82,
-    76
+    81,
+    81
    ],
    "raw": false
   },
-  "trousers__thigh_l": {
-   "layer": "trousers",
+  "onesie__thigh_l": {
+   "layer": "onesie",
    "piece": "thigh_l",
    "rect": [
     516,
@@ -415,14 +371,36 @@
    ],
    "raw": false
   },
-  "trousers__thigh_r": {
-   "layer": "trousers",
+  "onesie__thigh_r": {
+   "layer": "onesie",
    "piece": "thigh_r",
    "rect": [
     422,
     831,
     86,
     84
+   ],
+   "raw": false
+  },
+  "onesie__upper_arm_l": {
+   "layer": "onesie",
+   "piece": "upper_arm_l",
+   "rect": [
+    571,
+    757,
+    95,
+    72
+   ],
+   "raw": false
+  },
+  "onesie__upper_arm_r": {
+   "layer": "onesie",
+   "piece": "upper_arm_r",
+   "rect": [
+    358,
+    757,
+    94,
+    72
    ],
    "raw": false
   }
