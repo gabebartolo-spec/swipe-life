@@ -5,14 +5,18 @@ extends VBoxContainer
 signal acted
 
 var db: ActionDB
+var careers: CareerDB  # the "jobs" tab is the career menu (docs/CAREERS.md)
 var tab := ""
+var page := []  # career submenu path: [], ["find"], [slot, "advance"], [slot, "staff", role]
 var tabs_row := HBoxContainer.new()
 var info := Label.new()
 var list := VBoxContainer.new()
+var careers_rng := RandomNumberGenerator.new()
 
 
-func _init(action_db: ActionDB) -> void:
+func _init(action_db: ActionDB, career_db: CareerDB = null) -> void:
 	db = action_db
+	careers = career_db
 
 
 func _ready() -> void:
@@ -56,11 +60,15 @@ func _build() -> void:
 		b.pressed.connect(
 			func():
 				tab = t
+				page = []
 				_build()
 		)
 		tabs_row.add_child(b)
 	if tab == "":
 		_note("Too young for plans. Just grow.")
+		return
+	if tab == "jobs" and careers:
+		_build_career()
 		return
 	for a in db.available(tab, GameState.age):
 		var b := Button.new()
@@ -72,6 +80,106 @@ func _build() -> void:
 		b.add_theme_font_size_override("font_size", 26)
 		b.pressed.connect(do_action.bind(a))
 		list.add_child(b)
+
+
+func _button(text: String, on_press: Callable, disabled := false) -> void:
+	var b := Button.new()
+	b.text = text
+	b.disabled = disabled
+	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	b.custom_minimum_size.y = 64
+	b.add_theme_font_size_override("font_size", 26)
+	b.pressed.connect(on_press)
+	list.add_child(b)
+
+
+func _go(to: Array) -> void:
+	page = to
+	_build()
+
+
+func _did(line: String) -> void:
+	if line == "":
+		return
+	info.text = line
+	acted.emit()
+	if not page.is_empty() and page[0] in ["job", "special"] and not GameState.careers.has(page[0]):
+		page = []
+	_build()
+
+
+## Career menu: your careers, then submenus to advance, deal with staff, or find other work.
+func _build_career() -> void:
+	if page.is_empty():
+		for slot in ["job", "special"]:
+			var e: Dictionary = GameState.careers.get(slot, {})
+			if e.is_empty():
+				continue
+			_note(
+				(
+					"%s: %s  ·  performance %d"
+					% [careers.by_id[e.id].label, CareerRules.title(e), e.performance]
+				)
+			)
+			_button("  Advance your standing", _go.bind([slot, "advance"]))
+			_button("  Staff", _go.bind([slot, "staff"]))
+		if GameState.careers.is_empty():
+			_note("No job yet.")
+		_button("Look for work", _go.bind(["find"]))
+		return
+	_button("< Back", _go.bind(page.slice(0, -1) if page.size() > 2 else []))
+	if page[0] == "find":
+		for c in careers.available(GameState):
+			var held: Dictionary = GameState.careers.get(c.kind, {})
+			var cost := int(c.get("cost", 0))
+			var text: String = c.label + ("   $%d" % cost if cost else "")
+			if held.get("id") == c.id:
+				continue
+			if not held.is_empty():
+				text += "   (replaces %s)" % careers.by_id[held.id].label
+			_button(
+				text,
+				func():
+					_did(
+						(
+							"You start as %s." % c.ranks[0].title
+							if CareerRules.apply(c, GameState, careers_rng)
+							else ""
+						)
+					),
+				GameState.stats.money < cost
+			)
+		return
+	var slot: String = page[0]
+	var e: Dictionary = GameState.careers[slot]
+	if page[1] == "advance":
+		_button("Work hard", func(): _did(CareerRules.work_hard(GameState, slot)))
+		_button(
+			"Ask for a promotion", func(): _did(CareerRules.ask_promotion(GameState, slot, careers))
+		)
+		_button("Quit", func(): _quit(slot))
+	elif page.size() == 2:
+		for role in Coworkers.ROLES:
+			var cw: Dictionary = e.coworkers[role]
+			_button(
+				"%s (%s)  ·  %d" % [cw.name, role, cw.affinity], _go.bind([slot, "staff", role])
+			)
+	else:
+		var role: String = page[2]
+		for act in CareerRules.staff_acts(role):
+			var cost := int(CareerRules.STAFF[act].get("cost", 0))
+			_button(
+				act.capitalize() + ("   $%d" % cost if cost else ""),
+				func(): _did(CareerRules.staff(GameState, slot, role, act)),
+				GameState.stats.money < cost
+			)
+
+
+func _quit(slot: String) -> void:
+	var label: String = careers.by_id[GameState.careers[slot].id].label
+	CareerRules.leave(GameState, slot, "quit")
+	GameState.change_stat("stress", 2)
+	_did("You quit the %s." % label.to_lower())
 
 
 func _note(text: String) -> void:

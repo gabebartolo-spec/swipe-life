@@ -15,8 +15,6 @@
    "effects": {"relationships": 3, "stress": 1}, "result": "They listened. Mostly."},
   {"id": "crush", "tab": "people", "label": "Ask your crush out", "ages": [14, 99],
    "effects": {"happiness": 4, "relationships": 4, "stress": 8}, "result": "Your heart is pounding. They said maybe."},
-  {"id": "part_time", "tab": "jobs", "label": "Part-time job at the café", "ages": [14, 17],
-   "effects": {"money": 60, "career": 3, "stress": 10}, "result": "Long shifts. $60 in your pocket."},
   {"id": "car", "tab": "shop", "label": "Buy a used car", "ages": [18, 99], "cost": 2000,
    "effects": {"happiness": 10, "stress": 5}, "result": "It rattles, but it's yours."}
 ]

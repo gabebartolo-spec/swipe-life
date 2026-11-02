@@ -20,6 +20,7 @@ func _init() -> void:
 	_test_bad_careers_rejected()
 	_test_career_year_end()
 	_test_career_cards()
+	_test_career_menu()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -174,14 +175,15 @@ func _test_actions() -> void:
 	db.load_dir()
 	_check(db.errors.is_empty(), "action errors: %s" % "; ".join(db.errors))
 	print("actions: %d valid" % db.actions.size())
-	# age gates (GDD §6.7): a 3-year-old has nothing, a 15-year-old has clubs, study and a job
+	# age gates (GDD §6.7): a 3-year-old has nothing, a 15-year-old has clubs, study and the career tab
 	_check(ActionDB.tabs_at(3).is_empty(), "a 3-year-old sees a menu tab")
 	var ids := []
 	for t in ActionDB.tabs_at(15):
 		for a in db.available(t, 15):
 			ids.append(a.id)
-	for want in ["club", "study", "part_time"]:
+	for want in ["club", "study"]:
 		_check(want in ids, "15-year-old can't see %s" % want)
+	_check("jobs" in ActionDB.tabs_at(15), "no career tab at 15")
 	_check("shop" not in ActionDB.tabs_at(17), "shop open before 18")
 	# money limits actions (§6.5); every action adds Stress (§6.6)
 	var state := GameStateScript.new()
@@ -359,4 +361,23 @@ func _test_career_cards() -> void:
 	_check(not state.careers.has("job") and state.flags.has("quit"), "leave effect")
 	_check(state.partner.get("name") == crush, "date effect")
 	_check(state.careers.special.id == "musician", "leaving the job touched the special")
+	state.free()
+
+
+func _test_career_menu() -> void:
+	var db := CareerDB.new()
+	db.load_dir()
+	var state = _make_state()
+	CareerRules.apply(db.by_id.cafe, state, RandomNumberGenerator.new())
+	var job: Dictionary = state.careers.job
+	var stress: int = state.stats.stress
+	CareerRules.work_hard(state, "job")
+	_check(job.performance == 60 and state.stats.stress > stress, "work hard")
+	_check("flirt" not in CareerRules.staff_acts("boss"), "can flirt with the boss")
+	_check(CareerRules.staff(state, "job", "boss", "gift") == "", "gift without money")
+	CareerRules.staff(state, "job", "rival", "argue")
+	_check(job.coworkers.rival.affinity == -35 and job.performance == 57, "argue")
+	job.coworkers.crush.affinity = 50
+	CareerRules.staff(state, "job", "crush", "flirt")
+	_check(state.partner.get("name") == job.coworkers.crush.name, "flirting never led to a date")
 	state.free()
