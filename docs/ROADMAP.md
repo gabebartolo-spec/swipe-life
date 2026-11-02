@@ -18,9 +18,9 @@ Rules for every milestone:
 | M2 Swipe UI and stats | Done (#11) |
 | M3 Life rules | Done (#12) |
 | M4 Between-year menu | Done (#13) |
-| M5 Clay home scene | **Not started.** Director has not picked M5 or M6 next: ask. |
-| M6 ~200 cards | **Not started.** Only 10 sample cards in `data/cards/sample.json`. |
-| Careers, teen phase (§6.8) | Done (#17, #19, #21): Career menu, 12 careers, 120 work and juvie cards. |
+| M5 Clay home scene | In progress (#16, #18, #20, #22, #23): dollhouse one room at a time, modular clay people. Exit (director approves captures per age band) not met yet. |
+| M6 ~200 cards | In progress: 130 cards (10 samples, 120 career and juvie). The age-band batches are not written yet. |
+| Careers, teen phase (§6.8) | Done (#17, #19, #21, #24, #25): Career menu, 12 careers, 120 work and juvie cards. |
 | M7 Release candidate | Not started. |
 
 Open with the director:
