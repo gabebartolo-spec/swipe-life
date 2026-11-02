@@ -166,6 +166,7 @@ None.
 - 2026-11-03: Modular people (§10.7): body sizes, shapes, mix-and-match clothing slots, tinted parts, extras; looks inherited + random, improved by lifestyle.
 - 2026-11-03: Teen careers (§6.8): career menu, one job + one special, named coworkers, six specials, juvie
   and a permanent record, work partners carry over, breakups end the partner.
+- 2026-11-03: Career and work-card Stress cut by 25%; a free job is open even in debt.
 - 2026-11-03: Fun relieves Stress (§6.6): toys -3, friends -3, parents -2; pure-fun card choices -2.
 - 2026-11-03: M7 balance: pocket money (§4.3); card Happiness gains halved; F1 open to the richest ~10% of
   teens ($140); yearly performance drift -12..+10 and firing at 30 or less; gang unchanged.

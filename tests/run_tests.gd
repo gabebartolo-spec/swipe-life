@@ -279,8 +279,12 @@ func _test_career_year_end() -> void:
 	rng.seed = 3
 	var state = _make_state()
 	# F1 costs $140 up front, so only a rich teen can join: money is the only limit (GDD §6.5)
-	state.stats.money = 119
+	state.stats.money = 139
 	_check(not CareerRules.apply(db.by_id.formula1, state, rng), "F1 without money")
+	# a free job is open even in debt
+	state.stats.money = -50
+	_check(CareerRules.apply(db.by_id.paper_round, state, rng), "debt blocked a free job")
+	state.stats.money = 0
 	# one regular job and one special at once; a second job replaces the first
 	_check(CareerRules.apply(db.by_id.retail, state, rng), "can't take the retail job")
 	_check(CareerRules.apply(db.by_id.cafe, state, rng), "can't swap to the café")
