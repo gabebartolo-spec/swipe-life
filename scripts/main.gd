@@ -7,6 +7,7 @@ const MARGIN := 40.0
 const RESULT_TIME := 1.4
 
 var deck: Deck
+var menu: YearMenu
 var strip := StatStrip.new()
 var swipe_card := SwipeCard.new()
 var message := Label.new()
@@ -23,6 +24,12 @@ func _ready() -> void:
 	for e in db.errors:
 		push_error(e)
 	deck = Deck.new(db.cards)
+	var adb := ActionDB.new()
+	adb.load_dir()
+	for e in adb.errors:
+		push_error(e)
+	menu = YearMenu.new(adb)
+	menu.acted.connect(strip.refresh)
 
 	strip.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 10)
 	$StatStrip.add_child(strip)
@@ -39,7 +46,12 @@ func _ready() -> void:
 	)
 	$Card.add_child(message)
 
-	year_button.text = "Next year"  # placeholder for the between-year menu (roadmap M4)
+	menu.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 32)
+	menu.offset_bottom = -150
+	menu.hide()
+	$Card.add_child(menu)
+
+	year_button.text = "Next year"
 	year_button.add_theme_font_size_override("font_size", 36)
 	year_button.custom_minimum_size = Vector2(320, 96)
 	year_button.pressed.connect(_next_year)
@@ -137,14 +149,20 @@ func _year_end() -> void:
 		_end("You died at %d.\n%s." % [GameState.age, out.cause])
 		return
 	out.results.append("Year %d is over." % GameState.age)
-	message.text = "\n\n".join(out.results)
+	menu.open("\n".join(out.results))
 	year_button.show()
 	if autoplay:
+		for i in randi() % 3:
+			await get_tree().create_timer(0.8).timeout
+			var c := menu.choices()
+			if not c.is_empty():
+				menu.do_action(c.pick_random())
 		await get_tree().create_timer(0.8).timeout
 		_next_year()
 
 
 func _next_year() -> void:
+	menu.hide()
 	GameState.age += 1
 	GameState.quarter = 0
 	GameState.super_like_available = true  # GDD §3.3
@@ -159,6 +177,7 @@ func _next_year() -> void:
 func _end(headline: String) -> void:
 	swipe_card.hide()
 	year_button.hide()
+	menu.hide()
 	SaveSystem.clear()
 	var lines := []
 	for st in StatStrip.SHORT:

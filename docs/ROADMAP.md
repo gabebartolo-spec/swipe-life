@@ -46,7 +46,7 @@ Rules for every milestone:
 ## M4 Between-year menu (age-gated)
 - Data-driven actions with age gates (§6.7) and their costs: money, time and Stress (§6.5–6.6).
 - Tabs appear as they unlock: Activities, People, Shop, Job board.
-- The director sets the unlock ages (§13.1). Example only: toys and pocket money at 5, clubs and study at 10, a part-time job and crushes at 14, everything at 18.
+- Unlock ages set by the director (GDD §6.7): Activities 5, People 10, Jobs 14, Shop 18.
 - **Exit:** a 3-year-old sees almost nothing; a 15-year-old sees clubs, study and a part-time job.
 
 ## M5 Clay home scene
