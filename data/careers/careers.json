@@ -33,7 +33,7 @@
              {"title": "Rep Team", "pay": 20, "stress": 13, "promote_at": 85},
              {"title": "Draft Prospect", "pay": 50, "stress": 16}]},
   {"id": "formula1", "label": "Motor racing (F1)", "kind": "special", "ages": [14, 17],
-   "meter": "fitness", "cost": 120,
+   "meter": "fitness", "cost": 140,
    "ranks": [{"title": "Karting", "pay": -150, "stress": 12, "promote_at": 75},
              {"title": "Regional Champ", "pay": -100, "stress": 15, "promote_at": 88},
              {"title": "Junior Formula", "pay": 0, "stress": 18}]},

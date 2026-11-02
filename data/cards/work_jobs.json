@@ -3,7 +3,7 @@
     "id": "work_boss_praise", "ages": [14, 17], "requires": { "job": "job" },
     "text": "{boss} stops you mid-shift. \"Good work today, {job}.\" Everyone heard.",
     "left": { "label": "Shrug it off", "effects": { "stress": 2 }, "coworker": { "boss": 3, "rival": -3 } },
-    "right": { "label": "Thank them", "effects": { "happiness": 5, "stress": 2 }, "coworker": { "boss": 6, "rival": -6 }, "job": { "performance": 4 } },
+    "right": { "label": "Thank them", "effects": { "happiness": 3, "stress": 2 }, "coworker": { "boss": 6, "rival": -6 }, "job": { "performance": 4 } },
     "up": { "label": "Ask for more hours", "effects": { "money": 30, "stress": 8 }, "coworker": { "boss": 8 }, "job": { "performance": 8 },
             "result": "More hours. More money. Less sleep." }
   },
@@ -20,9 +20,9 @@
     "id": "work_rival_sabotage", "ages": [14, 17], "requires": { "job": "job" },
     "text": "Your station is a mess and you didn't leave it that way. {rival} is humming.",
     "left": { "label": "Clean it up", "effects": { "stress": 6 }, "job": { "performance": 2 } },
-    "right": { "label": "Confront {rival}", "effects": { "stress": 8, "happiness": 3 }, "coworker": { "rival": -10 },
+    "right": { "label": "Confront {rival}", "effects": { "stress": 8, "happiness": 2 }, "coworker": { "rival": -10 },
                "risk": { "chance": 0.3, "effects": { "stress": 5 }, "result": "{boss} only saw you yelling." } },
-    "up": { "label": "Mess up theirs", "effects": { "karma": -6, "happiness": 4, "stress": 5 }, "coworker": { "rival": -15 },
+    "up": { "label": "Mess up theirs", "effects": { "karma": -6, "happiness": 2, "stress": 5 }, "coworker": { "rival": -15 },
             "risk": { "chance": 0.35, "effects": { "stress": 8 }, "result": "Caught. {boss} sighs very loudly." } }
   },
   {
@@ -37,16 +37,16 @@
     "id": "work_rival_truce", "ages": [14, 17], "weight": 5, "requires": { "job": "job", "coworker": { "rival": [-100, -30] } },
     "text": "Closing time. {rival} offers you half of a stale muffin.",
     "left": { "label": "Refuse", "effects": { "stress": 3 } },
-    "right": { "label": "Take it", "effects": { "happiness": 3, "stress": 1 }, "coworker": { "rival": 20 },
+    "right": { "label": "Take it", "effects": { "happiness": 2, "stress": 1 }, "coworker": { "rival": 20 },
                "result": "You talk for ten minutes. They're almost bearable." }
   },
   {
     "id": "work_friend_cover", "ages": [14, 17], "requires": { "job": "job" },
     "text": "There's a party Saturday. You're rostered on. {friend} says they'll cover.",
     "left": { "label": "Work the shift", "effects": { "money": 20, "happiness": -4, "stress": 4 }, "job": { "performance": 3 } },
-    "right": { "label": "Let {friend} cover", "effects": { "happiness": 8, "relationships": 4, "stress": 2 }, "coworker": { "friend": -4 },
+    "right": { "label": "Let {friend} cover", "effects": { "happiness": 4, "relationships": 4, "stress": 2 }, "coworker": { "friend": -4 },
                "risk": { "chance": 0.25, "effects": { "stress": 6 }, "result": "{boss} noticed the swap. Awkward Monday." } },
-    "up": { "label": "Bring {friend} to the party", "effects": { "happiness": 10, "relationships": 6, "stress": 3 }, "coworker": { "friend": 10, "boss": -8 }, "job": { "performance": -6 },
+    "up": { "label": "Bring {friend} to the party", "effects": { "happiness": 5, "relationships": 6, "stress": 3 }, "coworker": { "friend": 10, "boss": -8 }, "job": { "performance": -6 },
             "result": "Nobody covered. Worth it, probably." }
   },
   {
@@ -59,7 +59,7 @@
     "id": "work_gossip", "ages": [14, 17], "requires": { "job": "job" },
     "text": "In the break room: someone says {boss} and {rival} are related.",
     "left": { "label": "Stay out of it", "effects": { "stress": 2 } },
-    "right": { "label": "Spread it", "effects": { "happiness": 4, "karma": -3, "stress": 3 }, "coworker": { "friend": 4, "rival": -8 },
+    "right": { "label": "Spread it", "effects": { "happiness": 2, "karma": -3, "stress": 3 }, "coworker": { "friend": 4, "rival": -8 },
                "risk": { "chance": 0.3, "effects": { "stress": 7 }, "result": "{boss} heard it came from you." } },
     "up": { "label": "Ask {boss} directly", "effects": { "stress": 6 }, "coworker": { "boss": -5 },
             "result": "They're not. {boss} would like to know who's asking." }
@@ -69,22 +69,22 @@
     "text": "Apparently you're \"{boss}'s favourite\". The whole shift thinks so.",
     "left": { "label": "Ignore it", "effects": { "stress": 4 } },
     "right": { "label": "Work extra hard to prove it wrong", "effects": { "stress": 7 }, "job": { "performance": 5 } },
-    "up": { "label": "Lean into it", "effects": { "happiness": 3, "stress": 3 }, "coworker": { "boss": 3, "rival": -8, "friend": -3 } }
+    "up": { "label": "Lean into it", "effects": { "happiness": 2, "stress": 3 }, "coworker": { "boss": 3, "rival": -8, "friend": -3 } }
   },
   {
     "id": "work_raise", "ages": [14, 17], "weight": 6, "requires": { "job": "job", "coworker": { "boss": [20, 100] } },
     "text": "{boss} says there might be a little extra in your pay this year.",
     "left": { "label": "Say nothing", "effects": { "money": 25, "stress": 2 } },
-    "right": { "label": "\"Thank you!\"", "effects": { "money": 40, "happiness": 5, "stress": 2 }, "coworker": { "boss": 3 } },
+    "right": { "label": "\"Thank you!\"", "effects": { "money": 40, "happiness": 3, "stress": 2 }, "coworker": { "boss": 3 } },
     "up": { "label": "Ask for double", "effects": { "stress": 6 }, "coworker": { "boss": -4 },
-            "risk": { "chance": 0.5, "effects": { "money": 80, "happiness": 6 }, "result": "{boss} laughs, then actually agrees." } }
+            "risk": { "chance": 0.5, "effects": { "money": 80, "happiness": 3 }, "result": "{boss} laughs, then actually agrees." } }
   },
   {
     "id": "work_quit_moment", "ages": [14, 17], "weight": 5, "requires": { "job": "job", "stats": { "stress": [50, 100] } },
     "text": "Double shift, no break, and {boss} just called you \"the new kid\" again.",
     "left": { "label": "Bite your tongue", "effects": { "stress": 8, "happiness": -4 } },
     "right": { "label": "Ask for a day off", "effects": { "stress": -6 }, "coworker": { "boss": -4 }, "job": { "performance": -3 } },
-    "up": { "label": "Take off the apron. Quit.", "effects": { "happiness": 10, "stress": -10, "relationships": -2 }, "job": { "leave": "quit" },
+    "up": { "label": "Take off the apron. Quit.", "effects": { "happiness": 5, "stress": -10, "relationships": -2 }, "job": { "leave": "quit" },
             "result": "You walk out into the sun. It feels incredible for about an hour." }
   },
   {
@@ -99,7 +99,7 @@
     "id": "work_payday_splurge", "ages": [14, 17], "requires": { "job": "job" },
     "text": "Your first real pay is in your account. It looks enormous.",
     "left": { "label": "Save it", "effects": { "money": 20, "smarts": 2, "stress": 1 } },
-    "right": { "label": "Spend it all", "effects": { "money": -40, "happiness": 10, "looks": 2, "stress": 2 },
+    "right": { "label": "Spend it all", "effects": { "money": -40, "happiness": 5, "looks": 2, "stress": 2 },
                "result": "Gone by Sunday. You don't know where." }
   },
   {
@@ -114,8 +114,8 @@
     "id": "work_crush_notice", "ages": [14, 17], "requires": { "job": "job", "not_flags": ["work_job_flirting", "work_job_dating"] },
     "text": "{crush} keeps ending up on the same shift as you. Coincidence?",
     "left": { "label": "Keep your head down", "effects": { "stress": 2 } },
-    "right": { "label": "Make small talk", "effects": { "happiness": 4, "stress": 3 }, "coworker": { "crush": 8 } },
-    "up": { "label": "Swap shifts to match theirs", "effects": { "happiness": 6, "stress": 4 }, "coworker": { "crush": 14, "friend": -4 },
+    "right": { "label": "Make small talk", "effects": { "happiness": 2, "stress": 3 }, "coworker": { "crush": 8 } },
+    "up": { "label": "Swap shifts to match theirs", "effects": { "happiness": 3, "stress": 4 }, "coworker": { "crush": 14, "friend": -4 },
             "set_flags": ["work_job_flirting"], "result": "{friend} noticed. {friend} is going to bring this up." }
   },
   {
@@ -123,8 +123,8 @@
     "requires": { "job": "job", "coworker": { "crush": [25, 100] }, "not_flags": ["work_job_flirting", "work_job_dating"] },
     "text": "{crush} draws a smiley face on your name tag.",
     "left": { "label": "Pretend not to notice", "effects": { "stress": 3 }, "coworker": { "crush": -5 } },
-    "right": { "label": "Draw one back", "effects": { "happiness": 6, "stress": 3 }, "coworker": { "crush": 10 }, "set_flags": ["work_job_flirting"] },
-    "up": { "label": "Draw a better one", "effects": { "happiness": 8, "stress": 4 }, "coworker": { "crush": 15 }, "set_flags": ["work_job_flirting"],
+    "right": { "label": "Draw one back", "effects": { "happiness": 3, "stress": 3 }, "coworker": { "crush": 10 }, "set_flags": ["work_job_flirting"] },
+    "up": { "label": "Draw a better one", "effects": { "happiness": 4, "stress": 4 }, "coworker": { "crush": 15 }, "set_flags": ["work_job_flirting"],
             "result": "It's a horse. They're impressed." }
   },
   {
@@ -132,15 +132,15 @@
     "requires": { "job": "job", "flags": ["work_job_flirting"], "not_flags": ["work_job_dating"] },
     "text": "You and {crush} are alone in the break room. Nobody is talking.",
     "left": { "label": "Check your phone", "effects": { "stress": 4 }, "coworker": { "crush": -4 } },
-    "right": { "label": "Ask about their weekend", "effects": { "happiness": 4, "stress": 3 }, "coworker": { "crush": 8 } },
-    "up": { "label": "Share your chips", "effects": { "happiness": 6, "stress": 2 }, "coworker": { "crush": 12 } }
+    "right": { "label": "Ask about their weekend", "effects": { "happiness": 2, "stress": 3 }, "coworker": { "crush": 8 } },
+    "up": { "label": "Share your chips", "effects": { "happiness": 3, "stress": 2 }, "coworker": { "crush": 12 } }
   },
   {
     "id": "work_crush_ask_out", "ages": [14, 17],
     "requires": { "job": "job", "flags": ["work_job_flirting"], "not_flags": ["work_job_dating"], "coworker": { "crush": [45, 100] } },
     "text": "Shift's over. {crush} is lingering by the door. This is it.",
     "left": { "label": "Wave and leave", "effects": { "happiness": -4, "stress": 4 }, "coworker": { "crush": -6 } },
-    "right": { "label": "Ask them out", "effects": { "happiness": 12, "relationships": 8, "stress": 6 }, "job": { "date": true },
+    "right": { "label": "Ask them out", "effects": { "happiness": 6, "relationships": 8, "stress": 6 }, "job": { "date": true },
                "set_flags": ["work_job_dating", "dating_work_partner"], "clear_flags": ["work_job_flirting"],
                "result": "They say yes before you finish the sentence." },
     "up": { "label": "Ask them out loudly, in front of everyone", "effects": { "stress": 9 }, "coworker": { "rival": -5 },
@@ -165,7 +165,7 @@
     "id": "work_dating_distracted", "ages": [14, 17], "requires": { "job": "job", "flags": ["work_job_dating"] },
     "text": "You and {crush} were laughing and the orders piled up.",
     "left": { "label": "Get back to work", "effects": { "stress": 5 }, "job": { "performance": 2 } },
-    "right": { "label": "One more joke", "effects": { "happiness": 6, "stress": 4 }, "coworker": { "boss": -8 }, "job": { "performance": -5 } }
+    "right": { "label": "One more joke", "effects": { "happiness": 3, "stress": 4 }, "coworker": { "boss": -8 }, "job": { "performance": -5 } }
   },
   {
     "id": "work_dating_fight", "ages": [14, 17], "requires": { "job": "job", "flags": ["work_job_dating"] },
@@ -195,7 +195,7 @@
     "id": "partner_after_work", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"] },
     "text": "{partner} texts: \"Milkshakes? I'm buying.\"",
     "left": { "label": "Too tired", "effects": { "health": 2, "stress": 2, "relationships": -3 } },
-    "right": { "label": "On my way", "effects": { "happiness": 7, "relationships": 5, "money": -5, "stress": 2 } }
+    "right": { "label": "On my way", "effects": { "happiness": 4, "relationships": 5, "money": -5, "stress": 2 } }
   },
   {
     "id": "partner_meet_parents", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"] }, "room": "kitchen",
@@ -208,7 +208,7 @@
     "id": "partner_quit_together", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"], "not_flags": ["work_job_dating"] },
     "text": "Neither of you works there any more. {partner} asks what you even talk about now.",
     "left": { "label": "\"I'm not sure\"", "effects": { "happiness": -6, "stress": 5, "relationships": -4 } },
-    "right": { "label": "Plan a proper date", "effects": { "happiness": 8, "relationships": 8, "money": -15, "stress": 3 } }
+    "right": { "label": "Plan a proper date", "effects": { "happiness": 4, "relationships": 8, "money": -15, "stress": 3 } }
   },
   {
     "id": "partner_jealous", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"] },
@@ -248,12 +248,12 @@
     "id": "work_retail_folding", "ages": [14, 17], "requires": { "job": "retail" },
     "text": "You've folded the same table of shirts six times. Someone just unfolded it again.",
     "left": { "label": "Fold it again", "effects": { "stress": 5 }, "job": { "performance": 2 } },
-    "right": { "label": "Hide in the stockroom", "effects": { "happiness": 4, "stress": 2 }, "job": { "performance": -3 } }
+    "right": { "label": "Hide in the stockroom", "effects": { "happiness": 2, "stress": 2 }, "job": { "performance": -3 } }
   },
   {
     "id": "work_babysitting_bedtime", "ages": [14, 17], "requires": { "job": "babysitting" }, "room": "living",
     "text": "It's 10 p.m. The kids are still awake and you've lost the remote.",
-    "left": { "label": "One more episode", "effects": { "happiness": 3, "stress": 4 }, "job": { "performance": -3 } },
+    "left": { "label": "One more episode", "effects": { "happiness": 2, "stress": 4 }, "job": { "performance": -3 } },
     "right": { "label": "Bedtime. Now.", "effects": { "stress": 7, "karma": 2 }, "job": { "performance": 4 } },
     "up": { "label": "Make up a bedtime story", "effects": { "smarts": 2, "stress": 3 }, "job": { "performance": 6 },
             "result": "The dragon was a dentist. They loved it." }

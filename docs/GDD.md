@@ -41,7 +41,8 @@
 - 4.1 A life tracks these stats: Health, Happiness, Money, Career/Skills, Relationships, Smarts, Looks,
   Karma/Reputation, Stress.
 - 4.2 The list is open: the director may add more.
-- 4.3 Every stat except Money is a 0–100 bar. Money is a plain number.
+- 4.3 Every stat except Money is a 0–100 bar. Money is a plain number. Children get pocket money each year:
+  $10 from age 6, $20 from age 10.
 - 4.4 Karma/Reputation is hidden from the player. All other stats are visible.
 - 4.5 Stress rises from activities (§6.5). High Stress or low Happiness can cause mental illnesses, which are
   very sticky. Checked at each year end from age 6:
@@ -164,3 +165,5 @@ None.
 - 2026-11-03: Modular people (§10.7): body sizes, shapes, mix-and-match clothing slots, tinted parts, extras; looks inherited + random, improved by lifestyle.
 - 2026-11-03: Teen careers (§6.8): career menu, one job + one special, named coworkers, six specials, juvie
   and a permanent record, work partners carry over, breakups end the partner.
+- 2026-11-03: M7 balance: pocket money (§4.3); card Happiness gains halved; F1 open to the richest ~10% of
+  teens ($140); yearly performance drift -12..+10 and firing at 30 or less; gang unchanged.

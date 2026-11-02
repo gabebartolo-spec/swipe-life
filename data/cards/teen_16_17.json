@@ -27,7 +27,7 @@
     "up": {
       "label": "Book it for tomorrow",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "money": -20
       },
       "set_flags": [
@@ -66,7 +66,7 @@
     "right": {
       "label": "Show off",
       "effects": {
-        "happiness": 4
+        "happiness": 2
       },
       "risk": {
         "chance": 0.4,
@@ -139,7 +139,7 @@
     "right": {
       "label": "Drive normally",
       "effects": {
-        "happiness": 8
+        "happiness": 4
       },
       "set_flags": [
         "licence"
@@ -176,7 +176,7 @@
     "right": {
       "label": "Promise to fill it up",
       "effects": {
-        "happiness": 6,
+        "happiness": 3,
         "money": -30,
         "relationships": 3
       },
@@ -209,7 +209,7 @@
     "right": {
       "label": "Squeeze in",
       "effects": {
-        "happiness": 4
+        "happiness": 2
       },
       "risk": {
         "chance": 0.1,
@@ -237,7 +237,7 @@
     "right": {
       "label": "Wing it",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "smarts": -2
       },
       "risk": {
@@ -281,7 +281,7 @@
     "right": {
       "label": "Pick what you love",
       "effects": {
-        "happiness": 6,
+        "happiness": 3,
         "relationships": -3,
         "smarts": 2
       }
@@ -365,7 +365,7 @@
       "label": "Go",
       "effects": {
         "smarts": 3,
-        "happiness": 4,
+        "happiness": 2,
         "money": -30
       }
     }
@@ -409,7 +409,7 @@
       "label": "Write it as a poem",
       "effects": {
         "smarts": 4,
-        "happiness": 4,
+        "happiness": 2,
         "money": 300
       },
       "risk": {
@@ -439,14 +439,14 @@
     "right": {
       "label": "\"Are you?\"",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "relationships": 3
       }
     },
     "up": {
       "label": "\"Only if you are\"",
       "effects": {
-        "happiness": 10,
+        "happiness": 5,
         "looks": 2
       },
       "set_flags": [
@@ -477,7 +477,7 @@
     "left": {
       "label": "Two straws",
       "effects": {
-        "happiness": 8,
+        "happiness": 4,
         "relationships": 5,
         "money": -8
       }
@@ -487,7 +487,7 @@
       "effects": {
         "karma": 3,
         "money": -8,
-        "happiness": 2
+        "happiness": 1
       }
     }
   },
@@ -575,7 +575,7 @@
     "right": {
       "label": "Go",
       "effects": {
-        "happiness": 7,
+        "happiness": 4,
         "relationships": 5
       },
       "risk": {
@@ -590,7 +590,7 @@
     "up": {
       "label": "Go, stay till sunrise",
       "effects": {
-        "happiness": 12,
+        "happiness": 6,
         "relationships": 6,
         "health": -5
       },
@@ -622,7 +622,7 @@
     "right": {
       "label": "Drink it",
       "effects": {
-        "happiness": 4
+        "happiness": 2
       },
       "risk": {
         "chance": 0.35,
@@ -650,7 +650,7 @@
     "right": {
       "label": "Make it your profile picture",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "relationships": 5
       },
       "result": "Respect."
@@ -672,7 +672,7 @@
     "right": {
       "label": "Post every day now",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "stress": 6,
         "looks": 2
       },
@@ -702,7 +702,7 @@
     "right": {
       "label": "Make a list of things to do first",
       "effects": {
-        "happiness": 7,
+        "happiness": 4,
         "relationships": 6
       }
     }
@@ -861,7 +861,7 @@
       "label": "One more video",
       "effects": {
         "health": -3,
-        "happiness": 2
+        "happiness": 1
       }
     }
   },
@@ -882,7 +882,7 @@
     "right": {
       "label": "Do it at home",
       "effects": {
-        "happiness": 6
+        "happiness": 3
       },
       "risk": {
         "chance": 0.5,
@@ -896,7 +896,7 @@
       "label": "Salon, the works",
       "effects": {
         "looks": 8,
-        "happiness": 8,
+        "happiness": 4,
         "money": -80
       }
     }
@@ -919,7 +919,7 @@
     "left": {
       "label": "New phone",
       "effects": {
-        "happiness": 6,
+        "happiness": 3,
         "money": -200
       }
     },
@@ -971,7 +971,7 @@
       "label": "Sign up",
       "effects": {
         "karma": 6,
-        "happiness": 5,
+        "happiness": 3,
         "stress": -2
       },
       "risk": {
@@ -1028,7 +1028,7 @@
     "right": {
       "label": "Borrow something",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "relationships": 3
       }
     },
@@ -1036,7 +1036,7 @@
       "label": "Make your own outfit",
       "effects": {
         "looks": 6,
-        "happiness": 8
+        "happiness": 4
       },
       "risk": {
         "chance": 0.4,
@@ -1087,7 +1087,7 @@
     "right": {
       "label": "Offer it toast",
       "effects": {
-        "happiness": 6,
+        "happiness": 3,
         "karma": 2
       },
       "result": "It takes the toast and the butter knife."
@@ -1095,7 +1095,7 @@
     "up": {
       "label": "Film it",
       "effects": {
-        "happiness": 8
+        "happiness": 4
       },
       "risk": {
         "chance": 0.5,
