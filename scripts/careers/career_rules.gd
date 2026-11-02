@@ -93,6 +93,10 @@ static func ask_promotion(state, slot: String, db: CareerDB) -> String:
 static func date_crush(state, slot: String) -> void:
 	var crush: Dictionary = state.careers[slot].coworkers.crush
 	state.partner = {"name": crush.name, "affinity": maxi(int(crush.affinity), 50), "met": "work"}
+	# the dating and partner card chains key off these flags, however the date started
+	state.flags["work_%s_dating" % slot] = true
+	state.flags["dating_work_partner"] = true
+	state.flags.erase("work_%s_flirting" % slot)
 
 
 ## Pays each career, drifts performance, then fires or (gang) arrests.
