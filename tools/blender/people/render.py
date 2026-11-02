@@ -19,9 +19,9 @@ import numpy as np
 
 argv = sys.argv[sys.argv.index("--") + 1 :]
 GLB, OUT = argv[0], os.path.abspath(argv[1])
-RES = 768
-SCALE = 2.9  # metres across the canvas
-CENTRE = (0.0, 1.2)
+RES = 1024  # tall enough for an adult (2.7 m) at the slice's 264.8 px/m
+SCALE = RES / (768 / 2.9)  # metres across the canvas
+CENTRE = (0.0, SCALE / 2 - 0.25)
 PAD = 2
 
 
@@ -89,7 +89,7 @@ lit = shots[("body", "chest")][0]
 lum = lit[..., :3] @ np.array([0.299, 0.587, 0.114], dtype=np.float32)
 k = 0.5 / float(np.median(lum[lit[..., 3] > 0.99]))  # the chest's median lit clay = 0.5
 
-manifest = {"res": RES, "px_per_m": RES / SCALE, "pivots": {}, "rest_deg": {}, "sprites": {}}
+manifest = {"res": RES, "px_per_m": RES / SCALE, "ground": px(0, 0), "pivots": {}, "rest_deg": {}, "sprites": {}}
 for (layer, piece), (rgb, msk, occluded) in shots.items():
     raw = layer == "face"
     out = np.zeros((RES, RES, 4), dtype=np.float32)

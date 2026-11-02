@@ -5,7 +5,7 @@ extends Node2D
 ## hair), tinted by person_clay.gdshader. A clip of world angles drives the bones on twos
 ## (12 fps). The node's origin is the point between the feet on the floor.
 
-const DIR := "res://assets/people/slice"
+const ROOT := "res://assets/people/"
 const SHADER := preload("res://shaders/person_clay.gdshader")
 const PARENT := {
 	"chest": "pelvis",
@@ -37,10 +37,12 @@ const PART_Z := {
 }
 const LAYER_Z := {"body": 0, "trousers": 1, "tee": 1, "sweater": 1, "face": 4}
 const FIXED_Z := {"hair_back": 0, "hair_front": 44}
-## A hand this far (m) in front of the head in the clip draws its whole arm over the head and hair.
+## A hand this far (m) in front of the head draws its forearm and hand over the head and hair.
 const FRONT_M := 0.35
 const ARM_FRONT_Z := 40
 
+## Body shape folder under assets/people (age_sex_build, docs/PEOPLE.md §2).
+@export var shape := "child_f_skinny"
 ## Colours per layer: [c1, c2, c3]. Layers missing here are not worn.
 @export var look := {
 	"body": [Color("f2c9a5")],
@@ -57,11 +59,11 @@ var _frame := 0
 
 
 func _ready() -> void:
-	var text := FileAccess.get_file_as_string(DIR.path_join("manifest.json"))
+	var text := FileAccess.get_file_as_string(ROOT.path_join(shape).path_join("manifest.json"))
 	var m: Dictionary = JSON.parse_string(text)
 	var pivots: Dictionary = m.pivots
 	_rest = m.rest_deg
-	var ground := Vector2(m.res / 2.0, m.res / 2.0 + 1.2 * float(m.px_per_m))
+	var ground := _arr(m.ground)
 	for piece in ["pelvis"] + PARENT.keys():
 		var bone := Node2D.new()
 		bone.name = piece
@@ -79,7 +81,7 @@ func _ready() -> void:
 		if not look.has(s.layer) and s.layer != "face":
 			continue
 		var spr := Sprite2D.new()
-		spr.texture = load(DIR.path_join(sprite_name + ".png"))
+		spr.texture = load(ROOT.path_join(shape).path_join(sprite_name + ".png"))
 		spr.centered = false
 		spr.offset = Vector2(s.rect[0], s.rect[1]) - _arr(pivots[s.piece])
 		var part: String = s.piece.trim_suffix("_l").trim_suffix("_r")
@@ -119,7 +121,7 @@ func _step() -> void:
 	var front: Dictionary = _clip.get("front", {})
 	for side in front:
 		var z := ARM_FRONT_Z if float(front[side][_frame]) > FRONT_M else 0
-		for part in ["upper_arm_", "forearm_", "hand_"]:
+		for part in ["forearm_", "hand_"]:  # the shoulder stays behind the face
 			_bones[part + side].get_node("Layers").z_index = z
 	_frame = (_frame + 1) % int(_clip.frames)
 
