@@ -83,7 +83,7 @@ for key, members in groups.items():
     mob = [o for _, o in members]
     # garments and hair: the body piece under them is an occluder (black in the mask pass), so whatever
     # the body hides in 3D (e.g. side hair behind the cheeks) is cut out of the sprite
-    occ = [o for _, o in groups.get(("body", key[1]), [])] if key[0] not in ("body", "face", "hair_back") else []
+    occ = [o for _, o in groups.get(("body", key[1]), [])] if key[0] not in ("body", "face", "wrinkles", "hair_back") else []
     for o in occ:
         o.color = (0, 0, 0, 1)
     shots[key] = (shot(mob + occ, False), shot(mob + occ, True), bool(occ))
@@ -106,6 +106,16 @@ def seamless(layer, piece, rgb):
         d = np.hypot(xx - c[0], yy - c[1])
         w = (np.clip((2.2 * r - d) / (0.7 * r), 0, 1) * prx[..., 3])[..., None]
         rgb[..., :3] = rgb[..., :3] * (1 - w) + prx[..., :3] * w
+        if piece == b and a not in ("chest", "pelvis"):
+            # director: forearm and upper arm read as separate once the elbow bends, because the child piece's
+            # round top is drawn over the parent. Fade the child's top across the joint (alpha 0 at 0.6 r above
+            # it, 1 at 0.5 r below) so the parent shows through and the outline is never drawn.
+            en = groups[("body", b)][0][1]["end"]
+            e = px(en[0], en[1])
+            dx, dy = e[0] - c[0], e[1] - c[1]
+            n = math.hypot(dx, dy)
+            t = ((xx - c[0]) * dx + (yy - c[1]) * dy) / n / r
+            rgb[..., 3] *= np.clip((t + 0.6) / 1.1, 0, 1)
     return rgb
 
 

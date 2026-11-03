@@ -34,11 +34,14 @@ ARGS = [a for a in ARGS if "=" not in a and a != "hair_only"]
 # rescale the body below the neck (sx width, sy height) and the head (h) about the neck
 SX, SY, H = {"baby": (1.12, 0.55, 0.95), "child": (1, 1, 1), "teen": (0.86, 1.35, 0.9), "adult": (0.9, 1.5, 0.86)}[AGE]
 NECK = 1.27  # points above this belong to the head
+# director 2026-11-03: a short neck on everyone but babies (no neck read as hunched); about a quarter head
+NECK_UP = {"baby": 0.0, "child": 0.08, "teen": 0.2}.get(AGE, 0.32)  # director: kid shortest neck, adult longest
 
 
 def T(p):
     """Age transform of a modelled point -> (point, radius factor, per-axis stretch); copied from build_clay_girl."""
     x, y, z = p
+    y += NECK_UP * min(max((y - 1.36) / 0.1, 0), 1)  # neck stub: the head rises above the collar line
     if y > NECK:
         return (x * H, NECK * SY + (y - NECK) * H, z * H), H, (1, 1, 1)
     f = (SX + SY) / 2
@@ -55,6 +58,21 @@ J = {
     "shoulder": (0.33, 1.24, 0), "elbow": (0.39, 1.02, 0.01), "wrist": (0.45, 0.8, 0.02), "hand_c": (0.47, 0.68, 0.03),
     "hip": (0.16, 0.72, 0), "knee": (0.16, 0.44, 0), "ankle": (0.17, 0.16, 0), "toe": (0.17, 0.08, 0.05),
 }
+# sex shape (director 2026-11-03, "triangle theory", not literal): men broad shoulders, women narrower
+# shoulders, a pinched waist and wider hips (hourglass). Teens and adults only; children stay unisex.
+GROWN = AGE in ("teen", "adult")
+SHOULDER_W = {"m": 1.12, "f": 0.94}[SEX] if GROWN else 1.0  # shoulder span and upper chest
+WAIST_W = {"m": 1.04, "f": 0.88}[SEX] if GROWN else 1.0  # ribs-to-waist width
+HIP_W = {"m": 1.0, "f": 1.1}[SEX] if GROWN else 1.0  # pelvis width
+for _n in ("shoulder", "elbow", "wrist", "hand_c"):  # the whole arm moves out, keeping its angle
+    J[_n] = (J[_n][0] + 0.33 * (SHOULDER_W - 1), *J[_n][1:])
+if GROWN:  # shoulder caps sat level with the chest top and poked up (director): drop the joint
+    J["shoulder"] = (J["shoulder"][0], J["shoulder"][1] - 0.04, J["shoulder"][2])
+    # arms angled a little away from the body, so a gap shows under the arm (director: arms looked fused)
+    for _n, _dx in (("elbow", 0.035), ("wrist", 0.07), ("hand_c", 0.08)):
+        J[_n] = (J[_n][0] + _dx, *J[_n][1:])
+for _n in ("hip", "knee", "ankle", "toe"):
+    J[_n] = (J[_n][0] + 0.16 * (HIP_W - 1), *J[_n][1:])
 PIVOT = {"pelvis": "waist", "chest": "waist", "head": "neck", "upper_arm": "shoulder", "forearm": "elbow",
          "hand": "wrist", "thigh": "hip", "shin": "knee", "foot": "ankle"}
 END = {"pelvis": "hip", "chest": "neck", "head": "head_c", "upper_arm": "elbow", "forearm": "wrist", "hand": "hand_c",
@@ -123,30 +141,45 @@ def bone(layer, piece, a, b, s, r, grow=0.0, n=5):
     socket(layer, piece, b, s, grow)
 
 
+def top_w(y):
+    """Width of a top's sides at height y (director: fitted tops). Women: in at the waist, out at the hips;
+    men: broad at the ribs, tapering to the hem; children: straight."""
+    if not GROWN:
+        return 1.0
+    if SEX == "f":
+        pts = ((1.05, 0.94), (0.97, 0.86), (0.9, 0.96), (0.84, HIP_W))
+    else:
+        pts = ((1.05, 1.06), (0.84, 0.96))
+    for (y0, w0), (y1, w1) in zip(pts, pts[1:]):
+        if y1 <= y <= y0:
+            return w1 + (w0 - w1) * (y - y1) / (y0 - y1)
+    return pts[0][1] if y > pts[0][0] else pts[-1][1]
+
+
 def torso(layer, grow, mask="R"):
     # slim: widest at the ribs, narrowing to the waist (director: the one-ball belly read as fat)
-    sphere((layer, "chest", mask), (0, 1.1, 0), 0.29 + grow, (1.0, 0.8, 0.62))
-    sphere((layer, "chest", mask), (0, 1.27, 0), 0.22 + grow, (1.05, 0.42, 0.7))
+    sphere((layer, "chest", mask), (0, 1.1, 0), 0.29 + grow, (WAIST_W, 0.8, 0.62))
+    sphere((layer, "chest", mask), (0, 1.27, 0), 0.22 + grow, (1.05 * SHOULDER_W, 0.42, 0.7))
+    if GROWN:  # flat yoke out to the shoulder: a squared shoulder line, not a ball (director: too rounded)
+        sphere((layer, "chest", mask), (0, 1.3, 0), 0.22 + grow, (1.4 * SHOULDER_W, 0.3, 0.65))
     socket(layer, "chest", "waist", grow=grow, mask=mask)
     if SEX == "f" and AGE in ("teen", "adult"):  # chest beads (PEOPLE.md §2, director: women need breasts)
         # undo the age stretch (tall bodies stretched round beads into vertical footballs): k/SY, k/SX
         k = (SX + SY) / 2
         for s in (-1, 1):
-            if AGE == "adult":  # teardrop: a soft upper slope into a fuller, slightly lower round
-                sphere((layer, "chest", mask), (0.11 * s, 1.18, 0.06), 0.07 + grow, (k / SX, 0.8 * k / SY, 0.8 * k / SX))
-                sphere((layer, "chest", mask), (0.12 * s, 1.12, 0.1), 0.095 + grow, (1.05 * k / SX, 0.92 * k / SY, k / SX))
-            else:  # teen: small and round
-                sphere((layer, "chest", mask), (0.12 * s, 1.13, 0.1), 0.095 + grow, (k / SX, 0.95 * k / SY, 0.85 * k / SX))
+            # one round bead per side, a clear gap between them (director: "just make them normal")
+            r = 0.075 if AGE == "adult" else 0.06
+            sphere((layer, "chest", mask), (0.1 * s, 1.14, 0.09), r + grow, (k / SX, k / SY, 0.8 * k / SX))
     if layer != "body":  # tops hang straight past the hips, wider than the trousers (director)
-        for y in (1.05, 1.02, 0.99, 0.96, 0.93, 0.9, 0.87, 0.84):  # straight sides from the ribs to the hem: no round belly
-            sphere((layer, "chest", mask), (0, y, 0), 0.3 + grow, (1.0, 0.35, 0.62))
-        sphere((layer, "chest", mask), (0, 0.8, 0), 0.24 + grow, (1.3, 0.28, 0.74))
+        for y in (1.05, 1.02, 0.99, 0.96, 0.93, 0.9, 0.87, 0.84):  # sides from the ribs to the hem: no round belly
+            sphere((layer, "chest", mask), (0, y, 0), 0.3 + grow, (top_w(y), 0.35, 0.62))
+        sphere((layer, "chest", mask), (0, 0.8, 0), 0.24 + grow, (1.3 * HIP_W, 0.28, 0.74))
     socket(layer, "chest", "neck", grow=grow, mask=mask)
 
 
 def pelvis(layer, grow):
     socket(layer, "pelvis", "waist", grow=grow)
-    sphere((layer, "pelvis", "R"), (0, 0.78, 0), 0.24 + grow, (1.05, 0.55, 0.75))
+    sphere((layer, "pelvis", "R"), (0, 0.78, 0), 0.24 + grow, (1.05 * HIP_W, 0.55, 0.75))
     for s in (-1, 1):
         socket(layer, "pelvis", "hip", s, grow)
 
@@ -174,7 +207,7 @@ def body():
     pelvis("body", 0)
     legs("body", 0)
     sphere(("body", "head", "R"), J["head_c"], 0.47, (1.05, 0.95, 1.0))
-    chain(("body", "head", "R"), (0, 1.3, 0), (0, 1.46, 0), 0.09, 3)
+    chain(("body", "head", "R"), (0, 1.3, 0), (0, 1.46, 0), 0.09, 5)
     socket("body", "head", "neck")
     for s, side in ((1, "l"), (-1, "r")):
         bone("body", "upper_arm_" + side, "shoulder", "elbow", s, 0.095)
@@ -188,6 +221,23 @@ def body():
         if AGE in ("baby", "child"):  # director: blush only on babies and children
             sphere(("face", "head", "blush"), (0.25 * s, 1.55, 0.38), 0.06, (1, 0.55, 0.35), 16)
     sphere(("face", "head", "mouth"), (0, 1.52, 0.44), 0.04, (1.2, 0.5, 0.4), 16)
+    if AGE == "adult":  # elderly face lines (director's minifig ref): own sprite, Person shows it when elderly
+        for s in (1, -1):
+            for y in (1.665, 1.625):  # crow's feet
+                sphere(("wrinkles", "head", "lines"), (0.25 * s, y, 0.4), 0.035, (1, 0.22, 0.3), 12)
+            sphere(("wrinkles", "head", "lines"), (0.15 * s, 1.578, 0.44), 0.035, (1, 0.2, 0.3), 12)  # under the eye
+            for x, y in ((0.112, 1.53), (0.104, 1.505), (0.1, 1.48)):  # smile bracket beside the mouth
+                sphere(("wrinkles", "head", "lines"), (x * s, y, 0.43), 0.02, (0.35, 1, 0.3), 12)
+
+
+def sleeve_top(layer, side, s, end, r):
+    """Grown sleeve top (director: clothes must follow the flat yoke): the chain starts below the joint and
+    a flat cap hides the socket, so no ball stands above the shoulder line."""
+    a = Vector(j("shoulder", s))
+    chain((layer, "upper_arm_" + side, "R"), tuple(a.lerp(Vector(end), 0.2)), tuple(end), r, 4)
+    # cap as wide as the sleeve (wider bulged as a separate ball, director: seamless); its top, 0.8 r above the
+    # joint, still covers the body's shoulder socket (r 0.1), so no skin shows
+    sphere((layer, "upper_arm_" + side, "R"), tuple(a), r, (1, 0.87, 1))  # top 0.87 r ~ 0.1 above the joint
 
 
 def tee():
@@ -195,14 +245,24 @@ def tee():
     ring(("tee", "chest", "G"), (0, 1.36, 0.0), 0.12, 0.1, 0.035)
     for s, side in ((1, "l"), (-1, "r")):
         mid = Vector(j("shoulder", s)).lerp(Vector(j("elbow", s)), 0.65)
-        chain(("tee", "upper_arm_" + side, "R"), j("shoulder", s), tuple(mid), 0.125, 4)
-        socket("tee", "upper_arm_" + side, "shoulder", s, 0.03)
+        if GROWN:
+            sleeve_top("tee", side, s, mid, 0.115)  # arm 0.095 + 0.02: close fit, no puff
+        else:
+            chain(("tee", "upper_arm_" + side, "R"), j("shoulder", s), tuple(mid), 0.115, 4)
+            socket("tee", "upper_arm_" + side, "shoulder", s, 0.015)
 
 
 def sweater():
     torso("sweater", 0.035)
     ring(("sweater", "chest", "G"), (0, 1.36, 0.0), 0.13, 0.11, 0.04)
-    arms("sweater", 0.04)
+    if GROWN:
+        for s, side in ((1, "l"), (-1, "r")):
+            sleeve_top("sweater", side, s, j("elbow", s), 0.115)
+            socket("sweater", "upper_arm_" + side, "elbow", s, 0.025)
+            chain(("sweater", "forearm_" + side, "R"), j("elbow", s), j("wrist", s), 0.11)  # same as the upper sleeve: no step at the elbow
+            socket("sweater", "forearm_" + side, "elbow", s, 0.025)
+    else:
+        arms("sweater", 0.025)
 
 
 def trousers():
@@ -226,9 +286,9 @@ def cap(r=0.5, y=1.82, sy=0.92):
     sphere(("hair_back", "head", "R"), (0, y, -0.1), r, (1.03, sy, 0.95))
 
 
-def shell(r=0.47, y=2.0, sy=0.42):
+def shell(r=0.47, y=2.06, sy=0.5, sx=1.04):  # top 2.3 covers the cap dome (else a beret brim), lower edge 1.83 stays above the eyes
     """Crown shell (PEOPLE.md: no scalp between fringe lumps); the head occluder trims it to the top."""
-    sphere(("hair_front", "head", "R"), (0, y, 0.02), r, (1.08, sy, 1.0))
+    sphere(("hair_front", "head", "R"), (0, y, 0.02), r, (sx, sy, 1.0))
 
 
 def front(at, r, scale=(1, 1, 1)):
@@ -288,9 +348,11 @@ def pixie():
 def long_straight():
     """Long straight, middle part: side curtains stop above the shoulders in front; the length falls behind."""
     cap()
+    # round crown no wider than the cap: a flat wide shell plus flat fringe pads read as a beret (director)
     shell()
     for s in (-1, 1):
-        front((0.15 * s, 1.98, 0.24), 0.2, (1.2, 0.5, 0.8))
+        # curtains sweep from the middle part down the sides of the forehead, following the skull
+        chain(("hair_front", "head", "R"), (0.04 * s, 2.1, 0.2), (0.3 * s, 1.86, 0.18), 0.13, 5)
         chain(("hair_front", "head", "R"), (0.34 * s, 1.84, -0.03), (0.36 * s, 1.62, -0.02), 0.16, 4)
         chain(("hair_back", "head", "R"), (0.38 * s, 1.7, -0.12), (0.34 * s, 0.98, -0.16), 0.16, 10)
     chain(("hair_back", "head", "R"), (0, 1.6, -0.3), (0, 0.98, -0.3), 0.3, 8)
@@ -299,7 +361,7 @@ def long_straight():
 def high_ponytail():
     """High ponytail: hair pulled back off the forehead, tail swung out to one side behind the head."""
     cap(0.5, 1.84, 0.9)
-    shell(0.47, 1.98, 0.48)
+    shell()
     back((0.04, 2.05, -0.38), 0.1)
     chain(("hair_back", "head", "R"), (0.1, 2.02, -0.45), (0.44, 1.46, -0.5), 0.12, 8)
     back((0.46, 1.4, -0.5), 0.09)
@@ -323,6 +385,9 @@ JOINTS = [("pelvis", "chest", "waist", 1), ("chest", "head", "neck", 1)] + [
         ("chest", "upper_arm" + d, "shoulder", s), ("upper_arm" + d, "forearm" + d, "elbow", s),
         ("forearm" + d, "hand" + d, "wrist", s), ("pelvis", "thigh" + d, "hip", s),
         ("thigh" + d, "shin" + d, "knee", s), ("shin" + d, "foot" + d, "ankle", s))]
+
+
+GROW = {"tee": 0.03, "sweater": 0.025, "trousers": 0.03, "onesie": 0.04}  # garment sockets past the bare joint
 
 
 def clay(ob):
@@ -360,7 +425,7 @@ def proxies():
             clay(ob)
             at, f, _ = T(j(joint, s))
             ob["joint"] = list(at)  # render.py takes the colour near this joint from the proxy's front render
-            ob["r"] = JR[joint] * f
+            ob["r"] = (JR[joint] + GROW.get(layer, 0)) * f  # garments are wider: blend over their whole overlap
 
 
 def fuse():
@@ -378,7 +443,7 @@ def fuse():
         flip = -1 if piece.endswith("_r") else 1
         ob["pivot"] = list(T(j(PIVOT[kind], flip))[0])
         ob["end"] = list(T(j(END[kind], flip))[0])
-        if layer != "face":
+        if layer not in ("face", "wrinkles"):
             clay(ob)
 
 
