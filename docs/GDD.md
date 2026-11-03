@@ -81,6 +81,12 @@
   - A gang arrest sends you to juvie and gives you a permanent criminal record (no sealing).
   - A partner met at work stays your partner after the job ends; a breakup ends the partner.
   - Adult careers come later on the same data.
+- 6.9 Adult life (director 2026-11-03):
+  - Careers: basically every common real-world job. Education gates careers: university and trade courses
+    unlock the jobs that need them (e.g. doctor needs university).
+  - Housing: rent or buy; buying takes a mortgage, and debt is possible.
+  - Love and family: dating apps, meeting people at social events, and card events; marriage, divorce,
+    infidelity and children.
 
 ## 7. Setting and tone
 
@@ -173,4 +179,6 @@ None.
 - 2026-11-03: Fun relieves Stress (§6.6): toys -3, friends -3, parents -2; pure-fun card choices -2.
 - 2026-11-03: M7 balance: pocket money (§4.3); card Happiness gains halved; F1 open to the richest ~10% of
   teens ($140); yearly performance drift -12..+10 and firing at 30 or less; gang unchanged.
+- 2026-11-03: Adult life (§6.9): every common job, education gates careers, rent or buy with mortgages,
+  dating apps, social events, marriage, divorce, infidelity, children. Balance comes last (`docs/ROADMAP.md`).
 - 2026-11-03: Skin tone blends the parents' tones (§10.7); it has no gameplay effect beyond genetics.

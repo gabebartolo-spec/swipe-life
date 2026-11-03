@@ -146,12 +146,11 @@ Builds:
 - Signed AAB through internal testing.
 - **Exit:** the director plays full lives, birth to death and into a legacy, on the phone and signs off.
 
-## Open with the director (Stage 2 design the GDD does not cover yet; ask before building)
-- Adult careers: which ones, and education (university, trade courses) before them?
-- Housing: buy only, or rent too? Mortgages and debt?
-- Family: marriage, divorce, how children arrive, how many, raising them as cards?
-- Adult menu: new actions per tab and their age ranges.
-- Monetisation stays undecided (§11): nothing may depend on it.
+## Stage 2 decisions (GDD §6.9, director 2026-11-03)
+- Every common real-world job; university and trade courses gate the jobs that need them (M8).
+- Rent or buy, mortgages and debt (M8, scene in M9).
+- Dating apps, social events, card events; marriage, divorce, infidelity, children (M10).
+- Still to ask when each milestone starts: the adult menu actions per tab and their age ranges.
 
 ## Out of scope
 Monetisation (§11), until the director decides.
