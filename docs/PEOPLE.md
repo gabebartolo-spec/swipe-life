@@ -98,9 +98,8 @@
 - **Near/far arm flags** are copied per frame from the sign of the Mixamo bone's depth.
 
 ## 6. Animation across sizes
-- Pipeline: Mixamo clip → `mocap_retarget.py` → `render_cutouts.py` at 24 fps.
-- `render_cutouts.py` currently stores deltas against one body's `cut_rest` (line 111), so its clips do not transfer between bodies. That changes:
-  - Clips store each bone's **world direction angle**: `clips/<name>.json {fps:24, bones:{LeftArm:[deg…]}, root_y:[…], near:[…]}`.
+- Pipeline: Mixamo clip → `tools/blender/people/clip.py` at 24 fps (the old `render_cutouts.py` stored deltas against one body's rest pose, so its clips did not transfer between bodies).
+  - Clips store each piece's **world direction angle** seen from the front: `assets/people/clips/<name>.json {fps:24, frames, bones:{piece:[deg…]}, front}`. Root translation and near/far flags are not in the format yet.
   - At runtime: `rotation = clip_world − rest_deg[body][piece]`, composed down the chain.
 - Root translation × (hip_px of this body / hip_px of the clip). Rotations change at 24 fps (director); the boil stays on twos.
 - **Baby:** separate copied clips (crawl, sit). If none fits, ask the director; never invent angles.

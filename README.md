@@ -7,7 +7,7 @@ Open `project.godot` in Godot 4.7.2. To run on a device over USB, install the ex
 Android SDK and JDK 17 paths in Editor Settings → Export → Android.
 
 ## Builds
-- **CI** (every PR and push to `main`): GDScript lint + format check, headless import.
+- **CI** (every PR and push to `main`): GDScript lint + format check, headless import, card validation and life sim (`tests/run_tests.gd`).
 - **Android build** (manual run, or push a `v*` tag): debug APK always; signed release AAB once the keystore
   secrets are set. Tags also publish a GitHub Release with the files.
 
