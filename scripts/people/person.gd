@@ -2,8 +2,9 @@ class_name Person
 extends Node2D
 ## A modular clay person (GDD §10.7, docs/PEOPLE.md): one bone Node2D per body piece
 ## (rotation only), each with a Layers child holding that piece's sprites (skin, garments,
-## hair), tinted by person_clay.gdshader. A clip of world angles drives the bones on twos
-## (12 fps). The node's origin is the point between the feet on the floor.
+## hair), tinted by person_clay.gdshader. A clip of world angles drives the bones
+## at the clip's rate (24 fps); the clay boil stays on twos.
+## The node's origin is the point between the feet on the floor.
 
 const ROOT := "res://assets/people/"
 const SHADER := preload("res://shaders/person_clay.gdshader")

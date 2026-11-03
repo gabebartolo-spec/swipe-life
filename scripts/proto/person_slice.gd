@@ -3,7 +3,7 @@ extends Node2D
 ## ~180 px/m, one top tinted three ways, waving. `-- --top=sweater` swaps the top;
 ## `--ages` lines up baby, child, teen and adult instead (one body each, ~130 px/m).
 ## `--sex=m` swaps in the male bodies.
-## `--seq=<n> --out=<dir>` saves n frames at 12 fps and quits.
+## `--seq=<n> --out=<dir>` saves n frames at 24 fps and quits.
 
 const PX_PER_M := 180.0
 const AGES := ["baby", "child_f_skinny", "teen_f_skinny", "adult_f_skinny"]
@@ -58,5 +58,5 @@ func _ready() -> void:
 		await get_tree().create_timer(0.3).timeout
 		for f in int(args.seq):
 			get_viewport().get_texture().get_image().save_png(args.out.path_join("f%03d.png" % f))
-			await get_tree().create_timer(1.0 / 12.0).timeout
+			await get_tree().create_timer(1.0 / 24.0).timeout
 		get_tree().quit()

@@ -109,7 +109,7 @@
   a bigger house).
 - 10.3 Style: a toon look with lots of personality, made entirely by Claude Code (no artist, no bought assets).
 - 10.4 Chosen style (director, 2026-11-03): flat 2D **clay cut-outs**. Clay pieces are modelled and lit in
-  Blender, prerendered to PNGs, and turned on pivots in Godot, posed on twos (12 fps) with a clay boil shader.
+  Blender, prerendered to PNGs, and turned on pivots in Godot, posed at 24 fps with a clay boil shader on twos (12 fps).
   Motion is copied from proven clips (e.g. Mixamo), never improvised.
 - 10.5 Screen layout (portrait): the dollhouse fills the top ~45%, a strip of stat bars sits below it, and
   the card fills the bottom half.

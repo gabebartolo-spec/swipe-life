@@ -1,10 +1,10 @@
 """Copy a Mixamo clip as front-view world angles, so one clip drives every body (docs/PEOPLE.md §6).
 
 Run headless:
-  blender -b --factory-startup --python tools/blender/people/clip.py -- <rig.glb> <out.json>
+  blender -b --factory-startup --python tools/blender/people/clip.py -- <rig.glb> <out.json> [fps]
 
-Writes {fps: 12, frames: n, bones: {piece: [deg, ...]}}: each piece's direction seen from the front,
-degrees counter-clockwise from screen right, 12 times a second. Godot turns a piece by
+Writes {fps: 24 (default), frames: n, bones: {piece: [deg, ...]}}: each piece's direction seen from the front,
+degrees counter-clockwise from screen right, FPS times a second. Godot turns a piece by
 (clip - rest_deg) and composes it down the chain. Pelvis and feet keep their rest direction (the hips
 bone and the forward-pointing foot have no stable front-view angle). "front" holds, per side and frame,
 how far (m) the hand is in front of the head; above 0 the arm draws over the head and hair.
@@ -16,7 +16,9 @@ import sys
 
 import bpy
 
-RIG, OUT = sys.argv[sys.argv.index("--") + 1 :][:2]
+ARGS = sys.argv[sys.argv.index("--") + 1 :]
+RIG, OUT = ARGS[:2]
+FPS = int(ARGS[2]) if len(ARGS) > 2 else 24  # director: 24 fps, the wave read choppy on twos
 # piece -> (bone whose head..tail gives the direction) or (from bone head, to bone head)
 SRC = {"chest": ("Spine", "Neck"), "head": ("Head",)}
 for side, m in (("l", "Left"), ("r", "Right")):
@@ -36,9 +38,9 @@ if rig.animation_data:  # evaluate fcurves directly: headless frame_set reads st
 start, end = action.frame_range
 bones = {p: [] for p in SRC}
 front = {"l": [], "r": []}  # hand nearer the camera than the head: the arm draws over head and hair
-n = int((end - start) * 12 / 30) + 1
+n = int((end - start) * FPS / 30) + 1
 for i in range(n):
-    f = start + i * 30 / 12
+    f = start + i * 30 / FPS
     for pb in rig.pose.bones:
         pb.rotation_mode = "QUATERNION"
         pb.rotation_quaternion = (1, 0, 0, 0)
@@ -57,5 +59,5 @@ for i in range(n):
     for side, m in (("l", "Left"), ("r", "Right")):
         hand_y = (rig.matrix_world @ rig.pose.bones[f"mixamorig:{m}Hand"].head).y
         front[side].append(round(head_y - hand_y, 3))  # Blender -y points at the camera
-json.dump({"fps": 12, "frames": n, "bones": bones, "front": front}, open(OUT, "w"))
+json.dump({"fps": FPS, "frames": n, "bones": bones, "front": front}, open(OUT, "w"))
 print("CLIP", n, "frames", {p: v[0] for p, v in bones.items()})
