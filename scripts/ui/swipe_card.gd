@@ -11,6 +11,7 @@ var card: Dictionary
 var can_super := false
 var drag := Vector2.ZERO
 var dragging := false
+var snap: Tween
 var locked := false
 var home := Vector2.ZERO
 var text_label := Label.new()
@@ -56,6 +57,8 @@ func _gui_input(event: InputEvent) -> void:
 		return
 	if event is InputEventScreenTouch:
 		if event.pressed:
+			if snap:
+				snap.kill()  # grab the card mid snap-back: keep dragging from here
 			dragging = true
 		elif dragging:
 			dragging = false
@@ -88,8 +91,8 @@ func side_for(d: Vector2, at: float) -> String:
 func _release() -> void:
 	var side := side_for(drag, THRESHOLD)
 	if side == "":
-		var t := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		t.tween_method(set_drag, drag, Vector2.ZERO, 0.25)
+		snap = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		snap.tween_method(set_drag, drag, Vector2.ZERO, 0.25)
 		return
 	commit(side)
 

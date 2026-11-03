@@ -103,6 +103,9 @@ func _apply(ch: Dictionary, state, slot := "") -> void:
 	if ch.get("partner") == "end":  # a breakup ends the partner record (docs/CAREERS.md)
 		state.partner = {}
 		state.flags.erase("dating_work_partner")
+		for f in state.flags.keys():
+			if f.begins_with("work_") and f.ends_with("_dating"):
+				state.flags.erase(f)
 	if slot == "" or not state.careers.has(slot):
 		return
 	var entry: Dictionary = state.careers[slot]

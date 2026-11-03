@@ -43,6 +43,8 @@ func open(headline: String) -> void:
 	var tabs := ActionDB.tabs_at(GameState.age)
 	if tab not in tabs:
 		tab = tabs[0] if not tabs.is_empty() else ""
+	if not page.is_empty() and page[0] in ["job", "special"] and not GameState.careers.has(page[0]):
+		page = []  # the career ended between years
 	_build()
 	show()
 

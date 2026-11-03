@@ -205,7 +205,7 @@
                "risk": { "chance": 0.3, "effects": { "happiness": -6 }, "result": "Someone brought out the baby photos." } }
   },
   {
-    "id": "partner_quit_together", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"], "not_flags": ["work_job_dating"] },
+    "id": "partner_quit_together", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"], "not_flags": ["work_job_dating", "work_special_dating"] },
     "text": "Neither of you works there any more. {partner} asks what you even talk about now.",
     "left": { "label": "\"I'm not sure\"", "effects": { "happiness": -6, "stress": 4, "relationships": -4 } },
     "right": { "label": "Plan a proper date", "effects": { "happiness": 4, "relationships": 8, "money": -15, "stress": -2 } }
