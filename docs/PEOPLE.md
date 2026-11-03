@@ -98,11 +98,11 @@
 - **Near/far arm flags** are copied per frame from the sign of the Mixamo bone's depth.
 
 ## 6. Animation across sizes
-- Pipeline: Mixamo clip → `mocap_retarget.py` → `render_cutouts.py` at 12 fps.
+- Pipeline: Mixamo clip → `mocap_retarget.py` → `render_cutouts.py` at 24 fps.
 - `render_cutouts.py` currently stores deltas against one body's `cut_rest` (line 111), so its clips do not transfer between bodies. That changes:
-  - Clips store each bone's **world direction angle**: `clips/<name>.json {fps:12, bones:{LeftArm:[deg…]}, root_y:[…], near:[…]}`.
+  - Clips store each bone's **world direction angle**: `clips/<name>.json {fps:24, bones:{LeftArm:[deg…]}, root_y:[…], near:[…]}`.
   - At runtime: `rotation = clip_world − rest_deg[body][piece]`, composed down the chain.
-- Root translation × (hip_px of this body / hip_px of the clip). Rotations change on twos.
+- Root translation × (hip_px of this body / hip_px of the clip). Rotations change at 24 fps (director); the boil stays on twos.
 - **Baby:** separate copied clips (crawl, sit). If none fits, ask the director; never invent angles.
 - **Faces:** blink and mouth are sprite swaps.
 - If a fat arm sinks into the belly, that is reported to the director. No correction is made without approval.
