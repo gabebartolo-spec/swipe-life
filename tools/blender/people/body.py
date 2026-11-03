@@ -124,8 +124,12 @@ def torso(layer, grow, mask="R"):
     sphere((layer, "chest", mask), (0, 1.1, 0), 0.29 + grow, (1.0, 0.8, 0.62))
     sphere((layer, "chest", mask), (0, 1.27, 0), 0.22 + grow, (1.05, 0.42, 0.7))
     socket(layer, "chest", "waist", grow=grow, mask=mask)
+    if SEX == "f" and AGE in ("teen", "adult"):  # chest beads (PEOPLE.md §2, director: women need breasts)
+        for s in (-1, 1):
+            sphere((layer, "chest", mask), (0.12 * s, 1.14, 0.12), 0.11 + grow, (1.0, 0.9, 0.85))
     if layer != "body":  # tops hang straight past the hips, wider than the trousers (director)
-        sphere((layer, "chest", mask), (0, 0.95, 0), 0.27 + grow, (1.05, 0.6, 0.7))
+        for y in (1.05, 1.02, 0.99, 0.96, 0.93, 0.9, 0.87, 0.84):  # straight sides from the ribs to the hem: no round belly
+            sphere((layer, "chest", mask), (0, y, 0), 0.3 + grow, (1.0, 0.35, 0.62))
         sphere((layer, "chest", mask), (0, 0.8, 0), 0.24 + grow, (1.3, 0.28, 0.74))
     socket(layer, "chest", "neck", grow=grow, mask=mask)
 
