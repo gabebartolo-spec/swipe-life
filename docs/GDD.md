@@ -126,6 +126,9 @@
   - Any item and hair can be any colour: parts are rendered once in neutral clay and tinted in game.
   - Also modular: haircuts, facial hair, skin tones, eye and brow shapes, ageing
     details (grey hair, wrinkles, baldness), body extras (freckles, scars, tattoos).
+  - Skin tone is genetic (director 2026-11-03): a child's tone blends both parents' tones plus a little
+    randomness (black and white parents make a light brown baby; light brown and white, a very light brown one).
+    Skin tone and ethnicity have no other gameplay effect: no stat, card, chance or sim tendency depends on them.
   - A look is inherited from the parents plus randomness, and improves with lifestyle (e.g. becoming
     athletic through exercise, plastic surgery). Attractiveness is the Looks stat (§4.1), not a separate part.
   - People are seen from the front only (director 2026-11-03); motion stays in the front plane.
@@ -170,3 +173,4 @@ None.
 - 2026-11-03: Fun relieves Stress (§6.6): toys -3, friends -3, parents -2; pure-fun card choices -2.
 - 2026-11-03: M7 balance: pocket money (§4.3); card Happiness gains halved; F1 open to the richest ~10% of
   teens ($140); yearly performance drift -12..+10 and firing at 30 or less; gang unchanged.
+- 2026-11-03: Skin tone blends the parents' tones (§10.7); it has no gameplay effect beyond genetics.
