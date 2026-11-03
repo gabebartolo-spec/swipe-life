@@ -129,8 +129,8 @@ def torso(layer, grow, mask="R"):
         k = (SX + SY) / 2
         for s in (-1, 1):
             if AGE == "adult":  # teardrop: a soft upper slope into a fuller, slightly lower round
-                sphere((layer, "chest", mask), (0.11 * s, 1.18, 0.07), 0.085 + grow, (k / SX, 0.8 * k / SY, 0.8 * k / SX))
-                sphere((layer, "chest", mask), (0.13 * s, 1.11, 0.12), 0.12 + grow, (1.05 * k / SX, 0.92 * k / SY, k / SX))
+                sphere((layer, "chest", mask), (0.11 * s, 1.18, 0.06), 0.07 + grow, (k / SX, 0.8 * k / SY, 0.8 * k / SX))
+                sphere((layer, "chest", mask), (0.12 * s, 1.12, 0.1), 0.095 + grow, (1.05 * k / SX, 0.92 * k / SY, k / SX))
             else:  # teen: small and round
                 sphere((layer, "chest", mask), (0.12 * s, 1.13, 0.1), 0.095 + grow, (k / SX, 0.95 * k / SY, 0.85 * k / SX))
     if layer != "body":  # tops hang straight past the hips, wider than the trousers (director)
