@@ -221,13 +221,20 @@ def body():
         if AGE in ("baby", "child"):  # director: blush only on babies and children
             sphere(("face", "head", "blush"), (0.25 * s, 1.55, 0.38), 0.06, (1, 0.55, 0.35), 16)
     sphere(("face", "head", "mouth"), (0, 1.52, 0.44), 0.04, (1.2, 0.5, 0.4), 16)
-    if AGE == "adult":  # elderly face lines (director's minifig ref): own sprite, Person shows it when elderly
+    if AGE == "adult":  # elderly face lines, copied from the director's sketch (2026-11-03): own sprite,
+        # Person shows it when elderly. Continuous strokes of overlapping thin beads, not dots.
+        def stroke(pts, r=0.011):
+            for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+                n = max(2, int(((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5 / (r * 0.6)))
+                for i in range(n + 1):
+                    t = i / n
+                    sphere(("wrinkles", "head", "lines"), (x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, 0.5), r, segs=8)
+
+        stroke([(-0.11, 1.872), (0.1, 1.872)], 0.011)  # forehead: a straight line over a wavy one
+        stroke([(-0.11, 1.8), (0, 1.808), (0.1, 1.8)], 0.011)
         for s in (1, -1):
-            for y in (1.665, 1.625):  # crow's feet
-                sphere(("wrinkles", "head", "lines"), (0.25 * s, y, 0.4), 0.035, (1, 0.22, 0.3), 12)
-            sphere(("wrinkles", "head", "lines"), (0.15 * s, 1.578, 0.44), 0.035, (1, 0.2, 0.3), 12)  # under the eye
-            for x, y in ((0.112, 1.53), (0.104, 1.505), (0.1, 1.48)):  # smile bracket beside the mouth
-                sphere(("wrinkles", "head", "lines"), (x * s, y, 0.43), 0.02, (0.35, 1, 0.3), 12)
+            stroke([(0.095 * s, 1.562), (0.185 * s, 1.562)], 0.009)  # under-eye line: eye-wide, at the sketch's eye-to-mouth ratio
+            stroke([(0.082 * s, 1.494), (0.1 * s, 1.466)], 0.01)  # fold down and out from the mouth corner
 
 
 def hand(side, s):

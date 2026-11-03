@@ -10,6 +10,9 @@ uniform vec3 c3 : source_color = vec3(0.2);
 uniform bool raw = false;
 uniform float boil_px = 0.9;
 uniform float seed = 0.0;
+// hair greying (director: gradual from the 40s): 0 none, 1 all grey; an even tint
+uniform float grey = 0.0;
+uniform vec3 grey_col : source_color = vec3(0.85);
 
 float hash(vec2 p) {
 	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -24,6 +27,8 @@ void fragment() {
 		COLOR = t;
 	} else {
 		vec3 base = mix(mix(c1, c2, t.g), c3, t.b);
+		// even tint toward grey: no noise (director: flecks looked horrible)
+		base = mix(base, grey_col, grey);
 		// highlights fade on dark colours, so black stays black clay instead of turning grey
 		float hl = 0.6 * smoothstep(0.05, 0.5, dot(base, vec3(0.299, 0.587, 0.114)));
 		float l = t.r;

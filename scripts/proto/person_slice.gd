@@ -3,6 +3,7 @@ extends Node2D
 ## ~180 px/m, one top tinted three ways, waving. `-- --top=sweater` swaps the top;
 ## `--ages` lines up baby, child, teen and adult instead (one body each, ~130 px/m).
 ## `--sex=m` swaps in the male bodies. `--hair=a,b,c,d` picks each figure's cut (body.py HAIRS).
+## `--elderly` shows the adults' face lines; `--grey=0.5` greys the adults' hair.
 ## `--seq=<n> --out=<dir>` saves n frames at 24 fps and quits.
 
 const PX_PER_M := 180.0
@@ -54,6 +55,9 @@ func _ready() -> void:
 			p.position = Vector2(100 + 170 * n, 580)
 			p.scale = Vector2.ONE * 130.0 / 264.8
 		p.hair = "wisp" if ages and n == 0 else cut
+		p.elderly = args.has("elderly") and p.shape.begins_with("adult")
+		if p.shape.begins_with("adult"):
+			p.grey = float(args.get("grey", "0"))
 		if n < cuts.size():
 			p.hair = cuts[n]
 		add_child(p)
