@@ -109,6 +109,14 @@ def seamless(layer, piece, rgb):
     return rgb
 
 
+def opening(m):
+    """Grey erosion then dilation with a 3x3 square."""
+    def nb(a, f):
+        p = np.pad(a, 1, mode="edge")
+        return f([p[1 + dy : 1 + dy + RES, 1 + dx : 1 + dx + RES] for dy in (-1, 0, 1) for dx in (-1, 0, 1)], axis=0)
+    return nb(nb(m, np.min), np.max)
+
+
 lit = shots[("body", "chest")][0]
 lum = lit[..., :3] @ np.array([0.299, 0.587, 0.114], dtype=np.float32)
 k = 0.5 / float(np.median(lum[lit[..., 3] > 0.99]))  # the chest's median lit clay = 0.5
@@ -120,7 +128,12 @@ for (layer, piece), (rgb, msk, occluded) in shots.items():
     out = np.zeros((RES, RES, 4), dtype=np.float32)
     alpha = rgb[..., 3]
     if occluded:
-        alpha = alpha * np.clip(msk[..., :3].sum(-1) * 2, 0, 1)
+        # a 3x3 opening drops occluder specks under 3 px (the shin peeking through a trouser cuff
+        # notched the hem edge); big occluded areas like side hair behind the cheeks stay cut
+        occ = 1 - np.clip(msk[..., :3].sum(-1) * 2, 0, 1)
+        occ = occ * (rgb[..., 3] > 0.002)
+        occ = opening(occ)
+        alpha = alpha * (1 - occ)
     if raw:
         out[..., :3] = rgb[..., :3]
     else:
