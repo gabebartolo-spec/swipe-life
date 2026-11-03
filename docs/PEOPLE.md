@@ -112,7 +112,7 @@
 |---|---|
 | Per body shape | ~212 pieces: skin 15, tops 60, bottoms 40, shoes 12, full-body 45, outerwear 30, extras ~10 |
 | All bodies | 19 × 212 ≈ 4,000 |
-| Head parts (per head, ~125) | face shapes 3, eyes 8, brows 6, mouths 4, noses 4, hair 24×2, facial hair 8, headwear 10×2, glasses 6, wrinkles 3, bald 2, freckles 3, scars 4 |
+| Head parts (per head, ~125) | face shapes 3, eyes 8, brows 6, mouths 4, noses 4, hair 34×2, facial hair 8, headwear 10×2, glasses 6, wrinkles 3, bald 2, freckles 3, scars 4 |
 | All heads | 7 × ~125 ≈ 875 |
 | **Total** | **≈ 4,900 sprites** |
 | Pixels | rendered at display scale (adult ~450 px), ≈ 16 Mpx bodies + 8 Mpx heads ≈ 24 Mpx |
