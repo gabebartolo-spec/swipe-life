@@ -125,8 +125,14 @@ def torso(layer, grow, mask="R"):
     sphere((layer, "chest", mask), (0, 1.27, 0), 0.22 + grow, (1.05, 0.42, 0.7))
     socket(layer, "chest", "waist", grow=grow, mask=mask)
     if SEX == "f" and AGE in ("teen", "adult"):  # chest beads (PEOPLE.md §2, director: women need breasts)
+        # undo the age stretch (tall bodies stretched round beads into vertical footballs): k/SY, k/SX
+        k = (SX + SY) / 2
         for s in (-1, 1):
-            sphere((layer, "chest", mask), (0.12 * s, 1.14, 0.12), 0.11 + grow, (1.0, 0.9, 0.85))
+            if AGE == "adult":  # teardrop: a soft upper slope into a fuller, slightly lower round
+                sphere((layer, "chest", mask), (0.11 * s, 1.18, 0.06), 0.07 + grow, (k / SX, 0.8 * k / SY, 0.8 * k / SX))
+                sphere((layer, "chest", mask), (0.12 * s, 1.12, 0.1), 0.095 + grow, (1.05 * k / SX, 0.92 * k / SY, k / SX))
+            else:  # teen: small and round
+                sphere((layer, "chest", mask), (0.12 * s, 1.13, 0.1), 0.095 + grow, (k / SX, 0.95 * k / SY, 0.85 * k / SX))
     if layer != "body":  # tops hang straight past the hips, wider than the trousers (director)
         for y in (1.05, 1.02, 0.99, 0.96, 0.93, 0.9, 0.87, 0.84):  # straight sides from the ribs to the hem: no round belly
             sphere((layer, "chest", mask), (0, y, 0), 0.3 + grow, (1.0, 0.35, 0.62))
