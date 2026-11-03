@@ -95,6 +95,8 @@ def sphere(key, at, r, scale=(1, 1, 1), segs=32):
 
 def chain(key, a, b, r, n=5):
     a, b = Vector(a), Vector(b)
+    if key[0].startswith("hair"):  # hair only: approved clothes keep their bead count
+        n = max(n, int((b - a).length / (0.3 * r)) + 2)  # beads 0.3 r apart: the remesh fuses them into a smooth tube, not sausages
     for i in range(n):
         sphere(key, a.lerp(b, i / (n - 1)), r)
 
