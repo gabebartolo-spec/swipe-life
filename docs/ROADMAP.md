@@ -1,9 +1,11 @@
-# Swipe Life — Roadmap to the first playable (birth to 18)
+# Swipe Life — Roadmap: birth to death
 
-Goal: a **playable Android APK** that covers one life from birth to 18. It includes the cards, the stats, the age-gated
-between-year menu (GDD §6.7), the clay cut-out home scene (§10.4) and autosave (§8.3). At 18 the life ends on a
-"to be continued" summary. The deck holds about 200 unique cards for ages 0–17 (§12.3). One life draws 76 of
-them (19 years × 4).
+Goal: the full game in GDD §1–§12 — one life from birth to death (§5), adult careers, family, old age, legacy
+(§9.3) and replay (§9.1–9.2), about 300 cards (§12.3), on Android.
+
+Stage 1 (M0–M6, careers) built the first playable, birth to 18. Stage 2 (M8–M13) builds adult life to death.
+**Balance comes last** (director, 2026-11-03): no tuning until the game is fully featured, or we tune numbers
+that will change. Until then the sim checks only for bugs (stuck lives, unreachable cards), not numbers.
 
 Rules for every milestone:
 - Each milestone is its own branch and PR to `main`, and CI must be green.
@@ -21,7 +23,8 @@ Rules for every milestone:
 | M5 Clay home scene | In progress (#16, #18, #20, #22, #23): dollhouse one room at a time, modular clay people. Exit (director approves captures per age band) not met yet. |
 | M6 ~200 cards | Done (#28, #31): 343 cards across every age band; the 1,000-life sim draws every age-band card. |
 | Careers, teen phase (§6.8) | Done (#17, #19, #21, #24, #25): Career menu, 12 careers, 120 work and juvie cards. |
-| M7 Release candidate | Not started. |
+| M7 Teen release candidate | Phone build only: internal-testing AAB, director plays birth to 18. Balance moved to M13. |
+| M8–M13 Adult life to death | Not started. |
 
 Open with the director:
 - Card rewrites: the director may fill in the "Your rewrite" column of the card doc
@@ -105,17 +108,58 @@ Builds:
 - Career menu in the Jobs tab; work drama, romance, special-career and juvie cards in `data/cards/`.
 - **Exit:** the sim holds at least 6 kinds of job across 100 lives and every career is reachable (tests).
 
-## M7 Age-18 release candidate
-- Balance pass using the sim's numbers.
+## M7 Teen phone build
 - Build a signed AAB with the existing CI signing setup and install it through internal testing.
-- **Exit:** the director plays a full life, birth to 18, on the phone and signs off.
+- **Exit:** the director plays a full life, birth to 18, on the phone. No balance pass (that is M13).
 
-## Out of scope before 18
-Adult careers, old age (§5.3c), legacy (§9.3), achievements and unlocks (§9.1–9.2), monetisation (§11).
+## M8 Adult life core (18+)
+- Remove the stop at 18: the year loop runs on, 4 cards a year (§2.5), until death (§5).
+- Shop tab opens at 18 (§6.7): houses, cars, furniture and items (§6.1), each with a price in data.
+- Adult careers on the careers data (§6.8 "adult careers come later"), and courses on the Job board (§6.4).
+- Adult card bands, written like M6 (a readable list per band before merge).
+- **Exit:** a life plays past 18 into the 30s; buying a house and holding an adult job work in the sim.
+
+## M9 Adult home scene
+- Own homes: bought houses as dollhouses, a bigger house changes the scene (§10.2), bought items placed in
+  rooms (§6.1, §10.2).
+- Adult people: adult body sizes and shapes, partner moving in (§10.2, §10.7).
+- **Exit:** the director approves captures of an adult home with bought items and a partner.
+
+## M10 Relationships and family
+- People tab for adults (§6.3): talk, gift, date, argue.
+- Partners, children and family members as characters in the life (§9.3 lists siblings and the other parent).
+- **Exit:** a life can find a partner and have a child, seen in the sim and in a capture.
+
+## M11 Ageing and death
+- Old age death: chance rising each year from about 70 (§5.3c).
+- Ageing details on people: grey hair, wrinkles, baldness (§10.7).
+- Remaining cards to the ~300 launch target (§12.3), including late-life bands.
+- **Exit:** the 1,000-life sim shows natural deaths spread from 70 onward and no stuck lives.
+
+## M12 Legacy and replay
+- Legacy (§9.3): continue as your child with money minus a tax, the house and items, some traits and family.
+- Achievements / ribbons (§9.1) and unlockable careers, backgrounds and card sets (§9.2).
+- **Exit:** the director dies in one life and plays on as the child, keeping the house; ribbons show.
+
+## M13 Balance and release candidate
+- Balance pass over the whole life using the sim's numbers (only now, with every feature in).
+- Signed AAB through internal testing.
+- **Exit:** the director plays full lives, birth to death and into a legacy, on the phone and signs off.
+
+## Open with the director (Stage 2 design the GDD does not cover yet; ask before building)
+- Adult careers: which ones, and education (university, trade courses) before them?
+- Housing: buy only, or rent too? Mortgages and debt?
+- Family: marriage, divorce, how children arrive, how many, raising them as cards?
+- Adult menu: new actions per tab and their age ranges.
+- Monetisation stays undecided (§11): nothing may depend on it.
+
+## Out of scope
+Monetisation (§11), until the director decides.
 
 ## Order
 - Critical path: M1 → M2 → M3.
 - M4 starts after M2.
 - M5 (art) runs alongside M1–M4.
 - M6 writing starts once the director approves the M1 schema.
-- M7 comes last.
+- M7 can ship any time after M5.
+- Stage 2: M8 → M9 and M10 (in parallel) → M11 → M12. M13 comes last.
