@@ -144,10 +144,10 @@
    "layer": "body",
    "piece": "hand_l",
    "rect": [
-    622,
+    621,
     830,
-    58,
-    44
+    45,
+    68
    ],
    "raw": false
   },
@@ -155,10 +155,10 @@
    "layer": "body",
    "piece": "hand_r",
    "rect": [
-    344,
+    358,
     830,
-    57,
-    44
+    45,
+    68
    ],
    "raw": false
   },

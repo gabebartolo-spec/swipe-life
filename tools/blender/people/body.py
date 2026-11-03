@@ -212,7 +212,7 @@ def body():
     for s, side in ((1, "l"), (-1, "r")):
         bone("body", "upper_arm_" + side, "shoulder", "elbow", s, 0.095)
         bone("body", "forearm_" + side, "elbow", "wrist", s, 0.085)
-        sphere(("body", "hand_" + side, "R"), j("hand_c", s), 0.1)
+        hand(side, s)
         socket("body", "hand_" + side, "wrist", s)
         sphere(("body", "foot_" + side, "R"), j("toe", s), 0.13, (0.85, 0.6, 1.25))
         socket("body", "foot_" + side, "ankle", s)
@@ -228,6 +228,24 @@ def body():
             sphere(("wrinkles", "head", "lines"), (0.15 * s, 1.578, 0.44), 0.035, (1, 0.2, 0.3), 12)  # under the eye
             for x, y in ((0.112, 1.53), (0.104, 1.505), (0.1, 1.48)):  # smile bracket beside the mouth
                 sphere(("wrinkles", "head", "lines"), (x * s, y, 0.43), 0.02, (0.35, 1, 0.3), 12)
+
+
+def hand(side, s):
+    """Relaxed hand (director: not a limp fish): palm faces the thigh, so the front view sees its narrow edge;
+    the wrist turns it in toward the leg and the fingers curl in, with a thumb in front. The joint (hand_c)
+    is unchanged, so clips keep their angles."""
+    h, w = Vector(j("hand_c", s)), Vector(j("wrist", s))
+    key = ("body", "hand_" + side, "R")
+    k = SX / SY  # undo each age's height stretch on the hand: teen/adult hands came out as long pointed claws,
+    # the baby's squash flattened the fist into a sideways tab
+    if AGE == "baby":  # a small round fist hanging straight down out of the cuff (director: not massive)
+        sphere(key, tuple(w + Vector((-0.01 * s, -0.08 * k, 0.01))), 0.062, (1, k, 1))
+        sphere(key, tuple(w + Vector((-0.02 * s, -0.13 * k, 0.015))), 0.068, (0.95, 0.95 * k, 1))
+        return
+    sphere(key, tuple(w + Vector((0, -0.03 * k, 0))), 0.064, (1, k, 1))  # wrist, narrower than the forearm
+    sphere(key, tuple(w + Vector((-0.02 * s, -0.11 * k, 0))), 0.07, (0.8, 1.2 * k, 0.9))  # palm, edge-on
+    sphere(key, tuple(w + Vector((-0.05 * s, -0.18 * k, 0.01))), 0.058, (0.85, k, 0.9))  # round curled fingers, in
+    sphere(key, tuple(w + Vector((-0.06 * s, -0.08 * k, 0.04))), 0.034, (0.9, 1.3 * k, 0.9))  # thumb, inner edge
 
 
 def sleeve_top(layer, side, s, end, r):
