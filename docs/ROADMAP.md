@@ -20,7 +20,7 @@ Rules for every milestone:
 | M2 Swipe UI and stats | Done (#11) |
 | M3 Life rules | Done (#12) |
 | M4 Between-year menu | Done (#13) |
-| M5 Clay home scene | In progress (#16, #18, #20, #22, #23): dollhouse one room at a time, modular clay people. Exit (director approves captures per age band) not met yet. |
+| M5 Clay home scene | In progress (#16, #18, #20, #22, #23, #29, #32, #39, #40, #44, #45): dollhouse one room at a time, modular clay people. Exit (director approves captures per age band) not met yet. |
 | M6 ~200 cards | Done (#28, #31): 343 cards across every age band; the 1,000-life sim draws every age-band card. |
 | Careers, teen phase (§6.8) | Done (#17, #19, #21, #24, #25): Career menu, 12 careers, 120 work and juvie cards. |
 | M7 Teen release candidate | Phone build only: internal-testing AAB, director plays birth to 18. Balance moved to M13. |
@@ -29,13 +29,16 @@ Rules for every milestone:
 Open with the director:
 - Card rewrites: the director may fill in the "Your rewrite" column of the card doc
   (https://claude.ai/artifact/GttfUkHETGzrYHbmESQvfS). Copy any rewrites into `data/cards/sample.json`.
-- The 10 actions in `data/actions/actions.json` are placeholders, also open for rewrite.
+- The 9 actions in `data/actions/actions.json` are placeholders, also open for rewrite.
 
 Where the code lives:
 - Rules: `scripts/cards/` (`card_db.gd` loader/validator, `deck.gd`, `life_rules.gd`). State and save: `scripts/autoload/`.
 - Menu: `scripts/menu/action_db.gd`, `scripts/ui/year_menu.gd`. Main loop: `scripts/main.gd`.
 - Clay cut-out art pipeline: `tools/blender/build_clay_girl.py --cutout`, `tools/blender/render_cutouts.py`,
   `shaders/clay_cutout.gdshader`, demo `scenes/proto/clay_cutout.tscn`.
+- Modular people (`docs/PEOPLE.md`): Blender `tools/blender/people/` (`body.py`, `render.py`, `clip.py`),
+  sprites in `assets/people/<shape>/`, clips in `assets/people/clips/`, `scripts/people/person.gd`,
+  `shaders/person_clay.gdshader`, demo `scenes/proto/person_slice.tscn`.
 
 How to run and check (Godot 4.7.2):
 - Tests: `godot --headless --path . --script res://tests/run_tests.gd` (run `--import` first after new class_names).
