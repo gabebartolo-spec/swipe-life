@@ -40,10 +40,12 @@ const LAYER_Z := {"body": 0, "trousers": 1, "tee": 1, "sweater": 1, "face": 4}
 const FIXED_Z := {"hair_back": 0, "hair_front": 44}
 ## A hand this far (m) in front of the head draws its forearm and hand over the head and hair.
 const FRONT_M := 0.35
-const ARM_FRONT_Z := 40
+const ARM_FRONT_Z := 46  # above hair_front (44): a waving hand covers the fringe
 
 ## Body shape folder under assets/people (age_sex_build, docs/PEOPLE.md §2).
 @export var shape := "child_f_skinny"
+## Hair cut folder under <shape>/hair/ (body.py HAIRS); "" for none.
+@export var hair := ""
 ## Colours per layer: [c1, c2, c3]. Layers missing here are not worn.
 @export var look := {
 	"body": [Color("f2c9a5")],
@@ -57,6 +59,7 @@ var _bones := {}
 var _rest := {}
 var _clip := {}
 var _frame := 0
+var _seed := 0
 
 
 func _ready() -> void:
@@ -76,13 +79,22 @@ func _ready() -> void:
 		layers.name = "Layers"
 		bone.add_child(layers)
 		_bones[piece] = bone
-	var seed := 0
-	for sprite_name in m.sprites:
-		var s: Dictionary = m.sprites[sprite_name]
+	_add_sprites(ROOT.path_join(shape), m.sprites, pivots)
+	if hair != "":  # one cut of tools/blender/people/body.py HAIRS, rendered on the same canvas
+		var dir := ROOT.path_join(shape).path_join("hair").path_join(hair)
+		var hm: Dictionary = JSON.parse_string(
+			FileAccess.get_file_as_string(dir.path_join("manifest.json"))
+		)
+		_add_sprites(dir, hm.sprites, pivots)
+
+
+func _add_sprites(dir: String, sprites: Dictionary, pivots: Dictionary) -> void:
+	for sprite_name in sprites:
+		var s: Dictionary = sprites[sprite_name]
 		if not look.has(s.layer) and s.layer != "face":
 			continue
 		var spr := Sprite2D.new()
-		spr.texture = load(ROOT.path_join(shape).path_join(sprite_name + ".png"))
+		spr.texture = load(dir.path_join(sprite_name + ".png"))
 		spr.centered = false
 		spr.offset = Vector2(s.rect[0], s.rect[1]) - _arr(pivots[s.piece])
 		var part: String = s.piece.trim_suffix("_l").trim_suffix("_r")
@@ -90,13 +102,13 @@ func _ready() -> void:
 		var mat := ShaderMaterial.new()
 		mat.shader = SHADER
 		mat.set_shader_parameter("raw", s.raw)
-		mat.set_shader_parameter("seed", float(seed % 97))
+		mat.set_shader_parameter("seed", float(_seed % 97))
 		var cols: Array = look.get(s.layer, [])
 		for i in cols.size():
 			mat.set_shader_parameter("c%d" % (i + 1), cols[i])
 		spr.material = mat
 		_bones[s.piece].get_node("Layers").add_child(spr)
-		seed += 13
+		_seed += 13
 
 
 ## Plays a clip of world angles (tools/blender/people/clip.py) on twos, looping.

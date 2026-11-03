@@ -261,28 +261,6 @@
    ],
    "raw": true
   },
-  "hair_back__head": {
-   "layer": "hair_back",
-   "piece": "head",
-   "rect": [
-    379,
-    357,
-    266,
-    217
-   ],
-   "raw": false
-  },
-  "hair_front__head": {
-   "layer": "hair_front",
-   "piece": "head",
-   "rect": [
-    380,
-    383,
-    263,
-    256
-   ],
-   "raw": false
-  },
   "sweater__chest": {
    "layer": "sweater",
    "piece": "chest",

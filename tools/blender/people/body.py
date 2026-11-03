@@ -25,7 +25,11 @@ from build_clay_room import g2b, hexc  # noqa: E402
 ARGS = sys.argv[sys.argv.index("--") + 1 :]
 OUT = ARGS[0]
 AGE = ARGS[1] if len(ARGS) > 1 else "child"
-SEX = ARGS[2] if len(ARGS) > 2 else "f"  # m: short crop instead of the bob (build_clay_girl.py --sex boy)
+SEX = ARGS[2] if len(ARGS) > 2 else "f"
+OPTS = dict(a.split("=", 1) if "=" in a else (a, "1") for a in ARGS[3:])
+HAIR = OPTS.get("hair", "")  # hair=<cut>: one cut of HAIRS; no hair= builds the body without hair
+HAIR_ONLY = "hair_only" in OPTS  # only the cut, the head (occluder) and the chest (render.py's light level)
+ARGS = [a for a in ARGS if "=" not in a and a != "hair_only"]
 # approved age bands (build_clay_girl.py --age, clay_sets_front.png): the child is modelled, other ages
 # rescale the body below the neck (sx width, sy height) and the head (h) about the neck
 SX, SY, H = {"baby": (1.12, 0.55, 0.95), "child": (1, 1, 1), "teen": (0.86, 1.35, 0.9), "adult": (0.9, 1.5, 0.86)}[AGE]
@@ -216,29 +220,96 @@ def onesie():
         socket("onesie", "foot_" + side, "ankle", s, 0.025)
 
 
+def cap(r=0.5, y=1.82, sy=0.92):
+    """Back of the hair: drawn behind the head and body, so it can never cover an arm."""
+    sphere(("hair_back", "head", "R"), (0, y, -0.1), r, (1.03, sy, 0.95))
+
+
+def shell(r=0.47, y=2.0, sy=0.42):
+    """Crown shell (PEOPLE.md: no scalp between fringe lumps); the head occluder trims it to the top."""
+    sphere(("hair_front", "head", "R"), (0, y, 0.02), r, (1.08, sy, 1.0))
+
+
+def front(at, r, scale=(1, 1, 1)):
+    sphere(("hair_front", "head", "R"), at, r, scale)
+
+
+def back(at, r, scale=(1, 1, 1)):
+    sphere(("hair_back", "head", "R"), at, r, scale)
+
+
+# Cuts (director 2026-11-03: 34, any cut on anyone). Rules that keep them clean in motion:
+# - every piece hangs off the head bone, so whatever covers the scalp at rest covers it in every frame;
+# - hair_front stays above the shoulder tops (y 1.36) outside |x| 0.2, so it never covers an arm;
+#   anything longer goes on hair_back, which draws behind the body.
 def wisp():
     """Baby hair: a wisp on top (build_clay_girl.py --age baby)."""
-    sphere(("hair_front", "head", "R"), (0.05, 2.1, 0.12), 0.14, (1.3, 0.5, 1.0))
+    front((0.05, 2.1, 0.12), 0.14, (1.3, 0.5, 1.0))
 
 
-def hair():
-    # bob: cap over the back and top (drawn behind the head), fringe and side curtains in front
-    sphere(("hair_back", "head", "R"), (0, 1.82, -0.1), 0.5, (1.03, 0.92, 0.95))
-    sphere(("hair_back", "head", "R"), (0, 1.55, -0.3), 0.3, (1.1, 1.0, 0.7))
-    # crown shell: covers the scalp between the fringe lumps (the head occludes all but its top)
-    sphere(("hair_front", "head", "R"), (0, 2.0, 0.02), 0.47, (1.08, 0.42, 1.0))
-    sphere(("hair_front", "head", "R"), (-0.12, 2.0, 0.2), 0.24, (1.3, 0.55, 1.0))
-    sphere(("hair_front", "head", "R"), (0.16, 1.96, 0.26), 0.2, (1.1, 0.5, 0.8))
+def bob():
+    # cap over the back and top (drawn behind the head), fringe and side curtains in front
+    cap()
+    back((0, 1.55, -0.3), 0.3, (1.1, 1.0, 0.7))
+    shell()
+    front((-0.12, 2.0, 0.2), 0.24, (1.3, 0.55, 1.0))
+    front((0.16, 1.96, 0.26), 0.2, (1.1, 0.5, 0.8))
     for s in (-1, 1):
         chain(("hair_front", "head", "R"), (0.33 * s, 1.78, -0.05), (0.37 * s, 1.36, -0.02), 0.17, 8)
-        sphere(("hair_front", "head", "R"), (0.42 * s, 1.3, -0.02), 0.11)
+        front((0.42 * s, 1.3, -0.02), 0.11)
 
 
 def crop():
-    """Boy's short crop (build_clay_girl.py --sex boy): cap close to the skull, small fringe."""
-    sphere(("hair_back", "head", "R"), (0, 1.86, -0.08), 0.49, (1.02, 0.82, 0.95))
-    sphere(("hair_front", "head", "R"), (0, 2.0, 0.02), 0.45, (1.06, 0.36, 1.0))  # crown shell, as the bob's
-    sphere(("hair_front", "head", "R"), (0.05, 2.02, 0.22), 0.22, (1.35, 0.45, 0.9))
+    """Short crop (build_clay_girl.py --sex boy): cap close to the skull, small fringe."""
+    cap(0.49, 1.86, 0.82)
+    shell(0.45, 2.0, 0.36)
+    front((0.05, 2.02, 0.22), 0.22, (1.35, 0.45, 0.9))
+
+
+def crew_cut():
+    """Crew cut: shorter than the crop, a low flat ridge at the front, no fringe."""
+    cap(0.49, 1.87, 0.8)
+    shell(0.46, 2.01, 0.36)
+    front((0, 2.05, 0.2), 0.2, (1.6, 0.35, 0.8))
+
+
+def pixie():
+    """Pixie: short all over, a side-swept fringe, small wisps in front of the ears."""
+    cap(0.5, 1.84, 0.86)
+    shell()
+    chain(("hair_front", "head", "R"), (0.22, 2.01, 0.24), (-0.22, 1.88, 0.31), 0.14, 6)
+    for s in (-1, 1):
+        front((0.44 * s, 1.62, 0.02), 0.1, (0.8, 1.4, 0.8))
+
+
+def long_straight():
+    """Long straight, middle part: side curtains stop above the shoulders in front; the length falls behind."""
+    cap()
+    shell()
+    for s in (-1, 1):
+        front((0.15 * s, 1.98, 0.24), 0.2, (1.2, 0.5, 0.8))
+        chain(("hair_front", "head", "R"), (0.34 * s, 1.84, -0.03), (0.39 * s, 1.42, 0.0), 0.16, 8)
+        chain(("hair_back", "head", "R"), (0.38 * s, 1.7, -0.12), (0.34 * s, 0.98, -0.16), 0.16, 10)
+    chain(("hair_back", "head", "R"), (0, 1.6, -0.3), (0, 0.98, -0.3), 0.3, 8)
+
+
+def high_ponytail():
+    """High ponytail: hair pulled back off the forehead, tail swung out to one side behind the head."""
+    cap(0.5, 1.84, 0.9)
+    shell(0.47, 1.98, 0.48)
+    back((0.04, 2.05, -0.38), 0.1)
+    chain(("hair_back", "head", "R"), (0.1, 2.02, -0.45), (0.44, 1.46, -0.5), 0.12, 8)
+    back((0.46, 1.4, -0.5), 0.09)
+
+
+def afro():
+    """Afro: a big round mass, wider than the head; its lower edge sits behind the shoulders."""
+    back((0, 1.86, -0.05), 0.64, (1.08, 0.95, 0.9))
+    shell(0.58, 2.05, 0.45)
+    front((0, 2.0, 0.25), 0.3, (1.5, 0.45, 0.8))
+
+
+HAIRS = {f.__name__: f for f in (wisp, bob, crop, crew_cut, pixie, long_straight, high_ponytail, afro)}
 
 
 # Seamless joints (director 2026-11-03): two pieces meeting at a joint are also remeshed together into a
@@ -363,15 +434,20 @@ def bake_ao():
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 body()
-if AGE == "baby":
+if HAIR_ONLY:
+    for key in [k for k in PARTS if not (k[0] == "body" and k[1] in ("head", "chest"))]:
+        for ob in PARTS.pop(key):
+            bpy.data.objects.remove(ob)
+elif AGE == "baby":
     onesie()
-    wisp()
 else:
     tee()
     sweater()
     trousers()
-    crop() if SEX == "m" else hair()
-proxies()
+if HAIR:
+    HAIRS[HAIR]()
+if not HAIR_ONLY:
+    proxies()
 fuse()
 bake_ao()
 bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE", export_materials="NONE",

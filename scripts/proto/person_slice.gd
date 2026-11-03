@@ -2,7 +2,7 @@ extends Node2D
 ## Vertical slice of modular people (docs/PEOPLE.md §10 step 1): three children in the bedroom at
 ## ~180 px/m, one top tinted three ways, waving. `-- --top=sweater` swaps the top;
 ## `--ages` lines up baby, child, teen and adult instead (one body each, ~130 px/m).
-## `--sex=m` swaps in the male bodies.
+## `--sex=m` swaps in the male bodies. `--hair=a,b,c,d` picks each figure's cut (body.py HAIRS).
 ## `--seq=<n> --out=<dir>` saves n frames at 24 fps and quits.
 
 const PX_PER_M := 180.0
@@ -28,6 +28,8 @@ func _ready() -> void:
 	room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	add_child(room)
 	var ages := args.has("ages")
+	var cut := "crop" if args.get("sex", "f") == "m" else "bob"
+	var cuts: Array = args.get("hair", "").split(",", false)
 	for n in 4 if ages else 3:
 		var i := n % 3
 		var p := Person.new()
@@ -51,6 +53,9 @@ func _ready() -> void:
 				}
 			p.position = Vector2(100 + 170 * n, 580)
 			p.scale = Vector2.ONE * 130.0 / 264.8
+		p.hair = "wisp" if ages and n == 0 else cut
+		if n < cuts.size():
+			p.hair = cuts[n]
 		add_child(p)
 		p.play("res://assets/people/clips/wave.json")
 	if args.has("seq"):
