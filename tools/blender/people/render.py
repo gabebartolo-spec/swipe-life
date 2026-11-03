@@ -33,8 +33,11 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=GLB)
 scene = bpy.context.scene
 obs = [o for o in scene.objects if o.type == "MESH"]
+proxies = [o for o in obs if o.name.startswith("proxy|")]
 groups = {}
 for o in obs:
+    if o in proxies:
+        continue
     layer, piece, mask = o.name.split("|")
     groups.setdefault((layer, piece), []).append((mask, o))
 
@@ -85,6 +88,27 @@ for key, members in groups.items():
         o.color = (0, 0, 0, 1)
     shots[key] = (shot(mob + occ, False), shot(mob + occ, True), bool(occ))
 
+# seamless joints: each proxy (two pieces remeshed together, body.py) rendered alone from the front
+seams = []  # (layer, a, b, centre px, radius px, rgba)
+for o in proxies:
+    _, layer, a, b = o.name.split("|")
+    seams.append((layer, a, b, px(o["joint"][0], o["joint"][1]), o["r"] * RES / SCALE, shot([o], False)))
+yy, xx = np.mgrid[0:RES, 0:RES].astype(np.float32)
+
+
+def seamless(layer, piece, rgb):
+    """Near each of the piece's joints, show the fused proxy's pixels: weight 1 out to 1.5 socket radii (garment sockets are grown),
+    fading to 0 at 2.2, so both pieces show the same surface where they overlap."""
+    rgb = rgb.copy()
+    for lay, a, b, c, r, prx in seams:
+        if lay != layer or piece not in (a, b):
+            continue
+        d = np.hypot(xx - c[0], yy - c[1])
+        w = (np.clip((2.2 * r - d) / (0.7 * r), 0, 1) * prx[..., 3])[..., None]
+        rgb[..., :3] = rgb[..., :3] * (1 - w) + prx[..., :3] * w
+    return rgb
+
+
 lit = shots[("body", "chest")][0]
 lum = lit[..., :3] @ np.array([0.299, 0.587, 0.114], dtype=np.float32)
 k = 0.5 / float(np.median(lum[lit[..., 3] > 0.99]))  # the chest's median lit clay = 0.5
@@ -92,6 +116,7 @@ k = 0.5 / float(np.median(lum[lit[..., 3] > 0.99]))  # the chest's median lit cl
 manifest = {"res": RES, "px_per_m": RES / SCALE, "ground": px(0, 0), "pivots": {}, "rest_deg": {}, "sprites": {}}
 for (layer, piece), (rgb, msk, occluded) in shots.items():
     raw = layer == "face"
+    rgb = seamless(layer, piece, rgb)
     out = np.zeros((RES, RES, 4), dtype=np.float32)
     alpha = rgb[..., 3]
     if occluded:
@@ -100,7 +125,8 @@ for (layer, piece), (rgb, msk, occluded) in shots.items():
         out[..., :3] = rgb[..., :3]
     else:
         out[..., 0] = np.clip((rgb[..., :3] @ np.array([0.299, 0.587, 0.114], dtype=np.float32)) * k, 0, 1)
-        s = msk[..., :3].sum(-1) + 1e-6
+        s = msk[..., :3].sum(-1)
+        s = np.where(s > 0.2, s, np.inf)  # near-zero mask noise would normalise to full-strength G/B specks
         out[..., 1] = msk[..., 1] / s
         out[..., 2] = msk[..., 2] / s
     out[..., 3] = alpha

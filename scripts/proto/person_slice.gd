@@ -2,6 +2,7 @@ extends Node2D
 ## Vertical slice of modular people (docs/PEOPLE.md §10 step 1): three children in the bedroom at
 ## ~180 px/m, one top tinted three ways, waving. `-- --top=sweater` swaps the top;
 ## `--ages` lines up baby, child, teen and adult instead (one body each, ~130 px/m).
+## `--sex=m` swaps in the male bodies.
 ## `--seq=<n> --out=<dir>` saves n frames at 12 fps and quits.
 
 const PX_PER_M := 180.0
@@ -41,7 +42,7 @@ func _ready() -> void:
 		p.position = Vector2(140 + 220 * i, 560)
 		p.scale = Vector2.ONE * PX_PER_M / 264.8
 		if ages:
-			p.shape = AGES[n]
+			p.shape = AGES[n].replace("_f_", "_" + args.get("sex", "f") + "_")
 			if n == 0:  # the baby wears a onesie and a wisp of hair
 				p.look = {
 					"body": [Color(SKINS[0])],
