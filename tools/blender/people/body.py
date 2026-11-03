@@ -255,8 +255,10 @@ def bob():
     front((-0.12, 2.0, 0.2), 0.24, (1.3, 0.55, 1.0))
     front((0.16, 1.96, 0.26), 0.2, (1.1, 0.5, 0.8))
     for s in (-1, 1):
-        chain(("hair_front", "head", "R"), (0.33 * s, 1.78, -0.05), (0.37 * s, 1.36, -0.02), 0.17, 8)
-        front((0.42 * s, 1.3, -0.02), 0.11)
+        # in front down to just above the shoulder; the tips fall behind it, clear of a raised arm
+        chain(("hair_front", "head", "R"), (0.33 * s, 1.78, -0.05), (0.35 * s, 1.62, -0.04), 0.17, 4)
+        chain(("hair_back", "head", "R"), (0.35 * s, 1.6, -0.04), (0.37 * s, 1.36, -0.02), 0.17, 6)
+        back((0.42 * s, 1.3, -0.02), 0.11)
 
 
 def crop():
@@ -288,7 +290,7 @@ def long_straight():
     shell()
     for s in (-1, 1):
         front((0.15 * s, 1.98, 0.24), 0.2, (1.2, 0.5, 0.8))
-        chain(("hair_front", "head", "R"), (0.34 * s, 1.84, -0.03), (0.39 * s, 1.42, 0.0), 0.16, 8)
+        chain(("hair_front", "head", "R"), (0.34 * s, 1.84, -0.03), (0.36 * s, 1.62, -0.02), 0.16, 4)
         chain(("hair_back", "head", "R"), (0.38 * s, 1.7, -0.12), (0.34 * s, 0.98, -0.16), 0.16, 10)
     chain(("hair_back", "head", "R"), (0, 1.6, -0.3), (0, 0.98, -0.3), 0.3, 8)
 

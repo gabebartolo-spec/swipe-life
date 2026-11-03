@@ -40,7 +40,7 @@ const LAYER_Z := {"body": 0, "trousers": 1, "tee": 1, "sweater": 1, "face": 4}
 const FIXED_Z := {"hair_back": 0, "hair_front": 44}
 ## A hand this far (m) in front of the head draws its forearm and hand over the head and hair.
 const FRONT_M := 0.35
-const ARM_FRONT_Z := 46  # above hair_front (44): a waving hand covers the fringe
+const ARM_FRONT_Z := 40
 
 ## Body shape folder under assets/people (age_sex_build, docs/PEOPLE.md §2).
 @export var shape := "child_f_skinny"
