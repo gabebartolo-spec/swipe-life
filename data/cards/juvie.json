@@ -1,7 +1,7 @@
 [
   {"id": "juvie_first_night", "text": "First night in juvie. The door locks from the outside.", "ages": [14, 17],
    "requires": {"flags": ["juvie"]}, "weight": 30,
-   "left": {"label": "Cry quietly", "effects": {"happiness": -8, "stress": 8}},
+   "left": {"label": "Cry quietly", "effects": {"happiness": -8, "stress": 8}, "set_flags": ["juvie_settled"]},
    "right": {"label": "Stare at the ceiling", "effects": {"happiness": -4, "stress": 10}, "set_flags": ["juvie_settled"]}},
   {"id": "juvie_cellmate", "text": "Your roommate wants your pudding cup. Every day.", "ages": [14, 17],
    "requires": {"flags": ["juvie"]}, "weight": 20,

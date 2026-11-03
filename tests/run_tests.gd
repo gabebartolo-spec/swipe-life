@@ -288,6 +288,11 @@ func _test_career_year_end() -> void:
 	# one regular job and one special at once; a second job replaces the first
 	_check(CareerRules.apply(db.by_id.retail, state, rng), "can't take the retail job")
 	_check(CareerRules.apply(db.by_id.cafe, state, rng), "can't swap to the café")
+	# swapping jobs ends the old job's story flags
+	state.flags["work_job_flirting"] = true
+	_check(CareerRules.apply(db.by_id.retail, state, rng), "can't swap back to retail")
+	_check(not state.flags.has("work_job_flirting"), "old job's flags survived a swap")
+	_check(CareerRules.apply(db.by_id.cafe, state, rng), "can't swap to the café again")
 	state.stats.money = 30
 	_check(CareerRules.apply(db.by_id.actor, state, rng), "can't add a special career")
 	_check(state.careers.keys().size() == 2, "expected a job and a special")
@@ -321,8 +326,14 @@ func _test_career_year_end() -> void:
 	_check(state.partner.get("name") == crush, "partner lost with the job")
 	_check(state.flags.has("dating_work_partner"), "dating set no partner flag")
 	_check(state.careers.has("special"), "firing the job ended the special too")
+	# a second work crush can't replace the partner you have
+	CareerRules.date_crush(state, "special")
+	_check(state.partner.get("name") == crush, "a card date replaced the partner")
+	_check(not state.flags.has("work_special_dating"), "dating flag set while partnered")
 	# a gang career heats up until the police step in: juvie and a record
 	state.stats.karma = 10
+	state.used = {"juvie_release": true, "juvie_first_night": true}  # served juvie once before
+	state.flags["juvie_settled"] = true
 	CareerRules.apply(db.by_id.gangster, state, rng)
 	var years := 0
 	while state.careers.has("special") and years < 100:
@@ -330,6 +341,9 @@ func _test_career_year_end() -> void:
 		CareerRules.year_end(state, db, rng)
 		years += 1
 	_check(state.flags.has("juvie") and state.flags.has("criminal_record"), "no juvie")
+	_check(
+		state.used.is_empty() and not state.flags.has("juvie_settled"), "juvie chain can't replay"
+	)
 	state.stats.health = 80
 	state.stats.karma = 80
 	_check(not db.by_id.lifeguard in db.available(state), "lifeguard hires with a record")
@@ -380,9 +394,11 @@ func _test_career_cards() -> void:
 	_check(state.careers.special.id == "musician", "leaving the job touched the special")
 	var breakup := {"id": "b", "left": {"label": "End it", "partner": "end"}}
 	state.flags["dating_work_partner"] = true
+	state.flags["work_job_dating"] = true
 	deck.choose(breakup, "left", state)
 	_check(state.partner.is_empty(), "breakup kept the partner")
 	_check(not state.flags.has("dating_work_partner"), "breakup kept the dating flag")
+	_check(not state.flags.has("work_job_dating"), "breakup kept the work dating chain")
 	state.partner = {"name": "Sam"}
 	var fail := {"id": "r", "left": {"label": "Plead", "risk": {"chance": 1.0, "partner": "end"}}}
 	deck.choose(fail, "left", state)

@@ -31,6 +31,8 @@ static func apply(career: Dictionary, state, rng: RandomNumberGenerator) -> bool
 	if (cost > 0 and state.stats.money < cost) or held.get("id") == career.id:
 		return false
 	state.change_stat("money", -cost)
+	if not held.is_empty():  # the old job's story flags end with it
+		leave(state, career.kind)
 	state.careers[career.kind] = {
 		"id": career.id,
 		"rank": 0,
@@ -92,6 +94,8 @@ static func ask_promotion(state, slot: String, db: CareerDB) -> String:
 
 ## The work crush becomes your partner. They stay your partner after the job ends.
 static func date_crush(state, slot: String) -> void:
+	if not state.partner.is_empty():  # one partner at a time, as the staff flirt path checks
+		return
 	var crush: Dictionary = state.careers[slot].coworkers.crush
 	state.partner = {"name": crush.name, "affinity": maxi(int(crush.affinity), 50), "met": "work"}
 	# the dating and partner card chains key off these flags, however the date started
@@ -132,6 +136,10 @@ static func _year(state, slot, entry, career, rng, results: Array) -> void:
 		change_meter(entry, HEAT_PER_RANK * (int(entry.rank) + 1))
 		if rng.randf() < entry.meter * ARREST_PER_HEAT:
 			leave(state, slot, "juvie")  # a juvie card chain picks this flag up
+			state.flags.erase("juvie_settled")  # a second arrest replays the chain
+			for id in state.used.keys():
+				if id.begins_with("juvie_"):
+					state.used.erase(id)
 			state.flags[RECORD] = true
 			state.change_stat("karma", -10)
 			state.change_stat("happiness", -15)
