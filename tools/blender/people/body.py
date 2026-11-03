@@ -185,7 +185,8 @@ def body():
         socket("body", "foot_" + side, "ankle", s)
         # face beads ride on the head piece
         sphere(("face", "head", "eyes"), (0.14 * s, 1.64, 0.43), 0.05, (0.8, 1.15, 0.5), 16)
-        sphere(("face", "head", "blush"), (0.25 * s, 1.55, 0.38), 0.06, (1, 0.55, 0.35), 16)
+        if AGE in ("baby", "child"):  # director: blush only on babies and children
+            sphere(("face", "head", "blush"), (0.25 * s, 1.55, 0.38), 0.06, (1, 0.55, 0.35), 16)
     sphere(("face", "head", "mouth"), (0, 1.52, 0.44), 0.04, (1.2, 0.5, 0.4), 16)
 
 
