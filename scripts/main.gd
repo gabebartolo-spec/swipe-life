@@ -18,7 +18,7 @@ var autoplay := "--autoplay" in OS.get_cmdline_user_args()
 
 
 func _ready() -> void:
-	var debug_set := OS.get_cmdline_user_args().any(func(a): return a.begins_with("--set="))
+	var debug_set := Array(OS.get_cmdline_user_args()).any(func(a): return a.begins_with("--set="))
 	if debug_set or not SaveSystem.load_life():  # resume at the last year boundary (GDD §8.2–8.3)
 		_new_life()
 	var db := CardDB.new()
