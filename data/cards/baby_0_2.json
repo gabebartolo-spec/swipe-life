@@ -1,0 +1,854 @@
+[
+  {
+    "id": "b0_first_bath",
+    "text": "Your first bath. The water is warm and suspicious.",
+    "ages": [
+      0,
+      0
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Scream",
+      "effects": {
+        "stress": 3,
+        "relationships": -1
+      }
+    },
+    "right": {
+      "label": "Float",
+      "effects": {
+        "happiness": 2,
+        "health": 2
+      },
+      "result": "You fall asleep in a towel."
+    }
+  },
+  {
+    "id": "b0_night_feed",
+    "text": "It is 3 a.m. You are hungry.",
+    "ages": [
+      0,
+      0
+    ],
+    "left": {
+      "label": "Wait politely",
+      "effects": {
+        "health": -2,
+        "karma": 2
+      },
+      "result": "Nobody hears polite."
+    },
+    "right": {
+      "label": "Wail",
+      "effects": {
+        "health": 3,
+        "relationships": -2
+      }
+    }
+  },
+  {
+    "id": "b0_grab_finger",
+    "text": "A giant finger hovers near your hand.",
+    "ages": [
+      0,
+      0
+    ],
+    "left": {
+      "label": "Ignore it"
+    },
+    "right": {
+      "label": "Grab it hard",
+      "effects": {
+        "relationships": 4,
+        "happiness": 1
+      },
+      "result": "The giant makes a noise like a kettle."
+    }
+  },
+  {
+    "id": "b0_first_smile",
+    "text": "Someone makes a ridiculous face at you.",
+    "ages": [
+      0,
+      1
+    ],
+    "room": "living",
+    "left": {
+      "label": "Stare blankly",
+      "effects": {
+        "smarts": 1
+      }
+    },
+    "right": {
+      "label": "Smile",
+      "effects": {
+        "relationships": 5,
+        "happiness": 1
+      },
+      "result": "They run to tell everyone."
+    }
+  },
+  {
+    "id": "b0_pacifier",
+    "text": "The pacifier fell on the floor.",
+    "ages": [
+      0,
+      1
+    ],
+    "left": {
+      "label": "Cry for a new one",
+      "effects": {
+        "stress": 2,
+        "health": 1
+      }
+    },
+    "right": {
+      "label": "Pick it up, suck it",
+      "effects": {
+        "health": -3,
+        "happiness": 2
+      },
+      "result": "Floor flavor."
+    }
+  },
+  {
+    "id": "b0_tummy_time",
+    "text": "Tummy time. Your face is in the rug.",
+    "ages": [
+      0,
+      1
+    ],
+    "room": "living",
+    "left": {
+      "label": "Give up",
+      "effects": {
+        "stress": 2
+      }
+    },
+    "right": {
+      "label": "Lift your head",
+      "effects": {
+        "health": 3,
+        "stress": 1
+      }
+    },
+    "up": {
+      "label": "Roll over completely",
+      "effects": {
+        "health": 5,
+        "smarts": 2
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "health": -3,
+          "stress": 3
+        },
+        "result": "You roll under the sofa."
+      }
+    }
+  },
+  {
+    "id": "b0_blowout",
+    "text": "Diaper emergency. It is up your back somehow.",
+    "ages": [
+      0,
+      1
+    ],
+    "left": {
+      "label": "Lie very still",
+      "effects": {
+        "looks": -2
+      }
+    },
+    "right": {
+      "label": "Kick everywhere",
+      "effects": {
+        "happiness": 1,
+        "relationships": -3
+      },
+      "result": "Wallpaper is involved."
+    }
+  },
+  {
+    "id": "b0_visitor",
+    "text": "A stranger with loud perfume wants to hold you.",
+    "ages": [
+      0,
+      1
+    ],
+    "left": {
+      "label": "Go along with it",
+      "effects": {
+        "relationships": 3,
+        "stress": 2
+      }
+    },
+    "right": {
+      "label": "Scream until returned",
+      "effects": {
+        "stress": -1,
+        "relationships": -2
+      }
+    }
+  },
+  {
+    "id": "b0_lullaby",
+    "text": "A parent sings to you. Badly.",
+    "ages": [
+      0,
+      1
+    ],
+    "left": {
+      "label": "Cry louder",
+      "effects": {
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Drift off",
+      "effects": {
+        "health": 2,
+        "happiness": 1,
+        "relationships": 2
+      }
+    }
+  },
+  {
+    "id": "b0_teething",
+    "text": "Your first tooth is coming in. Everything hurts.",
+    "ages": [
+      0,
+      1
+    ],
+    "left": {
+      "label": "Chew the crib",
+      "effects": {
+        "stress": -2,
+        "looks": -1
+      }
+    },
+    "right": {
+      "label": "Chew a cold spoon",
+      "effects": {
+        "health": 2,
+        "stress": -1
+      }
+    },
+    "up": {
+      "label": "Chew a parent",
+      "effects": {
+        "stress": -3,
+        "relationships": -3
+      },
+      "result": "They yelp. You feel better."
+    }
+  },
+  {
+    "id": "b0_first_word",
+    "text": "Everyone is waiting for your first word.",
+    "ages": [
+      0,
+      1
+    ],
+    "left": {
+      "label": "Say \"no\"",
+      "effects": {
+        "smarts": 3,
+        "relationships": -1
+      },
+      "set_flags": [
+        "first_word_no"
+      ]
+    },
+    "right": {
+      "label": "Say a parent's name",
+      "effects": {
+        "relationships": 6,
+        "smarts": 2
+      }
+    },
+    "up": {
+      "label": "Say the dog's name",
+      "effects": {
+        "happiness": 2,
+        "relationships": -2,
+        "smarts": 2
+      },
+      "result": "The dog is thrilled. Nobody else is."
+    }
+  },
+  {
+    "id": "b0_no_phase",
+    "text": "You discovered the word \"no\". It is powerful.",
+    "ages": [
+      1,
+      2
+    ],
+    "requires": {
+      "flags": [
+        "first_word_no"
+      ]
+    },
+    "left": {
+      "label": "Use it sparingly",
+      "effects": {
+        "karma": 2
+      }
+    },
+    "right": {
+      "label": "Use it on everything",
+      "effects": {
+        "happiness": 2,
+        "relationships": -4,
+        "stress": 2
+      }
+    }
+  },
+  {
+    "id": "b0_crawl",
+    "text": "Something shiny is across the room.",
+    "ages": [
+      0,
+      1
+    ],
+    "left": {
+      "label": "Wait for delivery",
+      "effects": {
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Crawl to it",
+      "effects": {
+        "health": 3,
+        "smarts": 1
+      },
+      "set_flags": [
+        "can_crawl"
+      ]
+    }
+  },
+  {
+    "id": "b0_cupboard",
+    "text": "You crawled into the kitchen. The low cupboard opens.",
+    "ages": [
+      1,
+      1
+    ],
+    "room": "kitchen",
+    "requires": {
+      "flags": [
+        "can_crawl"
+      ]
+    },
+    "left": {
+      "label": "Pots and pans",
+      "effects": {
+        "happiness": 3,
+        "relationships": -2
+      },
+      "result": "A drum solo nobody asked for."
+    },
+    "right": {
+      "label": "Close it again",
+      "effects": {
+        "karma": 1
+      }
+    }
+  },
+  {
+    "id": "b0_first_steps",
+    "text": "You stand up holding the sofa. Let go?",
+    "ages": [
+      1,
+      1
+    ],
+    "room": "living",
+    "left": {
+      "label": "Sit back down",
+      "effects": {
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Let go",
+      "effects": {
+        "health": 3,
+        "happiness": 2
+      },
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "health": -2
+        },
+        "result": "Bump. Then giggles."
+      },
+      "set_flags": [
+        "can_walk"
+      ]
+    }
+  },
+  {
+    "id": "b0_stairs_gate",
+    "text": "The stair gate is left open.",
+    "ages": [
+      1,
+      2
+    ],
+    "requires": {
+      "flags": [
+        "can_walk"
+      ]
+    },
+    "left": {
+      "label": "Toddle away",
+      "effects": {
+        "karma": 1
+      }
+    },
+    "right": {
+      "label": "Climb",
+      "effects": {
+        "happiness": 2
+      },
+      "risk": {
+        "chance": 0.2,
+        "effects": {
+          "health": -6,
+          "stress": 4
+        },
+        "result": "Three steps down, the fast way."
+      }
+    }
+  },
+  {
+    "id": "b0_mashed_food",
+    "text": "A spoon of green mush approaches.",
+    "ages": [
+      0,
+      1
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Mouth closed",
+      "effects": {
+        "health": -1,
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Eat it",
+      "effects": {
+        "health": 3
+      }
+    },
+    "up": {
+      "label": "Blow raspberries",
+      "effects": {
+        "happiness": 2,
+        "looks": -2
+      },
+      "result": "Green everywhere. Worth it."
+    }
+  },
+  {
+    "id": "b0_high_chair",
+    "text": "You are in the high chair. The floor is far below.",
+    "ages": [
+      1,
+      2
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Eat your food",
+      "effects": {
+        "health": 2
+      }
+    },
+    "right": {
+      "label": "Drop food, watch",
+      "effects": {
+        "smarts": 3,
+        "relationships": -2
+      },
+      "result": "Gravity works every time. You check 40 times."
+    }
+  },
+  {
+    "id": "b0_pet_tail",
+    "text": "The family pet has a tail. It is right there.",
+    "ages": [
+      1,
+      2
+    ],
+    "room": "living",
+    "left": {
+      "label": "Pat gently",
+      "effects": {
+        "karma": 3,
+        "happiness": 1
+      }
+    },
+    "right": {
+      "label": "Pull it",
+      "effects": {
+        "happiness": 1,
+        "karma": -3
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "health": -3,
+          "stress": 3
+        },
+        "result": "The pet has opinions."
+      }
+    }
+  },
+  {
+    "id": "b0_new_sibling",
+    "text": "A new baby came home. Everyone is looking at it.",
+    "ages": [
+      1,
+      2
+    ],
+    "weight": 4,
+    "left": {
+      "label": "Kiss its head",
+      "effects": {
+        "relationships": 4,
+        "karma": 2
+      },
+      "set_flags": [
+        "has_sibling"
+      ]
+    },
+    "right": {
+      "label": "Ask to send it back",
+      "effects": {
+        "stress": 3,
+        "relationships": -2
+      },
+      "set_flags": [
+        "has_sibling"
+      ]
+    }
+  },
+  {
+    "id": "b0_sibling_toy",
+    "text": "Your sibling has your old rattle.",
+    "ages": [
+      2,
+      2
+    ],
+    "requires": {
+      "flags": [
+        "has_sibling"
+      ]
+    },
+    "left": {
+      "label": "Let them",
+      "effects": {
+        "karma": 4
+      }
+    },
+    "right": {
+      "label": "Take it back",
+      "effects": {
+        "happiness": 2,
+        "relationships": -3
+      }
+    }
+  },
+  {
+    "id": "b0_bedtime",
+    "text": "Bedtime. You are not tired. You are very tired.",
+    "ages": [
+      1,
+      2
+    ],
+    "left": {
+      "label": "Go to sleep",
+      "effects": {
+        "health": 3,
+        "stress": -2
+      }
+    },
+    "right": {
+      "label": "Fight it",
+      "effects": {
+        "happiness": 1,
+        "health": -2,
+        "stress": 2
+      },
+      "result": "You fall asleep mid-shout."
+    }
+  },
+  {
+    "id": "b0_tantrum",
+    "text": "You wanted the blue cup. You got the red cup.",
+    "ages": [
+      1,
+      2
+    ],
+    "room": "kitchen",
+    "left": {
+      "label": "Accept the red cup",
+      "effects": {
+        "karma": 2,
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Full meltdown",
+      "effects": {
+        "stress": -2,
+        "relationships": -3
+      },
+      "result": "Everyone in the room ages a year."
+    }
+  },
+  {
+    "id": "b0_peekaboo",
+    "text": "A parent hides behind their hands. They are gone forever.",
+    "ages": [
+      0,
+      1
+    ],
+    "left": {
+      "label": "Panic",
+      "effects": {
+        "stress": 2
+      }
+    },
+    "right": {
+      "label": "Wait",
+      "effects": {
+        "smarts": 2
+      }
+    },
+    "up": {
+      "label": "Laugh so hard you hiccup",
+      "effects": {
+        "happiness": 3,
+        "relationships": 3
+      }
+    }
+  },
+  {
+    "id": "b0_bath_drain",
+    "text": "The bath drain gurgles. It wants to eat you.",
+    "ages": [
+      1,
+      2
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Get out now",
+      "effects": {
+        "stress": 2
+      }
+    },
+    "right": {
+      "label": "Splash it to death",
+      "effects": {
+        "happiness": 2,
+        "looks": 1
+      },
+      "result": "The bathroom floor is a lake."
+    }
+  },
+  {
+    "id": "b0_potty",
+    "text": "Someone shows you a tiny plastic toilet.",
+    "ages": [
+      2,
+      2
+    ],
+    "room": "bathroom",
+    "left": {
+      "label": "Wear it as a hat",
+      "effects": {
+        "happiness": 2,
+        "relationships": -1
+      }
+    },
+    "right": {
+      "label": "Try it",
+      "effects": {
+        "smarts": 3,
+        "relationships": 3
+      }
+    }
+  },
+  {
+    "id": "b0_crayon_wall",
+    "text": "You found a crayon. The wall is big and empty.",
+    "ages": [
+      2,
+      2
+    ],
+    "room": "living",
+    "left": {
+      "label": "Draw on paper",
+      "effects": {
+        "smarts": 2,
+        "karma": 1
+      }
+    },
+    "right": {
+      "label": "Draw on the wall",
+      "effects": {
+        "happiness": 3,
+        "relationships": -4
+      },
+      "result": "A masterpiece. Nobody agrees."
+    }
+  },
+  {
+    "id": "b0_doctor_shot",
+    "text": "The doctor has a small needle and a big smile.",
+    "ages": [
+      0,
+      2
+    ],
+    "left": {
+      "label": "Scream",
+      "effects": {
+        "health": 4,
+        "stress": 3
+      }
+    },
+    "right": {
+      "label": "Stare at the doctor",
+      "effects": {
+        "health": 4,
+        "karma": 1
+      },
+      "result": "You don't flinch. Legend."
+    }
+  },
+  {
+    "id": "b0_vacuum",
+    "text": "The vacuum is on. It is a monster.",
+    "ages": [
+      0,
+      2
+    ],
+    "room": "living",
+    "left": {
+      "label": "Cry",
+      "effects": {
+        "stress": 3
+      }
+    },
+    "right": {
+      "label": "Chase it",
+      "effects": {
+        "happiness": 2,
+        "health": 1
+      }
+    }
+  },
+  {
+    "id": "b0_playdate",
+    "text": "Another toddler is here. They have a better toy.",
+    "ages": [
+      1,
+      2
+    ],
+    "left": {
+      "label": "Share yours",
+      "effects": {
+        "relationships": 4,
+        "karma": 2
+      }
+    },
+    "right": {
+      "label": "Take theirs",
+      "effects": {
+        "happiness": 1,
+        "karma": -3,
+        "relationships": -2
+      },
+      "result": "Both of you cry."
+    }
+  },
+  {
+    "id": "b0_hiding",
+    "text": "Hide and seek. You hide behind a curtain. Your feet show.",
+    "ages": [
+      2,
+      2
+    ],
+    "left": {
+      "label": "Stay hidden",
+      "effects": {
+        "happiness": 2,
+        "smarts": 1
+      }
+    },
+    "right": {
+      "label": "Yell where you are",
+      "effects": {
+        "relationships": 3,
+        "happiness": 1
+      },
+      "result": "Found instantly. Proud anyway."
+    }
+  },
+  {
+    "id": "b0_sock_eater",
+    "text": "There is a sock in your mouth. You don't know whose.",
+    "ages": [
+      0,
+      2
+    ],
+    "left": {
+      "label": "Spit it out",
+      "effects": {
+        "health": 1
+      }
+    },
+    "right": {
+      "label": "Keep chewing",
+      "effects": {
+        "happiness": 1,
+        "health": -2
+      }
+    },
+    "up": {
+      "label": "Hide it under the sofa",
+      "effects": {
+        "smarts": 2
+      },
+      "result": "Nobody finds it for a year."
+    }
+  },
+  {
+    "id": "b0_mirror",
+    "text": "A baby in the mirror copies everything you do.",
+    "ages": [
+      0,
+      1
+    ],
+    "room": "bathroom",
+    "weight": 3,
+    "left": {
+      "label": "Fight it",
+      "effects": {
+        "stress": 2,
+        "happiness": 1
+      }
+    },
+    "right": {
+      "label": "Kiss it",
+      "effects": {
+        "looks": 2,
+        "happiness": 2
+      },
+      "result": "Slobber on glass. Friendship forever."
+    }
+  }
+]

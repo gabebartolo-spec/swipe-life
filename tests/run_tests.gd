@@ -115,6 +115,13 @@ func _test_life_rules() -> void:
 	# Health 0 ends a life (GDD §5.3a)
 	state.new_life()
 	_check(deck.choose({"left": {"effects": {"health": -100}}}, "left", state).died, "HP 0 lived")
+	# pocket money: none before 6, $10 from 6, $20 from 10 (GDD §4.3)
+	state.new_life()
+	for a in [[5, 0], [6, 10], [10, 20]]:
+		state.age = a[0]
+		var before: int = state.stats.money
+		LifeRules.year_end(state, rng)
+		_check(state.stats.money - before == a[1], "pocket money at %d" % a[0])
 	# high Stress starts anxiety; it holds while Stress stays high, and drains Health
 	state.new_life()
 	state.age = 10
@@ -185,7 +192,7 @@ func _test_actions() -> void:
 		_check(want in ids, "15-year-old can't see %s" % want)
 	_check("jobs" in ActionDB.tabs_at(15), "no career tab at 15")
 	_check("shop" not in ActionDB.tabs_at(17), "shop open before 18")
-	# money limits actions (§6.5); every action adds Stress (§6.6)
+	# money limits actions (§6.5); effort adds Stress, fun lowers it (§6.6)
 	var state := GameStateScript.new()
 	state.new_life()
 	var doctor: Dictionary = db.actions.filter(func(a): return a.id == "doctor")[0]
@@ -193,6 +200,10 @@ func _test_actions() -> void:
 	state.stats.money = 25
 	_check(ActionDB.perform(doctor, state) and state.stats.money == 5, "doctor cost wrong")
 	_check(state.stats.stress > 0, "action added no stress")
+	var stressed: int = state.stats.stress
+	var toys: Dictionary = db.actions.filter(func(a): return a.id == "play_toys")[0]
+	ActionDB.perform(toys, state)
+	_check(state.stats.stress < stressed, "playing with toys didn't lower stress")
 	state.free()
 	# the validator rejects an action without stress or with a bad tab
 	var bad := ActionDB.new()
@@ -267,8 +278,13 @@ func _test_career_year_end() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 3
 	var state = _make_state()
-	# F1 costs $300 up front: money is the only limit (GDD §6.5)
+	# F1 costs $140 up front, so only a rich teen can join: money is the only limit (GDD §6.5)
+	state.stats.money = 139
 	_check(not CareerRules.apply(db.by_id.formula1, state, rng), "F1 without money")
+	# a free job is open even in debt
+	state.stats.money = -50
+	_check(CareerRules.apply(db.by_id.paper_round, state, rng), "debt blocked a free job")
+	state.stats.money = 0
 	# one regular job and one special at once; a second job replaces the first
 	_check(CareerRules.apply(db.by_id.retail, state, rng), "can't take the retail job")
 	_check(CareerRules.apply(db.by_id.cafe, state, rng), "can't swap to the café")

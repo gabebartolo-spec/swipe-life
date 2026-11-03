@@ -78,7 +78,7 @@
     "left": {
       "label": "Argue",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "relationships": -3
       },
       "result": "You get them anyway."
@@ -103,7 +103,7 @@
       "label": "Laugh it off",
       "effects": {
         "relationships": 4,
-        "happiness": 2
+        "happiness": 1
       }
     },
     "right": {
@@ -132,8 +132,8 @@
     "right": {
       "label": "Skip to the apps",
       "effects": {
-        "happiness": 6,
-        "stress": 2
+        "happiness": 3,
+        "stress": -2
       }
     }
   },
@@ -192,7 +192,7 @@
     "right": {
       "label": "That can't be right",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "health": -2
       }
     }
@@ -242,7 +242,7 @@
     "right": {
       "label": "Go say hi",
       "effects": {
-        "happiness": 5,
+        "happiness": 3,
         "relationships": 3
       },
       "risk": {
@@ -256,7 +256,7 @@
     "up": {
       "label": "Ask them to dance",
       "effects": {
-        "happiness": 12,
+        "happiness": 6,
         "looks": 2
       },
       "risk": {
@@ -286,7 +286,7 @@
     "right": {
       "label": "Send a meme back",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "relationships": 2
       }
     }
@@ -354,7 +354,7 @@
     "left": {
       "label": "Sneak yours out",
       "effects": {
-        "happiness": 2,
+        "happiness": 1,
         "relationships": -4
       },
       "risk": {
@@ -414,7 +414,7 @@
       "effects": {
         "relationships": 7,
         "karma": 4,
-        "happiness": 3
+        "happiness": 2
       }
     }
   },
@@ -464,7 +464,7 @@
     "right": {
       "label": "Watch every second",
       "effects": {
-        "happiness": 4
+        "happiness": 2
       },
       "risk": {
         "chance": 0.5,
@@ -486,7 +486,7 @@
     "left": {
       "label": "Go out",
       "effects": {
-        "happiness": 6,
+        "happiness": 3,
         "smarts": -3,
         "stress": 4
       }
@@ -570,7 +570,7 @@
       "label": "Pop it",
       "effects": {
         "looks": -3,
-        "happiness": 2
+        "happiness": 1
       },
       "risk": {
         "chance": 0.5,
@@ -607,7 +607,7 @@
       "effects": {
         "looks": 3,
         "money": -40,
-        "happiness": 3
+        "happiness": 2
       },
       "risk": {
         "chance": 0.3,
@@ -660,7 +660,7 @@
       "label": "Teach yourself",
       "effects": {
         "smarts": 3,
-        "happiness": 4,
+        "happiness": 2,
         "stress": -2
       }
     }
@@ -675,14 +675,14 @@
     "left": {
       "label": "Keep it private",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "stress": -3
       }
     },
     "right": {
       "label": "Post your best one",
       "effects": {
-        "happiness": 3
+        "happiness": 2
       },
       "risk": {
         "chance": 0.4,
@@ -695,7 +695,7 @@
     "up": {
       "label": "Enter the town art contest",
       "effects": {
-        "happiness": 8,
+        "happiness": 4,
         "career": 3
       },
       "risk": {
@@ -791,7 +791,7 @@
     "left": {
       "label": "Spend it today",
       "effects": {
-        "happiness": 6,
+        "happiness": 3,
         "money": 20
       }
     },
@@ -843,7 +843,7 @@
     "right": {
       "label": "Try one",
       "effects": {
-        "happiness": 3,
+        "happiness": 2,
         "stress": 3
       },
       "risk": {
@@ -902,7 +902,7 @@
     "right": {
       "label": "Pick the music",
       "effects": {
-        "happiness": 4,
+        "happiness": 2,
         "relationships": 3
       },
       "risk": {
@@ -931,14 +931,14 @@
     "right": {
       "label": "Name it",
       "effects": {
-        "happiness": 6
+        "happiness": 3
       },
       "result": "It eats the name tag."
     },
     "up": {
       "label": "Ride it to school",
       "effects": {
-        "happiness": 10,
+        "happiness": 5,
         "relationships": 5
       },
       "risk": {

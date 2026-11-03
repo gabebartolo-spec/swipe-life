@@ -24,6 +24,8 @@ const ILLNESSES := {
 }
 const ONSET_PER_POINT := 0.01  # +1% onset chance per point past threshold, from 10% at it
 const RECOVERY_CHANCE := 0.15
+# pocket money: [from age, $ a year], highest age first (GDD §4.3)
+const POCKET_MONEY := [[10, 20], [6, 10]]
 
 
 static func _past(state, rule: Array) -> int:
@@ -33,6 +35,10 @@ static func _past(state, rule: Array) -> int:
 ## Applies the year's illness rules. Returns {results, died, cause} like Deck.choose.
 static func year_end(state, rng: RandomNumberGenerator) -> Dictionary:
 	var out := {"results": [], "died": false, "cause": ""}
+	for band in POCKET_MONEY:
+		if state.age >= band[0]:
+			state.change_stat("money", band[1])
+			break
 	for id in ILLNESSES:
 		var ill: Dictionary = ILLNESSES[id]
 		if state.flags.has(id):

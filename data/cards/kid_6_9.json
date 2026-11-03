@@ -1,0 +1,1071 @@
+[
+ {
+  "id": "k6_new_teacher",
+  "text": "Your new teacher has a whistle. She uses it indoors.",
+  "ages": [
+   6,
+   7
+  ],
+  "left": {
+   "label": "Hide behind a taller kid",
+   "effects": {
+    "stress": 2,
+    "smarts": -1
+   }
+  },
+  "right": {
+   "label": "Sit at the front",
+   "effects": {
+    "smarts": 3,
+    "stress": 2
+   }
+  }
+ },
+ {
+  "id": "k6_lost_tooth",
+  "text": "A front tooth wobbles loose at lunch.",
+  "ages": [
+   6,
+   7
+  ],
+  "left": {
+   "label": "Pull it now",
+   "effects": {
+    "happiness": 2,
+    "health": -1
+   },
+   "result": "Blood on the sandwich. Worth it."
+  },
+  "right": {
+   "label": "Save it for your pillow",
+   "effects": {
+    "happiness": 1,
+    "money": 2
+   },
+   "result": "There is a coin under it. Nobody explains how."
+  }
+ },
+ {
+  "id": "k6_reading_star",
+  "text": "You read a whole page out loud without stopping.",
+  "ages": [
+   6,
+   7
+  ],
+  "left": {
+   "label": "Read another",
+   "effects": {
+    "smarts": 3
+   }
+  },
+  "right": {
+   "label": "Take a bow",
+   "effects": {
+    "happiness": 2,
+    "relationships": 1
+   }
+  }
+ },
+ {
+  "id": "k6_glue_snack",
+  "text": "The kid next to you is eating the glue.",
+  "ages": [
+   6,
+   6
+  ],
+  "left": {
+   "label": "Tell the teacher",
+   "effects": {
+    "karma": 1,
+    "relationships": -2
+   }
+  },
+  "right": {
+   "label": "Try some",
+   "effects": {
+    "happiness": 1,
+    "health": -2
+   },
+   "result": "Tastes like sad paper."
+  },
+  "up": {
+   "label": "Start a glue tasting club",
+   "effects": {
+    "relationships": 4,
+    "health": -3
+   },
+   "risk": {
+    "chance": 0.4,
+    "effects": {
+     "health": -3,
+     "stress": 2
+    },
+    "result": "The club closes after one meeting. Stomach ache."
+   }
+  }
+ },
+ {
+  "id": "k6_show_and_tell",
+  "text": "Show and tell is tomorrow. You forgot.",
+  "ages": [
+   6,
+   8
+  ],
+  "room": "living",
+  "left": {
+   "label": "Bring a rock",
+   "effects": {
+    "stress": 1
+   },
+   "result": "You call it a meteor. Two kids believe you."
+  },
+  "right": {
+   "label": "Bring the cat",
+   "effects": {
+    "happiness": 2,
+    "relationships": 2
+   },
+   "risk": {
+    "chance": 0.5,
+    "effects": {
+     "stress": 4,
+     "relationships": -2
+    },
+    "result": "The cat escapes into the vents."
+   }
+  }
+ },
+ {
+  "id": "k6_bully_snack",
+  "text": "A bigger kid wants your snack. Every day.",
+  "ages": [
+   6,
+   9
+  ],
+  "left": {
+   "label": "Hand it over",
+   "effects": {
+    "happiness": -3,
+    "stress": 3
+   },
+   "set_flags": [
+    "bullied_k6"
+   ]
+  },
+  "right": {
+   "label": "Tell a grown-up",
+   "effects": {
+    "stress": -1,
+    "karma": 1,
+    "relationships": -1
+   }
+  }
+ },
+ {
+  "id": "k6_bully_back",
+  "text": "The snack kid is back. You have been thinking about this.",
+  "ages": [
+   7,
+   9
+  ],
+  "requires": {
+   "flags": [
+    "bullied_k6"
+   ]
+  },
+  "left": {
+   "label": "Stand your ground",
+   "effects": {
+    "stress": -3,
+    "happiness": 2
+   },
+   "risk": {
+    "chance": 0.3,
+    "effects": {
+     "health": -4
+    },
+    "result": "Your ground was not that solid."
+   }
+  },
+  "right": {
+   "label": "Share half",
+   "effects": {
+    "relationships": 3,
+    "karma": 2
+   },
+   "result": "Turns out they never get a snack at home.",
+   "set_flags": [
+    "bully_friend"
+   ]
+  }
+ },
+ {
+  "id": "k6_bully_friend",
+  "text": "The old snack kid saves you a seat on the bus.",
+  "ages": [
+   8,
+   9
+  ],
+  "requires": {
+   "flags": [
+    "bully_friend"
+   ]
+  },
+  "left": {
+   "label": "Sit somewhere else",
+   "effects": {
+    "relationships": -2
+   }
+  },
+  "right": {
+   "label": "Sit down",
+   "effects": {
+    "relationships": 4,
+    "happiness": 1
+   }
+  }
+ },
+ {
+  "id": "k6_goldfish",
+  "text": "You win a goldfish at the fair.",
+  "ages": [
+   6,
+   8
+  ],
+  "room": "living",
+  "left": {
+   "label": "Name it after your teacher",
+   "effects": {
+    "happiness": 2
+   },
+   "set_flags": [
+    "pet_fish"
+   ]
+  },
+  "right": {
+   "label": "Name it Fish",
+   "effects": {
+    "happiness": 1,
+    "smarts": -1
+   },
+   "set_flags": [
+    "pet_fish"
+   ]
+  },
+  "up": {
+   "label": "Promise to love it forever",
+   "effects": {
+    "happiness": 3,
+    "karma": 2
+   },
+   "risk": {
+    "chance": 0.5,
+    "effects": {
+     "happiness": -6
+    },
+    "result": "Forever lasted nine days."
+   },
+   "set_flags": [
+    "pet_fish"
+   ]
+  }
+ },
+ {
+  "id": "k6_fish_funeral",
+  "text": "Your goldfish is floating upside down.",
+  "ages": [
+   7,
+   9
+  ],
+  "room": "bathroom",
+  "requires": {
+   "flags": [
+    "pet_fish"
+   ]
+  },
+  "left": {
+   "label": "Flush it",
+   "effects": {
+    "stress": -1,
+    "happiness": -2
+   }
+  },
+  "right": {
+   "label": "Full funeral, with songs",
+   "effects": {
+    "relationships": 3,
+    "happiness": -1
+   },
+   "result": "Grandma sings. Everyone cries, mostly about Grandma."
+  }
+ },
+ {
+  "id": "k6_homework_dog",
+  "text": "Your homework is unfinished. The dog is right there.",
+  "ages": [
+   7,
+   9
+  ],
+  "room": "kitchen",
+  "left": {
+   "label": "Blame the dog",
+   "effects": {
+    "karma": -2,
+    "stress": -1
+   },
+   "risk": {
+    "chance": 0.5,
+    "effects": {
+     "stress": 4,
+     "relationships": -2
+    },
+    "result": "The teacher calls home. You have no dog."
+   }
+  },
+  "right": {
+   "label": "Finish it at breakfast",
+   "effects": {
+    "smarts": 2,
+    "stress": 2
+   }
+  }
+ },
+ {
+  "id": "k6_spelling_test",
+  "text": "Last round of the spelling test. The word is very long.",
+  "ages": [
+   7,
+   9
+  ],
+  "left": {
+   "label": "Spell it fast",
+   "effects": {
+    "smarts": 2
+   },
+   "risk": {
+    "chance": 0.5,
+    "effects": {
+     "happiness": -3
+    },
+    "result": "Two letters too many."
+   }
+  },
+  "right": {
+   "label": "Spell it slow",
+   "effects": {
+    "smarts": 3,
+    "stress": 2
+   }
+  },
+  "up": {
+   "label": "Ask what it means first",
+   "effects": {
+    "smarts": 5,
+    "stress": 3
+   },
+   "risk": {
+    "chance": 0.3,
+    "effects": {
+     "relationships": -2
+    },
+    "result": "The class groans. You still win."
+   }
+  }
+ },
+ {
+  "id": "k6_sports_day",
+  "text": "Sports day. The sack race starts now.",
+  "ages": [
+   6,
+   9
+  ],
+  "left": {
+   "label": "Hop with dignity",
+   "effects": {
+    "health": 2,
+    "happiness": 1
+   }
+  },
+  "right": {
+   "label": "Go all out",
+   "effects": {
+    "health": 3,
+    "happiness": 2
+   },
+   "risk": {
+    "chance": 0.3,
+    "effects": {
+     "health": -4
+    },
+    "result": "You face-plant in the sack."
+   }
+  },
+  "up": {
+   "label": "Run in the sack",
+   "effects": {
+    "happiness": 2,
+    "karma": -2
+   },
+   "result": "Disqualified. Legendary."
+  }
+ },
+ {
+  "id": "k6_egg_spoon",
+  "text": "Egg and spoon race. Your egg looks fragile.",
+  "ages": [
+   6,
+   8
+  ],
+  "left": {
+   "label": "Walk carefully",
+   "effects": {
+    "happiness": 1,
+    "stress": 1
+   }
+  },
+  "right": {
+   "label": "Glue it on",
+   "effects": {
+    "karma": -3,
+    "happiness": 2
+   },
+   "risk": {
+    "chance": 0.5,
+    "effects": {
+     "relationships": -3
+    },
+    "result": "The teacher flips your spoon. The egg stays."
+   }
+  }
+ },
+ {
+  "id": "k6_sleepover_invite",
+  "text": "You're invited to your first sleepover.",
+  "ages": [
+   7,
+   9
+  ],
+  "left": {
+   "label": "Stay home",
+   "effects": {
+    "stress": -1,
+    "relationships": -2
+   }
+  },
+  "right": {
+   "label": "Go",
+   "effects": {
+    "relationships": 4,
+    "happiness": 2
+   },
+   "risk": {
+    "chance": 0.3,
+    "effects": {
+     "stress": 4,
+     "happiness": -2
+    },
+    "result": "You call home at midnight."
+   },
+   "set_flags": [
+    "first_sleepover"
+   ]
+  }
+ },
+ {
+  "id": "k6_sleepover_ghost",
+  "text": "Someone at the sleepover starts a ghost story.",
+  "ages": [
+   7,
+   9
+  ],
+  "requires": {
+   "flags": [
+    "first_sleepover"
+   ]
+  },
+  "left": {
+   "label": "Cover your ears",
+   "effects": {
+    "stress": 3
+   }
+  },
+  "right": {
+   "label": "Make it scarier",
+   "effects": {
+    "relationships": 3,
+    "happiness": 1
+   }
+  },
+  "up": {
+   "label": "Pretend to be the ghost",
+   "effects": {
+    "relationships": 5,
+    "karma": -1
+   },
+   "risk": {
+    "chance": 0.4,
+    "effects": {
+     "relationships": -3
+    },
+    "result": "Someone cries. The parents come up."
+   }
+  }
+ },
+ {
+  "id": "k6_birthday_party",
+  "text": "It's your birthday party. Who's coming?",
+  "ages": [
+   6,
+   9
+  ],
+  "room": "kitchen",
+  "left": {
+   "label": "The whole class",
+   "effects": {
+    "relationships": 4,
+    "money": -15,
+    "stress": 3
+   }
+  },
+  "right": {
+   "label": "Just five friends",
+   "effects": {
+    "happiness": 2,
+    "relationships": 1
+   }
+  }
+ },
+ {
+  "id": "k6_party_clown",
+  "text": "There's a clown at a friend's party. He looks tired.",
+  "ages": [
+   6,
+   7
+  ],
+  "left": {
+   "label": "Hide under the table",
+   "effects": {
+    "stress": 2
+   }
+  },
+  "right": {
+   "label": "Ask if he's okay",
+   "effects": {
+    "karma": 3,
+    "relationships": 1
+   },
+   "result": "He says nobody has asked him that in years."
+  }
+ },
+ {
+  "id": "k6_present_socks",
+  "text": "Your aunt gives you socks for your birthday. Again.",
+  "ages": [
+   6,
+   9
+  ],
+  "room": "living",
+  "left": {
+   "label": "Say thank you",
+   "effects": {
+    "karma": 2,
+    "relationships": 2
+   }
+  },
+  "right": {
+   "label": "Say what you think",
+   "effects": {
+    "happiness": 1,
+    "relationships": -3
+   },
+   "result": "Next year: two pairs of socks."
+  }
+ },
+ {
+  "id": "k6_cake_face",
+  "text": "Someone shoves your face into your birthday cake.",
+  "ages": [
+   6,
+   8
+  ],
+  "room": "kitchen",
+  "left": {
+   "label": "Cry",
+   "effects": {
+    "happiness": -3
+   }
+  },
+  "right": {
+   "label": "Eat your way out",
+   "effects": {
+    "happiness": 2,
+    "health": -1
+   },
+   "result": "Best cake of your life."
+  }
+ },
+ {
+  "id": "k6_bike_wheels",
+  "text": "Your parent wants to take the training wheels off.",
+  "ages": [
+   6,
+   7
+  ],
+  "left": {
+   "label": "Not yet",
+   "effects": {
+    "stress": -1,
+    "happiness": -1
+   }
+  },
+  "right": {
+   "label": "Do it",
+   "effects": {
+    "health": 2,
+    "happiness": 2
+   },
+   "risk": {
+    "chance": 0.4,
+    "effects": {
+     "health": -3
+    },
+    "result": "Knees meet gravel."
+   }
+  }
+ },
+ {
+  "id": "k6_scraped_knee",
+  "text": "You scraped your knee badly at break.",
+  "ages": [
+   6,
+   9
+  ],
+  "left": {
+   "label": "Walk it off",
+   "effects": {
+    "health": -1,
+    "relationships": 1
+   }
+  },
+  "right": {
+   "label": "Go to the nurse",
+   "effects": {
+    "health": 2,
+    "stress": -1
+   }
+  }
+ },
+ {
+  "id": "k6_swimming_lessons",
+  "text": "Swimming lessons start. The deep end looks very deep.",
+  "ages": [
+   6,
+   8
+  ],
+  "left": {
+   "label": "Stay by the edge",
+   "effects": {
+    "health": 1,
+    "stress": 1
+   }
+  },
+  "right": {
+   "label": "Jump in",
+   "effects": {
+    "health": 3,
+    "happiness": 1
+   },
+   "risk": {
+    "chance": 0.2,
+    "effects": {
+     "stress": 4,
+     "health": -1
+    },
+    "result": "Water up the nose. All of it."
+   }
+  }
+ },
+ {
+  "id": "k6_best_friend",
+  "text": "A kid shares their crayons and says you're best friends now.",
+  "ages": [
+   6,
+   7
+  ],
+  "left": {
+   "label": "Already have one",
+   "effects": {
+    "relationships": -1
+   }
+  },
+  "right": {
+   "label": "Okay",
+   "effects": {
+    "relationships": 4,
+    "happiness": 1
+   },
+   "set_flags": [
+    "k6_best_friend"
+   ]
+  }
+ },
+ {
+  "id": "k6_best_friend_move",
+  "text": "Your best friend is moving away.",
+  "ages": [
+   8,
+   9
+  ],
+  "requires": {
+   "flags": [
+    "k6_best_friend"
+   ]
+  },
+  "left": {
+   "label": "Say goodbye",
+   "effects": {
+    "happiness": -3,
+    "relationships": 1
+   }
+  },
+  "right": {
+   "label": "Swap bracelets",
+   "effects": {
+    "happiness": -1,
+    "relationships": 3
+   },
+   "result": "You wear it until it falls apart."
+  }
+ },
+ {
+  "id": "k6_pet_beg",
+  "text": "You want a puppy more than anything.",
+  "ages": [
+   7,
+   9
+  ],
+  "room": "living",
+  "left": {
+   "label": "Give up",
+   "effects": {
+    "happiness": -2
+   }
+  },
+  "right": {
+   "label": "Beg every day",
+   "effects": {
+    "relationships": -3,
+    "stress": 2
+   },
+   "risk": {
+    "chance": 0.3,
+    "effects": {
+     "happiness": 4,
+     "money": -30
+    },
+    "result": "It works. The puppy chews everything."
+   }
+  }
+ },
+ {
+  "id": "k6_class_hamster",
+  "text": "You get to take the class hamster home for the weekend.",
+  "ages": [
+   6,
+   9
+  ],
+  "room": "living",
+  "left": {
+   "label": "Keep it caged",
+   "effects": {
+    "karma": 1,
+    "happiness": 1
+   }
+  },
+  "right": {
+   "label": "Let it roam",
+   "effects": {
+    "happiness": 2
+   },
+   "risk": {
+    "chance": 0.4,
+    "effects": {
+     "stress": 5,
+     "karma": -1
+    },
+    "result": "It lives in the sofa now."
+   }
+  }
+ },
+ {
+  "id": "k6_times_tables",
+  "text": "Times tables test tomorrow.",
+  "ages": [
+   8,
+   9
+  ],
+  "left": {
+   "label": "Practice all evening",
+   "effects": {
+    "smarts": 4,
+    "stress": 2,
+    "happiness": -1
+   }
+  },
+  "right": {
+   "label": "Wing it",
+   "effects": {
+    "stress": 1
+   },
+   "risk": {
+    "chance": 0.5,
+    "effects": {
+     "smarts": -2,
+     "stress": 3
+    },
+    "result": "Seven times eight. Blank."
+   }
+  }
+ },
+ {
+  "id": "k6_school_play",
+  "text": "You are cast as a tree in the school play.",
+  "ages": [
+   6,
+   9
+  ],
+  "left": {
+   "label": "Ask for a better part",
+   "effects": {
+    "relationships": -1
+   },
+   "risk": {
+    "chance": 0.5,
+    "effects": {
+     "happiness": 2
+    },
+    "result": "You are now a slightly bigger tree."
+   }
+  },
+  "right": {
+   "label": "Be the best tree",
+   "effects": {
+    "happiness": 2,
+    "relationships": 2
+   }
+  },
+  "up": {
+   "label": "Ad-lib a line as the tree",
+   "effects": {
+    "relationships": 5,
+    "happiness": 2
+   },
+   "risk": {
+    "chance": 0.4,
+    "effects": {
+     "stress": 4,
+     "relationships": -2
+    },
+    "result": "The play stops. Parents murmur."
+   }
+  }
+ },
+ {
+  "id": "k6_chore_chart",
+  "text": "A chore chart goes up. Your name is on dishes.",
+  "ages": [
+   7,
+   9
+  ],
+  "room": "kitchen",
+  "left": {
+   "label": "Break a plate on purpose",
+   "effects": {
+    "karma": -3,
+    "stress": -1
+   },
+   "result": "Never asked again. Also, no pocket money."
+  },
+  "right": {
+   "label": "Do the dishes",
+   "effects": {
+    "karma": 2,
+    "money": 3,
+    "happiness": -1
+   }
+  }
+ },
+ {
+  "id": "k6_lunch_trade",
+  "text": "Someone offers cookies for your apple.",
+  "ages": [
+   6,
+   9
+  ],
+  "room": "kitchen",
+  "left": {
+   "label": "Keep the apple",
+   "effects": {
+    "health": 2
+   }
+  },
+  "right": {
+   "label": "Trade",
+   "effects": {
+    "happiness": 2,
+    "health": -1
+   }
+  }
+ },
+ {
+  "id": "k6_monster_bed",
+  "text": "You are certain something lives under your bed.",
+  "ages": [
+   6,
+   7
+  ],
+  "left": {
+   "label": "Light stays on",
+   "effects": {
+    "stress": -2,
+    "health": -1
+   }
+  },
+  "right": {
+   "label": "Look under it",
+   "effects": {
+    "stress": 2
+   },
+   "result": "Just socks. Many, many socks."
+  },
+  "up": {
+   "label": "Leave it a snack",
+   "effects": {
+    "happiness": 2
+   },
+   "result": "The snack is gone by morning. The dog looks guilty."
+  }
+ },
+ {
+  "id": "k6_science_fair",
+  "text": "The science fair is next week.",
+  "ages": [
+   8,
+   9
+  ],
+  "room": "kitchen",
+  "left": {
+   "label": "Volcano, like everyone",
+   "effects": {
+    "smarts": 1,
+    "happiness": 1
+   }
+  },
+  "right": {
+   "label": "Grow mold on purpose",
+   "effects": {
+    "smarts": 4,
+    "relationships": -1
+   },
+   "result": "Second place. The smell wins first."
+  }
+ },
+ {
+  "id": "k6_haircut",
+  "text": "Your parent offers to cut your hair at home.",
+  "ages": [
+   6,
+   9
+  ],
+  "room": "bathroom",
+  "left": {
+   "label": "Real barber",
+   "effects": {
+    "looks": 2,
+    "money": -10
+   }
+  },
+  "right": {
+   "label": "Trust them",
+   "effects": {
+    "money": 2
+   },
+   "risk": {
+    "chance": 0.5,
+    "effects": {
+     "looks": -3,
+     "happiness": -2
+    },
+    "result": "School photos are tomorrow."
+   }
+  }
+ },
+ {
+  "id": "k6_teacher_gift",
+  "text": "Last day of school. Everyone brings the teacher a gift.",
+  "ages": [
+   6,
+   9
+  ],
+  "left": {
+   "label": "Bring nothing",
+   "effects": {
+    "relationships": -1
+   }
+  },
+  "right": {
+   "label": "Draw a card",
+   "effects": {
+    "karma": 2,
+    "relationships": 1
+   }
+  }
+ },
+ {
+  "id": "k6_snow_day",
+  "text": "Snow day! School is closed.",
+  "ages": [
+   6,
+   9
+  ],
+  "room": "living",
+  "left": {
+   "label": "Stay in pyjamas",
+   "effects": {
+    "happiness": 1,
+    "stress": -3
+   }
+  },
+  "right": {
+   "label": "Build a snow fort",
+   "effects": {
+    "happiness": 2,
+    "health": 1
+   }
+  }
+ },
+ {
+  "id": "k6_lost_shoe",
+  "text": "You come home with one shoe.",
+  "ages": [
+   6,
+   8
+  ],
+  "room": "living",
+  "left": {
+   "label": "A bird took it",
+   "effects": {
+    "karma": -1,
+    "happiness": 1
+   },
+   "result": "Nobody believes you. A bird did take it."
+  },
+  "right": {
+   "label": "Admit you lost it",
+   "effects": {
+    "relationships": 1,
+    "money": -10
+   }
+  }
+ }
+]
