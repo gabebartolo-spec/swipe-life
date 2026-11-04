@@ -97,6 +97,13 @@ Builds:
 - Make 4 character sets: baby, child, teen and 18. Each gets idle motion and reactions copied from proven clips.
 - Items bought in the menu appear in the scene (§10.2).
 - **Exit:** the director approves captures at each age band. I check every frame before sending.
+- Progress (2026-11-03, branch m5/hair-list):
+  - Done: blush on babies and children only. Even grey hair tint. Symmetric bust; the director approved the size.
+    Necks grow with age (child, then teen, then adult). Men broader, women hourglass, fitted tops.
+    Arms set away from the torso. Flat adult and teen shoulders, approved by the director.
+  - Hair: 8 of 34 cuts built, and the hair checker passes on every shape. The teen "beret" look on long hair is fixed.
+  - Elderly: face lines, grey hair and a slight stoop on the adult body.
+  - Left to do: clothes over the new shoulders, 26 more hair cuts, push and open a PR.
 
 ## M6 Content: about 200 cards, ages 0–17
 - Write the cards in batches by age band: 0–2, 3–5, 6–9, 10–12, 13–15 and 16–17, about 30–40 cards per band.

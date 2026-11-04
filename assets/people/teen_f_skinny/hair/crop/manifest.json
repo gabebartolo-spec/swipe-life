@@ -1,0 +1,15 @@
+{
+ "sprites": {
+  "hair_front__head": {
+   "layer": "hair_front",
+   "piece": "head",
+   "rect": [
+    382,
+    221,
+    260,
+    299
+   ],
+   "raw": false
+  }
+ }
+}

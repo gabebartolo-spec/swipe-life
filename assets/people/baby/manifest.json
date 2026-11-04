@@ -90,9 +90,9 @@
    "piece": "chest",
    "rect": [
     426,
-    758,
+    732,
     172,
-    93
+    112
    ],
    "raw": false
   },
@@ -101,9 +101,9 @@
    "piece": "foot_l",
    "rect": [
     537,
-    921,
+    922,
     51,
-    43
+    42
    ],
    "raw": false
   },
@@ -112,9 +112,9 @@
    "piece": "foot_r",
    "rect": [
     436,
-    921,
+    922,
     51,
-    43
+    42
    ],
    "raw": false
   },
@@ -122,10 +122,10 @@
    "layer": "body",
    "piece": "forearm_l",
    "rect": [
-    602,
-    795,
-    69,
-    60
+    603,
+    796,
+    67,
+    58
    ],
    "raw": false
   },
@@ -133,9 +133,9 @@
    "layer": "body",
    "piece": "forearm_r",
    "rect": [
-    353,
+    355,
     796,
-    69,
+    67,
     59
    ],
    "raw": false
@@ -144,10 +144,10 @@
    "layer": "body",
    "piece": "hand_l",
    "rect": [
-    622,
+    621,
     830,
-    58,
-    44
+    45,
+    68
    ],
    "raw": false
   },
@@ -155,10 +155,10 @@
    "layer": "body",
    "piece": "hand_r",
    "rect": [
-    344,
+    358,
     830,
-    57,
-    44
+    45,
+    68
    ],
    "raw": false
   },
@@ -177,10 +177,10 @@
    "layer": "body",
    "piece": "pelvis",
    "rect": [
-    436,
-    823,
-    152,
-    48
+    430,
+    805,
+    164,
+    66
    ],
    "raw": false
   },
@@ -189,9 +189,9 @@
    "piece": "shin_l",
    "rect": [
     529,
-    879,
+    878,
     64,
-    71
+    72
    ],
    "raw": false
   },
@@ -210,10 +210,10 @@
    "layer": "body",
    "piece": "thigh_l",
    "rect": [
-    526,
-    836,
-    67,
-    74
+    525,
+    835,
+    68,
+    75
    ],
    "raw": false
   },
@@ -222,9 +222,9 @@
    "piece": "thigh_r",
    "rect": [
     431,
-    836,
-    67,
-    74
+    835,
+    68,
+    75
    ],
    "raw": false
   },
@@ -232,10 +232,10 @@
    "layer": "body",
    "piece": "upper_arm_l",
    "rect": [
-    582,
-    763,
-    72,
-    61
+    581,
+    761,
+    75,
+    63
    ],
    "raw": false
   },
@@ -245,7 +245,7 @@
    "rect": [
     369,
     762,
-    73,
+    74,
     62
    ],
    "raw": false
@@ -261,25 +261,14 @@
    ],
    "raw": true
   },
-  "hair_front__head": {
-   "layer": "hair_front",
-   "piece": "head",
-   "rect": [
-    387,
-    545,
-    249,
-    243
-   ],
-   "raw": false
-  },
   "onesie__chest": {
    "layer": "onesie",
    "piece": "chest",
    "rect": [
-    415,
-    756,
-    194,
-    100
+    407,
+    723,
+    210,
+    141
    ],
    "raw": false
   },
@@ -299,9 +288,9 @@
    "piece": "foot_r",
    "rect": [
     429,
-    917,
+    918,
     65,
-    50
+    49
    ],
    "raw": false
   },
@@ -309,9 +298,9 @@
    "layer": "onesie",
    "piece": "forearm_l",
    "rect": [
-    591,
+    590,
     790,
-    92,
+    93,
     71
    ],
    "raw": false
@@ -321,9 +310,9 @@
    "piece": "forearm_r",
    "rect": [
     342,
-    790,
-    91,
-    71
+    789,
+    92,
+    72
    ],
    "raw": false
   },
@@ -331,10 +320,10 @@
    "layer": "onesie",
    "piece": "pelvis",
    "rect": [
-    427,
-    821,
-    170,
-    54
+    421,
+    801,
+    182,
+    75
    ],
    "raw": false
   },
@@ -342,10 +331,10 @@
    "layer": "onesie",
    "piece": "shin_l",
    "rect": [
-    520,
-    874,
-    81,
-    81
+    519,
+    873,
+    82,
+    82
    ],
    "raw": false
   },
@@ -354,9 +343,9 @@
    "piece": "shin_r",
    "rect": [
     423,
-    874,
+    873,
     81,
-    81
+    82
    ],
    "raw": false
   },
@@ -366,7 +355,7 @@
    "rect": [
     516,
     831,
-    86,
+    87,
     84
    ],
    "raw": false
@@ -375,9 +364,9 @@
    "layer": "onesie",
    "piece": "thigh_r",
    "rect": [
-    422,
+    421,
     831,
-    86,
+    87,
     84
    ],
    "raw": false
@@ -386,10 +375,10 @@
    "layer": "onesie",
    "piece": "upper_arm_l",
    "rect": [
-    571,
-    757,
-    95,
-    72
+    568,
+    756,
+    100,
+    74
    ],
    "raw": false
   },
@@ -397,10 +386,10 @@
    "layer": "onesie",
    "piece": "upper_arm_r",
    "rect": [
-    358,
-    757,
-    94,
-    72
+    356,
+    756,
+    100,
+    74
    ],
    "raw": false
   }

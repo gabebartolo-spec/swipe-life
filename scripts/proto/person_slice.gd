@@ -2,8 +2,11 @@ extends Node2D
 ## Vertical slice of modular people (docs/PEOPLE.md §10 step 1): three children in the bedroom at
 ## ~180 px/m, one top tinted three ways, waving. `-- --top=sweater` swaps the top;
 ## `--ages` lines up baby, child, teen and adult instead (one body each, ~130 px/m).
-## `--sex=m` swaps in the male bodies.
+## `--sex=m` swaps in the male bodies. `--hair=a,b,c,d` picks each figure's cut (body.py HAIRS).
+## `--elderly` shows the adults' face lines; `--grey=0.5` greys the adults' hair.
 ## `--seq=<n> --out=<dir>` saves n frames at 24 fps and quits.
+## `--ages --sweep=a,b,... --out=<dir>` gives child, teen and adult each cut in turn,
+## saving 3 wave stills per cut.
 
 const PX_PER_M := 180.0
 const AGES := ["baby", "child_f_skinny", "teen_f_skinny", "adult_f_skinny"]
@@ -20,14 +23,39 @@ func _ready() -> void:
 	for a in OS.get_cmdline_user_args():
 		var kv := a.trim_prefix("--").split("=")
 		args[kv[0]] = kv[1] if kv.size() > 1 else ""
-	var top: String = args.get("top", "tee")
 	var room := TextureRect.new()
 	room.texture = load("res://assets/house/rooms/room_bedroom_child.png")
 	room.size = Vector2(720, 600)
 	room.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	add_child(room)
+	if args.has("sweep"):
+		DirAccess.make_dir_recursive_absolute(args.out)
+		for c in args.sweep.split(",", false):
+			var people := _spawn(args, ["wisp", c, c, c])
+			for f in 3:
+				await get_tree().create_timer(0.5).timeout
+				var img := get_viewport().get_texture().get_image()
+				img.save_png(args.out.path_join("%s_%d.png" % [c, f]))
+			for p in people:
+				p.queue_free()
+		get_tree().quit()
+		return
+	_spawn(args, args.get("hair", "").split(",", false))
+	if args.has("seq"):
+		DirAccess.make_dir_recursive_absolute(args.out)
+		await get_tree().create_timer(0.3).timeout
+		for f in int(args.seq):
+			get_viewport().get_texture().get_image().save_png(args.out.path_join("f%03d.png" % f))
+			await get_tree().create_timer(1.0 / 24.0).timeout
+		get_tree().quit()
+
+
+func _spawn(args: Dictionary, cuts: Array) -> Array:
+	var people := []
+	var top: String = args.get("top", "tee")
 	var ages := args.has("ages")
+	var cut := "crop" if args.get("sex", "f") == "m" else "bob"
 	for n in 4 if ages else 3:
 		var i := n % 3
 		var p := Person.new()
@@ -51,12 +79,13 @@ func _ready() -> void:
 				}
 			p.position = Vector2(100 + 170 * n, 580)
 			p.scale = Vector2.ONE * 130.0 / 264.8
+		p.hair = "wisp" if ages and n == 0 else cut
+		p.elderly = args.has("elderly") and p.shape.begins_with("adult")
+		if p.shape.begins_with("adult"):
+			p.grey = float(args.get("grey", "0"))
+		if n < cuts.size():
+			p.hair = cuts[n]
 		add_child(p)
 		p.play("res://assets/people/clips/wave.json")
-	if args.has("seq"):
-		DirAccess.make_dir_recursive_absolute(args.out)
-		await get_tree().create_timer(0.3).timeout
-		for f in int(args.seq):
-			get_viewport().get_texture().get_image().save_png(args.out.path_join("f%03d.png" % f))
-			await get_tree().create_timer(1.0 / 24.0).timeout
-		get_tree().quit()
+		people.append(p)
+	return people

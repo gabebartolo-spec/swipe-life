@@ -7,7 +7,8 @@ Director decisions, 2026-11-03:
 - A **career menu** with submenus is where you advance your standing, talk to staff and look for other work. Cards bring the drama.
 - A gang arrest sends you to **juvie** and gives you a **criminal record**.
 - A partner you meet at work **stays your partner** after the job ends.
-- The special careers are AFL, Formula 1, Basketball, Musician, Actor and Gangster.
+- The special careers are AFL, Formula 1, Basketball, Musician, Actor, Gangster, Pro Skater, eSports and Head of State.
+- Added 2026-11-04: **Pro Skater** and **eSports** (a generic team shooter or arena game; no real title) are teen-entry specials. **Head of State** (generic, shown as Prime Minister, President etc.; ladder: local councillor to minister to leader, adult-only, built in the adult careers milestone) is a special career. Each has its own end age.
 
 ## Data: `data/careers/*.json` (validated by `CareerDB`)
 | key | meaning |
