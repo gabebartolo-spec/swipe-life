@@ -77,8 +77,8 @@
   submenus to advance your standing, deal with staff and look for other work; drama arrives as cards.
   - You hold at most one regular job and one special career at a time.
   - Each career has four named coworkers: boss, rival, crush and friend.
-  - Special careers: AFL, Formula 1, Basketball, Musician, Actor and Gangster (army and cop dropped).
-  - A gang arrest sends you to juvie and gives you a permanent criminal record (no sealing).
+  - Special careers: AFL, Formula 1, Basketball, Musician, Actor, Gangster, Pro Skater, eSports and Head of State (army and cop dropped; Head of State is adult-only; eSports is a generic title, no real game).
+  - A gang arrest sends you to juvie and gives you a criminal record; any record can be expunged later (director, 2026-11-04).
   - A partner met at work stays your partner after the job ends; a breakup ends the partner.
   - Adult careers come later on the same data.
 - 6.9 Adult life (director 2026-11-03):
@@ -92,6 +92,7 @@
 
 - 7.1 Generic world, no specific country: no named currency, school system, laws or real places.
 - 7.2 Tone is mostly grounded, with occasional absurd or funny cards.
+- 7.2a Dark comedy (director 2026-11-04): the cute clay art against the brutal realities of life is the game's niche. Cards may be darkly funny; under-18 sensitive-content rules still apply.
 
 ## 8. Session length
 
@@ -114,6 +115,9 @@
 - 10.2 The scene changes live in response to decisions and purchases (e.g. new furniture, a partner moving in,
   a bigger house).
 - 10.3 Style: a toon look with lots of personality, made entirely by Claude Code (no artist, no bought assets).
+  Free base meshes are allowed and clay-ified (director, 2026-11-04): CC0 from Kenney (Furniture, Car, City
+  Suburban, Building Kit), poly.pizza and Poly Haven; CC-BY only where CC0 lacks an item, with a credits
+  screen (M11). Each download is asked first.
 - 10.4 Chosen style (director, 2026-11-03): flat 2D **clay cut-outs**. Clay pieces are modelled and lit in
   Blender, prerendered to PNGs, and turned on pivots in Godot, posed at 24 fps with a clay boil shader on twos (12 fps).
   Motion is copied from proven clips (e.g. Mixamo), never improvised.
@@ -170,6 +174,8 @@ None.
 - 2026-11-03: Mental illness rule and numbers (§4.5).
 - 2026-11-03: Menu unlock ages (§6.7) and Stress as the time cost (§6.6); §13.1 closed.
 - 2026-11-03: Childhood home rooms (§10.6), girl or boy at birth (§10.7), pre-18 scene changes (§10.8).
+- 2026-11-04: Tone: pretty dark-comedy, cute art vs brutal life (§7.2a).
+- 2026-11-04: Special careers add Pro Skater, eSports and Head of State (§6.8, director).
 - 2026-11-03: Dollhouse shows one room at a time, camera moves between rooms (§10.6).
 - 2026-11-03: Card picks the room, slide pan, bedroom age bands 0–3 / 4–12 / 13–17 (§10.6).
 - 2026-11-03: Modular people (§10.7): body sizes, shapes, mix-and-match clothing slots, tinted parts, extras; looks inherited + random, improved by lifestyle.
@@ -182,3 +188,10 @@ None.
 - 2026-11-03: Adult life (§6.9): every common job, education gates careers, rent or buy with mortgages,
   dating apps, social events, marriage, divorce, infidelity, children. Balance comes last (`docs/ROADMAP.md`).
 - 2026-11-03: Skin tone blends the parents' tones (§10.7); it has no gameplay effect beyond genetics.
+- 2026-11-04: Adult framework: CardDB age cap lifted now behind a feature flag; entry adult salary $30,000/yr
+  (all adult prices scale from it); adult content rated Mature 16+; adult systems split M8 money + careers,
+  M10 relationships + health, M11 possessions + retirement.
+- 2026-11-04: Director answered the adult-life proposals (romance, friendship, illness, finances, retirement,
+  possessions, careers); answers in docs/proposals/DECISIONS.md until each GDD section is written.
+- 2026-11-04: §6.8: every criminal record, gang records included, can be expunged (was permanent).
+- 2026-11-04: §10.3: approved CC0 asset sources and CC-BY with credits; §6.8 change above. Further answers in DECISIONS.md.
