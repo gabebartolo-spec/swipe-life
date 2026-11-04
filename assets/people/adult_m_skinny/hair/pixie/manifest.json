@@ -4,10 +4,10 @@
    "layer": "hair_back",
    "piece": "head",
    "rect": [
-    394,
-    151,
-    236,
-    199
+    396,
+    155,
+    232,
+    191
    ],
    "raw": false
   },
@@ -15,10 +15,10 @@
    "layer": "hair_front",
    "piece": "head",
    "rect": [
-    381,
-    144,
-    262,
-    324
+    398,
+    155,
+    228,
+    313
    ],
    "raw": false
   }

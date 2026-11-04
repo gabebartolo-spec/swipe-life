@@ -343,72 +343,121 @@ def wisp():
 
 
 def bob():
-    # cap over the back and top (drawn behind the head), fringe and side curtains in front
+    """Chin-length bob: smooth straight sides to a blunt line at the jaw, a straight fringe, no layers."""
+    from math import cos, sin
+
     cap()
-    back((0, 1.55, -0.3), 0.3, (1.1, 1.0, 0.7))
     shell()
     temples()
-    front((-0.12, 2.0, 0.2), 0.24, (1.3, 0.55, 1.0))
-    front((0.16, 1.96, 0.26), 0.2, (1.1, 0.5, 0.8))
+    for i in range(11):  # blunt fringe across the brow, sitting on the skin so it fuses into the shell
+        x = -0.3 + 0.06 * i
+        front((x, 1.89, skin_z(x, 1.89) - 0.03), 0.08, (1.0, 1.1, 0.8))
     for s in (-1, 1):
-        # in front down to just above the shoulder; the tips fall behind it, clear of a raised arm
-        chain(("hair_front", "head", "R"), (0.33 * s, 1.78, -0.05), (0.35 * s, 1.62, -0.04), 0.17, 4)
-        chain(("hair_back", "head", "R"), (0.35 * s, 1.6, -0.04), (0.37 * s, 1.36, -0.02), 0.17, 6)
-        back((0.42 * s, 1.3, -0.02), 0.11)
+        # one smooth slab per side from the temple to the jaw
+        front((0.41 * s, 1.77, 0.04), 0.13, (0.75, 1.7, 1.0))
+        front((0.41 * s, 1.56, 0.02), 0.12, (0.78, 1.4, 1.05))
+        for i in range(6):  # a level bar along the jaw squares the bottom off (blunt line, no flick)
+            front((0.41 * s, 1.45, -0.18 + 0.065 * i), 0.07, (1.0, 0.8, 1.0))
+    # the back falls to the same level, behind the neck
+    back((0, 1.66, -0.2), 0.44, (1.12, 0.62, 0.92))
+    for i in range(9):  # level lower edge round the back, inside the side slabs
+        a = -1.4 + 0.35 * i
+        back((0.38 * sin(a), 1.46, -0.04 - 0.36 * cos(a)), 0.09, (1, 0.8, 1))
 
 
 def crop():
-    """Short crop (build_clay_girl.py --sex boy): cap close to the skull, small fringe."""
-    cap(0.49, 1.86, 0.82)
-    shell(0.45, 2.0, 0.36)
-    front((0.05, 2.02, 0.22), 0.22, (1.35, 0.45, 0.9))
+    """Short crop: a close rounded crown, a short soft-pointed fringe and tapered sides."""
+    cap(0.48, 1.84, 0.8)
+    shell(0.45, 2.0, 0.5)  # top 2.225 covers the cap dome (a lower shell shows its edge across the crown)
+    for i in range(9):  # a short smooth fringe, a touch lower in the middle, sunk in the skin so no lip
+        x = -0.28 + 0.07 * i
+        y = 1.91 + 0.25 * x * x
+        front((x, y, skin_z(x, y) - 0.02), 0.07, (1.0, 1.0, 0.6))
+    for s in (-1, 1):  # short sideburn tapering to the top of the ear
+        front((0.42 * s, 1.84, 0.08), 0.08, (0.7, 1.4, 0.9))
+        front((0.43 * s, 1.76, 0.1), 0.06, (0.65, 1.5, 0.8))
 
 
 def crew_cut():
-    """Crew cut: shorter than the crop, a low flat ridge at the front, no fringe."""
-    cap(0.49, 1.87, 0.8)
-    shell(0.46, 2.01, 0.36)
-    front((0, 2.05, 0.2), 0.2, (1.6, 0.35, 0.8))
+    """Crew cut: nearly flat to the scalp, high clean hairline, short sides, no fringe."""
+    cap(0.47, 1.84, 0.78)
+    shell(0.45, 1.99, 0.49)  # top 2.21 covers the cap dome
 
 
 def pixie():
-    """Pixie: short all over, a side-swept fringe, small wisps in front of the ears."""
-    cap(0.5, 1.84, 0.86)
-    shell()
-    temples()
-    chain(("hair_front", "head", "R"), (0.28, 2.02, 0.22), (-0.3, 1.87, 0.28), 0.14, 7)
+    """Pixie: short all over, a side-swept fringe tapering to the temple, short wisps in front of the ears."""
+    cap(0.49, 1.84, 0.84)
+    shell(0.46, 2.0, 0.55)  # top 2.25 covers the cap dome; closer to the skull than the long cuts
+    n = 9
+    for i in range(n):  # the sweep narrows as it crosses the brow, so it ends in the side hair without a step
+        t = i / (n - 1)
+        x, y = 0.26 - 0.6 * t, 2.02 - 0.18 * t
+        front((x, y, skin_z(x, y) + 0.01), 0.13 - 0.06 * t, (1.0, 0.8, 0.8))
     for s in (-1, 1):
-        front((0.44 * s, 1.62, 0.02), 0.1, (0.8, 1.4, 0.8))
+        front((0.43 * s, 1.78, 0.1), 0.08, (0.62, 1.5, 0.8))
+        front((0.42 * s, 1.67, 0.15), 0.05, (0.6, 1.5, 0.7))
+    front((-0.38, 1.88, 0.14), 0.08)  # closes the notch where the sweep ends at the temple
 
 
 def long_straight():
-    """Long straight, middle part: side curtains stop above the shoulders in front; the length falls behind."""
+    """Long straight, middle part: thin flat side panels stop above the shoulders in front; one flat sheet falls behind."""
     cap()
     # round crown no wider than the cap: a flat wide shell plus flat fringe pads read as a beret (director)
     shell()
-    temples()
     for s in (-1, 1):
         # curtains sweep from the middle part down the sides of the forehead, following the skull
-        chain(("hair_front", "head", "R"), (0.04 * s, 2.1, 0.2), (0.3 * s, 1.86, 0.18), 0.13, 5)
-        chain(("hair_front", "head", "R"), (0.34 * s, 1.84, -0.03), (0.36 * s, 1.62, -0.02), 0.16, 4)
-        chain(("hair_back", "head", "R"), (0.38 * s, 1.7, -0.12), (0.34 * s, 0.98, -0.16), 0.16, 10)
-    chain(("hair_back", "head", "R"), (0, 1.6, -0.3), (0, 0.98, -0.3), 0.3, 8)
+        sheet(HF, (0.03 * s, 2.15, 0.17), (0.38 * s, 1.84, 0.12), 0.12, (1.0, 0.8, 0.8))
+        # straight, flat panels framing the face: thin in x, so the edge reads as a hanging sheet, not a tube
+        sheet(HF, (0.39 * s, 1.94, 0.0), (0.38 * s, 1.6, -0.02), 0.15, (0.55, 1.0, 1.2))
+        # the same panel carries on straight down behind the shoulder
+        sheet(HB, (0.39 * s, 1.66, -0.04), (0.37 * s, 0.98, -0.1), 0.15, (0.55, 1.0, 1.2))
+    # one wide flat sheet down the back, dead straight sides
+    sheet(HB, (0, 1.72, -0.2), (0, 0.98, -0.22), 0.3, (1.4, 1.0, 0.6))
 
 
 def high_ponytail():
-    """High ponytail: hair pulled back off the forehead, tail swung out to one side behind the head."""
+    """High ponytail: pulled back off the forehead and tied on top of the crown; the tail arcs over and falls beside the head."""
     cap(0.5, 1.84, 0.9)
     shell()
-    back((0.04, 2.05, -0.38), 0.1)
-    chain(("hair_back", "head", "R"), (0.1, 2.02, -0.45), (0.44, 1.46, -0.5), 0.12, 8)
-    back((0.46, 1.4, -0.5), 0.09)
+    for s in (-1, 1):  # sleek sides: thin, flat against the skull (no bob lobes)
+        front((0.44 * s, 1.8, 0.04), 0.1, (0.6, 1.6, 1.0))
+    front((0, 2.3, -0.12), 0.1)  # the tie, on top of the crown
+    pts = [(0, 2.34, -0.16), (0.06, 2.41, -0.32), (0.26, 2.34, -0.48), (0.46, 2.1, -0.5), (0.54, 1.8, -0.46),
+           (0.56, 1.5, -0.42)]
+    for i, (a, b) in enumerate(zip(pts, pts[1:])):
+        chain(HB, a, b, 0.15 - 0.014 * i, 4)
+    back((0.56, 1.46, -0.42), 0.07)
 
 
 def afro():
-    """Afro: a big round mass, wider than the head; its lower edge sits behind the shoulders."""
-    back((0, 1.86, -0.05), 0.64, (1.08, 0.95, 0.9))
-    shell(0.58, 2.05, 0.45)
-    front((0, 2.0, 0.25), 0.3, (1.5, 0.45, 0.8))
+    """Afro: a big round mass of clumped curls, wider and taller than the head; curls right down to the hairline."""
+    import math
+
+    C, R = (0, 2.02, -0.06), (0.72, 0.68, 0.66)
+    back(C, 0.62, (1.08, 1.0, 0.98))
+    shell(0.47, 2.12, 0.45, 1.05)
+    n = 110
+    for i in range(n):
+        y = 1 - 2 * (i + 0.5) / n
+        rr = math.sqrt(1 - y * y)
+        t = math.pi * (3 - math.sqrt(5)) * i
+        x, z = rr * math.cos(t), rr * math.sin(t)
+        p = (C[0] + R[0] * x, C[1] + R[1] * y, C[2] + R[2] * z)
+        if p[1] < 1.5 or (p[2] > 0.05 and p[1] < 2.12 and abs(p[0]) < 0.52):
+            continue  # the face stays clear; the hairline row below closes it
+        # front layer down to well behind the ears, so no back curl shows through the mass as a seam
+        sphere(HF if p[2] > -0.3 else HB, p, 0.15 + 0.04 * ((i * 7) % 5) / 4)
+    for k in range(-5, 6):  # hairline: a row of small curls on the forehead, arched, higher in the middle
+        x = 0.085 * k
+        y = 2.04 - 0.008 * k * k
+        zz = max(1 - ((y - 1.68) / 0.4465) ** 2 - (x / 0.4935) ** 2, 0.02)
+        front((x, y, 0.47 * math.sqrt(zz) + 0.02), 0.11 + 0.02 * (k % 2))
+    for sx in (-1, 1):  # temples: curls closing the hairline into the side mass
+        front((0.47 * sx, 1.95, 0.12), 0.13)
+        front((0.53 * sx, 1.82, 0.33), 0.13)  # fills the crevice between temple and side curls
+        front((0.46 * sx, 1.87, 0.28), 0.1)
+        front((0.42 * sx, 1.78, 0.25), 0.07)  # sideburn curls: the face edge runs straight down
+        front((0.43 * sx, 1.66, 0.24), 0.07)
 
 
 HF = ("hair_front", "head", "R")
@@ -416,81 +465,91 @@ HB = ("hair_back", "head", "R")
 
 
 def buzz():
-    """Buzz: the thinnest skull-tight layer, no fringe, no ridge."""
-    cap(0.48, 1.86, 0.8)
-    shell(0.45, 2.0, 0.34)
-    temples()
+    """Buzz: one thin layer hugging the skull, hairline traced on the forehead and above the ears; no fringe, no lip."""
+    sphere(HB, (0, 1.66, -0.1), 0.48, (1.0, 0.92, 0.98))  # nape
+    # the whole visible crown is one front piece ~0.07 over the skull, so no edge runs across the top
+    sphere(HF, (0, 1.77, -0.06), 0.505, (1.02, 0.9, 1.0))
 
 
 def side_part():
-    """Short side part: crown swept from a part at x 0.18 across to the other side."""
-    cap(0.49, 1.86, 0.84)
-    shell(0.46, 2.02, 0.38)
-    temples()
-    chain(HF, (0.18, 2.12, 0.18), (-0.32, 1.98, 0.22), 0.15, 7)
-    front((0.3, 2.02, 0.12), 0.12, (1.0, 0.6, 0.8))
+    """Short side part: a clean part line at x 0.2, the long side swept smooth across the top and down to the far temple."""
+    _short_sides()
+    for z in (0.27, 0.14, 0.0, -0.14, -0.28):  # overlapping strands fuse into one smooth sweep from the part
+        e = -0.36 if z > 0.2 else -0.42
+        chain(HF, _top(0.2, z, 0.02 if z > 0.2 else 0.04), _top(-0.08, z, 0.05), 0.1, 6)
+        chain(HF, _top(-0.08, z, 0.05), _top(e, z, 0.02), 0.1, 6)
 
 
 def quiff():
-    """Quiff: short sides, the front lifted up and forward above the forehead."""
-    cap(0.49, 1.86, 0.82)
-    shell(0.46, 2.02, 0.38)
-    temples()
-    chain(HF, (0, 2.12, 0.0), (0.02, 2.3, 0.26), 0.17, 5)
-    front((0.02, 2.3, 0.26), 0.18, (1.3, 0.8, 1.0))
+    """Quiff: short sides, the front brushed up off the forehead, flaring forward into a rounded crest, tapering back."""
+    _short_sides()
+    front((0.02, 2.06, 0.25), 1.0, (0.28, 0.2, 0.15))  # brushed up from the hairline
+    for x in (-0.09, 0.09):  # two soft grooves on the upswept face
+        chain(HF, (x, 1.98, 0.32), (x * 1.3 + 0.03, 2.22, 0.36), 0.1, 6)
+    front((0.04, 2.25, 0.3), 1.0, (0.3, 0.12, 0.16))  # the crest, wider than the base, rolled forward
+    chain(HF, (0.03, 2.25, 0.24), (0.0, 2.14, -0.22), 0.13, 6)  # tapers back over the crown
 
 
 def pompadour():
-    """Pompadour: a tall smooth roll swept back over the crown, sides slicked."""
-    cap(0.49, 1.86, 0.84)
-    shell(0.47, 2.06, 0.44)
-    temples()
-    front((0, 2.3, 0.12), 0.26, (1.35, 0.7, 1.1))
-    back((0, 2.2, -0.2), 0.3, (1.2, 0.6, 1.0))
+    """Pompadour: one tall smooth roll rising off a high hairline, swept back; short slick sides."""
+    _short_sides()
+    front((0, 1.98, -0.14), 1.0, (0.47, 0.4, 0.5))  # the raised top, continuous with the sides at y 1.85
+    front((0.05, 2.2, 0.16), 1.0, (0.34, 0.2, 0.28))  # the roll's crest, forward over the forehead
 
 
 def slick_back():
-    """Slicked back: smooth, flat, combed straight back; no fringe, short tuck at the nape."""
-    cap(0.5, 1.84, 0.88)
-    shell(0.46, 2.03, 0.4)
-    temples()
-    back((0, 1.62, -0.36), 0.18, (1.3, 0.8, 0.8))
+    """Slicked back: smooth and flat, combed straight back off a high hairline; tight sides, no fringe."""
+    _short_sides(1.8, 0.41, 0.5, -0.1)
+    for x in (-0.26, -0.13, 0.0, 0.13, 0.26):  # comb ridges: fade in at the hairline, run straight back
+        z0 = 0.3 - abs(x) * 0.35
+        for i in range(14):
+            t = i / 13
+            front(_top(x, z0 + (-0.32 - z0) * t, 0.035), 0.015 + 0.04 * min(t * 2.5, 1))
 
 
 def mohawk():
-    """Mohawk: a tall central ridge front to back; stubble layer on the shaved sides keeps the scalp covered."""
-    cap(0.48, 1.86, 0.78)
-    shell(0.45, 2.0, 0.33)
-    temples()
-    chain(HF, (0, 2.24, 0.24), (0, 2.38, -0.05), 0.12, 6)
-    chain(HB, (0, 2.38, -0.05), (0, 2.1, -0.42), 0.12, 6)
+    """Mohawk: a tall fin from the forehead to the nape; the sides are shaved, a narrow crown strip covers the top."""
+    import math
+
+    cap(0.44, 1.8, 0.6)  # hidden behind the head from the front: no rim beside the shaved sides
+    hug(rx=0.42, ry=0.3, rz=0.43, y=1.86)  # a high crown strip, not a helmet: it ends above the temples
+    for i in range(17):
+        a = math.radians(40 - 150 * i / 16)  # from over the forehead, over the top, down to the nape
+        for k, r in ((0.44, 0.09), (0.54, 0.095), (0.64, 0.09), (0.72, 0.07)):
+            p = (0, 1.7 + k * math.cos(a), k * math.sin(a))
+            sphere(HF if p[2] > -0.05 else HB, p, r, (1.25, 1, 1))
 
 
 def undercut():
-    """Undercut: shaved sides, long top swept to one side and over."""
-    cap(0.48, 1.86, 0.78)
-    shell(0.45, 2.0, 0.33)
-    temples()
-    front((0, 2.18, 0.04), 0.3, (1.2, 0.5, 1.15))
-    chain(HF, (-0.1, 2.2, 0.2), (0.34, 2.06, 0.18), 0.15, 6)
+    """Undercut: sides clipped close to the skull, a long top lifted at the front and swept over to one side."""
+    cap(0.46, 1.84, 0.66)  # top 2.14, under the hug layer; the sides end above the ears
+    hug()
+    front((0.03, 2.12, 0.0), 0.3, (0.95, 0.42, 1.25))  # the long top, no wider than the skull
+    chain(HF, (-0.22, 2.18, 0.2), (0.26, 2.1, 0.27), 0.13, 6)  # lifted front, swept from the part across
+    front((0.32, 2.03, 0.22), 0.1, (1.0, 1.3, 0.8))  # the swept tip, above the temple
+    back((0.0, 2.06, -0.3), 0.28, (1.0, 0.5, 0.8))
 
 
 def curly_top():
-    """Curly top fade: tight sides, a cluster of curls on top."""
-    cap(0.48, 1.86, 0.8)
-    shell(0.46, 2.02, 0.36)
-    temples()
-    for x, y, z in ((-0.2, 2.2, 0.12), (0, 2.26, 0.16), (0.2, 2.2, 0.12), (-0.12, 2.28, -0.08),
-                    (0.12, 2.28, -0.08), (0, 2.2, 0.26)):
-        front((x, y, z), 0.13)
+    """Curly top fade: sides clipped close, tight curls over the whole top down to the hairline."""
+    import math
+
+    cap(0.46, 1.84, 0.66)
+    hug(rx=0.44, ry=0.34)
+    curls = [(0, 90)] + [(t, 64) for t in range(0, 360, 60)] + [(t + 20, 40) for t in range(0, 360, 40)]
+    curls += [(t, 18) for t in range(-60, 61, 24)]  # the front hairline is curls too, so the edge has no lip
+    for t, e in curls:
+        t, e = math.radians(t), math.radians(e)
+        x, y, z = 0.42 * math.cos(e) * math.sin(t), 1.86 + 0.32 * math.sin(e), 0.42 * math.cos(e) * math.cos(t)
+        sphere(HF if z > -0.1 else HB, (x, y, z), 0.105)
 
 
 def man_bun():
-    """Man bun: hair pulled back flat, a bun at the back of the crown."""
-    cap(0.5, 1.84, 0.9)
-    shell()
-    temples()
-    back((0, 2.12, -0.46), 0.17)
+    """Man bun: sides and top pulled back flat, a big bun high on the back of the crown, showing over the top."""
+    cap(0.47, 1.8, 0.72)  # top 2.14, under the hug layer
+    hug()
+    back((0, 2.3, -0.3), 0.2)
+    back((0, 2.14, -0.36), 0.14)  # the neck of the bun, joining it to the cap
 
 
 def top_knot():
@@ -502,179 +561,353 @@ def top_knot():
 
 
 def low_ponytail():
-    """Low ponytail: pulled back, tail from the nape straight down behind the back."""
-    cap(0.5, 1.84, 0.9)
-    shell()
-    temples()
-    back((0, 1.62, -0.42), 0.11)
-    chain(HB, (0, 1.58, -0.44), (0, 1.0, -0.4), 0.11, 8)
+    """Low ponytail: pulled back, tied low behind the left ear; the smooth tail falls forward over the shoulder."""
+    _pulled()
+    back((0.3, 1.58, -0.26), 0.13)  # the gathered hair behind the ear
+    _behind_ear(1)
+    _tube(HF, ((0.36, 1.52, -0.12), (0.26, 1.4, -0.02), (0.15, 1.34, 0.16), (0.1, 1.2, 0.22), (0.08, 1.06, 0.2)),
+          0.09, 0.05)
 
 
 def pigtails():
-    """Pigtails: middle part, two bunches tied behind the ears, ends behind the shoulders."""
-    cap()
-    shell()
-    temples()
+    """Pigtails: middle part, two bunches tied high behind the ears that flare out and taper above the shoulders."""
+    _pulled()
     for s in (-1, 1):
-        back((0.42 * s, 1.74, -0.2), 0.09)
-        chain(HB, (0.46 * s, 1.72, -0.2), (0.6 * s, 1.28, -0.2), 0.13, 7)
+        back((0.44 * s, 1.76, -0.14), 0.09)  # the tie
+        _tube(HB, ((0.48 * s, 1.74, -0.14), (0.57 * s, 1.66, -0.14), (0.59 * s, 1.52, -0.13), (0.55 * s, 1.4, -0.12)),
+              0.12, 0.05)
 
 
 def two_braids():
-    """Two braids: middle part, plaits from behind the ears hanging behind the shoulders."""
-    cap()
-    shell()
-    temples()
+    """Two braids, middle part: the left plait comes forward over the shoulder and down the front, the right one
+    (the waving arm's side, which crosses the chest) falls back behind the shoulder, seen from ear to shoulder."""
+    _pulled()
     for s in (-1, 1):
-        for i in range(7):
-            back((0.4 * s, 1.66 - 0.1 * i, -0.18), 0.085, (1.0, 0.8, 1.0))
-        back((0.4 * s, 0.94, -0.18), 0.06)
+        back((0.36 * s, 1.62, -0.2), 0.11)
+        _behind_ear(s)
+    _plait(HF, ((0.36, 1.52, -0.12), (0.26, 1.4, -0.02), (0.16, 1.34, 0.16), (0.1, 1.18, 0.22), (0.07, 1.0, 0.2)),
+           0.08, 0.055)
+    front((0.07, 0.97, 0.2), 0.045)
+    _plait(HB, ((-0.4, 1.58, -0.1), (-0.45, 1.42, -0.12), (-0.42, 1.2, -0.16)), 0.1, 0.08)
 
 
 def single_braid():
-    """Single braid: one plait down the middle of the back."""
-    cap(0.5, 1.84, 0.9)
-    shell()
-    temples()
-    for i in range(8):
-        back((0, 1.64 - 0.09 * i, -0.4), 0.1, (1.0, 0.8, 1.0))
+    """Single braid: pulled back to one side, one plait forward over the left shoulder and down the front
+    (the right arm waves across the chest, so the plait stays clear of it)."""
+    _pulled()
+    back((0.3, 1.58, -0.26), 0.13)
+    _behind_ear(1)
+    _plait(HF, ((0.36, 1.52, -0.12), (0.26, 1.4, -0.02), (0.16, 1.34, 0.16), (0.1, 1.18, 0.22), (0.07, 1.0, 0.2)),
+           0.085, 0.055)
+    front((0.07, 0.97, 0.2), 0.045)
 
 
 def space_buns():
-    """Space buns: two buns high on either side of the crown."""
-    cap(0.5, 1.84, 0.9)
-    shell()
-    temples()
+    """Space buns: all the hair pulled up tight off the face and sides into two coiled buns high on the crown."""
+    import math
+
+    cap(0.49, 1.85, 0.84)
+    _crown()
     for s in (-1, 1):
-        front((0.3 * s, 2.24, -0.04), 0.16)
+        c = (0.27 * s, 2.32, 0.04)
+        front((0.22 * s, 2.2, 0.03), 0.14, (1.0, 0.7, 1.0))  # gathered base, deep in the crown
+        front(c, 0.17, (1.0, 0.85, 1.0))
+        # a rope of hair wound round the bun, base to top: reads as a twisted bun, not a smooth round ear
+        for i in range(140):
+            t = i / 139
+            th, ph = s * 2 * math.pi * 2.75 * t, math.radians(-25 + 100 * t)
+            p = (c[0] + 0.17 * math.cos(ph) * math.sin(th), c[1] + 0.145 * math.sin(ph), c[2] + 0.17 * math.cos(ph) * math.cos(th))
+            front(p, 0.065 - 0.025 * t)
 
 
 def curly_bob():
-    """Curly bob: chin length, round and bumpy; the outline is curls, not a smooth curtain."""
-    cap(0.53, 1.82, 0.94)
-    shell(0.5, 2.06, 0.5)
-    temples()
-    for x in (-0.28, -0.08, 0.12, 0.3):
-        front((x, 2.04, 0.22), 0.13)
-    for s in (-1, 1):
-        for y in (1.82, 1.68, 1.54):
-            front((0.44 * s, y, -0.02), 0.13)
-        back((0.42 * s, 1.42, -0.08), 0.13)
+    """Curly bob: a round chin-length mass of tight curls all over, curly fringe; the ends tuck under at the jaw."""
+    cap(0.53, 1.78, 0.95)
+    back((0, 1.62, -0.12), 0.44, (1.12, 0.7, 0.85))
+    _crown(1.8, -0.06, 0.51, 0.9)
+    _curls((0, 1.72, -0.04), (0.53, 0.5, 0.53), 0.1, (2.2, 2.09, 1.98, 1.86, 1.74, 1.62, 1.51), 24, 1.97)
 
 
 def long_wavy():
-    """Long wavy: like long_straight, the back length zig-zags side to side."""
+    """Long wavy: middle part, curtains framing the face, one sheet down the back whose edges ripple in S waves."""
     cap()
-    shell()
+    _crown()
     temples()
     for s in (-1, 1):
         chain(HF, (0.04 * s, 2.1, 0.2), (0.3 * s, 1.86, 0.18), 0.13, 5)
-        chain(HF, (0.34 * s, 1.84, -0.03), (0.38 * s, 1.62, -0.02), 0.16, 4)
-        chain(HB, (0.38 * s, 1.7, -0.12), (0.46 * s, 1.36, -0.14), 0.16, 4)
-        chain(HB, (0.46 * s, 1.36, -0.14), (0.36 * s, 1.0, -0.16), 0.16, 4)
-    chain(HB, (0, 1.6, -0.3), (0, 0.98, -0.3), 0.32, 8)
+        chain(HF, (0.34 * s, 1.84, -0.03), (0.37 * s, 1.62, -0.02), 0.16, 4)
+        pts = [(0.37, 1.72, -0.1), (0.47, 1.54, -0.12), (0.33, 1.36, -0.14), (0.48, 1.18, -0.15), (0.35, 1.0, -0.16)]
+        for a, b in zip(pts, pts[1:]):
+            chain(HB, (a[0] * s, a[1], a[2]), (b[0] * s, b[1], b[2]), 0.15)
+    back((0, 1.42, -0.24), 0.4, (1.02, 1.2, 0.55))
 
 
 def long_curly():
-    """Long curly: big volume, curls to mid back; lumpy outline wider than long_wavy."""
-    cap(0.55, 1.82, 0.95)
-    shell(0.5, 2.06, 0.5)
-    temples()
-    for x in (-0.26, 0, 0.26):
-        front((x, 2.06, 0.22), 0.14)
+    """Long curly: a big curly mane, curls over the crown and fringe, one mass to mid back with a curly outline."""
+    cap(0.55, 1.8, 0.95)
+    _crown(1.8, -0.06, 0.52, 0.9)
+    back((0, 1.72, -0.16), 0.52, (1.12, 0.62, 0.85))
+    back((0, 1.36, -0.24), 0.44, (1.2, 1.05, 0.55))
+    _curls((0, 1.74, -0.05), (0.54, 0.5, 0.54), 0.11, (2.2, 2.09, 1.98, 1.86, 1.74), 24, 1.97)
     for s in (-1, 1):
-        front((0.46 * s, 1.74, -0.02), 0.14)
-        front((0.48 * s, 1.58, -0.04), 0.14)
-        for y in (1.42, 1.24, 1.06):
-            back((0.5 * s, y, -0.16), 0.16)
-    for y in (1.5, 1.28, 1.06):
-        back((0, y, -0.3), 0.3)
+        for i, y in enumerate((1.62, 1.5, 1.38, 1.26, 1.14, 1.02)):
+            back(((0.52 + 0.03 * (i % 2)) * s, y, -0.16), 0.12)
+            back(((0.4 + 0.02 * (i % 2)) * s, y - 0.06, -0.06), 0.11)
+    for x in (-0.42, -0.21, 0, 0.21, 0.42):
+        back((x, 0.96 - 0.03 * (abs(x) > 0.3), -0.24), 0.13)
 
 
 def dreadlocks():
-    """Dreadlocks: thick ropes from the crown; the front ones stop above the shoulders, the rest hang behind."""
-    cap(0.52, 1.84, 0.9)
-    shell(0.48, 2.06, 0.46)
-    temples()
-    for x in (-0.24, 0, 0.24):
-        chain(HF, (x, 2.16, 0.18), (x * 1.2, 2.0, 0.28), 0.07, 4)
+    """Dreadlocks: thick ropes from the crown over the skull; the front ones frame the face to the jaw, the rest hang
+    behind the neck and shoulders (no loose ends beside them)."""
+    cap(0.5, 1.84, 0.9)
+    shell(0.46, 2.0, 0.42)
+    r = 0.065
     for s in (-1, 1):
-        chain(HF, (0.4 * s, 1.9, 0.04), (0.44 * s, 1.5, 0.04), 0.07, 6)
-        for k in (0.3, 0.5):
-            chain(HB, (k * s, 1.8, -0.24), (k * 1.1 * s, 1.0, -0.24), 0.07, 9)
-    for x in (-0.1, 0.1):
-        chain(HB, (x, 1.7, -0.4), (x, 1.0, -0.4), 0.07, 9)
+        # swept off the forehead to the sides along the skull, then down beside the face
+        for a, b, c, d in (
+            ((0.06, 2.19, 0.18), (0.26, 2.05, 0.31), (0.42, 1.8, 0.2), (0.44, 1.44, 0.14)),
+            ((0.16, 2.21, 0.02), (0.38, 2.04, 0.16), (0.5, 1.78, 0.06), (0.5, 1.42, 0.04)),
+        ):
+            for p, q in ((a, b), (b, c), (c, d)):
+                chain(HF, (p[0] * s, p[1], p[2]), (q[0] * s, q[1], q[2]), r)
+        chain(HF, (0.3 * s, 2.16, -0.12), (0.5 * s, 1.9, -0.1), r)
+        # over the crown from the front hairline to the back, where they carry on down behind
+        chain(HF, (0.1 * s, 2.14, 0.3), (0.12 * s, 2.25, 0.04), r)
+        chain(HF, (0.12 * s, 2.25, 0.04), (0.14 * s, 2.12, -0.3), r)
+        # behind: ropes down the back of the head to the upper back, inside the neck and shoulder line
+        for x in (0.14, 0.3, 0.42):
+            chain(HB, (x * s, 2.02, -0.34), (x * 0.9 * s, 1.08, -0.3), r)
+    chain(HB, (0, 2.05, -0.4), (0, 1.08, -0.36), r)
 
 
 def cornrows():
-    """Cornrows: tight rows running front to back over a skull-close base."""
-    cap(0.48, 1.86, 0.8)
-    shell(0.46, 2.0, 0.42)  # skull-close, but deep enough to cover the adult crown
-    temples()
-    for x in (-0.3, -0.15, 0, 0.15, 0.3):
-        chain(HF, (x, 2.14 - abs(x) * 0.3, 0.26), (x, 2.3 - abs(x) * 0.5, -0.1), 0.05, 7)
+    """Cornrows: seven slim rows running straight back from the hairline, standing proud of a thin skull-close base
+    that starts at the hairline (the grooves between the rows show the scalp-tight base)."""
+    import math
+
+    cap(0.47, 1.8, 0.86)  # behind: kept under the rows so they make the top outline
+    shell(0.42, 1.8, 0.88, 1.12)  # thin skin over the skull, crossing the head surface at the hairline
+    for x in (-0.36, -0.24, -0.12, 0.0, 0.12, 0.24, 0.36):
+        k = math.sqrt(1 - (x / 0.5) ** 2)  # the row's arc over the skull narrows towards the sides
+        pts = [(x, 1.8 + 0.4 * k * math.sin(t), 0.02 + 0.45 * k * math.cos(t))
+               for t in (math.radians(10 + i * 20) for i in range(9))]  # hairline over the top to the crown back
+        for p, q in zip(pts, pts[1:]):
+            chain(HF, p, q, 0.045)
 
 
 def mullet():
-    """Mullet: short on top and sides, long at the back (all of it behind the head)."""
-    cap(0.5, 1.84, 0.86)
-    shell(0.46, 2.02, 0.38)
-    temples()
-    front((0.02, 2.04, 0.22), 0.22, (1.3, 0.45, 0.9))
-    chain(HB, (0, 1.62, -0.32), (0, 1.12, -0.3), 0.26, 6)
+    """Mullet: short textured top and short sides above the ears; the long back stays hidden behind the head down to
+    the jaw and only shows below it, on both sides of the neck down to the shoulders (behind the body)."""
+    cap(0.49, 1.86, 0.84)
+    front((0, 1.95, -0.02), 0.5, (1.0, 0.66, 1.0))  # short all over; the head occluder trims it above ears and brow
+    for x, z in ((-0.2, 0.18), (0.0, 0.24), (0.2, 0.18), (-0.12, -0.08), (0.12, -0.08)):
+        front((x, 2.2, z), 0.1, (1.0, 0.6, 1.0))  # textured top, sunk into the cap (no lip)
+    for s in (-1, 1):
+        chain(HB, (0.24 * s, 1.42, -0.24), (0.34 * s, 1.2, -0.16), 0.09)  # inside the head outline above the jaw
+        back((0.35 * s, 1.16, -0.14), 0.09, (1.2, 0.8, 1.0))  # the flick below the jaw
+    chain(HB, (0, 1.74, -0.36), (0, 1.22, -0.3), 0.24)
 
 
 def shag():
     """Shag: choppy layers, a messy fringe and flicked-out sides at jaw length."""
     cap(0.52, 1.83, 0.92)
-    shell(0.49, 2.06, 0.48)
+    shell(0.45, 2.04, 0.48)
     temples()
-    for x, y in ((-0.26, 1.98), (-0.08, 1.94), (0.1, 1.96), (0.28, 2.0)):
-        front((x, y, 0.26), 0.1, (0.9, 1.3, 0.8))
+    # choppy top: overlapping clumps of mixed size over the crown, each row lower and further forward
+    for x, y, z, r in ((-0.2, 2.24, -0.05, 0.13), (0.05, 2.27, -0.02, 0.14), (0.26, 2.2, -0.06, 0.12),
+                       (-0.32, 2.14, 0.1, 0.12), (-0.1, 2.2, 0.14, 0.12), (0.14, 2.19, 0.15, 0.13),
+                       (0.35, 2.1, 0.1, 0.11)):
+        front((x, y, z), r, (1.0, 0.8, 1.0))
+    # messy fringe: uneven points falling over the brow, one row, tips at different lengths
+    for x, y, d in ((-0.3, 2.04, 0.16), (-0.14, 2.08, 0.24), (0.02, 2.08, 0.17), (0.17, 2.07, 0.25), (0.32, 2.03, 0.14)):
+        spike(HF, (x, y, 0.24), (x * 1.1, y - d, 0.36), 0.09, 0.035, 5)
     for s in (-1, 1):
-        chain(HF, (0.4 * s, 1.82, -0.02), (0.48 * s, 1.52, -0.02), 0.13, 5)
-        back((0.5 * s, 1.44, -0.08), 0.1)
+        # layered sides down to the jaw, the ends flicked out but still joined to the head
+        spike(HF, (0.42 * s, 1.92, 0.04), (0.5 * s, 1.7, 0.08), 0.13, 0.08, 5)
+        spike(HF, (0.44 * s, 1.78, -0.02), (0.54 * s, 1.56, 0.0), 0.12, 0.08, 5)
+        spike(HB, (0.4 * s, 1.66, -0.12), (0.54 * s, 1.46, -0.1), 0.12, 0.08, 5)
 
 
 def bowl_cut():
-    """Bowl cut: a smooth helmet with a straight blunt fringe across the brow."""
-    cap(0.51, 1.84, 0.9)
-    shell(0.49, 2.04, 0.48)
-    temples()
-    front((0, 1.98, 0.26), 0.24, (1.7, 0.4, 0.9))
-    for s in (-1, 1):
-        front((0.44 * s, 1.78, 0.0), 0.13, (0.9, 1.4, 1.0))
+    """Bowl cut: a rounded helmet of hair combed straight down from the crown, cut in one level blunt line round the
+    head just above the brows and the ears (no pads, no ridge, no hanging sides)."""
+    import math
+
+    cap(0.5, 1.94, 0.66)  # back edge level with the sides, nothing hangs down behind
+    c, rx, ry = (0, 1.92, 0.0), 0.51, 0.337
+    front(c, rx, (1.0, ry / rx, 1.0))  # the helmet; the head occluder trims it at the bowl line
+    for f in range(-120, 121, 15):  # combed strands down the visible front half, their tips make the blunt line
+        p = math.radians(f)
+        pts = [(c[0] + rx * math.sin(t) * math.sin(p), c[1] + ry * math.cos(t), c[2] + rx * math.sin(t) * math.cos(p))
+               for t in (math.radians(a) for a in (35, 60, 85, 108))]
+        for a, b in zip(pts, pts[1:]):
+            chain(HF, a, b, 0.055)
 
 
 def spiky():
     """Spiky: short sides, upright spikes across the top."""
-    cap(0.49, 1.86, 0.82)
-    shell(0.46, 2.02, 0.38)
-    temples()
-    for x, z in ((-0.24, 0.1), (0, 0.18), (0.24, 0.1), (-0.12, -0.12), (0.12, -0.12)):
-        chain(HF, (x, 2.2, z), (x * 1.3, 2.38, z * 1.2), 0.07, 3)
+    import math
+
+    cap(0.47, 1.94, 0.66)  # short at the back: the lower edge sits at the ear tops, not the jaw
+    shell(0.42, 2.02, 0.4, 1.05)  # thin over the brow: no rim for the spikes to stand on; no side flaps
+    # spikes of mixed length, rooted inside the crown and standing mostly up (a little out, the front
+    # ones forward over the brow): pointing straight out from the head centre made a crown ring
+    for x, z, ln, r in ((-0.25, 0.18, 0.15, 0.065), (-0.08, 0.24, 0.19, 0.07), (0.12, 0.23, 0.16, 0.065),
+                        (0.29, 0.12, 0.14, 0.06), (-0.2, 0.04, 0.24, 0.09), (0.03, 0.1, 0.28, 0.1),
+                        (0.22, 0.0, 0.22, 0.09), (-0.1, -0.16, 0.24, 0.085), (0.13, -0.2, 0.2, 0.085),
+                        (0.0, -0.32, 0.17, 0.08), (-0.3, -0.12, 0.17, 0.075), (0.32, -0.14, 0.16, 0.075)):
+        y = 1.68 + 0.46 * math.sqrt(max(1 - (x / 0.5) ** 2 - (z / 0.48) ** 2, 0.04))  # on the crown
+        base = Vector((x, y, z))
+        out = (base - Vector((0, 1.68, 0))).normalized()
+        d = (out * 0.45 + Vector((0, 1, 0)) + Vector((0, 0, 0.12 if z > 0.15 else 0))).normalized()
+        spike(HF, base - d * 0.08, base + d * ln, r, 0.022, 7)
 
 
 def curtains():
     """Curtains: 90s middle part, short; two fringe wings frame the forehead, ears covered."""
     cap(0.5, 1.84, 0.88)
-    shell()
+    shell(0.45, 2.1, 0.5)  # set high, so the middle of the forehead shows between the wings
     temples()
     for s in (-1, 1):
-        chain(HF, (0.04 * s, 2.12, 0.2), (0.32 * s, 1.88, 0.2), 0.13, 5)
-        front((0.43 * s, 1.68, 0.0), 0.12, (0.9, 1.5, 0.9))
+        # each wing: from the middle part high on the forehead, falling down and out to the temple, so a
+        # V of forehead shows between them; thin at the part, fullest over the brow, melting into the crown
+        pts = ((0.05, 2.16, 0.2, 0.06), (0.1, 2.06, 0.32, 0.08), (0.18, 1.95, 0.36, 0.095),
+               (0.28, 1.86, 0.32, 0.1), (0.37, 1.8, 0.22, 0.09), (0.44, 1.76, 0.1, 0.08))
+        for i in range(len(pts) - 1):
+            (x0, y0, z0, r0), (x1, y1, z1, r1) = pts[i], pts[i + 1]
+            spike(HF, (x0 * s, y0, z0), (x1 * s, y1, z1), r0, r1, 4)
+        # the wing's root blends back into the crown (no step between wing and shell)
+        spike(HF, (0.12 * s, 2.2, 0.06), (0.26 * s, 2.0, 0.26), 0.12, 0.1, 4)
+        front((0.42 * s, 1.92, 0.12), 0.11, (0.85, 1.2, 1.0))  # closes the gap between the wing's end and the side hair
 
 
 def half_up():
     """Half up: top section tied back in a small knot, the rest hangs long behind (long_straight sides)."""
     cap()
-    shell()
+    shell(0.46, 2.02, 0.6, 0.97)  # the tied top: sleek and close to the skull
     temples()
-    back((0, 2.08, -0.42), 0.12)
     for s in (-1, 1):
-        chain(HF, (0.34 * s, 1.84, -0.03), (0.36 * s, 1.62, -0.02), 0.16, 4)
-        chain(HB, (0.38 * s, 1.7, -0.12), (0.34 * s, 0.98, -0.16), 0.16, 10)
+        # the top section combed back from the hairline to the knot: smooth bands over the crown
+        chain(HF, (0.3 * s, 2.02, 0.2), (0.1 * s, 2.24, -0.22), 0.09, 6)
+        # the loose length below the tied section, close over the ears (no lobe), falling behind the shoulders
+        chain(HF, (0.37 * s, 1.88, -0.02), (0.4 * s, 1.62, -0.04), 0.13, 4)
+        chain(HB, (0.42 * s, 1.74, -0.1), (0.38 * s, 0.98, -0.16), 0.17, 10)
     chain(HB, (0, 1.6, -0.3), (0, 0.98, -0.3), 0.3, 8)
+    # the knot: a round bun high on the back of the crown, standing clear of the head outline from the front
+    front((0, 2.3, -0.22), 0.11)
+    front((0, 2.4, -0.26), 0.17, (1.1, 0.95, 1.0))
+
+
+def _crown(y=1.8, z=-0.07, r=0.5, sy=0.88):
+    """Crown that grazes the skull: thins to nothing at the hairline (above the brow, the ear tops), so no lip."""
+    front((0, y, z), r, (1.0, sy, 1.0))
+
+
+def _curls(c, rad, r, ys, n0, face_y, hf_y=1.86):
+    """Curls packed round an ellipsoid at heights ys; none over the face below face_y. Low or wide ones go behind."""
+    import math
+
+    for k, y in enumerate(ys):
+        f = max(1 - ((y - c[1]) / rad[1]) ** 2, 0) ** 0.5
+        n = max(int(n0 * f), 3)
+        for i in range(n):
+            t = 2 * math.pi * (i + 0.5 * (k % 2)) / n
+            p = (c[0] + rad[0] * f * math.sin(t), y, c[2] + rad[2] * f * math.cos(t))
+            if y < face_y and p[2] > 0.1:
+                continue
+            sphere(HF if y >= hf_y and abs(p[0]) < 0.42 else HB, p, r)
+
+# Notes: helpers sit just before space_buns in body.py. The worktree started at main 54f086d, so it was detached to 67b4632 first (there is no local m5/hair-list branch). git lfs pull was needed for the child and adult_m body PNGs. The Godot import changes to docs/art-test were reverted. Nothing is committed. Last stills: scratchpad/w6/r3 (space_buns, long_curly), r2 (long_wavy) and r4 (curly_bob). The shared scratchpad loop.sh belongs to another agent; mine is scratchpad/w6/loop6.sh.
+
+
+def _top(x, z, d=0.0):
+    """Point on the child head's top surface (body(): centre y 1.68, radii 0.4935 / 0.4465 / 0.47) grown by d."""
+    u = max(1 - (x / (0.4935 + d)) ** 2 - (z / (0.47 + d)) ** 2, 0.0)
+    return (x, 1.68 + (0.4465 + d) * u**0.5, z)
+
+
+def _short_sides(y=1.8, ry=0.4, rz=0.5, z=-0.08, rx=0.51):
+    """Short-cut base: a skull-tight layer that surfaces above the temples (y 1.7), never below the ears,
+    and from y 1.9 on the forehead; the head occluder trims the rest. No side flaps."""
+    cap(0.48, 1.88, 0.78)
+    front((0, y, z), 1.0, (rx, ry, rz))
+    for s in (-1, 1):  # short sideburn in front of the ear
+        front((0.455 * s, 1.72, 0.12), 0.07, (0.7, 1.5, 0.8))
+
+# Caveats: body.py in worktree wf_4bf621e0-3e6-3 holds this code (latin-1, LF); nothing committed. Godot --import changed many unrelated .import files (assets/clay, house, clay2d, docs/art-test), which still need `git checkout` of the non-hair .import files. The quiff cap5 capture (bg bccfmkv89) may still be running; cap.sh deletes override.cfg when it ends.
+
+
+def skin_z(x, y):
+    """Front surface of the modelled head ((0, 1.68, 0) r 0.47 x(1.05, 0.95, 1)) at x, y: hairlines sit on it."""
+    q = 1 - (x / 0.4935) ** 2 - ((y - 1.68) / 0.4465) ** 2
+    return 0.47 * max(q, 0) ** 0.5
+
+
+def hug(rx=0.46, ry=0.36, rz=0.46, y=1.8, z=-0.03):
+    """Skull-tight crown layer for short and pulled-back cuts: it follows the forehead's curve (0.02 off at
+    y 2.0), so its front edge meets the skin at a grazing angle with no lip, and it stays inside the head's
+    outline below y 1.85, so the sides read short. Use it in place of shell() where a rim would show."""
+    front((0, y, z), rx, (1.0, ry / rx, rz / rx))
+
+
+def _path(pts, step):
+    """Points every `step` along the polyline pts, with their 0-1 position along it."""
+    pts = [Vector(p) for p in pts]
+    segs = [(a, b, (b - a).length) for a, b in zip(pts, pts[1:])]
+    total = sum(s[2] for s in segs)
+    out, d = [], 0.0
+    for a, b, n in segs:
+        k = max(int(n / step), 1)
+        for i in range(k):
+            out.append((a.lerp(b, i / k), (d + n * i / k) / total))
+        d += n
+    out.append((pts[-1], 1.0))
+    return out
+
+
+def _tube(key, pts, r0, r1):
+    """Smooth tail tapering r0 -> r1 along pts; beads 0.3 r apart so the remesh fuses one tube."""
+    for p, t in _path(pts, 0.3 * min(r0, r1)):
+        sphere(key, p, r0 + (r1 - r0) * t, segs=16)
+
+
+def _plait(key, pts, r0, r1):
+    """Braid: a thin core with flattened lobes alternating left and right, so it reads as plaited, not a tube."""
+    _tube(key, pts, 0.55 * r0, 0.55 * r1)
+    for i, (p, t) in enumerate(_path(pts, 0.7 * (r0 + r1) / 2)):
+        r = r0 + (r1 - r0) * t
+        sphere(key, p + Vector((0.16 * r * (1 if i % 2 else -1), 0, 0)), r, (1.0, 0.55, 0.8), segs=16)
+
+
+def _pulled():
+    """Hair pulled back tight, one smooth skin over the skull (head r 0.47 at y 1.68), about 0.05 thick: the back
+    layer rims the outline down to the ears, the front crown dips under the forehead at a rounded hairline
+    (y 1.9 in the middle, lower at the temples), so there is no ridge, no helmet and no side flap."""
+    back((0, 1.76, -0.04), 0.47, (1.1, 0.95, 1.05))
+    front((0, 1.84, -0.02), 0.5, (1.0, 0.72, 0.87))
+
+
+def _behind_ear(s, y=1.5):
+    """Hair combed back behind the ear down to the tie: shows only as a thin edge past the cheek, so the tail is attached."""
+    chain(HB, (0.43 * s, 1.82, -0.1), (0.38 * s, y, -0.08), 0.08, 6)
+
+
+def spike(key, base, tip, r0, r1, n=6):
+    """A tapered spike: beads shrinking from r0 at the base to r1 at the tip (cut-local; chain() keeps one radius)."""
+    a, b = Vector(base), Vector(tip)
+    n = max(n, int((b - a).length / (0.3 * min(r0, r1))) + 2)  # dense enough to fuse, like chain()
+    for i in range(n):
+        t = i / (n - 1)
+        sphere(key, a.lerp(b, t), r0 + (r1 - r0) * t, segs=16)
+
+
+def sheet(key, a, b, r, scale):
+    """Cut-local: a straight run of flattened beads 0.15 r apart, so the remesh fuses it into a flat panel, no bulges."""
+    a, b = Vector(a), Vector(b)
+    n = int((b - a).length / (0.15 * r)) + 2
+    for i in range(n):
+        sphere(key, a.lerp(b, i / (n - 1)), r, scale)
 
 
 HAIRS = {
