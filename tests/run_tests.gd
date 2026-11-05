@@ -22,6 +22,8 @@ func _init() -> void:
 	_test_career_cards()
 	_test_career_menu()
 	_test_traits()
+	_test_date_cards_need_single()
+	_test_old_save_traits()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -498,3 +500,37 @@ func _test_traits() -> void:
 	db._check_choice({"label": "x", "by_trait": {"boldness": {"luck": 1}}}, "c")
 	_check(db.errors.size() == 2, "bad by_trait gave %d errors, expected 2" % db.errors.size())
 	state.free()
+
+
+## A card that starts dating the crush must not be drawn while you already have a partner:
+## the date is skipped but its dating flags would stick and the next breakup would end the
+## old partner instead.
+func _test_date_cards_need_single() -> void:
+	var db := CardDB.new()
+	db.load_dir()
+	for c in db.cards:
+		for side in ["left", "right", "up"]:
+			if c.has(side) and c[side].get("job", {}).get("date", false):
+				_check(
+					"dating_work_partner" in c.get("requires", {}).get("not_flags", []),
+					"%s can date the crush while you already have a partner" % c.id
+				)
+
+
+## Saves from before the spectrums (#49) have no boldness or sociability: they load in range.
+func _test_old_save_traits() -> void:
+	var a := GameStateScript.new()
+	a.new_life()
+	var d: Dictionary = JSON.parse_string(JSON.stringify(a.to_dict()))
+	for t in GameStateScript.TRAITS:
+		d.stats.erase(t)
+	var b := GameStateScript.new()
+	b.from_dict(d)
+	for t in GameStateScript.TRAITS:
+		var v = b.stats.get(t)
+		_check(v is int and v >= 40 and v <= 60, "old save gave %s = %s" % [t, v])
+	a.stats.boldness = 93
+	b.from_dict(JSON.parse_string(JSON.stringify(a.to_dict())))
+	_check(b.stats.boldness == 93 and b.stats.boldness is int, "save lost boldness")
+	a.free()
+	b.free()

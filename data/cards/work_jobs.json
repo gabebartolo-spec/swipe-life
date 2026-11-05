@@ -137,7 +137,7 @@
   },
   {
     "id": "work_crush_ask_out", "ages": [14, 17],
-    "requires": { "job": "job", "flags": ["work_job_flirting"], "not_flags": ["work_job_dating"], "coworker": { "crush": [45, 100] } },
+    "requires": { "job": "job", "flags": ["work_job_flirting"], "not_flags": ["work_job_dating", "dating_work_partner"], "coworker": { "crush": [45, 100] } },
     "text": "Shift's over. {crush} is lingering by the door. This is it.",
     "left": { "label": "Wave and leave", "effects": { "happiness": -4, "stress": 3 }, "coworker": { "crush": -6 } },
     "right": { "label": "Ask them out", "effects": { "happiness": 6, "relationships": 8, "stress": 5 }, "job": { "date": true },
