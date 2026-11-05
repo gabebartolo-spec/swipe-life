@@ -1,10 +1,10 @@
 [
   {
     "id": "baby_night_cry",
-    "text": "It is 3 a.m. You have an opinion about this.",
+    "text": "It's 3 a.m. and you just woke up. You soiled your diaper, and you're hungry.",
     "ages": [0, 1],
-    "left": { "label": "Cry", "effects": { "happiness": 2, "relationships": -2 } },
-    "right": { "label": "Nap", "effects": { "health": 3, "relationships": 2 } }
+    "left": { "label": "Start crying", "effects": { "happiness": 2, "relationships": -2 } },
+    "right": { "label": "Sleep it off", "effects": { "health": 3, "relationships": 2 } }
   },
   {
     "id": "baby_first_word", "room": "living",
@@ -13,14 +13,14 @@
     "left": { "label": "\"Mama\"", "effects": { "relationships": 5 } },
     "right": { "label": "\"Dada\"", "effects": { "relationships": 5 } },
     "up": { "label": "\"Photosynthesis\"", "effects": { "smarts": 10 },
-            "result": "Nobody believes it happened.", "set_flags": ["gifted"] }
+            "result": "Your parents are shocked. You're one smart cookie.", "set_flags": ["gifted"] }
   },
   {
     "id": "toddler_broccoli", "room": "kitchen",
     "text": "Dinner is broccoli. Again.",
     "ages": [2, 4],
-    "left": { "label": "Throw it", "effects": { "happiness": 3, "health": -3 },
-              "result": "It hits the dog. The dog is delighted." },
+    "left": { "label": "Slap it off your plate in disgust", "effects": { "happiness": 3, "health": -3 },
+              "result": "It sticks to the wall. Nobody is delighted." },
     "right": { "label": "Eat it", "effects": { "health": 5, "happiness": -5 } },
     "up": { "label": "Eat it all, ask for more", "effects": { "health": 10, "looks": 2 },
             "risk": { "chance": 0.2, "effects": { "happiness": -10 }, "result": "Stomach ache. Never again." } }
@@ -55,9 +55,9 @@
     "id": "child_test_answers",
     "text": "The test answers are sitting on the teacher's desk.",
     "ages": [8, 12],
-    "left": { "label": "Look", "effects": { "smarts": 3, "karma": -8 },
+    "left": { "label": "Look", "effects": { "smarts": 3, "karma": -8, "boldness": 4 },
               "risk": { "chance": 0.3, "effects": { "relationships": -10, "stress": 10 }, "result": "Caught." } },
-    "right": { "label": "Don't", "effects": { "karma": 3 } }
+    "right": { "label": "Don't", "effects": { "karma": 3, "boldness": -4 } }
   },
   {
     "id": "teen_tree_dare",
@@ -77,8 +77,9 @@
     "id": "teen_haircut", "room": "bathroom",
     "text": "You could cut your own hair. How hard can it be?",
     "ages": [12, 17],
-    "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 2 }, "result": "Bold." },
-    "right": { "label": "Pay someone", "effects": { "money": -20, "looks": 5 } }
+    "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 2, "boldness": 4 }, "result": "Bold.",
+              "risk": { "chance": 0.25, "effects": { "looks": 13 }, "result": "You nailed it." } },
+    "right": { "label": "Pay someone", "effects": { "money": -20, "looks": 5, "boldness": -4 } }
   },
   {
     "id": "teen_first_job",
