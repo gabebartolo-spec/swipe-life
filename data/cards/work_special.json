@@ -269,7 +269,7 @@
    "right": {"label": "Improvise", "effects": {"stress": 5}, "job": {"meter": 5},
              "risk": {"chance": 0.5, "effects": {"happiness": -5}, "result": "Your line is cut. So is your scene."}}},
   {"id": "actor_costar_crush", "text": "Your co-star is {crush}. The director wants more chemistry.", "ages": [16, 17],
-   "requires": {"job": "actor", "rank": [2, 2]},
+   "requires": {"job": "actor", "rank": [2, 2], "not_flags": ["dating_work_partner"]},
    "left": {"label": "Keep it professional", "effects": {"stress": 4}, "job": {"performance": 5}},
    "right": {"label": "Ask {crush} out", "effects": {"happiness": 3, "stress": 5}, "coworker": {"crush": 10}, "job": {"date": true, "meter": 4},
              "result": "The gossip pages love it."}},

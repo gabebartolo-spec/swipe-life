@@ -51,6 +51,6 @@ Each choice has these fields:
 ## Validator rules (CI fails on any)
 - The JSON must parse, and every required field must be present.
 - Ids are unique across all files.
-- Stat names must be one of the 9 in `GameState.STATS`.
+- Stat names must be in `GameState.STATS` (the 9 stats of GDD §4.1 plus the 2 spectrums of §4.6).
 - `ages` is within 0–17 for now. Chances are within 0–1.
 - No unknown keys, so typos are caught.
