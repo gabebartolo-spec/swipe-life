@@ -57,9 +57,14 @@ func _test_sim() -> void:
 	var empty := 0
 	var deaths := 0
 	var jobs := {}
+	var seen := {}
 	for life in LIVES:
 		var state := GameStateScript.new()
 		state.new_life()
+		# Every 5th life starts at a trait corner (0/100) so extreme personalities get played too.
+		if life % 5 == 0:
+			state.stats.boldness = 100 * (life / 5 % 2)
+			state.stats.sociability = 100 * (life / 10 % 2)
 		var deck := Deck.new(db.cards, life)
 		var dead := false
 		var careers := CareerDB.new()
@@ -73,6 +78,7 @@ func _test_sim() -> void:
 					empty += 1
 					continue
 				drawn += 1
+				seen[card.id] = true
 				var side: String = ["left", "right"][deck.rng.randi() % 2]
 				if card.has("up") and state.super_like_available and deck.rng.randf() < 0.3:
 					side = "up"
@@ -101,7 +107,19 @@ func _test_sim() -> void:
 		"sim: %d lives, %d cards drawn, %d empty slots, %d deaths" % [LIVES, drawn, empty, deaths]
 	)
 	_check(drawn > 0, "sim drew no cards")
+	for card in db.cards:
+		if _trait_gated(card):
+			_check(seen.has(card.id), "trait-gated card never drawn: %s" % card.id)
 	_check(jobs.size() >= 6, "sim lives held only %d kinds of job" % jobs.size())
+
+
+## True when the card's conditions test a personality spectrum (GDD §4.6).
+func _trait_gated(card: Dictionary) -> bool:
+	var text := JSON.stringify(card.get("conditions", {}))
+	for t in GameStateScript.TRAITS:
+		if t in text:
+			return true
+	return false
 
 
 func _test_life_rules() -> void:
