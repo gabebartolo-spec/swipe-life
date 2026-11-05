@@ -21,6 +21,7 @@ func _init() -> void:
 	_test_career_year_end()
 	_test_career_cards()
 	_test_career_menu()
+	_test_traits()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -444,4 +445,38 @@ func _test_career_menu() -> void:
 	job.coworkers.crush.affinity = 50
 	CareerRules.staff(state, "job", "crush", "flirt")
 	_check(state.partner.get("name") == job.coworkers.crush.name, "flirting never led to a date")
+	state.free()
+
+
+## GDD §4.6: spectrums start 40-60, by_trait scales by position, the validator checks it.
+func _test_traits() -> void:
+	var state = GameStateScript.new()
+	for i in 200:
+		state.new_life()
+		for t in GameStateScript.TRAITS:
+			_check(
+				state.stats[t] >= 40 and state.stats[t] <= 60,
+				"%s starts at %d" % [t, state.stats[t]]
+			)
+	_check(Deck.trait_delta(100, 6) == 6, "full delta at 100")
+	_check(Deck.trait_delta(50, 6) == 0, "no delta at 50")
+	_check(Deck.trait_delta(0, 6) == -6, "reversed delta at 0")
+	var card := {"id": "t", "left": {"label": "Go", "by_trait": {"sociability": {"happiness": 10}}}}
+	var deck := Deck.new([card], 1)
+	state.new_life()
+	state.stats.sociability = 100
+	deck.choose(card, "left", state)
+	_check(
+		state.stats.happiness == 60, "extrovert happiness %d, expected 60" % state.stats.happiness
+	)
+	state.stats.happiness = 50
+	state.stats.sociability = 0
+	deck.choose(card, "left", state)
+	_check(
+		state.stats.happiness == 40, "introvert happiness %d, expected 40" % state.stats.happiness
+	)
+	var db := CardDB.new()
+	db._check_choice({"label": "x", "by_trait": {"health": {"happiness": 1}}}, "c")
+	db._check_choice({"label": "x", "by_trait": {"boldness": {"luck": 1}}}, "c")
+	_check(db.errors.size() == 2, "bad by_trait gave %d errors, expected 2" % db.errors.size())
 	state.free()

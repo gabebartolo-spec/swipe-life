@@ -30,24 +30,26 @@
     "text": "The stairs gate is open.",
     "ages": [1, 3],
     "weight": 5,
-    "left": { "label": "Climb", "effects": { "happiness": 3 },
+    "left": { "label": "Climb", "effects": { "happiness": 3, "boldness": 3 },
               "risk": { "chance": 0.3, "effects": { "health": -15 }, "result": "Down you go." } },
-    "right": { "label": "Wait for help", "effects": { "relationships": 2 } }
+    "right": { "label": "Wait for help", "effects": { "relationships": 2, "boldness": -3 } }
   },
   {
     "id": "child_first_day",
     "text": "First day of school. A kid is crying by the door.",
     "ages": [5, 6],
-    "left": { "label": "Ignore them", "effects": { "stress": 3 } },
-    "right": { "label": "Say hi", "effects": { "relationships": 8, "karma": 3 }, "set_flags": ["first_friend"] }
+    "left": { "label": "Ignore them", "effects": { "stress": 3, "sociability": -4 } },
+    "right": { "label": "Say hi", "effects": { "relationships": 8, "karma": 3, "sociability": 4 }, "set_flags": ["first_friend"] }
   },
   {
     "id": "child_friend_sleepover",
     "text": "Your first friend invites you to a sleepover.",
     "ages": [6, 10],
     "requires": { "flags": ["first_friend"] },
-    "left": { "label": "Stay home", "effects": { "stress": -3 } },
-    "right": { "label": "Go", "effects": { "happiness": 4, "relationships": 5 } }
+    "left": { "label": "Stay home", "effects": { "stress": -3, "sociability": -3 },
+              "by_trait": { "sociability": { "happiness": -4 } } },
+    "right": { "label": "Go", "effects": { "happiness": 4, "relationships": 5, "sociability": 3 },
+             "by_trait": { "sociability": { "happiness": 6, "stress": -4 } } }
   },
   {
     "id": "child_test_answers",
@@ -62,10 +64,12 @@
     "text": "Your friends dare you to climb the tallest tree in the park.",
     "ages": [10, 15],
     "weight": 3,
-    "left": { "label": "No thanks", "effects": { "relationships": -3 } },
-    "right": { "label": "Climb", "effects": { "happiness": 3, "relationships": 5 },
+    "left": { "label": "No thanks", "effects": { "relationships": -3, "boldness": -4 } },
+    "right": { "label": "Climb", "effects": { "happiness": 3, "relationships": 5, "boldness": 4 },
+               "by_trait": { "boldness": { "happiness": 6 } },
                "risk": { "chance": 0.25, "effects": { "health": -25 }, "result": "The branch says no." } },
-    "up": { "label": "Climb to the very top", "effects": { "relationships": 15, "looks": 3 },
+    "up": { "label": "Climb to the very top", "effects": { "relationships": 15, "looks": 3, "boldness": 8 },
+            "by_trait": { "boldness": { "happiness": 10, "stress": -6 } },
             "risk": { "chance": 0.4, "effects": { "health": -40 }, "result": "A long way down." },
             "death": { "chance": 0.02, "cause": "Fell from a tree" } }
   },

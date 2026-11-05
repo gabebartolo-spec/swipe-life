@@ -96,6 +96,9 @@ func choose(card: Dictionary, side: String, state) -> Dictionary:
 func _apply(ch: Dictionary, state, slot := "") -> void:
 	for s in ch.get("effects", {}):
 		state.change_stat(s, int(ch.effects[s]))
+	for t in ch.get("by_trait", {}):
+		for s in ch.by_trait[t]:
+			state.change_stat(s, trait_delta(state.stats[t], int(ch.by_trait[t][s])))
 	for f in ch.get("set_flags", []):
 		state.flags[f] = true
 	for f in ch.get("clear_flags", []):
@@ -140,6 +143,11 @@ static func job_slot(req: Dictionary, state) -> String:
 		if ok:
 			return slot
 	return ""
+
+
+## by_trait (docs/CARD_SCHEMA.md): full delta at 100, none at 50, reversed at 0.
+static func trait_delta(trait_value: int, delta: int) -> int:
+	return roundi(delta * (trait_value - 50) / 50.0)
 
 
 ## True when state passes a card's (or career's) "requires" block.
