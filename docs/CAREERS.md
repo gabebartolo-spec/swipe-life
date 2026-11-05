@@ -8,7 +8,7 @@ Director decisions, 2026-11-03:
 - A gang arrest sends you to **juvie** and gives you a **criminal record**.
 - A partner you meet at work **stays your partner** after the job ends.
 - The special careers are AFL, Formula 1, Basketball, Musician, Actor, Gangster, Pro Skater, eSports and Head of State.
-- Added 2026-11-04: **Pro Skater** and **eSports** (a generic team shooter or arena game; no real title) are teen-entry specials. **Head of State** (generic, shown as Prime Minister, President etc.; ladder: local councillor to minister to leader, adult-only, built in the adult careers milestone) is a special career. Each has its own end age.
+- Added 2026-11-04: **Pro Skater** and **eSports** (a generic team shooter or arena game; no real title) are specials open from 14 into adulthood (director 2026-11-05). End ages are placeholders: skater 35, eSports 30. **Head of State** (generic, shown as Prime Minister, President etc.; ladder: local councillor to minister to leader, adult-only, built in the adult careers milestone) is a special career. Each has its own end age.
 
 ## Data: `data/careers/*.json` (validated by `CareerDB`)
 | key | meaning |
@@ -31,7 +31,7 @@ Director decisions, 2026-11-03:
 - **Promotion** is asked for from the career menu. It succeeds when performance has reached the rank's `promote_at`. Asking too early costs you performance and the boss's goodwill.
 - **At year end:** each career pays its rank's pay, adds stress, raises the career stat and drifts performance by -12 to +10 plus a career-stat bonus.
 - **Firing:** performance of 30 or less at year end gets you fired (flag `fired`).
-- **Gang career:** heat rises by 6 per rank each year, and the chance of arrest is heat × 0.5%. An arrest ends the career and sets the flags `juvie` and `criminal_record`.
+- **Gang career:** heat rises by 6 per rank each year, and the chance of arrest is heat × 0.5%. An arrest ends every career you hold and sets the flags `juvie` and `criminal_record`; no career is offered until the juvie release card clears `juvie`.
 
 ## Cards
 These keys are added to the card format (`docs/CARD_SCHEMA.md`).

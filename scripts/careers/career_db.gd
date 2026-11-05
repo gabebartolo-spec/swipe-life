@@ -91,7 +91,7 @@ func _check_rank(r, where: String, last: bool) -> void:
 		errors.append("%s: the top rank can't have 'promote_at'" % where)
 
 
-## Careers open to this player now: age, stat and flag gates. Cost is checked on apply.
+## Careers open to this player now: age, stat and flag gates; none in juvie. Cost is on apply.
 func available(state) -> Array:
 	return careers.filter(
 		func(c):
@@ -99,5 +99,6 @@ func available(state) -> Array:
 				c.ages[0] <= state.age
 				and state.age <= c.ages[1]
 				and Deck.meets(c.get("requires", {}), state)
+				and not state.flags.has("juvie")
 			)
 	)
