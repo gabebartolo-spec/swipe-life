@@ -56,5 +56,15 @@
    "requires": {"stats": {"karma": [0, 40]}},
    "ranks": [{"title": "Lookout", "pay": 80, "stress": 9, "promote_at": 65},
              {"title": "Runner", "pay": 160, "stress": 12, "promote_at": 80},
-             {"title": "Crew Member", "pay": 280, "stress": 15}]}
+             {"title": "Crew Member", "pay": 280, "stress": 15}]},
+  {"id": "skater", "label": "Pro Skater", "kind": "special", "ages": [14, 35], "meter": "fame",
+   "requires": {"stats": {"health": [45, 100]}}, "cost": 25,
+   "ranks": [{"title": "Skatepark Local", "pay": 0, "stress": 7, "promote_at": 70},
+             {"title": "Sponsored Am", "pay": 40, "stress": 9, "promote_at": 85},
+             {"title": "Pro Team Rider", "pay": 150, "stress": 12}]},
+  {"id": "esports", "label": "eSports", "kind": "special", "ages": [14, 30], "meter": "fame",
+   "requires": {"stats": {"smarts": [40, 100]}}, "cost": 60,
+   "ranks": [{"title": "Ranked Grinder", "pay": 0, "stress": 7, "promote_at": 70},
+             {"title": "Academy Team", "pay": 30, "stress": 10, "promote_at": 85},
+             {"title": "Pro Roster", "pay": 160, "stress": 13}]}
 ]

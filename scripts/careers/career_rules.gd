@@ -109,6 +109,8 @@ static func date_crush(state, slot: String) -> void:
 static func year_end(state, db: CareerDB, rng: RandomNumberGenerator) -> Dictionary:
 	var out := {"results": [], "died": false, "cause": ""}
 	for slot in state.careers.keys():
+		if not state.careers.has(slot):  # an arrest this year ended it
+			continue
 		var entry: Dictionary = state.careers[slot]
 		var career: Dictionary = db.by_id.get(entry.id, {})
 		if career.is_empty():  # career removed from the data: drop it quietly
@@ -135,7 +137,9 @@ static func _year(state, slot, entry, career, rng, results: Array) -> void:
 	if career.get("meter") == "heat":
 		change_meter(entry, HEAT_PER_RANK * (int(entry.rank) + 1))
 		if rng.randf() < entry.meter * ARREST_PER_HEAT:
-			leave(state, slot, "juvie")  # a juvie card chain picks this flag up
+			for held in state.careers.keys():  # juvie ends every career, not just the gang
+				leave(state, held)
+			state.flags["juvie"] = true  # a juvie card chain picks this flag up
 			state.flags.erase("juvie_settled")  # a second arrest replays the chain
 			for id in state.used.keys():
 				if id.begins_with("juvie_"):

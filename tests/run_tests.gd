@@ -375,12 +375,16 @@ func _test_career_year_end() -> void:
 	state.used = {"juvie_release": true, "juvie_first_night": true}  # served juvie once before
 	state.flags["juvie_settled"] = true
 	CareerRules.apply(db.by_id.gangster, state, rng)
+	CareerRules.apply(db.by_id.fast_food, state, rng)
 	var years := 0
 	while state.careers.has("special") and years < 100:
-		state.careers.special.performance = 50
+		for slot in state.careers:
+			state.careers[slot].performance = 50
 		CareerRules.year_end(state, db, rng)
 		years += 1
 	_check(state.flags.has("juvie") and state.flags.has("criminal_record"), "no juvie")
+	_check(state.careers.is_empty(), "a job kept paying in juvie")
+	_check(db.available(state).is_empty(), "careers offered in juvie")
 	_check(
 		state.used.is_empty() and not state.flags.has("juvie_settled"), "juvie chain can't replay"
 	)

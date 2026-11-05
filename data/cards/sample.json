@@ -80,12 +80,5 @@
     "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 2, "boldness": 4 }, "result": "Bold.",
               "risk": { "chance": 0.25, "effects": { "looks": 13 }, "result": "You nailed it." } },
     "right": { "label": "Pay someone", "effects": { "money": -20, "looks": 5, "boldness": -4 } }
-  },
-  {
-    "id": "teen_first_job",
-    "text": "The corner shop needs weekend help.",
-    "ages": [14, 17],
-    "left": { "label": "Pass", "effects": { "stress": -2 } },
-    "right": { "label": "Take it", "effects": { "money": 120, "career": 6, "stress": 6 }, "set_flags": ["has_job"] }
   }
 ]
