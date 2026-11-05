@@ -46,6 +46,7 @@ Each choice has these fields:
 | `result` | no | One line shown after the swipe. |
 | `risk` | no | `{chance, effects, result}`. It applies on top of `effects` when it rolls. |
 | `death` | no | `{chance, cause}`. A rare deadly outcome (§5.3b). |
+| `by_trait` | no | `{spectrum: {stat: delta}}`, spectrum `boldness` or `sociability` (GDD §4.6). The delta is scaled by where the player sits: full at 100, none at 50, reversed at 0. E.g. `{"sociability": {"happiness": 6}}` cheers an extrovert, drains an introvert. |
 
 ## Validator rules (CI fails on any)
 - The JSON must parse, and every required field must be present.

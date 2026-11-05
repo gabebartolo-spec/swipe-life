@@ -17,12 +17,15 @@ const CHOICE_KEYS := [
 	"death",
 	"job",
 	"coworker",
-	"partner"
+	"partner",
+	"by_trait"
 ]
 const REQUIRES_KEYS := ["stats", "flags", "not_flags", "job", "rank", "coworker"]
 const JOB_KEYS := ["performance", "rank", "meter", "leave", "date"]  # docs/CAREERS.md
 const ROLES := ["boss", "rival", "crush", "friend"]
-const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
+const GS := preload("res://scripts/autoload/game_state.gd")
+const STATS: Array = GS.STATS
+const TRAITS: Array = GS.TRAITS
 
 var cards: Array = []
 var errors: PackedStringArray = []
@@ -107,6 +110,11 @@ func _check_choice(ch, where: String) -> void:
 		errors.append("%s: missing 'label'" % where)
 	for s in ch.get("effects", {}):
 		_check_stat(s, where)
+	for t in ch.get("by_trait", {}):
+		if t not in TRAITS:
+			errors.append("%s.by_trait: '%s' is not a spectrum" % [where, t])
+		for s in ch.by_trait[t]:
+			_check_stat(s, where + ".by_trait")
 	if ch.has("risk"):
 		_unknown_keys(ch.risk, ["chance", "effects", "result", "partner"], where + ".risk")
 		_check_chance(ch.risk.get("chance"), where + ".risk")

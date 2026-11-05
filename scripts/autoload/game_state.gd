@@ -2,10 +2,22 @@ extends Node
 ## One life's state: age, quarter, stats, flags and the yearly super like (GDD §2–§4).
 
 const STATS := [
-	"health", "happiness", "money", "career", "relationships", "smarts", "looks", "karma", "stress"
+	"health",
+	"happiness",
+	"money",
+	"career",
+	"relationships",
+	"smarts",
+	"looks",
+	"karma",
+	"stress",
+	"boldness",
+	"sociability"
 ]
 const HIDDEN_STATS := ["karma"]  # GDD §4.4
 const UNBOUNDED_STATS := ["money"]  # GDD §4.3: every other stat is 0–100
+## Spectrums (GDD §4.6): 0 = Cautious / Introvert, 100 = Risk-taker / Extrovert.
+const TRAITS := ["boldness", "sociability"]
 
 var age := 0
 var quarter := 0  # 0–3: which of the year's 4 cards is next (GDD §2.1)
@@ -32,6 +44,8 @@ func new_life() -> void:
 	stats = {}
 	for s in STATS:
 		stats[s] = 0 if s in UNBOUNDED_STATS or s == "stress" else 50
+	for s in TRAITS:
+		stats[s] = randi_range(40, 60)
 
 
 func change_stat(stat: String, delta: int) -> void:
@@ -68,4 +82,4 @@ func from_dict(d: Dictionary) -> void:
 	if partner.has("affinity"):
 		partner.affinity = int(partner.affinity)
 	for s in STATS:
-		stats[s] = int(d.stats.get(s, stats.get(s, 0)))
+		stats[s] = int(d.stats.get(s, stats.get(s, 50 if s in TRAITS else 0)))

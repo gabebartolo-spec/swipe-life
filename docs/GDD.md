@@ -50,6 +50,11 @@
     Lifts with a 15% chance per year, only while Stress < 40.
   - Depression: starts when Happiness ≤ 30, chance 10% + 1% per point below 30. Each year: Happiness −5,
     Health −3. Lifts with a 15% chance per year, only while Happiness > 60.
+- 4.6 Two personality spectrums, each one visible slider (director, 2026-11-05):
+  Cautious ↔ Risk-taker (`boldness`) and Introvert ↔ Extrovert (`sociability`), 0–100.
+  - A new life starts each at a random 40–60. Only swipe choices move them.
+  - They gate which cards appear (`requires.stats`) and change stat outcomes (`by_trait`,
+    `docs/CARD_SCHEMA.md`). They never change risk or death odds.
 
 ## 5. Life span
 
@@ -177,6 +182,7 @@ None.
 - 2026-11-04: Tone: pretty dark-comedy, cute art vs brutal life (§7.2a).
 - 2026-11-04: Special careers add Pro Skater, eSports and Head of State (§6.8, director).
 - 2026-11-03: Dollhouse shows one room at a time, camera moves between rooms (§10.6).
+- 2026-11-05: Personality spectrums: Cautious/Risk-taker, Introvert/Extrovert (§4.6).
 - 2026-11-03: Card picks the room, slide pan, bedroom age bands 0–3 / 4–12 / 13–17 (§10.6).
 - 2026-11-03: Modular people (§10.7): body sizes, shapes, mix-and-match clothing slots, tinted parts, extras; looks inherited + random, improved by lifestyle.
 - 2026-11-03: Teen careers (§6.8): career menu, one job + one special, named coworkers, six specials, juvie
