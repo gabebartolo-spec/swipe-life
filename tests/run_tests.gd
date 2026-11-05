@@ -146,6 +146,25 @@ func _test_life_rules() -> void:
 		state.age = y
 		LifeRules.year_end(state, rng)
 	_check(not state.flags.has("depression"), "depression before age 6")
+	# old age (GDD §5.3c): no deaths before 70, then spread over the 70s-90s
+	var ages: Array[int] = []
+	for life in 1000:
+		state.new_life()
+		state.age = 60
+		while state.age < 130:
+			state.stats.health = 100
+			state.stats.stress = 0
+			state.stats.happiness = 100
+			if LifeRules.year_end(state, rng).died:
+				break
+			state.age += 1
+		ages.append(state.age)
+	ages.sort()
+	_check(ages[0] >= 70, "old age death at %d, before 70" % ages[0])
+	_check(ages[-1] < 130, "a life never died of old age")
+	var median: int = ages[500]
+	_check(median >= 75 and median <= 90, "old age median %d, expected 75-90" % median)
+	print("old age deaths: min %d, median %d, max %d" % [ages[0], median, ages[-1]])
 	state.free()
 
 

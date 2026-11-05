@@ -12,7 +12,7 @@ Rules for every milestone:
 - Exit criteria are things the director sees on the phone or in a capture.
 - The GDD wins over this file. If they conflict, ask the director.
 
-## Status (2026-11-03) — start here
+## Status (2026-11-05) — start here
 | Milestone | State |
 |---|---|
 | M0 Foundations | Done (#9) |
@@ -20,11 +20,12 @@ Rules for every milestone:
 | M2 Swipe UI and stats | Done (#11) |
 | M3 Life rules | Done (#12) |
 | M4 Between-year menu | Done (#13) |
-| M5 Clay home scene | In progress (#16, #18, #20, #22, #23, #29, #32, #39, #40, #44, #45): dollhouse one room at a time, modular clay people. Exit (director approves captures per age band) not met yet. |
+| M5 Clay home scene | In progress (#16, #18, #20, #22, #23, #29, #32, #39, #40, #44, #45, #47): dollhouse one room at a time, modular clay people. Exit (director approves captures per age band) not met yet. |
 | M6 ~200 cards | Done (#28, #31): 343 cards across every age band; the 1,000-life sim draws every age-band card. |
 | Careers, teen phase (§6.8) | Done (#17, #19, #21, #24, #25): Career menu, 12 careers, 120 work and juvie cards. |
 | M7 Teen release candidate | Phone build only: internal-testing AAB, director plays birth to 18. Balance moved to M13. |
-| M8–M13 Adult life to death | Not started. |
+| M8–M10, M12–M13 | Not started. |
+| M11 Ageing and death | Old age death rule in (§5.3c). Grey hair, wrinkles and late-life cards not started. |
 
 Open with the director:
 - Card rewrites: the director may fill in the "Your rewrite" column of the card doc
@@ -97,13 +98,15 @@ Builds:
 - Make 4 character sets: baby, child, teen and 18. Each gets idle motion and reactions copied from proven clips.
 - Items bought in the menu appear in the scene (§10.2).
 - **Exit:** the director approves captures at each age band. I check every frame before sending.
-- Progress (2026-11-03, branch m5/hair-list):
+- Progress (2026-11-05, hair merged in #47):
   - Done: blush on babies and children only. Even grey hair tint. Symmetric bust; the director approved the size.
     Necks grow with age (child, then teen, then adult). Men broader, women hourglass, fitted tops.
     Arms set away from the torso. Flat adult and teen shoulders, approved by the director.
-  - Hair: 8 of 34 cuts built, and the hair checker passes on every shape. The teen "beret" look on long hair is fixed.
+  - Hair: 33 cuts on 6 shapes merged (#47); about 14 rebuilt on the new body, the rest older versions.
+    Open flaws: forehead rim, side lobes, short cuts look alike, ribbed long hair, stuck-on buns and braids.
   - Elderly: face lines, grey hair and a slight stoop on the adult body.
-  - Left to do: clothes over the new shoulders, 26 more hair cuts, push and open a PR.
+  - Left to do: clothes over the new shoulders, rebuild the remaining hair cuts and fix the flaws the
+    director names, baby pacifier.
 
 ## M6 Content: about 200 cards, ages 0–17
 - Write the cards in batches by age band: 0–2, 3–5, 6–9, 10–12, 13–15 and 16–17, about 30–40 cards per band.
@@ -141,7 +144,8 @@ Builds:
 - **Exit:** a life can find a partner and have a child, seen in the sim and in a capture.
 
 ## M11 Ageing and death
-- Old age death: chance rising each year from about 70 (§5.3c).
+- Old age death: chance rising each year from about 70 (§5.3c). Done: `LifeRules`, 2% at 70 then +2% a
+  year (placeholder until M13); healthy lives die at median 77. Takes effect once M8 removes the stop at 18.
 - Ageing details on people: grey hair, wrinkles, baldness (§10.7).
 - Remaining cards to the ~300 launch target (§12.3), including late-life bands.
 - **Exit:** the 1,000-life sim shows natural deaths spread from 70 onward and no stuck lives.
