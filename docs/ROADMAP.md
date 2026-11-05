@@ -24,12 +24,13 @@ Rules for every milestone:
 | M6 ~200 cards | Done (#28, #31): 343 cards across every age band; the 1,000-life sim draws every age-band card. |
 | Careers, teen phase (§6.8) | Done (#17, #19, #21, #24, #25): Career menu, 12 careers, 120 work and juvie cards. |
 | M7 Teen release candidate | Phone build only: internal-testing AAB, director plays birth to 18. Balance moved to M13. |
+| Personality spectrums (§4.6) | Done (#49): Cautious/Risk-taker and Introvert/Extrovert sliders; cards gate on them and `by_trait` scales outcomes. |
 | M8–M10, M12–M13 | Not started. |
 | M11 Ageing and death | Old age death rule in (§5.3c). Grey hair, wrinkles and late-life cards not started. |
 
 Open with the director:
-- Card rewrites: the director may fill in the "Your rewrite" column of the card doc
-  (https://claude.ai/artifact/GttfUkHETGzrYHbmESQvfS). Copy any rewrites into `data/cards/sample.json`.
+- Card rewrites: the director fills in the card doc
+  (https://claude.ai/artifact/5PhAQ7UdkN8LpayG6EACjr; each option shows its proposed gameplay effect). Copy any rewrites into `data/cards/sample.json`.
 - The 9 actions in `data/actions/actions.json` are placeholders, also open for rewrite.
 
 Where the code lives:
