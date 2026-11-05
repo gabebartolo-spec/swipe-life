@@ -29,8 +29,8 @@ Rules for every milestone:
 | M11 Ageing and death | Old age death rule in (§5.3c). Grey hair, wrinkles and late-life cards not started. |
 
 Open with the director:
-- Card rewrites: the director fills in the card doc
-  (https://claude.ai/artifact/5PhAQ7UdkN8LpayG6EACjr; each option shows its proposed gameplay effect). Copy any rewrites into `data/cards/sample.json`.
+- Card rewrites: round 1 applied (#51). Further rounds come from the card doc
+  (https://claude.ai/artifact/5PhAQ7UdkN8LpayG6EACjr); copy them into `data/cards/sample.json`.
 - The 9 actions in `data/actions/actions.json` are placeholders, also open for rewrite.
 
 Where the code lives:
