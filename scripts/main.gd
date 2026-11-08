@@ -10,7 +10,7 @@ var deck: Deck
 var careers := CareerDB.new()
 var finance := FinanceDB.new()
 var notices := []  # lines for this year's menu headline
-var adult_life := CardDB.ADULT_LIFE or "--adult" in OS.get_cmdline_user_args()
+var adult_life := CardDB.ADULT_LIFE
 var menu: YearMenu
 var strip := StatStrip.new()
 var swipe_card := SwipeCard.new()

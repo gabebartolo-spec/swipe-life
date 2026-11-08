@@ -5,8 +5,8 @@ extends RefCounted
 const CARD_DIR := "res://data/cards"
 const MAX_AGE := 100  # adult card cap (GDD §6.9)
 const TEEN_MAX_AGE := 17
-## Off until the adult card bands are approved: lives stop at 18. `-- --adult` turns it on.
-const ADULT_LIFE := false
+## On since the director approved the adult card bands (2026-11-09). Off stops lives at 18.
+const ADULT_LIFE := true
 const CARD_KEYS := [
 	"id", "text", "ages", "weight", "requires", "left", "right", "up", "once", "room"
 ]
