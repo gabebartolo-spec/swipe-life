@@ -201,3 +201,4 @@ None.
   possessions, careers); answers in docs/proposals/DECISIONS.md until each GDD section is written.
 - 2026-11-04: §6.8: every criminal record, gang records included, can be expunged (was permanent).
 - 2026-11-04: §10.3: approved CC0 asset sources and CC-BY with credits; §6.8 change above. Further answers in DECISIONS.md.
+- 2026-11-09: M8 money placeholders in docs/ADULT_MONEY.md stand until balance (M13).

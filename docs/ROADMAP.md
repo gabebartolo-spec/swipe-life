@@ -133,7 +133,7 @@ Builds:
 - Remove the stop at 18: the year loop runs on, 4 cards a year (§2.5), until death (§5).
 - Shop tab opens at 18 (§6.7): houses, cars, furniture and items (§6.1), each with a price in data.
 - Adult careers on the careers data (§6.8 "adult careers come later"), and courses on the Job board (§6.4).
-- Adult card bands, written like M6 (a readable list per band before merge).
+- Adult card bands 18–24, 25–39 and 40–59 (director, 2026-11-09), written like M6 (a readable list per band before merge).
 - **Exit:** a life plays past 18 into the 30s; buying a house and holding an adult job work in the sim.
 
 ## M9 Adult home scene
