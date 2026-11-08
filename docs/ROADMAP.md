@@ -25,7 +25,8 @@ Rules for every milestone:
 | Careers, teen phase (§6.8) | Done (#17, #19, #21, #24, #25): Career menu, 12 careers, 120 work and juvie cards. |
 | M7 Teen release candidate | Phone build only: internal-testing AAB, director plays birth to 18. Balance moved to M13. |
 | Personality spectrums (§4.6) | Done (#49): Cautious/Risk-taker and Introvert/Extrovert sliders; cards gate on them and `by_trait` scales outcomes. |
-| M8–M10, M12–M13 | Not started. |
+| M8 Adult life core | Done (#58, #59): lives run past 18. Shop items moved to M11. |
+| M9–M10, M12–M13 | Not started. |
 | M11 Ageing and death | Old age death rule in (§5.3c). Grey hair, wrinkles and late-life cards not started. |
 
 Open with the director:
@@ -127,8 +128,8 @@ Builds:
 - **Exit:** the director plays a full life, birth to 18, on the phone. No balance pass (that is M13).
 
 ## M8 Adult life core (18+)
-- Built behind `CardDB.ADULT_LIFE` (off; `-- --adult` turns it on): money, housing, debts, courses, adult jobs
-  and adult work cards (docs/ADULT_MONEY.md). Lives still stop at 18 until the adult card bands are approved.
+- `CardDB.ADULT_LIFE` is on (director, 2026-11-09): lives run past 18 with money, housing, debts, courses, adult
+  jobs and adult work cards (docs/ADULT_MONEY.md).
 - Shop items moved to M11 (director's split, 2026-11-04).
 - Remove the stop at 18: the year loop runs on, 4 cards a year (§2.5), until death (§5).
 - Shop tab opens at 18 (§6.7): houses, cars, furniture and items (§6.1), each with a price in data.
