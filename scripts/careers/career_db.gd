@@ -5,7 +5,7 @@ extends RefCounted
 
 const CAREER_DIR := "res://data/careers"
 const KEYS := ["id", "label", "kind", "ages", "requires", "cost", "ranks", "meter"]
-const RANK_KEYS := ["title", "pay", "stress", "promote_at"]
+const RANK_KEYS := ["title", "pay", "stress", "promote_at", "adult_pay", "min_age"]
 const KINDS := ["job", "special"]
 const METERS := ["fame", "heat", "fitness"]
 const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS

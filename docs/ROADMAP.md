@@ -127,6 +127,9 @@ Builds:
 - **Exit:** the director plays a full life, birth to 18, on the phone. No balance pass (that is M13).
 
 ## M8 Adult life core (18+)
+- Built behind `CardDB.ADULT_LIFE` (off; `-- --adult` turns it on): money, housing, debts, courses, adult jobs
+  and adult work cards (docs/ADULT_MONEY.md). Lives still stop at 18 until the adult card bands are approved.
+- Shop items moved to M11 (director's split, 2026-11-04).
 - Remove the stop at 18: the year loop runs on, 4 cards a year (§2.5), until death (§5).
 - Shop tab opens at 18 (§6.7): houses, cars, furniture and items (§6.1), each with a price in data.
 - Adult careers on the careers data (§6.8 "adult careers come later"), and courses on the Job board (§6.4).

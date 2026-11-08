@@ -8,6 +8,9 @@ const RESULT_TIME := 1.4
 
 var deck: Deck
 var careers := CareerDB.new()
+var finance := FinanceDB.new()
+var notices := []  # lines for this year's menu headline
+var adult_life := CardDB.ADULT_LIFE or "--adult" in OS.get_cmdline_user_args()
 var menu: YearMenu
 var strip := StatStrip.new()
 var swipe_card := SwipeCard.new()
@@ -29,11 +32,14 @@ func _ready() -> void:
 	careers.load_dir()
 	for e in careers.errors:
 		push_error(e)
+	finance.load_all()
+	for e in finance.errors:
+		push_error(e)
 	var adb := ActionDB.new()
 	adb.load_dir()
 	for e in adb.errors:
 		push_error(e)
-	menu = YearMenu.new(adb, careers)
+	menu = YearMenu.new(adb, careers, finance)
 	menu.acted.connect(strip.refresh)
 
 	strip.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 10)
@@ -151,8 +157,11 @@ func _on_chosen(side: String) -> void:
 func _year_end() -> void:
 	swipe_card.hide()
 	var out := CareerRules.year_end(GameState, careers, deck.rng)
+	out.results.append_array(Finance.year_end(GameState, careers, deck.rng))
 	var life := LifeRules.year_end(GameState, deck.rng)
 	out.results.append_array(life.results)
+	out.results = notices + out.results
+	notices = []
 	out.died = life.died
 	out.cause = life.cause
 	_update_age()
@@ -177,9 +186,10 @@ func _next_year() -> void:
 	GameState.age += 1
 	GameState.quarter = 0
 	GameState.super_like_available = true  # GDD §3.3
-	if GameState.age > CardDB.MAX_AGE:
+	if not adult_life and GameState.age > CardDB.TEEN_MAX_AGE:
 		_end("You turned 18.\nTo be continued...")
 		return
+	notices = CareerRules.outgrown(GameState, careers)
 	SaveSystem.save()  # GDD §8.3: autosave when the between-year menu closes
 	_deal()
 
@@ -199,7 +209,7 @@ func _end(headline: String) -> void:
 			headline,
 			"  ·  ".join(lines.slice(0, 4)),
 			"  ·  ".join(lines.slice(4)),
-			StatStrip.money_text(GameState.stats.money),
+			Finance.money_text(GameState.stats.money),
 		]
 	)
 	var ills := []

@@ -27,6 +27,10 @@ const ONSET_PER_POINT := 0.01  # +1% onset chance per point past threshold, from
 const RECOVERY_CHANCE := 0.15
 # pocket money: [from age, $ a year], highest age first (GDD §4.3)
 const POCKET_MONEY := [[10, 20], [6, 10]]
+const POCKET_MONEY_UNTIL := 17
+# adult drift (GDD §6.9): Health a year, highest age first; Stress -2 a year; Joy toward 50.
+const HEALTH_DRIFT := [[75, -3], [60, -2], [40, -1]]
+const ADULT_FROM := 18
 # old age death (GDD §5.3c): 2% at 70, +2% each year after. Placeholder until balance (M13).
 const OLD_AGE_FROM := 70
 const OLD_AGE_BASE := 0.02
@@ -37,13 +41,24 @@ static func _past(state, rule: Array) -> int:
 	return (state.stats[rule[0]] - rule[1]) * rule[2]
 
 
+static func _adult_drift(state) -> void:
+	for band in HEALTH_DRIFT:
+		if state.age >= band[0]:
+			state.change_stat("health", band[1])
+			break
+	state.change_stat("stress", -2)
+	state.change_stat("happiness", signi(50 - state.stats.happiness))
+
+
 ## Applies the year's illness rules. Returns {results, died, cause} like Deck.choose.
 static func year_end(state, rng: RandomNumberGenerator) -> Dictionary:
 	var out := {"results": [], "died": false, "cause": ""}
 	for band in POCKET_MONEY:
-		if state.age >= band[0]:
+		if state.age >= band[0] and state.age <= POCKET_MONEY_UNTIL:
 			state.change_stat("money", band[1])
 			break
+	if state.age >= ADULT_FROM:
+		_adult_drift(state)
 	for id in ILLNESSES:
 		var ill: Dictionary = ILLNESSES[id]
 		if state.flags.has(id):

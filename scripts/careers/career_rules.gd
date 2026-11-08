@@ -80,6 +80,8 @@ static func ask_promotion(state, slot: String, db: CareerDB) -> String:
 	var boss: String = entry.coworkers.boss.name
 	if not rank.has("promote_at"):
 		return "There's nowhere higher to go here."
+	if state.age < int(db.by_id[entry.id].ranks[int(entry.rank) + 1].get("min_age", 0)):
+		return "%s says that job is for adults." % boss
 	if int(entry.performance) < rank.promote_at:
 		change_performance(entry, -5)
 		Coworkers.change(entry.coworkers, "boss", -5)
@@ -104,6 +106,22 @@ static func date_crush(state, slot: String) -> void:
 	state.flags.erase("work_%s_flirting" % slot)
 
 
+## A rank's yearly pay at this age: teen ranks kept past 18 pay an adult wage.
+static func rank_pay(rank: Dictionary, age: int) -> int:
+	return int(rank.get("adult_pay", rank.pay)) if age >= Finance.ADULT_AGE else int(rank.pay)
+
+
+## Ends careers past their last age (a new year has begun). Returns the result lines.
+static func outgrown(state, db: CareerDB) -> Array:
+	var lines := []
+	for slot in state.careers.keys():
+		var career: Dictionary = db.by_id.get(state.careers[slot].id, {})
+		if not career.is_empty() and state.age > career.ages[1]:
+			leave(state, slot)
+			lines.append("You've aged out of %s." % String(career.label).to_lower())
+	return lines
+
+
 ## Pays each career, drifts performance, then fires or (gang) arrests.
 ## Returns {results, died, cause} like LifeRules.year_end.
 static func year_end(state, db: CareerDB, rng: RandomNumberGenerator) -> Dictionary:
@@ -122,7 +140,7 @@ static func year_end(state, db: CareerDB, rng: RandomNumberGenerator) -> Diction
 
 static func _year(state, slot, entry, career, rng, results: Array) -> void:
 	var rank: Dictionary = career.ranks[int(entry.rank)]
-	var pay := int(rank.pay)
+	var pay := rank_pay(rank, state.age)
 	state.change_stat("money", pay)
 	state.change_stat("stress", int(rank.stress))
 	state.change_stat("career", 2 + 2 * int(entry.rank))

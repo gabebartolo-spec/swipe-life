@@ -89,7 +89,7 @@
 - 6.9 Adult life (director 2026-11-03):
   - Careers: basically every common real-world job. Education gates careers: university and trade courses
     unlock the jobs that need them (e.g. doctor needs university).
-  - Housing: rent or buy; buying takes a mortgage, and debt is possible.
+  - Housing: rent or buy; buying takes a mortgage, and debt is possible. Money rules: docs/ADULT_MONEY.md.
   - Love and family: dating apps, meeting people at social events, and card events; marriage, divorce,
     infidelity and children.
 

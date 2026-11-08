@@ -6,6 +6,7 @@ signal acted
 
 var db: ActionDB
 var careers: CareerDB  # the "jobs" tab is the career menu (docs/CAREERS.md)
+var finance: FinanceDB
 var tab := ""
 var page := []  # career submenu path: [], ["find"], [slot, "advance"], [slot, "staff", role]
 var tabs_row := HBoxContainer.new()
@@ -14,9 +15,10 @@ var list := VBoxContainer.new()
 var careers_rng := RandomNumberGenerator.new()
 
 
-func _init(action_db: ActionDB, career_db: CareerDB = null) -> void:
+func _init(action_db: ActionDB, career_db: CareerDB = null, finance_db: FinanceDB = null) -> void:
 	db = action_db
 	careers = career_db
+	finance = finance_db
 
 
 func _ready() -> void:
@@ -72,6 +74,9 @@ func _build() -> void:
 	if tab == "jobs" and careers:
 		_build_career()
 		return
+	if tab == "money" and finance:
+		_build_money()
+		return
 	for a in db.available(tab, GameState.age):
 		var b := Button.new()
 		var cost := int(a.get("cost", 0))
@@ -90,6 +95,7 @@ func _button(text: String, on_press: Callable, disabled := false) -> void:
 	b.disabled = disabled
 	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	b.custom_minimum_size.y = 64
+	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART  # long rows wrap, never widen the panel
 	b.add_theme_font_size_override("font_size", 26)
 	b.pressed.connect(on_press)
 	list.add_child(b)
@@ -128,17 +134,29 @@ func _build_career() -> void:
 		if GameState.careers.is_empty():
 			_note("No job yet.")
 		_button("Look for work", _go.bind(["find"]))
+		if finance and GameState.age >= Finance.ADULT_AGE:
+			if GameState.course.is_empty():
+				_button("Courses", _go.bind(["courses"]))
+			else:
+				var c: Dictionary = GameState.course
+				_note("Studying %s: %d year(s) left" % [c.label, c.left])
 		return
 	_button("< Back", _go.bind(page.slice(0, -1) if page.size() > 2 else []))
+	if page[0] == "courses":
+		_build_courses()
+		return
 	if page[0] == "find":
 		for c in careers.available(GameState):
 			var held: Dictionary = GameState.careers.get(c.kind, {})
 			var cost := int(c.get("cost", 0))
 			var text: String = c.label + ("   $%d" % cost if cost else "")
+			if GameState.age >= Finance.ADULT_AGE:
+				var start := CareerRules.rank_pay(c.ranks[0], GameState.age)
+				text += "   %s a year" % Finance.money_text(start)
 			if held.get("id") == c.id:
 				continue
 			if not held.is_empty():
-				text += "   (replaces %s)" % careers.by_id[held.id].label
+				text = "%s, leaving %s" % [text, careers.by_id[held.id].label]
 			_button(
 				text,
 				func():
@@ -175,6 +193,93 @@ func _build_career() -> void:
 				func(): _did(CareerRules.staff(GameState, slot, role, act)),
 				GameState.stats.money < cost
 			)
+
+
+func _build_courses() -> void:
+	for c in finance.courses_open(GameState):
+		var cost := int(c.yearly)
+		var head := "%s  ·  %d yr  ·  %s a year" % [c.label, c.years, Finance.money_text(cost)]
+		_button(head, func(): _enrol(c, false), GameState.stats.money < cost)
+		if cost > 0:
+			_button("  On a student loan", func(): _enrol(c, true))
+
+
+func _enrol(c: Dictionary, on_loan: bool) -> void:
+	page = []
+	_did(Finance.enrol(GameState, c, on_loan))
+
+
+## Money tab (docs/ADULT_MONEY.md): housing and property, savings, investments, debts.
+func _build_money() -> void:
+	if not page.is_empty():
+		_button("< Back", _go.bind([]))
+		_build_property()
+		return
+	var h: Dictionary = GameState.housing
+	var home: String = {"parents": "With your parents", "rent": "Renting"}.get(h.kind, "")
+	_note(home if home != "" else "%s, worth %s" % [h.label, Finance.money_text(h.value)])
+	if h.kind == "parents":
+		var cost := Finance.money_text(Finance.RENT)
+		_button("Rent a place   %s a year" % cost, func(): _did(Finance.rent(GameState)))
+	if h.kind == "own":
+		_button("Sell the house", func(): _did(Finance.sell(GameState)))
+	else:
+		_button("Property", _go.bind(["property"]))
+	var cash: int = GameState.stats.money
+	_note("Savings %s" % Finance.money_text(GameState.savings))
+	_button("  Save a quarter of your money", func(): _move(Finance.to_savings, cash / 4), cash < 4)
+	_button("  Take it all out", func(): _take(Finance.from_savings), GameState.savings == 0)
+	var mode := "Bold" if GameState.invest_bold else "Safe"
+	_note("Investments %s  ·  %s" % [Finance.money_text(GameState.investments), mode])
+	_button("  Invest a quarter", func(): _move(Finance.to_investments, cash / 4), cash < 4)
+	_button("  Cash out", func(): _take(Finance.from_investments), GameState.investments == 0)
+	_button(
+		"  Switch to %s" % ("safe" if GameState.invest_bold else "bold"),
+		_toggle_bold,
+		not GameState.invest_bold and not Finance.can_invest_bold(GameState)
+	)
+	for d in GameState.debts:
+		_note("%s  %s" % [String(d.kind).capitalize(), Finance.money_text(d.balance)])
+		_button("  Pay what you can", func(): _did(Finance.pay_debt(GameState, d)), cash <= 0)
+	if Finance.can_fresh_start(GameState, careers):
+		_button("Fresh start", func(): _did(Finance.fresh_start(GameState)))
+
+
+func _build_property() -> void:
+	if not Finance.can_borrow(GameState):
+		_note("The bank wants a job and a clean slate.")
+	for house in finance.houses:
+		if GameState.age < int(house.min_age):
+			continue
+		var line := (
+			"%s  %s  ·  deposit %s"
+			% [
+				house.label,
+				Finance.money_text(house.price),
+				Finance.money_text(Finance.deposit(house)),
+			]
+		)
+		_button(line, func(): _buy(house), not Finance.can_buy(GameState, house))
+
+
+func _buy(house: Dictionary) -> void:
+	page = []
+	_did(Finance.buy(GameState, house))
+
+
+func _move(move: Callable, amount: int) -> void:
+	move.call(GameState, amount)
+	_did("Done.")
+
+
+func _take(move: Callable) -> void:
+	move.call(GameState)
+	_did("Done.")
+
+
+func _toggle_bold() -> void:
+	GameState.invest_bold = not GameState.invest_bold
+	_did("Your investments are now %s." % ("bold" if GameState.invest_bold else "safe"))
 
 
 func _quit(slot: String) -> void:

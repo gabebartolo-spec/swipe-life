@@ -24,6 +24,8 @@ func _init() -> void:
 	_test_traits()
 	_test_date_cards_need_single()
 	_test_old_save_traits()
+	_test_finance()
+	_test_adult_sim()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -71,7 +73,7 @@ func _test_sim() -> void:
 		var dead := false
 		var careers := CareerDB.new()
 		careers.load_dir()
-		while state.age <= CardDB.MAX_AGE and not dead:
+		while state.age <= CardDB.TEEN_MAX_AGE and not dead:
 			state.super_like_available = true
 			for q in 4:
 				state.quarter = q
@@ -284,6 +286,8 @@ func _test_careers_valid() -> void:
 		for s in c.get("requires", {}).get("stats", {}):
 			var r: Array = c.requires.stats[s]
 			state.stats[s] = int((r[0] + r[1]) / 2.0)
+		for f in c.get("requires", {}).get("flags", []):  # a finished course
+			state.flags[f] = true
 		_check(c in db.available(state), "nobody can take " + c.id)
 		state.free()
 	var kid = _make_state(13)
@@ -538,3 +542,157 @@ func _test_old_save_traits() -> void:
 	_check(b.stats.boldness == 93 and b.stats.boldness is int, "save lost boldness")
 	a.free()
 	b.free()
+
+
+func _test_finance() -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 1
+	var db := CareerDB.new()
+	db.load_dir()
+	_check(db.errors.is_empty(), "career data: %s" % ", ".join(db.errors))
+	var fdb := FinanceDB.new()
+	fdb.load_all()
+	_check(fdb.errors.is_empty(), "finance data: %s" % ", ".join(fdb.errors))
+	_check(fdb.houses.size() == 7 and fdb.courses.size() == 26, "houses or courses missing")
+	_check(int(db.by_id.corporate.ranks[-1].pay) == 900000, "top career must pay 30E")
+	# parents are free; a renter with no income pays rent + living, and it becomes a 10% loan
+	var s = _make_state(18)
+	s.stats.money = 0
+	Finance.year_end(s, db, rng)
+	_check(s.stats.money == 0 and s.debts.is_empty(), "living at home must be free")
+	Finance.rent(s)
+	var lines := Finance.year_end(s, db, rng)
+	_check("No income this year." in lines, "no-income line missing")
+	_check(s.stats.money == 0, "below zero must convert to a loan")
+	_check(Finance.total_debt(s) == Finance.RENT + Finance.LIVING, "wrong first-year loan")
+	_check(not Finance.can_borrow(s), "no job must block borrowing")
+	# fresh start clears loans and blocks borrowing for 7 years
+	_check(Finance.can_fresh_start(s, db), "fresh start should open")
+	Finance.fresh_start(s)
+	_check(s.debts.is_empty() and s.flags.has("fresh_start"), "fresh start did not clear")
+	s.age = s.fresh_start_until
+	s.housing = {"kind": "parents"}
+	Finance.year_end(s, db, rng)
+	_check(not s.flags.has("fresh_start"), "fresh start must expire")
+	# mortgage: 10% deposit, payments clear it in 25 years
+	var h = _make_state(30)
+	var flat: Dictionary = fdb.houses[0]
+	h.stats.money = 1000000
+	CareerRules.apply(db.by_id.corporate, h, rng)
+	Finance.buy(h, flat)
+	_check(h.housing.kind == "own", "could not buy")
+	_check(Finance.total_debt(h) == int(flat.price * 0.9), "mortgage must be 90% of price")
+	for i in Finance.MORTGAGE_YEARS:
+		Finance._debt_year(h, db)
+	_check(h.debts.is_empty(), "mortgage not cleared in 25 years")
+	_check(Finance.sell(h) != "" and h.housing.kind == "rent", "sell failed")
+	# repossession after 3 years in debt
+	var r = _make_state(30)
+	r.housing = {"kind": "own", "label": "x", "value": 1, "upkeep": 1000, "growth": 0.0}
+	r.debts = [{"kind": "loan", "balance": 500000, "rate": 0.1, "payment": 0, "taken": 25}]
+	for i in Finance.REPOSSESS_AFTER + 1:
+		Finance.year_end(r, db, rng)
+	_check(r.housing.kind == "rent", "house not repossessed")
+	# course: finishing sets the flag that opens the job
+	var c = _make_state(18)
+	c.stats.smarts = 100
+	var course: Array = fdb.courses.filter(func(k): return k.id == "carpentry")
+	_check(not db.available(c).any(func(j): return j.id == "carpenter"), "carpenter needs a course")
+	Finance.enrol(c, course[0], true)
+	var guard := 0
+	while not c.course.is_empty() and guard < 50:
+		Finance.year_end(c, db, rng)
+		guard += 1
+	_check(db.available(c).any(func(j): return j.id == "carpenter"), "course must open the job")
+	_check(c.debts.any(func(d): return d.kind == "student"), "student loan missing")
+	# retail carries on past 18 at an adult wage, with adult-only ranks; other teen jobs end
+	var t = _make_state(17)
+	CareerRules.apply(db.by_id.retail, t, rng)
+	t.careers.job.rank = 2
+	t.careers.job.performance = 100
+	CareerRules.ask_promotion(t, "job", db)
+	_check(t.careers.job.rank == 2, "store manager is for adults")
+	t.age = 18
+	_check(CareerRules.outgrown(t, db).is_empty(), "retail must carry on past 18")
+	_check(Finance.yearly_pay(t, db) == Finance.E, "teen rank must pay E at 18")
+	var f = _make_state(17)
+	CareerRules.apply(db.by_id.paper_round, f, rng)
+	f.age = 18
+	CareerRules.outgrown(f, db)
+	_check(f.careers.is_empty(), "teen job must end at 18")
+	for o in [s, h, r, c, t, f]:
+		o.free()
+
+
+## Lives from birth until death: nobody gets stuck and old age ends every life.
+func _test_adult_sim() -> void:
+	var db := CardDB.new()
+	db.load_dir()
+	var careers := CareerDB.new()
+	careers.load_dir()
+	var fdb := FinanceDB.new()
+	fdb.load_all()
+	var ages := []
+	var houses := 0
+	var adult_jobs := {}
+	var max_debt := 0
+	var actions := ActionDB.new()
+	actions.load_dir()
+	var careful := []
+	for life in LIVES:
+		var state := GameStateScript.new()
+		state.new_life()
+		var deck := Deck.new(db.cards, life)
+		var dead := false
+		while not dead and state.age <= CardDB.MAX_AGE + 50:
+			for q in 4:
+				var card = deck.draw(state)
+				if card == null:
+					continue
+				if deck.choose(card, ["left", "right"][deck.rng.randi() % 2], state).died:
+					dead = true
+					break
+			if dead:
+				break
+			var open := careers.available(state)
+			if not state.careers.has("job") and not open.is_empty():
+				CareerRules.apply(open[deck.rng.randi() % open.size()], state, deck.rng)
+			if state.age >= 18:
+				for entry in state.careers.values():
+					adult_jobs[entry.id] = true
+				if state.housing.kind == "parents" and life % 2 == 0:
+					Finance.rent(state)
+				var opening: Array = fdb.courses_open(state)
+				if state.course.is_empty() and not opening.is_empty():
+					Finance.enrol(state, opening[deck.rng.randi() % opening.size()], true)
+				if state.housing.kind == "rent" and Finance.can_buy(state, fdb.houses[0]):
+					Finance.buy(state, fdb.houses[0])
+					houses += 1
+			if life % 2 == 1:
+				for a in actions.actions:
+					if a.id in ["doctor", "friends"] and a.ages[0] <= state.age:
+						ActionDB.perform(a, state)
+			CareerRules.year_end(state, careers, deck.rng)
+			Finance.year_end(state, careers, deck.rng)
+			max_debt = maxi(max_debt, Finance.total_debt(state))
+			if LifeRules.year_end(state, deck.rng).died:
+				dead = true
+			else:
+				state.age += 1
+				CareerRules.outgrown(state, careers)
+		_check(dead, "adult life never ended (age %d)" % state.age)
+		(careful if life % 2 == 1 else ages).append(state.age)
+		state.free()
+	ages.sort()
+	careful.sort()
+	var median: int = careful[careful.size() / 2]
+	print("adult sim: never-rest lives median death %d" % ages[ages.size() / 2])
+	print(
+		(
+			"adult sim: careful lives median death %d, oldest %d, %d houses, %d jobs, max debt %d"
+			% [median, careful[-1], houses, adult_jobs.size(), max_debt]
+		)
+	)
+	_check(median > 30, "careful lives must get past 30")
+	_check(houses > 0, "no life bought a house")
+	_check(adult_jobs.size() > 10, "only %d jobs held" % adult_jobs.size())

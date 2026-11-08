@@ -84,7 +84,15 @@ func refresh() -> void:
 	for s in bars:
 		create_tween().tween_property(bars[s], "value", GameState.stats[s], 0.3)
 		values[s].text = "%s %d" % [SHORT[s], GameState.stats[s]]
-	money_label.text = money_text(GameState.stats.money)
+	money_label.text = Finance.money_text(GameState.stats.money)
+	var debt := Finance.total_debt(GameState)
+	if debt > 0:
+		money_label.text += "\nDebt " + Finance.money_text(debt)
+	money_label.add_theme_font_size_override("font_size", 22 if debt > 0 else 30)
+	if GameState.stats.money < 0 or debt > 0:
+		money_label.add_theme_color_override("font_color", Color(0.85, 0.2, 0.2))
+	else:
+		money_label.remove_theme_color_override("font_color")
 	for s in marks:
 		_place(s)
 
@@ -93,7 +101,3 @@ func _place(s: String) -> void:
 	var mark: ColorRect = marks[s]
 	var x: float = (mark.get_parent().size.x - MARK_W) * GameState.stats[s] / 100.0
 	create_tween().tween_property(mark, "position:x", x, 0.3)
-
-
-static func money_text(m: int) -> String:
-	return "-$%d" % -m if m < 0 else "$%d" % m

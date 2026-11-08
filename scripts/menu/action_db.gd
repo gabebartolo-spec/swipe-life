@@ -5,9 +5,13 @@ extends RefCounted
 ## other limit (§6.5).
 
 const ACTION_DIR := "res://data/actions"
-const TABS := {"activities": 5, "people": 10, "jobs": 14, "shop": 18}  # tab -> unlock age (§6.7)
+const TABS := {"activities": 5, "people": 10, "jobs": 14, "shop": 18, "money": 18}  # §6.7
 const TAB_NAMES := {
-	"activities": "Activities", "people": "People", "jobs": "Career", "shop": "Shop"
+	"activities": "Activities",
+	"people": "People",
+	"jobs": "Career",
+	"shop": "Shop",
+	"money": "Money",
 }
 const KEYS := ["id", "tab", "label", "ages", "cost", "effects", "result"]
 const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
