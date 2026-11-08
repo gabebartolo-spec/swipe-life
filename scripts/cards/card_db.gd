@@ -3,7 +3,10 @@ extends RefCounted
 ## Loads and validates card JSON files (schema: docs/CARD_SCHEMA.md).
 
 const CARD_DIR := "res://data/cards"
-const MAX_AGE := 17  # first playable ends at 18 (docs/ROADMAP.md)
+const MAX_AGE := 100  # adult card cap (GDD §6.9)
+const TEEN_MAX_AGE := 17
+## Off until the adult card bands are approved: lives stop at 18. `-- --adult` turns it on.
+const ADULT_LIFE := false
 const CARD_KEYS := [
 	"id", "text", "ages", "weight", "requires", "left", "right", "up", "once", "room"
 ]

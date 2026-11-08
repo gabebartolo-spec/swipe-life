@@ -1,0 +1,9 @@
+[
+	{"id": "small_flat", "label": "Small flat", "price": 75000, "min_age": 18, "upkeep": 750, "growth": 0.01},
+	{"id": "fixer_upper", "label": "Fixer-upper", "price": 54000, "min_age": 18, "upkeep": 1800, "growth": -0.01},
+	{"id": "starter_house", "label": "Starter house", "price": 120000, "min_age": 21, "upkeep": 1200, "growth": 0.02},
+	{"id": "family_house", "label": "Family house", "price": 240000, "min_age": 25, "upkeep": 2100, "growth": 0.025},
+	{"id": "town_house", "label": "Town house", "price": 300000, "min_age": 25, "upkeep": 3000, "growth": 0.03},
+	{"id": "seaside_villa", "label": "Seaside villa", "price": 600000, "min_age": 30, "upkeep": 9000, "growth": 0.02},
+	{"id": "mansion", "label": "Mansion", "price": 1200000, "min_age": 35, "upkeep": 18000, "growth": 0.03}
+]

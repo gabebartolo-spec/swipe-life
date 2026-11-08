@@ -27,6 +27,14 @@ var used := {}  # card ids drawn this life ("once" cards never repeat)
 var super_like_available := true  # one per year (GDD §3.3)
 var careers := {}  # slot ("job" / "special") -> entry; see CareerRules
 var partner := {}  # {} = single, else {name, affinity, met}; outlives the job it came from
+var housing := {"kind": "parents"}  # parents / rent / own (+ house, label, value, upkeep, growth)
+var debts := []  # {kind: mortgage / student / loan, balance, rate, payment, taken}; see Finance
+var savings := 0
+var investments := 0
+var invest_bold := false
+var debt_years := 0  # years in a row ending with a loan; repossession follows (Finance)
+var fresh_start_until := 0
+var course := {}  # the course in progress; see Finance.enrol
 
 
 func _ready() -> void:
@@ -41,6 +49,14 @@ func new_life() -> void:
 	super_like_available = true
 	careers = {}
 	partner = {}
+	housing = {"kind": "parents"}
+	debts = []
+	savings = 0
+	investments = 0
+	invest_bold = false
+	debt_years = 0
+	fresh_start_until = 0
+	course = {}
 	stats = {}
 	for s in STATS:
 		stats[s] = 0 if s in UNBOUNDED_STATS or s == "stress" else 50
@@ -63,6 +79,14 @@ func to_dict() -> Dictionary:
 		"super_like_available": super_like_available,
 		"careers": careers,
 		"partner": partner,
+		"housing": housing,
+		"debts": debts,
+		"savings": savings,
+		"investments": investments,
+		"invest_bold": invest_bold,
+		"debt_years": debt_years,
+		"fresh_start_until": fresh_start_until,
+		"course": course,
 	}
 
 
@@ -74,6 +98,14 @@ func from_dict(d: Dictionary) -> void:
 	super_like_available = d.super_like_available
 	careers = d.get("careers", {})
 	partner = d.get("partner", {})
+	housing = d.get("housing", {"kind": "parents"})
+	debts = d.get("debts", [])
+	savings = int(d.get("savings", 0))
+	investments = int(d.get("investments", 0))
+	invest_bold = d.get("invest_bold", false)
+	debt_years = int(d.get("debt_years", 0))
+	fresh_start_until = int(d.get("fresh_start_until", 0))
+	course = d.get("course", {})
 	for entry in careers.values():  # JSON reads numbers back as floats
 		for k in ["rank", "performance", "years", "meter"]:
 			entry[k] = int(entry[k])
