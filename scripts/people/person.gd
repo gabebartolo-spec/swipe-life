@@ -39,7 +39,11 @@ const PART_Z := {
 	"shin": 8,
 	"foot": 8
 }
-const LAYER_Z := {"body": 0, "trousers": 1, "tee": 1, "sweater": 1, "face": 4, "wrinkles": 5}
+const LAYER_Z := {
+	"body": 0, "trousers": 1, "tee": 1, "sweater": 1, "face": 4, "wrinkles": 5, "pacifier": 6
+}
+## Always worn by the baby; look["pacifier"] overrides these tints.
+const PACIFIER_TINT := [Color("8fc7e8"), Color("ffffff")]
 const FIXED_Z := {"hair_back": 0, "hair_front": 44}
 ## A hand this far (m) in front of the head draws its forearm and hand over the head and hair.
 const FRONT_M := 0.35
@@ -102,7 +106,7 @@ func _add_sprites(dir: String, sprites: Dictionary, pivots: Dictionary) -> void:
 		var s: Dictionary = sprites[sprite_name]
 		if s.layer == "wrinkles" and not elderly:
 			continue
-		if not look.has(s.layer) and s.layer not in ["face", "wrinkles"]:
+		if not look.has(s.layer) and s.layer not in ["face", "wrinkles", "pacifier"]:
 			continue
 		var spr := Sprite2D.new()
 		spr.texture = load(dir.path_join(sprite_name + ".png"))
@@ -115,6 +119,8 @@ func _add_sprites(dir: String, sprites: Dictionary, pivots: Dictionary) -> void:
 		mat.set_shader_parameter("raw", s.raw)
 		mat.set_shader_parameter("seed", float(_seed % 97))
 		var cols: Array = look.get(s.layer, [])
+		if s.layer == "pacifier" and cols.is_empty():
+			cols = PACIFIER_TINT
 		if s.layer == "wrinkles":  # face lines: the skin a shade darker, so they read on every tone
 			cols = [(look["body"][0] as Color).darkened(0.35)]
 		for i in cols.size():
