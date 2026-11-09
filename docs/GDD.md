@@ -148,7 +148,7 @@
     athletic through exercise, plastic surgery). Attractiveness is the Looks stat (§4.1), not a separate part.
   - The game is fully LGBTQ+ friendly (director): a partner can be any sex, whatever the player's sex.
   - The player picks their whole look at the start of a life (director 2026-11-09).
-  - People are seen from the front only (director 2026-11-03); motion stays in the front plane.
+  - People are real 3D figures living inside the rooms at room scale, seen from any angle, doing everyday things (director 2026-11-09; replaces front-view only).
   - Architecture: `docs/PEOPLE.md`.
 - 10.8 Before 18 (Shop locked, §6.7) the scene changes with age (e.g. crib → bed → desk) and with activities,
   which leave props in the house (e.g. a ball from the sports club, books from studying).

@@ -3,8 +3,10 @@ extends SceneTree
 ## to one PNG per age band, each with every activity layer shown.
 ## Run: godot --path . --resolution 1080x900 -s tools/godot/render_house.gd -- <out_dir>
 ## An adult home: ... -- <out_dir> res://assets/house/homes/<home>.glb <home>
+## Depth maps instead of stills: add "depth" as the last argument ("" as home for the age bands).
 
 const CLAY := preload("res://shaders/clay.gdshader")
+const DEPTH := preload("res://shaders/room_depth_bake.gdshader")
 const GLOWS := {"fairy": 1.2, "lamp_glow": 1.0, "glow_screen": 0.5}
 const BANDS := ["baby", "child", "teen"]
 ## One room at a time (GDD 10.6): room centre on the floor plan.
@@ -20,14 +22,17 @@ var _house: Node3D
 var _cam: Camera3D
 var _warm := false
 var _bands: Array = BANDS
+var _depth := false
 
 
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
 	var out: String = args[0]
 	var glb: String = args[1] if args.size() > 1 else "res://assets/house/house.glb"
-	if args.size() > 2:
+	if args.size() > 2 and args[2] != "":
 		_bands = [args[2]]
+	_depth = args.size() > 3 and args[3] == "depth"
+	root.use_hdr_2d = _depth
 	var root3d := Node3D.new()
 	root.add_child(root3d)
 	var env := Environment.new()
@@ -37,6 +42,9 @@ func _initialize() -> void:
 	env.ambient_light_color = Color(1, 0.96, 0.92)
 	env.ambient_light_energy = 0.35
 	env.tonemap_mode = 2
+	if _depth:
+		env.tonemap_mode = 0
+		env.background_color = Color.BLACK
 	var we := WorldEnvironment.new()
 	we.environment = env
 	root3d.add_child(we)
@@ -69,6 +77,10 @@ func _initialize() -> void:
 	_house = (load(glb) as PackedScene).instantiate()
 	root3d.add_child(_house)
 	for mi: MeshInstance3D in _house.find_children("*", "MeshInstance3D", true, false):
+		if _depth:
+			if "_glass" in String(mi.name):
+				mi.layers = 0
+			continue
 		if "_glass" in String(mi.name):
 			var pane := StandardMaterial3D.new()
 			pane.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -98,9 +110,15 @@ func _render(out: String) -> void:
 			var c: Vector2 = ROOMS[room]
 			_show_room(room, band, c)
 			_cam.transform.origin = Vector3(c.x, 1.0, c.y) + _cam.transform.basis.z * 20.0
+			if _depth:
+				_paint_depth(c)
 			for i in 20 if _warm else 90:
 				await process_frame
-			root.get_texture().get_image().save_png(out.path_join("room_%s_%s.png" % [room, band]))
+			var img := root.get_texture().get_image()
+			if _depth:
+				_save_depth(img, out.path_join("depth_%s_%s.png" % [room, band]))
+			else:
+				img.save_png(out.path_join("room_%s_%s.png" % [room, band]))
 			_warm = true
 			print("saved ", room, " ", band)
 	quit()
@@ -126,3 +144,28 @@ func _show_room(room: String, band: String, c: Vector2) -> void:
 			mi.visible = inside and n.begins_with("bed_%s__" % band)
 		else:
 			mi.visible = inside
+
+
+func _paint_depth(c: Vector2) -> void:
+	var m := ShaderMaterial.new()
+	m.shader = DEPTH
+	m.set_shader_parameter("origin", Vector3(c.x, 1.0, c.y))
+	m.set_shader_parameter("axis", _cam.transform.basis.z)
+	for mi: MeshInstance3D in _house.find_children("*", "MeshInstance3D", true, false):
+		mi.material_override = m
+
+
+## 16 bits across red and green. Exactly black means nothing there.
+func _save_depth(img: Image, path: String) -> void:
+	var w := img.get_width()
+	var h := img.get_height()
+	var out := PackedByteArray()
+	out.resize(w * h * 2)
+	var i := 0
+	for y in h:
+		for x in w:
+			var v := int(clampf(img.get_pixel(x, y).r, 0.0, 1.0) * 65535.0)
+			out[i] = v >> 8
+			out[i + 1] = v & 255
+			i += 2
+	Image.create_from_data(w, h, false, Image.FORMAT_RG8, out).save_png(path)
