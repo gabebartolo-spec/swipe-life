@@ -104,8 +104,7 @@ func _apply(ch: Dictionary, state, slot := "") -> void:
 	for f in ch.get("clear_flags", []):
 		state.flags.erase(f)
 	if ch.get("partner") == "end":  # a breakup ends the partner record (docs/CAREERS.md)
-		state.partner = {}
-		state.flags.erase("dating_work_partner")
+		Family.end_partner(state)
 		for f in state.flags.keys():
 			if f.begins_with("work_") and f.ends_with("_dating"):
 				state.flags.erase(f)

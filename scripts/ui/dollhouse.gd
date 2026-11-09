@@ -11,6 +11,7 @@ const ROOMS := {
 	"kitchen": Vector2(1, 1)
 }
 const PAN_TIME := 0.4
+const MAX_KIDS_SHOWN := 2  # a small room stays readable
 const ROOM_DIR := "res://assets/house/rooms"
 
 var room := ""
@@ -67,36 +68,34 @@ func show_room(age: int, room_id: String = "bedroom", housing: Dictionary = {}) 
 	_stage.set_room(room_id, new_band)
 
 
-## The player, and the partner if any, living in the room (GDD §10.2, §10.7). Partners are any sex,
-## whatever the player's; one gets a random look the first time they appear.
-func show_people(age: int, look: Dictionary, partner: Dictionary) -> void:
+## The player, the partner if any and the children still at home, living in the room (GDD §10.2,
+## §10.7). Partners are any sex, whatever the player's; one gets a random look on first showing.
+func show_people(age: int, look: Dictionary, partner: Dictionary, children: Array = []) -> void:
 	if look.is_empty():
 		return
 	if not partner.is_empty() and not partner.has("look"):
 		partner["look"] = Looks.random()
-	var key := "%s|%s|%s" % [Looks.shape_for(age, look.sex), look, partner.get("look")]
+	var kids := []
+	for child: Dictionary in children:
+		var child_age := age - int(child.born_at)
+		if child_age < Family.ADULT and kids.size() < MAX_KIDS_SHOWN:
+			kids.append([child.look, child_age])
+	var key := "%s|%s|%s|%s" % [Looks.shape_for(age, look.sex), look, partner.get("look"), kids]
 	if key == _people_key:
 		return
 	_people_key = key
-	var people := [
-		{
-			"shape": Looks.shape_for(age, look.sex),
-			"look": Looks.figure_look(look, age),
-			"age": age,
-		}
-	]
+	var people := [_person(look, age)]
 	if not partner.is_empty():
-		(
-			people
-			. append(
-				{
-					"shape": Looks.shape_for(age, partner.look.sex),
-					"look": Looks.figure_look(partner.look, age),
-					"age": age,
-				}
-			)
-		)
+		people.append(_person(partner.look, age))
+	for kid: Array in kids:
+		people.append(_person(kid[0], kid[1]))
 	_stage.set_people(people)
+
+
+func _person(look: Dictionary, age: int) -> Dictionary:
+	return {
+		"shape": Looks.shape_for(age, look.sex), "look": Looks.figure_look(look, age), "age": age
+	}
 
 
 ## Slides the old room out and the new one in along the iso direction between them on the 2x2

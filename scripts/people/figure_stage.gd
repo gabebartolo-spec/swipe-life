@@ -26,6 +26,8 @@ const TURN_SPEED := 6.0
 const CLEARANCE := 0.28  # metres of free floor around a figure
 const STAY_MIN := 4.0
 const STAY_MAX := 9.0
+const PERSONAL_SPACE := 0.75  # metres between where two people stop
+const SEAT_STEP := 0.6  # metres between seats along a bed or sofa
 
 var _viewport := SubViewport.new()
 var _world := Node3D.new()
@@ -117,7 +119,7 @@ func _apply_depth(fig: Figure3D) -> void:
 
 
 func _place(a: Dictionary) -> void:
-	var at := _free_spot()
+	var at := _free_spot(a)
 	a.fig.position = Vector3(at.x, FLOOR_Y, at.y)
 	a.fig.rotation.y = PI / 4.0 + randf_range(-1.2, 1.2)  # roughly toward the viewer
 	a.fig.set_shadow(true)
@@ -127,6 +129,8 @@ func _place(a: Dictionary) -> void:
 func _next(a: Dictionary) -> void:
 	if a.fig.position.y > FLOOR_Y + 0.01 or a.get("seated", false):  # stand up where there is room
 		a.seated = false
+		a.seat_z = -1.0
+		a.lying = false
 		var off := _free_near(Vector2(a.fig.position.x, a.fig.position.z))
 		a.fig.position = Vector3(off.x, FLOOR_Y, off.y)
 		a.fig.set_shadow(true)
@@ -136,7 +140,7 @@ func _next(a: Dictionary) -> void:
 		return
 	var from := Vector2(a.fig.position.x, a.fig.position.z)
 	for i in 20:
-		var to := _free_spot()
+		var to := _free_spot(a)
 		if to.distance_to(from) > 0.6 and _line_free(from, to):
 			a.to = Vector3(to.x, FLOOR_Y, to.y)
 			a.state = "move"
@@ -182,12 +186,15 @@ func _seat_choice(a: Dictionary) -> Dictionary:
 	var clip := "sit" if _room == "bedroom" else "sit_talk"
 	if _room == "bedroom" and randf() < 0.3:
 		clip = "lay_back"
-	return seat_for(clip)
+	return seat_for(clip, a)
 
 
 ## Where this clip fits in the current room; empty when the room has no such furniture.
-func seat_for(clip: String) -> Dictionary:
-	var z := {"bedroom": 1.6, "living": 5.95}.get(_room, -1.0) as float
+func seat_for(clip: String, who: Dictionary = {}) -> Dictionary:
+	var first := {"bedroom": 1.6, "living": 5.95}.get(_room, -1.0) as float
+	if first < 0.0:
+		return {}
+	var z := _open_seat(first, clip, who)
 	if z < 0.0:
 		return {}
 	var edge := _edge_along_x(z)
@@ -199,9 +206,28 @@ func seat_for(clip: String) -> Dictionary:
 	return {"clip": clip, "x": edge, "z": z, "y": surface}
 
 
+## The first seat nobody has, or -1: a lying figure takes the whole bed, and needs it empty.
+func _open_seat(first: float, clip: String, who: Dictionary) -> float:
+	for other in _actors:
+		if other != who and other.get("lying", false):
+			return -1.0
+		if clip == "lay_back" and other != who and other.get("seat_z", -1.0) >= 0.0:
+			return -1.0
+	for candidate: float in [first, first - SEAT_STEP]:
+		var taken := false
+		for other in _actors:
+			if other != who and absf(other.get("seat_z", -1.0) - candidate) < 0.1:
+				taken = true
+		if not taken:
+			return candidate
+	return -1.0
+
+
 func use_seat(a: Dictionary, seat: Dictionary) -> void:
 	var fig: Figure3D = a.fig
 	a.seated = true
+	a.seat_z = seat.z
+	a.lying = seat.clip == "lay_back"
 	fig.play(seat.clip)
 	fig.set_shadow(false)
 	if seat.clip == "lay_back":
@@ -228,12 +254,27 @@ func _edge_along_x(z: float) -> float:
 	return -1.0
 
 
-func _free_spot() -> Vector2:
+## Clear floor nobody else is standing on or heading for.
+func _free_spot(who: Dictionary) -> Vector2:
+	for i in 40:
+		var p := _centre + Vector2(randf_range(-1.7, 1.7), randf_range(-1.7, 1.7))
+		if is_free(p) and _has_space(p, who):
+			return p
 	for i in 40:
 		var p := _centre + Vector2(randf_range(-1.7, 1.7), randf_range(-1.7, 1.7))
 		if is_free(p):
 			return p
 	return _centre + Vector2(0.8, 0.8)
+
+
+func _has_space(p: Vector2, who: Dictionary) -> bool:
+	for other in _actors:
+		if other == who:
+			continue
+		var at: Vector3 = other.to if other.state == "move" else other.fig.position
+		if p.distance_to(Vector2(at.x, at.z)) < PERSONAL_SPACE:
+			return false
+	return true
 
 
 func _free_near(p: Vector2) -> Vector2:

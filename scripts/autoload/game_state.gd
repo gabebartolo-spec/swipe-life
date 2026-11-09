@@ -27,6 +27,8 @@ var used := {}  # card ids drawn this life ("once" cards never repeat)
 var super_like_available := true  # one per year (GDD §3.3)
 var careers := {}  # slot ("job" / "special") -> entry; see CareerRules
 var partner := {}  # {} = single, else {name, affinity, met}; outlives the job it came from
+var children := []  # {name, born_at (your age then), affinity, look, adopted}; see Family
+var parents_alive := true
 var look := {}  # Looks: chosen at the start of a life
 var housing := {"kind": "parents"}  # parents / rent / own (+ house, label, value, upkeep, growth)
 var debts := []  # {kind: mortgage / student / loan, balance, rate, payment, taken}; see Finance
@@ -50,6 +52,8 @@ func new_life() -> void:
 	super_like_available = true
 	careers = {}
 	partner = {}
+	children = []
+	parents_alive = true
 	look = {}
 	housing = {"kind": "parents"}
 	debts = []
@@ -81,6 +85,8 @@ func to_dict() -> Dictionary:
 		"super_like_available": super_like_available,
 		"careers": careers,
 		"partner": partner,
+		"children": children,
+		"parents_alive": parents_alive,
 		"look": look,
 		"housing": housing,
 		"debts": debts,
@@ -101,6 +107,8 @@ func from_dict(d: Dictionary) -> void:
 	super_like_available = d.super_like_available
 	careers = d.get("careers", {})
 	partner = d.get("partner", {})
+	children = d.get("children", [])
+	parents_alive = d.get("parents_alive", true)
 	look = d.get("look", {})
 	housing = d.get("housing", {"kind": "parents"})
 	debts = d.get("debts", [])
@@ -115,6 +123,9 @@ func from_dict(d: Dictionary) -> void:
 			entry[k] = int(entry[k])
 		for role in entry.coworkers:
 			entry.coworkers[role].affinity = int(entry.coworkers[role].affinity)
+	for child: Dictionary in children:
+		child.born_at = int(child.born_at)
+		child.affinity = int(child.affinity)
 	if partner.has("affinity"):
 		partner.affinity = int(partner.affinity)
 	for s in STATS:

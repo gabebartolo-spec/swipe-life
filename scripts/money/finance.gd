@@ -74,6 +74,7 @@ static func year_end(state, db: CareerDB, rng: RandomNumberGenerator) -> Array:
 		lines.append("No income this year.")
 	_course_year(state, rng, lines)
 	_cost_of_living(state, lines)
+	Family.year_end(state, rng, lines)
 	_debt_year(state, db)
 	_growth(state, rng, lines)
 	if state.stats.money < 0:
