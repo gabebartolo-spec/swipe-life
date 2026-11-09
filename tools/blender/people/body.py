@@ -209,7 +209,8 @@ def body():
     pelvis("body", 0)
     legs("body", 0)
     sphere(("body", "head", "R"), J["head_c"], 0.47, (1.05, 0.95, 1.0))
-    chain(("body", "head", "R"), (0, 1.3, 0), (0, 1.46, 0), 0.09, 5)
+    # dense enough to fuse after T() stretches the neck (director: sparse beads pinched under the head)
+    chain(("body", "head", "R"), (0, 1.3, 0), (0, 1.46, 0), 0.09, 5 + int(NECK_UP * 40))
     socket("body", "head", "neck")
     for s, side in ((1, "l"), (-1, "r")):
         bone("body", "upper_arm_" + side, "shoulder", "elbow", s, 0.095)
