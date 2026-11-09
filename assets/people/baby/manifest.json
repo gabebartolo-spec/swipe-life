@@ -392,6 +392,17 @@
     74
    ],
    "raw": false
+  },
+  "pacifier__head": {
+   "layer": "pacifier",
+   "piece": "head",
+   "rect": [
+    387,
+    555,
+    250,
+    233
+   ],
+   "raw": false
   }
  }
 }

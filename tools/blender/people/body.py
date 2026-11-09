@@ -5,7 +5,7 @@ Run headless:
   blender -b --factory-startup --python tools/blender/people/body.py -- <out.glb>
 
 Every object is named "<layer>|<piece>|<mask>":
-  layer  body, face (fixed colours, not tinted), tee, sweater, trousers, hair_back, hair_front
+  layer  body, face (fixed colours, not tinted), tee, sweater, trousers, onesie, pacifier, hair_back, hair_front
   piece  pelvis, chest, head, upper_arm_l/r, forearm_l/r, hand_l/r, thigh_l/r, shin_l/r, foot_l/r
   mask   R (main colour c1), G (trim, c2), B (detail, c3)
 Each piece's pivot (joint it turns about, Godot axes: x right, y up, z to camera) is a glTF extra.
@@ -264,7 +264,7 @@ def sleeve_top(layer, side, s, end, r):
     chain((layer, "upper_arm_" + side, "R"), tuple(a.lerp(Vector(end), 0.2)), tuple(end), r, 4)
     # cap as wide as the sleeve (wider bulged as a separate ball, director: seamless); its top, 0.8 r above the
     # joint, still covers the body's shoulder socket (r 0.1), so no skin shows
-    sphere((layer, "upper_arm_" + side, "R"), tuple(a), r, (1, 0.87, 1))  # top 0.87 r ~ 0.1 above the joint
+    sphere((layer, "upper_arm_" + side, "R"), tuple(a), r, (1, 0.96, 1))  # top ~ 0.1 above the joint
 
 
 def tee():
@@ -273,7 +273,7 @@ def tee():
     for s, side in ((1, "l"), (-1, "r")):
         mid = Vector(j("shoulder", s)).lerp(Vector(j("elbow", s)), 0.65)
         if GROWN:
-            sleeve_top("tee", side, s, mid, 0.115)  # arm 0.095 + 0.02: close fit, no puff
+            sleeve_top("tee", side, s, mid, 0.105)  # arm 0.095 + 0.01: close fit, no puff
         else:
             chain(("tee", "upper_arm_" + side, "R"), j("shoulder", s), tuple(mid), 0.115, 4)
             socket("tee", "upper_arm_" + side, "shoulder", s, 0.015)
@@ -284,10 +284,10 @@ def sweater():
     ring(("sweater", "chest", "G"), (0, 1.36, 0.0), 0.13, 0.11, 0.04)
     if GROWN:
         for s, side in ((1, "l"), (-1, "r")):
-            sleeve_top("sweater", side, s, j("elbow", s), 0.115)
-            socket("sweater", "upper_arm_" + side, "elbow", s, 0.025)
-            chain(("sweater", "forearm_" + side, "R"), j("elbow", s), j("wrist", s), 0.11)  # same as the upper sleeve: no step at the elbow
-            socket("sweater", "forearm_" + side, "elbow", s, 0.025)
+            sleeve_top("sweater", side, s, j("elbow", s), 0.105)
+            socket("sweater", "upper_arm_" + side, "elbow", s, 0.012)
+            chain(("sweater", "forearm_" + side, "R"), j("elbow", s), j("wrist", s), 0.098)  # forearm 0.085 + 0.013, tapering from the upper sleeve
+            socket("sweater", "forearm_" + side, "elbow", s, 0.012)
     else:
         arms("sweater", 0.025)
 
@@ -1617,6 +1617,17 @@ def proxies():
             ob["r"] = (JR[joint] + GROW.get(layer, 0)) * f  # garments are wider: blend over their whole overlap
 
 
+def pacifier():
+    """Baby's dummy, over the mouth: shield and teat in c1 (mask R), a ring handle in c2 (mask G)."""
+    import math
+
+    sphere(("pacifier", "head", "R"), (0, 1.52, 0.47), 0.1, (1.2, 0.85, 0.3))
+    sphere(("pacifier", "head", "R"), (0, 1.52, 0.51), 0.04)
+    for i in range(16):
+        t = 2 * math.pi * i / 16
+        sphere(("pacifier", "head", "G"), (0.05 * math.cos(t), 1.5 + 0.05 * math.sin(t), 0.54), 0.016, segs=12)
+
+
 def fuse():
     for (layer, piece, mask), obs in PARTS.items():
         bpy.ops.object.select_all(action="DESELECT")
@@ -1697,6 +1708,7 @@ if HAIR_ONLY:
             bpy.data.objects.remove(ob)
 elif AGE == "baby":
     onesie()
+    pacifier()
 else:
     tee()
     sweater()

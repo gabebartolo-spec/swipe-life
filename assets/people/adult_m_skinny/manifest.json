@@ -276,10 +276,10 @@
    "layer": "sweater",
    "piece": "forearm_l",
    "rect": [
-    595,
-    524,
-    78,
-    160
+    598,
+    525,
+    72,
+    153
    ],
    "raw": false
   },
@@ -287,10 +287,10 @@
    "layer": "sweater",
    "piece": "forearm_r",
    "rect": [
-    352,
-    523,
-    77,
-    160
+    354,
+    524,
+    72,
+    155
    ],
    "raw": false
   },
@@ -298,10 +298,10 @@
    "layer": "sweater",
    "piece": "upper_arm_l",
    "rect": [
-    572,
-    441,
-    79,
-    158
+    574,
+    442,
+    74,
+    152
    ],
    "raw": false
   },
@@ -309,10 +309,10 @@
    "layer": "sweater",
    "piece": "upper_arm_r",
    "rect": [
-    373,
+    376,
     441,
-    79,
-    157
+    73,
+    153
    ],
    "raw": false
   },
@@ -331,9 +331,9 @@
    "layer": "tee",
    "piece": "upper_arm_l",
    "rect": [
-    572,
+    574,
     442,
-    73,
+    71,
     148
    ],
    "raw": false
@@ -344,7 +344,7 @@
    "rect": [
     379,
     441,
-    73,
+    70,
     149
    ],
    "raw": false

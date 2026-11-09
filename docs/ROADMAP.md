@@ -105,11 +105,9 @@ Builds:
   - Done: blush on babies and children only. Even grey hair tint. Symmetric bust; the director approved the size.
     Necks grow with age (child, then teen, then adult). Men broader, women hourglass, fitted tops.
     Arms set away from the torso. Flat adult and teen shoulders, approved by the director.
-  - Hair: 33 cuts on 6 shapes merged (#47); about 14 rebuilt on the new body, the rest older versions.
-    Open flaws: forehead rim, side lobes, short cuts look alike, ribbed long hair, stuck-on buns and braids.
+  - Hair: 33 cuts on 6 shapes (#47), seven reshaped and passed by the director (#62).
   - Elderly: face lines, grey hair and a slight stoop on the adult body.
-  - Left to do: clothes over the new shoulders, rebuild the remaining hair cuts and fix the flaws the
-    director names, baby pacifier.
+  - Teen and adult sleeves refit to the flat shoulders; always-on tintable baby pacifier. Director passed both (2026-11-09).
 
 ## M6 Content: about 200 cards, ages 0–17
 - Write the cards in batches by age band: 0–2, 3–5, 6–9, 10–12, 13–15 and 16–17, about 30–40 cards per band.
