@@ -27,6 +27,7 @@ func _init() -> void:
 	_test_finance()
 	_test_adult_sim()
 	_test_figures()
+	_test_family()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -734,3 +735,53 @@ func _test_figures() -> void:
 		for room: String in Dollhouse.ROOMS:
 			var path := "%s/depth_%s_%s.png" % [FigureStage.DEPTH_DIR, room, home]
 			_check(ResourceLoader.exists(path), "no depth map: " + path)
+
+
+## A life can find a partner, marry, have a child and lose them all (ROADMAP M10).
+func _test_family() -> void:
+	var db := ActionDB.new()
+	db.load_dir()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 7
+	var s := GameStateScript.new()
+	s.new_life()
+	s.age = 25
+	s.stats.money = 100000
+	var ids := func() -> Array: return db.available("people", s.age, s).map(func(a): return a.id)
+	_check("date" in ids.call() and "propose" not in ids.call(), "single menu wrong")
+	for i in 50:
+		if s.partner.is_empty():
+			Family.act("date", s, rng)
+	_check(not s.partner.is_empty(), "dating never found a partner")
+	_check(s.flags.has("dating_work_partner"), "a partner must close the dating cards")
+	_check("date" not in ids.call() and "propose" in ids.call(), "partner menu wrong")
+	s.partner.affinity = 80
+	Family.act("propose", s, rng)
+	_check(s.partner.get("married", false), "a happy partner said no")
+	_check("divorce" in ids.call() and "breakup" not in ids.call(), "married menu wrong")
+	for i in 50:
+		if s.children.is_empty():
+			Family.act("try_child", s, rng)
+	_check(s.children.size() == 1, "trying never had a child")
+	_check("child_time" in ids.call(), "no child actions")
+	var d: Dictionary = JSON.parse_string(JSON.stringify(s.to_dict()))
+	var b := GameStateScript.new()
+	b.new_life()
+	b.from_dict(d)
+	_check(b.children.size() == 1 and b.children[0].born_at is int, "save lost the child")
+	s.age = 30
+	_check(Family.child_age(s.children[0], s) == 5, "child did not age")
+	var before: int = s.stats.money
+	var lines := []
+	Family.year_end(s, rng, lines)
+	_check(s.stats.money == before - Family.CHILD_COST, "child cost not paid")
+	s.partner.affinity = 0
+	Family.year_end(s, rng, lines)
+	_check(s.partner.is_empty() and not s.flags.has("married"), "an unhappy partner stayed")
+	s.age = 99
+	for i in 200:
+		Family.year_end(s, rng, lines)
+	_check(not s.parents_alive, "parents never died")
+	_check("parents" not in ids.call(), "can still talk to dead parents")
+	s.free()
+	b.free()

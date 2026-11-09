@@ -127,7 +127,7 @@ func _update_age(season := true) -> void:
 	$Dollhouse.show_room(
 		GameState.age, $Dollhouse.room if $Dollhouse.room else "bedroom", GameState.housing
 	)
-	$Dollhouse.show_people(GameState.age, GameState.look, GameState.partner)
+	$Dollhouse.show_people(GameState.age, GameState.look, GameState.partner, GameState.children)
 	strip.refresh()
 
 

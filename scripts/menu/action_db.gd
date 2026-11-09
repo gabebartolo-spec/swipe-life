@@ -13,7 +13,7 @@ const TAB_NAMES := {
 	"shop": "Shop",
 	"money": "Money",
 }
-const KEYS := ["id", "tab", "label", "ages", "cost", "effects", "result"]
+const KEYS := ["id", "tab", "label", "ages", "cost", "effects", "result", "needs", "do"]
 const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
 
 var actions: Array = []
@@ -78,8 +78,17 @@ static func tabs_at(age: int) -> Array:
 	return TABS.keys().filter(func(t): return age >= TABS[t])
 
 
-func available(tab: String, age: int) -> Array:
-	return actions.filter(func(a): return a.tab == tab and a.ages[0] <= age and age <= a.ages[1])
+## state, when given, also applies each action's "needs" (Family.meets).
+func available(tab: String, age: int, state = null) -> Array:
+	return actions.filter(
+		func(a):
+			return (
+				a.tab == tab
+				and a.ages[0] <= age
+				and age <= a.ages[1]
+				and (state == null or Family.meets(a.get("needs", []), state))
+			)
+	)
 
 
 ## Pays and applies the action. Returns false when the player can't afford it.

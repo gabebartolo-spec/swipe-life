@@ -77,7 +77,7 @@ func _build() -> void:
 	if tab == "money" and finance:
 		_build_money()
 		return
-	for a in db.available(tab, GameState.age):
+	for a in db.available(tab, GameState.age, GameState):
 		var b := Button.new()
 		var cost := int(a.get("cost", 0))
 		b.text = a.label + ("   $%d" % cost if cost else "")
@@ -300,7 +300,8 @@ func _note(text: String) -> void:
 
 func do_action(a: Dictionary) -> void:
 	if ActionDB.perform(a, GameState):
-		info.text = a.get("result", a.label)
+		var line := Family.act(a.get("do", ""), GameState, careers_rng)
+		info.text = line if line != "" else a.get("result", a.label)
 		acted.emit()
 		_build()
 
@@ -309,7 +310,7 @@ func do_action(a: Dictionary) -> void:
 func choices() -> Array:
 	var out := []
 	for t in ActionDB.tabs_at(GameState.age):
-		for a in db.available(t, GameState.age):
+		for a in db.available(t, GameState.age, GameState):
 			if GameState.stats.money >= int(a.get("cost", 0)):
 				out.append(a)
 	return out

@@ -32,7 +32,12 @@ func _run() -> void:
 		partner.look.sex = look.sex
 		partner.look.hair = look.hair
 	house.show_room(age, a[1], housing)
-	house.show_people(age, look, partner)
+	var kids := []
+	if a.size() > 8:  # your age when each child arrived, comma separated
+		for born: String in a[8].split(","):
+			var kid := Looks.random()
+			kids.append({"look": kid, "born_at": int(born)})
+	house.show_people(age, look, partner, kids)
 	for i in int(a[5]):
 		await create_timer(2.0).timeout
 		root.get_texture().get_image().save_png("%s/f%02d.png" % [a[0], i])
