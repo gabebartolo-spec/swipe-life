@@ -2,6 +2,7 @@ extends SceneTree
 ## Renders assets/house/house.glb with the approved clay look (scenes/proto/clay_room_baked.tscn)
 ## to one PNG per age band, each with every activity layer shown.
 ## Run: godot --path . --resolution 1080x900 -s tools/godot/render_house.gd -- <out_dir>
+## An adult home: ... -- <out_dir> res://assets/house/homes/<home>.glb <home>
 
 const CLAY := preload("res://shaders/clay.gdshader")
 const GLOWS := {"fairy": 1.2, "lamp_glow": 1.0, "glow_screen": 0.5}
@@ -18,10 +19,15 @@ const ROOM_SIZE := 5.6
 var _house: Node3D
 var _cam: Camera3D
 var _warm := false
+var _bands: Array = BANDS
 
 
 func _initialize() -> void:
-	var out: String = OS.get_cmdline_user_args()[0]
+	var args := OS.get_cmdline_user_args()
+	var out: String = args[0]
+	var glb: String = args[1] if args.size() > 1 else "res://assets/house/house.glb"
+	if args.size() > 2:
+		_bands = [args[2]]
 	var root3d := Node3D.new()
 	root.add_child(root3d)
 	var env := Environment.new()
@@ -60,9 +66,16 @@ func _initialize() -> void:
 	cam.transform = Transform3D(basis, Vector3(4, 0.9, 4) + basis.z * 20.0)
 	root3d.add_child(cam)
 	root.msaa_3d = Viewport.MSAA_4X
-	_house = (load("res://assets/house/house.glb") as PackedScene).instantiate()
+	_house = (load(glb) as PackedScene).instantiate()
 	root3d.add_child(_house)
 	for mi: MeshInstance3D in _house.find_children("*", "MeshInstance3D", true, false):
+		if "_glass" in String(mi.name):
+			var pane := StandardMaterial3D.new()
+			pane.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			pane.albedo_color = Color(0.82, 0.93, 0.97, 0.28)
+			pane.roughness = 0.2
+			mi.material_override = pane
+			continue
 		var m := ShaderMaterial.new()
 		m.shader = CLAY
 		m.set_shader_parameter("albedo", Color.WHITE)
@@ -80,7 +93,7 @@ func _render(out: String) -> void:
 	DirAccess.make_dir_recursive_absolute(out)
 	for i in 10:
 		await process_frame  # let the GLB transforms settle before reading AABBs
-	for band: String in BANDS:
+	for band: String in _bands:
 		for room: String in ROOMS:
 			var c: Vector2 = ROOMS[room]
 			_show_room(room, band, c)
@@ -99,7 +112,9 @@ func _show_room(room: String, band: String, c: Vector2) -> void:
 	for mi: MeshInstance3D in _house.find_children("*", "MeshInstance3D", true, false):
 		var n := String(mi.name)
 		var p := mi.global_transform * mi.get_aabb().get_center()
-		var inside := absf(p.x - c.x) < 2.1 and absf(p.z - c.y) < 2.1
+		## A home dresses its walls, so a piece 0.02 past the party wall must stay with its own room.
+		var reach := 2.1 if _bands == BANDS else 2.0
+		var inside := absf(p.x - c.x) < reach and absf(p.z - c.y) < reach
 		if n.begins_with("room_"):
 			mi.visible = n.begins_with("room_%s__" % room)
 		elif (

@@ -262,6 +262,15 @@ func _test_dollhouse() -> void:
 		for band in ["baby", "child", "teen"]:
 			var path := Dollhouse.texture_path(room, band)
 			_check(ResourceLoader.exists(path), "missing room still " + path)
+	_check(Dollhouse.home_for(30, {"kind": "parents"}) == "teen", "parents' home past 18")
+	_check(Dollhouse.home_for(30, {"kind": "rent"}) == "rental", "rental home")
+	_check(Dollhouse.home_for(30, {"kind": "own", "house": "mansion"}) == "mansion", "bought home")
+	var houses_json := FileAccess.get_file_as_string("res://data/property/houses.json")
+	var houses: Array = JSON.parse_string(houses_json)
+	for home: String in houses.map(func(h: Dictionary) -> String: return h.id) + ["rental"]:
+		for room in Dollhouse.ROOMS:
+			var still := Dollhouse.texture_path(room, home)
+			_check(ResourceLoader.exists(still), "missing home still " + still)
 
 
 func _make_state(age := 15):
