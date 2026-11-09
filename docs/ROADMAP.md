@@ -26,7 +26,8 @@ Rules for every milestone:
 | M7 Teen release candidate | Phone build only: internal-testing AAB, director plays birth to 18. Balance moved to M13. |
 | Personality spectrums (§4.6) | Done (#49): Cautious/Risk-taker and Introvert/Extrovert sliders; cards gate on them and `by_trait` scales outcomes. |
 | M8 Adult life core | Done (#58, #59): lives run past 18. Shop items moved to M11. |
-| M9–M10, M12–M13 | Not started. |
+| M9 Adult home scene | In progress: eight homes, scene follows housing. |
+| M10, M12–M13 | Not started. |
 | M11 Ageing and death | Old age death rule in (§5.3c). Grey hair, wrinkles and late-life cards not started. |
 
 Open with the director:
@@ -138,10 +139,10 @@ Builds:
 - **Exit:** a life plays past 18 into the 30s; buying a house and holding an adult job work in the sim.
 
 ## M9 Adult home scene
-- Own homes: bought houses as dollhouses, a bigger house changes the scene (§10.2), bought items placed in
-  rooms (§6.1, §10.2).
-- Adult people: adult body sizes and shapes, partner moving in (§10.2, §10.7).
-- **Exit:** the director approves captures of an adult home with bought items and a partner.
+- Director's scope (2026-11-09): eight home looks, the rental and each house in `data/property/houses.json`,
+  four rooms each. The scene follows `GameState.housing`; the parents' home keeps the teen rooms.
+- Bought items placed in rooms move to M11. Adult and partner figures move to after M5's clothes and hair.
+- **Exit:** the director approves captures of each home.
 
 ## M10 Relationships and family
 - People tab for adults (§6.3): talk, gift, date, argue.

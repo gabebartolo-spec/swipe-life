@@ -1,7 +1,8 @@
 class_name Dollhouse
 extends ColorRect
-## Childhood home (GDD §10.6): one prerendered clay room at a time. A card's `room` picks the room
-## (default bedroom); the view slides across the house to it. The bedroom changes with age band.
+## The home scene (GDD §10.2, §10.6): one prerendered clay room at a time. A card's `room` picks the
+## room (default bedroom); the view slides across the house to it. At the parents' the bedroom
+## changes with age band; a rental or a bought house shows that home's own rooms.
 
 const ROOMS := {
 	"bedroom": Vector2(0, 0),
@@ -31,14 +32,24 @@ static func band_for(age: int) -> String:
 	return "child" if age <= 12 else "teen"
 
 
+## Which set of room stills to show. The parents' home keeps the teen rooms past 18.
+static func home_for(age: int, housing: Dictionary) -> String:
+	match housing.get("kind", "parents"):
+		"rent":
+			return "rental"
+		"own":
+			return housing.get("house", "rental")
+	return band_for(age)
+
+
 static func texture_path(room_id: String, band_id: String) -> String:
 	return ROOM_DIR.path_join("room_%s_%s.png" % [room_id, band_id])
 
 
-func show_room(age: int, room_id: String = "bedroom") -> void:
+func show_room(age: int, room_id: String = "bedroom", housing: Dictionary = {}) -> void:
 	if not ROOMS.has(room_id):
 		room_id = "bedroom"
-	var new_band := band_for(age)
+	var new_band := home_for(age, housing)
 	if room_id == room and new_band == band:
 		return
 	var tex := load(texture_path(room_id, new_band)) as Texture2D

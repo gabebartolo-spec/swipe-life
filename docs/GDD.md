@@ -203,3 +203,4 @@ None.
 - 2026-11-04: §10.3: approved CC0 asset sources and CC-BY with credits; §6.8 change above. Further answers in DECISIONS.md.
 - 2026-11-09: M8 money placeholders in docs/ADULT_MONEY.md stand until balance (M13).
 - 2026-11-09: Adult life turned on: lives run past 18 to death (§5).
+- 2026-11-09: M9 is the homes only (§10.2): bought items move to M11, adult and partner figures to after M5's clothes and hair.
