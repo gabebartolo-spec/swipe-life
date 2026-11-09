@@ -66,6 +66,28 @@ static func shape_for(age: int, sex: String) -> String:
 	return "%s_%s_skinny" % [band, sex]
 
 
+## Tints for a Figure3D, same choices as make_person.
+static func figure_look(look: Dictionary, age: int) -> Dictionary:
+	var skin := Color(look.skin)
+	var hair := Color(look.hair_colour)
+	if age <= 3:
+		return {
+			"hair": "wisp",
+			"body": [skin],
+			"hair_front": [hair],
+			"onesie": [Color(look.top_colour)],
+			"pacifier": [Color("8fc7e8"), Color("ffffff")],
+		}
+	return {
+		"hair": look.hair,
+		"body": [skin],
+		"hair_back": [hair],
+		"hair_front": [hair],
+		look.top: [Color(look.top_colour), Color("ffffff")],
+		"trousers": [Color(look.bottom_colour)],
+	}
+
+
 static func make_person(look: Dictionary, age: int) -> Person:
 	var p := Person.new()
 	p.shape = shape_for(age, look.sex)

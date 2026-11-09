@@ -26,6 +26,7 @@ func _init() -> void:
 	_test_old_save_traits()
 	_test_finance()
 	_test_adult_sim()
+	_test_figures()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -705,3 +706,31 @@ func _test_adult_sim() -> void:
 	_check(median > 30, "careful lives must get past 30")
 	_check(houses > 0, "no life bought a house")
 	_check(adult_jobs.size() > 10, "only %d jobs held" % adult_jobs.size())
+
+
+## Every shape, cut, clip and room depth map the living figures need is there, and a figure poses.
+func _test_figures() -> void:
+	var dir := Figure3D.DIR
+	var cuts := DirAccess.get_files_at(dir + "/adult_f_skinny/hair")
+	_check(cuts.size() >= 33, "only %d hair cuts" % cuts.size())
+	for shape in ["child", "teen", "adult"]:
+		for sex in ["f", "m"]:
+			var folder := "%s/%s_%s_skinny" % [dir, shape, sex]
+			_check(FileAccess.file_exists(folder + "/body.json"), "no body: " + folder)
+			_check(DirAccess.get_files_at(folder + "/hair").size() == cuts.size(), folder + " hair")
+	_check(FileAccess.file_exists(dir + "/baby/body.json"), "no baby body")
+	var clips := ["idle", "sit", "sit_talk", "text", "crawl", "sit_floor", "walk", "lay_back"]
+	var fig := Figure3D.new()
+	fig.build("adult_f_skinny", {"hair": "bob", "body": [Color.WHITE]})
+	for clip: String in clips:
+		_check(FileAccess.file_exists("%s/clips/%s.json" % [dir, clip]), "no clip: " + clip)
+		fig.play(clip)
+		fig.advance(0.5)
+		_check(fig.get_node("head").position.is_finite(), "clip broke the pose: " + clip)
+	fig.free()
+	var homes := ["baby", "child", "teen", "rental", "small_flat", "fixer_upper"]
+	homes.append_array(["starter_house", "town_house", "family_house", "seaside_villa", "mansion"])
+	for home: String in homes:
+		for room: String in Dollhouse.ROOMS:
+			var path := "%s/depth_%s_%s.png" % [FigureStage.DEPTH_DIR, room, home]
+			_check(ResourceLoader.exists(path), "no depth map: " + path)
