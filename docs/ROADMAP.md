@@ -26,7 +26,7 @@ Rules for every milestone:
 | M7 Teen release candidate | Phone build only: internal-testing AAB, director plays birth to 18. Balance moved to M13. |
 | Personality spectrums (§4.6) | Done (#49): Cautious/Risk-taker and Introvert/Extrovert sliders; cards gate on them and `by_trait` scales outcomes. |
 | M8 Adult life core | Done (#58, #59): lives run past 18. Shop items moved to M11. |
-| M9 Adult home scene | In progress: eight homes, scene follows housing. |
+| M9 Adult home scene | Done: director approved all eight homes (2026-11-09). |
 | M10, M12–M13 | Not started. |
 | M11 Ageing and death | Old age death rule in (§5.3c). Grey hair, wrinkles and late-life cards not started. |
 
