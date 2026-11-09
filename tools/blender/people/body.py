@@ -919,19 +919,17 @@ def pixie():
 
 
 def long_straight():
-    """Long straight, middle part: a smooth crown whose hairline dips at the temples (side-swept curtains), thin
-    panels framing the face that carry on behind the shoulders, one flat sheet down the back; the ends taper and
-    stop at different lengths."""
-    cap()
-    shell(0.47, 2.06, 0.56)
+    """Long straight, middle part: one thin layer on the skin (no rim at the forehead), the hairline falling from a
+    centre part to the temples; thin panels framing the face carry on behind the shoulders, one flat sheet down the
+    back; the ends taper and stop at different lengths."""
+    cap(0.45, 1.76, 0.8)
+    quiff_hair([(0, 2.02), (18, 1.95), (40, 1.8), (62, 1.66), (90, 1.56), (180, 1.5)], 0.05, side=0.85, ease=0.05)
     for s in (-1, 1):
-        # curtains: a thin layer on the skull that lowers the hairline from the middle part to the temples
-        skull((0.3 * s, 2.04, 0.02), (0.34, 0.34, 0.5), lim=lambda ny: 0.06)
-        # straight panels framing the face, thin in x; they pass behind the shoulder
-        long_straight_lock(HF, (0.39 * s, 1.9, 0.0), (0.39 * s, 1.56, 0.0), 0.14, 0.13, (0.55, 1.0, 1.2))
+        long_straight_lock(HF, (0.42 * s, 1.86, 0.0), (0.42 * s, 1.56, 0.0), 0.1, 0.11, (0.55, 1.0, 1.2))
         long_straight_lock(HB, (0.39 * s, 1.68, -0.04), (0.36 * s, 0.96, -0.1), 0.15, 0.1, (0.55, 1.0, 1.2))
-    # one flat sheet down the back, rounded ends
     long_straight_lock(HB, (0, 1.72, -0.2), (0, 0.98, -0.22), 0.3, 0.24, (1.4, 1.0, 0.6))
+
+
 
 
 def high_ponytail():
@@ -1024,29 +1022,36 @@ def side_part():
 
 
 def quiff():
-    """Quiff: short tight sides, the front lifted off the forehead into a swept-up wave."""
+    """Quiff: short tight sides, the front lifted off the forehead into one wave that leans forward and sweeps to the
+    side, its height falling away quickly towards the crown."""
     cap(0.46, 1.8, 0.68)
     quiff_hair(
-        [(0, 1.99), (30, 1.97), (55, 1.88), (80, 1.76), (110, 1.68), (180, 1.6)],
-        0.045,
-        [([(-0.24, 1.98, 0.4), (-0.02, 2.07, 0.3), (0.2, 2.11, 0.12)], [0.16, 0.22, 0.12], [0.2, 0.21, 0.19], 1.2)],
-        up=0.5,
+        [(0, 1.96), (30, 1.94), (55, 1.86), (80, 1.76), (110, 1.68), (180, 1.6)],
+        0.035,
+        [([(-0.3, 1.97, 0.38), (-0.04, 2.02, 0.42), (0.24, 2.04, 0.3), (0.3, 2.06, 0.08)], [0.14, 0.3, 0.26, 0.08], [0.15, 0.17, 0.16, 0.12], 1.6)],
+        side=0.35,
+        up=0.15,
     )
+
+
 
 
 def pompadour():
-    """Pompadour: one tall smooth roll rising off a high hairline, swept back; short slick sides."""
+    """Pompadour: one tall roll the width of the forehead, leaning forward over the hairline and combed straight back
+    from it in a falling ridge; sides short and slick."""
     cap(0.46, 1.8, 0.68)
     quiff_hair(
-        [(0, 2.03), (20, 2.0), (40, 1.93), (62, 1.85), (85, 1.74), (110, 1.68), (180, 1.6)],
-        0.04,
+        [(0, 1.98), (25, 1.97), (45, 1.9), (65, 1.82), (85, 1.74), (110, 1.68), (180, 1.6)],
+        0.03,
         [
-            ([(-0.32, 1.98, 0.38), (-0.15, 2.07, 0.33), (0.15, 2.07, 0.33), (0.32, 1.98, 0.38)], [0.12, 0.17, 0.17, 0.12], [0.24, 0.28, 0.28, 0.24], 1.1),
-            ([(0, 2.08, 0.2), (0, 2.1, -0.1), (0, 2.02, -0.32)], [0.12, 0.11, 0.05], [0.44, 0.44, 0.38], 1.1),
+            ([(-0.36, 1.96, 0.32), (-0.16, 2.02, 0.4), (0.16, 2.02, 0.4), (0.36, 1.96, 0.32)], [0.09, 0.2, 0.2, 0.09], [0.17, 0.2, 0.2, 0.17], 1.6),
+            ([(0, 2.1, 0.22), (0, 2.13, -0.08), (0, 2.03, -0.32)], [0.09, 0.06, 0.02], [0.36, 0.38, 0.34], 1.1),
         ],
-        side=0.4,
-        up=0.8,
+        side=0.3,
+        up=0.2,
     )
+
+
 
 
 def slick_back():
@@ -1072,18 +1077,21 @@ def mohawk():
 
 
 def undercut():
-    """Undercut: sides clipped close to the skull, a long top swept over to one side."""
-    cap(0.46, 1.8, 0.68)
+    """Undercut: bare skin at the sides and back up to a high line, a long top swept over to one side that overhangs
+    that line, so a step and a strip of skin show all round."""
+    cap(0.3, 1.98, 0.5)
     quiff_hair(
-        [(0, 1.97), (30, 1.97), (55, 1.97), (85, 1.95), (110, 1.92), (180, 1.87)],
-        0.02,
-        [([(-0.2, 2.0, 0.3), (0.0, 2.1, 0.1), (0.2, 2.0, -0.15)], [0.16, 0.2, 0.14], [0.3, 0.32, 0.28], 1.2)],
-        side=0.5,
-        skew=0.45,
-        ease=0.06,
-        up=0.6,
-        low=([(0, 1.93), (50, 1.86), (85, 1.8), (180, 1.72)], 0.012),
+        [(0, 1.95), (30, 1.98), (55, 2.0), (85, 2.0), (110, 1.97), (180, 1.84)],
+        0.06,
+        [([(-0.3, 1.97, 0.3), (-0.02, 2.08, 0.22), (0.3, 2.0, 0.0)], [0.07, 0.12, 0.07], [0.2, 0.26, 0.2], 1.1)],
+        side=0.9,
+        skew=0.35,
+        ease=0.015,
+        up=0.25,
+        low=([(0, 1.93), (50, 1.87), (85, 1.72), (180, 1.56)], 0.008),
     )
+
+
 # --- quiff block end ---
 
 
@@ -1221,20 +1229,27 @@ def long_wavy():
 
 
 def long_curly():
-    """Long curly: a big curly mane, curls over the crown with a fringe above the brows, one mass to mid back."""
+    """Long curly: a big mane of curls of mixed size scattered at random (no rows), fringe above the brows, one uneven
+    mass to mid back, wider than the shoulders."""
+    from random import Random
+
+    rnd = Random(11)
     cap(0.5, 1.8, 0.95)
     skull((0, 2.12, 0.0), (0.5, 0.32, 0.5), lim=lambda ny: 0.04)
     side_patch()
-    long_straight_curls(0.1, 1.99, 1.5, 0.06)
+    long_straight_curls(0.095, 1.99, 1.5, 0.05, 1.15)
     back((0, 1.66, -0.16), 0.48, (1.08, 0.62, 0.85))
-    back((0, 1.32, -0.24), 0.42, (1.12, 1.05, 0.55))
-    for s in (-1, 1):
-        for i, y in enumerate((1.6, 1.48, 1.36, 1.24, 1.12, 1.0)):
-            x = (0.4 if y > 1.4 else 0.46) + 0.03 * (i % 2)
-            back((x * s, y, -0.16), 0.115)
-            back(((x - 0.1) * s, y - 0.06, -0.06), 0.11)
-    for x in (-0.4, -0.2, 0, 0.2, 0.4):
-        back((x, 0.96 - 0.03 * (abs(x) > 0.3), -0.24), 0.125)
+    back((0, 1.32, -0.24), 0.44, (1.2, 1.05, 0.55))
+    curls = []
+    for _ in range(170):
+        y = rnd.uniform(0.98, 1.66)
+        w = 0.5 + 0.12 * min((1.66 - y) / 0.4, 1.0)
+        if y < 0.98 + 0.14 * rnd.random():
+            continue
+        curls.append(((rnd.uniform(-w, w), y, rnd.uniform(-0.3, -0.08)), rnd.uniform(0.07, 0.14)))
+    cloud(HB, curls)
+
+
 
 
 def dreadlocks():
@@ -1267,31 +1282,43 @@ def dreadlocks():
 
 
 def cornrows():
-    """Cornrows: seven slim rows running straight back from the hairline, standing proud of a thin skull-close base
-    that starts at the hairline (the grooves between the rows show the scalp-tight base)."""
-    import math
+    """Cornrows: seven slim plaited rows lying tight on the skull from the hairline over the crown to the nape, each
+    following the head's own surface, with a skin-thin base between them so the grooves show."""
+    from math import cos, radians, sin, sqrt
 
-    cap(0.47, 1.8, 0.86)  # behind: kept under the rows so they make the top outline
-    shell(0.42, 1.8, 0.88, 1.12)  # thin skin over the skull, crossing the head surface at the hairline
+    cap(0.44, 1.76, 0.86)
+    crop_cover(lambda ny, p: 0.012, lambda p, th: 1.9 - 0.2 * min(th, 1.57), w=0.02)
+    hf, hb = [], []
     for x in (-0.36, -0.24, -0.12, 0.0, 0.12, 0.24, 0.36):
-        k = math.sqrt(1 - (x / 0.5) ** 2)  # the row's arc over the skull narrows towards the sides
-        pts = [(x, 1.8 + 0.4 * k * math.sin(t), 0.02 + 0.45 * k * math.cos(t))
-               for t in (math.radians(10 + i * 20) for i in range(9))]  # hairline over the top to the crown back
-        for p, q in zip(pts, pts[1:]):
-            chain(HF, p, q, 0.045)
+        k = sqrt(1 - (x / HEAD_R[0]) ** 2)
+        for i in range(int((215 - 26 - 40 * abs(x)) / 3.2)):
+            t = 26 + 40 * abs(x) + 3.2 * i  # the rows start at a hairline that follows the forehead to the temples
+            a = radians(t)
+            y, z = HEAD_C[1] + HEAD_R[1] * k * sin(a), HEAD_R[2] * k * cos(a)
+            r = 0.05 if (i // 3) % 2 else 0.038  # the plait: fat and thin stretches in turn
+            (hf if t < 120 else hb).append(((x, y + 0.012, z), r))
+    cloud(HF, hf)
+    cloud(HB, hb)
+
+
 
 
 def mullet():
-    """Mullet: short textured top and short sides above the ears; the long back stays hidden behind the head down to
-    the jaw and only shows below it, on both sides of the neck down to the shoulders (behind the body)."""
-    cap(0.49, 1.86, 0.84)
-    front((0, 1.95, -0.02), 0.5, (1.0, 0.66, 1.0))  # short all over; the head occluder trims it above ears and brow
-    for x, z in ((-0.2, 0.18), (0.0, 0.24), (0.2, 0.18), (-0.12, -0.08), (0.12, -0.08)):
-        front((x, 2.2, z), 0.1, (1.0, 0.6, 1.0))  # textured top, sunk into the cap (no lip)
+    """Mullet: short textured top with a broken fringe, tight sides; the long back flares out past the neck on both
+    sides and reaches the shoulders, wide enough that it shows from the front."""
+    cap(0.45, 1.78, 0.75)
+    crop_cover(
+        lambda ny, p: 0.035 + 0.05 * ny,
+        lambda p, th: 1.95 + crop_tips(p.x, 0.17, 0.05) * (1.0 - _step(0.7, 1.1, th)) - 0.08 * _step(0.7, 1.57, th),
+        lumps=(((-0.22, 2.1, 0.2), 0.14, 0.05), ((0.05, 2.14, 0.2), 0.14, 0.06), ((0.24, 2.08, 0.12), 0.14, 0.05), ((0.0, 2.1, -0.15), 0.16, 0.05)),
+    )
     for s in (-1, 1):
-        chain(HB, (0.24 * s, 1.42, -0.24), (0.34 * s, 1.2, -0.16), 0.09)  # inside the head outline above the jaw
-        back((0.35 * s, 1.16, -0.14), 0.09, (1.2, 0.8, 1.0))  # the flick below the jaw
-    chain(HB, (0, 1.74, -0.36), (0, 1.22, -0.3), 0.24)
+        chain(HB, (0.2 * s, 1.36, -0.22), (0.34 * s, 1.12, -0.18), 0.11)
+        chain(HB, (0.34 * s, 1.12, -0.18), (0.38 * s, 1.02, -0.16), 0.07)
+        chain(HB, (0.12 * s, 1.4, -0.28), (0.2 * s, 1.0, -0.24), 0.12)
+    chain(HB, (0, 1.74, -0.36), (0, 1.02, -0.3), 0.24)
+
+
 
 
 def shag():
