@@ -11,18 +11,23 @@ const ROOMS := {
 	"kitchen": Vector2(1, 1)
 }
 const PAN_TIME := 0.4
+const FIGURE_SCALE := 0.00082  # of the scene height, per sprite pixel
+const FIGURE_GAP := 0.24  # of the scene width, between figures
 const ROOM_DIR := "res://assets/house/rooms"
 
 var room := ""
 var band := ""
 var _view: TextureRect
 var _tween: Tween
+var _figures := Node2D.new()
+var _figures_key := ""
 
 
 func _ready() -> void:
 	clip_contents = true
 	resized.connect(_fit_views)
 	_view = _make_view()
+	add_child(_figures)
 
 
 ## Age band of the bedroom (director 2026-11-03): baby 0–3, child 4–12, teen 13–17.
@@ -59,6 +64,30 @@ func show_room(age: int, room_id: String = "bedroom", housing: Dictionary = {}) 
 		_pan_to(tex, ROOMS[room_id] - ROOMS[room])
 	room = room_id
 	band = new_band
+
+
+## The player, and the partner beside them, standing in the room (GDD §10.2). Partners are any
+## sex, whatever the player's; one gets a random look the first time they appear.
+func show_people(age: int, look: Dictionary, partner: Dictionary) -> void:
+	if look.is_empty():
+		return
+	if not partner.is_empty() and not partner.has("look"):
+		partner["look"] = Looks.random()
+	var key := "%s|%s|%s" % [Looks.shape_for(age, look.sex), look, partner.get("look")]
+	if key == _figures_key:
+		return
+	_figures_key = key
+	for f in _figures.get_children():
+		f.queue_free()
+	var people: Array[Person] = [Looks.make_person(look, age)]
+	if not partner.is_empty():
+		people.append(Looks.make_person(partner.look, age))
+	var gap := FIGURE_GAP * size.x
+	for i in people.size():
+		people[i].scale = Vector2.ONE * size.y * FIGURE_SCALE
+		var x := size.x / 2 + gap * (i - (people.size() - 1) / 2.0)
+		people[i].position = Vector2(x, size.y * 0.95)
+		_figures.add_child(people[i])
 
 
 ## Slides the old room out and the new one in along the iso direction between them on the 2x2

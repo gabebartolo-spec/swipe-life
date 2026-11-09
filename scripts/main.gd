@@ -75,6 +75,8 @@ func _ready() -> void:
 	new_life_button.hide()
 	$Card.add_child(new_life_button)
 
+	if GameState.look.is_empty():
+		await _pick_look()
 	await get_tree().process_frame
 	var area: Vector2 = $Card.size
 	swipe_card.position = Vector2(MARGIN, MARGIN)
@@ -84,6 +86,18 @@ func _ready() -> void:
 	new_life_button.position = year_button.position
 	message.offset_bottom = -150
 	_deal()
+
+
+## Autoplay, debug starts and old saves get a random look; a real new life asks the player.
+func _pick_look() -> void:
+	if autoplay or GameState.age > 0:
+		GameState.look = Looks.random()
+	else:
+		var creator := CharacterCreator.new()
+		get_tree().root.add_child.call_deferred(creator)
+		GameState.look = await creator.done
+		creator.queue_free()
+	SaveSystem.save()
 
 
 func _new_life() -> void:
@@ -113,6 +127,7 @@ func _update_age(season := true) -> void:
 	$Dollhouse.show_room(
 		GameState.age, $Dollhouse.room if $Dollhouse.room else "bedroom", GameState.housing
 	)
+	$Dollhouse.show_people(GameState.age, GameState.look, GameState.partner)
 	strip.refresh()
 
 
@@ -233,4 +248,5 @@ func _restart() -> void:
 	new_life_button.hide()
 	message.add_theme_font_size_override("font_size", 34)
 	_new_life()
+	await _pick_look()
 	_deal()
