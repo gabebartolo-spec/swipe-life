@@ -17,7 +17,7 @@ import bpy
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_clay_room as R  # noqa: E402
 
-box, ball, tube, cloth = R.box, R.ball, R.tube, R.cloth
+box, ball, tube, cloth, pillow = R.box, R.ball, R.tube, R.cloth, R.pillow
 WOOD, DARKWOOD, CREAM = "d9935a", "b8743f", "f3ead8"
 SPACING = 3.5
 ITEMS = {}  # id -> origin x
@@ -75,12 +75,29 @@ def sofa():
     box(n("arm_r"), p(0.88, 0.48, 0.02), (0.22, 0.52, 0.85), c, bevel=0.1)
     box(n("seat_l"), p(-0.4, 0.46, 0.08), (0.78, 0.18, 0.62), "6fa09a", bevel=0.07)
     box(n("seat_r"), p(0.4, 0.46, 0.08), (0.78, 0.18, 0.62), "6fa09a", bevel=0.07)
-    ball(n("cushion"), p(0.55, 0.68, 0.0), 0.22, "e0b45a", scale=(1, 1, 0.45), lump=0.02)
+    pillow(n("cushion"), p(0.55, 0.72, -0.12), (0.42, 0.4, 0.16), "e0b45a")
 
 
 def tv():
     at("tv")
-    box(n("stand"), p(0, 0.25, 0), (1.2, 0.5, 0.42), WOOD, bevel=0.05)
+    # open media unit: frame, a cubby with a docked Switch, a cubby of DVD cases
+    t = dict(bevel=0.012, subd=1, lump=0.002)
+    box(n("back"), p(0, 0.25, -0.195), (1.2, 0.5, 0.03), DARKWOOD, **t)
+    box(n("top"), p(0, 0.475, 0), (1.2, 0.05, 0.42), WOOD, bevel=0.025, subd=1, lump=0.004)
+    box(n("base"), p(0, 0.025, 0), (1.2, 0.05, 0.42), WOOD, bevel=0.025, subd=1, lump=0.004)
+    for i, dx in enumerate((-0.575, 0.575)):
+        box(n(f"side{i}"), p(dx, 0.25, 0), (0.05, 0.5, 0.42), WOOD, bevel=0.02, subd=1, lump=0.004)
+    box(n("divider"), p(0.15, 0.25, 0), (0.04, 0.4, 0.4), WOOD, **t)
+    box(n("dock_back"), p(-0.2, 0.15, -0.1), (0.32, 0.2, 0.04), "e8e8ea", **t)
+    box(n("dock_base"), p(-0.2, 0.08, -0.02), (0.34, 0.06, 0.16), "e8e8ea", **t)
+    box(n("switch"), p(-0.2, 0.185, -0.06), (0.24, 0.14, 0.03), "2b2f36", **t)
+    box(n("joycon_l"), p(-0.34, 0.185, -0.06), (0.04, 0.14, 0.03), "e8474c", **t)
+    box(n("joycon_r"), p(-0.06, 0.185, -0.06), (0.04, 0.14, 0.03), "3aa6e8", **t)
+    box(n("switch_screen"), p(-0.2, 0.19, -0.04), (0.2, 0.11, 0.005), "55606a", bevel=0.003, subd=0, lump=0)
+    cases = ("e8474c", "f3ead8", "3aa6e8", "f0c24a", "3c3f46", "6fb36f", "e8e8ea", "9b6fd0")
+    for i, c in enumerate(cases):
+        box(n(f"dvd{i}"), p(0.2 + i * 0.044, 0.155, 0.02), (0.036, 0.19, 0.14), c, **t)
+    box(n("remote"), p(-0.4, 0.51, 0.1), (0.05, 0.025, 0.16), "3a3d42", **t)
     box(n("neck"), p(0, 0.55, 0), (0.18, 0.1, 0.1), "3a3d42", bevel=0.02)
     box(n("screen"), p(0, 0.95, 0), (1.05, 0.62, 0.07), "3a3d42", bevel=0.03)
     box(n("glass"), p(0, 0.95, 0.04), (0.94, 0.52, 0.02), "55606a", bevel=0.01, subd=0, lump=0)
@@ -105,7 +122,8 @@ def mattress():
     box(n("frame"), p(0, 0.12, 0), (1.5, 0.22, 2.0), DARKWOOD, bevel=0.06)
     box(n("mat"), p(0, 0.34, 0), (1.4, 0.26, 1.9), CREAM, bevel=0.1)
     cloth(n("duvet"), p(0, 0.57, 0.28), (1.62, 0.1, 1.5), "9fb6d2", folds=0.025, droop=0.32)
-    ball(n("pillow"), p(0, 0.62, -0.7), 0.3, "fbf6ec", scale=(1.4, 0.4, 0.8), lump=0.02)
+    for i, dx in enumerate((-0.32, 0.32)):
+        pillow(n(f"pillow{i}"), p(dx, 0.55, -0.7), (0.6, 0.2, 0.42), "fbf6ec", seed=i)
 
 
 def desk():
