@@ -28,6 +28,24 @@ const STAY_MIN := 4.0
 const STAY_MAX := 9.0
 const PERSONAL_SPACE := 0.75  # metres between where two people stop
 const SEAT_STEP := 0.6  # metres between seats along a bed or sofa
+const ITEM_MODELS := "res://assets/house/items/items.glb"
+## Floor room an item needs, in metres from its middle. A rug is flat, so people walk over it.
+const ITEM_SPACE := {
+	"plant": 0.3,
+	"bookshelf": 0.55,
+	"rug": 0.6,
+	"sofa": 0.95,
+	"tv": 0.6,
+	"piano": 0.8,
+	"mattress": 1.0,
+	"desk": 0.7,
+	"wardrobe": 0.6,
+	"espresso": 0.3,
+	"cooker": 0.5,
+	"spa_bath": 0.9,
+}
+const FLAT_ITEMS := ["rug"]
+const ITEM_GRID := 0.25
 
 var _viewport := SubViewport.new()
 var _world := Node3D.new()
@@ -37,6 +55,9 @@ var _depth_tex: Texture2D
 var _centre := Vector2.ZERO
 var _room := ""
 var _actors: Array[Dictionary] = []
+var _item_list: Array = []  # [{id, room}] everything bought; this room's are shown
+var _item_nodes: Array[Node3D] = []
+var _item_spots: Array[Vector3] = []  # x, z, radius of the solid items standing in this room
 
 
 func _ready() -> void:
@@ -77,9 +98,86 @@ func set_room(room: String, home: String) -> void:
 	_cam.transform = Transform3D(BASIS_CAM, Vector3(_centre.x, 1.0, _centre.y) + BASIS_CAM.z * 20.0)
 	_depth_tex = load(DEPTH_DIR.path_join("depth_%s_%s.png" % [room, home]))
 	_depth = _depth_tex.get_image()
+	_rebuild_items()
 	for a in _actors:
 		_apply_depth(a.fig)
 		_place(a)
+
+
+## Bought items, [{id, room}]. The ones for this room stand on its free floor, the first to the
+## back of the room, where nobody needs the space.
+func set_items(items: Array) -> void:
+	if items == _item_list:
+		return
+	_item_list = items.duplicate(true)
+	_rebuild_items()
+	for a in _actors:
+		_place(a)
+
+
+func _rebuild_items() -> void:
+	for n in _item_nodes:
+		n.queue_free()
+	_item_nodes.clear()
+	_item_spots.clear()
+	if _depth == null:
+		return
+	var scene: Node = (load(ITEM_MODELS) as PackedScene).instantiate()
+	var mine := _item_list.filter(func(it): return it.room == _room)
+	mine.sort_custom(func(a, b): return ITEM_SPACE.get(a.id, 0.5) > ITEM_SPACE.get(b.id, 0.5))
+	for it: Dictionary in mine:
+		var mi := scene.find_child(it.id, true, false) as MeshInstance3D
+		var at := _item_spot(it.id)
+		if mi == null or at == Vector2.INF:
+			continue
+		var copy := MeshInstance3D.new()
+		copy.mesh = mi.mesh
+		copy.material_override = _item_material()
+		_world.add_child(copy)
+		copy.position = Vector3(at.x, FLOOR_Y, at.y)
+		copy.rotation.y = PI / 4.0  # front toward the viewer
+		_item_nodes.append(copy)
+		if it.id not in FLAT_ITEMS:
+			_item_spots.append(Vector3(at.x, at.y, ITEM_SPACE.get(it.id, 0.5)))
+	scene.free()
+
+
+func _item_material() -> ShaderMaterial:
+	var m := ShaderMaterial.new()
+	m.shader = preload("res://shaders/figure_clay.gdshader")
+	m.set_shader_parameter("albedo", Color.WHITE)
+	m.set_shader_parameter("use_vertex_color", true)
+	m.set_shader_parameter("contact_ao", 0.0)
+	m.set_shader_parameter("boil_fps", 0.0)
+	m.set_shader_parameter("lump", 0.0)
+	m.set_shader_parameter("room_depth", _depth_tex)
+	m.set_shader_parameter("room_origin", Vector3(_centre.x, 1.0, _centre.y))
+	m.set_shader_parameter("room_axis", BASIS_CAM.z)
+	m.set_shader_parameter("depth_span", DEPTH_SPAN)
+	return m
+
+
+## The free floor nearest the back wall that has room for this item; Vector2.INF if none.
+func _item_spot(id: String) -> Vector2:
+	var space: float = ITEM_SPACE.get(id, 0.5)
+	var best := Vector2.INF
+	var best_rank := INF
+	var steps := int(3.4 / ITEM_GRID)
+	for i in steps + 1:
+		for j in steps + 1:
+			var p := _centre + Vector2(-1.7 + i * ITEM_GRID, -1.7 + j * ITEM_GRID)
+			var rank := p.x + p.y
+			if rank >= best_rank or not is_free(p, space * 0.7):
+				continue
+			var clear := true
+			for s in _item_spots:
+				if p.distance_to(Vector2(s.x, s.y)) < s.z + space * 0.8:
+					clear = false
+					break
+			if clear:
+				best = p
+				best_rank = rank
+	return best
 
 
 ## people: [{shape, look (Figure3D tints), age}]. Replaces whoever was here.
@@ -298,6 +396,9 @@ func _line_free(a: Vector2, b: Vector2) -> bool:
 func is_free(p: Vector2, clearance := CLEARANCE) -> bool:
 	if absf(p.x - _centre.x) > 1.85 or absf(p.y - _centre.y) > 1.85:
 		return false
+	for s in _item_spots:
+		if p.distance_to(Vector2(s.x, s.y)) < s.z:
+			return false
 	for off: Vector2 in [
 		Vector2.ZERO,
 		Vector2(clearance, 0),

@@ -765,7 +765,7 @@ func _test_items() -> void:
 	_check(state.stats.happiness > before, "sofa effects not applied")
 	_check(shop.buy(state, sofa) == "", "sofa bought twice")
 	_check(not shop.available(state).has(sofa), "owned sofa still on sale")
-	_check(shop.items_for(state) == [{"label": sofa.label, "room": "living"}], "item not in room")
+	_check(shop.items_for(state) == [{"id": "sofa", "room": "living"}], "item not in room")
 	var copy := GameStateScript.new()
 	copy.new_life()
 	copy.from_dict(JSON.parse_string(JSON.stringify(state.to_dict())))
