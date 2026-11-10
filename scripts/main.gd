@@ -9,6 +9,7 @@ const RESULT_TIME := 1.4
 var deck: Deck
 var careers := CareerDB.new()
 var finance := FinanceDB.new()
+var shop := Items.new()
 var notices := []  # lines for this year's menu headline
 var adult_life := CardDB.ADULT_LIFE
 var menu: YearMenu
@@ -39,8 +40,12 @@ func _ready() -> void:
 	adb.load_dir()
 	for e in adb.errors:
 		push_error(e)
-	menu = YearMenu.new(adb, careers, finance)
+	shop.load_all()
+	for e in shop.errors:
+		push_error(e)
+	menu = YearMenu.new(adb, careers, finance, shop)
 	menu.acted.connect(strip.refresh)
+	menu.acted.connect(_show_items)
 
 	strip.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 10)
 	$StatStrip.add_child(strip)
@@ -128,7 +133,12 @@ func _update_age(season := true) -> void:
 		GameState.age, $Dollhouse.room if $Dollhouse.room else "bedroom", GameState.housing
 	)
 	$Dollhouse.show_people(GameState.age, GameState.look, GameState.partner, GameState.children)
+	_show_items()
 	strip.refresh()
+
+
+func _show_items() -> void:
+	$Dollhouse.show_items(shop.items_for(GameState))
 
 
 func _deal() -> void:
@@ -144,6 +154,7 @@ func _deal() -> void:
 		_deal()
 		return
 	$Dollhouse.show_room(GameState.age, c.get("room", "bedroom"), GameState.housing)
+	_show_items()
 	swipe_card.show()
 	swipe_card.position = Vector2(MARGIN, MARGIN)
 	swipe_card.show_card(c, GameState.super_like_available)

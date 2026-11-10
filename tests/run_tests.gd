@@ -28,6 +28,7 @@ func _init() -> void:
 	_test_adult_sim()
 	_test_figures()
 	_test_family()
+	_test_items()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -741,6 +742,40 @@ func _test_adult_sim() -> void:
 	_check(median > 30, "careful lives must get past 30")
 	_check(houses > 0, "no life bought a house")
 	_check(adult_jobs.size() > 10, "only %d jobs held" % adult_jobs.size())
+
+
+## Shop items load, sell once, charge and apply effects, show in their room and survive a save.
+func _test_items() -> void:
+	var shop := Items.new()
+	shop.load_all()
+	for e in shop.errors:
+		printerr(e)
+	_check(shop.errors.is_empty() and shop.items.size() >= 10, "items.json invalid")
+	var state := GameStateScript.new()
+	state.new_life()
+	state.age = 30
+	state.stats.money = 10000
+	var sofa := shop.get_item("sofa")
+	_check(shop.available(state).has(sofa), "sofa not on sale")
+	var before: int = state.stats.happiness
+	_check(shop.buy(state, sofa) != "", "sofa not bought")
+	_check(state.stats.money == 10000 - int(sofa.price), "sofa price not charged")
+	_check(state.stats.happiness > before, "sofa effects not applied")
+	_check(shop.buy(state, sofa) == "", "sofa bought twice")
+	_check(not shop.available(state).has(sofa), "owned sofa still on sale")
+	_check(shop.items_for(state) == [{"label": sofa.label, "room": "living"}], "item not in room")
+	var copy := GameStateScript.new()
+	copy.new_life()
+	copy.from_dict(JSON.parse_string(JSON.stringify(state.to_dict())))
+	_check(copy.items == ["sofa"], "items lost in save")
+	state.free()
+	copy.free()
+	var poor := GameStateScript.new()
+	poor.new_life()
+	poor.age = 30
+	poor.stats.money = 5
+	_check(shop.buy(poor, sofa) == "", "bought without money")
+	poor.free()
 
 
 ## Every shape, cut, clip and room depth map the living figures need is there, and a figure poses.

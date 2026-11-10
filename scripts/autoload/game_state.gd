@@ -38,6 +38,7 @@ var invest_bold := false
 var debt_years := 0  # years in a row ending with a loan; repossession follows (Finance)
 var fresh_start_until := 0
 var course := {}  # the course in progress; see Finance.enrol
+var items := []  # ids of bought shop items; see Items
 
 
 func _ready() -> void:
@@ -63,6 +64,7 @@ func new_life() -> void:
 	debt_years = 0
 	fresh_start_until = 0
 	course = {}
+	items = []
 	stats = {}
 	for s in STATS:
 		stats[s] = 0 if s in UNBOUNDED_STATS or s == "stress" else 50
@@ -96,6 +98,7 @@ func to_dict() -> Dictionary:
 		"debt_years": debt_years,
 		"fresh_start_until": fresh_start_until,
 		"course": course,
+		"items": items,
 	}
 
 
@@ -118,6 +121,7 @@ func from_dict(d: Dictionary) -> void:
 	debt_years = int(d.get("debt_years", 0))
 	fresh_start_until = int(d.get("fresh_start_until", 0))
 	course = d.get("course", {})
+	items = d.get("items", [])
 	for entry in careers.values():  # JSON reads numbers back as floats
 		for k in ["rank", "performance", "years", "meter"]:
 			entry[k] = int(entry[k])

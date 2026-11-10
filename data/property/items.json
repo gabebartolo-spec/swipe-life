@@ -1,0 +1,14 @@
+[
+	{"id": "plant", "label": "Pot plant", "room": "living", "price": 40, "min_age": 18, "effects": {"happiness": 1, "stress": -1}},
+	{"id": "bookshelf", "label": "Bookshelf", "room": "living", "price": 250, "min_age": 18, "effects": {"smarts": 2, "happiness": 1}},
+	{"id": "rug", "label": "Soft rug", "room": "living", "price": 400, "min_age": 18, "effects": {"happiness": 2, "stress": -1}},
+	{"id": "sofa", "label": "Good sofa", "room": "living", "price": 1500, "min_age": 18, "effects": {"happiness": 3, "stress": -2}},
+	{"id": "tv", "label": "Big telly", "room": "living", "price": 1200, "min_age": 18, "effects": {"happiness": 4, "health": -1}},
+	{"id": "piano", "label": "Piano", "room": "living", "price": 6000, "min_age": 18, "effects": {"happiness": 4, "smarts": 3, "stress": -3}},
+	{"id": "mattress", "label": "Proper mattress", "room": "bedroom", "price": 900, "min_age": 18, "effects": {"health": 3, "stress": -3}},
+	{"id": "desk", "label": "Standing desk", "room": "bedroom", "price": 700, "min_age": 18, "effects": {"smarts": 2, "health": 1}},
+	{"id": "wardrobe", "label": "Wardrobe of nice things", "room": "bedroom", "price": 2500, "min_age": 18, "effects": {"looks": 3, "happiness": 1}},
+	{"id": "espresso", "label": "Espresso machine", "room": "kitchen", "price": 600, "min_age": 18, "effects": {"happiness": 2, "stress": 1}},
+	{"id": "cooker", "label": "Chef's cooker", "room": "kitchen", "price": 4500, "min_age": 18, "effects": {"health": 3, "happiness": 3}},
+	{"id": "spa_bath", "label": "Spa bath", "room": "bathroom", "price": 5000, "min_age": 18, "effects": {"stress": -6, "happiness": 3, "looks": 1}}
+]
