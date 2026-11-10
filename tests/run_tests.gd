@@ -30,6 +30,7 @@ func _init() -> void:
 	_test_family()
 	_test_items()
 	_test_legacy()
+	_test_ribbons()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -809,6 +810,32 @@ func _test_legacy() -> void:
 	_check(Legacy.continue_as_heir(none) == "", "continued without an heir")
 	s.free()
 	none.free()
+
+
+## Ribbons load, match the life that ended, and the profile only reports new ones.
+func _test_ribbons() -> void:
+	var rb := Ribbons.new()
+	rb.load_all()
+	for e in rb.errors:
+		printerr(e)
+	_check(rb.errors.is_empty() and rb.ribbons.size() >= 10, "ribbons.json invalid")
+	var s := GameStateScript.new()
+	s.new_life()
+	s.age = 82
+	s.stats.money = 2000000
+	s.partner = {"name": "Sam"}
+	var ids: Array = rb.earned(s).map(func(r): return r.id)
+	_check(
+		"long_life" in ids and "rich" in ids and "partnered" in ids, "ribbons missed: %s" % [ids]
+	)
+	_check("gone_young" not in ids and "dynasty" not in ids, "ribbons given wrongly: %s" % [ids])
+	var path := "user://test_profile.json"
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	_check(rb.record(s, path).size() == ids.size(), "first life should report every ribbon")
+	_check(rb.record(s, path).is_empty(), "second life reported old ribbons")
+	_check(Ribbons.load_profile(path).lives == 2, "lives not counted")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	s.free()
 
 
 ## Every shape, cut, clip and room depth map the living figures need is there, and a figure poses.

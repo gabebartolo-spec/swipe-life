@@ -10,6 +10,7 @@ var deck: Deck
 var careers := CareerDB.new()
 var finance := FinanceDB.new()
 var shop := Items.new()
+var ribbons := Ribbons.new()
 var notices := []  # lines for this year's menu headline
 var adult_life := CardDB.ADULT_LIFE
 var menu: YearMenu
@@ -40,6 +41,9 @@ func _ready() -> void:
 	var adb := ActionDB.new()
 	adb.load_dir()
 	for e in adb.errors:
+		push_error(e)
+	ribbons.load_all()
+	for e in ribbons.errors:
 		push_error(e)
 	shop.load_all()
 	for e in shop.errors:
@@ -253,6 +257,9 @@ func _end(headline: String) -> void:
 			ills.append(id)
 	if not ills.is_empty():
 		text += "\nLiving with " + " and ".join(ills)
+	var fresh := ribbons.record(GameState)
+	if not fresh.is_empty():
+		text += "\nRibbons: " + ", ".join(fresh.map(func(r): return r.label))
 	message.add_theme_font_size_override("font_size", 28)
 	message.text = text
 	_update_age(false)
