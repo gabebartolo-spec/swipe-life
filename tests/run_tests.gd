@@ -29,6 +29,7 @@ func _init() -> void:
 	_test_figures()
 	_test_family()
 	_test_items()
+	_test_legacy()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -776,6 +777,38 @@ func _test_items() -> void:
 	poor.stats.money = 5
 	_check(shop.buy(poor, sofa) == "", "bought without money")
 	poor.free()
+
+
+## Legacy (GDD §9.3): the oldest grown-up child inherits the estate less tax, the house and items.
+func _test_legacy() -> void:
+	var s := GameStateScript.new()
+	s.new_life()
+	s.age = 70
+	s.stats.money = 100000
+	s.stats.looks = 90
+	s.items = ["sofa"]
+	s.partner = {"name": "Sam", "affinity": 70}
+	s.housing = {"kind": "own", "house": "small_flat", "label": "Small flat", "value": 80000}
+	s.children = [
+		{"name": "Kid", "born_at": 45, "affinity": 50, "look": {"sex": "f"}},
+		{"name": "Elder", "born_at": 40, "affinity": 50, "look": {"sex": "m"}},
+		{"name": "Baby", "born_at": 65, "affinity": 50, "look": {"sex": "f"}},
+	]
+	_check(Legacy.heir(s).name == "Elder", "heir is not the oldest grown-up child")
+	_check(Legacy.estate(s) == 60000, "estate tax wrong: %d" % Legacy.estate(s))
+	_check(Legacy.continue_as_heir(s) == "Elder", "did not continue as Elder")
+	_check(s.age == 30 and s.stats.money == 60000, "heir age or money wrong")
+	_check(s.stats.looks == 70, "looks not pulled halfway: %d" % s.stats.looks)
+	_check(s.housing.kind == "own" and s.items == ["sofa"], "house or items not inherited")
+	_check(s.siblings.size() == 2 and s.children.is_empty(), "siblings not carried")
+	_check(s.parents_alive and s.flags.generation == 2, "family or generation wrong")
+	var none := GameStateScript.new()
+	none.new_life()
+	none.age = 70
+	_check(Legacy.heir(none).is_empty(), "heir without children")
+	_check(Legacy.continue_as_heir(none) == "", "continued without an heir")
+	s.free()
+	none.free()
 
 
 ## Every shape, cut, clip and room depth map the living figures need is there, and a figure poses.

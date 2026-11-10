@@ -18,6 +18,7 @@ var swipe_card := SwipeCard.new()
 var message := Label.new()
 var year_button := Button.new()
 var new_life_button := Button.new()
+var heir_button := Button.new()
 var autoplay := "--autoplay" in OS.get_cmdline_user_args()
 
 
@@ -79,6 +80,11 @@ func _ready() -> void:
 	new_life_button.pressed.connect(_restart)
 	new_life_button.hide()
 	$Card.add_child(new_life_button)
+	heir_button.add_theme_font_size_override("font_size", 30)
+	heir_button.custom_minimum_size = year_button.custom_minimum_size
+	heir_button.pressed.connect(_continue_as_heir)
+	heir_button.hide()
+	$Card.add_child(heir_button)
 
 	if GameState.look.is_empty():
 		await _pick_look()
@@ -89,6 +95,7 @@ func _ready() -> void:
 	# both buttons sit below the message, which keeps the space above them
 	year_button.position = Vector2((area.x - year_button.custom_minimum_size.x) / 2, area.y - 140)
 	new_life_button.position = year_button.position
+	heir_button.position = year_button.position - Vector2(0, year_button.custom_minimum_size.y + 16)
 	message.offset_bottom = -150
 	_deal()
 
@@ -250,13 +257,34 @@ func _end(headline: String) -> void:
 	message.text = text
 	_update_age(false)
 	new_life_button.show()
+	var heir := Legacy.heir(GameState)
+	if not heir.is_empty():
+		heir_button.text = "Play on as %s" % heir.name
+		heir_button.show()
 	if autoplay:
 		await get_tree().create_timer(2.0).timeout
+		if not heir.is_empty() and randi() % 2 == 0:
+			_continue_as_heir()
+		else:
+			_restart()
+
+
+func _continue_as_heir() -> void:
+	new_life_button.hide()
+	heir_button.hide()
+	message.add_theme_font_size_override("font_size", 34)
+	var name := Legacy.continue_as_heir(GameState)
+	if name == "":
 		_restart()
+		return
+	notices = ["You carry on as %s." % name]
+	SaveSystem.save()
+	_deal()
 
 
 func _restart() -> void:
 	new_life_button.hide()
+	heir_button.hide()
 	message.add_theme_font_size_override("font_size", 34)
 	_new_life()
 	await _pick_look()
