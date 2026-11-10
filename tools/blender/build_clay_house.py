@@ -30,7 +30,7 @@ WALL, CREAM, WOOD, DARKWOOD = "efe3cf", "f3ead8", "d9935a", "b8743f"
 LAYERS = {}
 
 
-box, ball, tube, cloth = R.box, R.ball, R.tube, R.cloth  # all take Godot (x, y up, z) coordinates
+box, ball, tube, cloth, pillow = R.box, R.ball, R.tube, R.cloth, R.pillow  # all take Godot (x, y up, z) coordinates
 
 
 def layer(name):
@@ -122,8 +122,8 @@ def base():
     box("sofa_back", (0.22, 0.8, 6.1), (0.28, 0.75, 2.1), "7f9fb8", bevel=0.13)
     for i, z in enumerate((4.98, 7.22)):
         box(f"sofa_arm{i}", (0.55, 0.55, z), (0.9, 0.55, 0.26), "6f8fa8", bevel=0.11)
-    ball("cushion_a", (0.42, 0.85, 5.5), 0.24, "e0b45a", scale=(0.4, 0.9, 1))
-    ball("cushion_b", (0.42, 0.85, 6.7), 0.24, "e8dccb", scale=(0.4, 0.9, 1), seed=2)
+    pillow("cushion_a", (0.42, 0.85, 5.5), (0.18, 0.42, 0.46), "e0b45a")
+    pillow("cushion_b", (0.42, 0.85, 6.7), (0.18, 0.42, 0.46), "e8dccb", seed=2)
     cloth("throw", (0.75, 0.66, 6.85), (0.6, 0.05, 0.7), "c45c4a", folds=0.03, droop=0.1)
     box("coffee_top", (2.0, 0.42, 6.1), (0.85, 0.08, 1.3), WOOD, bevel=0.04)
     box("coffee_shelf", (2.0, 0.14, 6.1), (0.75, 0.05, 1.2), DARKWOOD, bevel=0.02)
@@ -222,7 +222,7 @@ def bedrooms():
     box("crib_base", (1.2, 0.42, 0.75), (1.45, 0.12, 0.88), CREAM, bevel=0.04)
     box("crib_mattress", (1.2, 0.54, 0.75), (1.32, 0.12, 0.76), "cfe0ea", bevel=0.06)
     cloth("crib_blanket", (1.4, 0.63, 0.8), (0.75, 0.05, 0.66), "f3d36b", folds=0.02)
-    ball("crib_pillow", (0.75, 0.66, 0.75), 0.16, "fbf6ec", scale=(0.8, 0.4, 1.2))
+    pillow("crib_pillow", (0.75, 0.65, 0.75), (0.26, 0.13, 0.38), "fbf6ec")
     for i in range(9):
         for z in (0.33, 1.17):
             tube(f"slat{i}_{z}", (0.58 + i * 0.155, 0.75, z), 0.025, 0.62, CREAM)
@@ -255,7 +255,7 @@ def bedrooms():
     box("kid_head", (0.85, 0.62, 0.2), (1.3, 0.75, 0.14), "e58f5a", bevel=0.07)
     box("kid_mattress", (0.85, 0.47, 1.17), (1.2, 0.18, 1.85), CREAM, bevel=0.07)
     cloth("kid_duvet", (0.88, 0.6, 1.45), (1.32, 0.09, 1.25), "f3d36b", folds=0.03, droop=0.18)
-    ball("kid_pillow", (0.85, 0.64, 0.5), 0.26, "fbf6ec", scale=(1.2, 0.4, 0.7))
+    pillow("kid_pillow", (0.85, 0.645, 0.5), (0.62, 0.21, 0.36), "fbf6ec")
     ball("plush", (1.15, 0.75, 0.62), 0.13, "9fb6d2")
     box("toy_box", (2.9, 0.28, 0.4), (0.9, 0.55, 0.55), "5c7a5a", bevel=0.07)
     box("toy_box_lid", (2.9, 0.58, 0.35), (0.95, 0.06, 0.6), "6f8f6a", bevel=0.03)
@@ -274,8 +274,8 @@ def bedrooms():
     box("teen_head", (1.0, 0.82, 0.2), (1.7, 1.15, 0.14), DARKWOOD, bevel=0.08)
     box("teen_mattress", (1.0, 0.56, 1.32), (1.58, 0.24, 2.15), CREAM, bevel=0.1)
     cloth("teen_duvet", (1.05, 0.73, 1.7), (1.72, 0.11, 1.45), "9fb6d2", folds=0.035, droop=0.25)
-    ball("teen_pillow_a", (0.65, 0.8, 0.55), 0.3, "fbf6ec", scale=(1.0, 0.36, 0.7))
-    ball("teen_pillow_b", (1.35, 0.8, 0.58), 0.3, "a9c2a2", scale=(1.0, 0.36, 0.7), seed=1)
+    pillow("teen_pillow_a", (0.65, 0.77, 0.55), (0.6, 0.22, 0.42), "fbf6ec")
+    pillow("teen_pillow_b", (1.35, 0.77, 0.58), (0.6, 0.22, 0.42), "a9c2a2", seed=1)
     box("desk_top", (3.0, 1.0, 0.45), (1.5, 0.08, 0.75), WOOD, bevel=0.04)
     box("desk_drawers", (3.5, 0.5, 0.45), (0.5, 0.95, 0.7), "c98a55", bevel=0.05)
     for i, z in enumerate((0.2, 0.7)):

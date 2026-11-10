@@ -71,6 +71,43 @@ def ball(name, center, radius, color, scale=(1, 1, 1), **kw):
     return finish(ob, color, **kw)
 
 
+def pillow(name, center, size, color, **kw):
+    """Plump cushion: a flat slab bulging at the middle and pinched at the corners, size = Godot
+    (x, y, z) extents; the thinnest axis is the thickness (flat pillow, upright cushion)."""
+    import bmesh
+
+    bpy.ops.mesh.primitive_cube_add(location=g2b(*center))
+    ob = bpy.context.object
+    ob.name = name
+    half = (size[0] / 2, size[2] / 2, size[1] / 2)  # Blender local x, y, z
+    k = min(range(3), key=lambda i: half[i])
+    bm = bmesh.new()
+    bm.from_mesh(ob.data)
+    bmesh.ops.subdivide_edges(bm, edges=bm.edges[:], cuts=9, use_grid_fill=True)
+    for v in bm.verts:
+        u = list(v.co)
+        a, b = [i for i in range(3) if i != k]
+        # square -> rounded rectangle, then the thickness follows the distance from the middle
+        pa = 0.5 * (u[a] + u[a] * math.sqrt(1 - u[b] ** 2 / 2))
+        pb = 0.5 * (u[b] + u[b] * math.sqrt(1 - u[a] ** 2 / 2))
+        r2 = pa * pa + pb * pb
+        fall = max(0.0, 1 - r2 / 1.3) ** 0.7
+        w = u[k] * half[k] * (0.25 + 0.75 * fall)
+        if k == 2:  # a head-shaped dip in the top of a pillow lying flat
+            w -= half[k] * 0.3 * math.exp(-3 * r2) * max(u[k], 0.0)
+        co = [0.0, 0.0, 0.0]
+        co[a], co[b], co[k] = pa * half[a], pb * half[b], w
+        v.co = Vector(co)
+    bm.to_mesh(ob.data)
+    bm.free()
+    kw.setdefault("bevel", 0)
+    kw.setdefault("subd", 1)
+    kw.setdefault("lump", 0.018)
+    ob.rotation_euler.z = 0.12 * ((kw.get("seed", 0) % 3) - 1)  # not squared to the bed
+    ob.data.shade_smooth()
+    return finish(ob, color, **kw)
+
+
 def tube(name, center, radius, depth, color, rot=(0, 0, 0), **kw):
     bpy.ops.mesh.primitive_cylinder_add(radius=radius, depth=depth, location=g2b(*center), rotation=rot, vertices=24)
     ob = bpy.context.object
@@ -118,8 +155,8 @@ def build():
     box("mattress", (1.0, 0.63, 1.8), (1.86, 0.3, 2.66), CREAM, bevel=0.12)
     cloth("duvet", (1.05, 0.83, 2.25), (1.95, 0.12, 1.75), "9fb6d2", folds=0.035, droop=0.28)
     cloth("throw", (1.05, 0.93, 2.8), (2.0, 0.07, 0.7), "d8c3a5", folds=0.02, droop=0.32)
-    ball("pillow_a", (0.6, 0.92, 0.75), 0.36, "fbf6ec", scale=(1.0, 0.36, 0.7), lump=0.02)
-    ball("pillow_b", (1.4, 0.92, 0.8), 0.36, "a9c2a2", scale=(1.0, 0.36, 0.7), lump=0.02, seed=1)
+    pillow("pillow_a", (0.6, 0.88, 0.75), (0.7, 0.24, 0.5), "fbf6ec")
+    pillow("pillow_b", (1.4, 0.88, 0.8), (0.7, 0.24, 0.5), "a9c2a2", seed=1)
     # window on the left wall
     box("win_frame", (0.04, 2.3, 2.0), (0.14, 1.45, 1.55), "fbf8f2", bevel=0.05)
     box("win_pane", (0.13, 2.3, 2.0), (0.06, 1.2, 1.3), "fff3d6", bevel=0.01, subd=0, lump=0)

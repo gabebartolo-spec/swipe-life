@@ -16,7 +16,7 @@ import bpy
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_clay_house as H  # noqa: E402
 
-box, ball, tube, cloth = H.box, H.ball, H.tube, H.cloth
+box, ball, tube, cloth, pillow = H.box, H.ball, H.tube, H.cloth, H.pillow
 ORIGINS = {"bedroom": (0, 0), "bathroom": (4, 0), "living": (0, 4), "kitchen": (4, 4)}
 
 
@@ -151,7 +151,7 @@ def rental():
     box("bed_frame", (1.05, 0.12, 1.25), (1.6, 0.2, 2.2), "b39a78", bevel=0.05)
     box("mattress", (1.05, 0.32, 1.25), (1.5, 0.24, 2.1), "e9e2d2", bevel=0.1)
     cloth("duvet", (1.1, 0.47, 1.65), (1.62, 0.1, 1.35), "6f8294", folds=0.04, droop=0.2)
-    ball("pillow", (0.75, 0.52, 0.5), 0.3, "f2ede0", scale=(1.0, 0.36, 0.7))
+    pillow("pillow", (0.75, 0.53, 0.5), (0.6, 0.22, 0.42), "f2ede0")
     tube("rail_l", (2.45, 0.9, 0.3), 0.025, 1.75, "8d9094")
     tube("rail_r", (3.75, 0.9, 0.3), 0.025, 1.75, "8d9094")
     tube("rail_top", (3.1, 1.75, 0.3), 0.025, 1.34, "8d9094", rot=(0, math.radians(90), 0))
@@ -330,7 +330,8 @@ def bed_room(s):
     box("mattress", (cx, 0.4, 1.2), (w - 0.1, 0.24, 2.05), "ece6d6", bevel=0.09)
     cloth("duvet", (cx + 0.03, 0.56, 1.62), (w + 0.04, 0.1, 1.35), s["duvet"], folds=0.03, droop=0.2)
     for i in range(2 if w > 1.5 else 1):
-        ball(f"pillow{i}", (cx + (i - 0.5) * w * 0.48 if w > 1.5 else cx, 0.6, 0.48), w * 0.2 if w > 1.5 else 0.3, "f4efe4", scale=(1, 0.38, 0.7))
+        pw = w * 0.38 if w > 1.5 else 0.58
+        pillow(f"pillow{i}", (cx + (i - 0.5) * w * 0.48 if w > 1.5 else cx, 0.5 + pw * 0.19, 0.48), (pw, pw * 0.38, pw * 0.7), "f4efe4")
     box("headboard", (cx, 0.6, 0.1), (w + 0.08, 1.15, 0.1), s.get("head", wood), bevel=0.05)
     if s.get("posts"):
         for i, (dx, z) in enumerate(((-w / 2, 0.12), (w / 2, 0.12), (-w / 2, 2.28), (w / 2, 2.28))):
