@@ -72,13 +72,13 @@ func owned_in(state, room: String) -> Array:
 	return out
 
 
-## Owned items as [{label, room}] for the home scene.
+## Owned items as [{id, room}] for the home scene.
 func items_for(state) -> Array:
 	var out := []
 	for id: String in state.items:
 		var it := get_item(id)
 		if not it.is_empty():
-			out.append({"label": it.label, "room": it.room})
+			out.append({"id": it.id, "room": it.room})
 	return out
 
 

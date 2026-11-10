@@ -20,8 +20,6 @@ var _view: TextureRect
 var _tween: Tween
 var _stage := FigureStage.new()
 var _people_key := ""
-var _items: Array = []  # [{label, room}] bought items, shown as tags in their room
-var _tags := HBoxContainer.new()
 
 
 func _ready() -> void:
@@ -31,13 +29,6 @@ func _ready() -> void:
 	move_child(_stage, 0)  # under AgeLabel
 	_stage.size = size
 	_view = _make_view()
-	_tags.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_tags.alignment = BoxContainer.ALIGNMENT_CENTER
-	_tags.add_theme_constant_override("separation", 6)
-	_tags.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	_tags.offset_top = -48.0
-	_tags.offset_bottom = -8.0
-	add_child(_tags)
 
 
 ## Age band of the bedroom (director 2026-11-03): baby 0–3, child 4–12, teen 13–17.
@@ -75,7 +66,6 @@ func show_room(age: int, room_id: String = "bedroom", housing: Dictionary = {}) 
 	room = room_id
 	band = new_band
 	_stage.set_room(room_id, new_band)
-	_refresh_tags()
 
 
 ## The player, the partner if any and the children still at home, living in the room (GDD §10.2,
@@ -102,31 +92,9 @@ func show_people(age: int, look: Dictionary, partner: Dictionary, children: Arra
 	_stage.set_people(people)
 
 
-## Bought items (GDD §10.2). Until the clay props are modelled each shows as a small tag in its
-## room; the tags sit over the room still.
+## Bought items, [{id, room}] (GDD §10.2): clay props standing in their room's free floor.
 func show_items(items: Array) -> void:
-	if items == _items:
-		return
-	_items = items.duplicate(true)
-	_refresh_tags()
-
-
-func _refresh_tags() -> void:
-	for c in _tags.get_children():
-		c.queue_free()
-	for it: Dictionary in _items:
-		if it.room != room:
-			continue
-		var l := Label.new()
-		l.text = it.label
-		l.add_theme_font_size_override("font_size", 20)
-		l.add_theme_color_override("font_color", Color(0.15, 0.15, 0.18))
-		var box := StyleBoxFlat.new()
-		box.bg_color = Color(1, 1, 1, 0.8)
-		box.set_corner_radius_all(10)
-		box.set_content_margin_all(6)
-		l.add_theme_stylebox_override("normal", box)
-		_tags.add_child(l)
+	_stage.set_items(items)
 
 
 func _person(look: Dictionary, age: int) -> Dictionary:
