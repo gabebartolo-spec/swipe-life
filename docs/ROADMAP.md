@@ -29,7 +29,7 @@ Rules for every milestone:
 | M9 Adult home scene | Done: director approved all eight homes (2026-11-09). |
 | M10 Relationships and family | Done: adult People tab, partners, marriage, children, parents (`Family`). |
 | M12–M13 | Not started. |
-| M11 Ageing and death | Old age death rule in (§5.3c). Grey hair, wrinkles and late-life cards not started. |
+| M11 Ageing and death | Old age death rule in (§5.3c). Elderly look done in M5. Late-life cards 60+ (28) drafted in `adult_60_plus.json`, awaiting director's read. |
 
 Open with the director:
 - Card rewrites: round 1 applied (#51). Further rounds come from the card doc
