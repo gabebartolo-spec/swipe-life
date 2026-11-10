@@ -104,8 +104,8 @@ def mattress():
     at("mattress")
     box(n("frame"), p(0, 0.12, 0), (1.5, 0.22, 2.0), DARKWOOD, bevel=0.06)
     box(n("mat"), p(0, 0.34, 0), (1.4, 0.26, 1.9), CREAM, bevel=0.1)
-    cloth(n("duvet"), p(0, 0.5, 0.25), (1.45, 0.1, 1.2), "9fb6d2", folds=0.03, droop=0.2)
-    ball(n("pillow"), p(0, 0.55, -0.7), 0.3, "fbf6ec", scale=(1.4, 0.4, 0.8), lump=0.02)
+    cloth(n("duvet"), p(0, 0.57, 0.28), (1.62, 0.1, 1.5), "9fb6d2", folds=0.025, droop=0.32)
+    ball(n("pillow"), p(0, 0.62, -0.7), 0.3, "fbf6ec", scale=(1.4, 0.4, 0.8), lump=0.02)
 
 
 def desk():
@@ -153,10 +153,15 @@ def cooker():
 
 def spa_bath():
     at("spa_bath")
-    box(n("tub"), p(0, 0.3, 0), (1.7, 0.6, 0.85), "f6f0e4", bevel=0.18)
-    box(n("water"), p(0, 0.56, 0), (1.4, 0.04, 0.6), "9fc7d8", bevel=0.02, lump=0.004)
-    for i, dx in enumerate((-0.5, 0.0, 0.5)):
-        ball(n(f"bubble{i}"), p(dx, 0.6, 0.05 * (i - 1)), 0.1, "ffffff", scale=(1, 0.7, 1), lump=0.01, seed=i)
+    # open tub: floor and four walls, so the water sits visibly inside the rim
+    box(n("tub_floor"), p(0, 0.08, 0), (1.7, 0.16, 0.85), "f6f0e4", bevel=0.05)
+    for i, dz in enumerate((-0.365, 0.365)):
+        box(n(f"tub_side{i}"), p(0, 0.3, dz), (1.7, 0.6, 0.12), "f6f0e4", bevel=0.05)
+    for i, dx in enumerate((-0.79, 0.79)):
+        box(n(f"tub_end{i}"), p(dx, 0.3, 0), (0.12, 0.6, 0.85), "f6f0e4", bevel=0.05)
+    box(n("water"), p(0, 0.44, 0), (1.5, 0.05, 0.66), "7fc4e0", bevel=0.015, lump=0.004)
+    for i, (dx, dz) in enumerate(((-0.45, 0.1), (0.05, -0.12), (0.4, 0.12))):
+        ball(n(f"bubble{i}"), p(dx, 0.5, dz), 0.09, "ffffff", scale=(1, 0.7, 1), lump=0.01, seed=i)
     tube(n("tap"), p(0.7, 0.75, -0.3), 0.025, 0.3, "b8bdc4")
     box(n("spout"), p(0.62, 0.9, -0.3), (0.2, 0.04, 0.04), "b8bdc4", bevel=0.01)
 
