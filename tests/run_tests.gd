@@ -650,6 +650,9 @@ func _test_adult_sim() -> void:
 	var actions := ActionDB.new()
 	actions.load_dir()
 	var careful := []
+	var old_age_deaths := []
+	var late_cards := {}
+	var stuck := 0
 	for life in LIVES:
 		var state := GameStateScript.new()
 		state.new_life()
@@ -659,7 +662,11 @@ func _test_adult_sim() -> void:
 			for q in 4:
 				var card = deck.draw(state)
 				if card == null:
+					if state.age >= 60:
+						stuck += 1
 					continue
+				if state.age >= 60 and card.id.begins_with("a60_"):
+					late_cards[card.id] = true
 				if deck.choose(card, ["left", "right"][deck.rng.randi() % 2], state).died:
 					dead = true
 					break
@@ -686,8 +693,11 @@ func _test_adult_sim() -> void:
 			CareerRules.year_end(state, careers, deck.rng)
 			Finance.year_end(state, careers, deck.rng)
 			max_debt = maxi(max_debt, Finance.total_debt(state))
-			if LifeRules.year_end(state, deck.rng).died:
+			var ending := LifeRules.year_end(state, deck.rng)
+			if ending.died:
 				dead = true
+				if ending.cause.contains("old age"):
+					old_age_deaths.append(state.age)
 			else:
 				state.age += 1
 				CareerRules.outgrown(state, careers)
@@ -704,6 +714,30 @@ func _test_adult_sim() -> void:
 			% [median, careful[-1], houses, adult_jobs.size(), max_debt]
 		)
 	)
+	old_age_deaths.sort()
+	print(
+		(
+			"adult sim: %d old-age deaths, ages %s to %s; %d late-life cards drawn; %d empty draws at 60+"
+			% [
+				old_age_deaths.size(),
+				old_age_deaths[0] if old_age_deaths else "-",
+				old_age_deaths[-1] if old_age_deaths else "-",
+				late_cards.size(),
+				stuck
+			]
+		)
+	)
+	_check(not old_age_deaths.is_empty(), "no life died of old age")
+	_check(
+		old_age_deaths.is_empty() or old_age_deaths[0] >= LifeRules.OLD_AGE_FROM,
+		"old age before 70"
+	)
+	_check(
+		old_age_deaths.size() < 2 or old_age_deaths[-1] - old_age_deaths[0] >= 8,
+		"old-age deaths not spread"
+	)
+	_check(late_cards.size() >= 15, "only %d late-life cards ever drawn" % late_cards.size())
+	_check(stuck == 0, "%d empty draws at 60+ (stuck lives)" % stuck)
 	_check(median > 30, "careful lives must get past 30")
 	_check(houses > 0, "no life bought a house")
 	_check(adult_jobs.size() > 10, "only %d jobs held" % adult_jobs.size())
