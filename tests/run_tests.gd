@@ -28,6 +28,8 @@ func _init() -> void:
 	_test_adult_sim()
 	_test_figures()
 	_test_family()
+	_test_items()
+	_test_legacy()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 
@@ -650,6 +652,9 @@ func _test_adult_sim() -> void:
 	var actions := ActionDB.new()
 	actions.load_dir()
 	var careful := []
+	var old_age_deaths := []
+	var late_cards := {}
+	var stuck := 0
 	for life in LIVES:
 		var state := GameStateScript.new()
 		state.new_life()
@@ -659,7 +664,11 @@ func _test_adult_sim() -> void:
 			for q in 4:
 				var card = deck.draw(state)
 				if card == null:
+					if state.age >= 60:
+						stuck += 1
 					continue
+				if state.age >= 60 and card.id.begins_with("a60_"):
+					late_cards[card.id] = true
 				if deck.choose(card, ["left", "right"][deck.rng.randi() % 2], state).died:
 					dead = true
 					break
@@ -686,8 +695,11 @@ func _test_adult_sim() -> void:
 			CareerRules.year_end(state, careers, deck.rng)
 			Finance.year_end(state, careers, deck.rng)
 			max_debt = maxi(max_debt, Finance.total_debt(state))
-			if LifeRules.year_end(state, deck.rng).died:
+			var ending := LifeRules.year_end(state, deck.rng)
+			if ending.died:
 				dead = true
+				if ending.cause.contains("old age"):
+					old_age_deaths.append(state.age)
 			else:
 				state.age += 1
 				CareerRules.outgrown(state, careers)
@@ -704,9 +716,99 @@ func _test_adult_sim() -> void:
 			% [median, careful[-1], houses, adult_jobs.size(), max_debt]
 		)
 	)
+	old_age_deaths.sort()
+	print(
+		(
+			"adult sim: %d old-age deaths, ages %s to %s; %d late-life cards drawn; %d empty draws at 60+"
+			% [
+				old_age_deaths.size(),
+				old_age_deaths[0] if old_age_deaths else "-",
+				old_age_deaths[-1] if old_age_deaths else "-",
+				late_cards.size(),
+				stuck
+			]
+		)
+	)
+	_check(not old_age_deaths.is_empty(), "no life died of old age")
+	_check(
+		old_age_deaths.is_empty() or old_age_deaths[0] >= LifeRules.OLD_AGE_FROM,
+		"old age before 70"
+	)
+	_check(
+		old_age_deaths.size() < 2 or old_age_deaths[-1] - old_age_deaths[0] >= 8,
+		"old-age deaths not spread"
+	)
+	_check(late_cards.size() >= 15, "only %d late-life cards ever drawn" % late_cards.size())
+	_check(stuck < LIVES * 4, "%d empty draws at 60+ (decks run dry)" % stuck)
 	_check(median > 30, "careful lives must get past 30")
 	_check(houses > 0, "no life bought a house")
 	_check(adult_jobs.size() > 10, "only %d jobs held" % adult_jobs.size())
+
+
+## Shop items load, sell once, charge and apply effects, show in their room and survive a save.
+func _test_items() -> void:
+	var shop := Items.new()
+	shop.load_all()
+	for e in shop.errors:
+		printerr(e)
+	_check(shop.errors.is_empty() and shop.items.size() >= 10, "items.json invalid")
+	var state := GameStateScript.new()
+	state.new_life()
+	state.age = 30
+	state.stats.money = 10000
+	var sofa := shop.get_item("sofa")
+	_check(shop.available(state).has(sofa), "sofa not on sale")
+	var before: int = state.stats.happiness
+	_check(shop.buy(state, sofa) != "", "sofa not bought")
+	_check(state.stats.money == 10000 - int(sofa.price), "sofa price not charged")
+	_check(state.stats.happiness > before, "sofa effects not applied")
+	_check(shop.buy(state, sofa) == "", "sofa bought twice")
+	_check(not shop.available(state).has(sofa), "owned sofa still on sale")
+	_check(shop.items_for(state) == [{"label": sofa.label, "room": "living"}], "item not in room")
+	var copy := GameStateScript.new()
+	copy.new_life()
+	copy.from_dict(JSON.parse_string(JSON.stringify(state.to_dict())))
+	_check(copy.items == ["sofa"], "items lost in save")
+	state.free()
+	copy.free()
+	var poor := GameStateScript.new()
+	poor.new_life()
+	poor.age = 30
+	poor.stats.money = 5
+	_check(shop.buy(poor, sofa) == "", "bought without money")
+	poor.free()
+
+
+## Legacy (GDD §9.3): the oldest grown-up child inherits the estate less tax, the house and items.
+func _test_legacy() -> void:
+	var s := GameStateScript.new()
+	s.new_life()
+	s.age = 70
+	s.stats.money = 100000
+	s.stats.looks = 90
+	s.items = ["sofa"]
+	s.partner = {"name": "Sam", "affinity": 70}
+	s.housing = {"kind": "own", "house": "small_flat", "label": "Small flat", "value": 80000}
+	s.children = [
+		{"name": "Kid", "born_at": 45, "affinity": 50, "look": {"sex": "f"}},
+		{"name": "Elder", "born_at": 40, "affinity": 50, "look": {"sex": "m"}},
+		{"name": "Baby", "born_at": 65, "affinity": 50, "look": {"sex": "f"}},
+	]
+	_check(Legacy.heir(s).name == "Elder", "heir is not the oldest grown-up child")
+	_check(Legacy.estate(s) == 60000, "estate tax wrong: %d" % Legacy.estate(s))
+	_check(Legacy.continue_as_heir(s) == "Elder", "did not continue as Elder")
+	_check(s.age == 30 and s.stats.money == 60000, "heir age or money wrong")
+	_check(s.stats.looks == 70, "looks not pulled halfway: %d" % s.stats.looks)
+	_check(s.housing.kind == "own" and s.items == ["sofa"], "house or items not inherited")
+	_check(s.siblings.size() == 2 and s.children.is_empty(), "siblings not carried")
+	_check(s.parents_alive and s.flags.generation == 2, "family or generation wrong")
+	var none := GameStateScript.new()
+	none.new_life()
+	none.age = 70
+	_check(Legacy.heir(none).is_empty(), "heir without children")
+	_check(Legacy.continue_as_heir(none) == "", "continued without an heir")
+	s.free()
+	none.free()
 
 
 ## Every shape, cut, clip and room depth map the living figures need is there, and a figure poses.

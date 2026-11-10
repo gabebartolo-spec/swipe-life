@@ -7,6 +7,7 @@ signal acted
 var db: ActionDB
 var careers: CareerDB  # the "jobs" tab is the career menu (docs/CAREERS.md)
 var finance: FinanceDB
+var shop: Items
 var tab := ""
 var page := []  # career submenu path: [], ["find"], [slot, "advance"], [slot, "staff", role]
 var tabs_row := HBoxContainer.new()
@@ -15,8 +16,14 @@ var list := VBoxContainer.new()
 var careers_rng := RandomNumberGenerator.new()
 
 
-func _init(action_db: ActionDB, career_db: CareerDB = null, finance_db: FinanceDB = null) -> void:
+func _init(
+	action_db: ActionDB,
+	career_db: CareerDB = null,
+	finance_db: FinanceDB = null,
+	items: Items = null
+) -> void:
 	db = action_db
+	shop = items
 	careers = career_db
 	finance = finance_db
 
@@ -87,6 +94,13 @@ func _build() -> void:
 		b.add_theme_font_size_override("font_size", 26)
 		b.pressed.connect(do_action.bind(a))
 		list.add_child(b)
+	if tab == "shop" and shop:
+		for it in shop.available(GameState):
+			_button(
+				"%s   %s" % [it.label, Finance.money_text(int(it.price))],
+				func(): _did(shop.buy(GameState, it)),
+				not shop.can_buy(GameState, it)
+			)
 
 
 func _button(text: String, on_press: Callable, disabled := false) -> void:

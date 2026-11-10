@@ -2,417 +2,1074 @@
   {
     "id": "a60_birthday",
     "text": "You turn 60. Someone gives you a card with a cartoon tortoise on it. It's a compliment, apparently.",
-    "ages": [60, 60],
+    "ages": [
+      60,
+      60
+    ],
     "weight": 50,
     "room": "living",
-    "left": { "label": "Quiet tea", "effects": { "stress": -2 } },
+    "left": {
+      "label": "Quiet tea",
+      "effects": {
+        "stress": -2
+      }
+    },
     "right": {
       "label": "Big do",
-      "effects": { "money": -600, "happiness": 5, "relationships": 4 },
+      "effects": {
+        "money": -600,
+        "happiness": 5,
+        "relationships": 4
+      },
       "result": "Three generations and one DJ. The DJ is your nephew."
     }
   },
   {
     "id": "a60_retire_date",
     "text": "HR has sent a leaflet called 'Your Next Chapter'. The chapter has a lot of white space.",
-    "ages": [60, 68],
+    "ages": [
+      60,
+      68
+    ],
     "weight": 5,
     "room": "living",
     "left": {
       "label": "Keep working",
-      "effects": { "money": 1500, "stress": 4, "happiness": -2 },
+      "effects": {
+        "money": 1500,
+        "stress": 4,
+        "happiness": -2
+      },
       "result": "You are indispensable. This is not as nice as it sounds."
     },
     "right": {
       "label": "Name the day",
-      "effects": { "stress": -8, "happiness": 4, "money": -1000 },
+      "effects": {
+        "stress": -8,
+        "happiness": 4,
+        "money": -1000
+      },
       "result": "You circle it in red. Then you go to bed at nine to celebrate."
     }
   },
   {
     "id": "a60_leaving_do",
     "text": "The leaving do is in the pub. Everyone you have worked with for thirty years says 'we must keep in touch'.",
-    "ages": [62, 68],
+    "ages": [
+      62,
+      68
+    ],
     "weight": 4,
     "room": "living",
-    "left": { "label": "Slip out early", "effects": { "happiness": -2, "stress": -2 } },
+    "left": {
+      "label": "Slip out early",
+      "effects": {
+        "happiness": -2,
+        "stress": -2
+      }
+    },
     "right": {
       "label": "Make the speech",
-      "effects": { "relationships": 5, "happiness": 4, "money": -100 },
+      "effects": {
+        "relationships": 5,
+        "happiness": 4,
+        "money": -100
+      },
       "result": "Nobody keeps in touch. The speech was lovely, though."
     }
   },
   {
     "id": "a60_empty_days",
     "text": "It's Tuesday. You have no work, no plans and nobody who needs you. The day is very long.",
-    "ages": [64, 75],
+    "ages": [
+      64,
+      75
+    ],
     "weight": 5,
     "room": "living",
     "left": {
       "label": "Watch the telly",
-      "effects": { "happiness": -3, "health": -2 },
+      "effects": {
+        "happiness": -3,
+        "health": -2
+      },
       "result": "You know the quiz show's whole cast now."
     },
     "right": {
       "label": "Find a routine",
-      "effects": { "happiness": 5, "health": 2 },
-      "by_trait": { "sociability": { "happiness": 4 } },
+      "effects": {
+        "happiness": 5,
+        "health": 2
+      },
+      "by_trait": {
+        "sociability": {
+          "happiness": 4
+        }
+      },
       "result": "Walk, coffee, library, walk. You are, briefly, unstoppable."
     }
   },
   {
     "id": "a60_grandchild",
     "text": "Your child hands you a small, furious person. It is your grandchild. It has your nose.",
-    "ages": [58, 78],
+    "ages": [
+      58,
+      78
+    ],
     "weight": 5,
     "room": "living",
     "left": {
       "label": "Offer a finger",
-      "effects": { "happiness": 8, "relationships": 3 },
+      "effects": {
+        "happiness": 8,
+        "relationships": 3
+      },
       "result": "It grips you. Your knees stop being the main news."
     },
     "right": {
       "label": "Volunteer to babysit",
-      "effects": { "happiness": 10, "stress": 3, "health": -1, "relationships": 5 },
+      "effects": {
+        "happiness": 10,
+        "stress": 3,
+        "health": -1,
+        "relationships": 5
+      },
       "result": "You are the favourite. You are also very tired."
     }
   },
   {
     "id": "a60_grandchild_visit",
     "text": "The grandchildren are coming for the weekend. There is one biscuit tin and eight hours of energy.",
-    "ages": [62, 85],
+    "ages": [
+      62,
+      85
+    ],
     "weight": 5,
     "room": "kitchen",
-    "left": { "label": "Plan outings", "effects": { "money": -150, "happiness": 6, "stress": 3 } },
+    "left": {
+      "label": "Plan outings",
+      "effects": {
+        "money": -150,
+        "happiness": 6,
+        "stress": 3
+      }
+    },
     "right": {
       "label": "Bake together",
-      "effects": { "happiness": 8, "relationships": 3 },
+      "effects": {
+        "happiness": 8,
+        "relationships": 3
+      },
       "result": "There's flour on the ceiling. You'll find it in March."
     }
   },
   {
     "id": "a60_hip",
     "text": "The surgeon says your hip is 'a bit worn'. You have also, it turns out, been walking funny.",
-    "ages": [62, 80],
+    "ages": [
+      62,
+      80
+    ],
     "weight": 4,
     "room": "bathroom",
     "left": {
       "label": "Put up with it",
-      "effects": { "health": -5, "happiness": -4 }
+      "effects": {
+        "health": -5,
+        "happiness": -4
+      }
     },
     "right": {
       "label": "Have the operation",
-      "effects": { "money": -2500, "stress": 6, "health": 6 },
-      "death": { "chance": 0.01, "cause": "complications after surgery" },
+      "effects": {
+        "money": -2500,
+        "stress": 6,
+        "health": 6
+      },
+      "death": {
+        "chance": 0.01,
+        "cause": "complications after surgery"
+      },
       "result": "Six weeks of the walking frame, then the stairs are just stairs again."
     }
   },
   {
     "id": "a60_cataract",
     "text": "The optician says the world looks like it's behind a bath curtain because it is. It can be fixed.",
-    "ages": [62, 85],
+    "ages": [
+      62,
+      85
+    ],
     "weight": 4,
     "room": "bathroom",
-    "left": { "label": "Squint on", "effects": { "happiness": -3, "health": -2 } },
+    "left": {
+      "label": "Squint on",
+      "effects": {
+        "happiness": -3,
+        "health": -2
+      }
+    },
     "right": {
       "label": "Book the lasers",
-      "effects": { "money": -1200, "health": 3, "happiness": 4 },
+      "effects": {
+        "money": -1200,
+        "health": 3,
+        "happiness": 4
+      },
       "result": "The grass is a colour you'd forgotten."
     }
   },
   {
     "id": "a60_pills",
     "text": "You now take eleven tablets a day. They live in a plastic box with the days of the week on it.",
-    "ages": [63, 85],
+    "ages": [
+      63,
+      85
+    ],
     "weight": 5,
     "room": "bathroom",
     "left": {
       "label": "Skip some",
-      "effects": { "health": -6, "stress": -1 },
-      "death": { "chance": 0.01, "cause": "a missed medicine" }
+      "effects": {
+        "health": -6,
+        "stress": -1
+      },
+      "death": {
+        "chance": 0.01,
+        "cause": "a missed medicine"
+      }
     },
     "right": {
       "label": "Stick to the box",
-      "effects": { "health": 3, "money": -200 },
+      "effects": {
+        "health": 3,
+        "money": -200
+      },
       "result": "Thursday is, somehow, always empty by Wednesday."
     }
   },
   {
     "id": "a60_fall",
     "text": "The rug moved. You went with it. You're lying on the floor looking at the underside of your own sofa.",
-    "ages": [66, 90],
+    "ages": [
+      66,
+      90
+    ],
     "weight": 4,
     "room": "living",
     "left": {
       "label": "Get up alone",
-      "effects": { "health": -8, "stress": 3 },
-      "death": { "chance": 0.02, "cause": "a fall at home" },
+      "effects": {
+        "health": -8,
+        "stress": 3
+      },
+      "death": {
+        "chance": 0.02,
+        "cause": "a fall at home"
+      },
       "result": "Eventually. Slowly. With a lot of language."
     },
     "right": {
       "label": "Press the button",
-      "effects": { "health": -2, "stress": 2, "money": -100, "relationships": 1 },
+      "effects": {
+        "health": -2,
+        "stress": 2,
+        "money": -100,
+        "relationships": 1
+      },
       "result": "The pendant works. The voice on the other end is very kind about it."
     }
   },
   {
     "id": "a60_downsize",
     "text": "The stairs have started to look like a mountain. There's a bungalow on the next street.",
-    "ages": [64, 85],
+    "ages": [
+      64,
+      85
+    ],
     "weight": 4,
     "room": "living",
     "left": {
       "label": "Stay put",
-      "effects": { "health": -3, "happiness": 2 },
+      "effects": {
+        "health": -3,
+        "happiness": 2
+      },
       "result": "Forty years of memories on the walls. And the stairs."
     },
     "right": {
       "label": "Move to the bungalow",
-      "effects": { "money": 5000, "health": 3, "happiness": -3, "stress": 4 },
+      "effects": {
+        "money": 5000,
+        "health": 3,
+        "happiness": -3,
+        "stress": 4
+      },
       "result": "You find thirty-one jars of buttons you don't recall buying."
     }
   },
   {
     "id": "a60_friend_dies",
     "text": "Another name has crossed out of the address book. You're now the person who remembers the funny story.",
-    "ages": [62, 95],
+    "ages": [
+      62,
+      95
+    ],
     "weight": 5,
     "room": "living",
-    "left": { "label": "Stay home", "effects": { "happiness": -8, "stress": 2 } },
+    "left": {
+      "label": "Stay home",
+      "effects": {
+        "happiness": -8,
+        "stress": 2
+      }
+    },
     "right": {
       "label": "Go and tell it",
-      "effects": { "happiness": -4, "relationships": 4, "karma": 2 },
+      "effects": {
+        "happiness": -4,
+        "relationships": 4,
+        "karma": 2
+      },
       "result": "They laugh and cry at the same moment. That's the point of it."
     }
   },
   {
     "id": "a60_partner_ill",
     "text": "Your partner is poorly, and the doctor is using 'long term' about it. You're now the carer.",
-    "ages": [65, 90],
+    "ages": [
+      65,
+      90
+    ],
     "weight": 3,
     "room": "bedroom",
     "left": {
       "label": "Arrange a carer",
-      "effects": { "money": -3000, "stress": 3, "relationships": -2 }
+      "effects": {
+        "money": -3000,
+        "stress": 3,
+        "relationships": -2
+      }
     },
     "right": {
       "label": "Do it yourself",
-      "effects": { "health": -6, "stress": 9, "happiness": -3, "relationships": 6, "karma": 3 },
+      "effects": {
+        "health": -6,
+        "stress": 9,
+        "happiness": -3,
+        "relationships": 6,
+        "karma": 3
+      },
       "result": "It's the hardest thing. You wouldn't give it to anyone else."
     }
   },
   {
     "id": "a60_widowed",
     "text": "The house is quiet in the evenings. You keep making tea for two.",
-    "ages": [68, 95],
+    "ages": [
+      68,
+      95
+    ],
     "weight": 3,
     "room": "kitchen",
     "left": {
       "label": "Sit in the quiet",
-      "effects": { "happiness": -10, "health": -3 },
+      "effects": {
+        "happiness": -10,
+        "health": -3
+      },
       "result": "You say a few words to the chair. The chair gets it."
     },
     "right": {
       "label": "Ring your child",
-      "effects": { "happiness": -3, "relationships": 5, "stress": -3 },
+      "effects": {
+        "happiness": -3,
+        "relationships": 5,
+        "stress": -3
+      },
       "result": "'Come round for lunch', they say. You were hoping they'd say that."
     }
   },
   {
     "id": "a60_late_love",
     "text": "You've met someone at the choir. They laugh at your jokes. They have, frankly, excellent knees.",
-    "ages": [62, 85],
+    "ages": [
+      62,
+      85
+    ],
     "weight": 2,
     "room": "living",
-    "left": { "label": "Too old for that", "effects": { "happiness": -2 } },
+    "left": {
+      "label": "Too old for that",
+      "effects": {
+        "happiness": -2
+      }
+    },
     "right": {
       "label": "Ask them for coffee",
-      "effects": { "happiness": 10, "relationships": 5, "stress": 2, "looks": 1 },
-      "by_trait": { "boldness": { "happiness": 4 } },
+      "effects": {
+        "happiness": 10,
+        "relationships": 5,
+        "stress": 2,
+        "looks": 1
+      },
+      "by_trait": {
+        "boldness": {
+          "happiness": 4
+        }
+      },
       "result": "Coffee turns into dinner. Dinner turns into a Tuesday-and-Thursday arrangement."
     }
   },
   {
     "id": "a60_scam_call",
     "text": "A young man from your bank would like your PIN, urgently. He's very polite. He's also breathing like a man at a call centre.",
-    "ages": [65, 95],
+    "ages": [
+      65,
+      95
+    ],
     "weight": 4,
     "room": "living",
     "left": {
       "label": "Give him the number",
-      "effects": { "money": -5000, "stress": 10, "happiness": -6 },
+      "effects": {
+        "money": -5000,
+        "stress": 10,
+        "happiness": -6
+      },
       "result": "It takes you a week to say it out loud."
     },
     "right": {
       "label": "Hang up on him",
-      "effects": { "happiness": 2, "stress": -1 },
+      "effects": {
+        "happiness": 2,
+        "stress": -1
+      },
       "result": "He rings back in eleven minutes. You put the phone in a drawer."
     }
   },
   {
     "id": "a60_phone",
     "text": "Your grandchild wants to show you a thing called a 'video call'. Your face is enormous in it.",
-    "ages": [62, 90],
+    "ages": [
+      62,
+      90
+    ],
     "weight": 4,
     "room": "living",
-    "left": { "label": "Not interested", "effects": { "happiness": -2 } },
+    "left": {
+      "label": "Not interested",
+      "effects": {
+        "happiness": -2
+      }
+    },
     "right": {
       "label": "Learn it",
-      "effects": { "happiness": 5, "relationships": 5, "stress": 2 },
+      "effects": {
+        "happiness": 5,
+        "relationships": 5,
+        "stress": 2
+      },
       "result": "You hold it upside down for the first fifteen minutes."
     }
   },
   {
     "id": "a60_garden",
     "text": "The allotment committee has a plot going. It has been fallow, they say, for 'a while'. It is a small forest.",
-    "ages": [62, 85],
+    "ages": [
+      62,
+      85
+    ],
     "weight": 4,
     "room": "living",
-    "left": { "label": "Not for me", "effects": { "happiness": -1 } },
+    "left": {
+      "label": "Not for me",
+      "effects": {
+        "happiness": -1
+      }
+    },
     "right": {
       "label": "Take it on",
-      "effects": { "health": 4, "happiness": 6, "money": -150, "stress": -4 },
-      "by_trait": { "sociability": { "relationships": 3 } },
+      "effects": {
+        "health": 4,
+        "happiness": 6,
+        "money": -150,
+        "stress": -4
+      },
+      "by_trait": {
+        "sociability": {
+          "relationships": 3
+        }
+      },
       "result": "You grow a marrow the size of a dog. People ask you for tips."
     }
   },
   {
     "id": "a60_cruise",
     "text": "The brochure says: 'Unpack once.' You like the sound of that. You like the buffet even more.",
-    "ages": [62, 80],
+    "ages": [
+      62,
+      80
+    ],
     "weight": 3,
     "room": "living",
-    "left": { "label": "Save the money", "effects": { "money": 1200, "happiness": -2 } },
+    "left": {
+      "label": "Save the money",
+      "effects": {
+        "money": 1200,
+        "happiness": -2
+      }
+    },
     "right": {
       "label": "Book the cabin",
-      "effects": { "money": -4000, "happiness": 10, "stress": -8, "relationships": 3 },
+      "effects": {
+        "money": -4000,
+        "happiness": 10,
+        "stress": -8,
+        "relationships": 3
+      },
       "result": "You meet a couple from Leeds. You keep in touch, for real."
     }
   },
   {
     "id": "a60_will",
     "text": "The solicitor has papers. There are choices about who gets the house, the spoons, and the cat.",
-    "ages": [65, 95],
+    "ages": [
+      65,
+      95
+    ],
     "weight": 4,
     "room": "living",
-    "left": { "label": "Leave it for later", "effects": { "stress": 2 } },
+    "left": {
+      "label": "Leave it for later",
+      "effects": {
+        "stress": 2
+      }
+    },
     "right": {
       "label": "Settle it today",
-      "effects": { "money": -400, "stress": -4, "karma": 2, "relationships": 2 },
+      "effects": {
+        "money": -400,
+        "stress": -4,
+        "karma": 2,
+        "relationships": 2
+      },
       "result": "The cat gets the armchair. The rest is up to the family."
     }
   },
   {
     "id": "a60_memory",
     "text": "You went upstairs for something. You are now upstairs. This has happened before.",
-    "ages": [68, 95],
+    "ages": [
+      68,
+      95
+    ],
     "weight": 5,
     "room": "bedroom",
-    "left": { "label": "Laugh it off", "effects": { "stress": 1, "happiness": -1 } },
+    "left": {
+      "label": "Laugh it off",
+      "effects": {
+        "stress": 1,
+        "happiness": -1
+      }
+    },
     "right": {
       "label": "See the doctor",
-      "effects": { "money": -150, "stress": 4, "health": 2 },
+      "effects": {
+        "money": -150,
+        "stress": 4,
+        "health": 2
+      },
       "result": "'Perfectly normal for your age.' You write it down, so you won't forget."
     }
   },
   {
     "id": "a60_memoir",
     "text": "Your grandchild says: 'Tell me what it was like.' It was, you realise, quite a lot.",
-    "ages": [65, 95],
+    "ages": [
+      65,
+      95
+    ],
     "weight": 4,
     "room": "living",
-    "left": { "label": "Keep it brief", "effects": { "happiness": 2 } },
+    "left": {
+      "label": "Keep it brief",
+      "effects": {
+        "happiness": 2
+      }
+    },
     "right": {
       "label": "Tell the whole story",
-      "effects": { "happiness": 8, "relationships": 5, "karma": 2 },
+      "effects": {
+        "happiness": 8,
+        "relationships": 5,
+        "karma": 2
+      },
       "result": "It takes four afternoons. The grandchild takes notes, and a few liberties."
     }
   },
   {
     "id": "a60_dance_class",
     "text": "The community hall does a tea dance on Thursdays. A woman in a sequined cardigan beckons.",
-    "ages": [62, 90],
+    "ages": [
+      62,
+      90
+    ],
     "weight": 4,
     "room": "living",
-    "left": { "label": "Watch from the side", "effects": { "happiness": 1 } },
+    "left": {
+      "label": "Watch from the side",
+      "effects": {
+        "happiness": 1
+      }
+    },
     "right": {
       "label": "Take her hand",
-      "effects": { "health": 3, "happiness": 7, "relationships": 4 },
-      "by_trait": { "sociability": { "happiness": 4 } },
+      "effects": {
+        "health": 3,
+        "happiness": 7,
+        "relationships": 4
+      },
+      "by_trait": {
+        "sociability": {
+          "happiness": 4
+        }
+      },
       "result": "Your waltz is mostly standing. She says it's the best she's had."
     }
   },
   {
     "id": "a60_care_home",
     "text": "Your child gently shows you a brochure. It has a conservatory and a lot of cheerful photos of nurses.",
-    "ages": [78, 98],
+    "ages": [
+      78,
+      98
+    ],
     "weight": 4,
     "room": "living",
     "left": {
       "label": "Refuse",
-      "effects": { "happiness": 3, "health": -4, "stress": 3 },
+      "effects": {
+        "happiness": 3,
+        "health": -4,
+        "stress": 3
+      },
       "result": "You stay home, and you're stubborn about it. They worry."
     },
     "right": {
       "label": "Go and look",
-      "effects": { "happiness": -3, "health": 4, "money": -4000, "stress": -4 },
+      "effects": {
+        "happiness": -3,
+        "health": 4,
+        "money": -4000,
+        "stress": -4
+      },
       "result": "It's a nice place. The quiz is on Wednesdays. You'd win."
     }
   },
   {
     "id": "a60_birthday_big",
     "text": "You are 80. The mayor sends a card. So does the king. So does a double-glazing company.",
-    "ages": [80, 80],
+    "ages": [
+      80,
+      80
+    ],
     "weight": 50,
     "room": "living",
-    "left": { "label": "Early night", "effects": { "stress": -2 } },
+    "left": {
+      "label": "Early night",
+      "effects": {
+        "stress": -2
+      }
+    },
     "right": {
       "label": "Pop the cork",
-      "effects": { "happiness": 8, "relationships": 6, "money": -400 },
+      "effects": {
+        "happiness": 8,
+        "relationships": 6,
+        "money": -400
+      },
       "result": "Four generations and a very nice cake."
     }
   },
   {
     "id": "a60_hundred",
     "text": "You are 100. A reporter asks for the secret. You are tempted to say 'luck', but it's a slow news day.",
-    "ages": [100, 100],
+    "ages": [
+      100,
+      100
+    ],
     "weight": 50,
     "room": "living",
-    "left": { "label": "Say 'luck'", "effects": { "happiness": 5 } },
+    "left": {
+      "label": "Say 'luck'",
+      "effects": {
+        "happiness": 5
+      }
+    },
     "right": {
       "label": "Say 'gin'",
-      "effects": { "happiness": 10, "karma": 2 },
+      "effects": {
+        "happiness": 10,
+        "karma": 2
+      },
       "result": "It makes the front page. Your family have to explain it to the vicar."
     }
   },
   {
     "id": "a60_flu",
     "text": "The flu is going round the street. You're being very good at getting it.",
-    "ages": [65, 100],
+    "ages": [
+      65,
+      100
+    ],
     "weight": 5,
     "room": "bedroom",
     "left": {
       "label": "Tough it out",
-      "effects": { "health": -8, "stress": 3 },
-      "death": { "chance": 0.03, "cause": "pneumonia after the flu" }
+      "effects": {
+        "health": -8,
+        "stress": 3
+      },
+      "death": {
+        "chance": 0.03,
+        "cause": "pneumonia after the flu"
+      }
     },
     "right": {
       "label": "Call the doctor",
-      "effects": { "health": -2, "money": -100, "stress": 1 },
+      "effects": {
+        "health": -2,
+        "money": -100,
+        "stress": 1
+      },
       "result": "Soup, antibiotics and a stern voice. Two weeks later you're up."
     }
   },
   {
     "id": "a60_old_photo",
     "text": "You find a box of photographs. A young person is grinning in every one. You know the grin.",
-    "ages": [65, 100],
+    "ages": [
+      65,
+      100
+    ],
     "weight": 5,
     "room": "bedroom",
-    "left": { "label": "Shut the box", "effects": { "happiness": -2 } },
+    "left": {
+      "label": "Shut the box",
+      "effects": {
+        "happiness": -2
+      }
+    },
     "right": {
       "label": "Look through them all",
-      "effects": { "happiness": 5, "stress": -3 },
+      "effects": {
+        "happiness": 5,
+        "stress": -3
+      },
       "result": "You lose an afternoon. It was well spent."
+    }
+  },
+  {
+    "id": "a60_r_walk",
+    "text": "The park bench is free. The ducks look expectant.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "living",
+    "left": {
+      "label": "Sit and watch",
+      "effects": {
+        "stress": -3,
+        "happiness": 1
+      }
+    },
+    "right": {
+      "label": "Do a lap",
+      "effects": {
+        "health": 2,
+        "stress": -2
+      },
+      "result": "You do one and a half laps and call it two."
+    }
+  },
+  {
+    "id": "a60_r_neighbour",
+    "text": "The neighbour wants to chat over the fence. It's been twenty minutes and you know about the bins.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "living",
+    "left": {
+      "label": "Escape inside",
+      "effects": {
+        "happiness": -1
+      }
+    },
+    "right": {
+      "label": "Chat",
+      "effects": {
+        "relationships": 2,
+        "happiness": 2,
+        "stress": 1
+      }
+    }
+  },
+  {
+    "id": "a60_r_crossword",
+    "text": "The crossword has one clue left. It has been one clue left since breakfast.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "living",
+    "left": {
+      "label": "Give up",
+      "effects": {
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Keep going",
+      "effects": {
+        "smarts": 1,
+        "happiness": 2
+      },
+      "result": "Nineteen across was 'ennui'. Of course it was."
+    }
+  },
+  {
+    "id": "a60_r_doctor",
+    "text": "Another appointment. The waiting room magazines are from a different decade.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "bathroom",
+    "left": {
+      "label": "Skip it",
+      "effects": {
+        "health": -2,
+        "money": 50
+      }
+    },
+    "right": {
+      "label": "Go",
+      "effects": {
+        "health": 2,
+        "money": -60,
+        "stress": 1
+      }
+    }
+  },
+  {
+    "id": "a60_r_call",
+    "text": "The phone rings. It's family, and they sound pleased you picked up.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "living",
+    "left": {
+      "label": "Let it ring",
+      "effects": {
+        "relationships": -2
+      }
+    },
+    "right": {
+      "label": "Talk for an hour",
+      "effects": {
+        "relationships": 3,
+        "happiness": 3
+      }
+    }
+  },
+  {
+    "id": "a60_r_cook",
+    "text": "It's cold out. There's a stew in your future if you want one.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "kitchen",
+    "left": {
+      "label": "Tin of soup",
+      "effects": {
+        "health": -1,
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Make the stew",
+      "effects": {
+        "health": 2,
+        "happiness": 2,
+        "money": -20
+      },
+      "result": "Enough for six. You live alone. The freezer is happy."
+    }
+  },
+  {
+    "id": "a60_r_nap",
+    "text": "The afternoon sun is on the armchair. It has your name on it.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "living",
+    "left": {
+      "label": "Stay awake",
+      "effects": {
+        "stress": 1
+      }
+    },
+    "right": {
+      "label": "Nap",
+      "effects": {
+        "health": 1,
+        "stress": -3,
+        "happiness": 1
+      }
+    }
+  },
+  {
+    "id": "a60_r_garden_chat",
+    "text": "A robin keeps watching you dig. It's expecting worms.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "kitchen",
+    "left": {
+      "label": "Leave it be",
+      "effects": {
+        "happiness": 1
+      }
+    },
+    "right": {
+      "label": "Feed the robin",
+      "effects": {
+        "happiness": 3,
+        "karma": 1,
+        "money": -5
+      }
+    }
+  },
+  {
+    "id": "a60_r_news",
+    "text": "The news is terrible again. You've heard all of this before, with different names.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "living",
+    "left": {
+      "label": "Switch it off",
+      "effects": {
+        "stress": -3
+      }
+    },
+    "right": {
+      "label": "Watch it all",
+      "effects": {
+        "stress": 3,
+        "smarts": 1
+      }
+    }
+  },
+  {
+    "id": "a60_r_radio",
+    "text": "An old song comes on. You remember exactly where you were.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "kitchen",
+    "left": {
+      "label": "Change the station",
+      "effects": {
+        "happiness": -1
+      }
+    },
+    "right": {
+      "label": "Turn it up",
+      "effects": {
+        "happiness": 4,
+        "stress": -2
+      }
+    }
+  },
+  {
+    "id": "a60_r_stairs",
+    "text": "The stairs are a lot. You have a choice about how to do them.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "living",
+    "left": {
+      "label": "One at a time, holding on",
+      "effects": {
+        "health": 1
+      }
+    },
+    "right": {
+      "label": "Race to the top",
+      "effects": {
+        "health": -3,
+        "happiness": 1
+      },
+      "result": "Nobody saw. You were not fast."
+    }
+  },
+  {
+    "id": "a60_r_shop",
+    "text": "The shop has a new self-service till. It speaks to you, and it's wrong about the bananas.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 3,
+    "once": false,
+    "room": "kitchen",
+    "left": {
+      "label": "Find a person",
+      "effects": {
+        "happiness": -1,
+        "relationships": 1
+      }
+    },
+    "right": {
+      "label": "Fight the machine",
+      "effects": {
+        "stress": 3,
+        "happiness": 1
+      },
+      "result": "You win. The queue behind you does not applaud."
     }
   }
 ]
