@@ -60,7 +60,7 @@ func _side(strat: String, card: Dictionary, rng: RandomNumberGenerator) -> Strin
 ## The between-year menu (GDD 6.5): the year's action budget, spent greedily on the best affordable
 ## actions, at most twice each (a real player mixes study, friends, gym and so on).
 func _menu_actions(state, actions) -> void:
-	state.actions_left = GameStateScript.ACTIONS_PER_YEAR
+	state.actions_left = GameStateScript.actions_per_year(state.age)
 	var used := {}
 	while state.actions_left > 0:
 		var best: Dictionary = {}

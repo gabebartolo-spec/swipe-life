@@ -250,7 +250,9 @@ func _test_actions() -> void:
 		if st.actions_left > 0 and ActionDB.perform(friends, st):
 			st.actions_left -= 1
 	_check(st.actions_left == 0, "action budget not spent")
-	_check(GameStateScript.ACTIONS_PER_YEAR == 8, "budget is not 8")
+	_check(GameStateScript.actions_per_year(12) == 8, "kid budget is not 8")
+	_check(GameStateScript.actions_per_year(3) == 4, "baby budget is not 4")
+	_check(GameStateScript.actions_per_year(20) == 12, "adult budget is not 12")
 	st.free()
 	_check("shop" not in ActionDB.tabs_at(17), "shop open before 18")
 	# money limits actions (§6.5); effort adds Stress, fun lowers it (§6.6)
