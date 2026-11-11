@@ -145,7 +145,7 @@ static func _year(state, slot, entry, career, rng, results: Array) -> void:
 	var rank: Dictionary = career.ranks[int(entry.rank)]
 	var pay := rank_pay(rank, state.age)
 	state.change_stat("money", pay)
-	state.change_stat("stress", int(rank.stress))
+	state.change_stat("stress", int(rank.stress) / 4)
 	state.change_stat("career", 2 + 2 * int(entry.rank))
 	if pay > 0:
 		results.append("%s paid you $%d this year." % [rank.title, pay])
