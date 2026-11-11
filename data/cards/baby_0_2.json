@@ -22,7 +22,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "There was a catch."},
       "result": "You fall asleep in a towel."
     }
-  , "up": {"label": "Make a tidal wave", "effects": {"happiness": 4, "health": 1, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"stress": 3, "relationships": -3}, "result": "The bathroom is a lake. Dad is a puddle."}}},
+  , "up": {"label": "Make a tidal wave", "effects": {"happiness": 5, "health": 2, "relationships": 3}, "risk": {"chance": 0.5, "effects": {"stress": 3, "relationships": -3}, "result": "The bathroom is a lake. Dad is a puddle."}}},
   {
     "id": "b0_night_feed",
     "text": "It is 3 a.m. You are hungry.",
@@ -221,7 +221,7 @@
         "stress": -1
       }
     },
-    "up": {"label": "Bite the nearest finger", "effects": {"stress": -4, "happiness": 3, "health": 1}, "risk": {"chance": 0.55, "effects": {"relationships": -4, "stress": 3}, "result": "A very loud yelp. Then a stern look."}}
+    "up": {"label": "Bite the nearest finger", "effects": {"stress": -4, "happiness": 4, "health": 2}, "risk": {"chance": 0.55, "effects": {"relationships": -4, "stress": 3}, "result": "A very loud yelp. Then a stern look."}}
   },
   {
     "id": "b0_first_word",
@@ -247,7 +247,7 @@
         "smarts": 2
       }
     },
-    "up": {"label": "Say a very rude word", "effects": {"smarts": 5, "happiness": 4, "relationships": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "Grandma was in the room. She is very still."}}
+    "up": {"label": "Say a very rude word", "effects": {"smarts": 6, "happiness": 5, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "Grandma was in the room. She is very still."}}
   },
   {
     "id": "b0_no_phase",
@@ -275,7 +275,7 @@
         "stress": 2
       }
     }
-  , "up": {"label": "Say no to the doctor", "effects": {"happiness": 4, "smarts": 3, "karma": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "The doctor gets the last word. And the needle."}}},
+  , "up": {"label": "Say no to the doctor", "effects": {"happiness": 5, "smarts": 4, "karma": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "The doctor gets the last word. And the needle."}}},
   {
     "id": "b0_crawl",
     "text": "Something shiny is across the room.",
@@ -548,7 +548,7 @@
       },
       "result": "You fall asleep mid-shout."
     }
-  , "up": {"label": "Escape the cot", "effects": {"health": -1, "happiness": 5, "smarts": 4}, "risk": {"chance": 0.5, "effects": {"health": -4, "stress": 3}, "result": "You land hard on the carpet. Alarms go off."}}},
+  , "up": {"label": "Escape the cot", "effects": {"health": -1, "happiness": 7, "smarts": 6}, "risk": {"chance": 0.5, "effects": {"health": -4, "stress": 3}, "result": "You land hard on the carpet. Alarms go off."}}},
   {
     "id": "b0_tantrum",
     "text": "You wanted the blue cup. You got the red cup.",
@@ -639,7 +639,7 @@
         "relationships": 3
       }
     }
-  , "up": {"label": "Use it as a drum", "effects": {"happiness": 5, "smarts": 3, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 2}, "result": "It was not empty."}}},
+  , "up": {"label": "Use it as a drum", "effects": {"happiness": 6, "smarts": 4, "relationships": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 2}, "result": "It was not empty."}}},
   {
     "id": "b0_crayon_wall",
     "text": "You found a crayon. The wall is big and empty.",
@@ -776,7 +776,7 @@
         "health": -2
       }
     },
-    "up": {"label": "Swallow it", "effects": {"happiness": 3, "smarts": 2, "health": 0}, "risk": {"chance": 0.6, "effects": {"health": -4, "stress": 3}, "result": "A trip to the hospital. For a sock."}}
+    "up": {"label": "Swallow it", "effects": {"happiness": 5, "smarts": 4, "health": 0}, "risk": {"chance": 0.6, "effects": {"health": -4, "stress": 3}, "result": "A trip to the hospital. For a sock."}}
   },
   {
     "id": "b0_mirror",

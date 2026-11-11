@@ -420,7 +420,7 @@
     "first_sleepover"
    ]
   }
- , "up": {"label": "Host one and invite everyone", "effects": {"relationships": 7, "happiness": 5, "money": -15}, "risk": {"chance": 0.45, "effects": {"stress": 5, "relationships": -4}, "result": "Three people cry. One breaks a lamp."}}},
+ , "up": {"label": "Host one and invite everyone", "effects": {"relationships": 8, "happiness": 6, "money": -15}, "risk": {"chance": 0.45, "effects": {"stress": 5, "relationships": -4}, "result": "Three people cry. One breaks a lamp."}}},
  {
   "id": "k6_sleepover_ghost",
   "text": "Someone at the sleepover starts a ghost story.",
@@ -791,7 +791,7 @@
     "relationships": 2
    }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "You paid for it later."}
   },
-  "up": {"label": "Upstage the lead", "effects": {"happiness": 6, "relationships": 3, "karma": -2}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "stress": 4}, "result": "You are removed from the cast. Mid-scene."}}
+  "up": {"label": "Upstage the lead", "effects": {"happiness": 8, "relationships": 5, "karma": -2}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "stress": 4}, "result": "You are removed from the cast. Mid-scene."}}
  },
  {
   "id": "k6_chore_chart",
@@ -839,7 +839,7 @@
     "health": -1
    }
   }
- , "up": {"label": "Sell your whole lunch for a pound", "effects": {"smarts": 5, "money": 10, "health": -1}, "risk": {"chance": 0.5, "effects": {"health": -3, "happiness": -3}, "result": "You are very hungry by two o'clock."}}},
+ , "up": {"label": "Sell your whole lunch for a pound", "effects": {"smarts": 8, "money": 16, "health": -1}, "risk": {"chance": 0.5, "effects": {"health": -3, "happiness": -3}, "result": "You are very hungry by two o'clock."}}},
  {
   "id": "k6_monster_bed",
   "text": "You are certain something lives under your bed.",

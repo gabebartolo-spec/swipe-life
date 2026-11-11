@@ -15,7 +15,7 @@
   {"id": "juvie_visit", "text": "Visiting day. Your family came. They brought the good biscuits.", "ages": [14, 17],
    "requires": {"flags": ["juvie"]}, "weight": 20,
    "left": {"label": "Act tough", "effects": {"relationships": -6, "stress": 6}},
-   "right": {"label": "Say sorry", "effects": {"relationships": 8, "happiness": 2, "karma": 3, "stress": 5}, "risk": {"chance": 0.3, "effects": {"relationships": -6, "stress": 2}, "result": "Mostly fine. Mostly."}}, "up": {"label": "Ask them to get you out early", "effects": {"relationships": 7, "happiness": 4, "stress": -4}, "risk": {"chance": 0.55, "effects": {"relationships": -8, "stress": 7}, "result": "They cannot. They cry in the car park."}}},
+   "right": {"label": "Say sorry", "effects": {"relationships": 8, "happiness": 2, "karma": 3, "stress": 5}, "risk": {"chance": 0.3, "effects": {"relationships": -6, "stress": 2}, "result": "Mostly fine. Mostly."}}, "up": {"label": "Ask them to get you out early", "effects": {"relationships": 8, "happiness": 5, "stress": -4}, "risk": {"chance": 0.55, "effects": {"relationships": -8, "stress": 7}, "result": "They cannot. They cry in the car park."}}},
   {"id": "juvie_release", "text": "Your caseworker signs the form. You're going home.", "ages": [14, 17],
    "requires": {"flags": ["juvie", "juvie_settled"]}, "weight": 40,
    "left": {"label": "Call the old crew", "effects": {"karma": -6, "happiness": 2, "stress": 6}, "clear_flags": ["juvie"],
