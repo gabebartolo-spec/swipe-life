@@ -24,7 +24,10 @@ Tools: `tools/audit/card_audit.py` (static, all 592 cards), `tools/audit/run.sh 
 1. **Fixed: 148 cards had a strictly better swipe.** `tools/audit/fix_dominated.py` gave each always-better
    swipe a 30% setback (its top gain undone, +2 Stress from age 6), so every card is safe vs gamble. The
    setback line is one of six generic lines; the card writing pass should replace them with specific ones.
-2. **Fixed: every card has a super swipe.** `tools/audit/add_up.py` wrote `up` for the 529 cards that lacked
-   one (text in `tools/audit/up_text/`): the better swipe doubled, a 50% setback, and a 2-4% death chance on 43
-   dangerous ones in total. Numbers are first-pass; the card writing pass should tune them.
+2. **Fixed: every card has a hand-written wildcard super swipe** (GDD 3.2-3.4: one per year, bolder, card-specific).
+   `tools/audit/up_v2/*.jsonl` holds all 592, applied by `tools/audit/set_up.py`. Each is a unique third action with
+   a bigger reward and a bigger risk than either swipe; death is rare (1-6%) and only where plausible. 200-life audit:
+   greedy death p10/p50/p90 [75, 81, 90]; greedy_super (spends it when worth it) [75, 80, 89], estate p50 +5%;
+   super_always [66, 81, 89], stress 77 vs 57. So spending it blindly costs the tail (earlier deaths, more stress),
+   while picking the moment pays a little: a real decision.
 3. Flags `gifted` and `juvie_studied` are set by cards and never read.

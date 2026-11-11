@@ -7,6 +7,9 @@ const GameStateScript := preload("res://scripts/autoload/game_state.gd")
 const VAL := {"stress": -1, "karma": 0.5}
 const GOOD := ["happiness", "health", "smarts", "looks", "relationships", "career"]
 const STRATS := ["random", "greedy", "worst", "greedy_frugal", "greedy_spender"]
+const EXTRA := ["greedy_super", "super_always"]  # run by name only
+const DEATH_COST := 60.0  # score a death is worth, for judging a super swipe
+const SUPER_MARGIN := 3.0  # how much better than the best normal swipe a super must look
 
 
 func _init() -> void:
@@ -52,6 +55,25 @@ func _side(strat: String, card: Dictionary, rng: RandomNumberGenerator) -> Strin
 	if strat == "worst":
 		left_better = not left_better
 	return "left" if left_better else "right"
+
+
+## Expected value of a super swipe: its gain, the risk roll's effects, and a death penalty.
+func _up_value(up: Dictionary) -> float:
+	var v := _score(up)
+	if up.has("risk"):
+		v += float(up.risk.chance) * _score(up.risk)
+	if up.has("death"):
+		v -= float(up.death.chance) * DEATH_COST
+	return v
+
+
+## greedy_super spends it when it beats the best normal swipe by a margin (or on the year's last
+## card); super_always spends it on the first card, as a baseline.
+func _take_super(strat: String, card: Dictionary, last: bool) -> bool:
+	if strat == "super_always" or last:
+		return true
+	var best := maxf(_score(card.left), _score(card.right))
+	return _up_value(card.up) - best >= SUPER_MARGIN
 
 
 func _adult_year(strat: String, state, deck: Deck, careers, fdb) -> void:
@@ -115,9 +137,16 @@ func _strategy(strat: String, lives: int, db, careers, fdb, actions) -> void:
 		var dead := false
 		var seen40 := false
 		while not dead and state.age <= 150:
+			var super_left: bool = strat in ["greedy_super", "super_always"]
 			for q in 4:
 				var card = deck.draw(state)
-				if card != null and deck.choose(card, _side(strat, card, deck.rng), state).died:
+				if card == null:
+					continue
+				var side := _side(strat, card, deck.rng)
+				if super_left and card.has("up") and _take_super(strat, card, q == 3):
+					side = "up"
+					super_left = false
+				if deck.choose(card, side, state).died:
 					dead = true
 					break
 			if dead:
