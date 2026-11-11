@@ -3,6 +3,8 @@ extends RefCounted
 ## Draws cards by age, requirements and weight, and applies a chosen side (GDD §2–§3, §5.3b).
 
 var cards: Array
+## Card sets a ribbon has unlocked (GDD §9.2). A card with a "set" stays out until its set is here.
+var open_sets: Array = []
 var rng := RandomNumberGenerator.new()
 
 
@@ -17,6 +19,8 @@ func _init(card_list: Array, seed_value: int = -1) -> void:
 func eligible(state) -> Array:
 	var out := []
 	for c in cards:
+		if c.has("set") and c.set not in open_sets:
+			continue
 		if c.get("once", true) and state.used.has(c.id):
 			continue
 		if state.age < c.ages[0] or state.age > c.ages[1]:

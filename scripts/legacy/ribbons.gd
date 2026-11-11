@@ -111,6 +111,15 @@ static func load_profile(path: String = PROFILE_PATH) -> Dictionary:
 	return out
 
 
+## Card sets the profile's ribbons have unlocked ("cards:dynasty" gives "dynasty"), for Deck.
+func card_sets(path: String = PROFILE_PATH) -> Array:
+	var out := []
+	for u: String in unlocked(path):
+		if u.begins_with("cards:"):
+			out.append(u.trim_prefix("cards:"))
+	return out
+
+
 ## Every content name any ribbon unlocks, earned or not.
 func all_unlocks() -> Array:
 	var out := []

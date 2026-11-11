@@ -860,6 +860,22 @@ func _test_unlocks(rb: Ribbons, s) -> void:
 	_check("cleaner" in ids.call(), "ordinary careers vanished")
 	db.unlocked = ["career:doctor"]
 	_check("doctor" in ids.call(), "unlocked career not offered")
+	var cdb := CardDB.new()
+	cdb.load_dir()
+	for u in rb.all_unlocks():
+		if u.begins_with("cards:"):
+			var in_set := cdb.cards.filter(
+				func(c): return c.get("set", "") == u.trim_prefix("cards:")
+			)
+			_check(in_set.size() >= 10, "ribbon unlocks thin card set %s" % u)
+	var deck := Deck.new(cdb.cards, 1)
+	s.new_life()
+	s.age = 40
+	s.flags["heir"] = true
+	var drawn := func(): return deck.eligible(s).filter(func(c): return c.has("set")).size()
+	_check(drawn.call() == 0, "locked card set drawn")
+	deck.open_sets = ["dynasty"]
+	_check(drawn.call() >= 5, "unlocked card set not drawn")
 
 
 ## Every shape, cut, clip and room depth map the living figures need is there, and a figure poses.

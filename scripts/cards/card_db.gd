@@ -8,7 +8,7 @@ const TEEN_MAX_AGE := 17
 ## On since the director approved the adult card bands (2026-11-09). Off stops lives at 18.
 const ADULT_LIFE := true
 const CARD_KEYS := [
-	"id", "text", "ages", "weight", "requires", "left", "right", "up", "once", "room"
+	"id", "text", "ages", "weight", "requires", "left", "right", "up", "once", "room", "set"
 ]
 const CHOICE_KEYS := [
 	"label",
@@ -79,6 +79,8 @@ func _check_card(c: Dictionary, where: String, ids: Dictionary) -> void:
 		errors.append("%s: 'ages' must be [min, max] within 0-%d" % [where, MAX_AGE])
 	if c.has("room") and not c.room in ["bedroom", "bathroom", "living", "kitchen"]:
 		errors.append("%s: unknown room '%s'" % [where, c.room])
+	if c.has("set") and not (c.set is String and c.set != ""):
+		errors.append("%s: 'set' must be a name" % where)
 	if c.has("weight") and not (c.weight is float and c.weight > 0):
 		errors.append("%s: 'weight' must be a positive number" % where)
 	if c.has("requires"):
