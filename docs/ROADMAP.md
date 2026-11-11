@@ -29,9 +29,9 @@ Rules for every milestone:
 | M8 Adult life core | Done (#58, #59): lives run past 18. Shop items moved to M11. |
 | M9 Adult home scene | Done: director approved all eight homes (2026-11-09). |
 | M10 Relationships and family | Done: adult People tab, partners, marriage, children, parents (`Family`). |
-| M12 Legacy and replay | Built (#70-#74): play on as your oldest grown-up child (`Legacy`), ribbons and a profile (`Ribbons`). Ribbons unlock careers (heir: Corporate; scholar: Doctor, Lawyer; rich: Banker; saint: Therapist; long life: Farmer); the Dynasty card set is still to write. |
+| M12 Legacy and replay | Built (#70-#74): play on as your oldest grown-up child (`Legacy`), ribbons and a profile (`Ribbons`). Ribbons unlock careers (heir: Corporate; scholar: Doctor, Lawyer; rich: Banker; saint: Therapist; long life: Farmer); the Dynasty card set (16 cards) is written. |
 | M13 Balance | First pass (#76): illness drains Health 1 a year, not 3. 1,000-life report: `tools/godot/balance_report.gd`. Careful players die at p50 77 (70-86); never visiting the doctor or friends p50 57 (was 38, all dead by 47). Dynasty card set (16 cards) written. Second pass (#80-#82): student loans cap at 6 course years a life, juvie ends at 18, living-room TV units match the shop media unit. Report player now dates, has 2 children, asks for promotions and takes fresh starts: 1,000 lives, max debt 514k, estate p50 1.22M (p5 741k, p95 2.5M), 2.7 promotions and 0.23 fresh starts a life. Release candidate 0.13.0 is on itch.io (web); Google Play is not needed for now (director, 2026-11-11), so itch is the release. The Android build workflow still makes the signed AAB (version code 2). |
-| M11 Ageing and death | Done: old age death (§5.3c), elderly look, 40 late-life cards 60+, sim checks, shop items shown as tags in rooms (clay props still to model). |
+| M11 Ageing and death | Done: old age death (§5.3c), elderly look, 40 late-life cards 60+, sim checks, shop items shown as tags in rooms (clay props modelled in #72/#74). |
 
 Open with the director:
 - Card rewrites: round 1 applied (#51). Further rounds come from the card doc
