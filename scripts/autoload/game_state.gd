@@ -1,7 +1,7 @@
 extends Node
 ## One life's state: age, quarter, stats, flags and the yearly super like (GDD §2–§4).
 
-const ACTIONS_PER_YEAR := 8  # GDD §6.5
+const ACTIONS_PER_YEAR := 12  # GDD §6.5: 3 per card turn from 13
 const STATS := [
 	"health",
 	"happiness",
@@ -55,7 +55,7 @@ func new_life() -> void:
 	flags = {}
 	used = {}
 	super_like_available = true
-	actions_left = ACTIONS_PER_YEAR
+	actions_left = actions_per_year(0)
 	careers = {}
 	partner = {}
 	children = []
@@ -147,3 +147,12 @@ func from_dict(d: Dictionary) -> void:
 		partner.affinity = int(partner.affinity)
 	for s in STATS:
 		stats[s] = int(d.stats.get(s, stats.get(s, 50 if s in TRAITS else 0)))
+
+
+## Menu actions per year by age (GDD §6.5): 1 per card turn under 6, 2 under 13, then 3.
+static func actions_per_year(at_age: int) -> int:
+	if at_age < 6:
+		return 4
+	if at_age < 13:
+		return 8
+	return ACTIONS_PER_YEAR

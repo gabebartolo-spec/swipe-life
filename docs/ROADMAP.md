@@ -167,6 +167,31 @@ Builds:
 - Release candidate on itch.io (web). Google Play internal testing is off for now (director, 2026-11-11).
 - **Exit:** the 1,000-life balance report stays inside its targets and the build is on itch.io with a devlog.
 
+## Stage 3 (director interview 2026-11-12, GDD §15). Each milestone ships itch web + APK.
+
+## M14 Swipe feel
+- Clay-bend drag, stat preview, haptics, super swipe moment, reactions, bars, floating numbers, calendar flip.
+## M15 Audio
+- Suno music by stage, career, mood; ElevenLabs SFX, grunts, place ambience (§15.17).
+## M16 Clay UI
+- Full clay redesign of the year menu and stats (§15.18).
+## M17 Character
+- Creator at birth, yearly ageing, wardrobe and context outfits, hair, tattoos, soft injuries (§15.6-15.7).
+## M18 Home
+- Room switching, bought items in slots with swaps, car in the driveway, pets, wealth-driven house (§15.5).
+## M19 Life in the scene
+- Full prop sets: careers, trophies, body changes, relationships and kids, fading over years (§15.6).
+## M20 People and places
+- Named people as clay characters with bond meters and own lives; workplace, school, street (§15.4, §15.8).
+## M21 Depth
+- Fame and infamy (6 tiers of cards), family background, chains and arcs, ~1,000 cards, richer text.
+## M22 World
+- ~15 countries, local cards and laws, emigration, languages (§15.10).
+## M23 Activities and mini-games
+- Job shifts, school tests, sport, music and stage, all skippable; optional activities (§15.13).
+## M24 Endings and legacy
+- Darkly comic deaths, recap scene and share image, wills, heirs, hundreds of achievements (§15.14-15.16).
+
 ## Stage 2 decisions (GDD §6.9, director 2026-11-03)
 - Every common real-world job; university and trade courses gate the jobs that need them (M8).
 - Rent or buy, mortgages and debt (M8, scene in M9).

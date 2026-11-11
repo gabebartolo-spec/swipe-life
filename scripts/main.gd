@@ -228,7 +228,7 @@ func _next_year() -> void:
 	GameState.age += 1
 	GameState.quarter = 0
 	GameState.super_like_available = true  # GDD §3.3
-	GameState.actions_left = GameState.ACTIONS_PER_YEAR  # GDD §6.5
+	GameState.actions_left = GameState.actions_per_year(GameState.age)  # GDD §6.5
 	if not adult_life and GameState.age > CardDB.TEEN_MAX_AGE:
 		_end("You turned 18.\nTo be continued...")
 		return

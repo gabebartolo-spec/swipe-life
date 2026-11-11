@@ -71,9 +71,10 @@
 - 6.2 Activities: e.g. gym, doctor, holiday, study; spend money to change stats.
 - 6.3 People: talk to, gift, date or argue with characters in your life.
 - 6.4 Job board: apply for jobs and courses.
-- 6.5 The menu allows 8 actions per year (2 per card turn); the budget refills each birthday. Free actions
-  (chores, friends, toys) would otherwise loop for ever, so money is no longer the only limit. Moving
-  money (savings, investments, debt) and navigation are free. (Director, 2026-11-12)
+- 6.5 The menu allows 3 actions per card turn from age 13 (12 per year, one per month); 2 per turn
+  aged 6-12 (8 per year) and 1 per turn under 6 (4 per year). Same in old age. The budget refills each
+  birthday. Free actions would otherwise loop for ever. Moving money (savings, investments, debt),
+  navigation and browsing places are free; doing things costs actions. (Director, 2026-11-12)
 - 6.6 Balance: effort, fear and conflict add Stress; that is their time cost (there is no time budget). Fun
   and rest (toys, friends, family, treats) lower it, on actions and card choices alike. Repeating effort in
   one year piles up Stress (and the illness risk of §4.5), so buying stats every year has a price beyond money.
@@ -171,6 +172,51 @@
 - 12.3 Launch target: about 300 cards. The first playable (birth to 18, `docs/ROADMAP.md`) has about 200
   cards for ages 0–17.
 - 12.4 Repo conventions are in `CLAUDE.md` (branches, PRs, CI, LFS, no keystores in git).
+
+## 15. Stage 3 direction (director interview, 2026-11-12)
+
+Audience: the director only for now (itch web + APK each milestone). Rating Mature 16+; nothing off-limits
+if handled with taste. The game is firmly anti-fascist, anti-sexist and anti-bigotry; faith and voting exist.
+English only for now. I decide content; the director reviews.
+
+- 15.1 Order: polish and feel first, starting with the swipe. Biggest weakness: the scene looks flat.
+- 15.2 Swipe feel: the card bends like heavy clay while dragged; stat icons preview the change on drag;
+  haptics; the super swipe gets a big moment (card flies up, burst, slow-mo, sound sting).
+- 15.3 Feedback: the character reacts (cheer, sulk, wince), stat bars animate, numbers float. The year turns
+  with a calendar flip. Cards get richer text (two to three lines).
+- 15.4 Places: home, workplace (office and law, trades and service first), school, town street. Cards move
+  you to their place; menu actions let you pick one. Browsing places is free.
+- 15.5 Home: room switching (bedroom, lounge, kitchen, garage). Bought items auto-fill fixed slots; the player
+  can swap which item fills a slot (a bought car in the driveway, a couch in the lounge). House size and type
+  and furniture quality follow money. Pets appear when acquired.
+- 15.6 Life shows in the scene (§10.7b): career props, trophies and wins, body changes, relationships and kids.
+  Changes fade over years (posters come down after the career). Build a full set per category, then show it.
+  Injuries are realistic but soft (casts, scars, wheelchair, missing limb).
+- 15.7 Character: chosen at birth (gender and pronouns, any; skin, hair, eyes; name; birthplace and family).
+  Looks change by shop (wardrobe, hair, tattoos) and by cards. Outfits follow context (work clothes at work,
+  pyjamas at night). Ages visibly every year, gradually.
+- 15.8 People: every named person is an on-screen clay character with a visible bond meter, living their own
+  life (friends marry, parents age and die, rivals succeed). Grunts and reactions, no speech.
+- 15.9 Family background (rich, poor, country, parents) changes gameplay strongly.
+- 15.10 World: about 15 countries to start, with local cards and laws (driving, drinking, school ages, legal
+  outcomes). Move country through cards and actions. Languages are learnable and gate jobs abroad.
+- 15.11 Fame: a new stat with 6 tiers (local, rising, known, famous, star, icon), each with its own card set.
+  It unlocks cards, boosts income, shows in the scene (fans, magazine covers) and lasts after death.
+  Infamy is a separate stat from crime and scandal, with its own cards.
+- 15.12 Content: about 1,000 cards. Cards chain over years: multi-year story arcs and loose callbacks.
+- 15.13 Play time: 15 minutes rushed, 2-3+ hours taking time. Slow play comes from optional activities (visit
+  places, shop, decorate, talk to people) and mini-games (job shifts, school tests, sport, music and stage).
+  Mini-games are always skippable (auto-resolve by stats); skill gives only a small bonus.
+- 15.14 Achievements: hundreds; common ones visible, rare ones secret with hints.
+- 15.15 Endings: darkly comic stop-motion death scenes, then a life recap scene (house and body as they ended,
+  a short story), shareable as an image.
+- 15.16 Legacy: optional. After death, play on as an heir at their current age, or start over. A will can be
+  written any time (an action) and edited at death; it decides who gets money and house and belongings.
+  Family reputation and relationships carry over. One life at a time (autosave).
+- 15.17 Audio: music changes with life stage, career and mood, made with Suno (I operate it in Chrome).
+  SFX: clay foley for UI, ambience per place; SFX and grunts from ElevenLabs. Existing credits on both
+  accounts may be used freely; ask before buying more.
+- 15.18 UI: full clay redesign of the year menu and stats.
 
 ## 13. Open questions (ask the director; do not decide)
 
