@@ -57,6 +57,34 @@ func _side(strat: String, card: Dictionary, rng: RandomNumberGenerator) -> Strin
 	return "left" if left_better else "right"
 
 
+## The between-year menu (GDD 6.5): the year's action budget, spent greedily on the best affordable
+## actions, at most twice each (a real player mixes study, friends, gym and so on).
+func _menu_actions(state, actions) -> void:
+	state.actions_left = GameStateScript.ACTIONS_PER_YEAR
+	var used := {}
+	while state.actions_left > 0:
+		var best: Dictionary = {}
+		var best_score := 0.0
+		for a in actions.actions:
+			if a.ages[0] > state.age or state.age > a.ages[1]:
+				continue
+			if (
+				used.get(a.id, 0) >= 2
+				or a.get("needs", []).size() > 0
+				or state.stats.money < int(a.get("cost", 0))
+			):
+				continue
+			var sc := _score(a) - float(a.get("cost", 0)) / 2000.0
+			if sc > best_score:
+				best_score = sc
+				best = a
+		if best.is_empty():
+			break
+		ActionDB.perform(best, state)
+		used[best.id] = used.get(best.id, 0) + 1
+		state.actions_left -= 1
+
+
 ## Expected value of a super swipe: its gain, the risk roll's effects, and a death penalty.
 func _up_value(up: Dictionary) -> float:
 	var v := _score(up)
@@ -163,9 +191,7 @@ func _strategy(strat: String, lives: int, db, careers, fdb, actions) -> void:
 				years += 1
 				jobs += 1 if state.careers.has("job") else 0
 				_adult_year(strat, state, deck, careers, fdb)
-			for a in actions.actions:
-				if a.id in ["doctor", "friends"] and a.ages[0] <= state.age:
-					ActionDB.perform(a, state)
+			_menu_actions(state, actions)
 			CareerRules.year_end(state, careers, deck.rng)
 			Finance.year_end(state, careers, deck.rng)
 			debt = maxi(debt, Finance.total_debt(state))

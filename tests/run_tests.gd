@@ -238,6 +238,20 @@ func _test_actions() -> void:
 	for want in ["club", "study"]:
 		_check(want in ids, "15-year-old can't see %s" % want)
 	_check("jobs" in ActionDB.tabs_at(15), "no career tab at 15")
+	# GDD §6.5: the menu has a yearly action budget, so free actions can't loop for ever
+	var st = GameStateScript.new()
+	st.new_life()
+	st.age = 12
+	var friends := {}
+	for a in db.actions:
+		if a.id == "study":
+			friends = a
+	for i in 30:
+		if st.actions_left > 0 and ActionDB.perform(friends, st):
+			st.actions_left -= 1
+	_check(st.actions_left == 0, "action budget not spent")
+	_check(GameStateScript.ACTIONS_PER_YEAR == 8, "budget is not 8")
+	st.free()
 	_check("shop" not in ActionDB.tabs_at(17), "shop open before 18")
 	# money limits actions (§6.5); effort adds Stress, fun lowers it (§6.6)
 	var state := GameStateScript.new()
