@@ -1,7 +1,7 @@
 class_name StatStrip
 extends GridContainer
-## Stat bars under the dollhouse (GDD §4.3–4.4, §10.5). Karma is hidden; Money is a number.
-## The two spectrums (GDD §4.6) are a track with a marker, low end named on the left.
+## Stat bars under the dollhouse (GDD Â§4.3â€“4.4, Â§10.5). Karma is hidden; Money is a number.
+## The two spectrums (GDD Â§4.6) are a track with a marker, low end named on the left.
 
 const SHORT := {
 	"health": "HP",
@@ -13,7 +13,7 @@ const SHORT := {
 	"stress": "Stress",
 }
 const SPECTRUMS := {"boldness": ["Safe", "Bold"], "sociability": ["Shy", "Social"]}
-const MARK_W := 10.0
+const MARK_W := 22.0
 
 var bars := {}
 var values := {}
@@ -25,12 +25,7 @@ func _ready() -> void:
 	columns = 5
 	add_theme_constant_override("h_separation", 14)
 	add_theme_constant_override("v_separation", 6)
-	var fill := StyleBoxFlat.new()
-	fill.bg_color = Color(0.98, 0.78, 0.4)
-	fill.set_corner_radius_all(4)
-	var back := StyleBoxFlat.new()
-	back.bg_color = Color(0.18, 0.19, 0.23)
-	back.set_corner_radius_all(4)
+	var back := ClayTheme.groove()
 	for s in SHORT:
 		var box := VBoxContainer.new()
 		box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -39,8 +34,8 @@ func _ready() -> void:
 		name_label.add_theme_font_size_override("font_size", 22)
 		var bar := ProgressBar.new()
 		bar.show_percentage = false
-		bar.custom_minimum_size.y = 16
-		bar.add_theme_stylebox_override("fill", fill)
+		bar.custom_minimum_size.y = 22
+		bar.add_theme_stylebox_override("fill", ClayTheme.bar_fill(s))
 		bar.add_theme_stylebox_override("background", back)
 		box.add_child(name_label)
 		box.add_child(bar)
@@ -60,11 +55,11 @@ func _ready() -> void:
 			end.horizontal_alignment = [HORIZONTAL_ALIGNMENT_LEFT, HORIZONTAL_ALIGNMENT_RIGHT][i]
 			ends.add_child(end)
 		var track := Panel.new()
-		track.custom_minimum_size.y = 16
+		track.custom_minimum_size.y = 22
 		track.add_theme_stylebox_override("panel", back)
-		var mark := ColorRect.new()
-		mark.color = fill.bg_color
-		mark.size = Vector2(MARK_W, 16)
+		var mark := Panel.new()
+		mark.add_theme_stylebox_override("panel", ClayTheme.bar_fill("happiness"))
+		mark.size = Vector2(MARK_W, 22)
 		track.add_child(mark)
 		marks[s] = mark
 		track.resized.connect(_place.bind(s))
@@ -82,7 +77,11 @@ func _ready() -> void:
 
 func refresh() -> void:
 	for s in bars:
-		create_tween().tween_property(bars[s], "value", GameState.stats[s], 0.3)
+		var bar: ProgressBar = bars[s]
+		if is_inside_tree() and int(bar.value) != int(GameState.stats[s]):
+			_pulse(bar.get_parent())
+		var t := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		t.tween_property(bar, "value", GameState.stats[s], 0.5)
 		values[s].text = "%s %d" % [SHORT[s], GameState.stats[s]]
 	money_label.text = Finance.money_text(GameState.stats.money)
 	var debt := Finance.total_debt(GameState)
@@ -98,12 +97,12 @@ func refresh() -> void:
 
 
 func _place(s: String) -> void:
-	var mark: ColorRect = marks[s]
+	var mark: Control = marks[s]
 	var x: float = (mark.get_parent().size.x - MARK_W) * GameState.stats[s] / 100.0
 	create_tween().tween_property(mark, "position:x", x, 0.3)
 
 
-## Drag preview (GDD §15.2): the stats this choice will move glow green (better) or red (worse).
+## Drag preview (GDD Â§15.2): the stats this choice will move glow green (better) or red (worse).
 ## Only the sure effects show, never the size or the hidden risk.
 func preview(effects: Dictionary) -> void:
 	for s in values:
@@ -118,3 +117,11 @@ func preview(effects: Dictionary) -> void:
 	money_label.modulate = (
 		Color.WHITE if m == 0 else (Color(0.6, 1.4, 0.7) if m > 0 else Color(1.5, 0.6, 0.55))
 	)
+
+
+## A changed stat squishes like poked clay (GDD §15.3).
+func _pulse(box: Control) -> void:
+	box.pivot_offset = box.size / 2
+	var t := box.create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	box.scale = Vector2(1.12, 0.88)
+	t.tween_property(box, "scale", Vector2.ONE, 0.6)

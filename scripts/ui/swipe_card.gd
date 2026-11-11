@@ -19,12 +19,15 @@ var text_label := Label.new()
 var hint_label := Label.new()
 var shown_side := ""
 var squish: Tween
+var gone := false  # committed: the fly-off must not re-light the stat preview
 
 
 func _ready() -> void:
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(1, 0.99, 0.96)
-	style.set_corner_radius_all(24)
+	style.set_corner_radius_all(28)
+	style.border_width_bottom = 12  # clay slab thickness (GDD §15.18)
+	style.border_color = Color(0.86, 0.8, 0.7)
 	style.shadow_size = 12
 	style.shadow_color = Color(0, 0, 0, 0.25)
 	add_theme_stylebox_override("panel", style)
@@ -53,6 +56,7 @@ func show_card(c: Dictionary, super_ok: bool) -> void:
 	rotation = 0
 	scale = Vector2.ONE
 	shown_side = ""
+	gone = false
 	modulate.a = 0
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.2)
 
@@ -86,7 +90,7 @@ func set_drag(d: Vector2) -> void:
 			if absf(drag.x) > absf(drag.y)
 			else Vector2(1.0 - pull * 0.4, 1.0 + pull * 0.5)
 		)
-	var side := side_for(drag, PREVIEW_AT)
+	var side := "" if gone else side_for(drag, PREVIEW_AT)
 	if side != shown_side:
 		shown_side = side
 		previewing.emit(side)
@@ -119,6 +123,7 @@ func _release() -> void:
 
 func commit(side: String) -> void:
 	locked = true
+	gone = true
 	shown_side = ""
 	previewing.emit("")
 	if side == "up":
