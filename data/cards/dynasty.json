@@ -33,7 +33,7 @@
   {
     "id": "dyn_expectations",
     "set": "dynasty",
-    "text": "'Your family has always done well,' says the careers teacher, looking at your marks. 'Until now.'",
+    "text": "'Your family has always done well,' says the careers teacher, looking at your marks over her glasses. 'Until now.'",
     "ages": [
       13,
       17
@@ -96,7 +96,7 @@
   {
     "id": "dyn_watch",
     "set": "dynasty",
-    "text": "You find the family watch in a drawer. It stopped the minute its last owner did. A dealer offers $4,000.",
+    "text": "In a drawer: the family watch. It stopped the minute its last owner did. A dealer turns it over and offers $4,000.",
     "ages": [
       16,
       45
@@ -127,7 +127,7 @@
   {
     "id": "dyn_cousin",
     "set": "dynasty",
-    "text": "A cousin you have never met says the will was wrong and they want their share. They have brought a folder.",
+    "text": "A cousin you've never met says the will was wrong and wants their share. They've brought a folder. It's colour-coded.",
     "ages": [
       20,
       65
@@ -166,7 +166,7 @@
   {
     "id": "dyn_plot",
     "set": "dynasty",
-    "text": "The family plot at the cemetery has one space left. The office rings to ask if you'd like to reserve it.",
+    "text": "The family plot at the cemetery has one space left. The office rings, very cheerful, to ask if you'd like to reserve it.",
     "ages": [
       30,
       90
@@ -197,7 +197,7 @@
   {
     "id": "dyn_pudding",
     "set": "dynasty",
-    "text": "Every year your family eats the same grey pudding on the same day. Nobody likes it. This year it is your turn to make it.",
+    "text": "Every year your family eats the same grey pudding on the same day. Nobody likes it. This year it's your turn to make it.",
     "ages": [
       18,
       70
@@ -229,7 +229,7 @@
   {
     "id": "dyn_door_frame",
     "set": "dynasty",
-    "text": "On an old door frame you find a parent's height marks in pencil, year by year. At your age they were taller.",
+    "text": "On an old door frame, a parent's height marks in pencil, year by year. At your age they were taller. By a lot.",
     "ages": [
       18,
       50
@@ -259,7 +259,7 @@
   {
     "id": "dyn_curse",
     "set": "dynasty",
-    "text": "An old neighbour tells you your family is cursed: not one of you has ever died peacefully. They say it kindly.",
+    "text": "An old neighbour tells you your family is cursed: not one of you has ever died peacefully. She says it kindly, with tea.",
     "ages": [
       18,
       75
@@ -297,7 +297,7 @@
   {
     "id": "dyn_letter",
     "set": "dynasty",
-    "text": "In the attic: a letter marked 'to be opened when I am gone'. It is mostly about the boiler.",
+    "text": "In the attic: a letter marked 'to be opened when I am gone'. You open it, heart racing. It is mostly about the boiler.",
     "ages": [
       18,
       60
@@ -328,7 +328,7 @@
   {
     "id": "dyn_alpacas",
     "set": "dynasty",
-    "text": "A relative has heard you came into money. They have a business idea. It involves alpacas.",
+    "text": "A relative has heard you came into money. They have a business idea and a slideshow. It involves alpacas. Many alpacas.",
     "ages": [
       18,
       70
@@ -365,7 +365,7 @@
   {
     "id": "dyn_tree",
     "set": "dynasty",
-    "text": "A website offers to trace your family tree for $200.",
+    "text": "A website offers to trace your family tree for $200. The ad says one in five people find a pirate. Or worse.",
     "ages": [
       25,
       80
@@ -396,7 +396,7 @@
   {
     "id": "dyn_reunion",
     "set": "dynasty",
-    "text": "Family reunion. Forty relatives, one barbecue, and an uncle with opinions.",
+    "text": "Family reunion. Forty relatives, one barbecue, paper plates, and an uncle with opinions and a folding chair.",
     "ages": [
       20,
       85
@@ -447,7 +447,7 @@
   {
     "id": "dyn_historian",
     "set": "dynasty",
-    "text": "A local historian wants to write a book about your family. They ask if there's anything you'd like left out.",
+    "text": "A local historian wants to write a book about your family. Pen ready, they ask if there's anything you'd like left out.",
     "ages": [
       50,
       95
@@ -474,7 +474,7 @@
   {
     "id": "dyn_bench",
     "set": "dynasty",
-    "text": "The council offers a memorial bench with your family name on it for $900. You are not dead, but they suggest planning ahead.",
+    "text": "The council offers a bench with your family name on it for $900. You're not dead, but they suggest planning ahead.",
     "ages": [
       60,
       100

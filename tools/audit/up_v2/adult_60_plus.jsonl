@@ -34,7 +34,7 @@
 {"id":"a60_r_cook","label":"Cook for the whole street","effects":{"relationships":7,"happiness":6,"karma":3},"risk":{"chance":0.4,"effects":{"money":-250,"stress":5},"result":"Eleven people. One oven. No more spoons."}}
 {"id":"a60_r_nap","label":"Take the armchair outside","effects":{"health":3,"stress":-6,"happiness":4},"risk":{"chance":0.4,"effects":{"health":-3,"looks":-2},"result":"You wake up sunburnt and soaked."}}
 {"id":"a60_r_garden_chat","label":"Build it a house","effects":{"happiness":6,"karma":3,"smarts":2},"risk":{"chance":0.45,"effects":{"happiness":-4,"stress":3},"result":"It chooses the neighbour's."}}
-{"id":"a60_r_news","label":"Write to your MP","effects":{"karma":4,"smarts":5,"stress":-2},"risk":{"chance":0.5,"effects":{"stress":5,"happiness":-3},"result":"Form letter. Same one as last time."}}
+{"id":"a60_r_news","label":"Write to your representative","effects":{"karma":4,"smarts":5,"stress":-2},"risk":{"chance":0.5,"effects":{"stress":5,"happiness":-3},"result":"Form letter. Same one as last time."}}
 {"id":"a60_r_radio","label":"Dance in the kitchen","effects":{"happiness":7,"health":3,"stress":-4},"risk":{"chance":0.45,"effects":{"health":-6,"stress":3},"result":"Your hip says no."},"death":{"chance":0.02,"cause":"The kitchen floor was wet."}}
 {"id":"a60_r_stairs","label":"Install the stairlift and race it","effects":{"happiness":6,"health":2,"money":-1500},"risk":{"chance":0.45,"effects":{"health":-5,"stress":3},"result":"It has an emergency brake. It uses it."}}
 {"id":"a60_r_shop","label":"Start a petition","effects":{"karma":5,"relationships":5,"happiness":3},"risk":{"chance":0.45,"effects":{"stress":5,"relationships":-3},"result":"The manager reads it at the till. Out loud."}}

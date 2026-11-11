@@ -35,7 +35,7 @@ func _ready() -> void:
 		l.add_theme_color_override("font_color", Color(0.15, 0.15, 0.18))
 		add_child(l)
 	text_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	text_label.add_theme_font_size_override("font_size", 34)
+	text_label.add_theme_font_size_override("font_size", 32)  # 2-3 lines of ~110 chars (GDD §15.3)
 	hint_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 	hint_label.add_theme_font_size_override("font_size", 30)
 	pivot_offset = size / 2

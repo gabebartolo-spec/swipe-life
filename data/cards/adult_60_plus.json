@@ -1,7 +1,7 @@
 [
   {
     "id": "a60_birthday",
-    "text": "You turn 60. Someone gives you a card with a cartoon tortoise on it. It's a compliment, apparently.",
+    "text": "You turn 60. Someone gives you a card with a cartoon tortoise in a party hat on it. It's a compliment, apparently.",
     "ages": [
       60,
       60
@@ -26,7 +26,7 @@
   , "up": {"label": "Skydive to celebrate", "effects": {"happiness": 10, "health": 3, "relationships": 5}, "risk": {"chance": 0.4, "effects": {"health": -7, "stress": 4}, "result": "You land badly and the whole family watched."}, "death": {"chance": 0.02, "cause": "The parachute opened a second too late."}}},
   {
     "id": "a60_retire_date",
-    "text": "HR has sent a leaflet called 'Your Next Chapter'. The chapter has a lot of white space.",
+    "text": "HR sends a leaflet called 'Your Next Chapter', with a couple laughing at a salad. The chapter has a lot of white space.",
     "ages": [
       60,
       68
@@ -54,7 +54,7 @@
   , "up": {"label": "Retire to a tiny island", "effects": {"stress": -12, "happiness": 8, "money": -5000}, "risk": {"chance": 0.45, "effects": {"money": -3000, "happiness": -6}, "result": "The island has one shop. It closes at three."}}},
   {
     "id": "a60_leaving_do",
-    "text": "The leaving do is in the pub. Everyone you have worked with for thirty years says 'we must keep in touch'.",
+    "text": "The leaving do is in the pub. Thirty years of colleagues say 'we must keep in touch'. The card is signed by strangers.",
     "ages": [
       62,
       68
@@ -80,7 +80,7 @@
   , "up": {"label": "Announce you're starting a band", "effects": {"happiness": 8, "relationships": 7, "looks": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -5, "relationships": -3}, "result": "The first gig is a wedding. It's not going well."}}},
   {
     "id": "a60_empty_days",
-    "text": "It's Tuesday. You have no work, no plans and nobody who needs you. The day is very long.",
+    "text": "It's Tuesday. No work, no plans, nobody who needs you. The kitchen clock ticks louder than it used to. The day is long.",
     "ages": [
       64,
       75
@@ -111,7 +111,7 @@
   , "up": {"label": "Walk the entire coast path", "effects": {"health": 7, "happiness": 9, "money": -1200}, "risk": {"chance": 0.45, "effects": {"health": -6, "stress": 4}, "result": "Blisters. Rain. A very long day four."}}},
   {
     "id": "a60_grandchild",
-    "text": "Your child hands you a small, furious person. It is your grandchild. It has your nose.",
+    "text": "Your child hands you a small, furious bundle. It is your grandchild. It is red in the face. It has your nose.",
     "ages": [
       58,
       78
@@ -139,7 +139,7 @@
   , "up": {"label": "Move into the same street", "effects": {"happiness": 14, "relationships": 9, "money": -5000}, "risk": {"chance": 0.45, "effects": {"stress": 8, "relationships": -5}, "result": "Your child wanted a bit of space."}}},
   {
     "id": "a60_grandchild_visit",
-    "text": "The grandchildren are coming for the weekend. There is one biscuit tin and eight hours of energy.",
+    "text": "The grandchildren are coming for the weekend. There's one biscuit tin, one fragile vase and eight hours of energy each.",
     "ages": [
       62,
       85
@@ -165,7 +165,7 @@
   , "up": {"label": "Let them run the house", "effects": {"happiness": 12, "relationships": 7, "looks": -1}, "risk": {"chance": 0.5, "effects": {"money": -800, "stress": 6}, "result": "There's glitter on the ceiling now."}}},
   {
     "id": "a60_hip",
-    "text": "The surgeon says your hip is 'a bit worn'. You have also, it turns out, been walking funny.",
+    "text": "The surgeon says your hip is 'a bit worn' and shows you an X-ray like a cracked teacup. Also, you've been walking funny.",
     "ages": [
       62,
       80
@@ -195,7 +195,7 @@
   , "up": {"label": "Go abroad for the cheaper operation", "effects": {"health": 8, "money": 500, "happiness": 3}, "risk": {"chance": 0.4, "effects": {"health": -9, "money": -3000}, "result": "A complication. Back home, back in hospital."}}},
   {
     "id": "a60_cataract",
-    "text": "The optician says the world looks like it's behind a bath curtain because it is. It can be fixed.",
+    "text": "The world has gone soft and blurry. The optician says it looks like it's behind a bath curtain because it is. Fixable.",
     "ages": [
       62,
       85
@@ -221,7 +221,7 @@
   , "up": {"label": "Get the premium lenses", "effects": {"health": 6, "happiness": 7, "money": -3000}, "risk": {"chance": 0.3, "effects": {"health": -5, "happiness": -4}, "result": "One eye is great. The other has opinions."}}},
   {
     "id": "a60_pills",
-    "text": "You now take eleven tablets a day. They live in a plastic box with the days of the week on it.",
+    "text": "You now take eleven tablets a day. They live in a plastic box with the days of the week on it. Wednesday rattles most.",
     "ages": [
       63,
       85
@@ -250,7 +250,7 @@
   , "up": {"label": "Ditch half and go herbal", "effects": {"happiness": 8, "health": 3, "stress": -5, "money": 600}, "risk": {"chance": 0.5, "effects": {"health": -9, "stress": 5}, "result": "The doctor has a one-line report on your decision."}, "death": {"chance": 0.03, "cause": "Dropping the tablets caught up with you."}}},
   {
     "id": "a60_fall",
-    "text": "The rug moved. You went with it. You're lying on the floor looking at the underside of your own sofa.",
+    "text": "The rug moved. You went with it. You're on the floor, staring at the underside of your sofa. A biscuit lives there.",
     "ages": [
       66,
       90
@@ -282,7 +282,7 @@
   , "up": {"label": "Get up and prove you can", "effects": {"happiness": 3, "health": 2, "stress": -2}, "risk": {"chance": 0.55, "effects": {"health": -10, "money": -500}, "result": "You can't. You wait three hours."}}},
   {
     "id": "a60_downsize",
-    "text": "The stairs have started to look like a mountain. There's a bungalow on the next street.",
+    "text": "The stairs have started to look like a mountain, the bedroom at the summit. There's a bungalow on the next street.",
     "ages": [
       64,
       85
@@ -310,7 +310,7 @@
   , "up": {"label": "Move into a narrowboat", "effects": {"happiness": 8, "stress": -5, "money": 3000}, "risk": {"chance": 0.45, "effects": {"health": -5, "stress": 6}, "result": "The engine fails in a lock. Then it rains."}}},
   {
     "id": "a60_friend_dies",
-    "text": "Another name has crossed out of the address book. You're now the person who remembers the funny story.",
+    "text": "Another name has been crossed out of the address book. You're the last who knows the funny story about the caravan.",
     "ages": [
       62,
       95
@@ -336,7 +336,7 @@
   , "up": {"label": "Fulfil their bucket list", "effects": {"karma": 7, "happiness": 5, "relationships": 5}, "risk": {"chance": 0.4, "effects": {"money": -2500, "health": -4}, "result": "Item three was a bungee jump. Your back remembers."}}},
   {
     "id": "a60_partner_ill",
-    "text": "Your partner is poorly, and the doctor is using 'long term' about it. You're now the carer.",
+    "text": "Your partner is poorly, and the doctor says 'long term'. New pill boxes line the counter. You're now the carer.",
     "ages": [
       65,
       90
@@ -365,7 +365,7 @@
   , "up": {"label": "Sell up and take them somewhere warm", "effects": {"relationships": 9, "happiness": 6, "money": -6000}, "risk": {"chance": 0.5, "effects": {"stress": 8, "health": -5}, "result": "Treatment abroad is a different matter."}}},
   {
     "id": "a60_widowed",
-    "text": "The house is quiet in the evenings. You keep making tea for two.",
+    "text": "The house is quiet in the evenings. Their chair still has the dent in it. You keep making tea for two.",
     "ages": [
       68,
       95
@@ -392,7 +392,7 @@
   , "up": {"label": "Take up their old hobby", "effects": {"happiness": 7, "relationships": 4, "karma": 3}, "risk": {"chance": 0.45, "effects": {"happiness": -8, "stress": 4}, "result": "Their kit, their stool, their silence."}}},
   {
     "id": "a60_late_love",
-    "text": "You've met someone at the choir. They laugh at your jokes. They have, frankly, excellent knees.",
+    "text": "You've met someone at the choir. They sing slightly flat. They laugh at your jokes. They have, frankly, excellent knees.",
     "ages": [
       62,
       85
@@ -423,7 +423,7 @@
   , "up": {"label": "Move in together at once", "effects": {"happiness": 16, "relationships": 8, "money": -1500}, "risk": {"chance": 0.4, "effects": {"happiness": -9, "relationships": -5}, "result": "They snore. And leave the kettle on."}}},
   {
     "id": "a60_scam_call",
-    "text": "A young man from your bank would like your PIN, urgently. He's very polite. He's also breathing like a man at a call centre.",
+    "text": "A polite young man from \"your bank\" wants your PIN, urgently. Behind him, forty other voices are asking for PINs.",
     "ages": [
       65,
       95
@@ -450,7 +450,7 @@
   , "up": {"label": "Play along and trace him", "effects": {"karma": 6, "smarts": 4, "happiness": 5}, "risk": {"chance": 0.4, "effects": {"money": -3000, "stress": 8}, "result": "He was better at this than you were."}}},
   {
     "id": "a60_phone",
-    "text": "Your grandchild wants to show you a thing called a 'video call'. Your face is enormous in it.",
+    "text": "Your grandchild wants to show you a thing called a 'video call'. Your face fills the screen, mostly nostril.",
     "ages": [
       62,
       90
@@ -475,7 +475,7 @@
   , "up": {"label": "Open an account and post daily", "effects": {"relationships": 7, "happiness": 6, "looks": 1}, "risk": {"chance": 0.45, "effects": {"money": -2000, "stress": 6}, "result": "Someone gets your details. It's a hard day."}}},
   {
     "id": "a60_garden",
-    "text": "The allotment committee has a plot going. It has been fallow, they say, for 'a while'. It is a small forest.",
+    "text": "The allotment committee has a plot going. Fallow, they say, for 'a while'. It's a small forest. Something lives there.",
     "ages": [
       62,
       85
@@ -506,7 +506,7 @@
   , "up": {"label": "Enter the giant marrow contest", "effects": {"happiness": 12, "relationships": 6, "health": 4}, "risk": {"chance": 0.45, "effects": {"happiness": -6, "stress": 4}, "result": "Slugs. All of them. In one night."}}},
   {
     "id": "a60_cruise",
-    "text": "The brochure says: 'Unpack once.' You like the sound of that. You like the buffet even more.",
+    "text": "The brochure says: 'Unpack once.' You like the sound of that. The tennis-court-sized buffet, even more.",
     "ages": [
       62,
       80
@@ -533,7 +533,7 @@
   , "up": {"label": "Sell the car and sail the Atlantic", "effects": {"happiness": 22, "relationships": 5, "stress": -8, "money": -6000}, "risk": {"chance": 0.45, "effects": {"health": -7, "stress": 6}, "result": "The crossing is rough. The captain isn't nice."}, "death": {"chance": 0.02, "cause": "The storm took the boat. You went with it."}}},
   {
     "id": "a60_will",
-    "text": "The solicitor has papers. There are choices about who gets the house, the spoons, and the cat.",
+    "text": "The solicitor has papers and a very good pen. Who gets the house, the spoons, the cat? The cat has not been consulted.",
     "ages": [
       65,
       95
@@ -559,7 +559,7 @@
   , "up": {"label": "Leave it all to a stranger's charity", "effects": {"karma": 14, "stress": -8, "happiness": 8, "relationships": -4}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 6}, "result": "The family isn't speaking to you."}}},
   {
     "id": "a60_memory",
-    "text": "You went upstairs for something. You are now upstairs. This has happened before.",
+    "text": "You went upstairs for something. You are now upstairs, holding a sock. This has happened before. Twice this week.",
     "ages": [
       68,
       95
@@ -585,7 +585,7 @@
   , "up": {"label": "Join the experimental trial", "effects": {"health": 5, "karma": 6, "smarts": 2}, "risk": {"chance": 0.4, "effects": {"health": -6, "stress": 6}, "result": "A side effect nobody mentioned."}}},
   {
     "id": "a60_memoir",
-    "text": "Your grandchild says: 'Tell me what it was like.' It was, you realise, quite a lot.",
+    "text": "Your grandchild holds up a phone to record you and says: 'Tell me what it was like.' It was, you realise, quite a lot.",
     "ages": [
       65,
       95
@@ -610,7 +610,7 @@
   , "up": {"label": "Record it as a podcast", "effects": {"happiness": 12, "relationships": 8, "career": 2}, "risk": {"chance": 0.4, "effects": {"happiness": -5, "relationships": -4}, "result": "A cousin hears what you said about her wedding."}}},
   {
     "id": "a60_dance_class",
-    "text": "The community hall does a tea dance on Thursdays. A woman in a sequined cardigan beckons.",
+    "text": "The community hall does a tea dance on Thursdays. Two men and a keyboard play. A woman in a sequined cardigan beckons.",
     "ages": [
       62,
       90
@@ -640,7 +640,7 @@
   , "up": {"label": "Enter the national championships", "effects": {"happiness": 12, "health": 6, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"health": -7, "happiness": -4}, "result": "You pull something on the first lift."}}},
   {
     "id": "a60_care_home",
-    "text": "Your child gently shows you a brochure. It has a conservatory and a lot of cheerful photos of nurses.",
+    "text": "Your child gently shows you a brochure. A conservatory, a bingo night, and many cheerful nurses holding teapots.",
     "ages": [
       78,
       98
@@ -669,7 +669,7 @@
   , "up": {"label": "Buy a retirement flat in a village", "effects": {"happiness": 6, "health": 4, "relationships": 5}, "risk": {"chance": 0.4, "effects": {"money": -6000, "stress": 6}, "result": "The service charge is a work of fiction."}}},
   {
     "id": "a60_birthday_big",
-    "text": "You are 80. The mayor sends a card. So does the king. So does a double-glazing company.",
+    "text": "You are 80. The mayor sends a card. So does the king. So does a double-glazing company, with a discount voucher.",
     "ages": [
       80,
       80
@@ -694,7 +694,7 @@
   , "up": {"label": "Rent a castle for the weekend", "effects": {"happiness": 13, "relationships": 10, "money": -3000}, "risk": {"chance": 0.4, "effects": {"health": -5, "stress": 5}, "result": "The staircase is a lot. As is the bill."}}},
   {
     "id": "a60_hundred",
-    "text": "You are 100. A reporter asks for the secret. You are tempted to say 'luck', but it's a slow news day.",
+    "text": "You are 100. A reporter asks for the secret. You're tempted to say 'luck', but it's a slow news day and there's cake.",
     "ages": [
       100,
       100
@@ -718,7 +718,7 @@
   , "up": {"label": "Tell the truth about all of it", "effects": {"happiness": 22, "karma": 6, "relationships": -3}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 5}, "result": "Your relatives read the papers the next day."}}},
   {
     "id": "a60_flu",
-    "text": "The flu is going round the street. You're being very good at getting it.",
+    "text": "The flu is going round the street, house by house. You're being very good at getting it. The tissues are running out.",
     "ages": [
       65,
       100
@@ -748,7 +748,7 @@
   , "up": {"label": "Go to the hospital and demand antivirals", "effects": {"health": 4, "stress": -2, "money": -500}, "risk": {"chance": 0.4, "effects": {"health": -6, "stress": 5}, "result": "The ward has the worst bug of all."}}},
   {
     "id": "a60_old_photo",
-    "text": "You find a box of photographs. A young person is grinning in every one. You know the grin.",
+    "text": "You find a box of photographs in the loft. A young person grins in every one, with terrible hair. You know that grin.",
     "ages": [
       65,
       100
@@ -772,7 +772,7 @@
   , "up": {"label": "Track down everyone in the photographs", "effects": {"relationships": 10, "happiness": 8, "money": -800}, "risk": {"chance": 0.5, "effects": {"happiness": -9, "stress": 4}, "result": "Most of them have died. You find out one at a time."}}},
   {
     "id": "a60_r_walk",
-    "text": "The park bench is free. The ducks look expectant.",
+    "text": "The park bench is free, and still warm from the sun. The ducks have formed a line. They look expectant.",
     "ages": [
       60,
       100
@@ -798,7 +798,7 @@
   , "up": {"label": "Walk to the next town", "effects": {"health": 5, "happiness": 4, "smarts": 1}, "risk": {"chance": 0.45, "effects": {"health": -6, "money": -30}, "result": "You have to get a taxi back. The taxi driver lectures you."}}},
   {
     "id": "a60_r_neighbour",
-    "text": "The neighbour wants to chat over the fence. It's been twenty minutes and you know about the bins.",
+    "text": "The neighbour wants to chat over the fence. It's been twenty minutes. You now know everything about the bins.",
     "ages": [
       60,
       100
@@ -823,7 +823,7 @@
   , "up": {"label": "Invite them in for dinner", "effects": {"relationships": 5, "happiness": 5, "money": -40}, "risk": {"chance": 0.4, "effects": {"relationships": -4, "stress": 4}, "result": "They've brought their opinions on politics."}}},
   {
     "id": "a60_r_crossword",
-    "text": "The crossword has one clue left. It has been one clue left since breakfast.",
+    "text": "The crossword has one clue left. Seven letters, ends in E. It's been one clue left since breakfast. The tea is cold.",
     "ages": [
       60,
       100
@@ -848,7 +848,7 @@
   , "up": {"label": "Send it to the paper", "effects": {"smarts": 3, "happiness": 5, "karma": 1}, "risk": {"chance": 0.45, "effects": {"happiness": -4, "smarts": -1}, "result": "The answer was one letter off. In print."}}},
   {
     "id": "a60_r_doctor",
-    "text": "Another appointment. The waiting room magazines are from a different decade.",
+    "text": "Another appointment. The waiting room smells of hand gel. The magazines are from a different decade, quizzes filled in.",
     "ages": [
       60,
       100
@@ -874,7 +874,7 @@
   , "up": {"label": "Ask for every test going", "effects": {"health": 6, "stress": -2, "money": -300}, "risk": {"chance": 0.4, "effects": {"stress": 7, "health": -3}, "result": "They find three things to watch."}}},
   {
     "id": "a60_r_call",
-    "text": "The phone rings. It's family, and they sound pleased you picked up.",
+    "text": "The phone rings. It's family, and they sound pleased you picked up. There's a lot of noise behind them, and a baby.",
     "ages": [
       60,
       100
@@ -898,7 +898,7 @@
   , "up": {"label": "Ring everyone you know", "effects": {"relationships": 7, "happiness": 7, "stress": 1}, "risk": {"chance": 0.45, "effects": {"relationships": -4, "stress": 4}, "result": "It's been so long that someone asks who you are."}}},
   {
     "id": "a60_r_cook",
-    "text": "It's cold out. There's a stew in your future if you want one.",
+    "text": "It's cold out and the windows have fogged. There are carrots, an onion and some beef in the fridge. A stew is possible.",
     "ages": [
       60,
       100
@@ -925,7 +925,7 @@
   , "up": {"label": "Cook for the whole street", "effects": {"relationships": 7, "happiness": 6, "karma": 3}, "risk": {"chance": 0.4, "effects": {"money": -250, "stress": 5}, "result": "Eleven people. One oven. No more spoons."}}},
   {
     "id": "a60_r_nap",
-    "text": "The afternoon sun is on the armchair. It has your name on it.",
+    "text": "The afternoon sun lies across the armchair like a warm blanket. The cushion has a dent your exact shape. It's calling.",
     "ages": [
       60,
       100
@@ -950,7 +950,7 @@
   , "up": {"label": "Take the armchair outside", "effects": {"health": 3, "stress": -6, "happiness": 4}, "risk": {"chance": 0.4, "effects": {"health": -3, "looks": -2}, "result": "You wake up sunburnt and soaked."}}},
   {
     "id": "a60_r_garden_chat",
-    "text": "A robin keeps watching you dig. It's expecting worms.",
+    "text": "A robin sits on the fence and watches you dig, tilting its head each time you turn the soil. It's expecting worms.",
     "ages": [
       60,
       100
@@ -975,7 +975,7 @@
   , "up": {"label": "Build it a house", "effects": {"happiness": 6, "karma": 3, "smarts": 2}, "risk": {"chance": 0.45, "effects": {"happiness": -4, "stress": 3}, "result": "It chooses the neighbour's."}}},
   {
     "id": "a60_r_news",
-    "text": "The news is terrible again. You've heard all of this before, with different names.",
+    "text": "The news is terrible again. The man in the suit looks tired. You've heard all of this before, with different names.",
     "ages": [
       60,
       100
@@ -996,10 +996,10 @@
         "smarts": 1
       }
     }
-  , "up": {"label": "Write to your MP", "effects": {"karma": 4, "smarts": 5, "stress": -2}, "risk": {"chance": 0.5, "effects": {"stress": 5, "happiness": -3}, "result": "Form letter. Same one as last time."}}},
+  , "up": {"label": "Write to your representative", "effects": {"karma": 4, "smarts": 5, "stress": -2}, "risk": {"chance": 0.5, "effects": {"stress": 5, "happiness": -3}, "result": "Form letter. Same one as last time."}}},
   {
     "id": "a60_r_radio",
-    "text": "An old song comes on. You remember exactly where you were.",
+    "text": "An old song comes on while you're washing up. You remember exactly where you were, who with, and what you wore.",
     "ages": [
       60,
       100
@@ -1023,7 +1023,7 @@
   , "up": {"label": "Dance in the kitchen", "effects": {"happiness": 7, "health": 3, "stress": -4}, "risk": {"chance": 0.45, "effects": {"health": -6, "stress": 3}, "result": "Your hip says no."}, "death": {"chance": 0.02, "cause": "The kitchen floor was wet."}}},
   {
     "id": "a60_r_stairs",
-    "text": "The stairs are a lot. You have a choice about how to do them.",
+    "text": "The stairs are a lot today. Fourteen steps, every one of them looking at you. You have a choice about how to do them.",
     "ages": [
       60,
       100
@@ -1048,7 +1048,7 @@
   , "up": {"label": "Install the stairlift and race it", "effects": {"happiness": 6, "health": 2, "money": -1500}, "risk": {"chance": 0.45, "effects": {"health": -5, "stress": 3}, "result": "It has an emergency brake. It uses it."}}},
   {
     "id": "a60_r_shop",
-    "text": "The shop has a new self-service till. It speaks to you, and it's wrong about the bananas.",
+    "text": "The shop has a new self-service till. It talks to you in a cheerful voice, and it's wrong about the bananas. Again.",
     "ages": [
       60,
       100
