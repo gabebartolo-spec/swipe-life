@@ -101,3 +101,20 @@ func _place(s: String) -> void:
 	var mark: ColorRect = marks[s]
 	var x: float = (mark.get_parent().size.x - MARK_W) * GameState.stats[s] / 100.0
 	create_tween().tween_property(mark, "position:x", x, 0.3)
+
+
+## Drag preview (GDD §15.2): the stats this choice will move glow green (better) or red (worse).
+## Only the sure effects show, never the size or the hidden risk.
+func preview(effects: Dictionary) -> void:
+	for s in values:
+		var d := int(effects.get(s, 0))
+		var box: Control = values[s].get_parent()
+		if d == 0:
+			box.modulate = Color.WHITE
+			continue
+		var good: bool = (d < 0) == (s == "stress")
+		box.modulate = Color(0.6, 1.4, 0.7) if good else Color(1.5, 0.6, 0.55)
+	var m := int(effects.get("money", 0))
+	money_label.modulate = (
+		Color.WHITE if m == 0 else (Color(0.6, 1.4, 0.7) if m > 0 else Color(1.5, 0.6, 0.55))
+	)
