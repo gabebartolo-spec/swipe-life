@@ -24,6 +24,8 @@ var autoplay := "--autoplay" in OS.get_cmdline_user_args()
 
 
 func _ready() -> void:
+	if Array(OS.get_cmdline_user_args()).any(func(x): return x.begins_with("--frames=")):
+		add_child(preload("res://scripts/proto/frame_dump.gd").new())
 	var debug_set := Array(OS.get_cmdline_user_args()).any(func(a): return a.begins_with("--set="))
 	if debug_set or not SaveSystem.load_life():  # resume at the last year boundary (GDD §8.2–8.3)
 		_new_life()
@@ -59,6 +61,7 @@ func _ready() -> void:
 	$StatStrip.add_child(strip)
 	$Card.add_child(swipe_card)
 	swipe_card.chosen.connect(_on_chosen)
+	swipe_card.previewing.connect(_on_preview)
 
 	message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -184,8 +187,10 @@ func _on_chosen(side: String) -> void:
 	swipe_card.hide()
 	if side == "up":
 		GameState.super_like_available = false
+	var before: Dictionary = GameState.stats.duplicate()
 	var out := deck.choose(swipe_card.card, side, GameState)
 	strip.refresh()
+	Feel.float_changes($Dollhouse, Feel.diff(before, GameState.stats))  # GDD §15.3
 	if out.died:
 		_end("You died at %d.\n%s." % [GameState.age, out.cause])
 		return
@@ -194,6 +199,10 @@ func _on_chosen(side: String) -> void:
 		message.text = "\n".join(out.results)
 		await get_tree().create_timer(RESULT_TIME).timeout
 	_deal()
+
+
+func _on_preview(side: String) -> void:
+	strip.preview(swipe_card.card[side].get("effects", {}) if side != "" else {})
 
 
 func _year_end() -> void:
@@ -225,6 +234,7 @@ func _year_end() -> void:
 
 func _next_year() -> void:
 	menu.hide()
+	Feel.calendar_flip($Dollhouse, GameState.age, GameState.age + 1)  # GDD §15.3
 	GameState.age += 1
 	GameState.quarter = 0
 	GameState.super_like_available = true  # GDD §3.3
