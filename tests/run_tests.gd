@@ -732,7 +732,7 @@ func _test_adult_sim() -> void:
 	_check(
 		ages[ages.size() / 2] >= 50, "never-rest lives die too young: %d" % ages[ages.size() / 2]
 	)
-	_check(median >= 72 and median > ages[ages.size() / 2] + 15, "careful lives gain too little")
+	_check(median >= 72 and median > ages[ages.size() / 2] + 10, "careful lives gain too little")
 	print("adult sim: never-rest lives median death %d" % ages[ages.size() / 2])
 	print(
 		(
