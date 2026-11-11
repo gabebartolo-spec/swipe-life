@@ -20,7 +20,7 @@
     "stress": 2
    }, "risk": {"chance": 0.3, "effects": {"smarts": -2, "stress": 2}, "result": "Not everything went your way."}
   }
- },
+ , "up": {"label": "Ask to blow the whistle", "effects": {"smarts": 6, "stress": 4}, "risk": {"chance": 0.5, "effects": {"smarts": -4, "stress": 3}, "result": "She hands it to you. It's loud."}}},
  {
   "id": "k6_lost_tooth",
   "text": "A front tooth wobbles loose at lunch.",
@@ -44,7 +44,7 @@
    },
    "result": "There is a coin under it. Nobody explains how."
   }
- },
+ , "up": {"label": "Wiggle it in front of the class", "effects": {"happiness": 2, "money": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "It goes in someone's lunch."}}},
  {
   "id": "k6_reading_star",
   "text": "You read a whole page out loud without stopping.",
@@ -65,7 +65,7 @@
     "relationships": 1
    }
   }
- },
+ , "up": {"label": "Read the whole book aloud", "effects": {"smarts": 6}, "risk": {"chance": 0.5, "effects": {"smarts": -4, "stress": 3}, "result": "You lose your place twice."}}},
  {
   "id": "k6_glue_snack",
   "text": "The kid next to you is eating the glue.",
@@ -134,7 +134,7 @@
     "result": "The cat escapes into the vents."
    }
   }
- },
+ , "up": {"label": "Bring the cat and a rock", "effects": {"happiness": 4, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The cat eats the rock. Nearly."}}},
  {
   "id": "k6_bully_snack",
   "text": "A bigger kid wants your snack. Every day.",
@@ -160,7 +160,7 @@
     "relationships": -1
    }
   }
- },
+ , "up": {"label": "Hand over the snack with a note", "effects": {"stress": -2, "karma": 2, "relationships": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The note isn't helpful."}}},
  {
   "id": "k6_bully_back",
   "text": "The snack kid is back. You have been thinking about this.",
@@ -198,7 +198,7 @@
     "bully_friend"
    ]
   }
- },
+ , "up": {"label": "Trade a snack for a favour", "effects": {"stress": -6, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The favour comes with conditions."}}},
  {
   "id": "k6_bully_friend",
   "text": "The old snack kid saves you a seat on the bus.",
@@ -224,7 +224,7 @@
     "happiness": 1
    }, "risk": {"chance": 0.3, "effects": {"relationships": -3, "stress": 2}, "result": "Mostly fine. Mostly."}
   }
- },
+ , "up": {"label": "Offer them half a sandwich", "effects": {"relationships": 8, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 3}, "result": "They say it's too small."}}},
  {
   "id": "k6_goldfish",
   "text": "You win a goldfish at the fair.",
@@ -298,7 +298,7 @@
    },
    "result": "Grandma sings. Everyone cries, mostly about Grandma."
   }
- },
+ , "up": {"label": "Invite the whole class", "effects": {"relationships": 6, "happiness": -2}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "Nobody wants to sing."}}},
  {
   "id": "k6_homework_dog",
   "text": "Your homework is unfinished. The dog is right there.",
@@ -329,7 +329,7 @@
     "stress": 2
    }
   }
- },
+ , "up": {"label": "Get up at five to finish it", "effects": {"karma": -4, "stress": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "You fall asleep in class."}}},
  {
   "id": "k6_spelling_test",
   "text": "Last round of the spelling test. The word is very long.",
@@ -437,7 +437,7 @@
     "result": "The teacher flips your spoon. The egg stays."
    }
   }
- },
+ , "up": {"label": "Run the whole race", "effects": {"karma": -6, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The egg falls apart."}}},
  {
   "id": "k6_sleepover_invite",
   "text": "You're invited to your first sleepover.",
@@ -470,7 +470,7 @@
     "first_sleepover"
    ]
   }
- },
+ , "up": {"label": "Be the last to go to sleep", "effects": {"relationships": 8, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 3}, "result": "You fall asleep first."}}},
  {
   "id": "k6_sleepover_ghost",
   "text": "Someone at the sleepover starts a ghost story.",
@@ -534,7 +534,7 @@
     "relationships": 1
    }
   }
- },
+ , "up": {"label": "Rent a bouncy castle", "effects": {"happiness": 4, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "Someone gets a bloody nose."}}},
  {
   "id": "k6_party_clown",
   "text": "There's a clown at a friend's party. He looks tired.",
@@ -556,7 +556,7 @@
    }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "Not everything went your way."},
    "result": "He says nobody has asked him that in years."
   }
- },
+ , "up": {"label": "Offer him your cake", "effects": {"karma": 6, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "He takes it all."}}},
  {
   "id": "k6_present_socks",
   "text": "Your aunt gives you socks for your birthday. Again.",
@@ -580,7 +580,7 @@
    },
    "result": "Next year: two pairs of socks."
   }
- },
+ , "up": {"label": "Wear them as hats", "effects": {"karma": 4, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "Your aunt takes a photo."}}},
  {
   "id": "k6_cake_face",
   "text": "Someone shoves your face into your birthday cake.",
@@ -603,7 +603,7 @@
    },
    "result": "Best cake of your life."
   }
- },
+ , "up": {"label": "Smear it right back", "effects": {"happiness": 4, "health": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The cake goes everywhere."}}},
  {
   "id": "k6_bike_wheels",
   "text": "Your parent wants to take the training wheels off.",
@@ -632,7 +632,7 @@
     "result": "Knees meet gravel."
    }
   }
- },
+ , "up": {"label": "Ride without hands", "effects": {"health": 4, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "The wall was closer than expected."}}},
  {
   "id": "k6_scraped_knee",
   "text": "You scraped your knee badly at break.",
@@ -654,7 +654,7 @@
     "stress": -1
    }
   }
- },
+ , "up": {"label": "Show the whole class", "effects": {"health": 4, "stress": -2}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "A teacher takes you to the nurse anyway."}}},
  {
   "id": "k6_swimming_lessons",
   "text": "Swimming lessons start. The deep end looks very deep.",
@@ -684,7 +684,7 @@
     "result": "Water up the nose. All of it."
    }
   }
- },
+ , "up": {"label": "Jump off the high board", "effects": {"health": 6, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"health": -4, "stress": 3}, "result": "It was higher than it looked."}, "death": {"chance": 0.02, "cause": "You went in, and you didn't come back up."}}},
  {
   "id": "k6_best_friend",
   "text": "A kid shares their crayons and says you're best friends now.",
@@ -708,7 +708,7 @@
     "k6_best_friend"
    ]
   }
- },
+ , "up": {"label": "Make a secret club", "effects": {"relationships": 8, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 3}, "result": "Nobody else can join. Even you."}}},
  {
   "id": "k6_best_friend_move",
   "text": "Your best friend is moving away.",
@@ -736,7 +736,7 @@
    }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "Not everything went your way."},
    "result": "You wear it until it falls apart."
   }
- },
+ , "up": {"label": "Write a letter every week", "effects": {"happiness": -2, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "The letters slow down."}}},
  {
   "id": "k6_pet_beg",
   "text": "You want a puppy more than anything.",
@@ -766,7 +766,7 @@
     "result": "It works. The puppy chews everything."
    }
   }
- },
+ , "up": {"label": "Make a PowerPoint for your parents", "effects": {"happiness": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "Your parents are unmoved."}}},
  {
   "id": "k6_class_hamster",
   "text": "You get to take the class hamster home for the weekend.",
@@ -796,7 +796,7 @@
     "result": "It lives in the sofa now."
    }
   }
- },
+ , "up": {"label": "Take it on a walk", "effects": {"happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "It escapes in the park."}}},
  {
   "id": "k6_times_tables",
   "text": "Times tables test tomorrow.",
@@ -826,7 +826,7 @@
     "result": "Seven times eight. Blank."
    }
   }
- },
+ , "up": {"label": "Stay up past midnight to learn them", "effects": {"smarts": 8, "stress": 4, "happiness": -2}, "risk": {"chance": 0.5, "effects": {"smarts": -6, "stress": 3}, "result": "You mix up the sevens."}}},
  {
   "id": "k6_school_play",
   "text": "You are cast as a tree in the school play.",
@@ -894,7 +894,7 @@
     "happiness": -1
    }
   }
- },
+ , "up": {"label": "Do everyone's dishes", "effects": {"karma": 4, "money": 6, "happiness": -2}, "risk": {"chance": 0.5, "effects": {"money": -300, "stress": 3}, "result": "You get nothing for it."}}},
  {
   "id": "k6_lunch_trade",
   "text": "Someone offers cookies for your apple.",
@@ -916,7 +916,7 @@
     "health": -1
    }
   }
- },
+ , "up": {"label": "Trade the whole lunchbox", "effects": {"health": 4}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "You go hungry."}}},
  {
   "id": "k6_monster_bed",
   "text": "You are certain something lives under your bed.",
@@ -969,7 +969,7 @@
    },
    "result": "Second place. The smell wins first."
   }
- },
+ , "up": {"label": "Make the volcano real", "effects": {"smarts": 8, "relationships": -2}, "risk": {"chance": 0.5, "effects": {"smarts": -6, "stress": 3}, "result": "The real volcano gets everywhere."}}},
  {
   "id": "k6_haircut",
   "text": "Your parent offers to cut your hair at home.",
@@ -999,7 +999,7 @@
     "result": "School photos are tomorrow."
    }
   }
- },
+ , "up": {"label": "Cut your own fringe", "effects": {"looks": 4, "money": -20}, "risk": {"chance": 0.5, "effects": {"looks": -3, "stress": 3}, "result": "You have a short fringe now."}}},
  {
   "id": "k6_teacher_gift",
   "text": "Last day of school. Everyone brings the teacher a gift.",
@@ -1020,7 +1020,7 @@
     "relationships": 1
    }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "Not everything went your way."}
   }
- },
+ , "up": {"label": "Make a giant poster", "effects": {"karma": 4, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "The poster doesn't fit through the door."}}},
  {
   "id": "k6_snow_day",
   "text": "Snow day! School is closed.",
@@ -1043,7 +1043,7 @@
     "health": 1
    }
   }
- },
+ , "up": {"label": "Build a whole castle", "effects": {"happiness": 2, "stress": -6}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "You get a cold."}}},
  {
   "id": "k6_lost_shoe",
   "text": "You come home with one shoe.",
@@ -1067,5 +1067,5 @@
     "money": -10
    }
   }
- }
+ , "up": {"label": "Claim you found a new one", "effects": {"relationships": 2, "money": -20}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "Your parents are suspicious."}}}
 ]

@@ -1,0 +1,195 @@
+work_carer_wont_eat|Feed her by hand for the whole shift|The rest of the ward falls behind.|
+work_carer_family_gift|Take the envelope and say nothing|A manager hears about it.|
+work_porter_lost_bed|Take a bed from the next ward|The next ward finds out.|
+work_porter_shortcut|Race through the bay with a patient|A forklift appears.|The forklift didn't see you.
+work_hca_call_bell|Run to all three at once|You trip over a bucket.|
+work_hca_nurse_teach|Take blood from five patients|You get the sixth one wrong.|
+work_medic_wrong_address|Take the gamble and floor it|Wrong turn. Lost three minutes.|The road got you before the call did.
+work_medic_bad_call|Write it all up and ask for a break|The report is a hard read.|
+work_nurse_drug_error|Report it and demand a review|{rival} fights back.|
+work_nurse_night_shift|Ask {crush} out for a drink|The answer is a long pause.|
+work_pharm_forged|Call the police yourself|The man is not alone.|
+work_pharm_advice|Make a chart for every pill|The chart is wrong in one place.|
+work_dn_screamer|Sing to the kid|The kid screams louder.|
+work_dn_gossip|Make a joke of the rumour|Nobody laughs.|
+work_dentist_upsell|Refuse and tell the patient what's going on|{boss} is furious.|
+work_dentist_backache|Switch to part-time and learn the trade|The money does not stretch.|
+work_vet_farm_call|Drive through the flood|The ford was deeper than it looked.|The river took the car. And you.
+work_vet_cant_pay|Pay the whole bill yourself|The cat does fine. Your bank does not.|
+work_doc_diagnosis|Order everything and stay late|The tests find nothing. {boss} sighs.|
+work_doc_36_hours|Take on another patient|You misread a chart.|
+work_ther_cancel|Visit them at home|They're upset you came.|
+work_ther_supervision|Re-do every note and ask for a review|{boss} finds more.|
+work_builder_heat|Pour it all and finish early|The slab sets wrong.|The heat took you off the scaffold.
+work_builder_level|Rebuild the whole frame overnight|You're in on a Saturday.|
+work_electrician_live|Cut the wire to prove it|It was live.|The wire was live.
+work_electrician_apprentice|Hand them the whole job|They rewire the kitchen.|
+work_plumber_callout|Go now and fix it by dawn|A second pipe bursts.|
+work_plumber_ring|Hand it back and tell the paper|The papers get the story wrong.|
+work_carpenter_thumb|Laugh and keep sawing|The saw has opinions.|
+work_carpenter_deadline|Finish by Friday if it kills you|The stairs wobble.|
+work_mech_upsell|Fix the brakes for free|{boss} docks your pay.|
+work_mech_noise|Strip the engine to find it|You can't put it back.|
+work_chef_rush|Take over the pass|You drop three plates.|
+work_chef_dropped|Serve it with a flourish|A customer finds a hair.|
+work_driver_night|Push on to the depot|You nod off for a second.|The lines stopped dancing. So did the truck.
+work_driver_hitch|Drive them home|They were not who they said.|
+work_farm_drought|Sell all the stock and buy a new tank|The price of stock has dropped.|
+work_farm_calf|Deliver it single-handed|The calf is fine. You are not.|
+work_cleaner_party|Clean the whole building by dawn|You fall asleep at lunch.|
+work_cleaner_ring|Hand it in with a note|The note is lost. So is the credit.|
+work_wh_quota|Work through lunch and the next|You pull a muscle.|
+work_wh_forklift|Report {rival} for dangerous driving|{rival} was ready for that.|
+work_admin_printer|Rebuild the printer|You can't put it back.|
+work_admin_calendar|Book a hall for everyone|It costs a fortune.|
+work_sales_quota|Promise the moon|They want the moon in writing.|
+work_sales_steal_lead|Phone the client first|The client is confused.|
+work_teller_short_till|Count the whole vault|It's even more short.|
+work_teller_scam|Follow the grandson out|He turns out to be armed.|
+work_bank_loan_family|Approve it and sponsor them|Their numbers did not work out.|
+work_bank_bonus|Threaten to quit|{boss} says go on then.|
+work_acct_tax_season|Stay all night and clear the lot|You make a mistake at 3am.|
+work_acct_creative|Do it and cover your tracks|The audit comes early.|
+work_paralegal_filing|Sprint the whole way|You twist an ankle on the steps.|
+work_paralegal_credit|Go to the partners with proof|{boss} is out for you.|
+work_law_guilty_client|Fight the case of your life|You lose.|
+work_law_billable|Work every weekend|Your health is the casualty.|
+work_dev_prod_down|Roll back and rewrite it|It fails again.|
+work_dev_review|Rewrite the whole module|The new module is worse.|
+work_it_unplugged|Fix everyone's computers on the floor|It takes the whole day.|
+work_it_overnight|Do the upgrade and the rack move|The upgrade breaks the backups.|
+work_mkt_viral|Fly a drone through the office|The drone hits a client.|
+work_mkt_pitch|Take over the pitch|{boss} stares.|
+work_teacher_marking|Write long feedback for every essay|You are asleep by essay forty.|
+work_teacher_parent|Host a meeting with the parent and the principal|The parent brings a lawyer.|
+work_police_speeding|Let her off and drive her home|Your sergeant hears about it.|
+work_police_partner_cash|Report him to the chief|{rival} gets back at you.|
+work_fire_house|Go in with no mask|The smoke is thick.|The roof came down on the hall.
+work_fire_calendar|Pose in full gear|The photo gets around.|
+work_childcare_biter|Hold both toddlers|Both bite you.|
+work_childcare_nap|Do the paperwork and the floors|One wakes up. Then they all do.|
+work_retail_refund_adult|Hold the line and call the manager|It turns into a shouting match.|
+work_retail_shoplifter|Chase him down the street|He's quicker than you think.|
+work_cafe_latte_art_adult|Pour a swan, a heart and a rose|The milk is cold.|
+work_cafe_regular|Give her a free breakfast|The boss notices the till.|
+work_designer_bigger|Redo it five times for free|The client wants version one.|
+work_designer_credit|Call it out in front of everyone|It gets awkward.|
+work_journo_leak|Publish it with a front page|The mayor has a lawyer.|
+work_journo_source|Go to court to protect them|You lose in court.|
+work_soldier_deployment|Volunteer to lead the first wave|Things get hard fast.|The deployment was not safe.
+work_soldier_drill|Lead the whole unit through|You pull a muscle.|
+work_corp_restructure|Offer to take the cut yourself|{boss} accepts.|
+work_corp_board|Resign and tell the press|Nobody listens.|
+work_rival_truce|Share the muffin and a joke|It was stale.|
+work_friend_favour|Cover their shift and tomorrow's|You're exhausted.|
+work_payday_splurge|Buy a gift for everyone|You are broke by Thursday.|
+work_crush_rejected|Ask them out in front of the team|The team is very quiet.|
+work_dating_secret|Announce it at the staff meeting|{boss} is not happy.|
+work_dating_distracted|Run a competition on it|{boss} walks in.|
+work_dating_fight|Apologise with flowers at work|The flowers wilt. So does the mood.|
+work_breakup|Beg in the freezer|You both get cold feet.|
+partner_after_work|Take them out for a proper dinner|The bill is big.|
+partner_meet_parents|Cook for everyone|The cooking is a fire hazard.|
+partner_quit_together|Plan a trip together|The trip is expensive.|
+partner_jealous|Introduce the new person|It does not help.|
+partner_breakup|Beg for a second chance|They say no again.|
+work_fast_food_fryer|Fix it with a spanner|The spanner is not a good idea.|
+work_fast_food_rush|Run the drive-through yourself|You get the orders mixed.|
+work_retail_refund|Refund and give a discount|{boss} frowns at the till.|
+work_retail_folding|Redo the whole display|It takes all night.|
+work_lifeguard_rescue|Dive in and carry them out|They were only waving.|
+work_lifeguard_sunburn|Swap your shift for shade|You miss out on pay.|
+work_paper_round_dog|Climb the fence|The dog is quicker.|
+work_paper_round_rain|Do the round twice|Your bike has a flat.|
+work_cafe_latte_art|Do a swan|You pour a puddle.|
+work_cafe_dishes|Wash it all in record time|You break two plates.|
+afl_preseason|Run double the hills|You're sore for a week.|
+afl_rolled_ankle|Play the whole match on it|The ankle gives out.|
+afl_rival_spot|Take {rival} out of the running|The coach sees.|
+afl_mum_canteen|Wave and blow a kiss|The whole team saw.|
+afl_concussion|Play out the match and hide it|It was a concussion.|
+afl_rep_selection|Bring the whole family to see it|You didn't make it.|
+afl_rep_trip|Run the room raid yourself|You get a warning.|
+afl_rival_chat|Challenge {rival} to a kick-off|{rival} wins by a mile.|
+afl_scout_watch|Take the hanger of the year|You land on your head.|
+afl_draft_combine|Do every test twice|You pull a hamstring.|
+afl_draft_media|Predict your first game|The prediction goes wrong.|
+f1_tyres|Buy the pro set|You're broke.|
+f1_first_corner|Go three wide|The three-wide goes wrong.|The kart went into the wall.
+f1_sponsor_pitch|Pitch five sponsors at once|Four say no.|
+f1_parents_remortgage|Tell them to go ahead|Your parents carry the guilt.|
+f1_rival_teammate|Sabotage {rival}'s setup|The team finds out.|
+f1_neck_training|Train with double weights|You pull a neck muscle.|
+f1_engine_blown|Rebuild it with a pro|The pro bill is massive.|
+f1_sim_rig|Buy the full rig with the triple screens|You never leave your room.|
+f1_regional_title|Win by half a second|You take a bad corner.|
+f1_big_crash|Hold your line|The barrier wins.|The barrier didn't give way.
+f1_test_drive|Take the test and push every lap|The car bites back.|
+f1_junior_seat|Sign for the seat|The sponsors fall through.|
+bball_tryout_drill|Run until you drop|You throw up.|
+bball_knee|Play the final on it|The knee goes.|
+bball_rival_ballhog|Take over the ball|The coach benches you both.|
+bball_free_throws|Shoot with your eyes shut|Air ball.|
+bball_dunk_attempt|Go for a 360 dunk|The rim wins.|
+bball_shoes|Buy two pairs|You're skint.|
+bball_summer_camp|Go to the elite camp|The elite camp is brutal.|
+bball_state_selection|Go for every shot|You miss a lot.|
+bball_state_bench|Ask for a trial of your own|{boss} says no.|
+bball_scout_dm|Send your whole reel|The scout is a fake.|
+bball_college_visit|Order the lot and sign on the spot|The offer is smaller than you thought.|
+bball_rival_scouted|Challenge {rival} to a one-on-one|{rival} wins.|
+music_band_name|Rename the band every week|Nobody knows who you are.|
+music_garage_noise|Play on the roof|The neighbour calls the police.|
+music_first_gig|Play your own song|They love the cover better.|
+music_cover_viral|Quit school for it|The numbers dip.|
+music_battle_bands|Play a wild new song|The song falls apart.|
+music_rival_solo|Take every solo yourself|{rival} quits.|
+music_manager_offer|Sign a three-year contract|The contract is nasty.|
+music_pub_gig|Play and sneak out the back|The landlord knows.|
+music_scandal|Take a long break|The break gets long.|
+music_label_demo|Rewrite the songs from scratch|Nothing's ready on Friday.|
+music_solo_offer|Sign and drop the band|The band drops you back.|
+actor_extra_day|Fall over on take twenty|The director is furious.|
+actor_audition|Cry, scream, and then laugh|The casting director leaves.|
+actor_headshots|Pay for a photoshoot with a pro|The photos look like a different person.|
+actor_rival_callback|Take the callback by swapping the script|The director catches on.|
+actor_cry_on_cue|Cry like it's real|You can't stop.|
+actor_school_clash|Do both and sleep in the van|You fail one.|
+actor_ad_role|Faint dramatically|The ad is unusable.|
+actor_recognised|Sign autographs for an hour|You miss the bus.|
+actor_scandal|Hit back with a video|The video makes it worse.|
+actor_tv_lines|Ad-lib the whole scene|The director is livid.|
+actor_costar_crush|Fake date for the press|The press goes wild.|
+actor_agent_drop|Go it alone|Nobody calls.|
+gang_lookout_shift|Run the corner solo|Blue showed up.|
+gang_package|Take it to a rival gang|{boss} finds out.|The package was not what you thought.
+gang_school_rumour|Brag about it|The principal calls home.|
+gang_mum_finds_cash|Hand her all of it|She's not impressed.|
+gang_shop_job|Run the whole job|It goes badly wrong.|The servo job went badly wrong.
+gang_cops_question|Pretend to be someone else|They've heard that one.|
+gang_rival_skim|Blackmail {rival}|{rival} is dangerous.|
+gang_rival_betrayal|Beat up {rival}|{boss} hears of it.|
+gang_runner_car|Take it on a joyride|You scrape it on a wall.|
+gang_friend_out|Walk out tonight|Word gets out.|
+gang_crew_initiation|Take the hardest job|It goes wrong.|The initiation went wrong.
+gang_heat_lie_low|Leave town for a month|You miss everything.|
+skate_first_drop|Drop in and go big|You eat concrete.|
+skate_security|Skate right past security|They call the cops.|
+skate_film|Do a stair set|The stairs win.|You came off the rail head-first.
+skate_broken_board|Build one yourself|It snaps on the first run.|
+skate_rival_line|Do your trick down the stairs|You eat it.|
+skate_parents|Wear every pad you own|Your friends laugh.|
+skate_shop_sponsor|Ask for a full sponsorship|The shop says one wheel at a time.|
+skate_contest|Go for a trick you've never landed|You bail.|
+skate_tour_van|Drive the van yourself|The van breaks down.|
+skate_pro_model|Design a wild graphic|The graphic is not in demand.|
+esports_ranked_tilt|Play until you win|You lose seven more.|
+esports_chair|Buy the best chair and a desk|Your savings go.|
+esports_toxic_chat|Out-troll them in front of everyone|You get a ban.|
+esports_stream|Stream for twelve hours|Eleven viewers left.|
+esports_parents_bedtime|Hack the router|They catch you.|
+esports_rival_smurf|Expose {rival} publicly|{rival} sues. Nearly.|
+esports_tryout|Do a trick shot|The trick shot misses.|
+esports_wrist|Buy a wrist brace and keep playing|The brace doesn't help.|
+esports_lan|Bet the whole map|It doesn't work.|
+esports_contract|Sign and drop out|The team folds.|

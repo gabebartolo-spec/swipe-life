@@ -5,7 +5,7 @@
     "ages": [0, 1],
     "left": { "label": "Start crying", "effects": { "happiness": 2, "relationships": -2 } },
     "right": { "label": "Sleep it off", "effects": { "health": 3, "relationships": 2 } }
-  },
+  , "up": {"label": "Wail until the lights come on", "effects": {"health": 6, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"health": -4}, "result": "Everyone is up now."}}},
   {
     "id": "baby_first_word", "room": "living",
     "text": "Everyone is waiting for your first word.",
@@ -33,14 +33,14 @@
     "left": { "label": "Climb", "effects": { "happiness": 3, "boldness": 3 },
               "risk": { "chance": 0.3, "effects": { "health": -15 }, "result": "Down you go." } },
     "right": { "label": "Wait for help", "effects": { "relationships": 2, "boldness": -3 } }
-  },
+  , "up": {"label": "Climb all the way to the top", "effects": {"happiness": 6, "boldness": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "Down is harder."}}},
   {
     "id": "child_first_day",
     "text": "First day of school. A kid is crying by the door.",
     "ages": [5, 6],
     "left": { "label": "Ignore them", "effects": { "stress": 3, "sociability": -4 } },
     "right": { "label": "Say hi", "effects": { "relationships": 8, "karma": 3, "sociability": 4 }, "set_flags": ["first_friend"] }
-  },
+  , "up": {"label": "Introduce yourself to the class", "effects": {"relationships": 16, "karma": 6, "sociability": 8}, "risk": {"chance": 0.5, "effects": {"relationships": -12}, "result": "They laugh at your name."}}},
   {
     "id": "child_friend_sleepover",
     "text": "Your first friend invites you to a sleepover.",
@@ -50,7 +50,7 @@
               "by_trait": { "sociability": { "happiness": -4 } } },
     "right": { "label": "Go", "effects": { "happiness": 4, "relationships": 5, "sociability": 3 },
              "by_trait": { "sociability": { "happiness": 6, "stress": -4 } } }
-  },
+  , "up": {"label": "Stay up all night", "effects": {"happiness": 8, "relationships": 10, "sociability": 6}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 3}, "result": "You are a wreck the next day."}}},
   {
     "id": "child_test_answers",
     "text": "The test answers are sitting on the teacher's desk.",
@@ -58,7 +58,7 @@
     "left": { "label": "Look", "effects": { "smarts": 3, "karma": -8, "boldness": 4 },
               "risk": { "chance": 0.3, "effects": { "relationships": -10, "stress": 10 }, "result": "Caught." } },
     "right": { "label": "Don't", "effects": { "karma": 3, "boldness": -4 } }
-  },
+  , "up": {"label": "Copy every single one", "effects": {"karma": 6, "boldness": -8}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The teacher saw."}}},
   {
     "id": "teen_tree_dare",
     "text": "Your friends dare you to climb the tallest tree in the park.",
@@ -80,5 +80,5 @@
     "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 2, "boldness": 4 }, "result": "Bold.",
               "risk": { "chance": 0.25, "effects": { "looks": 13 }, "result": "You nailed it." } },
     "right": { "label": "Pay someone", "effects": { "money": -20, "looks": 5, "boldness": -4 } }
-  }
+  , "up": {"label": "Shave it all off", "effects": {"money": -40, "looks": 10, "boldness": -8}, "risk": {"chance": 0.5, "effects": {"looks": -8, "stress": 3}, "result": "It's a bit too short."}}}
 ]

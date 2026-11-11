@@ -77,7 +77,7 @@
         "result": "The bin didn't move. The car did."
       }
     }
-  },
+  , "up": {"label": "Do a handbrake turn", "effects": {"happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The handbrake turn did not go to plan."}, "death": {"chance": 0.04, "cause": "The car ended up in a hedge, then a wall."}}},
   {
     "id": "t16_parallel_park",
     "text": "Parallel parking. Attempt number seven.",
@@ -105,7 +105,7 @@
       },
       "result": "Nailed it. Nobody saw."
     }
-  },
+  , "up": {"label": "Take on the tight space", "effects": {"stress": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "You hit the car behind."}}},
   {
     "id": "t16_driving_test",
     "text": "Driving test day. The examiner hasn't smiled once.",
@@ -153,7 +153,7 @@
         "result": "A roundabout nearly ends you. Scraped a pass."
       }
     }
-  },
+  , "up": {"label": "Drive fast and confident", "effects": {"happiness": 8}, "risk": {"chance": 0.5, "effects": {"happiness": -6, "stress": 3}, "result": "The examiner writes a lot."}}},
   {
     "id": "t16_borrow_car",
     "text": "You ask to borrow the car for the night.",
@@ -189,7 +189,7 @@
         "result": "A scrape on the bumper."
       }
     }
-  },
+  , "up": {"label": "Take a friend to the coast", "effects": {"happiness": 6, "money": -60, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The tank runs dry on the way."}}},
   {
     "id": "t16_crowded_car",
     "text": "A friend with a brand-new licence offers a lift. Seven people, five seats.",
@@ -219,7 +219,7 @@
         "result": "A sudden stop. Bruises all over."
       }
     }
-  },
+  , "up": {"label": "Squeeze in and sit on laps", "effects": {"happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The driver takes a corner too hard."}, "death": {"chance": 0.04, "cause": "The car didn't make the bend."}}},
   {
     "id": "t16_final_exams",
     "text": "Final exams in a month. Your future, apparently, depends on it.",
@@ -286,7 +286,7 @@
         "smarts": 2
       }
     }
-  },
+  , "up": {"label": "Pick all the hard ones", "effects": {"happiness": 6, "relationships": -6, "smarts": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The workload is huge."}}},
   {
     "id": "t16_answers_sale",
     "text": "Someone's selling the exam answers in a chat.",
@@ -316,7 +316,7 @@
         "relationships": -3
       }
     }
-  },
+  , "up": {"label": "Buy the whole set", "effects": {"karma": 12, "relationships": -6}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The teacher knows."}}},
   {
     "id": "t16_blank_essay",
     "text": "An essay is due at 9 a.m. It's midnight and the page is empty.",
@@ -346,7 +346,7 @@
         "result": "\"No.\""
       }
     }
-  },
+  , "up": {"label": "Write about something personal", "effects": {"stress": -4, "relationships": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The essay is too personal."}}},
   {
     "id": "t16_open_day",
     "text": "Open day at a faraway college. It looks amazing.",
@@ -369,7 +369,7 @@
         "money": -30
       }
     }
-  },
+  , "up": {"label": "Apply to three colleges", "effects": {"smarts": 6, "happiness": 4, "money": -60}, "risk": {"chance": 0.5, "effects": {"smarts": -4, "stress": 3}, "result": "The fees add up."}}},
   {
     "id": "t16_scholarship",
     "text": "There's a scholarship. The essay question is \"Who are you?\"",
@@ -490,7 +490,7 @@
         "happiness": 1
       }
     }
-  },
+  , "up": {"label": "Pay for the whole meal", "effects": {"happiness": 8, "relationships": 10, "money": -16}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 3}, "result": "Your wallet is thin."}}},
   {
     "id": "t16_meet_parents",
     "text": "Your parents want to meet the person you're seeing.",
@@ -523,7 +523,7 @@
         "result": "The baby photos come out."
       }
     }
-  },
+  , "up": {"label": "Invite the whole family", "effects": {"relationships": 10}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 3}, "result": "Your parent tells an embarrassing story."}}},
   {
     "id": "t16_text_breakup",
     "text": "They broke up with you. By text.",
@@ -557,7 +557,7 @@
         "teen_dating"
       ]
     }
-  },
+  , "up": {"label": "Write a long reply", "effects": {"happiness": -12, "stress": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "You regret the reply."}}},
   {
     "id": "t16_house_party",
     "text": "Party at a house where the parents are away.",
@@ -633,7 +633,7 @@
         "result": "Sick in the garden. Phones out."
       }
     }
-  },
+  , "up": {"label": "Down it and dance", "effects": {"health": 4, "karma": 4}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "You don't remember the night."}, "death": {"chance": 0.04, "cause": "You didn't wake up from the party."}}},
   {
     "id": "t16_sneeze_photo",
     "text": "A photo of you mid-sneeze is going round the school.",
@@ -655,7 +655,7 @@
       }, "risk": {"chance": 0.3, "effects": {"relationships": -4, "stress": 2}, "result": "Then it went a bit wrong."},
       "result": "Respect."
     }
-  },
+  , "up": {"label": "Turn it into a meme yourself", "effects": {"happiness": 6, "relationships": 10}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 3}, "result": "The meme is everywhere."}}},
   {
     "id": "t16_views",
     "text": "One of your videos got ten thousand views overnight.",
@@ -684,7 +684,7 @@
         "result": "Views drop to twelve."
       }
     }
-  },
+  , "up": {"label": "Quit school to make videos", "effects": {"stress": -6}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The views dry up."}}},
   {
     "id": "t16_friend_moving",
     "text": "Your best friend is moving away at the end of the year.",
@@ -706,7 +706,7 @@
         "relationships": 6
       }, "risk": {"chance": 0.3, "effects": {"relationships": -5, "stress": 2}, "result": "There was a catch."}
     }
-  },
+  , "up": {"label": "Throw a goodbye party", "effects": {"happiness": 8, "relationships": 12}, "risk": {"chance": 0.5, "effects": {"relationships": -9, "stress": 3}, "result": "It's a bit sad."}}},
   {
     "id": "t16_friend_secret",
     "text": "Your friend tells you something they've never told anyone.",
@@ -727,7 +727,7 @@
         "karma": 4
       }, "risk": {"chance": 0.3, "effects": {"relationships": -6, "stress": 2}, "result": "Not everything went your way."}
     }
-  },
+  , "up": {"label": "Promise to keep it for life", "effects": {"relationships": 16, "karma": 8}, "risk": {"chance": 0.5, "effects": {"relationships": -12, "stress": 3}, "result": "It's a heavy thing to carry."}}},
   {
     "id": "t16_sibling_maths",
     "text": "Your younger sibling is failing maths. They won't ask for help.",
@@ -751,7 +751,7 @@
         "smarts": 2
       }
     }
-  },
+  , "up": {"label": "Tutor them every night", "effects": {"karma": 10, "relationships": 10, "smarts": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 3}, "result": "They fail anyway."}}},
   {
     "id": "t16_tight_money",
     "text": "A parent lost their job. Money is tight at home.",
@@ -775,7 +775,7 @@
         "karma": 6
       }
     }
-  },
+  , "up": {"label": "Take a second job", "effects": {"money": -200, "relationships": 20, "karma": 12}, "risk": {"chance": 0.5, "effects": {"relationships": -15, "stress": 3}, "result": "You're exhausted."}}},
   {
     "id": "t16_curfew",
     "text": "You're home an hour after curfew. The lights are on.",
@@ -805,7 +805,7 @@
         "result": "They check the timetable."
       }
     }
-  },
+  , "up": {"label": "Admit it and ask for more freedom", "effects": {"relationships": 4, "stress": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "They say no."}}},
   {
     "id": "t16_get_fit",
     "text": "You catch yourself in the mirror and decide to get fit.",
@@ -864,7 +864,7 @@
         "happiness": 1
       }
     }
-  },
+  , "up": {"label": "Delete every app", "effects": {"health": 6, "stress": -4}, "risk": {"chance": 0.5, "effects": {"health": -4, "stress": 3}, "result": "You re-download them by Friday."}}},
   {
     "id": "t16_hair_dye",
     "text": "You want to dye your hair a colour that doesn't occur in nature.",
@@ -930,7 +930,7 @@
         "stress": -1
       }
     }
-  },
+  , "up": {"label": "Invest the lot", "effects": {"smarts": 4, "stress": -2}, "risk": {"chance": 0.5, "effects": {"smarts": -3, "stress": 3}, "result": "The market has a bad week."}}},
   {
     "id": "t16_prize_text",
     "text": "A text says you won a prize. Just pay a small fee.",
@@ -952,7 +952,7 @@
       },
       "result": "There is no prize."
     }
-  },
+  , "up": {"label": "Pay the fee and give your details", "effects": {"smarts": 4}, "risk": {"chance": 0.5, "effects": {"smarts": -3, "stress": 3}, "result": "The prize doesn't exist."}}},
   {
     "id": "t16_shelter",
     "text": "The animal shelter needs weekend volunteers.",
@@ -982,7 +982,7 @@
         "result": "You come home with a cat. Unplanned."
       }
     }
-  },
+  , "up": {"label": "Foster a dog", "effects": {"karma": 12, "happiness": 6, "stress": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The dog eats a shoe. Several."}}},
   {
     "id": "t16_walkout",
     "text": "Students are walking out of class for a cause you care about.",
@@ -1011,7 +1011,7 @@
         "result": "Detention for everyone."
       }
     }
-  },
+  , "up": {"label": "Lead the walkout", "effects": {"karma": 8, "relationships": 8}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 3}, "result": "You get detention. And a speech."}}},
   {
     "id": "t16_formal",
     "text": "The end-of-year dance is coming. You have nothing to wear.",
@@ -1069,7 +1069,7 @@
         "career": 2
       }
     }
-  },
+  , "up": {"label": "Announce a gap year", "effects": {"smarts": 6, "stress": 6, "career": 4}, "risk": {"chance": 0.5, "effects": {"smarts": -4, "stress": 3}, "result": "Your parents are not thrilled."}}},
   {
     "id": "t16_raccoon",
     "text": "A raccoon is sitting at the kitchen table like it lives here.",
@@ -1129,5 +1129,5 @@
       },
       "result": "Puffy cheeks for three days."
     }
-  }
+  , "up": {"label": "Have all four out at once", "effects": {"health": 10, "money": -120}, "risk": {"chance": 0.5, "effects": {"health": -8, "stress": 3}, "result": "The swelling is hard to hide."}}}
 ]

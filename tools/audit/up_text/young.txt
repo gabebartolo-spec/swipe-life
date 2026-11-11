@@ -1,0 +1,203 @@
+b0_first_bath|Kick the bath into a wave|The wave takes the cat.|
+b0_night_feed|Wail the whole house awake|Everyone is awake. Everyone is cross.|
+b0_grab_finger|Grab it and don't let go|Your grip is a bit tight for the finger's owner.|
+b0_first_smile|Laugh out loud for the first time|Spit-up came with it.|
+b0_pacifier|Throw it as far as you can|It landed in the dog's bowl.|
+b0_blowout|Wave every limb for a bath|The bath is cold.|
+b0_visitor|Smile at the stranger and grab her hair|The perfume doesn't wash off.|
+b0_lullaby|Sing along, loudly|The singing gets worse.|
+b0_no_phase|Say no to the whole world|The whole world says no back.|
+b0_crawl|Crawl at full speed|You hit the table leg at full speed.|
+b0_cupboard|Empty the cupboard and build a drum kit|The neighbours knock on the wall.|
+b0_first_steps|Run three steps|Four steps would have been better.|
+b0_stairs_gate|Climb to the top|Coming down is a different problem.|Down the stairs, and not back up.
+b0_high_chair|Hurl the whole bowl|The bowl lands on the wrong head.|
+b0_pet_tail|Climb on the pet|The pet has opinions.|
+b0_new_sibling|Share your whole toy box|They throw up on the best one.|
+b0_sibling_toy|Swap it for their best one|They're not impressed.|
+b0_bedtime|Stay up till midnight|Midnight comes with a meltdown.|
+b0_tantrum|Lie on the floor of the supermarket|A stranger has filmed it.|
+b0_bath_drain|Pull the plug and watch it go|The bath empties all over the floor.|
+b0_potty|Use it like a pro|It was a bit much.|
+b0_crayon_wall|Do the whole room|The whole room is a mural. Parents are not impressed.|
+b0_doctor_shot|Wave and say hi to everyone|The needle goes in anyway.|
+b0_vacuum|Ride it|The vacuum goes over a sock. Everyone screams.|
+b0_playdate|Start a toy trade|The other toddler is better at trading.|
+b0_hiding|Stay hidden for an hour|They all forgot to come find you.|
+b0_mirror|Hug the mirror|The mirror hugs back. Cold.|
+dyn_register|Make the name proud|Everyone now expects it of you.|
+dyn_expectations|Top every class|The pressure is something else.|
+dyn_portrait|Hang a second one next to it|Two sets of eyes now.|
+dyn_watch|Wind it and wear it for life|It gets stuck on a Tuesday.|
+dyn_cousin|Meet them and hear their story|The story goes on a while.|
+dyn_plot|Book a plot for each of the family|The office also offers a payment plan.|
+dyn_pudding|Cook it for the whole village|Forty bowls of grey pudding.|
+dyn_door_frame|Frame the whole door|The landlord isn't thrilled.|
+dyn_curse|Hire an expert to lift it|The expert is a bit of a fraud.|
+dyn_letter|Read it aloud at the family dinner|There's a second page about the boiler.|
+dyn_alpacas|Buy the herd|The alpacas escape.|
+dyn_tree|Pay for the deluxe tree|The tree has an awkward branch.|
+dyn_reunion|Host it at your place|Nobody leaves before Tuesday.|
+dyn_crest|Put it on everything you own|People ask why you own a lion.|
+dyn_historian|Hand over the family diaries|One diary is quite spicy.|
+dyn_bench|Buy a bench for every park|The council bills you for a plaque.|
+juvie_first_night|Lie awake and plan your future|The plan is shaky.|
+juvie_cellmate|Offer a trade|It turns into a regular tax.|
+juvie_classes|Top the class|The other kids tease you for it.|
+juvie_visit|Promise to change, and mean it|You made a promise you have to keep.|
+juvie_release|Walk out and never look back|It's harder than it sounds.|
+record_job_rejection|Tick yes and explain everything|The box was not the problem. The boss was.|
+record_parents_watchful|Ask them to start trusting you|They agree. With conditions.|
+record_school_trip|Fight for the trip in front of the board|The board takes a vote. You lose.|
+k10_hand_me_down_phone|Fix it up and sell it for a better one|The repair goes wrong.|
+k10_group_chat_add|Become the group's admin|The admin gets all the complaints.|
+k10_crush_reply|Wave and say hi out loud|Your voice squeaks.|
+k10_school_camp|Volunteer for the night hike|You get lost for an hour.|
+k10_camp_homesick|Lead a song round the campfire|Your voice cracks halfway.|
+k10_deodorant|Buy five kinds at once|You smell like a perfume shop.|
+k10_growth_spurt|Ask for a whole new wardrobe|The wardrobe doesn't fit by Christmas.|
+k10_talk|Ask every question you can think of|Your parent has to leave the room.|
+k10_walk_alone|Take a shortcut through the park|The shortcut has a big dog.|
+k10_home_alone|Throw a party for your toys|The kitchen is a mess.|
+k10_cook_dinner|Cook a three-course meal|The smoke alarm has a view.|
+k10_lemonade|Open a stand with ten flavours|Half the flavours are mud.|
+k10_viral_video|Do the video on the roof|The roof is high.|You slipped off the edge of the roof.
+k10_screen_time|Go phone-free for a week|The week is long.|
+k10_sleepover_truth|Dare. Anything.|The dare involves a snail.|
+k10_teacher_praise|Bow and then correct the teacher|The teacher was not wrong.|
+k10_test_answers|Sell the answers to the class|Someone tells.|
+k10_spelling_contest|Win it|You lose on a silent letter.|
+k10_pimple|Pop it in front of everyone|It does not go well.|
+k10_sibling_room|Split the room with a tape line|The tape line becomes a border war.|
+k10_haircut|Dye it blue|It turns green.|
+k10_bike_ramp|Add another ramp and jump both|The second ramp was a mistake.|You jumped. The ground got there first.
+k10_left_out|Throw a bigger party the same night|Nobody comes.|
+k10_secret_spill|Tell the secret before anyone asks|Everyone knows within minutes.|
+k10_bedroom_lock|Install it yourself|The lock sticks. So does the door.|
+k10_library|Read a book a day|Your eyes hurt.|
+k10_tryouts|Captain the team|The captain gets the blame.|
+k10_grandparent_call|Teach them a video game|They beat you. Twice.|
+k10_new_sport|Hold a tournament|Someone loses a tooth.|
+k10_crush_rumour|Write a love letter|The letter ends up on the board.|
+k3_imaginary_friend|Throw a tea party for Gerald|He ate all the cake. Apparently.|
+k3_gerald_blame|Blame Gerald loudly|Gerald is grounded. So are you.|
+k3_gerald_leaves|Pack a bag and follow him|You get as far as the hall.|
+k3_daycare_first_day|Run in and take over|The other kids have already made friends.|
+k3_nap_time|Sneak off and explore|The caretaker is unimpressed.|
+k3_monster_closet|Open it and roar|Something tumbles out.|
+k3_picky_peas|Declare a hunger strike|Dinner is cold. So is the room.|
+k3_mystery_green|Eat the whole plate|It was brussels sprouts.|
+k3_playground_slide|Go down head first|The landing is a bit hard.|
+k3_first_friend|Give them your best toy|They don't give it back.|
+k3_bestie_fight|Build a bigger castle|The castle collapses.|
+k3_bestie_sleepover|Stay for the whole weekend|You miss your bed by Saturday.|
+k3_why_phase|Ask why until bedtime|Your parent has run out of answers.|
+k3_bath_time|Swim in the bath|Half the bath is on the floor.|
+k3_potty_holdout|Keep playing and hope|You didn't make it.|
+k3_dress_yourself|Wear your pyjamas to the shops|Everyone is looking at you.|
+k3_new_sibling|Teach the baby everything|You teach it a word you shouldn't.|
+k3_art_masterpiece|Hang it in the hall|A guest asks what it is.|
+k3_counting_show|Count to a hundred|You skip a lot of numbers.|
+k3_lost_toy|Organise a search party|The search party loses its own toy.|
+k3_bug_collection|Start a bug hotel|The hotel is full by morning.|
+k3_show_and_tell|Tell a tall tale about a dragon|The teacher knows it's made up.|
+k3_pet_fish|Feed it a feast|The fish has seen better days.|
+k3_crayon_snack|Eat the whole box|Your tummy is a rainbow.|
+k3_grandparent_visit|Empty their pockets|They had a surprise for you.|
+k3_doctor_shot|Ask for two stickers|The doctor gives you only one.|
+k3_sharing_song|Lead the whole room|You forget the words.|
+k3_king_of_couch|Declare war on the armchair|The armchair has the cat.|
+k3_learn_to_ride|Ride downhill|The hill was steeper than you thought.|
+k3_nightmare|Wake the whole house|Nobody sleeps.|
+k6_new_teacher|Ask to blow the whistle|She hands it to you. It's loud.|
+k6_lost_tooth|Wiggle it in front of the class|It goes in someone's lunch.|
+k6_reading_star|Read the whole book aloud|You lose your place twice.|
+k6_show_and_tell|Bring the cat and a rock|The cat eats the rock. Nearly.|
+k6_bully_snack|Hand over the snack with a note|The note isn't helpful.|
+k6_bully_back|Trade a snack for a favour|The favour comes with conditions.|
+k6_bully_friend|Offer them half a sandwich|They say it's too small.|
+k6_fish_funeral|Invite the whole class|Nobody wants to sing.|
+k6_homework_dog|Get up at five to finish it|You fall asleep in class.|
+k6_egg_spoon|Run the whole race|The egg falls apart.|
+k6_sleepover_invite|Be the last to go to sleep|You fall asleep first.|
+k6_birthday_party|Rent a bouncy castle|Someone gets a bloody nose.|
+k6_party_clown|Offer him your cake|He takes it all.|
+k6_present_socks|Wear them as hats|Your aunt takes a photo.|
+k6_cake_face|Smear it right back|The cake goes everywhere.|
+k6_bike_wheels|Ride without hands|The wall was closer than expected.|
+k6_scraped_knee|Show the whole class|A teacher takes you to the nurse anyway.|
+k6_swimming_lessons|Jump off the high board|It was higher than it looked.|You went in, and you didn't come back up.
+k6_best_friend|Make a secret club|Nobody else can join. Even you.|
+k6_best_friend_move|Write a letter every week|The letters slow down.|
+k6_pet_beg|Make a PowerPoint for your parents|Your parents are unmoved.|
+k6_class_hamster|Take it on a walk|It escapes in the park.|
+k6_times_tables|Stay up past midnight to learn them|You mix up the sevens.|
+k6_chore_chart|Do everyone's dishes|You get nothing for it.|
+k6_lunch_trade|Trade the whole lunchbox|You go hungry.|
+k6_science_fair|Make the volcano real|The real volcano gets everywhere.|
+k6_haircut|Cut your own fringe|You have a short fringe now.|
+k6_teacher_gift|Make a giant poster|The poster doesn't fit through the door.|
+k6_snow_day|Build a whole castle|You get a cold.|
+k6_lost_shoe|Claim you found a new one|Your parents are suspicious.|
+baby_night_cry|Wail until the lights come on|Everyone is up now.|
+toddler_stairs|Climb all the way to the top|Down is harder.|
+child_first_day|Introduce yourself to the class|They laugh at your name.|
+child_friend_sleepover|Stay up all night|You are a wreck the next day.|
+child_test_answers|Copy every single one|The teacher saw.|
+teen_haircut|Shave it all off|It's a bit too short.|
+t13_report_card|Frame it|A relative asks about the C.|
+t13_braces|Get the rainbow ones|The rainbow ones are loud.|
+t13_voice_crack|Do a comedy bit about it|The bit is not funny.|
+t13_first_phone|Break the rules on day one|They take it back.|
+t13_screen_time|Go phone-free for a month|You miss everything.|
+t13_crush_notes|Write a poem|The poem is read out loud.|
+t13_crush_reply|Send a bold reply|The bold reply goes to the wrong chat.|
+t13_sibling_hoodie|Hold the hoodie hostage|It is now a feud.|
+t13_sibling_secret|Blackmail them|They find out about yours.|
+t13_family_dinner|Start a dinner debate|The debate ends in slammed doors.|
+t13_parents_argue|Tell them both to stop|They both turn on you.|
+t13_new_kid|Throw them a welcome party|Nobody comes.|
+t13_friend_drift|Confront the whole group|It gets awkward.|
+t13_sleepover_film|Watch it and tell everyone you loved it|You don't sleep for a week.|
+t13_teacher_gift|Enter the national contest|You do not make the final.|
+t13_detention|Challenge them to a game|You lose. Twice.|
+t13_picture_day|Cover it in concealer|It's still there. In orange.|
+t13_skincare|Do all ten steps daily|Your skin hates it.|
+t13_growth_spurt|Own the high-water look|Someone writes a song.|
+t13_old_guitar|Start a band|The band's first gig is in the garage.|
+t13_tryouts|Try out for the captain|The captain's spot goes to someone else.|
+t13_pocket_money|Make a business plan|Your parent likes the plan. Less so the figures.|
+t13_found_wallet|Return it and demand a reward|The owner is not impressed.|
+t13_birthday_money|Put it all on a bet|The bet doesn't come in.|
+t13_fever|Take the exam with a fever|You throw up in the middle.|
+t13_energy_drink|Drink three|Your heart beats like a drum.|
+t13_first_concert|Sneak out to go|You get caught at the door.|
+t13_road_trip|Lead the singalong|Everybody is sick of it by hour three.|
+t13_rumour|Start a rumour about the rumour|Now there are two rumours.|
+t16_first_lesson|Do a handbrake turn|The handbrake turn did not go to plan.|The car ended up in a hedge, then a wall.
+t16_parallel_park|Take on the tight space|You hit the car behind.|
+t16_driving_test|Drive fast and confident|The examiner writes a lot.|
+t16_borrow_car|Take a friend to the coast|The tank runs dry on the way.|
+t16_crowded_car|Squeeze in and sit on laps|The driver takes a corner too hard.|The car didn't make the bend.
+t16_subjects|Pick all the hard ones|The workload is huge.|
+t16_answers_sale|Buy the whole set|The teacher knows.|
+t16_blank_essay|Write about something personal|The essay is too personal.|
+t16_open_day|Apply to three colleges|The fees add up.|
+t16_first_date|Pay for the whole meal|Your wallet is thin.|
+t16_meet_parents|Invite the whole family|Your parent tells an embarrassing story.|
+t16_text_breakup|Write a long reply|You regret the reply.|
+t16_mystery_cup|Down it and dance|You don't remember the night.|You didn't wake up from the party.
+t16_sneeze_photo|Turn it into a meme yourself|The meme is everywhere.|
+t16_views|Quit school to make videos|The views dry up.|
+t16_friend_moving|Throw a goodbye party|It's a bit sad.|
+t16_friend_secret|Promise to keep it for life|It's a heavy thing to carry.|
+t16_sibling_maths|Tutor them every night|They fail anyway.|
+t16_tight_money|Take a second job|You're exhausted.|
+t16_curfew|Admit it and ask for more freedom|They say no.|
+t16_3am_scroll|Delete every app|You re-download them by Friday.|
+t16_savings|Invest the lot|The market has a bad week.|
+t16_prize_text|Pay the fee and give your details|The prize doesn't exist.|
+t16_shelter|Foster a dog|The dog eats a shoe. Several.|
+t16_walkout|Lead the walkout|You get detention. And a speech.|
+t16_after_school|Announce a gap year|Your parents are not thrilled.|
+t16_wisdom_tooth|Have all four out at once|The swelling is hard to hide.|

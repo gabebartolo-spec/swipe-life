@@ -21,7 +21,7 @@
     "stress": -2
    }
   }
- },
+ , "up": {"label": "Fix it up and sell it for a better one", "effects": {"happiness": 6, "stress": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The repair goes wrong."}}},
  {
   "id": "k10_group_chat_add",
   "text": "You get added to a group chat with forty people. It pings all night.",
@@ -44,7 +44,7 @@
     "health": -2
    }
   }
- },
+ , "up": {"label": "Become the group's admin", "effects": {"stress": -4, "relationships": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The admin gets all the complaints."}}},
  {
   "id": "k10_crush_note",
   "text": "A folded note lands on your desk: \"do u like anyone\"",
@@ -120,7 +120,7 @@
     "looks": 1
    }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "Then it went a bit wrong."}
   }
- },
+ , "up": {"label": "Wave and say hi out loud", "effects": {"happiness": 4, "looks": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "Your voice squeaks."}}},
  {
   "id": "k10_school_camp",
   "text": "School camp sign-up. Three nights in cabins, no parents.",
@@ -146,7 +146,7 @@
     "k10_camp"
    ]
   }
- },
+ , "up": {"label": "Volunteer for the night hike", "effects": {"happiness": 6, "relationships": 8, "money": -60}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 3}, "result": "You get lost for an hour."}}},
  {
   "id": "k10_camp_cabin",
   "text": "Camp, night one. Someone in your cabin says the woods are haunted.",
@@ -223,7 +223,7 @@
     "smarts": 1
    }
   }
- },
+ , "up": {"label": "Lead a song round the campfire", "effects": {"relationships": 6, "stress": -6}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "Your voice cracks halfway."}}},
  {
   "id": "k10_deodorant",
   "text": "A friend leans over: \"Do you... wear deodorant?\"",
@@ -246,7 +246,7 @@
     "money": -5
    }
   }
- },
+ , "up": {"label": "Buy five kinds at once", "effects": {"looks": 6, "money": -10}, "risk": {"chance": 0.5, "effects": {"looks": -4, "stress": 3}, "result": "You smell like a perfume shop."}}},
  {
   "id": "k10_growth_spurt",
   "text": "Your trousers ended above your ankles overnight.",
@@ -269,7 +269,7 @@
     "money": -20
    }
   }
- },
+ , "up": {"label": "Ask for a whole new wardrobe", "effects": {"looks": 4, "relationships": -2, "money": -40}, "risk": {"chance": 0.5, "effects": {"looks": -3, "stress": 3}, "result": "The wardrobe doesn't fit by Christmas."}}},
  {
   "id": "k10_talk",
   "text": "Your parent sits you down for The Talk. They brought diagrams.",
@@ -294,7 +294,7 @@
     "relationships": 2
    }
   }
- },
+ , "up": {"label": "Ask every question you can think of", "effects": {"smarts": 6, "stress": 6, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"smarts": -4, "stress": 3}, "result": "Your parent has to leave the room."}}},
  {
   "id": "k10_best_friend_split",
   "text": "Your two best friends stopped talking. Both want you on their side.",
@@ -359,7 +359,7 @@
     "relationships": 2
    }
   }
- },
+ , "up": {"label": "Take a shortcut through the park", "effects": {"happiness": 4, "stress": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The shortcut has a big dog."}}},
  {
   "id": "k10_first_key",
   "text": "You get your own house key. On a lanyard. Around your neck.",
@@ -418,7 +418,7 @@
     "result": "The floor was wet."
    }
   }
- },
+ , "up": {"label": "Throw a party for your toys", "effects": {"happiness": 6, "stress": -6}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The kitchen is a mess."}}},
  {
   "id": "k10_cook_dinner",
   "text": "You offer to make dinner. Nobody stops you.",
@@ -449,7 +449,7 @@
     "result": "The smoke alarm reviews it."
    }
   }
- },
+ , "up": {"label": "Cook a three-course meal", "effects": {"smarts": 4, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "The smoke alarm has a view."}}},
  {
   "id": "k10_allowance",
   "text": "You can earn pocket money doing chores.",
@@ -510,7 +510,7 @@
    },
    "result": "The neighbour buys six. Out of pity, probably."
   }
- },
+ , "up": {"label": "Open a stand with ten flavours", "effects": {"health": 2}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "Half the flavours are mud."}}},
  {
   "id": "k10_viral_video",
   "text": "Your friend wants to film a dance video to post online.",
@@ -539,7 +539,7 @@
     "result": "Someone screenshots your worst frame."
    }
   }
- },
+ , "up": {"label": "Do the video on the roof", "effects": {"happiness": 4, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The roof is high."}, "death": {"chance": 0.02, "cause": "You slipped off the edge of the roof."}}},
  {
   "id": "k10_screen_time",
   "text": "Your phone says you used it nine hours yesterday.",
@@ -562,7 +562,7 @@
     "health": -2
    }
   }
- },
+ , "up": {"label": "Go phone-free for a week", "effects": {"health": 4, "smarts": 4, "happiness": -4}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "The week is long."}}},
  {
   "id": "k10_sleepover_truth",
   "text": "Sleepover game: truth or dare.",
@@ -592,7 +592,7 @@
     "result": "You licked the bottom of a shoe."
    }
   }
- },
+ , "up": {"label": "Dare. Anything.", "effects": {"happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The dare involves a snail."}}},
  {
   "id": "k10_teacher_praise",
   "text": "A teacher calls you their best student. Out loud. In front of everyone.",
@@ -614,7 +614,7 @@
     "relationships": -2
    }
   }
- },
+ , "up": {"label": "Bow and then correct the teacher", "effects": {"happiness": 4, "relationships": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The teacher was not wrong."}}},
  {
   "id": "k10_test_answers",
   "text": "Someone offers you the answers to tomorrow's test.",
@@ -644,7 +644,7 @@
     "result": "The answers were for a different test."
    }
   }
- },
+ , "up": {"label": "Sell the answers to the class", "effects": {"karma": 6, "stress": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "Someone tells."}}},
  {
   "id": "k10_spelling_contest",
   "text": "You made the final of the class spelling contest.",
@@ -673,7 +673,7 @@
     "result": "Out on a word with a silent letter."
    }
   }
- },
+ , "up": {"label": "Win it", "effects": {"stress": -4, "karma": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "You lose on a silent letter."}}},
  {
   "id": "k10_pimple",
   "text": "A pimple appears on your nose the morning of class photos.",
@@ -696,7 +696,7 @@
     "stress": 2
    }
   }
- },
+ , "up": {"label": "Pop it in front of everyone", "effects": {"looks": -6}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "It does not go well."}}},
  {
   "id": "k10_sibling_room",
   "text": "Your sibling wants to share your room for a month.",
@@ -723,7 +723,7 @@
     "stress": 3
    }
   }
- },
+ , "up": {"label": "Split the room with a tape line", "effects": {"relationships": 6, "stress": 6}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "The tape line becomes a border war."}}},
  {
   "id": "k10_pet_pitch",
   "text": "You want a pet. You've made a slideshow.",
@@ -791,7 +791,7 @@
     "result": "It is bold. Too bold."
    }
   }
- },
+ , "up": {"label": "Dye it blue", "effects": {"looks": 6, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"looks": -4, "stress": 3}, "result": "It turns green."}}},
  {
   "id": "k10_bike_ramp",
   "text": "Kids at the park dare you to jump the ramp on your bike.",
@@ -819,7 +819,7 @@
     "result": "You land. Your bike lands elsewhere."
    }
   }
- },
+ , "up": {"label": "Add another ramp and jump both", "effects": {"happiness": 6, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The second ramp was a mistake."}, "death": {"chance": 0.02, "cause": "You jumped. The ground got there first."}}},
  {
   "id": "k10_left_out",
   "text": "Everyone's at a party you weren't invited to. You see the photos.",
@@ -842,7 +842,7 @@
     "money": -10
    }
   }
- },
+ , "up": {"label": "Throw a bigger party the same night", "effects": {"relationships": 6, "happiness": 2, "money": -20}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "Nobody comes."}}},
  {
   "id": "k10_secret_spill",
   "text": "A friend told you a secret. Now someone asks you about it.",
@@ -865,7 +865,7 @@
     "happiness": 1
    }
   }
- },
+ , "up": {"label": "Tell the secret before anyone asks", "effects": {"karma": 6, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "Everyone knows within minutes."}}},
  {
   "id": "k10_bedroom_lock",
   "text": "You ask for a lock on your bedroom door.",
@@ -887,7 +887,7 @@
     "relationships": -3
    }
   }
- },
+ , "up": {"label": "Install it yourself", "effects": {"happiness": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "The lock sticks. So does the door."}}},
  {
   "id": "k10_library",
   "text": "You discover the library has a whole section for older kids.",
@@ -908,7 +908,7 @@
     "stress": -2
    }
   }
- },
+ , "up": {"label": "Read a book a day", "effects": {"smarts": 8, "stress": -4}, "risk": {"chance": 0.5, "effects": {"smarts": -6, "stress": 3}, "result": "Your eyes hurt."}}},
  {
   "id": "k10_tryouts",
   "text": "Team tryouts after school.",
@@ -937,7 +937,7 @@
     "result": "Cut. The list is on the gym door."
    }
   }
- },
+ , "up": {"label": "Captain the team", "effects": {"health": 8, "relationships": 4, "stress": 4}, "risk": {"chance": 0.5, "effects": {"health": -6, "stress": 3}, "result": "The captain gets the blame."}}},
  {
   "id": "k10_grandparent_call",
   "text": "A grandparent wants a weekly video call. They hold the phone very close.",
@@ -960,7 +960,7 @@
     "karma": 2
    }
   }
- },
+ , "up": {"label": "Teach them a video game", "effects": {"relationships": 6, "karma": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "They beat you. Twice."}}},
  {
   "id": "k10_goose",
   "text": "A goose has taken over the path to school. It is staring at you.",
@@ -1025,7 +1025,7 @@
     "result": "The ladder lost."
    }
   }
- },
+ , "up": {"label": "Hold a tournament", "effects": {"happiness": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "Someone loses a tooth."}}},
  {
   "id": "k10_crush_rumour",
   "text": "A rumour says you have a crush. It's even true.",
@@ -1053,5 +1053,5 @@
     "result": "The rumour gets a sequel."
    }
   }
- }
+ , "up": {"label": "Write a love letter", "effects": {"happiness": 2, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "The letter ends up on the board."}}}
 ]

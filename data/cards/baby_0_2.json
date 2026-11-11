@@ -22,7 +22,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "There was a catch."},
       "result": "You fall asleep in a towel."
     }
-  },
+  , "up": {"label": "Kick the bath into a wave", "effects": {"happiness": 4, "health": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "The wave takes the cat."}}},
   {
     "id": "b0_night_feed",
     "text": "It is 3 a.m. You are hungry.",
@@ -45,7 +45,7 @@
         "relationships": -2
       }
     }
-  },
+  , "up": {"label": "Wail the whole house awake", "effects": {"health": 6, "relationships": -4}, "risk": {"chance": 0.5, "effects": {"health": -4}, "result": "Everyone is awake. Everyone is cross."}}},
   {
     "id": "b0_grab_finger",
     "text": "A giant finger hovers near your hand.",
@@ -64,7 +64,7 @@
       }, "risk": {"chance": 0.3, "effects": {"relationships": -3}, "result": "Then it went a bit wrong."},
       "result": "The giant makes a noise like a kettle."
     }
-  },
+  , "up": {"label": "Grab it and don't let go", "effects": {"relationships": 8, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6}, "result": "Your grip is a bit tight for the finger's owner."}}},
   {
     "id": "b0_first_smile",
     "text": "Someone makes a ridiculous face at you.",
@@ -87,7 +87,7 @@
       },
       "result": "They run to tell everyone."
     }
-  },
+  , "up": {"label": "Laugh out loud for the first time", "effects": {"relationships": 10, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -8}, "result": "Spit-up came with it."}}},
   {
     "id": "b0_pacifier",
     "text": "The pacifier fell on the floor.",
@@ -110,7 +110,7 @@
       },
       "result": "Floor flavor."
     }
-  },
+  , "up": {"label": "Throw it as far as you can", "effects": {"stress": 4, "health": 2}, "risk": {"chance": 0.5, "effects": {"health": -3}, "result": "It landed in the dog's bowl."}}},
   {
     "id": "b0_tummy_time",
     "text": "Tummy time. Your face is in the rug.",
@@ -169,7 +169,7 @@
       },
       "result": "Wallpaper is involved."
     }
-  },
+  , "up": {"label": "Wave every limb for a bath", "effects": {"looks": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "The bath is cold."}}},
   {
     "id": "b0_visitor",
     "text": "A stranger with loud perfume wants to hold you.",
@@ -191,7 +191,7 @@
         "relationships": -2
       }
     }
-  },
+  , "up": {"label": "Smile at the stranger and grab her hair", "effects": {"relationships": 6, "stress": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -4}, "result": "The perfume doesn't wash off."}}},
   {
     "id": "b0_lullaby",
     "text": "A parent sings to you. Badly.",
@@ -213,7 +213,7 @@
         "relationships": 2
       }, "risk": {"chance": 0.3, "effects": {"health": -2}, "result": "You paid for it later."}
     }
-  },
+  , "up": {"label": "Sing along, loudly", "effects": {"health": 4, "happiness": 2, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"health": -3}, "result": "The singing gets worse."}}},
   {
     "id": "b0_teething",
     "text": "Your first tooth is coming in. Everything hurts.",
@@ -304,7 +304,7 @@
         "stress": 2
       }
     }
-  },
+  , "up": {"label": "Say no to the whole world", "effects": {"karma": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "The whole world says no back."}}},
   {
     "id": "b0_crawl",
     "text": "Something shiny is across the room.",
@@ -328,7 +328,7 @@
         "can_crawl"
       ]
     }
-  },
+  , "up": {"label": "Crawl at full speed", "effects": {"health": 6, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"health": -4}, "result": "You hit the table leg at full speed."}}},
   {
     "id": "b0_cupboard",
     "text": "You crawled into the kitchen. The low cupboard opens.",
@@ -356,7 +356,7 @@
         "karma": 1
       }
     }
-  },
+  , "up": {"label": "Empty the cupboard and build a drum kit", "effects": {"happiness": 6, "relationships": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "The neighbours knock on the wall."}}},
   {
     "id": "b0_first_steps",
     "text": "You stand up holding the sofa. Let go?",
@@ -388,7 +388,7 @@
         "can_walk"
       ]
     }
-  },
+  , "up": {"label": "Run three steps", "effects": {"health": 6, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"health": -4}, "result": "Four steps would have been better."}}},
   {
     "id": "b0_stairs_gate",
     "text": "The stair gate is left open.",
@@ -421,7 +421,7 @@
         "result": "Three steps down, the fast way."
       }
     }
-  },
+  , "up": {"label": "Climb to the top", "effects": {"happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "Coming down is a different problem."}, "death": {"chance": 0.02, "cause": "Down the stairs, and not back up."}}},
   {
     "id": "b0_mashed_food",
     "text": "A spoon of green mush approaches.",
@@ -474,7 +474,7 @@
       },
       "result": "Gravity works every time. You check 40 times."
     }
-  },
+  , "up": {"label": "Hurl the whole bowl", "effects": {"health": 4}, "risk": {"chance": 0.5, "effects": {"health": -3}, "result": "The bowl lands on the wrong head."}}},
   {
     "id": "b0_pet_tail",
     "text": "The family pet has a tail. It is right there.",
@@ -505,7 +505,7 @@
         "result": "The pet has opinions."
       }
     }
-  },
+  , "up": {"label": "Climb on the pet", "effects": {"karma": 6, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "The pet has opinions."}}},
   {
     "id": "b0_new_sibling",
     "text": "A new baby came home. Everyone is looking at it.",
@@ -534,7 +534,7 @@
         "has_sibling"
       ]
     }
-  },
+  , "up": {"label": "Share your whole toy box", "effects": {"relationships": 8, "karma": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -6}, "result": "They throw up on the best one."}}},
   {
     "id": "b0_sibling_toy",
     "text": "Your sibling has your old rattle.",
@@ -560,7 +560,7 @@
         "relationships": -3
       }
     }
-  },
+  , "up": {"label": "Swap it for their best one", "effects": {"karma": 8}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "They're not impressed."}}},
   {
     "id": "b0_bedtime",
     "text": "Bedtime. You are not tired. You are very tired.",
@@ -584,7 +584,7 @@
       },
       "result": "You fall asleep mid-shout."
     }
-  },
+  , "up": {"label": "Stay up till midnight", "effects": {"health": 6, "stress": -4}, "risk": {"chance": 0.5, "effects": {"health": -4}, "result": "Midnight comes with a meltdown."}}},
   {
     "id": "b0_tantrum",
     "text": "You wanted the blue cup. You got the red cup.",
@@ -608,7 +608,7 @@
       },
       "result": "Everyone in the room ages a year."
     }
-  },
+  , "up": {"label": "Lie on the floor of the supermarket", "effects": {"karma": 4, "stress": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "A stranger has filmed it."}}},
   {
     "id": "b0_peekaboo",
     "text": "A parent hides behind their hands. They are gone forever.",
@@ -658,7 +658,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "Mostly fine. Mostly."},
       "result": "The bathroom floor is a lake."
     }
-  },
+  , "up": {"label": "Pull the plug and watch it go", "effects": {"happiness": 4, "looks": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "The bath empties all over the floor."}}},
   {
     "id": "b0_potty",
     "text": "Someone shows you a tiny plastic toilet.",
@@ -681,7 +681,7 @@
         "relationships": 3
       }
     }
-  },
+  , "up": {"label": "Use it like a pro", "effects": {"smarts": 6, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"smarts": -4}, "result": "It was a bit much."}}},
   {
     "id": "b0_crayon_wall",
     "text": "You found a crayon. The wall is big and empty.",
@@ -705,7 +705,7 @@
       },
       "result": "A masterpiece. Nobody agrees."
     }
-  },
+  , "up": {"label": "Do the whole room", "effects": {"smarts": 4, "karma": 2}, "risk": {"chance": 0.5, "effects": {"smarts": -3}, "result": "The whole room is a mural. Parents are not impressed."}}},
   {
     "id": "b0_doctor_shot",
     "text": "The doctor has a small needle and a big smile.",
@@ -728,7 +728,7 @@
       }, "risk": {"chance": 0.3, "effects": {"health": -3}, "result": "Then it went a bit wrong."},
       "result": "You don't flinch. Legend."
     }
-  },
+  , "up": {"label": "Wave and say hi to everyone", "effects": {"health": 8, "karma": 2}, "risk": {"chance": 0.5, "effects": {"health": -6}, "result": "The needle goes in anyway."}}},
   {
     "id": "b0_vacuum",
     "text": "The vacuum is on. It is a monster.",
@@ -750,7 +750,7 @@
         "health": 1
       }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "There was a catch."}
     }
-  },
+  , "up": {"label": "Ride it", "effects": {"happiness": 4, "health": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "The vacuum goes over a sock. Everyone screams."}}},
   {
     "id": "b0_playdate",
     "text": "Another toddler is here. They have a better toy.",
@@ -774,7 +774,7 @@
       },
       "result": "Both of you cry."
     }
-  },
+  , "up": {"label": "Start a toy trade", "effects": {"relationships": 8, "karma": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -6}, "result": "The other toddler is better at trading."}}},
   {
     "id": "b0_hiding",
     "text": "Hide and seek. You hide behind a curtain. Your feet show.",
@@ -797,7 +797,7 @@
       },
       "result": "Found instantly. Proud anyway."
     }
-  },
+  , "up": {"label": "Stay hidden for an hour", "effects": {"relationships": 6, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -4}, "result": "They all forgot to come find you."}}},
   {
     "id": "b0_sock_eater",
     "text": "There is a sock in your mouth. You don't know whose.",
@@ -850,5 +850,5 @@
       }, "risk": {"chance": 0.3, "effects": {"looks": -2}, "result": "There was a catch."},
       "result": "Slobber on glass. Friendship forever."
     }
-  }
+  , "up": {"label": "Hug the mirror", "effects": {"looks": 4, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"looks": -3}, "result": "The mirror hugs back. Cold."}}}
 ]

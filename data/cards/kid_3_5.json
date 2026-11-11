@@ -62,7 +62,7 @@
         "imaginary_friend"
       ]
     }
-  },
+  , "up": {"label": "Throw a tea party for Gerald", "effects": {"happiness": 4, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "He ate all the cake. Apparently."}}},
   {
     "id": "k3_gerald_blame",
     "text": "Somebody drew on the wall. Gerald, probably.",
@@ -98,7 +98,7 @@
         "stress": 2
       }
     }
-  },
+  , "up": {"label": "Blame Gerald loudly", "effects": {"karma": 6, "relationships": 4, "stress": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -3}, "result": "Gerald is grounded. So are you."}}},
   {
     "id": "k3_gerald_leaves",
     "text": "Gerald says he's moving away. He packed a tiny invisible bag.",
@@ -129,7 +129,7 @@
         "imaginary_friend"
       ]
     }
-  },
+  , "up": {"label": "Pack a bag and follow him", "effects": {"happiness": -2, "smarts": 4}, "risk": {"chance": 0.5, "effects": {"smarts": -3}, "result": "You get as far as the hall."}}},
   {
     "id": "k3_daycare_first_day",
     "text": "First day at daycare. Your parent is edging toward the door.",
@@ -153,7 +153,7 @@
         "stress": 1
       }, "risk": {"chance": 0.3, "effects": {"relationships": -2}, "result": "There was a catch."}
     }
-  },
+  , "up": {"label": "Run in and take over", "effects": {"relationships": 6, "happiness": 2, "stress": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -4}, "result": "The other kids have already made friends."}}},
   {
     "id": "k3_nap_time",
     "text": "Nap time. Everyone is lying down. You are not tired.",
@@ -183,7 +183,7 @@
         "result": "The teacher heard that."
       }
     }
-  },
+  , "up": {"label": "Sneak off and explore", "effects": {"health": 4, "karma": 2}, "risk": {"chance": 0.5, "effects": {"health": -3}, "result": "The caretaker is unimpressed."}}},
   {
     "id": "k3_bedtime_stall",
     "text": "It's bedtime. You need water. And a story. And another water.",
@@ -245,7 +245,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "Not everything went your way."},
       "result": "It was a coat. A very rude coat."
     }
-  },
+  , "up": {"label": "Open it and roar", "effects": {"stress": -4, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "Something tumbles out."}}},
   {
     "id": "k3_picky_peas",
     "text": "There's a pea touching your potatoes. Unacceptable.",
@@ -269,7 +269,7 @@
         "smarts": 1
       }
     }
-  },
+  , "up": {"label": "Declare a hunger strike", "effects": {"health": 4, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"health": -3}, "result": "Dinner is cold. So is the room."}}},
   {
     "id": "k3_mystery_green",
     "text": "A green thing is on your fork. Nobody will say what it is.",
@@ -300,7 +300,7 @@
         "result": "It was exactly as bad as it looked."
       }
     }
-  },
+  , "up": {"label": "Eat the whole plate", "effects": {"health": 6, "happiness": -2}, "risk": {"chance": 0.5, "effects": {"health": -4}, "result": "It was brussels sprouts."}}},
   {
     "id": "k3_playground_slide",
     "text": "The big slide. The big kids use it.",
@@ -329,7 +329,7 @@
         "result": "Bumped knee. Brave face."
       }
     }
-  },
+  , "up": {"label": "Go down head first", "effects": {"happiness": 2, "stress": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "The landing is a bit hard."}}},
   {
     "id": "k3_sandbox_shovel",
     "text": "A kid in the sandbox has the good shovel.",
@@ -384,7 +384,7 @@
         "preschool_bestie"
       ]
     }
-  },
+  , "up": {"label": "Give them your best toy", "effects": {"relationships": 10, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -8}, "result": "They don't give it back."}}},
   {
     "id": "k3_bestie_fight",
     "text": "Your best friend says you can't come to their pretend castle.",
@@ -411,7 +411,7 @@
         "karma": 1
       }
     }
-  },
+  , "up": {"label": "Build a bigger castle", "effects": {"relationships": 8, "karma": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6}, "result": "The castle collapses."}}},
   {
     "id": "k3_bestie_sleepover",
     "text": "Your best friend's parent asks if you want to stay the night.",
@@ -446,7 +446,7 @@
         "result": "Midnight call. Someone has to come get you."
       }
     }
-  },
+  , "up": {"label": "Stay for the whole weekend", "effects": {"relationships": 8, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -6}, "result": "You miss your bed by Saturday."}}},
   {
     "id": "k3_why_phase",
     "text": "Why is the sky up? Why are feet? Why why why?",
@@ -469,7 +469,7 @@
       },
       "result": "A tired parent stares at the ceiling."
     }
-  },
+  , "up": {"label": "Ask why until bedtime", "effects": {"smarts": 8, "relationships": -4}, "risk": {"chance": 0.5, "effects": {"smarts": -6}, "result": "Your parent has run out of answers."}}},
   {
     "id": "k3_haircut",
     "text": "Haircut day. The scissors are very close to your ears.",
@@ -526,7 +526,7 @@
       },
       "result": "The bathroom is a lake."
     }
-  },
+  , "up": {"label": "Swim in the bath", "effects": {"happiness": 4, "relationships": -4, "health": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "Half the bath is on the floor."}}},
   {
     "id": "k3_potty_holdout",
     "text": "You have to go. But you're SO busy playing.",
@@ -556,7 +556,7 @@
         "karma": 1
       }
     }
-  },
+  , "up": {"label": "Keep playing and hope", "effects": {"health": 4, "karma": 2}, "risk": {"chance": 0.5, "effects": {"health": -3}, "result": "You didn't make it."}}},
   {
     "id": "k3_dress_yourself",
     "text": "You want to dress yourself today.",
@@ -579,7 +579,7 @@
       },
       "result": "You look like a legend."
     }
-  },
+  , "up": {"label": "Wear your pyjamas to the shops", "effects": {"happiness": 6, "looks": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "Everyone is looking at you."}}},
   {
     "id": "k3_new_sibling",
     "text": "A baby is coming home. Everyone says you're a big kid now.",
@@ -609,7 +609,7 @@
         "karma": 2
       }, "risk": {"chance": 0.3, "effects": {"relationships": -4}, "result": "There was a catch."}
     }
-  },
+  , "up": {"label": "Teach the baby everything", "effects": {"relationships": 10, "karma": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -8}, "result": "You teach it a word you shouldn't."}}},
   {
     "id": "k3_art_masterpiece",
     "text": "You painted a picture. It is mostly brown.",
@@ -632,7 +632,7 @@
       }, "risk": {"chance": 0.3, "effects": {"relationships": -3}, "result": "You paid for it later."},
       "result": "It goes on the fridge. Honored forever."
     }
-  },
+  , "up": {"label": "Hang it in the hall", "effects": {"relationships": 8, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6}, "result": "A guest asks what it is."}}},
   {
     "id": "k3_counting_show",
     "text": "A grown-up asks you to count to ten in front of everybody.",
@@ -654,7 +654,7 @@
       }, "risk": {"chance": 0.3, "effects": {"smarts": -2}, "result": "You paid for it later."},
       "result": "You skip seven. Nobody minds."
     }
-  },
+  , "up": {"label": "Count to a hundred", "effects": {"smarts": 6, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"smarts": -4}, "result": "You skip a lot of numbers."}}},
   {
     "id": "k3_lost_toy",
     "text": "Your favourite stuffed rabbit is gone.",
@@ -678,7 +678,7 @@
         "stress": -1
       }, "risk": {"chance": 0.3, "effects": {"smarts": -2}, "result": "There was a catch."}
     }
-  },
+  , "up": {"label": "Organise a search party", "effects": {"smarts": 6, "stress": -2}, "risk": {"chance": 0.5, "effects": {"smarts": -4}, "result": "The search party loses its own toy."}}},
   {
     "id": "k3_dog_meet",
     "text": "A big dog trots over in the park.",
@@ -736,7 +736,7 @@
       },
       "result": "It escapes. It's in the house now."
     }
-  },
+  , "up": {"label": "Start a bug hotel", "effects": {"karma": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "The hotel is full by morning."}}},
   {
     "id": "k3_show_and_tell",
     "text": "Show and tell. You have nothing to show.",
@@ -759,7 +759,7 @@
         "karma": -1
       }
     }
-  },
+  , "up": {"label": "Tell a tall tale about a dragon", "effects": {"smarts": 6, "karma": -2}, "risk": {"chance": 0.5, "effects": {"smarts": -4}, "result": "The teacher knows it's made up."}}},
   {
     "id": "k3_pet_fish",
     "text": "The class fish needs feeding while the teacher is out.",
@@ -788,7 +788,7 @@
         "result": "The fish is having a hard week."
       }
     }
-  },
+  , "up": {"label": "Feed it a feast", "effects": {"karma": 4, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"smarts": -3}, "result": "The fish has seen better days."}}},
   {
     "id": "k3_crayon_snack",
     "text": "A purple crayon looks delicious today.",
@@ -811,7 +811,7 @@
       },
       "result": "Tastes like purple. Disappointing."
     }
-  },
+  , "up": {"label": "Eat the whole box", "effects": {"smarts": 2}, "risk": {"chance": 0.5, "effects": {"smarts": -3}, "result": "Your tummy is a rainbow."}}},
   {
     "id": "k3_grandparent_visit",
     "text": "A grandparent arrives with pockets full of something.",
@@ -834,7 +834,7 @@
       }, "risk": {"chance": 0.3, "effects": {"relationships": -3}, "result": "You paid for it later."},
       "result": "Candy. The pockets had candy."
     }
-  },
+  , "up": {"label": "Empty their pockets", "effects": {"relationships": 8, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -6}, "result": "They had a surprise for you."}}},
   {
     "id": "k3_doctor_shot",
     "text": "The doctor has a needle and a sticker.",
@@ -858,7 +858,7 @@
       }, "risk": {"chance": 0.3, "effects": {"health": -2}, "result": "There was a catch."},
       "result": "You get two stickers."
     }
-  },
+  , "up": {"label": "Ask for two stickers", "effects": {"health": 6, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"health": -4}, "result": "The doctor gives you only one."}}},
   {
     "id": "k3_sharing_song",
     "text": "Everyone has to hold hands and sing a song.",
@@ -881,7 +881,7 @@
       },
       "result": "Wrong words. Full heart."
     }
-  },
+  , "up": {"label": "Lead the whole room", "effects": {"happiness": 4, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3}, "result": "You forget the words."}}},
   {
     "id": "k3_king_of_couch",
     "text": "You declare the couch a kingdom. You are its ruler.",
@@ -904,7 +904,7 @@
       },
       "result": "A parent invades. The kingdom falls."
     }
-  },
+  , "up": {"label": "Declare war on the armchair", "effects": {"happiness": 6, "relationships": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "The armchair has the cat."}}},
   {
     "id": "k3_learn_to_ride",
     "text": "Someone's taking the training wheels off your bike.",
@@ -933,7 +933,7 @@
         "result": "You meet the pavement. Then you ride."
       }
     }
-  },
+  , "up": {"label": "Ride downhill", "effects": {"happiness": 6, "health": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "The hill was steeper than you thought."}}},
   {
     "id": "k3_nightmare",
     "text": "You woke up from a bad dream. The hall is dark.",
@@ -958,5 +958,5 @@
       },
       "result": "You sleep sideways across both of them."
     }
-  }
+  , "up": {"label": "Wake the whole house", "effects": {"stress": -6, "relationships": 4, "health": -2}, "risk": {"chance": 0.5, "effects": {"relationships": -3}, "result": "Nobody sleeps."}}}
 ]

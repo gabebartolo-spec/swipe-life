@@ -1,0 +1,131 @@
+a18_budget_style|Budget to the cent, spreadsheet and all|The spreadsheet becomes your whole personality.|
+a18_vote|Volunteer at the polling station|Eleven hours on a plastic chair. Nobody thanks you.|
+a18_laundry|Dye everything pink on purpose|The landlord's towels were in that wash too.|
+a18_call_home|Cook the vegetables and send photos|They send back a list of corrections.|
+a18_deposit|Threaten small claims court|The landlord calls your bluff.|
+a18_mould|Report them to the council|The inspector finds a lot more than mould.|
+a18_still_home|Sign for a flat tonight|The rent is higher than you worked out.|
+a18_first_interview|Say you want their job|The room goes very quiet.|
+a18_cv_lie|Invent a whole previous job|They call the number you made up.|
+a18_scam|Send $2,000 to go bigger|The nice logo has vanished.|
+a18_credit_offer|Fill the basket, pay with the card|The interest is a work of fiction.|
+a18_car_breakdown|Push it to the garage yourself|The car rolls back. So does your pride.|
+a18_drive_home|Drive home fast|The road is wetter than it looks.|The road took you at 2am.
+a18_club_toilets|Take two|It was not what he said it was.|You did not wake up after that night.
+a18_hangover|Do the presentation anyway|You mix up the slides. Loudly.|
+a18_gym_membership|Pay for two years upfront|You go three times.|
+a18_cooking|Host a dinner for six|The smoke alarm gives a standing ovation.|
+a18_mole|Book the full check, then a second opinion|Both doctors want more tests.|
+a18_burnout|Quit and take a month off|The bills do not take a month off.|
+a18_old_friends|Plan a reunion weekend away|Half of them cancel on the day.|
+a18_friend_loan|Lend $3,000 and the spare room|They've moved in and not mentioned Friday.|
+a18_wedding_guest|Be the best man at the wedding|The speech ran long.|
+a18_backpack|Sell the lot and go for two years|The money ran out in a hostel in month four.|
+a18_tattoo|Get the full sleeve|The artist was not what you'd call experienced.|
+a18_side_hustle|Quit work to sell full-time|The stock sits in your hallway.|
+a18_tax_letter|Open it and call them at once|You were on hold for three hours.|
+a18_quarter_life|Overhaul your whole life by Friday|By Friday you are tired.|
+a18_volunteer|Run the Saturday shift|Somebody has to count the tins. It's you.|
+a18_grandparent_call|Spend the weekend and fix everything|They undo it all by Monday.|
+a18_pigeon|Adopt a flock|Gerald has told his friends.|
+a18_adult_form|Write your whole family tree|Someone else's name is on there. It's a long afternoon.|
+a25_reunion|Give a speech|The speech did not go the way it did in the shower.|
+a25_friend_wedding|Do the dance with the aunt|The aunt does not let go.|
+a25_friends_baby|Offer to babysit all weekend|The baby has opinions about sleep.|
+a25_back_twinge|Start a strict training plan|It aggravates the back.|
+a25_all_nighter|Pull a double all-nighter|Your body files a complaint.|
+a25_career_change|Quit with no plan|The plan arrives later than the rent.|
+a25_pay_rise_ask|Threaten to leave|They say go on then.|
+a25_scam_invest|Buy the premium pack|The box arrives. It is empty.|
+a25_rent_rise|Threaten to move out|You do not, in fact, have anywhere to move.|
+a25_neighbour_noise|Join the band|You are now the worst drummer in the street.|
+a25_car_upgrade|Get the sports model|The payments are not basically nothing.|
+a25_parent_scare|Move them in with you|They're very polite about it. Everyone is tense.|
+a25_checkup|Go full health nut|Three weeks of kale. The kale wins.|
+a25_friend_drift|Plan an expedition|It rains for six days.|
+a25_drink_habit|Dry year, with a coach|The year is long. You wobble.|
+a25_therapy|Go twice a week|It stirs up more than you expected.|
+a25_marathon|Do an ultra-marathon|Somewhere around mile twenty you regret this.|The heart gave out on the course.
+a25_night_class|Sell your pots at the market|The market is not kind to pots.|
+a25_dream_trip|Take a sabbatical for the trip|The job is not there when you return.|
+a25_found_wallet|Track the owner down yourself|The owner is not grateful. The dog is.|
+a25_charity_run|Do a full fancy-dress marathon|The leek costume was not made to be run in.|
+a25_grey_hair|Dye it bright silver|It went a different colour.|
+a25_teens_scare_you|Let them have a go|They will tell all of their friends.|
+a25_loan_friend|Put the house up against it|The truck did not make it past the first festival.|
+a25_savings_talk|Slash everything for ten years|You forget what fun was.|
+a25_old_flame_post|Message them a hello|They replied. It was awkward.|
+a25_jury|Become the jury foreman|The case drags on for weeks.|
+a25_pet_rat|Take her whole extended family|They are not all Margaret.|
+a25_burnout|Leave and start over|Starting over turned out to cost money.|
+a25_ladder_fall|Climb it in the rain|The ladder was older than you thought.|The ladder went one way. You went the other.
+a40_birthday|Skydive for it|The party was actually less risky.|You did not make it down in one piece.
+a40_midlife_car|Buy it and do a road trip|The car is faster than your nerves.|The bend was sharper than the sign said.
+a40_reading_glasses|Get laser surgery|The laser had a bad day.|
+a40_knee|Run a half marathon on it|The knee has the final word.|
+a40_screening|Book every screening going|They find a thing you now worry about.|
+a40_blood_pressure|Take up a gruelling diet|You are hungry and unbearable.|
+a40_chest_pain|Drive yourself to the ER|You are in no state to drive.|The chest pain was not nothing.
+a40_ageing_parent|Record every story they tell|You hear all of them. Again.|
+a40_parent_care|Move them in and quit work|It is a lot harder than the brochure.|
+a40_parent_funeral|Give a eulogy that has everybody laughing|One joke lands badly.|
+a40_old_friend_dies|Travel to the funeral and meet the old group|Everyone drinks. Everyone cries.|
+a40_passed_over|Resign on the spot|You have no other job to resign into.|
+a40_restructure|Demand a bigger payout|They found a way to say no.|
+a40_new_tech|Take the advanced course|The advanced course is for people who already know.|
+a40_pension_letter|Move everything into a risky fund|The fund had a bad quarter. Then another.|
+a40_get_rich_late|Pay for the VIP tier|The VIP tier has a free tote bag.|
+a40_marathon_late|Swim a mile every day|You haven't swum in a very long time.|
+a40_hobby|Do both and run the whole show|You are now in charge of the raffle.|
+a40_old_bully|Meet them for dinner|You are surprised how much it hurts.|
+a40_volunteer_mentor|Take on three students|It is a lot more than three.|
+a40_weight|Go on a juice cleanse|You are not a nice person on day two.|
+a40_hair|Fly abroad for a procedure|The result is... not what the brochure said.|
+a40_skin_treatment|Get the full treatment|You can't blink right for a week.|
+a40_reinvent|Quit and enrol tomorrow|The course costs more than you thought.|
+a40_inheritance|Spend it all on one big thing|Money has a way of leaving.|
+a40_party_invite|Stay till the end|You pay for it all week.|
+a40_drink_doctor|Give it up completely|It is harder than you thought.|
+a40_sleep|Hire a sleep coach|The coach sleeps better than you.|
+a40_stranger_help|Sit with them till they're okay|They're grateful. You're late for everything.|
+a40_early_retire|Retire in two years|The numbers do not add up.|
+a60_birthday|Hire a hall and a band|The band plays for far too long.|
+a60_retire_date|Retire tomorrow|The days are very long now.|
+a60_leaving_do|Sing a song|You've never sung in your life.|
+a60_empty_days|Join four clubs at once|You get a lot of mail.|
+a60_grandchild|Take over the whole childcare|You are exhausted by Tuesday.|
+a60_grandchild_visit|Take them camping|It rains. There's one tent.|
+a60_hip|Have both hips done|The recovery is long and grim.|
+a60_cataract|Have both eyes done at once|You can't see for a week.|
+a60_pills|Add the herbal remedy too|The herbs do not agree with the tablets.|
+a60_fall|Walk it off and make tea|Your hip disagrees. Loudly.|The fall was the last one.
+a60_downsize|Sell up and move abroad|It's lovely. You miss everyone.|
+a60_friend_dies|Give the eulogy|You break down halfway through.|
+a60_partner_ill|Learn the whole thing yourself|You are very tired.|
+a60_widowed|Throw a dinner party for one chair|It's a lonely table.|
+a60_late_love|Propose a trip together|They say they need time.|
+a60_scam_call|Argue with him for an hour|He's patient. You're not.|
+a60_phone|Join every social media site|Your inbox is full by lunchtime.|
+a60_garden|Take on three plots|Your back files an objection.|
+a60_cruise|Book the world cruise|The sea is rougher than the brochure.|The ship never did make it back to port.
+a60_will|Give it all away now|You might regret this later.|
+a60_memory|Make a memory book and see a specialist|The specialist is vague.|
+a60_memoir|Write the book and publish it|Two people buy it. Both relatives.|
+a60_dance_class|Enter the tea dance competition|You tripped over the sequins.|
+a60_care_home|Agree to the full tour and a trial stay|The food is not what the photos suggest.|
+a60_birthday_big|Hire a hot-air balloon|The wind picked up.|The balloon didn't land where the pilot said.
+a60_hundred|Say 'gin' and have one|It was a bit more than one.|
+a60_flu|Mow the lawn through it|The flu got worse.|The flu turned into something worse.
+a60_old_photo|Make an album and show everyone|There's a photo you didn't want shown.|
+a60_r_walk|Walk to the next town|It's much further than it looks.|
+a60_r_neighbour|Invite them in for the afternoon|They stay for the evening.|
+a60_r_crossword|Start another one and finish both|It takes the whole day.|
+a60_r_doctor|Ask for every test going|They find something to watch.|
+a60_r_call|Ring everyone you know|Half of them are out.|
+a60_r_cook|Cook for the whole street|You're up till midnight.|
+a60_r_nap|Sleep till dark|You are up all night.|
+a60_r_garden_chat|Build the robin a house|It prefers the neighbour's.|
+a60_r_news|Write to your MP|The reply is a form letter.|
+a60_r_radio|Dance in the kitchen|Your hip says no.|The kitchen floor was wet.
+a60_r_stairs|Take them two at a time|They were not meant for two.|The stairs won that one.
+a60_r_shop|Complain to the manager|The manager is also the machine.|
