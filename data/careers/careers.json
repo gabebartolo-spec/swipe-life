@@ -245,19 +245,19 @@
 		"ranks": [
 			{
 				"title": "Junior Club",
-				"pay": 0,
+				"pay": 30,
 				"stress": 8,
 				"promote_at": 70
 			},
 			{
 				"title": "Rep Team",
-				"pay": 20,
+				"pay": 80,
 				"stress": 10,
 				"promote_at": 85
 			},
 			{
 				"title": "Draft Prospect",
-				"pay": 50,
+				"pay": 160,
 				"stress": 12
 			}
 		]
@@ -275,19 +275,19 @@
 		"ranks": [
 			{
 				"title": "Karting",
-				"pay": -150,
+				"pay": -60,
 				"stress": 9,
 				"promote_at": 75
 			},
 			{
 				"title": "Regional Champ",
-				"pay": -100,
+				"pay": -20,
 				"stress": 11,
 				"promote_at": 88
 			},
 			{
 				"title": "Junior Formula",
-				"pay": 0,
+				"pay": 60,
 				"stress": 14
 			}
 		]
@@ -317,19 +317,19 @@
 		"ranks": [
 			{
 				"title": "School Team",
-				"pay": 0,
+				"pay": 30,
 				"stress": 8,
 				"promote_at": 70
 			},
 			{
 				"title": "State Squad",
-				"pay": 20,
+				"pay": 80,
 				"stress": 10,
 				"promote_at": 85
 			},
 			{
 				"title": "College Scouted",
-				"pay": 40,
+				"pay": 160,
 				"stress": 12
 			}
 		]
@@ -355,19 +355,19 @@
 		"ranks": [
 			{
 				"title": "Garage Band",
-				"pay": 0,
+				"pay": 20,
 				"stress": 6,
 				"promote_at": 70
 			},
 			{
 				"title": "Local Gigs",
-				"pay": 40,
+				"pay": 70,
 				"stress": 8,
 				"promote_at": 85
 			},
 			{
 				"title": "Demo Signed",
-				"pay": 120,
+				"pay": 160,
 				"stress": 11
 			}
 		]
@@ -470,18 +470,21 @@
 				"title": "Skatepark Local",
 				"pay": 0,
 				"stress": 7,
-				"promote_at": 70
+				"promote_at": 70,
+				"adult_pay": 12000
 			},
 			{
 				"title": "Sponsored Am",
 				"pay": 40,
 				"stress": 9,
-				"promote_at": 85
+				"promote_at": 85,
+				"adult_pay": 40000
 			},
 			{
 				"title": "Pro Team Rider",
 				"pay": 150,
-				"stress": 12
+				"stress": 12,
+				"adult_pay": 90000
 			}
 		]
 	},
@@ -508,18 +511,21 @@
 				"title": "Ranked Grinder",
 				"pay": 0,
 				"stress": 7,
-				"promote_at": 70
+				"promote_at": 70,
+				"adult_pay": 12000
 			},
 			{
 				"title": "Academy Team",
 				"pay": 30,
 				"stress": 10,
-				"promote_at": 85
+				"promote_at": 85,
+				"adult_pay": 45000
 			},
 			{
 				"title": "Pro Roster",
 				"pay": 160,
-				"stress": 13
+				"stress": 13,
+				"adult_pay": 110000
 			}
 		]
 	}

@@ -11,6 +11,9 @@ const LOAN_RATE := 0.10
 const SAVINGS_RATE := 0.02
 const REPOSSESS_AFTER := 3  # years in debt
 const DEPOSIT := 0.10
+# income tax: [pay above, rate] highest first; each band taxes only the pay inside it
+const TAX_BANDS := [[150000, 0.45], [60000, 0.30], [30000, 0.15]]
+const MORTGAGE_SHARE := 0.5  # bank lends while repayments + upkeep fit in this share of pay
 const MORTGAGE_YEARS := 25
 const MORTGAGE_RATE := 0.04  # placeholder until balance (M13)
 const STUDENT_RATE := 0.02  # placeholder until balance (M13)
@@ -73,6 +76,7 @@ static func year_end(state, db: CareerDB, rng: RandomNumberGenerator) -> Array:
 	var before: int = state.stats.money
 	if yearly_pay(state, db) <= 0:
 		lines.append("No income this year.")
+	_tax(state, yearly_pay(state, db), lines)
 	_course_year(state, rng, lines)
 	_cost_of_living(state, lines)
 	Family.year_end(state, rng, lines)
@@ -90,6 +94,24 @@ static func year_end(state, db: CareerDB, rng: RandomNumberGenerator) -> Array:
 		state.flags.erase("fresh_start")
 	lines.append("Money this year: %s" % Finance.money_text(state.stats.money - before))
 	return lines
+
+
+## Income tax on a year's pay (bands in TAX_BANDS).
+static func tax_due(pay: int) -> int:
+	var due := 0.0
+	var top := pay
+	for band in TAX_BANDS:
+		if top > band[0]:
+			due += (top - band[0]) * band[1]
+			top = band[0]
+	return int(due)
+
+
+static func _tax(state, pay: int, lines: Array) -> void:
+	var due := tax_due(pay)
+	if due > 0:
+		state.change_stat("money", -due)
+		lines.append("Tax took %s." % Finance.money_text(due))
 
 
 static func _cost_of_living(state, lines: Array) -> void:
@@ -198,6 +220,16 @@ static func mortgage_payment(amount: int) -> int:
 
 static func deposit(house: Dictionary) -> int:
 	return int(house.price * DEPOSIT)
+
+
+## Yearly mortgage payment plus upkeep of a house bought with the usual deposit.
+static func house_cost(house: Dictionary) -> int:
+	return mortgage_payment(int(house.price) - deposit(house)) + int(house.upkeep)
+
+
+## The bank's affordability check: the house's yearly cost must fit in MORTGAGE_SHARE of pay.
+static func can_afford(state, house: Dictionary, db: CareerDB) -> bool:
+	return house_cost(house) <= MORTGAGE_SHARE * yearly_pay(state, db)
 
 
 static func can_buy(state, house: Dictionary) -> bool:
