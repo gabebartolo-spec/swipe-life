@@ -17,6 +17,7 @@ const STUDENT_RATE := 0.02  # placeholder until balance (M13)
 const STUDENT_THRESHOLD := E  # repaid only on pay above this; placeholder
 const STUDENT_SHARE := 0.05  # of yearly pay; placeholder
 const STUDENT_WRITE_OFF := 40  # years
+const STUDENT_LOAN_YEARS := 6  # course years a life can put on a loan (the longest course)
 const FRESH_START_YEARS := 7
 const FRESH_START_OVER_PAY := 3
 const HOME_FROM := 22  # living with parents starts to cost Happiness and family
@@ -301,8 +302,15 @@ static func fail_chance(state) -> float:
 	return maxf(COURSE_FAIL - bonus, 0.0)
 
 
+## A student loan covers 6 course years in a life; after that a course is paid in cash.
+static func loan_open(state, course: Dictionary) -> bool:
+	return state.loan_years + int(course.years) <= STUDENT_LOAN_YEARS
+
+
 static func enrol(state, course: Dictionary, on_loan: bool) -> String:
 	if not state.course.is_empty():
+		return ""
+	if on_loan and not loan_open(state, course):
 		return ""
 	if not on_loan and state.stats.money < int(course.yearly):
 		return ""
@@ -314,6 +322,8 @@ static func enrol(state, course: Dictionary, on_loan: bool) -> String:
 		"left": int(course.years),
 		"on_loan": on_loan,
 	}
+	if on_loan:
+		state.loan_years += int(course.years)
 	return "You enrolled: %s." % course.label
 
 

@@ -73,11 +73,14 @@ func _init() -> void:
 			if trace and state.age >= 18:
 				print(
 					(
-						"  age %d money %d pay %d house %s debts %s"
+						"  age %d money %d pay %d job %s open %d flags %s house %s debts %s"
 						% [
 							state.age,
 							state.stats.money,
 							Finance.yearly_pay(state, careers),
+							state.careers.get("job", {}).get("id", "none"),
+							careers.available(state).size(),
+							state.flags.keys(),
 							state.housing.kind,
 							state.debts
 						]

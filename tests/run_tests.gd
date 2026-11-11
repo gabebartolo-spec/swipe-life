@@ -619,6 +619,18 @@ func _test_finance() -> void:
 		guard += 1
 	_check(db.available(c).any(func(j): return j.id == "carpenter"), "course must open the job")
 	_check(c.debts.any(func(d): return d.kind == "student"), "student loan missing")
+	# six course years on loan: medicine (6) is refused after carpentry (2), nursing (3) is not
+	var by_course := func(id): return fdb.courses.filter(func(k): return k.id == id)[0]
+	_check(Finance.enrol(c, by_course.call("medicine"), true) == "", "loan past the 6-year cap")
+	_check(Finance.enrol(c, by_course.call("nursing"), true) != "", "loan inside the cap refused")
+	c.course = {}
+	_check(Finance.enrol(c, by_course.call("care_cert"), true) != "", "last loan year refused")
+	c.course = {}
+	_check(Finance.enrol(c, by_course.call("fire"), true) == "", "seventh loan year given")
+	c.stats.money = 100000
+	_check(
+		Finance.enrol(c, by_course.call("fire"), false) != "", "cash course refused after the cap"
+	)
 	# retail carries on past 18 at an adult wage, with adult-only ranks; other teen jobs end
 	var t = _make_state(17)
 	CareerRules.apply(db.by_id.retail, t, rng)
@@ -628,6 +640,12 @@ func _test_finance() -> void:
 	_check(t.careers.job.rank == 2, "store manager is for adults")
 	t.age = 18
 	_check(CareerRules.outgrown(t, db).is_empty(), "retail must carry on past 18")
+	# juvie ends at 18 even if the release card never came up, or no job would ever open
+	var j = _make_state(18)
+	j.flags["juvie"] = true
+	_check(db.available(j).is_empty(), "juvie must block jobs")
+	CareerRules.outgrown(j, db)
+	_check(not db.available(j).is_empty(), "juvie must end at 18")
 	_check(Finance.yearly_pay(t, db) == Finance.E, "teen rank must pay E at 18")
 	var f = _make_state(17)
 	CareerRules.apply(db.by_id.paper_round, f, rng)
@@ -722,6 +740,7 @@ func _test_adult_sim() -> void:
 			% [median, careful[-1], houses, adult_jobs.size(), max_debt]
 		)
 	)
+	_check(max_debt < 1000000, "runaway debt in the sim: %d" % max_debt)
 	old_age_deaths.sort()
 	print(
 		(

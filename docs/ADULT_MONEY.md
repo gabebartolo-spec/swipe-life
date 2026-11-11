@@ -9,6 +9,7 @@ Director's numbers (2026-11-04). E is the entry salary, $30,000. Code: `scripts/
   borrowing for 7 years.
 - Savings +2% a year. Safe investments -2% to +6%; bold -30% to +30%, needs 40 Smarts.
 - Courses: +4 Smarts and +3 Stress a year, 10% fail chance, less 1% per 10 Smarts above 50.
+- A student loan covers 6 course years in a life (the longest course). After that a course is cash only.
 
 ## Placeholders until M13 (director kept them, 2026-11-09)
 

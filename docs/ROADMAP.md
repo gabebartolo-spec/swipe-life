@@ -9,7 +9,8 @@ that will change. Until then the sim checks only for bugs (stuck lives, unreacha
 
 Rules for every milestone:
 - Each milestone is its own branch and PR to `main`, and CI must be green.
-- Exit criteria are things the director sees on the phone or in a capture.
+- No playtesting step (director, 2026-11-11): nothing waits on the director playing. Exits are tests, the sim
+  and captures; the next task starts as soon as CI is green.
 - The GDD wins over this file. If they conflict, ask the director.
 
 ## Status (2026-11-05) — start here
@@ -23,13 +24,13 @@ Rules for every milestone:
 | M5 Clay home scene | In progress (#16, #18, #20, #22, #23, #29, #32, #39, #40, #44, #45, #47): dollhouse one room at a time, modular clay people. Exit (director approves captures per age band) not met yet. |
 | M6 ~200 cards | Done (#28, #31): 343 cards across every age band; the 1,000-life sim draws every age-band card. |
 | Careers, teen phase (§6.8) | Done (#17, #19, #21, #24, #25): Career menu, 12 careers, 120 work and juvie cards. |
-| M7 Teen release candidate | Phone build only: internal-testing AAB, director plays birth to 18. Balance moved to M13. |
+| M7 Teen release candidate | Phone build only: signed AAB built in CI. Balance moved to M13. |
 | Personality spectrums (§4.6) | Done (#49): Cautious/Risk-taker and Introvert/Extrovert sliders; cards gate on them and `by_trait` scales outcomes. |
 | M8 Adult life core | Done (#58, #59): lives run past 18. Shop items moved to M11. |
 | M9 Adult home scene | Done: director approved all eight homes (2026-11-09). |
 | M10 Relationships and family | Done: adult People tab, partners, marriage, children, parents (`Family`). |
 | M12 Legacy and replay | Built (#70-#74): play on as your oldest grown-up child (`Legacy`), ribbons and a profile (`Ribbons`). Ribbons unlock careers (heir: Corporate; scholar: Doctor, Lawyer; rich: Banker; saint: Therapist; long life: Farmer); the Dynasty card set is still to write. |
-| M13 Balance | First pass (#76): illness drains Health 1 a year, not 3. 1,000-life report: `tools/godot/balance_report.gd`. Careful players die at p50 77 (70-86); never visiting the doctor or friends p50 57 (was 38, all dead by 47). Dynasty card set (16 cards) written. Release candidate 0.13.0 is on itch.io (web); Google Play is not needed for now (director, 2026-11-11), so the director plays it there. The Android build workflow still makes the signed AAB (version code 2). |
+| M13 Balance | First pass (#76): illness drains Health 1 a year, not 3. 1,000-life report: `tools/godot/balance_report.gd`. Careful players die at p50 77 (70-86); never visiting the doctor or friends p50 57 (was 38, all dead by 47). Dynasty card set (16 cards) written. Release candidate 0.13.0 is on itch.io (web); Google Play is not needed for now (director, 2026-11-11), so itch is the release. The Android build workflow still makes the signed AAB (version code 2). |
 | M11 Ageing and death | Done: old age death (§5.3c), elderly look, 40 late-life cards 60+, sim checks, shop items shown as tags in rooms (clay props still to model). |
 
 Open with the director:
@@ -125,8 +126,8 @@ Builds:
 - **Exit:** the sim holds at least 6 kinds of job across 100 lives and every career is reachable (tests).
 
 ## M7 Teen phone build
-- Build a signed AAB with the existing CI signing setup and install it through internal testing.
-- **Exit:** the director plays a full life, birth to 18, on the phone. No balance pass (that is M13).
+- Build a signed AAB with the existing CI signing setup.
+- **Exit:** the signed AAB builds in CI and the sim plays birth to 18. No balance pass (that is M13).
 
 ## M8 Adult life core (18+)
 - `CardDB.ADULT_LIFE` is on (director, 2026-11-09): lives run past 18 with money, housing, debts, courses, adult
@@ -159,12 +160,12 @@ Builds:
 ## M12 Legacy and replay
 - Legacy (§9.3): continue as your child with money minus a tax, the house and items, some traits and family.
 - Achievements / ribbons (§9.1) and unlockable careers, backgrounds and card sets (§9.2).
-- **Exit:** the director dies in one life and plays on as the child, keeping the house; ribbons show.
+- **Exit:** tests: a life ends, play goes on as the child with the house kept, and ribbons are recorded.
 
 ## M13 Balance and release candidate
 - Balance pass over the whole life using the sim's numbers (only now, with every feature in).
 - Release candidate on itch.io (web). Google Play internal testing is off for now (director, 2026-11-11).
-- **Exit:** the director plays full lives, birth to death and into a legacy, on itch.io and signs off.
+- **Exit:** the 1,000-life balance report stays inside its targets and the build is on itch.io with a devlog.
 
 ## Stage 2 decisions (GDD §6.9, director 2026-11-03)
 - Every common real-world job; university and trade courses gate the jobs that need them (M8).
