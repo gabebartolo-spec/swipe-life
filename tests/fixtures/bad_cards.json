@@ -6,5 +6,7 @@
   { "id": "bad_age", "text": "e", "ages": [16, 101], "left": { "label": "x" }, "right": { "label": "y" } },
   { "id": "bad_chance", "text": "f", "ages": [0, 1], "left": { "label": "x", "risk": { "chance": 2 } }, "right": { "label": "y" } },
   { "id": "no_right", "text": "g", "ages": [0, 1], "left": { "label": "x" } },
-  {"id": "bad_room", "text": "x", "ages": [0, 1], "room": "attic", "left": {"label": "a"}, "right": {"label": "b"}}
+  {"id": "bad_room", "text": "x", "ages": [0, 1], "room": "attic", "left": {"label": "a"}, "right": {"label": "b"}},
+  {"id": "bad_fame_tier", "text": "x", "ages": [0, 1], "requires": {"fame_tier": [2, 7]}, "left": {"label": "a"}, "right": {"label": "b"}},
+  {"id": "bad_since", "text": "x", "ages": [0, 1], "requires": {"since": {"arc": 2}}, "left": {"label": "a"}, "right": {"label": "b"}}
 ]

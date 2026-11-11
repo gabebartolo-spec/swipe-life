@@ -31,6 +31,7 @@ func _init() -> void:
 	_test_items()
 	_test_legacy()
 	_test_ribbons()
+	failures += preload("res://tests/fame_tests.gd").new().run()
 	print("TESTS %s (%d failures)" % ["PASSED" if failures == 0 else "FAILED", failures])
 	quit(1 if failures else 0)
 

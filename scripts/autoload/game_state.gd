@@ -13,9 +13,16 @@ const STATS := [
 	"karma",
 	"stress",
 	"boldness",
-	"sociability"
+	"sociability",
+	"fame",
+	"infamy",
 ]
-const HIDDEN_STATS := ["karma"]  # GDD §4.4
+## Fame and Infamy (GDD §15.11) start at 0; the player sees the fame tier, not the number.
+const HIDDEN_STATS := ["karma", "fame", "infamy"]  # GDD §4.4
+const ZERO_STATS := ["money", "stress", "fame", "infamy"]
+## Fame tiers (GDD §15.11): the lowest Fame of each tier; under the first is tier 0 (nobody).
+const FAME_TIERS := ["local", "rising", "known", "famous", "star", "icon"]
+const FAME_TIER_AT := [5, 20, 40, 60, 80, 95]
 const UNBOUNDED_STATS := ["money"]  # GDD §4.3: every other stat is 0–100
 ## Spectrums (GDD §4.6): 0 = Cautious / Introvert, 100 = Risk-taker / Extrovert.
 const TRAITS := ["boldness", "sociability"]
@@ -74,7 +81,7 @@ func new_life() -> void:
 	siblings = []
 	stats = {}
 	for s in STATS:
-		stats[s] = 0 if s in UNBOUNDED_STATS or s == "stress" else 50
+		stats[s] = 0 if s in ZERO_STATS else 50
 	for s in TRAITS:
 		stats[s] = randi_range(40, 60)
 
@@ -146,7 +153,27 @@ func from_dict(d: Dictionary) -> void:
 	if partner.has("affinity"):
 		partner.affinity = int(partner.affinity)
 	for s in STATS:
-		stats[s] = int(d.stats.get(s, stats.get(s, 50 if s in TRAITS else 0)))
+		var fallback: int = 0 if s in ZERO_STATS else stats.get(s, 50 if s in TRAITS else 0)
+		stats[s] = int(d.stats.get(s, fallback))
+
+
+## 0 (nobody) to 6 (icon): index into FAME_TIERS is tier - 1.
+func fame_tier() -> int:
+	return tier_of(int(stats.get("fame", 0)))
+
+
+## The fame tier's name, "" for nobody.
+func fame_tier_name() -> String:
+	var t := fame_tier()
+	return FAME_TIERS[t - 1] if t > 0 else ""
+
+
+static func tier_of(fame: int) -> int:
+	var t := 0
+	for at in FAME_TIER_AT:
+		if fame >= at:
+			t += 1
+	return t
 
 
 ## Menu actions per year by age (GDD §6.5): 1 per card turn under 6, 2 under 13, then 3.

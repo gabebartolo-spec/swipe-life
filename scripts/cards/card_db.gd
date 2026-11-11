@@ -23,7 +23,9 @@ const CHOICE_KEYS := [
 	"partner",
 	"by_trait"
 ]
-const REQUIRES_KEYS := ["stats", "flags", "not_flags", "job", "rank", "coworker"]
+const REQUIRES_KEYS := [
+	"stats", "flags", "not_flags", "job", "rank", "coworker", "fame_tier", "since"
+]
 const JOB_KEYS := ["performance", "rank", "meter", "leave", "date"]  # docs/CAREERS.md
 const ROLES := ["boss", "rival", "crush", "friend"]
 const GS := preload("res://scripts/autoload/game_state.gd")
@@ -90,6 +92,14 @@ func _check_card(c: Dictionary, where: String, ids: Dictionary) -> void:
 		var rank = c.requires.get("rank", [0, 0])
 		if not (rank is Array and rank.size() == 2 and 0 <= rank[0] and rank[0] <= rank[1]):
 			errors.append("%s.requires: 'rank' must be [min, max]" % where)
+		var fame = c.requires.get("fame_tier", [0, 0])
+		if not (fame is Array and fame.size() == 2 and 0 <= fame[0] and fame[0] <= fame[1]):
+			errors.append("%s.requires: 'fame_tier' must be [min, max] within 0-6" % where)
+		elif fame[1] > GS.FAME_TIERS.size():
+			errors.append("%s.requires: 'fame_tier' must be [min, max] within 0-6" % where)
+		for f in c.requires.get("since", {}):
+			if not c.requires.get("flags", []).has(f):
+				errors.append("%s.requires: 'since' flag '%s' must be in 'flags'" % [where, f])
 		if c.requires.has("rank") and not c.requires.has("job"):
 			errors.append("%s.requires: 'rank' needs 'job'" % where)
 		for role in c.requires.get("coworker", {}):
