@@ -5,15 +5,14 @@
     "ages": [0, 1],
     "left": { "label": "Start crying", "effects": { "happiness": 2, "relationships": -2 } },
     "right": { "label": "Sleep it off", "effects": { "health": 3, "relationships": 2 } }
-  , "up": {"label": "Wail until the lights come on", "effects": {"health": 6, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"health": -4}, "result": "Everyone is up now."}}},
+  , "up": {"label": "Wake the whole house on purpose", "effects": {"health": 4, "relationships": 3, "happiness": 4}, "risk": {"chance": 0.55, "effects": {"relationships": -5, "stress": 4}, "result": "Everyone is cranky for a week."}}},
   {
     "id": "baby_first_word", "room": "living",
     "text": "Everyone is waiting for your first word.",
     "ages": [0, 2],
     "left": { "label": "\"Mama\"", "effects": { "relationships": 5 } },
     "right": { "label": "\"Dada\"", "effects": { "relationships": 5 } },
-    "up": { "label": "\"Photosynthesis\"", "effects": { "smarts": 10 },
-            "result": "Your parents are shocked. You're one smart cookie.", "set_flags": ["gifted"] }
+    "up": {"label": "Say a very long word", "effects": {"smarts": 7, "relationships": 5, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "It is a swear. Aunt Pam heard."}}
   },
   {
     "id": "toddler_broccoli", "room": "kitchen",
@@ -22,8 +21,7 @@
     "left": { "label": "Slap it off your plate in disgust", "effects": { "happiness": 3, "health": -3 },
               "result": "It sticks to the wall. Nobody is delighted." },
     "right": { "label": "Eat it", "effects": { "health": 5, "happiness": -5 } },
-    "up": { "label": "Eat it all, ask for more", "effects": { "health": 10, "looks": 2 },
-            "risk": { "chance": 0.2, "effects": { "happiness": -10 }, "result": "Stomach ache. Never again." } }
+    "up": {"label": "Hide it in the plant pot", "effects": {"smarts": 4, "happiness": 5, "karma": -1}, "risk": {"chance": 0.55, "effects": {"health": -3, "relationships": -4}, "result": "The plant dies. Broccoli is found."}}
   },
   {
     "id": "toddler_stairs", "room": "living",
@@ -33,14 +31,14 @@
     "left": { "label": "Climb", "effects": { "happiness": 3, "boldness": 3 },
               "risk": { "chance": 0.3, "effects": { "health": -15 }, "result": "Down you go." } },
     "right": { "label": "Wait for help", "effects": { "relationships": 2, "boldness": -3 } }
-  , "up": {"label": "Climb all the way to the top", "effects": {"happiness": 6, "boldness": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -4}, "result": "Down is harder."}}},
+  , "up": {"label": "Slide down the banister", "effects": {"happiness": 6, "health": 3, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"health": -6, "stress": 4}, "result": "You miss the bottom. A trip to casualty."}}},
   {
     "id": "child_first_day",
     "text": "First day of school. A kid is crying by the door.",
     "ages": [5, 6],
     "left": { "label": "Ignore them", "effects": { "stress": 3, "sociability": -4 } },
     "right": { "label": "Say hi", "effects": { "relationships": 8, "karma": 3, "sociability": 4 }, "set_flags": ["first_friend"] }
-  , "up": {"label": "Introduce yourself to the class", "effects": {"relationships": 16, "karma": 6, "sociability": 8}, "risk": {"chance": 0.5, "effects": {"relationships": -12}, "result": "They laugh at your name."}}},
+  , "up": {"label": "Make a club for the crying kids", "effects": {"relationships": 9, "karma": 5, "happiness": 4}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 4}, "result": "Too many members. Too many tears."}}},
   {
     "id": "child_friend_sleepover",
     "text": "Your first friend invites you to a sleepover.",
@@ -50,7 +48,7 @@
               "by_trait": { "sociability": { "happiness": -4 } } },
     "right": { "label": "Go", "effects": { "happiness": 4, "relationships": 5, "sociability": 3 },
              "by_trait": { "sociability": { "happiness": 6, "stress": -4 } } }
-  , "up": {"label": "Stay up all night", "effects": {"happiness": 8, "relationships": 10, "sociability": 6}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 3}, "result": "You are a wreck the next day."}}},
+  , "up": {"label": "Host your own the next week", "effects": {"relationships": 8, "happiness": 6, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"stress": 6, "relationships": -5}, "result": "Three go home early. One won't stop crying."}}},
   {
     "id": "child_test_answers",
     "text": "The test answers are sitting on the teacher's desk.",
@@ -58,7 +56,7 @@
     "left": { "label": "Look", "effects": { "smarts": 3, "karma": -8, "boldness": 4 },
               "risk": { "chance": 0.3, "effects": { "relationships": -10, "stress": 10 }, "result": "Caught." } },
     "right": { "label": "Don't", "effects": { "karma": 3, "boldness": -4 } }
-  , "up": {"label": "Copy every single one", "effects": {"karma": 6, "boldness": -8}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The teacher saw."}}},
+  , "up": {"label": "Swap them for a different set", "effects": {"smarts": 3, "happiness": 5, "karma": -3}, "risk": {"chance": 0.6, "effects": {"karma": -5, "relationships": -6}, "result": "The teacher knows your handwriting."}}},
   {
     "id": "teen_tree_dare",
     "text": "Your friends dare you to climb the tallest tree in the park.",
@@ -68,10 +66,7 @@
     "right": { "label": "Climb", "effects": { "happiness": 3, "relationships": 5, "boldness": 4 },
                "by_trait": { "boldness": { "happiness": 6 } },
                "risk": { "chance": 0.25, "effects": { "health": -25 }, "result": "The branch says no." } },
-    "up": { "label": "Climb to the very top", "effects": { "relationships": 15, "looks": 3, "boldness": 8 },
-            "by_trait": { "boldness": { "happiness": 10, "stress": -6 } },
-            "risk": { "chance": 0.4, "effects": { "health": -40 }, "result": "A long way down." },
-            "death": { "chance": 0.02, "cause": "Fell from a tree" } }
+    "up": {"label": "Climb it and jump into the lake", "effects": {"happiness": 8, "relationships": 8, "looks": 1}, "risk": {"chance": 0.5, "effects": {"health": -9, "stress": 5}, "result": "The water is shallower than it looked."}, "death": {"chance": 0.03, "cause": "The branch broke and the ground was hard."}}
   },
   {
     "id": "teen_haircut", "room": "bathroom",
@@ -80,5 +75,5 @@
     "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 2, "boldness": 4 }, "result": "Bold.",
               "risk": { "chance": 0.25, "effects": { "looks": 13 }, "result": "You nailed it." } },
     "right": { "label": "Pay someone", "effects": { "money": -20, "looks": 5, "boldness": -4 } }
-  , "up": {"label": "Shave it all off", "effects": {"money": -40, "looks": 10, "boldness": -8}, "risk": {"chance": 0.5, "effects": {"looks": -8, "stress": 3}, "result": "It's a bit too short."}}}
+  , "up": {"label": "Dye it and cut it in the same night", "effects": {"looks": 3, "happiness": 7, "relationships": 3}, "risk": {"chance": 0.6, "effects": {"looks": -8, "relationships": -3}, "result": "It is a haircut that gets stared at."}}}
 ]
