@@ -381,8 +381,7 @@ def live_room(s):
     box("coffee_top", (2.15, 0.42, 5.95), (0.7, 0.05, 1.05), wood, bevel=0.02)
     for i, (dx, dz) in enumerate(((-0.28, -0.44), (0.28, -0.44), (-0.28, 0.44), (0.28, 0.44))):
         tube(f"coffee_leg{i}", (2.15 + dx, 0.2, 5.95 + dz), 0.025, 0.4, wood)
-    box("tv_unit", (3.6, 0.27, 6.0), (0.5, 0.5, 1.5), wood, bevel=0.04)
-    box("tv", (3.68, 0.92, 6.0), (0.08, 0.72, 1.15), "4a4e55", bevel=0.03)
+    H.media_unit(3.6, 6.0, 1.5, 0.5, wood, "5d4a3a", (3.68, 0.92, 0.08, 0.72, 1.15, "3a3d42"))
     box("bookcase", (1.1 + shift, 1.0, 4.2), (1.25, 2.0, 0.34), wood, bevel=0.03)
     for j, y in enumerate((0.38, 0.95, 1.5)):
         box(f"bookcase_back{j}", (1.1 + shift, y + 0.18, 4.38), (1.1, 0.4, 0.02), "5d4a3a", bevel=0.005, subd=1, lump=0)
