@@ -1,0 +1,499 @@
+[
+  {
+    "id": "dyn_register",
+    "set": "dynasty",
+    "text": "A teacher reads your surname off the register and sighs. 'I taught the last one of you. And the one before.'",
+    "ages": [
+      6,
+      12
+    ],
+    "weight": 5,
+    "room": "bedroom",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Live up to it",
+      "effects": {
+        "smarts": 3,
+        "stress": 3
+      }
+    },
+    "right": {
+      "label": "Live it down",
+      "effects": {
+        "happiness": 3,
+        "smarts": -2
+      },
+      "result": "By Friday the sigh has a new reason."
+    }
+  },
+  {
+    "id": "dyn_expectations",
+    "set": "dynasty",
+    "text": "'Your family has always done well,' says the careers teacher, looking at your marks. 'Until now.'",
+    "ages": [
+      13,
+      17
+    ],
+    "weight": 5,
+    "room": "bedroom",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Study",
+      "effects": {
+        "smarts": 4,
+        "stress": 4
+      }
+    },
+    "right": {
+      "label": "Break the chain",
+      "effects": {
+        "happiness": 3,
+        "smarts": -2
+      },
+      "result": "Somebody had to. You feel almost historic."
+    }
+  },
+  {
+    "id": "dyn_portrait",
+    "set": "dynasty",
+    "text": "The portrait of the one who left you everything hangs in the hall. The eyes follow you. So does the disappointment.",
+    "ages": [
+      18,
+      70
+    ],
+    "weight": 5,
+    "room": "living",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Take it down",
+      "effects": {
+        "happiness": 2,
+        "karma": -3
+      },
+      "result": "It leaves a pale square on the wall. The square also judges you."
+    },
+    "right": {
+      "label": "Leave it up",
+      "effects": {
+        "stress": 2,
+        "karma": 2
+      },
+      "result": "You nod at it every morning. It has not nodded back."
+    }
+  },
+  {
+    "id": "dyn_watch",
+    "set": "dynasty",
+    "text": "You find the family watch in a drawer. It stopped the minute its last owner did. A dealer offers $4,000.",
+    "ages": [
+      16,
+      45
+    ],
+    "weight": 5,
+    "room": "bedroom",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Sell it",
+      "effects": {
+        "money": 4000,
+        "karma": -5
+      },
+      "result": "The dealer sells it on for nine. You learn this at a bad moment."
+    },
+    "right": {
+      "label": "Wear it",
+      "effects": {
+        "happiness": 3
+      },
+      "result": "It is never right. You are late for everything, with dignity."
+    }
+  },
+  {
+    "id": "dyn_cousin",
+    "set": "dynasty",
+    "text": "A cousin you have never met says the will was wrong and they want their share. They have brought a folder.",
+    "ages": [
+      20,
+      65
+    ],
+    "weight": 5,
+    "room": "living",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Fight it",
+      "effects": {
+        "money": -3000,
+        "stress": 6
+      },
+      "result": "Your lawyer says you'll win.",
+      "risk": {
+        "chance": 0.3,
+        "effects": {
+          "money": -8000
+        },
+        "result": "It was a very good folder."
+      }
+    },
+    "right": {
+      "label": "Pay them off",
+      "effects": {
+        "money": -5000,
+        "relationships": 3
+      },
+      "result": "They send a Christmas card every year now. It always mentions the folder."
+    }
+  },
+  {
+    "id": "dyn_plot",
+    "set": "dynasty",
+    "text": "The family plot at the cemetery has one space left. The office rings to ask if you'd like to reserve it.",
+    "ages": [
+      30,
+      90
+    ],
+    "weight": 5,
+    "room": "living",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Reserve it",
+      "effects": {
+        "money": -1500,
+        "stress": -3
+      },
+      "result": "Your name is on a list. It is the one waiting list you are in no hurry on."
+    },
+    "right": {
+      "label": "Hang up",
+      "effects": {
+        "stress": 2
+      },
+      "result": "They ring again next year. They are patient people."
+    }
+  },
+  {
+    "id": "dyn_pudding",
+    "set": "dynasty",
+    "text": "Every year your family eats the same grey pudding on the same day. Nobody likes it. This year it is your turn to make it.",
+    "ages": [
+      18,
+      70
+    ],
+    "weight": 5,
+    "room": "kitchen",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Make it",
+      "effects": {
+        "relationships": 4,
+        "happiness": -2
+      },
+      "result": "It is as bad as ever. Everyone is delighted."
+    },
+    "right": {
+      "label": "Order pizza",
+      "effects": {
+        "happiness": 3,
+        "relationships": -4
+      },
+      "result": "Your aunt does not speak to you until spring."
+    }
+  },
+  {
+    "id": "dyn_door_frame",
+    "set": "dynasty",
+    "text": "On an old door frame you find a parent's height marks in pencil, year by year. At your age they were taller.",
+    "ages": [
+      18,
+      50
+    ],
+    "weight": 5,
+    "room": "bedroom",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Paint over it",
+      "effects": {
+        "happiness": -2,
+        "stress": -1
+      }
+    },
+    "right": {
+      "label": "Add your mark",
+      "effects": {
+        "happiness": 3
+      },
+      "result": "You stand very straight. It doesn't help."
+    }
+  },
+  {
+    "id": "dyn_curse",
+    "set": "dynasty",
+    "text": "An old neighbour tells you your family is cursed: not one of you has ever died peacefully. They say it kindly.",
+    "ages": [
+      18,
+      75
+    ],
+    "weight": 5,
+    "room": "living",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Laugh",
+      "effects": {
+        "happiness": 2
+      },
+      "risk": {
+        "chance": 0.15,
+        "effects": {
+          "health": -5
+        },
+        "result": "You trip on their step on the way out. Coincidence."
+      }
+    },
+    "right": {
+      "label": "See a priest",
+      "effects": {
+        "money": -100,
+        "stress": -3,
+        "karma": 1
+      },
+      "result": "The priest says it's nonsense, then blesses you twice to be safe."
+    }
+  },
+  {
+    "id": "dyn_letter",
+    "set": "dynasty",
+    "text": "In the attic: a letter marked 'to be opened when I am gone'. It is mostly about the boiler.",
+    "ages": [
+      18,
+      60
+    ],
+    "weight": 5,
+    "room": "bedroom",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Read on",
+      "effects": {
+        "smarts": 1,
+        "happiness": 3
+      },
+      "result": "The last line is about you. It is better than the boiler part."
+    },
+    "right": {
+      "label": "Put it back",
+      "effects": {
+        "stress": 2
+      },
+      "result": "You still don't know how the boiler works."
+    }
+  },
+  {
+    "id": "dyn_alpacas",
+    "set": "dynasty",
+    "text": "A relative has heard you came into money. They have a business idea. It involves alpacas.",
+    "ages": [
+      18,
+      70
+    ],
+    "weight": 5,
+    "room": "living",
+    "requires": {
+      "flags": [
+        "heir"
+      ]
+    },
+    "left": {
+      "label": "Invest",
+      "effects": {
+        "money": -2000
+      },
+      "result": "You own a share of eleven alpacas.",
+      "risk": {
+        "chance": 0.25,
+        "effects": {
+          "money": 7000
+        },
+        "result": "Alpacas, it turns out, are in."
+      }
+    },
+    "right": {
+      "label": "Decline",
+      "effects": {
+        "relationships": -3
+      },
+      "result": "They tell the whole family you've changed."
+    }
+  },
+  {
+    "id": "dyn_tree",
+    "set": "dynasty",
+    "text": "A website offers to trace your family tree for $200.",
+    "ages": [
+      25,
+      80
+    ],
+    "weight": 5,
+    "room": "living",
+    "left": {
+      "label": "Pay",
+      "effects": {
+        "money": -200,
+        "smarts": 2
+      },
+      "risk": {
+        "chance": 0.4,
+        "effects": {
+          "happiness": -4
+        },
+        "result": "Seven generations of people who died of things you also have."
+      }
+    },
+    "right": {
+      "label": "Rather not know",
+      "effects": {
+        "happiness": 1
+      }
+    }
+  },
+  {
+    "id": "dyn_reunion",
+    "set": "dynasty",
+    "text": "Family reunion. Forty relatives, one barbecue, and an uncle with opinions.",
+    "ages": [
+      20,
+      85
+    ],
+    "weight": 5,
+    "room": "living",
+    "left": {
+      "label": "Go",
+      "effects": {
+        "relationships": 5,
+        "stress": 4
+      },
+      "result": "You are told you look tired by nine separate people."
+    },
+    "right": {
+      "label": "Send a card",
+      "effects": {
+        "relationships": -3,
+        "stress": -2
+      }
+    }
+  },
+  {
+    "id": "dyn_crest",
+    "set": "dynasty",
+    "text": "A man at a market stall sells you your family crest. It has a lion on it. Nobody in your family has ever met a lion.",
+    "ages": [
+      18,
+      80
+    ],
+    "weight": 5,
+    "room": "living",
+    "left": {
+      "label": "Buy it",
+      "effects": {
+        "money": -80,
+        "happiness": 2
+      },
+      "result": "It goes above the toilet. The lion looks unsure."
+    },
+    "right": {
+      "label": "Walk on",
+      "effects": {
+        "stress": -1
+      }
+    }
+  },
+  {
+    "id": "dyn_historian",
+    "set": "dynasty",
+    "text": "A local historian wants to write a book about your family. They ask if there's anything you'd like left out.",
+    "ages": [
+      50,
+      95
+    ],
+    "weight": 5,
+    "room": "living",
+    "left": {
+      "label": "Tell all",
+      "effects": {
+        "karma": 3,
+        "relationships": -4
+      },
+      "result": "Chapter six ends two friendships and one marriage. Not yours."
+    },
+    "right": {
+      "label": "Leave things out",
+      "effects": {
+        "stress": 3,
+        "karma": -2
+      },
+      "result": "The book is short and very polite."
+    }
+  },
+  {
+    "id": "dyn_bench",
+    "set": "dynasty",
+    "text": "The council offers a memorial bench with your family name on it for $900. You are not dead, but they suggest planning ahead.",
+    "ages": [
+      60,
+      100
+    ],
+    "weight": 5,
+    "room": "living",
+    "left": {
+      "label": "Buy it",
+      "effects": {
+        "money": -900,
+        "karma": 2
+      },
+      "result": "You sit on it most days. Checking the quality."
+    },
+    "right": {
+      "label": "Not yet",
+      "effects": {
+        "happiness": 1
+      }
+    }
+  }
+]

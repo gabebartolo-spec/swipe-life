@@ -33,6 +33,7 @@ Cards live in `data/cards/*.json`. Each file holds an array of cards, usually on
 | `requires.flags` / `not_flags` | no | Flags that must be set or unset (e.g. `has_sibling`). |
 | `left`, `right` | yes | The two choices (§3.1). |
 | `up` | no | The super-like choice (§3.2, §3.4). If it is missing, the card cannot be super-liked. |
+| `set` | no | Locked card set this card belongs to (e.g. `dynasty`). It is drawn only once a ribbon unlocks `cards:<set>` (GDD §9.2). |
 | `once` | no (true) | The card is drawn at most once per life. |
 | `room` | no (`bedroom`) | Dollhouse room shown with the card: `bedroom`, `bathroom`, `living`, `kitchen` (GDD §10.6). |
 

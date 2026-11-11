@@ -47,6 +47,7 @@ func _ready() -> void:
 		push_error(e)
 	careers.locked = ribbons.all_unlocks()
 	careers.unlocked = ribbons.unlocked()
+	deck.open_sets = ribbons.card_sets()
 	shop.load_all()
 	for e in shop.errors:
 		push_error(e)
@@ -261,6 +262,7 @@ func _end(headline: String) -> void:
 		text += "\nLiving with " + " and ".join(ills)
 	var fresh := ribbons.record(GameState)
 	careers.unlocked = ribbons.unlocked()
+	deck.open_sets = ribbons.card_sets()
 	if not fresh.is_empty():
 		text += "\nRibbons: " + ", ".join(fresh.map(func(r): return r.label))
 	message.add_theme_font_size_override("font_size", 28)
