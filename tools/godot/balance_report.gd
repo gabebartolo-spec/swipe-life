@@ -2,8 +2,11 @@ extends SceneTree
 ## Balance report (M13): plays N lives with a sensible player and prints the numbers the balance
 ## pass tunes against. Run: godot --headless --script res://tools/godot/balance_report.gd
 ## -- [lives] [trace life] [lazy]  ("lazy" never visits the doctor or friends).
+## The player also dates, talks to the partner, proposes and tries for two children, so the
+## estate and legacy numbers describe a life that has an heir.
 
 const GameStateScript := preload("res://scripts/autoload/game_state.gd")
+const FAMILY := ["date", "partner_talk", "propose", "try_child"]
 
 
 func _init() -> void:
@@ -29,6 +32,9 @@ func _init() -> void:
 	var kids := 0
 	var big_debt := []
 	var partnered := 0
+	var heirs := 0
+	var promotions := 0
+	var fresh_starts := 0
 	for life in lives:
 		var state := GameStateScript.new()
 		state.new_life()
@@ -51,8 +57,17 @@ func _init() -> void:
 			var open := careers.available(state)
 			if not state.careers.has("job") and not open.is_empty():
 				CareerRules.apply(open[deck.rng.randi() % open.size()], state, deck.rng)
+			if state.careers.has("job"):  # ask for the next rank once the boss will say yes
+				var job: Dictionary = state.careers.job
+				var rank: Dictionary = careers.by_id[job.id].ranks[int(job.rank)]
+				if rank.has("promote_at") and int(job.performance) >= int(rank.promote_at):
+					if CareerRules.ask_promotion(state, "job", careers).contains("promoted"):
+						promotions += 1
 			if state.age >= 18:
 				adult_years += 1
+				if Finance.can_fresh_start(state, careers):
+					Finance.fresh_start(state)
+					fresh_starts += 1
 				if state.careers.has("job"):
 					employed_years += 1
 				if state.housing.kind == "parents":
@@ -67,6 +82,11 @@ func _init() -> void:
 			for a in [] if lazy else actions.actions:
 				if a.id in ["doctor", "friends"] and a.ages[0] <= state.age:
 					ActionDB.perform(a, state)
+			for a in actions.available("people", state.age, state):
+				if a.id not in FAMILY or (a.id == "try_child" and state.children.size() >= 2):
+					continue
+				if ActionDB.perform(a, state):
+					Family.act(a.get("do", ""), state, deck.rng)
 			CareerRules.year_end(state, careers, deck.rng)
 			Finance.year_end(state, careers, deck.rng)
 			peak_debt = maxi(peak_debt, Finance.total_debt(state))
@@ -104,6 +124,8 @@ func _init() -> void:
 		kids += state.children.size()
 		if not state.partner.is_empty():
 			partnered += 1
+		if not Legacy.heir(state).is_empty():
+			heirs += 1
 		state.free()
 	death_ages.sort()
 	worth.sort()
@@ -122,8 +144,13 @@ func _init() -> void:
 	print("estate p5/p25/p50/p75/p95: %s" % [_pct(worth, [5, 25, 50, 75, 95])])
 	print(
 		(
-			"own a home at death: %d%%, partnered: %d%%, children avg %.1f"
-			% [owners * 100 / lives, partnered * 100 / lives, float(kids) / lives]
+			"own a home at death: %d%%, partnered: %d%%, children avg %.1f, an heir: %d%%"
+			% [
+				owners * 100 / lives,
+				partnered * 100 / lives,
+				float(kids) / lives,
+				heirs * 100 / lives
+			]
 		)
 	)
 	print(
@@ -136,6 +163,7 @@ func _init() -> void:
 			]
 		)
 	)
+	print("promotions a life: %.1f, fresh starts a life: %.2f" % [float(promotions) / lives, float(fresh_starts) / lives])
 	print("causes: %s" % [causes])
 	quit()
 
