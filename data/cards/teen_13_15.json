@@ -1,7 +1,7 @@
 [
   {
     "id": "t13_group_project",
-    "text": "Group project. Nobody else has opened the file.",
+    "text": "Group project, due Thursday. Four names on the shared file, one cursor blinking: yours. Nobody else has even opened it.",
     "ages": [
       13,
       15
@@ -25,7 +25,7 @@
   },
   {
     "id": "t13_report_card",
-    "text": "Your report card is on the fridge. Someone put it there.",
+    "text": "Your report card is stuck to the fridge with a pineapple magnet. You didn't put it there. Someone in this house did.",
     "ages": [
       13,
       15
@@ -54,7 +54,7 @@
   , "up": {"label": "Present it with a plan to improve", "effects": {"smarts": 4, "relationships": 6, "stress": -4}, "risk": {"chance": 0.45, "effects": {"relationships": -4, "stress": 5}, "result": "The plan involves a lot of extra homework."}}},
   {
     "id": "t13_braces",
-    "text": "The dentist says braces.",
+    "text": "The dentist taps your teeth with a little mirror and says the word: braces. Two years of metal.",
     "ages": [
       13,
       15
@@ -79,7 +79,7 @@
   , "up": {"label": "Make them your signature look", "effects": {"looks": 5, "happiness": 5, "relationships": 3}, "risk": {"chance": 0.5, "effects": {"looks": -4, "happiness": -5}, "result": "Spinach. In front of the crush."}}},
   {
     "id": "t13_voice_crack",
-    "text": "Your voice cracks in the middle of reading aloud.",
+    "text": "You're reading aloud in class and your voice cracks mid-word, high like a kettle. Thirty heads turn. Someone snorts.",
     "ages": [
       13,
       15
@@ -101,7 +101,7 @@
   , "up": {"label": "Turn it into a stand-up bit", "effects": {"relationships": 8, "happiness": 5, "career": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -7, "relationships": -4}, "result": "Silence. Then someone coughs."}}},
   {
     "id": "t13_first_phone",
-    "text": "Your parents finally hand you a phone. It has rules attached.",
+    "text": "Your parents finally hand you a phone. It comes with a printed list of rules, two pages long, signed by both of them.",
     "ages": [
       13,
       15
@@ -124,7 +124,7 @@
   , "up": {"label": "Negotiate your own rules", "effects": {"smarts": 5, "relationships": 5, "happiness": 5}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "New rules: no phone for a month."}}},
   {
     "id": "t13_group_chat",
-    "text": "The class group chat is roasting a kid who is not in it.",
+    "text": "The class group chat is roasting a kid who isn't in it. Forty messages, crying-laughing faces. Your thumb hovers.",
     "ages": [
       13,
       15
@@ -146,7 +146,7 @@
   },
   {
     "id": "t13_screen_time",
-    "text": "Your screen time this week: nine hours a day.",
+    "text": "Your weekly screen time report pops up: nine hours a day. That's longer than school. That's longer than sleep.",
     "ages": [
       13,
       15
@@ -170,7 +170,7 @@
   , "up": {"label": "Quit every app for a month", "effects": {"health": 5, "smarts": 5, "stress": -6}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "happiness": -4}, "result": "Nobody knows where the party is. You miss it."}}},
   {
     "id": "t13_crush_notes",
-    "text": "You have a crush. Their name is in your notebook margin. Twice.",
+    "text": "You have a crush. You know because their name is in your notebook margin. Twice. Once inside a small, wobbly heart.",
     "ages": [
       13,
       15
@@ -199,7 +199,7 @@
   , "up": {"label": "Slip them a note", "effects": {"happiness": 6, "relationships": 5, "looks": 1}, "risk": {"chance": 0.55, "effects": {"happiness": -8, "relationships": -4}, "result": "The note is read aloud. By someone else."}}},
   {
     "id": "t13_crush_dance",
-    "text": "School dance. Your crush is standing alone by the snacks.",
+    "text": "School dance. The gym smells of floor wax and body spray. Your crush is standing alone by the crisps, holding a cup.",
     "ages": [
       13,
       15
@@ -228,7 +228,7 @@
   },
   {
     "id": "t13_crush_reply",
-    "text": "Your crush replied with just \"lol\".",
+    "text": "You spent forty minutes writing that message. Your crush replied in four seconds with just \"lol\". Nothing else.",
     "ages": [
       13,
       15
@@ -250,7 +250,7 @@
   , "up": {"label": "Ask them out in plain words", "effects": {"happiness": 7, "relationships": 6, "looks": 1}, "risk": {"chance": 0.55, "effects": {"happiness": -8, "stress": 5}, "result": "They send back 'lol'. Again."}}},
   {
     "id": "t13_sibling_hoodie",
-    "text": "Your sibling took your hoodie and your charger. Without asking.",
+    "text": "Your sibling took your hoodie and your charger. Without asking. You can see the hoodie right now. They're wearing it.",
     "ages": [
       13,
       15
@@ -272,7 +272,7 @@
   , "up": {"label": "Take their whole wardrobe", "effects": {"happiness": 7, "looks": 4, "relationships": -2}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "stress": 5}, "result": "A feud. Parents get involved."}}},
   {
     "id": "t13_sibling_secret",
-    "text": "You catch your sibling sneaking in after midnight.",
+    "text": "Past midnight, the back window slides open. Your sibling climbs in, shoes in hand, and freezes when they see you.",
     "ages": [
       13,
       15
@@ -302,7 +302,7 @@
   , "up": {"label": "Blackmail them gently", "effects": {"money": 100, "smarts": 4, "happiness": 9}, "risk": {"chance": 0.5, "effects": {"karma": -4, "relationships": -7}, "result": "They tell your secret. You told it first."}}},
   {
     "id": "t13_family_dinner",
-    "text": "Family dinner. Phones go in the basket.",
+    "text": "Family dinner. Phones go in the basket by the door. Yours buzzes in there twice, face down, like it's calling for help.",
     "ages": [
       13,
       15
@@ -332,7 +332,7 @@
   , "up": {"label": "Cook the whole thing yourself", "effects": {"relationships": 8, "smarts": 3, "happiness": 4}, "risk": {"chance": 0.45, "effects": {"stress": 5, "relationships": -3}, "result": "The kitchen is destroyed. The meal is a toast."}}},
   {
     "id": "t13_parents_argue",
-    "text": "Your parents are arguing in the next room again.",
+    "text": "Your parents are arguing in the next room again. The words are muffled, but the tone isn't. A cupboard door slams.",
     "ages": [
       13,
       15
@@ -355,7 +355,7 @@
   , "up": {"label": "Call a family meeting", "effects": {"relationships": 6, "karma": 3, "smarts": 2}, "risk": {"chance": 0.55, "effects": {"stress": 8, "relationships": -5}, "result": "It gets worse. Now everyone is shouting at you."}}},
   {
     "id": "t13_new_kid",
-    "text": "A new kid moved in down the street. They don't know anyone.",
+    "text": "A new kid moved in down the street. You've seen them twice, sitting on the wall alone, kicking it with one heel.",
     "ages": [
       13,
       15
@@ -377,7 +377,7 @@
   , "up": {"label": "Throw them a welcome party", "effects": {"relationships": 9, "karma": 5, "happiness": 4}, "risk": {"chance": 0.4, "effects": {"relationships": -5, "money": -30}, "result": "They don't turn up. You ate the cake."}}},
   {
     "id": "t13_friend_drift",
-    "text": "Your oldest friend has a new group. You weren't invited.",
+    "text": "Your oldest friend has a new group now. You see the photos: all of them at the park, on a Saturday. You weren't invited.",
     "ages": [
       13,
       15
@@ -406,7 +406,7 @@
   , "up": {"label": "Gatecrash their group", "effects": {"relationships": 7, "happiness": 5, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "happiness": -5}, "result": "Nobody says a word. You leave."}}},
   {
     "id": "t13_sleepover_film",
-    "text": "Sleepover. Someone puts on a horror film you're too young for.",
+    "text": "Sleepover. Someone puts on a horror film you're far too young for. The lights are off and the first scream is a doll.",
     "ages": [
       13,
       15
@@ -435,7 +435,7 @@
   , "up": {"label": "Run the film night and the dares", "effects": {"relationships": 7, "happiness": 6, "stress": -2}, "risk": {"chance": 0.5, "effects": {"stress": 6, "health": -2}, "result": "Nightmares for a week. Yours and theirs."}}},
   {
     "id": "t13_exam_week",
-    "text": "Exams start Monday. It is Friday night.",
+    "text": "Exams start Monday. It is Friday night. Your textbook is still in its plastic wrap, and your friends are going out.",
     "ages": [
       13,
       15
@@ -460,7 +460,7 @@
   },
   {
     "id": "t13_teacher_gift",
-    "text": "A teacher says you have a real gift for their subject.",
+    "text": "After class, a teacher keeps you back. Not to tell you off. To say you have a real gift for their subject. You blush.",
     "ages": [
       13,
       15
@@ -482,7 +482,7 @@
   , "up": {"label": "Enter the national contest", "effects": {"smarts": 8, "career": 3, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -6, "stress": 6}, "result": "You come tenth out of ten thousand. It stings."}}},
   {
     "id": "t13_detention",
-    "text": "Detention. The only other kid there is the scariest kid in school.",
+    "text": "Detention. The only other kid there is the scariest kid in school. They're carving something into the desk with a key.",
     "ages": [
       13,
       15
@@ -503,7 +503,7 @@
   , "up": {"label": "Challenge them to a game of chess", "effects": {"relationships": 6, "smarts": 4, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 5}, "result": "You win. They do not take it well."}}},
   {
     "id": "t13_picture_day",
-    "text": "A spot has appeared on your nose. It's picture day.",
+    "text": "A spot has appeared on the tip of your nose overnight. It's red, it's shiny, and today is school picture day.",
     "ages": [
       13,
       15
@@ -533,7 +533,7 @@
   , "up": {"label": "Draw a pretend scar on it", "effects": {"looks": 3, "happiness": 5, "relationships": 3}, "risk": {"chance": 0.55, "effects": {"looks": -5, "relationships": -3}, "result": "The photo goes in the yearbook. For ever."}}},
   {
     "id": "t13_skincare",
-    "text": "A video says you need a ten-step skincare routine.",
+    "text": "A video says you need a ten-step skincare routine. Serums, toners, a tiny jade roller. Your face currently uses soap.",
     "ages": [
       13,
       15
@@ -564,7 +564,7 @@
   , "up": {"label": "Start your own skincare channel", "effects": {"looks": 4, "career": 2, "happiness": 5}, "risk": {"chance": 0.5, "effects": {"money": -60, "relationships": -4}, "result": "Five views. Four are your mum."}}},
   {
     "id": "t13_growth_spurt",
-    "text": "You grew so fast your trousers stop above your ankles.",
+    "text": "You grew so fast this term that your trousers now stop above your ankles. Your socks are on full public display.",
     "ages": [
       13,
       15
@@ -587,7 +587,7 @@
   , "up": {"label": "Customise them into shorts", "effects": {"looks": 4, "smarts": 2, "happiness": 5}, "risk": {"chance": 0.5, "effects": {"looks": -5, "relationships": -3}, "result": "One leg is longer than the other."}}},
   {
     "id": "t13_old_guitar",
-    "text": "There's an old guitar in the cupboard nobody plays.",
+    "text": "There's an old guitar at the back of the cupboard, under the coats. Five strings, a sticker of a star. Nobody plays it.",
     "ages": [
       13,
       15
@@ -610,7 +610,7 @@
   , "up": {"label": "Form a band", "effects": {"relationships": 7, "happiness": 6, "smarts": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "happiness": -4}, "result": "Creative differences. In the first rehearsal."}}},
   {
     "id": "t13_sketchbook",
-    "text": "You filled a whole sketchbook in a month.",
+    "text": "You filled a whole sketchbook in a month. Hands, dogs, your teacher as a frog. Some of them are actually good.",
     "ages": [
       13,
       15
@@ -639,7 +639,7 @@
   },
   {
     "id": "t13_tryouts",
-    "text": "Try-outs for the school team are tomorrow.",
+    "text": "Try-outs for the school team are tomorrow after lunch. Your kit is by the door. Your stomach is in knots.",
     "ages": [
       13,
       15
@@ -667,7 +667,7 @@
   , "up": {"label": "Try out for the senior team", "effects": {"health": 7, "relationships": 7, "career": 3}, "risk": {"chance": 0.55, "effects": {"health": -4, "happiness": -6}, "result": "You're cut in front of all your friends."}}},
   {
     "id": "t13_pocket_money",
-    "text": "You ask for more pocket money. Your parent asks what for.",
+    "text": "You ask for more pocket money. Your parent puts down their mug, looks at you over their glasses, and asks what for.",
     "ages": [
       13,
       15
@@ -691,7 +691,7 @@
   , "up": {"label": "Start a small business", "effects": {"money": 70, "smarts": 4, "career": 2}, "risk": {"chance": 0.5, "effects": {"money": -40, "stress": 4}, "result": "You owe your sibling. And a supplier."}}},
   {
     "id": "t13_found_wallet",
-    "text": "You find a wallet on the bus. There's cash in it.",
+    "text": "You find a wallet on the bus seat next to you. It's fat with cash. There's a photo of a smiling dog inside too.",
     "ages": [
       13,
       15
@@ -713,7 +713,7 @@
   , "up": {"label": "Track the owner down and take a reward", "effects": {"karma": 7, "money": 26, "relationships": 5}, "risk": {"chance": 0.45, "effects": {"stress": 4, "karma": -3}, "result": "They think you stole it. Awkward."}}},
   {
     "id": "t13_birthday_money",
-    "text": "Birthday money from a relative you've met twice.",
+    "text": "A birthday card arrives from a relative you've met twice. Inside: a crisp note and \"Don't spend it all at once\".",
     "ages": [
       13,
       15
@@ -735,7 +735,7 @@
   , "up": {"label": "Invest it in a stranger's tip", "effects": {"money": 600, "smarts": 3, "happiness": 7, "stress": 3}, "risk": {"chance": 0.5, "effects": {"money": -150, "happiness": -3}, "result": "The tip was wrong. The money is gone."}}},
   {
     "id": "t13_fever",
-    "text": "You wake up with a fever on a school day. A real one.",
+    "text": "You wake up with a fever on a school day. A real one this time. The thermometer agrees. Your pillow is soaked.",
     "ages": [
       13,
       15
@@ -758,7 +758,7 @@
   , "up": {"label": "Sweat it out with the exam anyway", "effects": {"smarts": 8, "karma": 3, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"health": -7, "smarts": -3}, "result": "You faint. In the exam hall."}}},
   {
     "id": "t13_energy_drink",
-    "text": "Everyone at school is drinking energy drinks.",
+    "text": "Everyone at school is drinking energy drinks. The cans are neon. One kid says he hasn't blinked since Tuesday.",
     "ages": [
       13,
       15
@@ -788,7 +788,7 @@
   , "up": {"label": "Start a challenge: drink three", "effects": {"happiness": 6, "relationships": 7, "health": -2}, "risk": {"chance": 0.55, "effects": {"health": -6, "stress": 4}, "result": "Heart racing. Hands shaking. A trip to the nurse."}}},
   {
     "id": "t13_first_concert",
-    "text": "Your favourite band is playing in the city. Your parents say \"maybe\".",
+    "text": "Your favourite band is playing in the city next month. You've asked your parents. They said \"maybe\". It means no.",
     "ages": [
       13,
       15
@@ -817,7 +817,7 @@
   , "up": {"label": "Sneak out and go anyway", "effects": {"happiness": 9, "relationships": 5, "smarts": 1}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 6}, "result": "Your parents saw you on the live stream."}}},
   {
     "id": "t13_road_trip",
-    "text": "The family is driving eight hours to visit relatives.",
+    "text": "The family is driving eight hours to visit relatives. You're in the back with a cool box and a bag of boiled sweets.",
     "ages": [
       13,
       15
@@ -846,7 +846,7 @@
   , "up": {"label": "Take over the driving playlist and the maps", "effects": {"relationships": 5, "happiness": 5, "smarts": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "You take a wrong turn. Four hours of it."}}},
   {
     "id": "t13_goat",
-    "text": "A goat is standing in your front garden. Nobody on the street owns a goat.",
+    "text": "A goat is standing in your front garden, eating the hedge. Nobody on the street owns a goat. It looks at you, chewing.",
     "ages": [
       13,
       15
@@ -869,7 +869,7 @@
   },
   {
     "id": "t13_rumour",
-    "text": "There's a rumour going round about you. It isn't true.",
+    "text": "There's a rumour going round about you. It isn't true. Kids stop talking when you walk past. One of them giggles.",
     "ages": [
       13,
       15

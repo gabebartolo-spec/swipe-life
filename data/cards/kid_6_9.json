@@ -1,7 +1,7 @@
 [
  {
   "id": "k6_new_teacher",
-  "text": "Your new teacher has a whistle. She uses it indoors.",
+  "text": "Your new teacher has a whistle. She uses it indoors. Every blast, somebody drops a pencil.",
   "ages": [
    6,
    7
@@ -23,7 +23,7 @@
  , "up": {"label": "Challenge her to a quiz", "effects": {"smarts": 5, "relationships": 3, "happiness": 2}, "risk": {"chance": 0.45, "effects": {"smarts": -2, "stress": 4}, "result": "She wins. Then she makes you do a bonus round."}}},
  {
   "id": "k6_lost_tooth",
-  "text": "A front tooth wobbles loose at lunch.",
+  "text": "A front tooth wobbles loose at lunch. It hangs by a thread. Your tongue can't leave it alone.",
   "ages": [
    6,
    7
@@ -47,7 +47,7 @@
  , "up": {"label": "Set a trap for the tooth fairy", "effects": {"smarts": 4, "money": 10, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The fairy takes the tooth and leaves a note about trespassing."}}},
  {
   "id": "k6_reading_star",
-  "text": "You read a whole page out loud without stopping.",
+  "text": "You read a whole page out loud without stopping. Even the long words. The teacher looks up. So do you.",
   "ages": [
    6,
    7
@@ -68,7 +68,7 @@
  , "up": {"label": "Read the whole book to the class", "effects": {"smarts": 5, "relationships": 3, "happiness": 3}, "risk": {"chance": 0.45, "effects": {"relationships": -3, "stress": 4}, "result": "It is chapter one. You lose your place at page six."}}},
  {
   "id": "k6_glue_snack",
-  "text": "The kid next to you is eating the glue.",
+  "text": "The kid next to you is eating the glue. Calmly, with a spoon from home. They offer you the pot.",
   "ages": [
    6,
    6
@@ -92,7 +92,7 @@
  },
  {
   "id": "k6_show_and_tell",
-  "text": "Show and tell is tomorrow. You forgot.",
+  "text": "Show and tell is tomorrow. You forgot. Someone is bringing a real lizard. It is already bedtime.",
   "ages": [
    6,
    8
@@ -123,7 +123,7 @@
  , "up": {"label": "Bring your grandparent", "effects": {"relationships": 6, "happiness": 5, "karma": 2}, "risk": {"chance": 0.4, "effects": {"relationships": -3, "happiness": -4}, "result": "They tell the story of your nappy. In full."}}},
  {
   "id": "k6_bully_snack",
-  "text": "A bigger kid wants your snack. Every day.",
+  "text": "A bigger kid wants your snack. Every day. They wait by the coat pegs, hand out. Today it's your favourite.",
   "ages": [
    6,
    9
@@ -149,7 +149,7 @@
  , "up": {"label": "Make a deal: homework help for protection", "effects": {"smarts": 4, "relationships": 5, "stress": -3}, "risk": {"chance": 0.45, "effects": {"stress": 5, "karma": -2}, "result": "They want help on every test. For ever."}}},
  {
   "id": "k6_bully_back",
-  "text": "The snack kid is back. You have been thinking about this.",
+  "text": "The snack kid is back. You have been thinking about this. You practised in the mirror. Their hand is out.",
   "ages": [
    7,
    9
@@ -187,7 +187,7 @@
  , "up": {"label": "Challenge them to a race for the snack", "effects": {"happiness": 5, "health": 3, "relationships": 3}, "risk": {"chance": 0.5, "effects": {"health": -4, "happiness": -4}, "result": "They win. You are now winded and snack-less."}}},
  {
   "id": "k6_bully_friend",
-  "text": "The old snack kid saves you a seat on the bus.",
+  "text": "The old snack kid saves you a seat on the bus. They pat the space next to them. They look nervous.",
   "ages": [
    8,
    9
@@ -213,7 +213,7 @@
  , "up": {"label": "Invite them to your birthday", "effects": {"relationships": 7, "karma": 4, "happiness": 3}, "risk": {"chance": 0.4, "effects": {"relationships": -5, "stress": 4}, "result": "They bring the whole gang. And eat the cake."}}},
  {
   "id": "k6_goldfish",
-  "text": "You win a goldfish at the fair.",
+  "text": "You win a goldfish at the fair. It spins in a plastic bag, looking confused. It needs a name.",
   "ages": [
    6,
    8
@@ -242,7 +242,7 @@
  },
  {
   "id": "k6_fish_funeral",
-  "text": "Your goldfish is floating upside down.",
+  "text": "Your goldfish is floating upside down. It is not a trick. You tapped the bowl twice. It's gone.",
   "ages": [
    7,
    9
@@ -271,7 +271,7 @@
  , "up": {"label": "Build a pyramid for it", "effects": {"happiness": 4, "smarts": 4, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "The garden is now a crater. Dad is furious."}}},
  {
   "id": "k6_homework_dog",
-  "text": "Your homework is unfinished. The dog is right there.",
+  "text": "Your homework is unfinished. The dog is right there, chewing a slipper. He already looks guilty.",
   "ages": [
    7,
    9
@@ -302,7 +302,7 @@
  , "up": {"label": "Teach the dog to do it", "effects": {"happiness": 5, "smarts": 3, "karma": -1}, "risk": {"chance": 0.6, "effects": {"smarts": -3, "stress": 4}, "result": "The dog eats it. It is real this time."}}},
  {
   "id": "k6_spelling_test",
-  "text": "Last round of the spelling test. The word is very long.",
+  "text": "Last round of the spelling test. The word is very long and has a silent letter. Everyone is watching.",
   "ages": [
    7,
    9
@@ -331,7 +331,7 @@
  },
  {
   "id": "k6_sports_day",
-  "text": "Sports day. The sack race starts now.",
+  "text": "Sports day. The sack race starts now. The sack is itchy and smells of potatoes. The whistle goes.",
   "ages": [
    6,
    9
@@ -361,7 +361,7 @@
  },
  {
   "id": "k6_egg_spoon",
-  "text": "Egg and spoon race. Your egg looks fragile.",
+  "text": "Egg and spoon race. Your egg looks fragile. It is real and raw. The spoon is tiny. The finish is far.",
   "ages": [
    6,
    8
@@ -390,7 +390,7 @@
  , "up": {"label": "Throw the egg to the finish", "effects": {"happiness": 5, "smarts": 3, "relationships": 2}, "risk": {"chance": 0.6, "effects": {"relationships": -4, "karma": -2}, "result": "It cracks. The teacher is not amused."}}},
  {
   "id": "k6_sleepover_invite",
-  "text": "You're invited to your first sleepover.",
+  "text": "You're invited to your first sleepover. A whole night at someone else's house. Their cereal. Their dark.",
   "ages": [
    7,
    9
@@ -423,7 +423,7 @@
  , "up": {"label": "Host one and invite everyone", "effects": {"relationships": 8, "happiness": 6, "money": -15}, "risk": {"chance": 0.45, "effects": {"stress": 5, "relationships": -4}, "result": "Three people cry. One breaks a lamp."}}},
  {
   "id": "k6_sleepover_ghost",
-  "text": "Someone at the sleepover starts a ghost story.",
+  "text": "Someone at the sleepover starts a ghost story. Torch under the chin. Something creaks upstairs.",
   "ages": [
    7,
    9
@@ -450,7 +450,7 @@
  },
  {
   "id": "k6_birthday_party",
-  "text": "It's your birthday party. Who's coming?",
+  "text": "It's your birthday party. Who's coming? Your parent has a pen, a list and a budget. You choose.",
   "ages": [
    6,
    9
@@ -474,7 +474,7 @@
  , "up": {"label": "Throw a themed party with a treasure hunt", "effects": {"relationships": 7, "happiness": 6, "money": -30}, "risk": {"chance": 0.45, "effects": {"stress": 5, "relationships": -4}, "result": "The treasure was found at once. Then lost."}}},
  {
   "id": "k6_party_clown",
-  "text": "There's a clown at a friend's party. He looks tired.",
+  "text": "There's a clown at a friend's party. He looks tired. His balloon dog has a puncture. He sighs a lot.",
   "ages": [
    6,
    7
@@ -496,7 +496,7 @@
  , "up": {"label": "Offer to swap places", "effects": {"karma": 5, "happiness": 4, "relationships": 3}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 4}, "result": "Kids throw cake at you. Kids are terrifying."}}},
  {
   "id": "k6_present_socks",
-  "text": "Your aunt gives you socks for your birthday. Again.",
+  "text": "Your aunt gives you socks for your birthday. Again. They have little ducks on them. She's watching you.",
   "ages": [
    6,
    9
@@ -520,7 +520,7 @@
  , "up": {"label": "Ask for a pony next time", "effects": {"happiness": 4, "relationships": 2, "smarts": 2}, "risk": {"chance": 0.55, "effects": {"relationships": -4, "karma": -2}, "result": "Aunt keeps a long memory. And a longer list."}}},
  {
   "id": "k6_cake_face",
-  "text": "Someone shoves your face into your birthday cake.",
+  "text": "Someone shoves your face into your birthday cake. Icing in your nose and one eyebrow. Everyone laughs.",
   "ages": [
    6,
    8
@@ -543,7 +543,7 @@
  , "up": {"label": "Cover them with cake too", "effects": {"happiness": 5, "relationships": 4, "smarts": 1}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "A food fight. Grandma's lap is the target."}}},
  {
   "id": "k6_bike_wheels",
-  "text": "Your parent wants to take the training wheels off.",
+  "text": "Your parent wants to take the training wheels off. They promise to hold the seat. Probably.",
   "ages": [
    6,
    7
@@ -572,7 +572,7 @@
  , "up": {"label": "Go down the big hill first try", "effects": {"health": 4, "happiness": 6, "looks": 1}, "risk": {"chance": 0.5, "effects": {"health": -6, "looks": -2}, "result": "A hedge breaks your fall. A little."}}},
  {
   "id": "k6_scraped_knee",
-  "text": "You scraped your knee badly at break.",
+  "text": "You scraped your knee badly at break. There's gravel in it. It stings. It's also kind of impressive.",
   "ages": [
    6,
    9
@@ -594,7 +594,7 @@
  , "up": {"label": "Show it off for a day", "effects": {"relationships": 5, "happiness": 4, "health": 1}, "risk": {"chance": 0.4, "effects": {"health": -3, "happiness": -3}, "result": "It gets infected. Now it looks worse."}}},
  {
   "id": "k6_swimming_lessons",
-  "text": "Swimming lessons start. The deep end looks very deep.",
+  "text": "Swimming lessons start. The deep end looks very deep. A rubber brick waits at the bottom.",
   "ages": [
    6,
    8
@@ -624,7 +624,7 @@
  , "up": {"label": "Dive for the brick", "effects": {"health": 5, "happiness": 5, "smarts": 2}, "risk": {"chance": 0.45, "effects": {"health": -5, "stress": 4}, "result": "You get a mouthful of pool. And a nosebleed."}}},
  {
   "id": "k6_best_friend",
-  "text": "A kid shares their crayons and says you're best friends now.",
+  "text": "A kid shares their crayons and says you're best friends now. They gave you the good blue one.",
   "ages": [
    6,
    7
@@ -648,7 +648,7 @@
  , "up": {"label": "Form a secret society", "effects": {"relationships": 7, "smarts": 3, "happiness": 4}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 3}, "result": "There is a schism. Over the handshake."}}},
  {
   "id": "k6_best_friend_move",
-  "text": "Your best friend is moving away.",
+  "text": "Your best friend is moving away. The van is outside. They're on your doorstep, trying not to cry.",
   "ages": [
    8,
    9
@@ -676,7 +676,7 @@
  , "up": {"label": "Plan to run away with them", "effects": {"relationships": 6, "happiness": 5, "smarts": 2}, "risk": {"chance": 0.55, "effects": {"relationships": -5, "stress": 6}, "result": "You get to the bus stop. A police officer says hello."}}},
  {
   "id": "k6_pet_beg",
-  "text": "You want a puppy more than anything.",
+  "text": "You want a puppy more than anything. You saw one with a spot on its ear. Your parents say \"we'll see\".",
   "ages": [
    7,
    9
@@ -706,7 +706,7 @@
  , "up": {"label": "Write a ten-page proposal", "effects": {"smarts": 5, "relationships": 4, "happiness": 5}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "happiness": -5}, "result": "They read it. They still say no. But gently."}}},
  {
   "id": "k6_class_hamster",
-  "text": "You get to take the class hamster home for the weekend.",
+  "text": "You get to take the class hamster home for the weekend. He is called Professor. He is plotting.",
   "ages": [
    6,
    9
@@ -736,7 +736,7 @@
  , "up": {"label": "Take it to the park", "effects": {"happiness": 6, "relationships": 4, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "karma": -3}, "result": "The hamster is lost. The class is in mourning."}}},
  {
   "id": "k6_times_tables",
-  "text": "Times tables test tomorrow.",
+  "text": "Times tables test tomorrow. Sevens are the worst. Your parent says it's easy, then gets one wrong.",
   "ages": [
    8,
    9
@@ -766,7 +766,7 @@
  , "up": {"label": "Make a rap to remember it", "effects": {"smarts": 5, "happiness": 5, "relationships": 3}, "risk": {"chance": 0.45, "effects": {"relationships": -3, "smarts": -1}, "result": "You perform it. Out loud. In the exam."}}},
  {
   "id": "k6_school_play",
-  "text": "You are cast as a tree in the school play.",
+  "text": "You are cast as a tree in the school play. No lines. Your costume is a brown sack and two branches.",
   "ages": [
    6,
    9
@@ -795,7 +795,7 @@
  },
  {
   "id": "k6_chore_chart",
-  "text": "A chore chart goes up. Your name is on dishes.",
+  "text": "A chore chart goes up. Your name is on dishes. Every night. The sink is already full of greasy plates.",
   "ages": [
    7,
    9
@@ -820,7 +820,7 @@
  , "up": {"label": "Pay your sibling to do them", "effects": {"smarts": 5, "happiness": 4, "money": -8}, "risk": {"chance": 0.5, "effects": {"karma": -3, "relationships": -4}, "result": "They report you. Both of you do dishes for a month."}}},
  {
   "id": "k6_lunch_trade",
-  "text": "Someone offers cookies for your apple.",
+  "text": "Someone offers cookies for your apple. Two cookies, chocolate chip, still soft. Your apple is bruised.",
   "ages": [
    6,
    9
@@ -839,10 +839,10 @@
     "health": -1
    }
   }
- , "up": {"label": "Sell your whole lunch for a pound", "effects": {"smarts": 8, "money": 16, "health": -1}, "risk": {"chance": 0.5, "effects": {"health": -3, "happiness": -3}, "result": "You are very hungry by two o'clock."}}},
+ , "up": {"label": "Sell your whole lunch for cash", "effects": {"smarts": 8, "money": 16, "health": -1}, "risk": {"chance": 0.5, "effects": {"health": -3, "happiness": -3}, "result": "You are very hungry by two o'clock."}}},
  {
   "id": "k6_monster_bed",
-  "text": "You are certain something lives under your bed.",
+  "text": "You are certain something lives under your bed. You heard it breathing. The gap is pure black.",
   "ages": [
    6,
    7
@@ -865,7 +865,7 @@
  },
  {
   "id": "k6_science_fair",
-  "text": "The science fair is next week.",
+  "text": "The science fair is next week. Half the class is making a volcano. The kitchen has vinegar and old bread.",
   "ages": [
    8,
    9
@@ -889,7 +889,7 @@
  , "up": {"label": "Build a robot out of the kitchen", "effects": {"smarts": 7, "happiness": 5, "career": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 4}, "result": "It sets off the fire alarm. The robot is fine."}}},
  {
   "id": "k6_haircut",
-  "text": "Your parent offers to cut your hair at home.",
+  "text": "Your parent offers to cut your hair at home. Kitchen scissors, a towel, one video watched. Very confident.",
   "ages": [
    6,
    9
@@ -919,7 +919,7 @@
  , "up": {"label": "Give yourself a new look", "effects": {"looks": 3, "happiness": 5, "smarts": 1}, "risk": {"chance": 0.6, "effects": {"looks": -5, "relationships": -3}, "result": "It is a unique style. It is not a good one."}}},
  {
   "id": "k6_teacher_gift",
-  "text": "Last day of school. Everyone brings the teacher a gift.",
+  "text": "Last day of school. Everyone brings the teacher a gift. Mugs, flowers, a huge candle. Your hands are empty.",
   "ages": [
    6,
    9
@@ -940,7 +940,7 @@
  , "up": {"label": "Write a song for her", "effects": {"relationships": 6, "karma": 3, "happiness": 4}, "risk": {"chance": 0.45, "effects": {"relationships": -4, "stress": 3}, "result": "You sing it. In front of the school. Alone."}}},
  {
   "id": "k6_snow_day",
-  "text": "Snow day! School is closed.",
+  "text": "Snow day! School is closed. The street is white and silent. Your boots are waiting by the door.",
   "ages": [
    6,
    9
@@ -963,7 +963,7 @@
  , "up": {"label": "Build a snow slide down the street", "effects": {"happiness": 6, "health": 3, "relationships": 5}, "risk": {"chance": 0.5, "effects": {"health": -5, "relationships": -3}, "result": "A neighbour slips on it. An ambulance is called."}}},
  {
   "id": "k6_lost_shoe",
-  "text": "You come home with one shoe.",
+  "text": "You come home with one shoe. The other foot is a wet sock. Your parent is staring at your feet.",
   "ages": [
    6,
    8

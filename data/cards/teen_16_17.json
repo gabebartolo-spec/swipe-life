@@ -1,7 +1,7 @@
 [
   {
     "id": "t16_learner_permit",
-    "text": "You're old enough for a learner permit.",
+    "text": "You're old enough for a learner permit now. The handbook is two hundred pages of road signs and stopping distances.",
     "ages": [
       16,
       17
@@ -28,7 +28,7 @@
   },
   {
     "id": "t16_first_lesson",
-    "text": "First driving lesson. A parent grips the passenger seat.",
+    "text": "First driving lesson. You haven't left the drive yet. Your parent in the passenger seat is gripping it like a ride.",
     "ages": [
       16,
       17
@@ -63,7 +63,7 @@
   , "up": {"label": "Try the motorway on lesson one", "effects": {"happiness": 6, "smarts": 3, "looks": 2}, "risk": {"chance": 0.55, "effects": {"stress": 7, "relationships": -4}, "result": "The instructor needs a lie down."}}},
   {
     "id": "t16_parallel_park",
-    "text": "Parallel parking. Attempt number seven.",
+    "text": "Parallel parking. Attempt number seven. The car behind you has stopped to watch. Somebody on the pavement is filming.",
     "ages": [
       16,
       17
@@ -91,7 +91,7 @@
   , "up": {"label": "Park in the nearest hedge", "effects": {"happiness": 4, "smarts": 2, "stress": -3}, "risk": {"chance": 0.6, "effects": {"money": -150, "relationships": -3}, "result": "The hedge stays. The bumper doesn't."}}},
   {
     "id": "t16_driving_test",
-    "text": "Driving test day. The examiner hasn't smiled once.",
+    "text": "Driving test day. The examiner has a clipboard and hasn't smiled once. They write something down before you start.",
     "ages": [
       16,
       17
@@ -139,7 +139,7 @@
   , "up": {"label": "Drive with total confidence and no mirror checks", "effects": {"happiness": 7, "career": 2, "looks": 1}, "risk": {"chance": 0.55, "effects": {"money": -80, "stress": 6}, "result": "Fail in the first minute. Rebooking fee."}}},
   {
     "id": "t16_borrow_car",
-    "text": "You ask to borrow the car for the night.",
+    "text": "You ask to borrow the car for the night. Your parent looks at the keys, then at you, then at the keys again.",
     "ages": [
       16,
       17
@@ -175,7 +175,7 @@
   , "up": {"label": "Take a road trip with friends", "effects": {"happiness": 8, "relationships": 7, "money": -60}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "money": -150}, "result": "A dented door. A very loud lecture."}}},
   {
     "id": "t16_crowded_car",
-    "text": "A friend with a brand-new licence offers a lift. Seven people, five seats.",
+    "text": "A friend with a brand-new licence offers you a lift. Seven people, five seats. Someone is already lying across the back.",
     "ages": [
       16,
       17
@@ -205,7 +205,7 @@
   , "up": {"label": "Take the wheel yourself", "effects": {"happiness": 7, "relationships": 6, "looks": 2}, "risk": {"chance": 0.5, "effects": {"health": -8, "stress": 6}, "result": "A bump. An ambulance. Nobody is okay."}, "death": {"chance": 0.03, "cause": "The car left the road at the bend."}}},
   {
     "id": "t16_final_exams",
-    "text": "Final exams in a month. Your future, apparently, depends on it.",
+    "text": "Final exams in a month. Your future, apparently, depends on it. Every teacher says so. The calendar on the wall agrees.",
     "ages": [
       16,
       17
@@ -235,7 +235,7 @@
   },
   {
     "id": "t16_subjects",
-    "text": "Time to choose subjects. Your parents have opinions.",
+    "text": "Time to choose your subjects. The form is due Friday. Your parents have opinions and have printed them out for you.",
     "ages": [
       16,
       17
@@ -258,7 +258,7 @@
   , "up": {"label": "Design your own path and write to the head", "effects": {"smarts": 5, "happiness": 5, "career": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 5}, "result": "Family war. Parents on one side, you on the other."}}},
   {
     "id": "t16_answers_sale",
-    "text": "Someone's selling the exam answers in a chat.",
+    "text": "Someone in a chat is selling the exam answers. Screenshots, a price, a promise. Three people have already paid.",
     "ages": [
       16,
       17
@@ -288,7 +288,7 @@
   , "up": {"label": "Run a sting and expose the seller", "effects": {"karma": 9, "smarts": 4, "career": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -7, "stress": 6}, "result": "The seller's friends know who you are."}}},
   {
     "id": "t16_blank_essay",
-    "text": "An essay is due at 9 a.m. It's midnight and the page is empty.",
+    "text": "An essay is due at 9 a.m. It's midnight. The page is white and the cursor blinks at you like it's judging.",
     "ages": [
       16,
       17
@@ -318,7 +318,7 @@
   , "up": {"label": "Write it as a rap", "effects": {"smarts": 4, "happiness": 6, "relationships": 3}, "risk": {"chance": 0.55, "effects": {"smarts": -4, "stress": 5}, "result": "The teacher calls it 'bold'. That's a bad sign."}}},
   {
     "id": "t16_open_day",
-    "text": "Open day at a faraway college. It looks amazing.",
+    "text": "Open day at a faraway college. Old stone buildings, a lake, students reading on the grass. It looks amazing.",
     "ages": [
       16,
       17
@@ -341,7 +341,7 @@
   , "up": {"label": "Apply, and move abroad", "effects": {"smarts": 6, "happiness": 6, "career": 3}, "risk": {"chance": 0.5, "effects": {"money": -300, "stress": 6}, "result": "Rent. Homesickness. A very small room."}}},
   {
     "id": "t16_scholarship",
-    "text": "There's a scholarship. The essay question is \"Who are you?\"",
+    "text": "There's a scholarship that covers almost everything. The essay question is three words: \"Who are you?\" You stare.",
     "ages": [
       16,
       17
@@ -378,7 +378,7 @@
   },
   {
     "id": "t16_party_question",
-    "text": "Your crush asks if you're going to the party on Saturday.",
+    "text": "Your crush stops by your locker and asks if you're going to the party on Saturday. Your brain goes completely blank.",
     "ages": [
       16,
       17
@@ -401,7 +401,7 @@
   },
   {
     "id": "t16_first_date",
-    "text": "First date. You've got enough money for one milkshake.",
+    "text": "First date at the diner. You've counted your coins twice. You have enough money for exactly one milkshake.",
     "ages": [
       16,
       17
@@ -431,7 +431,7 @@
   , "up": {"label": "Plan an elaborate surprise", "effects": {"happiness": 8, "relationships": 8, "looks": 1}, "risk": {"chance": 0.55, "effects": {"happiness": -8, "money": -40}, "result": "Wrong place, wrong time. Cold chips."}}},
   {
     "id": "t16_meet_parents",
-    "text": "Your parents want to meet the person you're seeing.",
+    "text": "Your parents want to meet the person you're seeing. Your mum has already asked what they like to eat. Twice.",
     "ages": [
       16,
       17
@@ -464,7 +464,7 @@
   , "up": {"label": "Meet them on neutral ground with a rehearsed speech", "effects": {"relationships": 7, "smarts": 2, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 5}, "result": "Your mother asks 'And your intentions?'"}}},
   {
     "id": "t16_text_breakup",
-    "text": "They broke up with you. By text.",
+    "text": "They broke up with you. By text. It ended with a full stop. You read it eleven times on the bathroom floor.",
     "ages": [
       16,
       17
@@ -498,7 +498,7 @@
   , "up": {"label": "Turn up at their door", "effects": {"happiness": 5, "relationships": 4, "smarts": -1}, "risk": {"chance": 0.6, "effects": {"happiness": -9, "relationships": -5}, "result": "They shut the door. Politely."}}},
   {
     "id": "t16_house_party",
-    "text": "Party at a house where the parents are away.",
+    "text": "Party at a house where the parents are away for the weekend. You can hear the bass from the end of the street.",
     "ages": [
       16,
       17
@@ -529,7 +529,7 @@
   },
   {
     "id": "t16_mystery_cup",
-    "text": "At a party, someone hands you a cup. You don't know what's in it.",
+    "text": "At the party, someone hands you a red cup. The drink is a colour you can't name. You don't know what's in it.",
     "ages": [
       16,
       17
@@ -559,7 +559,7 @@
   , "up": {"label": "Try it and dance on the table", "effects": {"happiness": 7, "relationships": 7, "looks": 2}, "risk": {"chance": 0.6, "effects": {"health": -9, "relationships": -5}, "result": "Hospital. Stomach pump. Ugly."}, "death": {"chance": 0.03, "cause": "The cup was spiked with more than anyone knew."}}},
   {
     "id": "t16_sneeze_photo",
-    "text": "A photo of you mid-sneeze is going round the school.",
+    "text": "A photo of you mid-sneeze is going round the school. Eyes shut, mouth wide. Someone has added sound effects.",
     "ages": [
       16,
       17
@@ -581,7 +581,7 @@
   , "up": {"label": "Make a sticker of it and sell them", "effects": {"money": 79, "relationships": 8, "happiness": 7}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "karma": -2}, "result": "It's on a mug. You never see the profit."}}},
   {
     "id": "t16_views",
-    "text": "One of your videos got ten thousand views overnight.",
+    "text": "One of your videos got ten thousand views overnight. Your phone won't stop buzzing. Strangers are quoting you.",
     "ages": [
       16,
       17
@@ -610,7 +610,7 @@
   , "up": {"label": "Quit school to do it full-time", "effects": {"money": 400, "career": 6, "happiness": 5}, "risk": {"chance": 0.6, "effects": {"smarts": -5, "career": -4}, "result": "The views fade. The exams do not."}}},
   {
     "id": "t16_friend_moving",
-    "text": "Your best friend is moving away at the end of the year.",
+    "text": "Your best friend is moving away at the end of the year. They told you on the swings, staring at their shoes.",
     "ages": [
       16,
       17
@@ -632,7 +632,7 @@
   , "up": {"label": "Follow them next year", "effects": {"relationships": 9, "happiness": 6, "career": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "money": -100}, "result": "They've changed. So have you."}}},
   {
     "id": "t16_friend_secret",
-    "text": "Your friend tells you something they've never told anyone.",
+    "text": "Your friend goes quiet, then tells you something they've never told anyone. Their hands are shaking a little.",
     "ages": [
       16,
       17
@@ -653,7 +653,7 @@
   , "up": {"label": "Help them tell their family", "effects": {"relationships": 14, "karma": 8, "happiness": 4, "stress": 3}, "risk": {"chance": 0.4, "effects": {"relationships": -6, "stress": 6}, "result": "It goes badly. They blame you for a while."}}},
   {
     "id": "t16_sibling_maths",
-    "text": "Your younger sibling is failing maths. They won't ask for help.",
+    "text": "Your younger sibling is failing maths. You've seen the test in the bin, folded small. They won't ask for help.",
     "ages": [
       16,
       17
@@ -677,7 +677,7 @@
   , "up": {"label": "Set up a study group at the kitchen table", "effects": {"karma": 7, "relationships": 9, "smarts": 5}, "risk": {"chance": 0.45, "effects": {"stress": 5, "relationships": -4}, "result": "They resent you. The group stops."}}},
   {
     "id": "t16_tight_money",
-    "text": "A parent lost their job. Money is tight at home.",
+    "text": "A parent lost their job. Money is tight at home. The heating stays off and the shopping is mostly own-brand now.",
     "ages": [
       16,
       17
@@ -701,7 +701,7 @@
   , "up": {"label": "Take a full-time job after school", "effects": {"money": 600, "relationships": 14, "karma": 8, "happiness": 4, "career": 4, "stress": 5}, "risk": {"chance": 0.4, "effects": {"smarts": -4, "stress": 5}, "result": "Grades fall. You're tired all the time."}}},
   {
     "id": "t16_curfew",
-    "text": "You're home an hour after curfew. The lights are on.",
+    "text": "You're home an hour after curfew. You turn into the street and see it: every light in the house is still on.",
     "ages": [
       16,
       17
@@ -731,7 +731,7 @@
   , "up": {"label": "Get ahead and make a pact", "effects": {"relationships": 5, "smarts": 3, "karma": 2}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "stress": 5}, "result": "They accept it. And add a new curfew."}}},
   {
     "id": "t16_get_fit",
-    "text": "You catch yourself in the mirror and decide to get fit.",
+    "text": "You catch yourself in the shop window and decide, right there, to get fit. Your trainers are still in the box.",
     "ages": [
       16,
       17
@@ -755,7 +755,7 @@
   },
   {
     "id": "t16_3am_scroll",
-    "text": "It's 3 a.m. and you're still scrolling.",
+    "text": "It's 3 a.m. and you're still scrolling. You've watched a man restore a rusty axe. Then another one. Then a third.",
     "ages": [
       16,
       17
@@ -777,7 +777,7 @@
   , "up": {"label": "Turn it into a night-time hobby", "effects": {"smarts": 4, "happiness": 5, "career": 3}, "risk": {"chance": 0.55, "effects": {"health": -6, "smarts": -3}, "result": "You sleep through the exam."}}},
   {
     "id": "t16_hair_dye",
-    "text": "You want to dye your hair a colour that doesn't occur in nature.",
+    "text": "You want to dye your hair a colour that doesn't occur in nature. Electric teal. The box is in your basket already.",
     "ages": [
       16,
       17
@@ -806,7 +806,7 @@
   },
   {
     "id": "t16_savings",
-    "text": "You've saved up a decent amount.",
+    "text": "You've saved up a decent amount from shifts and birthdays. It's sitting there in your account, looking at you.",
     "ages": [
       16,
       17
@@ -836,7 +836,7 @@
   , "up": {"label": "Put it all on a risky stock tip", "effects": {"money": 600, "smarts": 3, "happiness": 8, "stress": 3}, "risk": {"chance": 0.5, "effects": {"money": -400, "happiness": -4}, "result": "The tip was a tip. In the bin."}}},
   {
     "id": "t16_prize_text",
-    "text": "A text says you won a prize. Just pay a small fee.",
+    "text": "A text says you won a brand new tablet. Just pay a small fee to claim it. The link has a lot of numbers in it.",
     "ages": [
       16,
       17
@@ -858,7 +858,7 @@
   , "up": {"label": "Trace the scammers", "effects": {"smarts": 5, "karma": 5, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"stress": 5, "money": -50}, "result": "They trace you first."}}},
   {
     "id": "t16_shelter",
-    "text": "The animal shelter needs weekend volunteers.",
+    "text": "The animal shelter needs weekend volunteers. On the poster, a one-eyed dog looks straight into your soul.",
     "ages": [
       16,
       17
@@ -888,7 +888,7 @@
   , "up": {"label": "Foster a dog at home", "effects": {"karma": 8, "happiness": 6, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "money": -80}, "result": "The sofa is gone. The dog is not leaving."}}},
   {
     "id": "t16_walkout",
-    "text": "Students are walking out of class for a cause you care about.",
+    "text": "Students are walking out of class at ten o'clock for a cause you care about. The clock says nine fifty-eight.",
     "ages": [
       16,
       17
@@ -917,7 +917,7 @@
   , "up": {"label": "Lead it, with a megaphone", "effects": {"karma": 7, "relationships": 8, "career": 4}, "risk": {"chance": 0.55, "effects": {"stress": 6, "relationships": -5}, "result": "Suspended. The headteacher knew your name."}}},
   {
     "id": "t16_formal",
-    "text": "The end-of-year dance is coming. You have nothing to wear.",
+    "text": "The end-of-year dance is in two weeks. Everyone's talking outfits. You have one shirt and it has a stain on it.",
     "ages": [
       16,
       17
@@ -939,7 +939,7 @@
   },
   {
     "id": "t16_after_school",
-    "text": "Everyone keeps asking what you'll do after school.",
+    "text": "Everyone keeps asking what you'll do after school. Aunts, teachers, the dentist. Even the dentist wants to know.",
     "ages": [
       16,
       17
@@ -962,7 +962,7 @@
   , "up": {"label": "Announce a wild plan for a gap year", "effects": {"happiness": 7, "career": 2, "smarts": 3}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "stress": 6}, "result": "Your parents want it in writing."}}},
   {
     "id": "t16_raccoon",
-    "text": "A raccoon is sitting at the kitchen table like it lives here.",
+    "text": "A raccoon is sitting at the kitchen table like it lives here. It has its little hands on the fruit bowl. It stares.",
     "ages": [
       16,
       17
@@ -986,7 +986,7 @@
   },
   {
     "id": "t16_wisdom_tooth",
-    "text": "A wisdom tooth is coming in. Your whole jaw aches.",
+    "text": "A wisdom tooth is coming in sideways. Your whole jaw aches. You've been chewing on one side of your mouth for days.",
     "ages": [
       16,
       17

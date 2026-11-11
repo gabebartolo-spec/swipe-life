@@ -1,7 +1,7 @@
 [
   {
     "id": "b0_first_bath",
-    "text": "Your first bath. The water is warm and suspicious.",
+    "text": "Your first bath. The water is warm and suspicious. A rubber duck stares at you, judging.",
     "ages": [
       0,
       0
@@ -25,7 +25,7 @@
   , "up": {"label": "Make a tidal wave", "effects": {"happiness": 5, "health": 2, "relationships": 3}, "risk": {"chance": 0.5, "effects": {"stress": 3, "relationships": -3}, "result": "The bathroom is a lake. Dad is a puddle."}}},
   {
     "id": "b0_night_feed",
-    "text": "It is 3 a.m. You are hungry.",
+    "text": "It is 3 a.m. You are hungry. Everyone is asleep. Your stomach growls louder than you can.",
     "ages": [
       0,
       0
@@ -48,7 +48,7 @@
   , "up": {"label": "Sing the whole house awake", "effects": {"health": 4, "relationships": 2, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "Everyone is up. Nobody is happy."}}},
   {
     "id": "b0_grab_finger",
-    "text": "A giant finger hovers near your hand.",
+    "text": "A giant finger hovers near your hand. It smells of coffee. Its owner coos and waits.",
     "ages": [
       0,
       0
@@ -67,7 +67,7 @@
   , "up": {"label": "Pull them nose-first into a hug", "effects": {"relationships": 7, "happiness": 3}, "risk": {"chance": 0.4, "effects": {"relationships": -3, "stress": 2}, "result": "A nose is pulled. Not gently."}}},
   {
     "id": "b0_first_smile",
-    "text": "Someone makes a ridiculous face at you.",
+    "text": "Someone makes a ridiculous face at you. Cheeks puffed, eyes crossed. They won't stop until you react.",
     "ages": [
       0,
       1
@@ -90,7 +90,7 @@
   , "up": {"label": "Giggle until you hiccup", "effects": {"relationships": 8, "happiness": 4, "health": 1}, "risk": {"chance": 0.4, "effects": {"health": -2, "stress": 2}, "result": "Hiccups for an hour. Then sick."}}},
   {
     "id": "b0_pacifier",
-    "text": "The pacifier fell on the floor.",
+    "text": "The pacifier fell on the floor. It is a bit fluffy now. The dog has noticed it too.",
     "ages": [
       0,
       1
@@ -113,7 +113,7 @@
   , "up": {"label": "Throw it at the dog", "effects": {"happiness": 4, "karma": -1, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"health": -3, "relationships": -2}, "result": "The dog has it. The dog is not sharing."}}},
   {
     "id": "b0_tummy_time",
-    "text": "Tummy time. Your face is in the rug.",
+    "text": "Tummy time. Your face is in the rug. It smells of feet. A grown-up claps like this is fun.",
     "ages": [
       0,
       1
@@ -136,7 +136,7 @@
   },
   {
     "id": "b0_blowout",
-    "text": "Diaper emergency. It is up your back somehow.",
+    "text": "Diaper emergency. It is up your back somehow. A grown-up approaches with wipes and quiet horror.",
     "ages": [
       0,
       1
@@ -158,7 +158,7 @@
   , "up": {"label": "Escape the changing mat", "effects": {"health": 3, "happiness": 4, "smarts": 2}, "risk": {"chance": 0.55, "effects": {"relationships": -4, "looks": -2}, "result": "You make it to the carpet. It does not end well."}}},
   {
     "id": "b0_visitor",
-    "text": "A stranger with loud perfume wants to hold you.",
+    "text": "A stranger with loud perfume wants to hold you. Big earrings, rustling handbag. Your parent hands you over.",
     "ages": [
       0,
       1
@@ -180,7 +180,7 @@
   , "up": {"label": "Charm them into buying a toy", "effects": {"relationships": 6, "happiness": 4, "money": 0}, "risk": {"chance": 0.4, "effects": {"stress": 3, "relationships": -3}, "result": "They have a cold. You now have a cold."}}},
   {
     "id": "b0_lullaby",
-    "text": "A parent sings to you. Badly.",
+    "text": "A parent sings to you. Badly. They forget the words and hum the rest. They mean every wrong note.",
     "ages": [
       0,
       1
@@ -202,7 +202,7 @@
   , "up": {"label": "Sing along, louder and worse", "effects": {"relationships": 6, "happiness": 4, "smarts": 2}, "risk": {"chance": 0.45, "effects": {"stress": 3, "relationships": -3}, "result": "The parent cries. It's not the good kind."}}},
   {
     "id": "b0_teething",
-    "text": "Your first tooth is coming in. Everything hurts.",
+    "text": "Your first tooth is coming in. Everything hurts. Your chin is wet with drool. You want to bite the world.",
     "ages": [
       0,
       1
@@ -225,7 +225,7 @@
   },
   {
     "id": "b0_first_word",
-    "text": "Everyone is waiting for your first word.",
+    "text": "Everyone is waiting for your first word. A phone is filming. A grandparent leans in. Total silence.",
     "ages": [
       0,
       1
@@ -251,7 +251,7 @@
   },
   {
     "id": "b0_no_phase",
-    "text": "You discovered the word \"no\". It is powerful.",
+    "text": "You discovered the word \"no\". It is powerful. Grown-ups freeze when you say it. How far does this go?",
     "ages": [
       1,
       2
@@ -278,7 +278,7 @@
   , "up": {"label": "Say no to the doctor", "effects": {"happiness": 5, "smarts": 4, "karma": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "The doctor gets the last word. And the needle."}}},
   {
     "id": "b0_crawl",
-    "text": "Something shiny is across the room.",
+    "text": "Something shiny is across the room. Keys, foil or treasure. The carpet is long. The cat is watching it too.",
     "ages": [
       0,
       1
@@ -302,7 +302,7 @@
   , "up": {"label": "Race the cat to it", "effects": {"health": 5, "smarts": 3, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "The cat wins. You wail."}}},
   {
     "id": "b0_cupboard",
-    "text": "You crawled into the kitchen. The low cupboard opens.",
+    "text": "You crawled into the kitchen. The low cupboard opens. Pots, lids, a whisk. Nobody has seen you yet.",
     "ages": [
       1,
       1
@@ -330,7 +330,7 @@
   , "up": {"label": "Empty it onto the floor", "effects": {"happiness": 5, "smarts": 3, "relationships": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "health": -2}, "result": "A pot falls on your toe. The noise is dreadful."}}},
   {
     "id": "b0_first_steps",
-    "text": "You stand up holding the sofa. Let go?",
+    "text": "You stand up holding the sofa. Your legs wobble like jelly. A parent holds out their arms. Let go?",
     "ages": [
       1,
       1
@@ -362,7 +362,7 @@
   , "up": {"label": "Run across the room", "effects": {"health": 5, "happiness": 4, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"health": -4, "stress": 3}, "result": "Splat. A bump on the head."}}},
   {
     "id": "b0_stairs_gate",
-    "text": "The stair gate is left open.",
+    "text": "The stair gate is left open. The stairs rise like a carpeted mountain. Nobody is looking.",
     "ages": [
       1,
       2
@@ -395,7 +395,7 @@
   , "up": {"label": "Slide down on your tummy", "effects": {"happiness": 5, "health": 2, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"health": -5, "stress": 3}, "result": "The bottom stair was very close."}}},
   {
     "id": "b0_mashed_food",
-    "text": "A spoon of green mush approaches.",
+    "text": "A spoon of green mush approaches, making airplane noises. It smells of peas and lies.",
     "ages": [
       0,
       1
@@ -418,7 +418,7 @@
   },
   {
     "id": "b0_high_chair",
-    "text": "You are in the high chair. The floor is far below.",
+    "text": "You are in the high chair. The floor is far below. Food makes a lovely splat. The dog waits underneath.",
     "ages": [
       1,
       2
@@ -441,7 +441,7 @@
   , "up": {"label": "Drop the whole plate", "effects": {"smarts": 5, "happiness": 3, "relationships": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "health": -2}, "result": "Mum is tired and the floor is a mess."}}},
   {
     "id": "b0_pet_tail",
-    "text": "The family pet has a tail. It is right there.",
+    "text": "The family pet has a tail. It is right there, swishing, fluffy and warm. The pet is fast asleep.",
     "ages": [
       1,
       2
@@ -472,7 +472,7 @@
   , "up": {"label": "Ride the dog", "effects": {"happiness": 6, "health": 2, "karma": -1}, "risk": {"chance": 0.5, "effects": {"health": -3, "relationships": -3}, "result": "The dog is a dog and not a horse."}}},
   {
     "id": "b0_new_sibling",
-    "text": "A new baby came home. Everyone is looking at it.",
+    "text": "A new baby came home. Everyone is looking at it. It is small, red and loud. You were here first.",
     "ages": [
       1,
       2
@@ -501,7 +501,7 @@
   , "up": {"label": "Adopt them as your own", "effects": {"relationships": 7, "karma": 4, "happiness": 3}, "risk": {"chance": 0.4, "effects": {"stress": 4, "relationships": -3}, "result": "You won't let go. They won't stop crying."}}},
   {
     "id": "b0_sibling_toy",
-    "text": "Your sibling has your old rattle.",
+    "text": "Your sibling has your old rattle. You forgot it existed. Now it is the most important thing ever.",
     "ages": [
       2,
       2
@@ -527,7 +527,7 @@
   , "up": {"label": "Trade it for the cat's bowl", "effects": {"smarts": 5, "happiness": 3, "karma": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 2}, "result": "The cat wins. The sibling cries. So do you."}}},
   {
     "id": "b0_bedtime",
-    "text": "Bedtime. You are not tired. You are very tired.",
+    "text": "Bedtime. You are not tired. You are very tired. Your eyes keep closing. You refuse to miss anything.",
     "ages": [
       1,
       2
@@ -551,7 +551,7 @@
   , "up": {"label": "Escape the cot", "effects": {"health": -1, "happiness": 7, "smarts": 6}, "risk": {"chance": 0.5, "effects": {"health": -4, "stress": 3}, "result": "You land hard on the carpet. Alarms go off."}}},
   {
     "id": "b0_tantrum",
-    "text": "You wanted the blue cup. You got the red cup.",
+    "text": "You wanted the blue cup. You got the red cup. Same cup, wrong colour. This is an outrage.",
     "ages": [
       1,
       2
@@ -575,7 +575,7 @@
   , "up": {"label": "Swap cups and change the rules", "effects": {"smarts": 5, "happiness": 3, "karma": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 3}, "result": "Both cups are gone. So is dinner."}}},
   {
     "id": "b0_peekaboo",
-    "text": "A parent hides behind their hands. They are gone forever.",
+    "text": "A parent hides behind their hands. They are gone forever. You can hear them breathing in there.",
     "ages": [
       0,
       1
@@ -596,7 +596,7 @@
   },
   {
     "id": "b0_bath_drain",
-    "text": "The bath drain gurgles. It wants to eat you.",
+    "text": "The bath drain gurgles. It wants to eat you. The water slurps toward the hole. Your duck drifts closer.",
     "ages": [
       1,
       2
@@ -619,7 +619,7 @@
   , "up": {"label": "Pull the plug yourself", "effects": {"smarts": 5, "happiness": 4, "health": 1}, "risk": {"chance": 0.5, "effects": {"stress": 4, "health": -2}, "result": "The whole bath goes. So does your duck."}}},
   {
     "id": "b0_potty",
-    "text": "Someone shows you a tiny plastic toilet.",
+    "text": "Someone shows you a tiny plastic toilet. It is bright yellow. They smile too much. What is it for?",
     "ages": [
       2,
       2
@@ -642,7 +642,7 @@
   , "up": {"label": "Use it as a drum", "effects": {"happiness": 6, "smarts": 4, "relationships": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 2}, "result": "It was not empty."}}},
   {
     "id": "b0_crayon_wall",
-    "text": "You found a crayon. The wall is big and empty.",
+    "text": "You found a crayon. The wall is big, white and empty. Somewhere there is paper. Nobody is watching.",
     "ages": [
       2,
       2
@@ -666,7 +666,7 @@
   , "up": {"label": "Paint the whole house", "effects": {"happiness": 6, "smarts": 4, "looks": 1}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "stress": 3}, "result": "Dad finds the gallery. Dad is not a patron."}}},
   {
     "id": "b0_doctor_shot",
-    "text": "The doctor has a small needle and a big smile.",
+    "text": "The doctor has a small needle and a big smile. Your parent holds your arm. Everyone says it's quick.",
     "ages": [
       0,
       2
@@ -689,7 +689,7 @@
   , "up": {"label": "Grab the stethoscope and escape", "effects": {"smarts": 5, "happiness": 4, "health": 3}, "risk": {"chance": 0.5, "effects": {"stress": 4, "relationships": -3}, "result": "You are retrieved. The needle is waiting."}}},
   {
     "id": "b0_vacuum",
-    "text": "The vacuum is on. It is a monster.",
+    "text": "The vacuum is on. It is a monster. It roars, eats crumbs and a sock. Now it is coming your way.",
     "ages": [
       0,
       2
@@ -711,7 +711,7 @@
   , "up": {"label": "Ride it", "effects": {"happiness": 6, "health": 2, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"stress": 4, "health": -3}, "result": "The monster has a roar. You fall off."}}},
   {
     "id": "b0_playdate",
-    "text": "Another toddler is here. They have a better toy.",
+    "text": "Another toddler is here. They have a better toy. It beeps and flashes. Yours is a wooden spoon.",
     "ages": [
       1,
       2
@@ -735,7 +735,7 @@
   , "up": {"label": "Start a toy swap market", "effects": {"smarts": 5, "relationships": 5, "happiness": 3}, "risk": {"chance": 0.45, "effects": {"relationships": -4, "stress": 3}, "result": "A treaty is signed. Then broken. Tears."}}},
   {
     "id": "b0_hiding",
-    "text": "Hide and seek. You hide behind a curtain. Your feet show.",
+    "text": "Hide and seek. You hide behind a curtain. Your feet show. A grown-up loudly wonders where you are.",
     "ages": [
       2,
       2
@@ -758,7 +758,7 @@
   , "up": {"label": "Hide in the washing basket", "effects": {"smarts": 4, "happiness": 5, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"stress": 3, "relationships": -2}, "result": "They forgot you and put the lid on."}}},
   {
     "id": "b0_sock_eater",
-    "text": "There is a sock in your mouth. You don't know whose.",
+    "text": "There is a sock in your mouth. You don't know whose. It tastes of the washing basket. Still chewing.",
     "ages": [
       0,
       2
@@ -780,7 +780,7 @@
   },
   {
     "id": "b0_mirror",
-    "text": "A baby in the mirror copies everything you do.",
+    "text": "A baby in the mirror copies everything you do. It pulls your faces. It never says a word.",
     "ages": [
       0,
       1
