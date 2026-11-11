@@ -5,6 +5,7 @@ extends RefCounted
 
 const ITEM_FILE := "res://data/property/items.json"
 const KEYS := ["id", "label", "room", "price", "min_age", "effects"]
+const OPTIONAL := ["slot", "pet"]  # slot: items sharing one fill it in turn (GDD §15.5)
 const ROOMS := ["bedroom", "bathroom", "living", "kitchen"]
 const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
 
@@ -32,7 +33,7 @@ func load_all(path: String = ITEM_FILE) -> void:
 
 func _check(it: Dictionary, where: String, ids: Dictionary) -> void:
 	for k in it:
-		if k not in KEYS:
+		if k not in KEYS and k not in OPTIONAL:
 			errors.append("%s: unknown key '%s'" % [where, k])
 	for k in KEYS:
 		if not it.has(k):
@@ -72,14 +73,46 @@ func owned_in(state, room: String) -> Array:
 	return out
 
 
-## Owned items as [{id, room}] for the home scene.
-func items_for(state) -> Array:
-	var out := []
+static func slot_of(it: Dictionary) -> String:
+	return it.get("slot", it.id)
+
+
+## The owned item filling each slot: the player's pick, else the newest bought (GDD §15.5).
+func shown(state) -> Array:
+	var by_slot := {}
 	for id: String in state.items:
 		var it := get_item(id)
 		if not it.is_empty():
-			out.append({"id": it.id, "room": it.room})
+			by_slot[slot_of(it)] = it
+	for slot: String in state.home_slots:
+		var pick := get_item(state.home_slots[slot])
+		if by_slot.has(slot) and not pick.is_empty() and pick.id in state.items:
+			by_slot[slot] = pick
+	return by_slot.values()
+
+
+## Slots where the player owns more than one item to choose from: {slot: [items]}.
+func swappable(state) -> Dictionary:
+	var out := {}
+	for id: String in state.items:
+		var it := get_item(id)
+		if not it.is_empty():
+			out.get_or_add(slot_of(it), []).append(it)
+	for slot in out.keys():
+		if out[slot].size() < 2:
+			out.erase(slot)
 	return out
+
+
+## Puts an owned item in its slot. Free: it is arranging, not doing (GDD §6.5).
+func place(state, it: Dictionary) -> String:
+	state.home_slots[slot_of(it)] = it.id
+	return "The %s goes back in." % it.label.to_lower()
+
+
+## Shown items as [{id, room}] for the home scene.
+func items_for(state) -> Array:
+	return shown(state).map(func(it): return {"id": it.id, "room": it.room, "slot": slot_of(it)})
 
 
 func can_buy(state, it: Dictionary) -> bool:
@@ -94,4 +127,7 @@ func buy(state, it: Dictionary) -> String:
 	for s in it.effects:
 		state.change_stat(s, int(it.effects[s]))
 	state.items.append(it.id)
+	state.home_slots[slot_of(it)] = it.id
+	if it.get("pet", false):
+		return "You bring home the %s. It already owns the place." % it.label.to_lower()
 	return "You buy the %s. It looks right at home." % it.label.to_lower()

@@ -20,6 +20,8 @@ var _view: TextureRect
 var _tween: Tween
 var _stage := FigureStage.new()
 var _people_key := ""
+var _arrows: Array[Button] = []
+var _browse := {}  # {age, housing} while the player may walk the house (between years)
 
 
 func _ready() -> void:
@@ -29,6 +31,16 @@ func _ready() -> void:
 	move_child(_stage, 0)  # under AgeLabel
 	_stage.size = size
 	_view = _make_view()
+	for i in 2:
+		var b := Button.new()
+		b.text = ["<", ">"][i]
+		b.add_theme_font_size_override("font_size", 40)
+		b.custom_minimum_size = Vector2(76, 76)
+		b.pressed.connect(_step_room.bind(-1 if i == 0 else 1))
+		b.hide()
+		add_child(b)
+		_arrows.append(b)
+	_fit_views()
 
 
 ## Age band of the bedroom (director 2026-11-03): baby 0–3, child 4–12, teen 13–17.
@@ -139,3 +151,22 @@ func _fit_views() -> void:
 	for v in get_children():
 		if v is TextureRect:
 			v.size = size
+	for i in _arrows.size():
+		var b := _arrows[i]
+		b.position = Vector2(16 if i == 0 else size.x - 92, size.y - 92)
+
+
+## Between years the player can walk the house room by room (GDD §15.5). Free; cards still pick
+## their own room.
+func set_browsing(on: bool, age := 0, housing: Dictionary = {}) -> void:
+	_browse = {"age": age, "housing": housing} if on else {}
+	for b in _arrows:
+		b.visible = on
+
+
+func _step_room(step: int) -> void:
+	if _browse.is_empty():
+		return
+	var ids := ROOMS.keys()
+	var i := (ids.find(room) + step + ids.size()) % ids.size()
+	show_room(_browse.age, ids[i], _browse.housing)
