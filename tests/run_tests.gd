@@ -164,8 +164,8 @@ func _test_life_rules() -> void:
 		LifeRules.year_end(state, rng)
 	_check(state.flags.has("anxiety"), "anxiety lifted while stress was high")
 	_check(
-		state.stats.health == 70,
-		"anxiety drained %d health, expected 30" % (100 - state.stats.health)
+		state.stats.health == 90,
+		"anxiety drained %d health, expected 10" % (100 - state.stats.health)
 	)
 	# no onset before age 6
 	state.new_life()
@@ -710,6 +710,11 @@ func _test_adult_sim() -> void:
 	ages.sort()
 	careful.sort()
 	var median: int = careful[careful.size() / 2]
+	# Balance (M13): ignoring health costs years, not the whole life; looking after it adds more.
+	_check(
+		ages[ages.size() / 2] >= 50, "never-rest lives die too young: %d" % ages[ages.size() / 2]
+	)
+	_check(median >= 72 and median > ages[ages.size() / 2] + 15, "careful lives gain too little")
 	print("adult sim: never-rest lives median death %d" % ages[ages.size() / 2])
 	print(
 		(
