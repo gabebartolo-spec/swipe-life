@@ -23,7 +23,7 @@
       },
       "result": "Three generations and one DJ. The DJ is your nephew."
     }
-  },
+  , "up": {"label": "Hire a hall and a band", "effects": {"money": -1200, "happiness": 10, "relationships": 8}, "risk": {"chance": 0.5, "effects": {"happiness": -8, "stress": 3}, "result": "The band plays for far too long."}}},
   {
     "id": "a60_retire_date",
     "text": "HR has sent a leaflet called 'Your Next Chapter'. The chapter has a lot of white space.",
@@ -51,7 +51,7 @@
       },
       "result": "You circle it in red. Then you go to bed at nine to celebrate."
     }
-  },
+  , "up": {"label": "Retire tomorrow", "effects": {"stress": -16, "happiness": 8, "money": -2000}, "risk": {"chance": 0.5, "effects": {"happiness": -6, "stress": 3}, "result": "The days are very long now."}}},
   {
     "id": "a60_leaving_do",
     "text": "The leaving do is in the pub. Everyone you have worked with for thirty years says 'we must keep in touch'.",
@@ -77,7 +77,7 @@
       },
       "result": "Nobody keeps in touch. The speech was lovely, though."
     }
-  },
+  , "up": {"label": "Sing a song", "effects": {"relationships": 10, "happiness": 8, "money": -200}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 3}, "result": "You've never sung in your life."}}},
   {
     "id": "a60_empty_days",
     "text": "It's Tuesday. You have no work, no plans and nobody who needs you. The day is very long.",
@@ -108,7 +108,7 @@
       },
       "result": "Walk, coffee, library, walk. You are, briefly, unstoppable."
     }
-  },
+  , "up": {"label": "Join four clubs at once", "effects": {"happiness": 10, "health": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -8, "stress": 3}, "result": "You get a lot of mail."}}},
   {
     "id": "a60_grandchild",
     "text": "Your child hands you a small, furious person. It is your grandchild. It has your nose.",
@@ -136,7 +136,7 @@
       },
       "result": "You are the favourite. You are also very tired."
     }
-  },
+  , "up": {"label": "Take over the whole childcare", "effects": {"happiness": 16, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -12, "stress": 3}, "result": "You are exhausted by Tuesday."}}},
   {
     "id": "a60_grandchild_visit",
     "text": "The grandchildren are coming for the weekend. There is one biscuit tin and eight hours of energy.",
@@ -162,7 +162,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -6, "stress": 2}, "result": "It didn't go to plan."},
       "result": "There's flour on the ceiling. You'll find it in March."
     }
-  },
+  , "up": {"label": "Take them camping", "effects": {"happiness": 16, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -12, "stress": 3}, "result": "It rains. There's one tent."}}},
   {
     "id": "a60_hip",
     "text": "The surgeon says your hip is 'a bit worn'. You have also, it turns out, been walking funny.",
@@ -192,7 +192,7 @@
       },
       "result": "Six weeks of the walking frame, then the stairs are just stairs again."
     }
-  },
+  , "up": {"label": "Have both hips done", "effects": {"money": -5000, "stress": 12, "health": 12}, "risk": {"chance": 0.5, "effects": {"health": -9, "stress": 3}, "result": "The recovery is long and grim."}}},
   {
     "id": "a60_cataract",
     "text": "The optician says the world looks like it's behind a bath curtain because it is. It can be fixed.",
@@ -218,7 +218,7 @@
       },
       "result": "The grass is a colour you'd forgotten."
     }
-  },
+  , "up": {"label": "Have both eyes done at once", "effects": {"money": -2400, "health": 6, "happiness": 8}, "risk": {"chance": 0.5, "effects": {"happiness": -6, "stress": 3}, "result": "You can't see for a week."}}},
   {
     "id": "a60_pills",
     "text": "You now take eleven tablets a day. They live in a plastic box with the days of the week on it.",
@@ -247,7 +247,7 @@
       },
       "result": "Thursday is, somehow, always empty by Wednesday."
     }
-  },
+  , "up": {"label": "Add the herbal remedy too", "effects": {"health": 6, "money": -400}, "risk": {"chance": 0.5, "effects": {"health": -4, "stress": 3}, "result": "The herbs do not agree with the tablets."}}},
   {
     "id": "a60_fall",
     "text": "The rug moved. You went with it. You're lying on the floor looking at the underside of your own sofa.",
@@ -279,7 +279,7 @@
       },
       "result": "The pendant works. The voice on the other end is very kind about it."
     }
-  },
+  , "up": {"label": "Walk it off and make tea", "effects": {"health": -4, "stress": 4, "money": -200, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "Your hip disagrees. Loudly."}, "death": {"chance": 0.04, "cause": "The fall was the last one."}}},
   {
     "id": "a60_downsize",
     "text": "The stairs have started to look like a mountain. There's a bungalow on the next street.",
@@ -307,7 +307,7 @@
       },
       "result": "You find thirty-one jars of buttons you don't recall buying."
     }
-  },
+  , "up": {"label": "Sell up and move abroad", "effects": {"health": -6, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "It's lovely. You miss everyone."}}},
   {
     "id": "a60_friend_dies",
     "text": "Another name has crossed out of the address book. You're now the person who remembers the funny story.",
@@ -333,7 +333,7 @@
       }, "risk": {"chance": 0.3, "effects": {"relationships": -3, "stress": 2}, "result": "Mostly fine. Mostly."},
       "result": "They laugh and cry at the same moment. That's the point of it."
     }
-  },
+  , "up": {"label": "Give the eulogy", "effects": {"happiness": -8, "relationships": 8, "karma": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 3}, "result": "You break down halfway through."}}},
   {
     "id": "a60_partner_ill",
     "text": "Your partner is poorly, and the doctor is using 'long term' about it. You're now the carer.",
@@ -362,7 +362,7 @@
       },
       "result": "It's the hardest thing. You wouldn't give it to anyone else."
     }
-  },
+  , "up": {"label": "Learn the whole thing yourself", "effects": {"money": -6000, "stress": 6, "relationships": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "You are very tired."}}},
   {
     "id": "a60_widowed",
     "text": "The house is quiet in the evenings. You keep making tea for two.",
@@ -389,7 +389,7 @@
       }, "risk": {"chance": 0.3, "effects": {"relationships": -4, "stress": 2}, "result": "There was a catch."},
       "result": "'Come round for lunch', they say. You were hoping they'd say that."
     }
-  },
+  , "up": {"label": "Throw a dinner party for one chair", "effects": {"happiness": -6, "relationships": 10, "stress": -6}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 3}, "result": "It's a lonely table."}}},
   {
     "id": "a60_late_love",
     "text": "You've met someone at the choir. They laugh at your jokes. They have, frankly, excellent knees.",
@@ -420,7 +420,7 @@
       },
       "result": "Coffee turns into dinner. Dinner turns into a Tuesday-and-Thursday arrangement."
     }
-  },
+  , "up": {"label": "Propose a trip together", "effects": {"happiness": 20, "relationships": 10, "stress": 4, "looks": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -15, "stress": 3}, "result": "They say they need time."}}},
   {
     "id": "a60_scam_call",
     "text": "A young man from your bank would like your PIN, urgently. He's very polite. He's also breathing like a man at a call centre.",
@@ -447,7 +447,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "You paid for it later."},
       "result": "He rings back in eleven minutes. You put the phone in a drawer."
     }
-  },
+  , "up": {"label": "Argue with him for an hour", "effects": {"happiness": 4, "stress": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "He's patient. You're not."}}},
   {
     "id": "a60_phone",
     "text": "Your grandchild wants to show you a thing called a 'video call'. Your face is enormous in it.",
@@ -472,7 +472,7 @@
       },
       "result": "You hold it upside down for the first fifteen minutes."
     }
-  },
+  , "up": {"label": "Join every social media site", "effects": {"happiness": 10, "relationships": 10, "stress": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -8, "stress": 3}, "result": "Your inbox is full by lunchtime."}}},
   {
     "id": "a60_garden",
     "text": "The allotment committee has a plot going. It has been fallow, they say, for 'a while'. It is a small forest.",
@@ -503,7 +503,7 @@
       },
       "result": "You grow a marrow the size of a dog. People ask you for tips."
     }
-  },
+  , "up": {"label": "Take on three plots", "effects": {"health": 8, "happiness": 12, "money": -300, "stress": -8}, "risk": {"chance": 0.5, "effects": {"happiness": -9, "stress": 3}, "result": "Your back files an objection."}}},
   {
     "id": "a60_cruise",
     "text": "The brochure says: 'Unpack once.' You like the sound of that. You like the buffet even more.",
@@ -530,7 +530,7 @@
       },
       "result": "You meet a couple from Leeds. You keep in touch, for real."
     }
-  },
+  , "up": {"label": "Book the world cruise", "effects": {"money": -8000, "happiness": 20, "stress": -16, "relationships": 6}, "risk": {"chance": 0.5, "effects": {"happiness": -15, "stress": 3}, "result": "The sea is rougher than the brochure."}, "death": {"chance": 0.04, "cause": "The ship never did make it back to port."}}},
   {
     "id": "a60_will",
     "text": "The solicitor has papers. There are choices about who gets the house, the spoons, and the cat.",
@@ -556,7 +556,7 @@
       },
       "result": "The cat gets the armchair. The rest is up to the family."
     }
-  },
+  , "up": {"label": "Give it all away now", "effects": {"money": -800, "stress": -8, "karma": 4, "relationships": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "You might regret this later."}}},
   {
     "id": "a60_memory",
     "text": "You went upstairs for something. You are now upstairs. This has happened before.",
@@ -582,7 +582,7 @@
       },
       "result": "'Perfectly normal for your age.' You write it down, so you won't forget."
     }
-  },
+  , "up": {"label": "Make a memory book and see a specialist", "effects": {"stress": 2, "happiness": -2}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The specialist is vague."}}},
   {
     "id": "a60_memoir",
     "text": "Your grandchild says: 'Tell me what it was like.' It was, you realise, quite a lot.",
@@ -607,7 +607,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -6, "stress": 2}, "result": "You paid for it later."},
       "result": "It takes four afternoons. The grandchild takes notes, and a few liberties."
     }
-  },
+  , "up": {"label": "Write the book and publish it", "effects": {"happiness": 16, "relationships": 10, "karma": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -12, "stress": 3}, "result": "Two people buy it. Both relatives."}}},
   {
     "id": "a60_dance_class",
     "text": "The community hall does a tea dance on Thursdays. A woman in a sequined cardigan beckons.",
@@ -637,7 +637,7 @@
       },
       "result": "Your waltz is mostly standing. She says it's the best she's had."
     }
-  },
+  , "up": {"label": "Enter the tea dance competition", "effects": {"health": 6, "happiness": 14, "relationships": 8}, "risk": {"chance": 0.5, "effects": {"happiness": -10, "stress": 3}, "result": "You tripped over the sequins."}}},
   {
     "id": "a60_care_home",
     "text": "Your child gently shows you a brochure. It has a conservatory and a lot of cheerful photos of nurses.",
@@ -666,7 +666,7 @@
       },
       "result": "It's a nice place. The quiz is on Wednesdays. You'd win."
     }
-  },
+  , "up": {"label": "Agree to the full tour and a trial stay", "effects": {"happiness": -6, "health": 8, "money": -8000, "stress": -8}, "risk": {"chance": 0.5, "effects": {"health": -6, "stress": 3}, "result": "The food is not what the photos suggest."}}},
   {
     "id": "a60_birthday_big",
     "text": "You are 80. The mayor sends a card. So does the king. So does a double-glazing company.",
@@ -691,7 +691,7 @@
       },
       "result": "Four generations and a very nice cake."
     }
-  },
+  , "up": {"label": "Hire a hot-air balloon", "effects": {"happiness": 16, "relationships": 12, "money": -800}, "risk": {"chance": 0.5, "effects": {"happiness": -12, "stress": 3}, "result": "The wind picked up."}, "death": {"chance": 0.04, "cause": "The balloon didn't land where the pilot said."}}},
   {
     "id": "a60_hundred",
     "text": "You are 100. A reporter asks for the secret. You are tempted to say 'luck', but it's a slow news day.",
@@ -715,7 +715,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -8, "stress": 2}, "result": "There was a catch."},
       "result": "It makes the front page. Your family have to explain it to the vicar."
     }
-  },
+  , "up": {"label": "Say 'gin' and have one", "effects": {"happiness": 20, "karma": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -15, "stress": 3}, "result": "It was a bit more than one."}}},
   {
     "id": "a60_flu",
     "text": "The flu is going round the street. You're being very good at getting it.",
@@ -745,7 +745,7 @@
       },
       "result": "Soup, antibiotics and a stern voice. Two weeks later you're up."
     }
-  },
+  , "up": {"label": "Mow the lawn through it", "effects": {"health": -4, "money": -200, "stress": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The flu got worse."}, "death": {"chance": 0.04, "cause": "The flu turned into something worse."}}},
   {
     "id": "a60_old_photo",
     "text": "You find a box of photographs. A young person is grinning in every one. You know the grin.",
@@ -769,7 +769,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -4, "stress": 2}, "result": "There was a catch."},
       "result": "You lose an afternoon. It was well spent."
     }
-  },
+  , "up": {"label": "Make an album and show everyone", "effects": {"happiness": 10, "stress": -6}, "risk": {"chance": 0.5, "effects": {"happiness": -8, "stress": 3}, "result": "There's a photo you didn't want shown."}}},
   {
     "id": "a60_r_walk",
     "text": "The park bench is free. The ducks look expectant.",
@@ -795,7 +795,7 @@
       },
       "result": "You do one and a half laps and call it two."
     }
-  },
+  , "up": {"label": "Walk to the next town", "effects": {"stress": -6, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "It's much further than it looks."}}},
   {
     "id": "a60_r_neighbour",
     "text": "The neighbour wants to chat over the fence. It's been twenty minutes and you know about the bins.",
@@ -820,7 +820,7 @@
         "stress": 1
       }
     }
-  },
+  , "up": {"label": "Invite them in for the afternoon", "effects": {"relationships": 4, "happiness": 4, "stress": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "They stay for the evening."}}},
   {
     "id": "a60_r_crossword",
     "text": "The crossword has one clue left. It has been one clue left since breakfast.",
@@ -845,7 +845,7 @@
       }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "It didn't go to plan."},
       "result": "Nineteen across was 'ennui'. Of course it was."
     }
-  },
+  , "up": {"label": "Start another one and finish both", "effects": {"smarts": 2, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"happiness": -3, "stress": 3}, "result": "It takes the whole day."}}},
   {
     "id": "a60_r_doctor",
     "text": "Another appointment. The waiting room magazines are from a different decade.",
@@ -871,7 +871,7 @@
         "stress": 1
       }
     }
-  },
+  , "up": {"label": "Ask for every test going", "effects": {"health": 4, "money": -120, "stress": 2}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "They find something to watch."}}},
   {
     "id": "a60_r_call",
     "text": "The phone rings. It's family, and they sound pleased you picked up.",
@@ -895,7 +895,7 @@
         "happiness": 3
       }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "You paid for it later."}
     }
-  },
+  , "up": {"label": "Ring everyone you know", "effects": {"relationships": 6, "happiness": 6}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "Half of them are out."}}},
   {
     "id": "a60_r_cook",
     "text": "It's cold out. There's a stew in your future if you want one.",
@@ -922,7 +922,7 @@
       },
       "result": "Enough for six. You live alone. The freezer is happy."
     }
-  },
+  , "up": {"label": "Cook for the whole street", "effects": {"health": 4, "happiness": 4, "money": -40}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "You're up till midnight."}}},
   {
     "id": "a60_r_nap",
     "text": "The afternoon sun is on the armchair. It has your name on it.",
@@ -947,7 +947,7 @@
         "happiness": 1
       }, "risk": {"chance": 0.3, "effects": {"health": -2, "stress": 2}, "result": "There was a catch."}
     }
-  },
+  , "up": {"label": "Sleep till dark", "effects": {"health": 2, "stress": -6, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "You are up all night."}}},
   {
     "id": "a60_r_garden_chat",
     "text": "A robin keeps watching you dig. It's expecting worms.",
@@ -972,7 +972,7 @@
         "money": -5
       }
     }
-  },
+  , "up": {"label": "Build the robin a house", "effects": {"happiness": 6, "karma": 2, "money": -10}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "It prefers the neighbour's."}}},
   {
     "id": "a60_r_news",
     "text": "The news is terrible again. You've heard all of this before, with different names.",
@@ -996,7 +996,7 @@
         "smarts": 1
       }
     }
-  },
+  , "up": {"label": "Write to your MP", "effects": {"stress": -6}, "risk": {"chance": 0.5, "effects": {"happiness": -4, "stress": 3}, "result": "The reply is a form letter."}}},
   {
     "id": "a60_r_radio",
     "text": "An old song comes on. You remember exactly where you were.",
@@ -1020,7 +1020,7 @@
         "stress": -2
       }, "risk": {"chance": 0.3, "effects": {"happiness": -3, "stress": 2}, "result": "Not everything went your way."}
     }
-  },
+  , "up": {"label": "Dance in the kitchen", "effects": {"happiness": 8, "stress": -4}, "risk": {"chance": 0.5, "effects": {"happiness": -6, "stress": 3}, "result": "Your hip says no."}, "death": {"chance": 0.04, "cause": "The kitchen floor was wet."}}},
   {
     "id": "a60_r_stairs",
     "text": "The stairs are a lot. You have a choice about how to do them.",
@@ -1045,7 +1045,7 @@
       },
       "result": "Nobody saw. You were not fast."
     }
-  },
+  , "up": {"label": "Take them two at a time", "effects": {"health": 2}, "risk": {"chance": 0.5, "effects": {"health": -3, "stress": 3}, "result": "They were not meant for two."}, "death": {"chance": 0.04, "cause": "The stairs won that one."}}},
   {
     "id": "a60_r_shop",
     "text": "The shop has a new self-service till. It speaks to you, and it's wrong about the bananas.",
@@ -1071,5 +1071,5 @@
       },
       "result": "You win. The queue behind you does not applaud."
     }
-  }
+  , "up": {"label": "Complain to the manager", "effects": {"happiness": -2, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "The manager is also the machine."}}}
 ]

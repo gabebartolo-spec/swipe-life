@@ -24,6 +24,7 @@ Tools: `tools/audit/card_audit.py` (static, all 592 cards), `tools/audit/run.sh 
 1. **Fixed: 148 cards had a strictly better swipe.** `tools/audit/fix_dominated.py` gave each always-better
    swipe a 30% setback (its top gain undone, +2 Stress from age 6), so every card is safe vs gamble. The
    setback line is one of six generic lines; the card writing pass should replace them with specific ones.
-2. **Super swipes cover 63 of 592 cards (11%).** None in the adult, 60+ or Dynasty sets; 2 of 92 special
-   cards. Only 9 swipes carry death odds, one of them a super swipe. See `tools/audit/superswipe_audit.py`.
+2. **Fixed: every card has a super swipe.** `tools/audit/add_up.py` wrote `up` for the 529 cards that lacked
+   one (text in `tools/audit/up_text/`): the better swipe doubled, a 50% setback, and a 2-4% death chance on 43
+   dangerous ones in total. Numbers are first-pass; the card writing pass should tune them.
 3. Flags `gifted` and `juvie_studied` are set by cards and never read.
