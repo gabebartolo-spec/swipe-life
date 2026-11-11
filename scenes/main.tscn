@@ -32,7 +32,7 @@ theme_override_font_sizes/font_size = 36
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 13.0
-color = Color(0.3, 0.32, 0.38, 1)
+color = Color(0.86, 0.74, 0.6, 1)
 
 [node name="Card" type="ColorRect" parent="."]
 layout_mode = 2

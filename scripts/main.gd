@@ -24,6 +24,7 @@ var autoplay := "--autoplay" in OS.get_cmdline_user_args()
 
 
 func _ready() -> void:
+	theme = ClayTheme.make()
 	if Array(OS.get_cmdline_user_args()).any(func(x): return x.begins_with("--frames=")):
 		add_child(preload("res://scripts/proto/frame_dump.gd").new())
 	var debug_set := Array(OS.get_cmdline_user_args()).any(func(a): return a.begins_with("--set="))
