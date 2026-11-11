@@ -111,9 +111,12 @@ static func rank_pay(rank: Dictionary, age: int) -> int:
 	return int(rank.get("adult_pay", rank.pay)) if age >= Finance.ADULT_AGE else int(rank.pay)
 
 
-## Ends careers past their last age (a new year has begun). Returns the result lines.
+## Ends careers past their last age (a new year has begun), and juvie at 18. Returns result lines.
 static func outgrown(state, db: CareerDB) -> Array:
 	var lines := []
+	if state.age >= Finance.ADULT_AGE and state.flags.has("juvie"):  # the release card stops at 17
+		state.flags.erase("juvie")
+		lines.append("You're 18. Juvie lets you out.")
 	for slot in state.careers.keys():
 		var career: Dictionary = db.by_id.get(state.careers[slot].id, {})
 		if not career.is_empty() and state.age > career.ages[1]:

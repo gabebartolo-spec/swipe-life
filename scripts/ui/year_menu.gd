@@ -215,7 +215,9 @@ func _build_courses() -> void:
 		var head := "%s  ·  %d yr  ·  %s a year" % [c.label, c.years, Finance.money_text(cost)]
 		_button(head, func(): _enrol(c, false), GameState.stats.money < cost)
 		if cost > 0:
-			_button("  On a student loan", func(): _enrol(c, true))
+			_button(
+				"  On a student loan", func(): _enrol(c, true), not Finance.loan_open(GameState, c)
+			)
 
 
 func _enrol(c: Dictionary, on_loan: bool) -> void:

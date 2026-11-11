@@ -38,6 +38,7 @@ var invest_bold := false
 var debt_years := 0  # years in a row ending with a loan; repossession follows (Finance)
 var fresh_start_until := 0
 var course := {}  # the course in progress; see Finance.enrol
+var loan_years := 0  # course years already put on a student loan; see Finance.loan_open
 var items := []  # ids of bought shop items; see Items
 var siblings := []  # {name, look}: the heir's brothers and sisters; see Legacy
 
@@ -65,6 +66,7 @@ func new_life() -> void:
 	debt_years = 0
 	fresh_start_until = 0
 	course = {}
+	loan_years = 0
 	items = []
 	siblings = []
 	stats = {}
@@ -100,6 +102,7 @@ func to_dict() -> Dictionary:
 		"debt_years": debt_years,
 		"fresh_start_until": fresh_start_until,
 		"course": course,
+		"loan_years": loan_years,
 		"items": items,
 		"siblings": siblings,
 	}
@@ -124,6 +127,7 @@ func from_dict(d: Dictionary) -> void:
 	debt_years = int(d.get("debt_years", 0))
 	fresh_start_until = int(d.get("fresh_start_until", 0))
 	course = d.get("course", {})
+	loan_years = int(d.get("loan_years", 0))
 	items = d.get("items", [])
 	siblings = d.get("siblings", [])
 	for entry in careers.values():  # JSON reads numbers back as floats
