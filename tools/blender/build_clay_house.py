@@ -95,7 +95,8 @@ def chair(n, x, z, face, col=CREAM):
 
 
 def media_unit(cx, cz, w, h, wood, dark, tv, d=0.46):
-    """Open TV unit on the +x wall, facing the sofa, no back (the camera looks in from behind): a docked Switch in one cubby, DVD cases in the other.
+    """Open TV unit on the +x wall, facing the sofa: a docked Switch in one cubby, DVD cases in the other.
+    No back panel: the game camera looks in from behind. `dark` is unused, kept for the callers.
     Same build as the shop TV (build_clay_items.tv). tv = (x, y, thick, height, width, colour)."""
     t = dict(bevel=0.012, subd=1, lump=0.002)
     f = dict(bevel=0.025, subd=1, lump=0.004)
