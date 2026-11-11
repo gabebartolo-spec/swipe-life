@@ -30,7 +30,7 @@ const POCKET_MONEY := [[10, 20], [6, 10]]
 const POCKET_MONEY_UNTIL := 17
 # Illness drains Health 1 a year (M13: was 3, which killed anyone who ignored Stress by their 40s).
 # adult drift (GDD §6.9): Health a year, highest age first; Stress -2 a year; Joy toward 50.
-const HEALTH_DRIFT := [[75, -3], [60, -2], [40, -1]]
+const HEALTH_DRIFT := [[75, -4], [60, -3], [40, -2], [30, -1]]
 const ADULT_FROM := 18
 # old age death (GDD §5.3c): 2% at 70, +2% each year after. Placeholder until balance (M13).
 const OLD_AGE_FROM := 70
@@ -76,8 +76,9 @@ static func year_end(state, rng: RandomNumberGenerator) -> Dictionary:
 		out.died = true
 		out.cause = "Your health gave out"
 	elif state.age >= OLD_AGE_FROM:
-		var years: int = state.age - OLD_AGE_FROM
-		if rng.randf() < OLD_AGE_BASE + years * OLD_AGE_PER_YEAR:
+		# good health buys years, poor health costs them: 10 Health = 1 year
+		var years: int = state.age - OLD_AGE_FROM + int((50 - state.stats.health) / 10.0)
+		if rng.randf() < maxf(OLD_AGE_BASE + years * OLD_AGE_PER_YEAR, 0.0):
 			out.died = true
 			out.cause = "You died peacefully of old age"
 	return out

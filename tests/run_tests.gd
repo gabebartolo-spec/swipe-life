@@ -568,7 +568,7 @@ func _test_finance() -> void:
 	fdb.load_all()
 	_check(fdb.errors.is_empty(), "finance data: %s" % ", ".join(fdb.errors))
 	_check(fdb.houses.size() == 7 and fdb.courses.size() == 26, "houses or courses missing")
-	_check(int(db.by_id.corporate.ranks[-1].pay) == 900000, "top career must pay 30E")
+	_check(int(db.by_id.corporate.ranks[-1].pay) == 300000, "top career must pay 10E")
 	# parents are free; a renter with no income pays rent + living, and it becomes a 10% loan
 	var s = _make_state(18)
 	s.stats.money = 0
@@ -704,7 +704,11 @@ func _test_adult_sim() -> void:
 				var opening: Array = fdb.courses_open(state)
 				if state.course.is_empty() and not opening.is_empty():
 					Finance.enrol(state, opening[deck.rng.randi() % opening.size()], true)
-				if state.housing.kind == "rent" and Finance.can_buy(state, fdb.houses[0]):
+				if (
+					state.housing.kind == "rent"
+					and Finance.can_buy(state, fdb.houses[0])
+					and Finance.can_afford(state, fdb.houses[0], careers)
+				):
 					Finance.buy(state, fdb.houses[0])
 					houses += 1
 			if life % 2 == 1:

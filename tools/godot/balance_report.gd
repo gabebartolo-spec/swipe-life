@@ -75,7 +75,11 @@ func _init() -> void:
 				var opening: Array = fdb.courses_open(state)
 				if state.course.is_empty() and not opening.is_empty():
 					Finance.enrol(state, opening[deck.rng.randi() % opening.size()], true)
-				if state.housing.kind == "rent" and Finance.can_buy(state, fdb.houses[0]):
+				if (
+					state.housing.kind == "rent"
+					and Finance.can_buy(state, fdb.houses[0])
+					and Finance.can_afford(state, fdb.houses[0], careers)
+				):
 					Finance.buy(state, fdb.houses[0])
 				if state.stats.money < 0:
 					broke_years += 1
@@ -163,7 +167,12 @@ func _init() -> void:
 			]
 		)
 	)
-	print("promotions a life: %.1f, fresh starts a life: %.2f" % [float(promotions) / lives, float(fresh_starts) / lives])
+	print(
+		(
+			"promotions a life: %.1f, fresh starts a life: %.2f"
+			% [float(promotions) / lives, float(fresh_starts) / lives]
+		)
+	)
 	print("causes: %s" % [causes])
 	quit()
 

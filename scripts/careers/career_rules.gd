@@ -152,7 +152,7 @@ static func _year(state, slot, entry, career, rng, results: Array) -> void:
 	elif pay < 0:
 		results.append("%s cost you $%d this year." % [rank.title, -pay])
 	entry.years = int(entry.years) + 1
-	var skill := int((state.stats.career - 50) / 10.0)
+	var skill := clampi(int((state.stats.career - 50) / 10.0), -3, 2)
 	change_performance(entry, rng.randi_range(DRIFT[0], DRIFT[1]) + skill)
 
 	if career.get("meter") == "heat":

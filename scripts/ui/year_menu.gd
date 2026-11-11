@@ -275,7 +275,10 @@ func _build_property() -> void:
 				Finance.money_text(Finance.deposit(house)),
 			]
 		)
-		_button(line, func(): _buy(house), not Finance.can_buy(GameState, house))
+		var lent := Finance.can_afford(GameState, house, careers)
+		if not lent:
+			line += "  ·  needs pay %s" % Finance.money_text(Finance.house_cost(house) * 2)
+		_button(line, func(): _buy(house), not (lent and Finance.can_buy(GameState, house)))
 
 
 func _buy(house: Dictionary) -> void:

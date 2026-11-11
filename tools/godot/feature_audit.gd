@@ -66,8 +66,36 @@ func _adult_year(strat: String, state, deck: Deck, careers, fdb) -> void:
 	var opening: Array = fdb.courses_open(state)
 	if state.course.is_empty() and not opening.is_empty():
 		Finance.enrol(state, opening[deck.rng.randi() % opening.size()], true)
-	if state.housing.kind == "rent" and Finance.can_buy(state, fdb.houses[0]):
+	if (
+		state.housing.kind == "rent"
+		and Finance.can_buy(state, fdb.houses[0])
+		and Finance.can_afford(state, fdb.houses[0], careers)
+	):
 		Finance.buy(state, fdb.houses[0])
+	if strat == "greedy_spender":
+		_spend(state, fdb, careers)
+
+
+## Buys every shop item it can afford and trades up to the dearest house it can afford.
+func _spend(state, fdb, careers) -> void:
+	var shop := Items.new()
+	shop.load_all()
+	for it in shop.available(state):
+		if state.stats.money > 2 * int(it.price):
+			shop.buy(state, it)
+	if state.housing.kind == "parents" or not Finance.can_borrow(state):
+		return
+	for h in fdb.houses:
+		var better: bool = state.housing.kind != "own" or int(h.price) > int(state.housing.value)
+		if (
+			better
+			and Finance.can_afford(state, h, careers)
+			and state.stats.money > 2 * Finance.deposit(h)
+			and state.age >= int(h.min_age)
+		):
+			if state.housing.kind == "own":
+				Finance.sell(state)
+			Finance.buy(state, h)
 
 
 func _strategy(strat: String, lives: int, db, careers, fdb, actions) -> void:
@@ -76,6 +104,7 @@ func _strategy(strat: String, lives: int, db, careers, fdb, actions) -> void:
 	var h40 := []
 	var s40 := []
 	var m40 := []
+	var hp60 := []
 	var debt := 0
 	var jobs := 0
 	var years := 0
@@ -116,6 +145,8 @@ func _strategy(strat: String, lives: int, db, careers, fdb, actions) -> void:
 				h40.append(state.stats.happiness)
 				s40.append(state.stats.stress)
 				m40.append(state.stats.money)
+			if state.age == 60:
+				hp60.append(state.stats.health)
 			if LifeRules.year_end(state, deck.rng).died:
 				dead = true
 			else:
@@ -128,7 +159,7 @@ func _strategy(strat: String, lives: int, db, careers, fdb, actions) -> void:
 	worth.sort()
 	print(
 		(
-			"%-15s death p5/50/95 %s estate %s @40 happy %.0f stress %.0f cash %d maxdebt %d job %d%%"
+			"%-14s death %s estate %s @40 happy %.0f stress %.0f cash %d hp60 %.0f debt %d job %d%%"
 			% [
 				strat,
 				_pct(ages),
@@ -136,6 +167,7 @@ func _strategy(strat: String, lives: int, db, careers, fdb, actions) -> void:
 				_avg(h40),
 				_avg(s40),
 				_avg(m40),
+				_avg(hp60),
 				debt,
 				jobs * 100 / maxi(years, 1)
 			]
