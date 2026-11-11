@@ -94,6 +94,34 @@ def chair(n, x, z, face, col=CREAM):
         tube(f"{n}_leg{i}", (x + dx, 0.22, z + dz), 0.03, 0.44, DARKWOOD)
 
 
+def media_unit(cx, cz, w, h, wood, dark, tv, d=0.46):
+    """Open TV unit on the +x wall, facing the sofa, no back (the camera looks in from behind): a docked Switch in one cubby, DVD cases in the other.
+    Same build as the shop TV (build_clay_items.tv). tv = (x, y, thick, height, width, colour)."""
+    t = dict(bevel=0.012, subd=1, lump=0.002)
+    f = dict(bevel=0.025, subd=1, lump=0.004)
+    k = w / 1.2
+    box("tv_unit_top", (cx, h - 0.025, cz), (d, 0.05, w), wood, **f)
+    box("tv_unit_base", (cx, 0.025, cz), (d, 0.05, w), wood, **f)
+    for i, dz in enumerate((-w / 2 + 0.025, w / 2 - 0.025)):
+        box(f"tv_unit_side{i}", (cx, h / 2, cz + dz), (d, h, 0.05), wood, **f)
+    box("tv_unit_divider", (cx, h / 2, cz + 0.15 * k), (d - 0.02, h - 0.1, 0.04), wood, **t)
+    sz = cz - 0.2 * k
+    box("tv_dock_back", (cx + 0.1, 0.11, sz), (0.04, 0.12, 0.32), "e8e8ea", **t)
+    box("tv_dock_base", (cx + 0.02, 0.08, sz), (0.16, 0.06, 0.34), "e8e8ea", **t)
+    box("tv_switch", (cx + 0.06, 0.185, sz), (0.03, 0.14, 0.24), "2b2f36", **t)
+    box("tv_joycon_l", (cx + 0.06, 0.185, sz - 0.14), (0.03, 0.14, 0.04), "e8474c", **t)
+    box("tv_joycon_r", (cx + 0.06, 0.185, sz + 0.14), (0.03, 0.14, 0.04), "3aa6e8", **t)
+    box("tv_switch_screen", (cx + 0.04, 0.19, sz), (0.005, 0.11, 0.2), "55606a", bevel=0.003, subd=0, lump=0)
+    cases = ("e8474c", "f3ead8", "3aa6e8", "f0c24a", "3c3f46", "6fb36f", "e8e8ea", "9b6fd0")
+    z0 = cz + 0.15 * k + 0.06
+    for i in range(int((cz + w / 2 - 0.07 - z0) / 0.044)):
+        box(f"tv_dvd{i}", (cx - 0.02, 0.155, z0 + i * 0.044), (0.14, 0.19, 0.036), cases[i % len(cases)], **t)
+    x, y, thick, th, tw, col = tv
+    box("tv_neck", (x, (h + y - th / 2) / 2, cz), (0.1, y - th / 2 - h + 0.04, 0.18), "3a3d42", bevel=0.02)
+    box("tv", (x, y, cz), (thick, th, tw), col, bevel=0.03)
+    box("tv_glass", (x - thick / 2 - 0.004, y, cz), (0.02, th - 0.1, tw - 0.11), "55606a", bevel=0.01, subd=0, lump=0)
+
+
 def books(n, x, y, z, count, along_x=True, seed=0):
     cols = ("c45c4a", "e0b45a", "4e6a8a", "7fae6a", "8a5a7a", "e58f5a", "5c7a5a")
     for i in range(count):
@@ -131,8 +159,7 @@ def base():
         tube(f"coffee_leg{i}", (2.0 + dx, 0.21, 6.1 + dz), 0.04, 0.42, DARKWOOD)
     tube("mug", (1.9, 0.53, 5.75), 0.07, 0.14, "f4efe6")
     box("magazine", (2.1, 0.47, 6.35), (0.38, 0.02, 0.3), "4e6a8a", bevel=0.01)
-    box("tv_unit", (3.55, 0.27, 6.1), (0.5, 0.54, 1.7), DARKWOOD, bevel=0.05)
-    box("tv", (3.6, 0.92, 6.1), (0.1, 0.64, 1.05), "55595f", bevel=0.05)
+    media_unit(3.55, 6.1, 1.7, 0.54, WOOD, DARKWOOD, (3.6, 0.92, 0.1, 0.64, 1.05, "3a3d42"))
     books("tv_books", 3.5, 0.54, 6.75, 3, along_x=False)
     tube("speaker", (3.55, 0.7, 5.45), 0.08, 0.32, "4a4d55")
     box("low_shelf", (1.3, 0.3, 4.35), (2.0, 0.6, 0.38), WOOD, bevel=0.05)
