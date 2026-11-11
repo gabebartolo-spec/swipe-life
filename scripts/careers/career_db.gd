@@ -13,6 +13,9 @@ const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
 var careers: Array = []
 var by_id := {}
 var errors: PackedStringArray = []
+## Careers that past lives must unlock (GDD 9.2) as "career:<id>", and the ones this profile has.
+var locked: Array = []
+var unlocked: Array = []
 
 
 func load_dir(dir: String = CAREER_DIR) -> void:
@@ -100,5 +103,11 @@ func available(state) -> Array:
 				and state.age <= c.ages[1]
 				and Deck.meets(c.get("requires", {}), state)
 				and not state.flags.has("juvie")
+				and not _is_locked(c.id)
 			)
 	)
+
+
+func _is_locked(id: String) -> bool:
+	var key := "career:" + id
+	return key in locked and key not in unlocked

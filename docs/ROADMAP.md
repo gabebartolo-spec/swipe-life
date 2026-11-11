@@ -28,7 +28,7 @@ Rules for every milestone:
 | M8 Adult life core | Done (#58, #59): lives run past 18. Shop items moved to M11. |
 | M9 Adult home scene | Done: director approved all eight homes (2026-11-09). |
 | M10 Relationships and family | Done: adult People tab, partners, marriage, children, parents (`Family`). |
-| M12 Legacy and replay | Built (#70, #71): play on as your oldest grown-up child (`Legacy`), ribbons and a profile (`Ribbons`). Unlock lists empty: director picks what ribbons unlock. |
+| M12 Legacy and replay | Built (#70-#74): play on as your oldest grown-up child (`Legacy`), ribbons and a profile (`Ribbons`). Ribbons unlock careers (heir: Corporate; scholar: Doctor, Lawyer; rich: Banker; saint: Therapist; long life: Farmer); the Dynasty card set is still to write. |
 | M13 | Not started. |
 | M11 Ageing and death | Done: old age death (§5.3c), elderly look, 40 late-life cards 60+, sim checks, shop items shown as tags in rooms (clay props still to model). |
 

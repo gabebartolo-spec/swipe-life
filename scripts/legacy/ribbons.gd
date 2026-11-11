@@ -18,6 +18,7 @@ const CONDITIONS := [
 	"partnered",
 	"generation_min"
 ]
+const UNLOCK_KINDS := ["career", "cards"]
 const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
 
 var ribbons: Array = []
@@ -47,6 +48,10 @@ func load_all(path: String = RIBBON_FILE) -> void:
 			if ids.has(r.id):
 				errors.append("%s: duplicate id" % where)
 			ids[r.id] = true
+		for u in r.get("unlocks", []):
+			var parts: PackedStringArray = str(u).split(":")
+			if parts.size() != 2 or parts[0] not in UNLOCK_KINDS:
+				errors.append("%s: unlock '%s' must be career:<id> or cards:<set>" % [where, u])
 		var when: Dictionary = r.get("when", {})
 		for c in when:
 			if c not in CONDITIONS:
@@ -103,6 +108,14 @@ static func load_profile(path: String = PROFILE_PATH) -> Dictionary:
 	if d is Dictionary:
 		out.ribbons = d.get("ribbons", [])
 		out.lives = int(d.get("lives", 0))
+	return out
+
+
+## Every content name any ribbon unlocks, earned or not.
+func all_unlocks() -> Array:
+	var out := []
+	for r in ribbons:
+		out.append_array(r.unlocks)
 	return out
 
 
