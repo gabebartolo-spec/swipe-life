@@ -1,6 +1,7 @@
 extends Node
 ## One life's state: age, quarter, stats, flags and the yearly super like (GDD §2–§4).
 
+const ACTIONS_PER_YEAR := 8  # GDD §6.5
 const STATS := [
 	"health",
 	"happiness",
@@ -25,6 +26,7 @@ var stats := {}
 var flags := {}  # also holds illnesses (LifeRules.ILLNESSES)
 var used := {}  # card ids drawn this life ("once" cards never repeat)
 var super_like_available := true  # one per year (GDD §3.3)
+var actions_left := ACTIONS_PER_YEAR  # between-year menu budget (GDD §6.5)
 var careers := {}  # slot ("job" / "special") -> entry; see CareerRules
 var partner := {}  # {} = single, else {name, affinity, met}; outlives the job it came from
 var children := []  # {name, born_at (your age then), affinity, look, adopted}; see Family
@@ -53,6 +55,7 @@ func new_life() -> void:
 	flags = {}
 	used = {}
 	super_like_available = true
+	actions_left = ACTIONS_PER_YEAR
 	careers = {}
 	partner = {}
 	children = []
@@ -89,6 +92,7 @@ func to_dict() -> Dictionary:
 		"flags": flags,
 		"used": used,
 		"super_like_available": super_like_available,
+		"actions_left": actions_left,
 		"careers": careers,
 		"partner": partner,
 		"children": children,
@@ -114,6 +118,7 @@ func from_dict(d: Dictionary) -> void:
 	flags = d.flags
 	used = d.get("used", {})
 	super_like_available = d.super_like_available
+	actions_left = int(d.get("actions_left", ACTIONS_PER_YEAR))
 	careers = d.get("careers", {})
 	partner = d.get("partner", {})
 	children = d.get("children", [])

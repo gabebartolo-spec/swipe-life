@@ -78,6 +78,7 @@ func _build() -> void:
 	if tab == "":
 		_note("Too young for plans. Just grow.")
 		return
+	_note("Actions left this year: %d" % GameState.actions_left)
 	if tab == "jobs" and careers:
 		_build_career()
 		return
@@ -88,7 +89,7 @@ func _build() -> void:
 		var b := Button.new()
 		var cost := int(a.get("cost", 0))
 		b.text = a.label + ("   $%d" % cost if cost else "")
-		b.disabled = GameState.stats.money < cost
+		b.disabled = GameState.stats.money < cost or GameState.actions_left <= 0
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.custom_minimum_size.y = 64
 		b.add_theme_font_size_override("font_size", 26)
@@ -103,10 +104,15 @@ func _build() -> void:
 			)
 
 
-func _button(text: String, on_press: Callable, disabled := false) -> void:
+func _nav(text: String, on_press: Callable) -> void:
+	_button(text, on_press, false, false)
+
+
+## spends: the button uses one of the year's actions (GDD §6.5); admin and navigation are free.
+func _button(text: String, on_press: Callable, disabled := false, spends := true) -> void:
 	var b := Button.new()
 	b.text = text
-	b.disabled = disabled
+	b.disabled = disabled or (spends and GameState.actions_left <= 0)
 	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	b.custom_minimum_size.y = 64
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART  # long rows wrap, never widen the panel
@@ -120,9 +126,11 @@ func _go(to: Array) -> void:
 	_build()
 
 
-func _did(line: String) -> void:
+func _did(line: String, spends := true) -> void:
 	if line == "":
 		return
+	if spends:
+		GameState.actions_left = maxi(GameState.actions_left - 1, 0)
 	info.text = line
 	acted.emit()
 	if not page.is_empty() and page[0] in ["job", "special"] and not GameState.careers.has(page[0]):
@@ -143,19 +151,19 @@ func _build_career() -> void:
 					% [careers.by_id[e.id].label, CareerRules.title(e), e.performance]
 				)
 			)
-			_button("  Advance your standing", _go.bind([slot, "advance"]))
-			_button("  Staff", _go.bind([slot, "staff"]))
+			_nav("  Advance your standing", _go.bind([slot, "advance"]))
+			_nav("  Staff", _go.bind([slot, "staff"]))
 		if GameState.careers.is_empty():
 			_note("No job yet.")
-		_button("Look for work", _go.bind(["find"]))
+		_nav("Look for work", _go.bind(["find"]))
 		if finance and GameState.age >= Finance.ADULT_AGE:
 			if GameState.course.is_empty():
-				_button("Courses", _go.bind(["courses"]))
+				_nav("Courses", _go.bind(["courses"]))
 			else:
 				var c: Dictionary = GameState.course
 				_note("Studying %s: %d year(s) left" % [c.label, c.left])
 		return
-	_button("< Back", _go.bind(page.slice(0, -1) if page.size() > 2 else []))
+	_nav("< Back", _go.bind(page.slice(0, -1) if page.size() > 2 else []))
 	if page[0] == "courses":
 		_build_courses()
 		return
@@ -195,9 +203,7 @@ func _build_career() -> void:
 	elif page.size() == 2:
 		for role in Coworkers.ROLES:
 			var cw: Dictionary = e.coworkers[role]
-			_button(
-				"%s (%s)  ·  %d" % [cw.name, role, cw.affinity], _go.bind([slot, "staff", role])
-			)
+			_nav("%s (%s)  ·  %d" % [cw.name, role, cw.affinity], _go.bind([slot, "staff", role]))
 	else:
 		var role: String = page[2]
 		for act in CareerRules.staff_acts(role):
@@ -228,7 +234,7 @@ func _enrol(c: Dictionary, on_loan: bool) -> void:
 ## Money tab (docs/ADULT_MONEY.md): housing and property, savings, investments, debts.
 func _build_money() -> void:
 	if not page.is_empty():
-		_button("< Back", _go.bind([]))
+		_nav("< Back", _go.bind([]))
 		_build_property()
 		return
 	var h: Dictionary = GameState.housing
@@ -240,23 +246,36 @@ func _build_money() -> void:
 	if h.kind == "own":
 		_button("Sell the house", func(): _did(Finance.sell(GameState)))
 	else:
-		_button("Property", _go.bind(["property"]))
+		_nav("Property", _go.bind(["property"]))
 	var cash: int = GameState.stats.money
 	_note("Savings %s" % Finance.money_text(GameState.savings))
-	_button("  Save a quarter of your money", func(): _move(Finance.to_savings, cash / 4), cash < 4)
-	_button("  Take it all out", func(): _take(Finance.from_savings), GameState.savings == 0)
+	_button(
+		"  Save a quarter of your money",
+		func(): _move(Finance.to_savings, cash / 4),
+		cash < 4,
+		false
+	)
+	_button("  Take it all out", func(): _take(Finance.from_savings), GameState.savings == 0, false)
 	var mode := "Bold" if GameState.invest_bold else "Safe"
 	_note("Investments %s  ·  %s" % [Finance.money_text(GameState.investments), mode])
-	_button("  Invest a quarter", func(): _move(Finance.to_investments, cash / 4), cash < 4)
-	_button("  Cash out", func(): _take(Finance.from_investments), GameState.investments == 0)
+	_button("  Invest a quarter", func(): _move(Finance.to_investments, cash / 4), cash < 4, false)
+	_button(
+		"  Cash out", func(): _take(Finance.from_investments), GameState.investments == 0, false
+	)
 	_button(
 		"  Switch to %s" % ("safe" if GameState.invest_bold else "bold"),
 		_toggle_bold,
-		not GameState.invest_bold and not Finance.can_invest_bold(GameState)
+		not GameState.invest_bold and not Finance.can_invest_bold(GameState),
+		false
 	)
 	for d in GameState.debts:
 		_note("%s  %s" % [String(d.kind).capitalize(), Finance.money_text(d.balance)])
-		_button("  Pay what you can", func(): _did(Finance.pay_debt(GameState, d)), cash <= 0)
+		_button(
+			"  Pay what you can",
+			func(): _did(Finance.pay_debt(GameState, d), false),
+			cash <= 0,
+			false
+		)
 	if Finance.can_fresh_start(GameState, careers):
 		_button("Fresh start", func(): _did(Finance.fresh_start(GameState)))
 
@@ -288,24 +307,24 @@ func _buy(house: Dictionary) -> void:
 
 func _move(move: Callable, amount: int) -> void:
 	move.call(GameState, amount)
-	_did("Done.")
+	_did("Done.", false)
 
 
 func _take(move: Callable) -> void:
 	move.call(GameState)
-	_did("Done.")
+	_did("Done.", false)
 
 
 func _toggle_bold() -> void:
 	GameState.invest_bold = not GameState.invest_bold
-	_did("Your investments are now %s." % ("bold" if GameState.invest_bold else "safe"))
+	_did("Your investments are now %s." % ("bold" if GameState.invest_bold else "safe"), false)
 
 
 func _quit(slot: String) -> void:
 	var label: String = careers.by_id[GameState.careers[slot].id].label
 	CareerRules.leave(GameState, slot, "quit")
 	GameState.change_stat("stress", 2)
-	_did("You quit the %s." % label.to_lower())
+	_did("You quit the %s." % label.to_lower(), false)
 
 
 func _note(text: String) -> void:
@@ -318,7 +337,10 @@ func _note(text: String) -> void:
 
 
 func do_action(a: Dictionary) -> void:
+	if GameState.actions_left <= 0:
+		return
 	if ActionDB.perform(a, GameState):
+		GameState.actions_left -= 1
 		var line := Family.act(a.get("do", ""), GameState, careers_rng)
 		info.text = line if line != "" else a.get("result", a.label)
 		acted.emit()
@@ -330,6 +352,6 @@ func choices() -> Array:
 	var out := []
 	for t in ActionDB.tabs_at(GameState.age):
 		for a in db.available(t, GameState.age, GameState):
-			if GameState.stats.money >= int(a.get("cost", 0)):
+			if GameState.stats.money >= int(a.get("cost", 0)) and GameState.actions_left > 0:
 				out.append(a)
 	return out

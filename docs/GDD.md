@@ -71,7 +71,9 @@
 - 6.2 Activities: e.g. gym, doctor, holiday, study; spend money to change stats.
 - 6.3 People: talk to, gift, date or argue with characters in your life.
 - 6.4 Job board: apply for jobs and courses.
-- 6.5 There is no action limit per year; money is the only limit.
+- 6.5 The menu allows 8 actions per year (2 per card turn); the budget refills each birthday. Free actions
+  (chores, friends, toys) would otherwise loop for ever, so money is no longer the only limit. Moving
+  money (savings, investments, debt) and navigation are free. (Director, 2026-11-12)
 - 6.6 Balance: effort, fear and conflict add Stress; that is their time cost (there is no time budget). Fun
   and rest (toys, friends, family, treats) lower it, on actions and card choices alike. Repeating effort in
   one year piles up Stress (and the illness risk of §4.5), so buying stats every year has a price beyond money.
@@ -150,6 +152,10 @@
   - The player picks their whole look at the start of a life (director 2026-11-09).
   - People are real 3D figures living inside the rooms at room scale, seen from any angle, doing everyday things (director 2026-11-09; replaces front-view only).
   - Architecture: `docs/PEOPLE.md`.
+- 10.7b Life shows in the scene (director, 2026-11-12): cards and actions feed the visuals directly. Examples: a
+  punk musician gets band posters on the wall and maybe a mohawk; a trophy won appears on her bookshelf; losing a
+  limb shows on the character. Every career, win, injury and big card outcome should map to a visible change on
+  the person or the house. Needs a mapping table (event/flag -> prop or body part); see docs/ROADMAP.md.
 - 10.8 Before 18 (Shop locked, §6.7) the scene changes with age (e.g. crib → bed → desk) and with activities,
   which leave props in the house (e.g. a ball from the sports club, books from studying).
 
