@@ -29,7 +29,7 @@ Rules for every milestone:
 | M9 Adult home scene | Done: director approved all eight homes (2026-11-09). |
 | M10 Relationships and family | Done: adult People tab, partners, marriage, children, parents (`Family`). |
 | M12 Legacy and replay | Built (#70-#74): play on as your oldest grown-up child (`Legacy`), ribbons and a profile (`Ribbons`). Ribbons unlock careers (heir: Corporate; scholar: Doctor, Lawyer; rich: Banker; saint: Therapist; long life: Farmer); the Dynasty card set is still to write. |
-| M13 Balance | First pass (#76): illness drains Health 1 a year, not 3. 1,000-life report: `tools/godot/balance_report.gd`. Careful players die at p50 77 (70-86); never visiting the doctor or friends p50 57 (was 38, all dead by 47). Dynasty card set (16 cards) written. Release candidate AAB still to do. |
+| M13 Balance | First pass (#76): illness drains Health 1 a year, not 3. 1,000-life report: `tools/godot/balance_report.gd`. Careful players die at p50 77 (70-86); never visiting the doctor or friends p50 57 (was 38, all dead by 47). Dynasty card set (16 cards) written. Release candidate 0.2.0 (version code 2) built by the Android build workflow; director to play it through internal testing. |
 | M11 Ageing and death | Done: old age death (§5.3c), elderly look, 40 late-life cards 60+, sim checks, shop items shown as tags in rooms (clay props still to model). |
 
 Open with the director:
