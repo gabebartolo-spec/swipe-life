@@ -29,7 +29,7 @@
       },
       "result": "By Friday the sigh has a new reason."
     }
-  , "up": {"label": "Change your name by deed poll", "effects": {"happiness": 4, "smarts": 3, "career": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "money": -300}, "result": "Your family doesn't take it well."}}},
+  , "up": {"label": "Change your name by deed poll", "effects": {"happiness": 5, "smarts": 4, "career": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "money": -300}, "result": "Your family doesn't take it well."}}},
   {
     "id": "dyn_expectations",
     "set": "dynasty",
@@ -123,7 +123,7 @@
       },
       "result": "It is never right. You are late for everything, with dignity."
     }
-  , "up": {"label": "Take it to be repaired and keep it ticking", "effects": {"happiness": 6, "karma": 3, "money": -800}, "risk": {"chance": 0.5, "effects": {"money": -2000, "happiness": -4}, "result": "It was priceless. It's now worthless."}}},
+  , "up": {"label": "Take it to be repaired and keep it ticking", "effects": {"happiness": 7, "karma": 3, "money": -800}, "risk": {"chance": 0.5, "effects": {"money": -2000, "happiness": -4}, "result": "It was priceless. It's now worthless."}}},
   {
     "id": "dyn_cousin",
     "set": "dynasty",
@@ -193,7 +193,7 @@
       },
       "result": "They ring again next year. They are patient people."
     }
-  , "up": {"label": "Buy a second plot beside it", "effects": {"relationships": 3, "stress": -5, "money": -3000}, "risk": {"chance": 0.4, "effects": {"happiness": -5, "stress": 4}, "result": "You can't stop thinking about the extra one."}}},
+  , "up": {"label": "Buy a second plot beside it", "effects": {"relationships": 5, "stress": -5, "money": -3000}, "risk": {"chance": 0.4, "effects": {"happiness": -5, "stress": 4}, "result": "You can't stop thinking about the extra one."}}},
   {
     "id": "dyn_pudding",
     "set": "dynasty",
@@ -225,7 +225,7 @@
       },
       "result": "Your aunt does not speak to you until spring."
     }
-  , "up": {"label": "Revolutionise the recipe", "effects": {"happiness": 6, "relationships": 3, "smarts": 2}, "risk": {"chance": 0.6, "effects": {"relationships": -8, "happiness": -4}, "result": "A family rift that outlasts pudding."}}},
+  , "up": {"label": "Revolutionise the recipe", "effects": {"happiness": 7, "relationships": 4, "smarts": 3}, "risk": {"chance": 0.6, "effects": {"relationships": -8, "happiness": -4}, "result": "A family rift that outlasts pudding."}}},
   {
     "id": "dyn_door_frame",
     "set": "dynasty",
@@ -324,7 +324,7 @@
       },
       "result": "You still don't know how the boiler works."
     }
-  , "up": {"label": "Read it aloud at the next family dinner", "effects": {"relationships": 6, "happiness": 5, "karma": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 6}, "result": "The secret is out. Everyone speaks at once."}}},
+  , "up": {"label": "Read it aloud at the next family dinner", "effects": {"relationships": 7, "happiness": 6, "karma": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -8, "stress": 6}, "result": "The secret is out. Everyone speaks at once."}}},
   {
     "id": "dyn_alpacas",
     "set": "dynasty",
@@ -392,7 +392,7 @@
         "happiness": 1
       }
     }
-  , "up": {"label": "Hire a genealogist to dig deeper", "effects": {"smarts": 5, "happiness": 4, "money": -1000}, "risk": {"chance": 0.5, "effects": {"happiness": -6, "relationships": -4}, "result": "You find a second family. Awkward."}}},
+  , "up": {"label": "Hire a genealogist to dig deeper", "effects": {"smarts": 6, "happiness": 5, "money": -1000}, "risk": {"chance": 0.5, "effects": {"happiness": -6, "relationships": -4}, "result": "You find a second family. Awkward."}}},
   {
     "id": "dyn_reunion",
     "set": "dynasty",

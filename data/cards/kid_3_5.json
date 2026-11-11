@@ -460,7 +460,7 @@
         "stress": 2
       }
     },
-    "up": {"label": "Cut your own fringe first", "effects": {"smarts": 3, "happiness": 4, "looks": -2}, "risk": {"chance": 0.55, "effects": {"looks": -4, "relationships": -3}, "result": "It is jagged. It is also short."}}
+    "up": {"label": "Cut your own fringe first", "effects": {"smarts": 4, "happiness": 5, "looks": -2}, "risk": {"chance": 0.55, "effects": {"looks": -4, "relationships": -3}, "result": "It is jagged. It is also short."}}
   },
   {
     "id": "k3_bath_time",
@@ -659,7 +659,7 @@
         "smarts": 1
       }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "You paid for it later."}
     },
-    "up": {"label": "Try to ride it", "effects": {"happiness": 6, "health": 2, "smarts": 1}, "risk": {"chance": 0.5, "effects": {"health": -5, "stress": 4}, "result": "The dog says no with a bark and a growl."}}
+    "up": {"label": "Try to ride it", "effects": {"happiness": 7, "health": 3, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"health": -5, "stress": 4}, "result": "The dog says no with a bark and a growl."}}
   },
   {
     "id": "k3_bug_collection",
@@ -758,7 +758,7 @@
       },
       "result": "Tastes like purple. Disappointing."
     }
-  , "up": {"label": "Eat the whole box", "effects": {"happiness": 4, "smarts": 2, "looks": -1}, "risk": {"chance": 0.6, "effects": {"health": -4, "relationships": -3}, "result": "Colourful nappies for a week."}}},
+  , "up": {"label": "Eat the whole box", "effects": {"happiness": 6, "smarts": 4, "looks": -1}, "risk": {"chance": 0.6, "effects": {"health": -4, "relationships": -3}, "result": "Colourful nappies for a week."}}},
   {
     "id": "k3_grandparent_visit",
     "text": "A grandparent arrives with pockets full of something.",
@@ -880,7 +880,7 @@
         "result": "You meet the pavement. Then you ride."
       }
     }
-  , "up": {"label": "Ride it down the hill, no hands", "effects": {"happiness": 7, "health": 3, "looks": 1}, "risk": {"chance": 0.5, "effects": {"health": -6, "looks": -3}, "result": "The hill is long. The hedge is thorny."}}},
+  , "up": {"label": "Ride it down the hill, no hands", "effects": {"happiness": 8, "health": 4, "looks": 2}, "risk": {"chance": 0.5, "effects": {"health": -6, "looks": -3}, "result": "The hill is long. The hedge is thorny."}}},
   {
     "id": "k3_nightmare",
     "text": "You woke up from a bad dream. The hall is dark.",

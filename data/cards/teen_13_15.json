@@ -121,7 +121,7 @@
         "stress": -2
       }
     }
-  , "up": {"label": "Negotiate your own rules", "effects": {"smarts": 4, "relationships": 4, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "New rules: no phone for a month."}}},
+  , "up": {"label": "Negotiate your own rules", "effects": {"smarts": 5, "relationships": 5, "happiness": 5}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "New rules: no phone for a month."}}},
   {
     "id": "t13_group_chat",
     "text": "The class group chat is roasting a kid who is not in it.",
@@ -142,7 +142,7 @@
         "relationships": -2
       }
     },
-    "up": {"label": "Screenshot it and tell the teacher", "effects": {"karma": 8, "smarts": 2, "stress": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -7, "stress": 6}, "result": "Now you're the snitch. In the same chat."}}
+    "up": {"label": "Screenshot it and tell the teacher", "effects": {"karma": 10, "smarts": 3, "happiness": 3, "stress": 2}, "risk": {"chance": 0.45, "effects": {"relationships": -7, "stress": 6}, "result": "Now you're the snitch. In the same chat."}}
   },
   {
     "id": "t13_screen_time",
@@ -269,7 +269,7 @@
         "stress": 2
       }
     }
-  , "up": {"label": "Take their whole wardrobe", "effects": {"happiness": 4, "looks": 2, "relationships": -2}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "stress": 5}, "result": "A feud. Parents get involved."}}},
+  , "up": {"label": "Take their whole wardrobe", "effects": {"happiness": 7, "looks": 4, "relationships": -2}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "stress": 5}, "result": "A feud. Parents get involved."}}},
   {
     "id": "t13_sibling_secret",
     "text": "You catch your sibling sneaking in after midnight.",
@@ -299,7 +299,7 @@
         "result": "Your parents find out you knew."
       }
     }
-  , "up": {"label": "Blackmail them gently", "effects": {"money": 30, "smarts": 3, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"karma": -4, "relationships": -7}, "result": "They tell your secret. You told it first."}}},
+  , "up": {"label": "Blackmail them gently", "effects": {"money": 100, "smarts": 4, "happiness": 9}, "risk": {"chance": 0.5, "effects": {"karma": -4, "relationships": -7}, "result": "They tell your secret. You told it first."}}},
   {
     "id": "t13_family_dinner",
     "text": "Family dinner. Phones go in the basket.",
@@ -403,7 +403,7 @@
         "result": "\"We just grew apart, I guess.\""
       }
     }
-  , "up": {"label": "Gatecrash their group", "effects": {"relationships": 6, "happiness": 4, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "happiness": -5}, "result": "Nobody says a word. You leave."}}},
+  , "up": {"label": "Gatecrash their group", "effects": {"relationships": 7, "happiness": 5, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "happiness": -5}, "result": "Nobody says a word. You leave."}}},
   {
     "id": "t13_sleepover_film",
     "text": "Sleepover. Someone puts on a horror film you're too young for.",
@@ -635,7 +635,7 @@
         "result": "One rude comment. It's all you can see."
       }
     },
-    "up": {"label": "Enter the national art prize", "effects": {"career": 3, "happiness": 6, "smarts": 3}, "risk": {"chance": 0.55, "effects": {"happiness": -7, "stress": 4}, "result": "Rejected. With a comment."}}
+    "up": {"label": "Enter the national art prize", "effects": {"career": 4, "happiness": 7, "smarts": 4}, "risk": {"chance": 0.55, "effects": {"happiness": -7, "stress": 4}, "result": "Rejected. With a comment."}}
   },
   {
     "id": "t13_tryouts",
@@ -664,7 +664,7 @@
         "result": "Not this year."
       }
     }
-  , "up": {"label": "Try out for the senior team", "effects": {"health": 6, "relationships": 6, "career": 2}, "risk": {"chance": 0.55, "effects": {"health": -4, "happiness": -6}, "result": "You're cut in front of all your friends."}}},
+  , "up": {"label": "Try out for the senior team", "effects": {"health": 7, "relationships": 7, "career": 3}, "risk": {"chance": 0.55, "effects": {"health": -4, "happiness": -6}, "result": "You're cut in front of all your friends."}}},
   {
     "id": "t13_pocket_money",
     "text": "You ask for more pocket money. Your parent asks what for.",
@@ -710,7 +710,7 @@
       },
       "result": "The owner sends a thank-you card."
     }
-  , "up": {"label": "Track the owner down and take a reward", "effects": {"karma": 7, "money": 20, "relationships": 3}, "risk": {"chance": 0.45, "effects": {"stress": 4, "karma": -3}, "result": "They think you stole it. Awkward."}}},
+  , "up": {"label": "Track the owner down and take a reward", "effects": {"karma": 7, "money": 26, "relationships": 5}, "risk": {"chance": 0.45, "effects": {"stress": 4, "karma": -3}, "result": "They think you stole it. Awkward."}}},
   {
     "id": "t13_birthday_money",
     "text": "Birthday money from a relative you've met twice.",
@@ -732,7 +732,7 @@
         "smarts": 1
       }
     }
-  , "up": {"label": "Invest it in a stranger's tip", "effects": {"money": 90, "smarts": 2, "stress": 3}, "risk": {"chance": 0.55, "effects": {"money": -60, "happiness": -3}, "result": "The tip was wrong. The money is gone."}}},
+  , "up": {"label": "Invest it in a stranger's tip", "effects": {"money": 600, "smarts": 3, "happiness": 7, "stress": 3}, "risk": {"chance": 0.5, "effects": {"money": -150, "happiness": -3}, "result": "The tip was wrong. The money is gone."}}},
   {
     "id": "t13_fever",
     "text": "You wake up with a fever on a school day. A real one.",
@@ -755,7 +755,7 @@
         "smarts": -1
       }
     }
-  , "up": {"label": "Sweat it out with the exam anyway", "effects": {"smarts": 4, "karma": 2, "happiness": -1}, "risk": {"chance": 0.55, "effects": {"health": -7, "smarts": -3}, "result": "You faint. In the exam hall."}}},
+  , "up": {"label": "Sweat it out with the exam anyway", "effects": {"smarts": 8, "karma": 3, "happiness": 2}, "risk": {"chance": 0.5, "effects": {"health": -7, "smarts": -3}, "result": "You faint. In the exam hall."}}},
   {
     "id": "t13_energy_drink",
     "text": "Everyone at school is drinking energy drinks.",
@@ -785,7 +785,7 @@
         "result": "Heart racing. Not in the fun way."
       }
     }
-  , "up": {"label": "Start a challenge: drink three", "effects": {"happiness": 4, "relationships": 5, "health": -2}, "risk": {"chance": 0.55, "effects": {"health": -6, "stress": 4}, "result": "Heart racing. Hands shaking. A trip to the nurse."}}},
+  , "up": {"label": "Start a challenge: drink three", "effects": {"happiness": 6, "relationships": 7, "health": -2}, "risk": {"chance": 0.55, "effects": {"health": -6, "stress": 4}, "result": "Heart racing. Hands shaking. A trip to the nurse."}}},
   {
     "id": "t13_first_concert",
     "text": "Your favourite band is playing in the city. Your parents say \"maybe\".",

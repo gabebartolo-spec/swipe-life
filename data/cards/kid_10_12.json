@@ -21,7 +21,7 @@
     "stress": -2
    }
   }
- , "up": {"label": "Sell it and buy a better one", "effects": {"money": 25, "smarts": 3, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "karma": -3}, "result": "Mum finds out. The phone is now a piece of history."}}},
+ , "up": {"label": "Sell it and buy a better one", "effects": {"money": 33, "smarts": 5, "happiness": 6}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "karma": -3}, "result": "Mum finds out. The phone is now a piece of history."}}},
  {
   "id": "k10_group_chat_add",
   "text": "You get added to a group chat with forty people. It pings all night.",
@@ -338,7 +338,7 @@
     "looks": -1
    }
   },
-  "up": {"label": "Copy it and sell copies", "effects": {"money": 20, "smarts": 3, "happiness": 3}, "risk": {"chance": 0.55, "effects": {"karma": -4, "relationships": -5}, "result": "Someone lets themselves in. Your house."}}
+  "up": {"label": "Copy it and sell copies", "effects": {"money": 23, "smarts": 4, "happiness": 4}, "risk": {"chance": 0.55, "effects": {"karma": -4, "relationships": -5}, "result": "Someone lets themselves in. Your house."}}
  },
  {
   "id": "k10_home_alone",
@@ -368,7 +368,7 @@
     "result": "The floor was wet."
    }
   }
- , "up": {"label": "Throw a party for your friends", "effects": {"relationships": 7, "happiness": 6, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "stress": 6}, "result": "The neighbours call your parents. At 9pm."}}},
+ , "up": {"label": "Throw a party for your friends", "effects": {"relationships": 9, "happiness": 8, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "stress": 6}, "result": "The neighbours call your parents. At 9pm."}}},
  {
   "id": "k10_cook_dinner",
   "text": "You offer to make dinner. Nobody stops you.",
@@ -422,7 +422,7 @@
     "relationships": 2
    }
   },
-  "up": {"label": "Run a chore business", "effects": {"money": 50, "smarts": 4, "stress": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "money": -20}, "result": "Your siblings go on strike."}}
+  "up": {"label": "Run a chore business", "effects": {"money": 200, "smarts": 5, "happiness": 4, "stress": 3}, "risk": {"chance": 0.45, "effects": {"relationships": -4, "money": -20}, "result": "Your siblings go on strike."}}
  },
  {
   "id": "k10_lemonade",
@@ -446,7 +446,7 @@
    },
    "result": "The neighbour buys six. Out of pity, probably."
   }
- , "up": {"label": "Open a full cafe", "effects": {"money": 60, "smarts": 4, "stress": 3}, "risk": {"chance": 0.5, "effects": {"money": -25, "happiness": -4}, "result": "The council shuts it down. The lemons stay."}}},
+ , "up": {"label": "Open a full cafe", "effects": {"money": 250, "smarts": 5, "happiness": 4, "stress": 3}, "risk": {"chance": 0.45, "effects": {"money": -25, "happiness": -4}, "result": "The council shuts it down. The lemons stay."}}},
  {
   "id": "k10_viral_video",
   "text": "Your friend wants to film a dance video to post online.",
@@ -498,7 +498,7 @@
     "health": -2
    }
   }
- , "up": {"label": "Go analogue for a month", "effects": {"health": 5, "smarts": 4, "happiness": -1}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 4}, "result": "Your friends think you've vanished."}}},
+ , "up": {"label": "Go analogue for a month", "effects": {"health": 6, "smarts": 5, "happiness": -1}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 4}, "result": "Your friends think you've vanished."}}},
  {
   "id": "k10_sleepover_truth",
   "text": "Sleepover game: truth or dare.",
@@ -580,7 +580,7 @@
     "result": "The answers were for a different test."
    }
   }
- , "up": {"label": "Report them and hand over the answers", "effects": {"karma": 7, "smarts": 3, "stress": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 5}, "result": "You're a snitch. Everyone knows."}}},
+ , "up": {"label": "Report them and hand over the answers", "effects": {"karma": 7, "smarts": 6, "stress": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 5}, "result": "You're a snitch. Everyone knows."}}},
  {
   "id": "k10_spelling_contest",
   "text": "You made the final of the class spelling contest.",
@@ -719,7 +719,7 @@
     "result": "It is bold. Too bold."
    }
   }
- , "up": {"label": "Dye it green", "effects": {"looks": 4, "happiness": 6, "relationships": 2}, "risk": {"chance": 0.6, "effects": {"looks": -5, "relationships": -4}, "result": "It stains the pillow. And the school ties."}}},
+ , "up": {"label": "Dye it green", "effects": {"looks": 5, "happiness": 7, "relationships": 3}, "risk": {"chance": 0.6, "effects": {"looks": -5, "relationships": -4}, "result": "It stains the pillow. And the school ties."}}},
  {
   "id": "k10_bike_ramp",
   "text": "Kids at the park dare you to jump the ramp on your bike.",
@@ -747,7 +747,7 @@
     "result": "You land. Your bike lands elsewhere."
    }
   }
- , "up": {"label": "Do a flip", "effects": {"happiness": 7, "relationships": 6, "health": 2}, "risk": {"chance": 0.55, "effects": {"health": -8, "happiness": -4}, "result": "You land on your head. Not on the bike."}, "death": {"chance": 0.01, "cause": "The flip went wrong. The helmet was at home."}}},
+ , "up": {"label": "Do a flip", "effects": {"happiness": 8, "relationships": 7, "health": 3}, "risk": {"chance": 0.55, "effects": {"health": -8, "happiness": -4}, "result": "You land on your head. Not on the bike."}, "death": {"chance": 0.01, "cause": "The flip went wrong. The helmet was at home."}}},
  {
   "id": "k10_left_out",
   "text": "Everyone's at a party you weren't invited to. You see the photos.",
@@ -770,7 +770,7 @@
     "money": -10
    }
   }
- , "up": {"label": "Gatecrash it", "effects": {"happiness": 6, "relationships": 6, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "stress": 5}, "result": "The host asks you to leave. By name."}}},
+ , "up": {"label": "Gatecrash it", "effects": {"happiness": 7, "relationships": 7, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "stress": 5}, "result": "The host asks you to leave. By name."}}},
  {
   "id": "k10_secret_spill",
   "text": "A friend told you a secret. Now someone asks you about it.",
@@ -793,7 +793,7 @@
     "happiness": 1
    }
   }
- , "up": {"label": "Tell the person it's about", "effects": {"karma": 6, "relationships": 4, "stress": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "happiness": -4}, "result": "Both of them stop talking to you."}}},
+ , "up": {"label": "Tell the person it's about", "effects": {"karma": 8, "relationships": 8, "happiness": 3, "stress": 3}, "risk": {"chance": 0.45, "effects": {"relationships": -6, "happiness": -4}, "result": "Both of them stop talking to you."}}},
  {
   "id": "k10_bedroom_lock",
   "text": "You ask for a lock on your bedroom door.",

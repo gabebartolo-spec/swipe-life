@@ -4,7 +4,7 @@
     "text": "{boss} stops you mid-shift. \"Good work today, {job}.\" Everyone heard.",
     "left": { "label": "Shrug it off", "effects": { "stress": 2 }, "coworker": { "boss": 3, "rival": -3 } },
     "right": { "label": "Thank them", "effects": { "happiness": 3, "stress": -2 }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "Mostly fine. Mostly."}, "coworker": { "boss": 6, "rival": -6 }, "job": { "performance": 4 } },
-    "up": {"label": "Ask for a promotion on the spot", "effects": {"career": 6, "happiness": 4, "money": 300}, "risk": {"chance": 0.5, "effects": {"career": -4, "stress": 5}, "result": "{boss} laughs. Then goes quiet. Then goes cold."}}
+    "up": {"label": "Ask for a promotion on the spot", "effects": {"career": 7, "happiness": 5, "money": 345}, "risk": {"chance": 0.5, "effects": {"career": -4, "stress": 5}, "result": "{boss} laughs. Then goes quiet. Then goes cold."}}
   },
   {
     "id": "work_boss_blame", "ages": [14, 17], "requires": { "job": "job" },
@@ -42,35 +42,35 @@
     "left": { "label": "Work the shift", "effects": { "money": 20, "happiness": -4, "stress": 3 }, "job": { "performance": 3 } },
     "right": { "label": "Let {friend} cover", "effects": { "happiness": 4, "relationships": 4, "stress": -2 }, "coworker": { "friend": -4 },
                "risk": { "chance": 0.25, "effects": { "stress": 5 }, "result": "{boss} noticed the swap. Awkward Monday." } },
-    "up": {"label": "Swap with the whole shift and run the party", "effects": {"happiness": 7, "relationships": 8, "career": -2}, "risk": {"chance": 0.5, "effects": {"career": -6, "stress": 5}, "result": "{boss} sees the photos."}}
+    "up": {"label": "Swap with the whole shift and run the party", "effects": {"happiness": 10, "relationships": 11, "career": -2}, "risk": {"chance": 0.45, "effects": {"career": -6, "stress": 5}, "result": "{boss} sees the photos."}}
   },
   {
     "id": "work_friend_favour", "ages": [14, 17], "requires": { "job": "job" },
     "text": "{friend} is sick and begs you to cover their shift tonight.",
     "left": { "label": "Say no", "effects": { "stress": 2 }, "coworker": { "friend": -10 } },
     "right": { "label": "Cover it", "effects": { "money": 20, "karma": 3, "stress": 5 }, "coworker": { "friend": 12 }, "job": { "performance": 3 } }
-  , "up": {"label": "Cover and learn their whole job", "effects": {"career": 5, "karma": 5, "money": 60, "stress": 6}, "risk": {"chance": 0.45, "effects": {"health": -5, "stress": 6}, "result": "You catch what they had."}}},
+  , "up": {"label": "Cover and learn their whole job", "effects": {"career": 9, "karma": 5, "money": 105, "stress": 6}, "risk": {"chance": 0.45, "effects": {"health": -5, "stress": 6}, "result": "You catch what they had."}}},
   {
     "id": "work_gossip", "ages": [14, 17], "requires": { "job": "job" },
     "text": "In the break room: someone says {boss} and {rival} are related.",
     "left": { "label": "Stay out of it", "effects": { "stress": 2 } },
     "right": { "label": "Spread it", "effects": { "happiness": 2, "karma": -3, "stress": 2 }, "coworker": { "friend": 4, "rival": -8 },
                "risk": { "chance": 0.3, "effects": { "stress": 5 }, "result": "{boss} heard it came from you." } },
-    "up": {"label": "Publish it in the staff newsletter", "effects": {"happiness": 5, "relationships": 3, "karma": -5}, "risk": {"chance": 0.6, "effects": {"career": -8, "relationships": -7}, "result": "The newsletter was read by {boss}."}}
+    "up": {"label": "Publish it in the staff newsletter", "effects": {"happiness": 9, "relationships": 4, "karma": -5}, "risk": {"chance": 0.5, "effects": {"career": -8, "relationships": -7}, "result": "The newsletter was read by {boss}."}}
   },
   {
     "id": "work_gossip_about_you", "ages": [14, 17], "requires": { "job": "job" },
     "text": "Apparently you're \"{boss}'s favourite\". The whole shift thinks so.",
     "left": { "label": "Ignore it", "effects": { "stress": 3 }, "risk": {"chance": 0.3, "effects": {"happiness": -3, "stress": 2}, "result": "Then it went a bit wrong."} },
     "right": { "label": "Work extra hard to prove it wrong", "effects": { "stress": 5 }, "job": { "performance": 5 } },
-    "up": {"label": "Make it true and ask for a rise", "effects": {"career": 5, "money": 50, "karma": -3}, "risk": {"chance": 0.55, "effects": {"career": -7, "relationships": -6}, "result": "{boss} is confused. Then offended."}}
+    "up": {"label": "Make it true and ask for a rise", "effects": {"career": 8, "money": 76, "karma": -3}, "risk": {"chance": 0.55, "effects": {"career": -7, "relationships": -6}, "result": "{boss} is confused. Then offended."}}
   },
   {
     "id": "work_raise", "ages": [14, 17], "weight": 6, "requires": { "job": "job", "coworker": { "boss": [20, 100] } },
     "text": "{boss} says there might be a little extra in your pay this year.",
     "left": { "label": "Say nothing", "effects": { "money": 25, "stress": 2 } },
     "right": { "label": "\"Thank you!\"", "effects": { "money": 40, "happiness": 3, "stress": -2 }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "Then it went a bit wrong."}, "coworker": { "boss": 3 } },
-    "up": {"label": "Negotiate hard for a real raise", "effects": {"money": 120, "career": 5, "stress": 4}, "risk": {"chance": 0.5, "effects": {"money": -40, "career": -5}, "result": "{boss} withdraws the offer. Loudly."}}
+    "up": {"label": "Negotiate hard for a real raise", "effects": {"money": 400, "career": 11, "happiness": 3, "stress": 4}, "risk": {"chance": 0.4, "effects": {"money": -80, "career": -6}, "result": "{boss} withdraws the offer. Loudly."}}
   },
   {
     "id": "work_quit_moment", "ages": [14, 17], "weight": 5, "requires": { "job": "job", "stats": { "stress": [50, 100] } },
@@ -93,7 +93,7 @@
     "left": { "label": "Save it", "effects": { "money": 20, "smarts": 2, "stress": 1 } },
     "right": { "label": "Spend it all", "effects": { "money": -40, "happiness": 5, "looks": 2, "stress": -2 },
                "result": "Gone by Sunday. You don't know where." }
-  , "up": {"label": "Invest it in a side hustle", "effects": {"money": 90, "career": 4, "smarts": 3}, "risk": {"chance": 0.5, "effects": {"money": -60, "happiness": -4}, "result": "The hustle did not hustle."}}},
+  , "up": {"label": "Invest it in a side hustle", "effects": {"money": 600, "career": 6, "smarts": 5, "happiness": 4}, "risk": {"chance": 0.45, "effects": {"money": -200, "happiness": -4}, "result": "The hustle did not hustle."}}},
   {
     "id": "work_late_homework", "ages": [14, 17], "requires": { "job": "job" },
     "text": "Shift ran late. There's an assignment due at nine.",
@@ -183,26 +183,26 @@
     "text": "{partner} texts: \"Milkshakes? I'm buying.\"",
     "left": { "label": "Too tired", "effects": { "health": 2, "stress": 2, "relationships": -3 } },
     "right": { "label": "On my way", "effects": { "happiness": 4, "relationships": 5, "money": -5, "stress": -2 } }
-  , "up": {"label": "Take them to a surprise weekend away", "effects": {"happiness": 7, "relationships": 8, "money": -120}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 6}, "result": "They hate surprises. They tell you."}}},
+  , "up": {"label": "Take them to a surprise weekend away", "effects": {"happiness": 10, "relationships": 11, "money": -300}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 6}, "result": "They hate surprises. They tell you."}}},
   {
     "id": "partner_meet_parents", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"] }, "room": "kitchen",
     "text": "{partner} is coming for dinner. Your family is being weird about it.",
     "left": { "label": "Cancel", "effects": { "stress": 2, "relationships": -6 } },
     "right": { "label": "Go through with it", "effects": { "relationships": 8, "stress": 6 },
                "risk": { "chance": 0.3, "effects": { "happiness": -6 }, "result": "Someone brought out the baby photos." } }
-  , "up": {"label": "Propose at the dinner table", "effects": {"relationships": 10, "happiness": 8, "stress": 6}, "risk": {"chance": 0.55, "effects": {"relationships": -10, "happiness": -8}, "result": "It goes badly. Your mother is silent."}}},
+  , "up": {"label": "Propose at the dinner table", "effects": {"relationships": 12, "happiness": 9, "stress": 6}, "risk": {"chance": 0.55, "effects": {"relationships": -10, "happiness": -8}, "result": "It goes badly. Your mother is silent."}}},
   {
     "id": "partner_quit_together", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"], "not_flags": ["work_job_dating", "work_special_dating"] },
     "text": "Neither of you works there any more. {partner} asks what you even talk about now.",
     "left": { "label": "\"I'm not sure\"", "effects": { "happiness": -6, "stress": 4, "relationships": -4 } },
     "right": { "label": "Plan a proper date", "effects": { "happiness": 4, "relationships": 8, "money": -15, "stress": -2 } }
-  , "up": {"label": "Move abroad together next week", "effects": {"happiness": 8, "relationships": 9, "money": -150}, "risk": {"chance": 0.55, "effects": {"money": -200, "relationships": -7}, "result": "Visas are hard. Rent is harder."}}},
+  , "up": {"label": "Move abroad together next week", "effects": {"happiness": 10, "relationships": 12, "money": -150}, "risk": {"chance": 0.55, "effects": {"money": -200, "relationships": -7}, "result": "Visas are hard. Rent is harder."}}},
   {
     "id": "partner_jealous", "ages": [14, 17], "requires": { "flags": ["dating_work_partner"] },
     "text": "{partner} saw you laughing with someone new and has questions.",
     "left": { "label": "Get defensive", "effects": { "stress": 6, "relationships": -6 } },
     "right": { "label": "Reassure them", "effects": { "stress": 3, "relationships": 5 }, "risk": {"chance": 0.3, "effects": {"relationships": -4, "stress": 2}, "result": "You paid for it later."} }
-  , "up": {"label": "Show them every message, every day", "effects": {"relationships": 6, "karma": 3, "happiness": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 6}, "result": "They want to see it all. Every day. For ever."}}},
+  , "up": {"label": "Show them every message, every day", "effects": {"relationships": 10, "karma": 3, "happiness": -1}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 6}, "result": "They want to see it all. Every day. For ever."}}},
   {
     "id": "partner_breakup", "ages": [14, 17], "weight": 4, "requires": { "flags": ["dating_work_partner"] },
     "text": "{partner} thinks you've grown apart.",
@@ -223,7 +223,7 @@
     "text": "A school bus just pulled into the drive-through.",
     "left": { "label": "Panic quietly", "effects": { "stress": 7 }, "job": { "performance": -2 } },
     "right": { "label": "Take charge", "effects": { "stress": 5, "career": 2 }, "risk": {"chance": 0.3, "effects": {"career": -2, "stress": 2}, "result": "You paid for it later."}, "coworker": { "boss": 6 }, "job": { "performance": 5 } }
-  , "up": {"label": "Open every till and run the floor", "effects": {"career": 6, "relationships": 4, "stress": 6}, "risk": {"chance": 0.5, "effects": {"career": -5, "stress": 8}, "result": "Wrong orders. Right fury."}}},
+  , "up": {"label": "Open every till and run the floor", "effects": {"career": 7, "relationships": 5, "stress": 6}, "risk": {"chance": 0.5, "effects": {"career": -5, "stress": 8}, "result": "Wrong orders. Right fury."}}},
   {
     "id": "work_retail_refund", "ages": [14, 17], "requires": { "job": "retail" },
     "text": "A man wants a refund on a jumper he has very clearly worn to a wedding.",
@@ -242,7 +242,7 @@
     "text": "It's 10 p.m. The kids are still awake and you've lost the remote.",
     "left": { "label": "One more episode", "effects": { "happiness": 2, "stress": -2 }, "job": { "performance": -3 } },
     "right": { "label": "Bedtime. Now.", "effects": { "stress": 5, "karma": 2 }, "job": { "performance": 4 } },
-    "up": {"label": "Run a pillow-fort sleepover", "effects": {"happiness": 6, "relationships": 5, "karma": 2}, "risk": {"chance": 0.55, "effects": {"stress": 7, "relationships": -5}, "result": "The parents get home at midnight. Mayhem."}}
+    "up": {"label": "Run a pillow-fort sleepover", "effects": {"happiness": 7, "relationships": 6, "karma": 2}, "risk": {"chance": 0.55, "effects": {"stress": 7, "relationships": -5}, "result": "The parents get home at midnight. Mayhem."}}
   },
   {
     "id": "work_lifeguard_rescue", "ages": [15, 17], "requires": { "job": "lifeguard" },
