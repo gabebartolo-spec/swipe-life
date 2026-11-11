@@ -1,0 +1,174 @@
+{"id": "work_carer_wont_eat", "text": "A resident pushes her tray of grey mash away again. \"Not hungry, dear.\" {boss} taps a watch."}
+{"id": "work_carer_family_gift", "text": "A resident's son slips you a fat envelope. \"For looking after Dad.\" Policy says no gifts."}
+{"id": "work_porter_lost_bed", "text": "A ward is demanding a bed that does not exist. {boss} says find one. The corridor is empty."}
+{"id": "work_porter_shortcut", "text": "{friend} knows a shortcut through the loading bay. Saves ten minutes. The door says staff only."}
+{"id": "work_hca_call_bell", "text": "Three call bells ring at once. {rival} is on break. Again. Their coffee is still steaming."}
+{"id": "work_hca_nurse_teach", "text": "{friend} offers to show you how to take blood. They grin. \"Don't faint. The last one fainted.\""}
+{"id": "work_medic_wrong_address", "text": "The sat nav says left. {friend} says right. The siren screams. Someone out there isn't breathing."}
+{"id": "work_medic_bad_call", "text": "You did everything right, by the book. It wasn't enough. Nobody turns the radio on for the drive back."}
+{"id": "work_nurse_drug_error", "text": "You glance at the chart and freeze. {rival} wrote ten times the dose. The patient hasn't had it yet."}
+{"id": "work_nurse_night_shift", "text": "Fourth night shift in a row. The vending machine is out of crisps. {crush} brings you a coffee at 4am."}
+{"id": "work_pharm_forged", "text": "The prescription looks off. The signature's wrong, the ink still wet. The man drums on the counter."}
+{"id": "work_pharm_advice", "text": "An old man tips twelve pill bottles onto the counter. He asks if he really needs all of them."}
+{"id": "work_dn_screamer", "text": "A kid in the chair bites {boss}'s finger and won't let go. {boss} squeaks. Everyone looks at you."}
+{"id": "work_dn_gossip", "text": "{rival} is spreading a rumour about you and {crush}. The receptionist winks at you. Twice."}
+{"id": "work_dentist_upsell", "text": "{boss} wants more veneers sold. Your patient has perfectly good teeth and trusts you completely."}
+{"id": "work_dentist_backache", "text": "Years of leaning over chairs, peering into mouths. Your back clicks when you stand. It's complaining."}
+{"id": "work_vet_farm_call", "text": "Midnight. A farmer's cow is calving badly in a muddy shed. It's raining sideways."}
+{"id": "work_vet_cant_pay", "text": "A man counts coins onto the counter for his cat's surgery. He counts twice. He's short."}
+{"id": "work_doc_diagnosis", "text": "Everyone says it's a virus and the bed is needed. Something about the rash bothers you."}
+{"id": "work_doc_36_hours", "text": "Hour 30 of your shift. You've read the same chart three times. The coffee went cold hours ago."}
+{"id": "work_ther_cancel", "text": "Your regular client cancels for the third week. The text is short, no emoji. They always use emoji."}
+{"id": "work_ther_supervision", "text": "{boss} flicks through your notes, stopping on a page with one line. \"These are... thin.\""}
+{"id": "work_builder_heat", "text": "It's scorching. The steel burns to touch. {boss} wants the slab poured before lunch."}
+{"id": "work_builder_level", "text": "The frame's a few millimetres out. The bubble sits just off centre, smugly. Nobody would ever know."}
+{"id": "work_electrician_live", "text": "{boss} swears the circuit's dead and reaches for the wires. Your tester beeps red. It disagrees."}
+{"id": "work_electrician_apprentice", "text": "The new apprentice has wired the switch upside down. Up is off. They are beaming with pride."}
+{"id": "work_plumber_callout", "text": "3am. Burst pipe, water through the ceiling. The caller is crying too hard to say the address."}
+{"id": "work_plumber_ring", "text": "You pull a clump of hair and soap out of the drain. Something glints. A diamond ring, slimy and real."}
+{"id": "work_carpenter_thumb", "text": "Hammer. Thumb. You make a noise you didn't know you could. {rival} laughs so hard they sit down."}
+{"id": "work_carpenter_deadline", "text": "The stairs are due Friday. It's Thursday. Right now they're a pile of planks and a doodle."}
+{"id": "work_mech_upsell", "text": "{boss} wants you to tell an old lady she needs new brakes. She doesn't. She offers you a biscuit."}
+{"id": "work_mech_noise", "text": "\"It makes a noise.\" That's all the customer says. Then they make a vague whooshing face."}
+{"id": "work_chef_rush", "text": "Forty covers at once. {boss} is shouting. {rival} has burnt the risotto. The smoke alarm wonders."}
+{"id": "work_chef_dropped", "text": "The steak slides off the tongs and slaps the floor. You look around. Nobody saw. It's an expensive steak."}
+{"id": "work_driver_night", "text": "Hour fourteen at the wheel. The radio is static and the white lines are starting to dance."}
+{"id": "work_driver_hitch", "text": "A soaked hitchhiker on the verge, cardboard sign melting in the rain. Company rules say no."}
+{"id": "work_farm_drought", "text": "Third dry month. The fields look like toast. The water tank clangs hollow when you knock it."}
+{"id": "work_farm_calf", "text": "A calf is coming backwards. It's 2am, the shed light flickers and {friend} is asleep in the house."}
+{"id": "work_cleaner_party", "text": "The office party ended at midnight. There's cake on the ceiling and a shoe in a plant pot. You start at 5."}
+{"id": "work_cleaner_ring", "text": "A diamond ring, behind the toilet in a rich client's marble bathroom. The house is silent."}
+{"id": "work_wh_quota", "text": "The scanner beeps: you're 12% under quota. Your feet ache. {boss} is watching your number on the big screen."}
+{"id": "work_wh_forklift", "text": "{rival} reverses the forklift into a pallet of TVs. Crunch. Tinkle. Then they turn and point at you."}
+{"id": "work_admin_printer", "text": "The printer jams again and eats a page with a grinding noise. {boss} looks straight at you."}
+{"id": "work_admin_calendar", "text": "Two directors booked the same room for the same hour. Both stand at the door. Both booked it first."}
+{"id": "work_sales_quota", "text": "Last day of the month. You're one sale short of quota. The office is emptying. The phone is right there."}
+{"id": "work_sales_steal_lead", "text": "{rival} is about to close YOUR client, using the lead from your notes. And your jokes."}
+{"id": "work_teller_short_till", "text": "Your till is twenty short at close. You count it three times. Nobody's watching the cameras."}
+{"id": "work_teller_scam", "text": "A frail old woman wants all her savings in cash. Her \"grandson\" waits outside, engine running."}
+{"id": "work_bank_loan_family", "text": "A young family needs a loan. The baby chews your pen. Their numbers are... hopeful."}
+{"id": "work_bank_bonus", "text": "Bonus season. {rival} leaves their letter open on the desk. Their bonus is bigger than yours. Much."}
+{"id": "work_acct_tax_season", "text": "Tax season. Your inbox has 214 unread, half marked urgent. It's 9pm and your eyes itch."}
+{"id": "work_acct_creative", "text": "A client hands you receipts for a jet ski and a pony. They want you to get 'creative' with expenses."}
+{"id": "work_paralegal_filing", "text": "The filing deadline is 5pm. It's 4:40. The courier texts you a photo of a traffic jam."}
+{"id": "work_paralegal_credit", "text": "{boss} presents your research to the partners as their own. Coffee stain and all. They're impressed."}
+{"id": "work_law_guilty_client", "text": "Your client leans in and whispers, off the record, that they did it. Then asks how the case is going."}
+{"id": "work_law_billable", "text": "{boss} wants 2,000 billable hours this year. You're on track for 1,600, counting naps at your desk."}
+{"id": "work_dev_prod_down", "text": "Friday, 5:55pm. The website is down. Your last change went in at 5:50. The phones start ringing."}
+{"id": "work_dev_review", "text": "{rival} leaves 47 comments on your code review. Most are about spacing. One just says \"hmm\"."}
+{"id": "work_it_unplugged", "text": "Ticket #4,112: 'computer broken. URGENT.' You climb three floors. It's unplugged. They're watching."}
+{"id": "work_it_overnight", "text": "The server upgrade has to happen overnight. Someone has to stay with the humming racks and cold pizza."}
+{"id": "work_mkt_viral", "text": "{boss} wants the new campaign to 'go viral', like the cat videos. Budget: zero. {boss} is thrilled."}
+{"id": "work_mkt_pitch", "text": "Pitch meeting in ten minutes. Through the glass, {rival} is rehearsing your idea, word for word."}
+{"id": "work_teacher_marking", "text": "Ninety essays on the same poem. Sunday night, cold tea. Essay forty-one compares it to a sandwich."}
+{"id": "work_teacher_parent", "text": "A parent tells {boss} their kid \"deserved an A\". The kid copied half of it. {boss} wants a word."}
+{"id": "work_police_speeding", "text": "You pull over a speeder. It's {friend}'s mother. She's already crying and offering you a muffin."}
+{"id": "work_police_partner_cash", "text": "{rival} slides cash from an evidence bag into his jacket. He looks up. He sees you see it."}
+{"id": "work_fire_house", "text": "Smoke pours from the upstairs windows. Neighbours in dressing gowns. Someone screams there's a dog inside."}
+{"id": "work_fire_calendar", "text": "{friend} signs you up for the charity calendar. Shirtless. Holding a hose. The fan is already on."}
+{"id": "work_childcare_biter", "text": "A toddler bites another toddler. Then looks at you. Then, holding eye contact, bites again."}
+{"id": "work_childcare_nap", "text": "Twelve kids, all asleep at once on little mats. It's never happened before. You don't dare breathe."}
+{"id": "work_retail_refund_adult", "text": "A customer wants a refund on a toaster. It's full of water. There's a rubber duck in the slot."}
+{"id": "work_retail_shoplifter", "text": "An old man in a thin coat slips a tin of soup into his pocket. His hands are shaking."}
+{"id": "work_cafe_latte_art_adult", "text": "{rival} posts their latte art: a swan, wings spread, perfect neck. It's annoyingly good."}
+{"id": "work_cafe_regular", "text": "Your 7am regular hasn't come in for a week. Today she's back, red-eyed, gripping her purse."}
+{"id": "work_designer_bigger", "text": "The client wants the logo bigger. And the other logo bigger. And both to pop. By voice note."}
+{"id": "work_designer_credit", "text": "{rival} clicks to the next slide. It's your poster, your hidden doodle and all. \"So I made this.\""}
+{"id": "work_journo_leak", "text": "A brown envelope on your desk, no name. Inside: the mayor's expenses. All of them. Even the hot tub."}
+{"id": "work_journo_source", "text": "The police want your source's name, and they're not asking nicely. Your source is {friend}."}
+{"id": "work_soldier_deployment", "text": "Orders come in, stamped and stapled. Your unit deploys next month. The barracks goes very quiet."}
+{"id": "work_soldier_drill", "text": "5am drill in freezing rain, boots full of water. {rival} is slacking at the back, hiding."}
+{"id": "work_corp_restructure", "text": "{boss} hands you a list of your team in a cheerful font. Cut three names by Friday."}
+{"id": "work_corp_board", "text": "The board wants growth this quarter. Twelve suits wait for your slide. The numbers say no."}
+{"id": "afl_preseason", "text": "{boss} wants everyone running hills at 6 a.m. before school. It's dark, the grass is wet and cold."}
+{"id": "afl_rolled_ankle", "text": "Your ankle rolls under you in a pack. You hop out. It's swelling like a balloon in your sock."}
+{"id": "afl_rival_spot", "text": "{rival} and you both play wing. There's one spot on the sheet this week. You both eye the clipboard."}
+{"id": "afl_mum_canteen", "text": "Your family's on canteen duty, selling pies. They cheer very loudly at every mark you take."}
+{"id": "afl_gym_program", "text": "{boss} hands you a laminated gym program. It is mostly squats. The last page just says \"SQUATS\"."}
+{"id": "afl_concussion", "text": "You get collected in a marking contest. The sky spins. The lights look funny. There are two umpires."}
+{"id": "afl_rep_selection", "text": "The rep team list goes up on the clubroom door. Kids crowd in. Your heart is thumping."}
+{"id": "afl_rep_trip", "text": "Rep carnival interstate. Four nights in a cheap motel with the squad and one very tired manager."}
+{"id": "afl_rival_chat", "text": "{rival} is telling the scouts you can't kick on your left. Loudly. Next to the canteen."}
+{"id": "afl_scout_watch", "text": "A recruiter sits in the stands with a little notebook. Every time you touch the ball, the pen moves."}
+{"id": "afl_draft_combine", "text": "Draft combine. Clipboards and stopwatches everywhere. They time everything, even how you breathe."}
+{"id": "afl_draft_media", "text": "A journalist pushes a microphone at you. Cameras click. Which club would you love to be drafted to?"}
+{"id": "f1_tyres", "text": "New tyres cost more than your parents' car payment. Your old ones are bald and shiny. Race is Sunday."}
+{"id": "f1_first_corner", "text": "Lights out. Twelve karts scream towards one tight first corner. There's a gap. Nearly a gap."}
+{"id": "f1_sponsor_pitch", "text": "A local tiling company might put its logo on your helmet. The logo is a smiling tile with arms."}
+{"id": "f1_parents_remortgage", "text": "Through the kitchen door you hear your parents, quietly, about the house and your racing."}
+{"id": "f1_rival_teammate", "text": "{rival} is in the same team, same kart, and half a second quicker. The timesheet gloats."}
+{"id": "f1_neck_training", "text": "{boss} says your neck wobbles in the corners. There's a harness with weights. It looks medieval."}
+{"id": "f1_engine_blown", "text": "The engine goes bang on lap three. Blue smoke, a rattle, silence. That was expensive."}
+{"id": "f1_sim_rig", "text": "A sim rig would let you learn every track from your bedroom. Wheel, pedals, bolted seat. Small bedroom."}
+{"id": "f1_regional_title", "text": "Last race of the regional season. You lead by two points. Second place is close enough to read your stickers."}
+{"id": "f1_big_crash", "text": "Rain, 140 km/h, spray everywhere. The kart twitches. The barrier is coming up fast."}
+{"id": "f1_test_drive", "text": "A real single-seater team offers a test day. Real car, real track. You pay for the fuel. All of it."}
+{"id": "f1_junior_seat", "text": "{boss} has a seat for next season. The budget is more than your house. Your parents go quiet."}
+{"id": "bball_tryout_drill", "text": "{boss} blows the whistle. Suicides until someone throws up. The gym smells of sweat and polish."}
+{"id": "bball_knee", "text": "You land wrong on a rebound. Your knee makes a noise like snapping celery. The gym goes quiet."}
+{"id": "bball_rival_ballhog", "text": "{rival} never passes. Ever. Not even when you're wide open, waving like you're landing a plane."}
+{"id": "bball_free_throws", "text": "Down by one, no time left. Two free throws. The gym is silent. Somebody drops a juice box."}
+{"id": "bball_dunk_attempt", "text": "You've never dunked. Now it's a breakaway, nobody between you and the hoop, and the crowd is up."}
+{"id": "bball_shoes", "text": "Everyone on the team has the new signature shoes but you. Yours have tape on the toe."}
+{"id": "bball_summer_camp", "text": "There's a summer shooting camp with real coaches. It costs a lot of mowing money. A lot of lawns."}
+{"id": "bball_state_selection", "text": "State squad trials. Two hundred kids in bibs, fifteen spots, coaches frowning in the stands."}
+{"id": "bball_state_bench", "text": "You made state. You've played four minutes all tournament. Your warm-up top has never been warmer."}
+{"id": "bball_scout_dm", "text": "A college scout messages you. They love your game. Their account has eleven followers and no photo."}
+{"id": "bball_college_visit", "text": "A real college flies you out. Big arena, free hoodie, a chocolate fountain. Everything is free."}
+{"id": "bball_rival_scouted", "text": "{rival} got the same college offer. One scholarship left. You pass at practice without a word."}
+{"id": "music_band_name", "text": "The band needs a name. {rival} wants \"Mouldy Toast\". They've already drawn the logo. It has a face."}
+{"id": "music_garage_noise", "text": "The neighbour has called about the drums again. Third time this week. He's waving the phone at you."}
+{"id": "music_first_gig", "text": "First gig. Nine people in the room, and four are your family. Your nan brought a sign."}
+{"id": "music_write_song", "text": "2 a.m. A song is half-written in your notes app. One verse is just \"something about rain\"."}
+{"id": "music_cover_viral", "text": "Your cover of an old song is doing numbers. Small numbers, but numbers. Someone wrote \"this slaps\"."}
+{"id": "music_battle_bands", "text": "Battle of the bands in a sticky hall. The prize is studio time. The last band had a smoke machine."}
+{"id": "music_rival_solo", "text": "{rival} wants a guitar solo in every song. Every one. Even the slow one about your nan's dog."}
+{"id": "music_manager_offer", "text": "A man in sunglasses wants to be your manager. Indoors. At night. His business cards are handwritten."}
+{"id": "music_pub_gig", "text": "A pub gig pays real money. The stage is two pallets. You're technically too young to be inside."}
+{"id": "music_scandal", "text": "An old post of yours resurfaces, screenshotted and shared everywhere. It is very, very bad."}
+{"id": "music_label_demo", "text": "The label wants a second demo by Friday. It's Tuesday. The drummer has a cold."}
+{"id": "music_solo_offer", "text": "The label wants you. Just you. Not the band. The band is outside, eating chips, waiting."}
+{"id": "actor_extra_day", "text": "Background extra. Your job is to walk past a café with an empty cup. Forty times. Again."}
+{"id": "actor_audition", "text": "Audition. You pour your heart out. The casting director eats soup the whole time and slurps the sad bit."}
+{"id": "actor_headshots", "text": "Your agent winces at your headshots. They look like a school photo. Bad fringe and everything."}
+{"id": "actor_rival_callback", "text": "{rival} got the callback you wanted. Now they're holding out the script, asking you to run lines."}
+{"id": "actor_cry_on_cue", "text": "The director needs you to cry on cue. Now. Thirty crew are waiting and the light is fading."}
+{"id": "actor_school_clash", "text": "The shoot runs into exam week. The schedule and your revision timetable overlap on the fridge."}
+{"id": "actor_ad_role", "text": "You're cast in a yoghurt ad. One line: \"Mmm\". You must say it convincingly, with a spoon, eleven takes."}
+{"id": "actor_recognised", "text": "Someone in the cereal aisle points: \"Yoghurt kid!\" Three people turn round. One is holding yoghurt."}
+{"id": "actor_scandal", "text": "A gossip page says you were rude to a fan. You weren't. Mostly. You were hungry and had a cold."}
+{"id": "actor_tv_lines", "text": "TV bit part. You have three lines, and one is \"Look out!\" You've said it in the mirror two hundred times."}
+{"id": "actor_costar_crush", "text": "Your co-star is {crush}. The director wants more chemistry. The whole set pretends not to watch."}
+{"id": "actor_agent_drop", "text": "Your agent wants you to change your name. And your nose. They say it casually, buttering a roll."}
+{"id": "gang_lookout_shift", "text": "{boss} says watch the corner. Whistle if you see blue. The streetlight buzzes. Your phone is on 12%."}
+{"id": "gang_package", "text": "{boss} hands you a taped-up bag, heavier than it looks. \"Don't open it. Don't drop it.\""}
+{"id": "gang_school_rumour", "text": "Kids at school whisper when you walk past. Some move seats at lunch. A teacher stares a bit too long."}
+{"id": "gang_mum_finds_cash", "text": "Your mum finds a roll of cash in your sock drawer. She's standing in your doorway, holding it up."}
+{"id": "gang_shop_job", "text": "{boss} wants the servo's back door left unlocked tonight. The owner always gives you free slushies."}
+{"id": "gang_cops_question", "text": "A police officer stops you on the way home, notebook out. \"Know anything about the servo?\""}
+{"id": "gang_rival_skim", "text": "You count the takings twice. {rival} has been skimming. Their new trainers are very white."}
+{"id": "gang_rival_betrayal", "text": "{rival} told {boss} the missing money was you. {boss} is staring at you. Nobody is talking."}
+{"id": "gang_runner_car", "text": "You're a runner now. {boss} tosses you keys to a car with a cracked windscreen. You're fifteen."}
+{"id": "gang_friend_out", "text": "{friend} knows a youth worker who can get you an apprenticeship. Real pay. Away from all this."}
+{"id": "gang_crew_initiation", "text": "To be crew, {boss} says you need to prove yourself. Tonight. The others watch from the bench."}
+{"id": "gang_heat_lie_low", "text": "Squad cars keep cruising your street, slowly, every hour. Curtains twitch. {boss} says lie low."}
+{"id": "skate_first_drop", "text": "The big bowl. Tail on the edge, toes over nothing. Everyone's watching. {friend} says just commit."}
+{"id": "skate_security", "text": "Security says the plaza isn't a skatepark. Perfect ledges, smooth stairs. It's a very good skatepark."}
+{"id": "skate_film", "text": "{friend} has a camera and a plan. You need one clip that isn't a slam. The battery's on one bar."}
+{"id": "skate_broken_board", "text": "Your deck snapped clean in half like a biscuit. A new one costs ninety. You have about six."}
+{"id": "skate_rival_line", "text": "{rival} lands your trick. Your trick. On your ledge. Then they do a little bow."}
+{"id": "skate_parents", "text": "Your parents watched one video of you falling down stairs. Just one. They have opinions. And leaflets."}
+{"id": "skate_shop_sponsor", "text": "{boss} from the skate shop offers you free wheels every month. Flow, they call it."}
+{"id": "skate_contest", "text": "Am contest. Two minutes, one run, three judges with clipboards and sunburn. The crowd is loud."}
+{"id": "skate_tour_van", "text": "Team tour. Eight skaters, one van, no air con. The windows only open halfway. It smells already."}
+{"id": "skate_pro_model", "text": "{boss} wants to put your name on a board. An actual board, on the shop wall, for sale."}
+{"id": "esports_ranked_tilt", "text": "Five ranked losses in a row. Your hands are sweaty. One more and you drop a tier."}
+{"id": "esports_chair", "text": "Your back hurts after every session. A real gaming chair costs two hundred and fifty. You're on a stool."}
+{"id": "esports_toxic_chat", "text": "A stranger in chat has thoughts about your mother. Many thoughts. All caps, bad spelling."}
+{"id": "esports_stream", "text": "{friend} says you should stream. Eleven people would watch. Maybe twelve, if your nan logs on."}
+{"id": "esports_parents_bedtime", "text": "Your parents cut the wifi at 10 p.m. Scrims start at 10:30. Your team is already in voice chat."}
+{"id": "esports_rival_smurf", "text": "{rival} is on a secret account, farming low ranks and laughing about it. The victims are about twelve."}
+{"id": "esports_tryout", "text": "An academy team wants a tryout. {boss} is right behind you, watching every click."}
+{"id": "esports_wrist", "text": "Your wrist clicks when you click. Every single time. You hear it in your sleep. That seems bad."}
+{"id": "esports_lan", "text": "First LAN final. Real stage, real lights, and a trophy shaped like a sword. Your mouse hand shakes."}
+{"id": "esports_contract", "text": "{boss} offers a pro contract. Gaming house, salary, a chef who only makes pasta. School's not done."}

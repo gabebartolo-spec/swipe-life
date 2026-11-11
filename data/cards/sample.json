@@ -1,14 +1,14 @@
 [
   {
     "id": "baby_night_cry",
-    "text": "It's 3 a.m. and you just woke up. You soiled your diaper, and you're hungry.",
+    "text": "It's 3 a.m. and you just woke up. You soiled your diaper, and you're hungry. Your parents are snoring.",
     "ages": [0, 1],
     "left": { "label": "Start crying", "effects": { "happiness": 2, "relationships": -2 } },
     "right": { "label": "Sleep it off", "effects": { "health": 3, "relationships": 2 } }
   , "up": {"label": "Wake the whole house on purpose", "effects": {"health": 5, "relationships": 4, "happiness": 5}, "risk": {"chance": 0.55, "effects": {"relationships": -5, "stress": 4}, "result": "Everyone is cranky for a week."}}},
   {
     "id": "baby_first_word", "room": "living",
-    "text": "Everyone is waiting for your first word.",
+    "text": "Everyone is waiting for your first word. Both parents lean in, mouthing their own names very slowly.",
     "ages": [0, 2],
     "left": { "label": "\"Mama\"", "effects": { "relationships": 5 } },
     "right": { "label": "\"Dada\"", "effects": { "relationships": 5 } },
@@ -16,7 +16,7 @@
   },
   {
     "id": "toddler_broccoli", "room": "kitchen",
-    "text": "Dinner is broccoli. Again.",
+    "text": "Dinner is broccoli. Again. Three little green trees, steaming. They say it makes you big. Lies.",
     "ages": [2, 4],
     "left": { "label": "Slap it off your plate in disgust", "effects": { "happiness": 3, "health": -3 },
               "result": "It sticks to the wall. Nobody is delighted." },
@@ -25,7 +25,7 @@
   },
   {
     "id": "toddler_stairs", "room": "living",
-    "text": "The stairs gate is open.",
+    "text": "The stairs gate is open. The stairs go up and up. The banister is shiny and smooth. Nobody is looking.",
     "ages": [1, 3],
     "weight": 5,
     "left": { "label": "Climb", "effects": { "happiness": 3, "boldness": 3 },
@@ -34,14 +34,14 @@
   , "up": {"label": "Slide down the banister", "effects": {"happiness": 6, "health": 3, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"health": -6, "stress": 4}, "result": "You miss the bottom. A trip to casualty."}}},
   {
     "id": "child_first_day",
-    "text": "First day of school. A kid is crying by the door.",
+    "text": "First day of school. A kid is crying by the door, holding a dinosaur lunchbox. Everyone walks past.",
     "ages": [5, 6],
     "left": { "label": "Ignore them", "effects": { "stress": 3, "sociability": -4 } },
     "right": { "label": "Say hi", "effects": { "relationships": 8, "karma": 3, "sociability": 4 }, "set_flags": ["first_friend"] }
   , "up": {"label": "Make a club for the crying kids", "effects": {"relationships": 10, "karma": 5, "happiness": 5}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 4}, "result": "Too many members. Too many tears."}}},
   {
     "id": "child_friend_sleepover",
-    "text": "Your first friend invites you to a sleepover.",
+    "text": "Your first friend invites you to a sleepover. They have bunk beds and a dog called Biscuit.",
     "ages": [6, 10],
     "requires": { "flags": ["first_friend"] },
     "left": { "label": "Stay home", "effects": { "stress": -3, "sociability": -3 },
@@ -51,7 +51,7 @@
   , "up": {"label": "Host your own the next week", "effects": {"relationships": 9, "happiness": 7, "smarts": 3}, "risk": {"chance": 0.5, "effects": {"stress": 6, "relationships": -5}, "result": "Three go home early. One won't stop crying."}}},
   {
     "id": "child_test_answers",
-    "text": "The test answers are sitting on the teacher's desk.",
+    "text": "The test answers are sitting on the teacher's desk. The teacher stepped out. The page is face up.",
     "ages": [8, 12],
     "left": { "label": "Look", "effects": { "smarts": 3, "karma": -8, "boldness": 4 },
               "risk": { "chance": 0.3, "effects": { "relationships": -10, "stress": 10 }, "result": "Caught." } },
@@ -59,7 +59,7 @@
   , "up": {"label": "Swap them for a different set", "effects": {"smarts": 5, "happiness": 7, "karma": -3}, "risk": {"chance": 0.6, "effects": {"karma": -5, "relationships": -6}, "result": "The teacher knows your handwriting."}}},
   {
     "id": "teen_tree_dare",
-    "text": "Your friends dare you to climb the tallest tree in the park.",
+    "text": "Your friends dare you to climb the tallest tree in the park. The lake glitters nearby. Everyone watches.",
     "ages": [10, 15],
     "weight": 3,
     "left": { "label": "No thanks", "effects": { "relationships": -3, "boldness": -4 } },
@@ -70,7 +70,7 @@
   },
   {
     "id": "teen_haircut", "room": "bathroom",
-    "text": "You could cut your own hair. How hard can it be?",
+    "text": "You could cut your own hair. How hard can it be? Scissors, a mirror, a tutorial. The light is very honest.",
     "ages": [12, 17],
     "left": { "label": "Do it", "effects": { "looks": -8, "happiness": 2, "boldness": 4 }, "result": "Bold.",
               "risk": { "chance": 0.25, "effects": { "looks": 13 }, "result": "You nailed it." } },

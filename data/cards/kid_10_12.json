@@ -1,7 +1,7 @@
 [
  {
   "id": "k10_hand_me_down_phone",
-  "text": "An old phone, handed down. Cracked screen, one bar of battery.",
+  "text": "An old phone, handed down. Cracked screen, one bar of battery. The wallpaper is a blurry sandwich.",
   "ages": [
    10,
    11
@@ -24,7 +24,7 @@
  , "up": {"label": "Sell it and buy a better one", "effects": {"money": 33, "smarts": 5, "happiness": 6}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "karma": -3}, "result": "Mum finds out. The phone is now a piece of history."}}},
  {
   "id": "k10_group_chat_add",
-  "text": "You get added to a group chat with forty people. It pings all night.",
+  "text": "You get added to a group chat with forty people. It pings all night. Memes, fights, someone's cat.",
   "ages": [
    10,
    12
@@ -47,7 +47,7 @@
  , "up": {"label": "Become the admin", "effects": {"relationships": 7, "career": 1, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"stress": 6, "relationships": -5}, "result": "You have to deal with every argument."}}},
  {
   "id": "k10_crush_note",
-  "text": "A folded note lands on your desk: \"do u like anyone\"",
+  "text": "A folded note lands on your desk: \"do u like anyone\". Someone two rows back is watching closely.",
   "ages": [
    10,
    12
@@ -80,7 +80,7 @@
  },
  {
   "id": "k10_crush_reply",
-  "text": "Your crush walks past. They nod. Just a nod.",
+  "text": "Your crush walks past. They nod. Just a nod. Friendly? Cool? At the person behind you? Your face burns.",
   "ages": [
    10,
    12
@@ -107,7 +107,7 @@
  , "up": {"label": "Ask them to the school disco", "effects": {"happiness": 7, "relationships": 5, "looks": 1}, "risk": {"chance": 0.55, "effects": {"happiness": -7, "relationships": -3}, "result": "They say yes. They also say 'as friends'."}}},
  {
   "id": "k10_school_camp",
-  "text": "School camp sign-up. Three nights in cabins, no parents.",
+  "text": "School camp sign-up. Three nights in cabins, no parents. A lake, bunk beds, canoes. Form due Friday.",
   "ages": [
    10,
    12
@@ -133,7 +133,7 @@
  , "up": {"label": "Be the first one to lead the hike", "effects": {"relationships": 6, "health": 3, "happiness": 5}, "risk": {"chance": 0.45, "effects": {"stress": 4, "health": -4}, "result": "You get everyone lost. In the rain."}}},
  {
   "id": "k10_camp_cabin",
-  "text": "Camp, night one. Someone in your cabin says the woods are haunted.",
+  "text": "Camp, night one. Someone in your cabin says the woods are haunted. A branch scrapes the window.",
   "ages": [
    10,
    12
@@ -168,7 +168,7 @@
  },
  {
   "id": "k10_camp_homesick",
-  "text": "Camp, night two. You miss your own bed more than expected.",
+  "text": "Camp, night two. You miss your own bed more than expected. Someone is snoring like a tractor.",
   "ages": [
    10,
    12
@@ -196,7 +196,7 @@
  , "up": {"label": "Start a cabin talent show", "effects": {"relationships": 6, "happiness": 5, "stress": -3}, "risk": {"chance": 0.5, "effects": {"happiness": -5, "relationships": -3}, "result": "Your act is a flop. The cabin does not forget."}}},
  {
   "id": "k10_deodorant",
-  "text": "A friend leans over: \"Do you... wear deodorant?\"",
+  "text": "A friend leans over: \"Do you... wear deodorant?\" They look worried for you. Gym was before lunch.",
   "ages": [
    10,
    12
@@ -219,7 +219,7 @@
  , "up": {"label": "Start a trend with a mad scent", "effects": {"looks": 3, "relationships": 4, "happiness": 4}, "risk": {"chance": 0.55, "effects": {"looks": -4, "relationships": -4}, "result": "It smells like a swamp. People move away."}}},
  {
   "id": "k10_growth_spurt",
-  "text": "Your trousers ended above your ankles overnight.",
+  "text": "Your trousers ended above your ankles overnight. Your socks are on show. Your knees ache at night.",
   "ages": [
    11,
    12
@@ -242,7 +242,7 @@
  , "up": {"label": "Turn the trousers into shorts", "effects": {"looks": 3, "happiness": 5, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"looks": -4, "money": -15}, "result": "The cut is uneven. The trousers are now bin material."}}},
  {
   "id": "k10_talk",
-  "text": "Your parent sits you down for The Talk. They brought diagrams.",
+  "text": "Your parent sits you down for The Talk. They brought diagrams. They are sweating. It's labelled neatly.",
   "ages": [
    10,
    12
@@ -267,7 +267,7 @@
  , "up": {"label": "Ask all the questions you have", "effects": {"smarts": 6, "relationships": 4, "stress": -2}, "risk": {"chance": 0.5, "effects": {"stress": 5, "happiness": -4}, "result": "They answer every one. You wish they hadn't."}}},
  {
   "id": "k10_best_friend_split",
-  "text": "Your two best friends stopped talking. Both want you on their side.",
+  "text": "Your two best friends stopped talking. Both want you on their side. Each saved you a seat at lunch.",
   "ages": [
    10,
    12
@@ -290,7 +290,7 @@
  },
  {
   "id": "k10_walk_alone",
-  "text": "You're allowed to walk to school alone for the first time.",
+  "text": "You're allowed to walk to school alone for the first time. Your parent watches from the window. Badly hidden.",
   "ages": [
    10,
    11
@@ -319,7 +319,7 @@
  , "up": {"label": "Explore a new route every day", "effects": {"smarts": 4, "happiness": 5, "health": 2}, "risk": {"chance": 0.45, "effects": {"stress": 4, "relationships": -3}, "result": "You are late. Three times. Detention."}}},
  {
   "id": "k10_first_key",
-  "text": "You get your own house key. On a lanyard. Around your neck.",
+  "text": "You get your own house key. On a lanyard. Around your neck. It's bright orange and bounces when you run.",
   "ages": [
    10,
    12
@@ -342,7 +342,7 @@
  },
  {
   "id": "k10_home_alone",
-  "text": "Home alone for two hours. The house is very quiet.",
+  "text": "Home alone for two hours. The house is very quiet. The fridge hums. Every room feels bigger.",
   "ages": [
    10,
    12
@@ -371,7 +371,7 @@
  , "up": {"label": "Throw a party for your friends", "effects": {"relationships": 9, "happiness": 8, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "stress": 6}, "result": "The neighbours call your parents. At 9pm."}}},
  {
   "id": "k10_cook_dinner",
-  "text": "You offer to make dinner. Nobody stops you.",
+  "text": "You offer to make dinner. Nobody stops you. There's a recipe book, half an onion and one egg.",
   "ages": [
    11,
    12
@@ -402,7 +402,7 @@
  , "up": {"label": "Cook a five-course meal", "effects": {"smarts": 5, "relationships": 6, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 5}, "result": "The kitchen is a war zone. Dinner is a toast."}}},
  {
   "id": "k10_allowance",
-  "text": "You can earn pocket money doing chores.",
+  "text": "You can earn pocket money doing chores. Bins, dishes, the gross bit of the bathroom. Every job has a price.",
   "ages": [
    10,
    12
@@ -426,7 +426,7 @@
  },
  {
   "id": "k10_lemonade",
-  "text": "A hot day. You could set up a drink stand on the corner.",
+  "text": "A hot day. You could set up a drink stand on the corner. There are lemons and a folding table.",
   "ages": [
    10,
    11
@@ -449,7 +449,7 @@
  , "up": {"label": "Open a full cafe", "effects": {"money": 250, "smarts": 5, "happiness": 4, "stress": 3}, "risk": {"chance": 0.45, "effects": {"money": -25, "happiness": -4}, "result": "The council shuts it down. The lemons stay."}}},
  {
   "id": "k10_viral_video",
-  "text": "Your friend wants to film a dance video to post online.",
+  "text": "Your friend wants to film a dance video to post online. They have a ring light. They need a second dancer.",
   "ages": [
    10,
    12
@@ -478,7 +478,7 @@
  , "up": {"label": "Make it a ridiculous stunt", "effects": {"happiness": 6, "relationships": 5, "looks": 1}, "risk": {"chance": 0.55, "effects": {"relationships": -6, "health": -3}, "result": "The video goes round. The wrong way."}}},
  {
   "id": "k10_screen_time",
-  "text": "Your phone says you used it nine hours yesterday.",
+  "text": "Your phone says you used it nine hours yesterday. More than you slept. It seems proud of it.",
   "ages": [
    10,
    12
@@ -501,7 +501,7 @@
  , "up": {"label": "Go analogue for a month", "effects": {"health": 6, "smarts": 5, "happiness": -1}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 4}, "result": "Your friends think you've vanished."}}},
  {
   "id": "k10_sleepover_truth",
-  "text": "Sleepover game: truth or dare.",
+  "text": "Sleepover game: truth or dare. The bottle spins and stops on you. The whole circle leans in.",
   "ages": [
    10,
    12
@@ -531,7 +531,7 @@
  , "up": {"label": "Dare the host to do a prank call", "effects": {"happiness": 5, "relationships": 5, "karma": -2}, "risk": {"chance": 0.55, "effects": {"relationships": -5, "stress": 4}, "result": "The prank call goes to their grandmother."}}},
  {
   "id": "k10_teacher_praise",
-  "text": "A teacher calls you their best student. Out loud. In front of everyone.",
+  "text": "A teacher calls you their best student. Out loud. In front of everyone. Thirty heads turn.",
   "ages": [
    10,
    12
@@ -553,7 +553,7 @@
  , "up": {"label": "Ask to teach the next lesson", "effects": {"smarts": 5, "career": 2, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "happiness": -4}, "result": "You're a swot. They say so, loudly."}}},
  {
   "id": "k10_test_answers",
-  "text": "Someone offers you the answers to tomorrow's test.",
+  "text": "Someone offers you the answers to tomorrow's test. A crumpled page. They swear it's real.",
   "ages": [
    10,
    12
@@ -583,7 +583,7 @@
  , "up": {"label": "Report them and hand over the answers", "effects": {"karma": 7, "smarts": 6, "stress": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 5}, "result": "You're a snitch. Everyone knows."}}},
  {
   "id": "k10_spelling_contest",
-  "text": "You made the final of the class spelling contest.",
+  "text": "You made the final of the class spelling contest. A hall, a microphone, a judge. Your mouth is dry.",
   "ages": [
    10,
    11
@@ -612,7 +612,7 @@
  , "up": {"label": "Pick the hardest word on purpose", "effects": {"smarts": 6, "happiness": 4, "relationships": 2}, "risk": {"chance": 0.55, "effects": {"smarts": -2, "happiness": -5}, "result": "You spell it wrong. On a stage. In front of everyone."}}},
  {
   "id": "k10_pimple",
-  "text": "A pimple appears on your nose the morning of class photos.",
+  "text": "A pimple appears on your nose the morning of class photos. Red, shiny, enormous. It has a heartbeat.",
   "ages": [
    11,
    12
@@ -635,7 +635,7 @@
  , "up": {"label": "Own it and name it", "effects": {"happiness": 4, "relationships": 4, "looks": 1}, "risk": {"chance": 0.5, "effects": {"looks": -3, "relationships": -3}, "result": "It is now called Pete. Your photo has Pete in it."}}},
  {
   "id": "k10_sibling_room",
-  "text": "Your sibling wants to share your room for a month.",
+  "text": "Your sibling wants to share your room for a month. They snore. They bring every toy they own.",
   "ages": [
    10,
    12
@@ -662,7 +662,7 @@
  , "up": {"label": "Turn the room into a double bunk den", "effects": {"relationships": 7, "happiness": 5, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -6, "stress": 5}, "result": "You have a war on the border. The duvet is the front."}}},
  {
   "id": "k10_pet_pitch",
-  "text": "You want a pet. You've made a slideshow.",
+  "text": "You want a pet. You've made a slideshow. Twelve slides, charts, cute photos. Your parents fold their arms.",
   "ages": [
    10,
    12
@@ -692,7 +692,7 @@
  },
  {
   "id": "k10_haircut",
-  "text": "You want a bold new haircut.",
+  "text": "You want a bold new haircut. You saved a photo. The hairdresser looks at it, then at you, then at it.",
   "ages": [
    10,
    12
@@ -722,7 +722,7 @@
  , "up": {"label": "Dye it green", "effects": {"looks": 5, "happiness": 7, "relationships": 3}, "risk": {"chance": 0.6, "effects": {"looks": -5, "relationships": -4}, "result": "It stains the pillow. And the school ties."}}},
  {
   "id": "k10_bike_ramp",
-  "text": "Kids at the park dare you to jump the ramp on your bike.",
+  "text": "Kids at the park dare you to jump the ramp on your bike. It's a plank on two bricks. Someone's filming.",
   "ages": [
    10,
    12
@@ -750,7 +750,7 @@
  , "up": {"label": "Do a flip", "effects": {"happiness": 8, "relationships": 7, "health": 3}, "risk": {"chance": 0.55, "effects": {"health": -8, "happiness": -4}, "result": "You land on your head. Not on the bike."}, "death": {"chance": 0.01, "cause": "The flip went wrong. The helmet was at home."}}},
  {
   "id": "k10_left_out",
-  "text": "Everyone's at a party you weren't invited to. You see the photos.",
+  "text": "Everyone's at a party you weren't invited to. You see the photos. Cake, balloons, a group hug.",
   "ages": [
    10,
    12
@@ -773,7 +773,7 @@
  , "up": {"label": "Gatecrash it", "effects": {"happiness": 7, "relationships": 7, "karma": -1}, "risk": {"chance": 0.55, "effects": {"relationships": -7, "stress": 5}, "result": "The host asks you to leave. By name."}}},
  {
   "id": "k10_secret_spill",
-  "text": "A friend told you a secret. Now someone asks you about it.",
+  "text": "A friend told you a secret. Now someone asks you about it. They know half. They just need a yes.",
   "ages": [
    10,
    12
@@ -796,7 +796,7 @@
  , "up": {"label": "Tell the person it's about", "effects": {"karma": 8, "relationships": 8, "happiness": 3, "stress": 3}, "risk": {"chance": 0.45, "effects": {"relationships": -6, "happiness": -4}, "result": "Both of them stop talking to you."}}},
  {
   "id": "k10_bedroom_lock",
-  "text": "You ask for a lock on your bedroom door.",
+  "text": "You ask for a lock on your bedroom door. Your sibling keeps walking in. So does your parent, with laundry.",
   "ages": [
    11,
    12
@@ -818,7 +818,7 @@
  , "up": {"label": "Fit one yourself", "effects": {"smarts": 4, "happiness": 5, "relationships": -2}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "money": -15}, "result": "The door is now a doorframe. A drill is confiscated."}}},
  {
   "id": "k10_library",
-  "text": "You discover the library has a whole section for older kids.",
+  "text": "You discover the library has a whole section for older kids. Thick books, dark covers, dragons.",
   "ages": [
    10,
    12
@@ -839,7 +839,7 @@
  , "up": {"label": "Read your way through the shelf", "effects": {"smarts": 7, "stress": -3, "happiness": 3}, "risk": {"chance": 0.4, "effects": {"relationships": -4, "health": -2}, "result": "Your friends find you a bore. Your eyes hurt."}}},
  {
   "id": "k10_tryouts",
-  "text": "Team tryouts after school.",
+  "text": "Team tryouts after school. The coach has a clipboard. The older kids look huge. Your trainers squeak.",
   "ages": [
    10,
    12
@@ -868,7 +868,7 @@
  , "up": {"label": "Try out for captain", "effects": {"health": 5, "relationships": 5, "career": 2}, "risk": {"chance": 0.55, "effects": {"happiness": -6, "stress": 4}, "result": "You're cut. Not even as a reserve."}}},
  {
   "id": "k10_grandparent_call",
-  "text": "A grandparent wants a weekly video call. They hold the phone very close.",
+  "text": "A grandparent wants a weekly video call. They hold the phone very close. You mostly see a nostril.",
   "ages": [
    10,
    12
@@ -891,7 +891,7 @@
  , "up": {"label": "Teach them to play online games", "effects": {"relationships": 7, "happiness": 5, "karma": 3}, "risk": {"chance": 0.45, "effects": {"stress": 4, "relationships": -3}, "result": "They are addicted. They call at 3am."}}},
  {
   "id": "k10_goose",
-  "text": "A goose has taken over the path to school. It is staring at you.",
+  "text": "A goose has taken over the path to school. It is staring at you. It hisses. It fears nothing.",
   "ages": [
    10,
    12
@@ -921,7 +921,7 @@
  },
  {
   "id": "k10_new_sport",
-  "text": "You've invented a new sport. It needs a ladder and a trampoline.",
+  "text": "You've invented a new sport. It needs a ladder and a trampoline. The rules are on a napkin.",
   "ages": [
    10,
    12
@@ -949,7 +949,7 @@
  , "up": {"label": "Hold the first league", "effects": {"happiness": 6, "relationships": 6, "health": 2}, "risk": {"chance": 0.5, "effects": {"health": -6, "relationships": -3}, "result": "Three broken arms. The school bans it."}}},
  {
   "id": "k10_crush_rumour",
-  "text": "A rumour says you have a crush. It's even true.",
+  "text": "A rumour says you have a crush. It's even true. Half the class knows by lunch. Your crush has heard.",
   "ages": [
    11,
    12

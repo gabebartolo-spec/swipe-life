@@ -1,7 +1,7 @@
 [
   {
     "id": "k3_supermarket_tantrum",
-    "text": "The checkout has sweets at exactly your eye level.",
+    "text": "The checkout has sweets at exactly your eye level. Long queue, tired parent. They already said no once.",
     "ages": [
       3,
       4
@@ -27,7 +27,7 @@
   },
   {
     "id": "k3_imaginary_friend",
-    "text": "A friend only you can see moves in. His name is Gerald.",
+    "text": "A friend only you can see moves in. His name is Gerald. He wears a top hat and wants his own chair.",
     "ages": [
       3,
       5
@@ -52,7 +52,7 @@
   , "up": {"label": "Put Gerald in charge of the house", "effects": {"happiness": 5, "smarts": 3, "relationships": 1}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "Gerald has decided the sweets are his."}}},
   {
     "id": "k3_gerald_blame",
-    "text": "Somebody drew on the wall. Gerald, probably.",
+    "text": "Somebody drew on the wall. Gerald, probably. The crayon is in your hand, but that proves nothing.",
     "ages": [
       4,
       5
@@ -88,7 +88,7 @@
   , "up": {"label": "Hold a trial for Gerald", "effects": {"smarts": 5, "happiness": 4, "karma": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "karma": -3}, "result": "The jury is you. The verdict is you."}}},
   {
     "id": "k3_gerald_leaves",
-    "text": "Gerald says he's moving away. He packed a tiny invisible bag.",
+    "text": "Gerald says he's moving away. He packed a tiny invisible bag. His train leaves from the garden.",
     "ages": [
       5,
       5
@@ -119,7 +119,7 @@
   , "up": {"label": "Go with him", "effects": {"happiness": 5, "smarts": 4, "health": -1}, "risk": {"chance": 0.5, "effects": {"stress": 5, "relationships": -3}, "result": "You get as far as the front gate. A parent is waiting."}}},
   {
     "id": "k3_daycare_first_day",
-    "text": "First day at daycare. Your parent is edging toward the door.",
+    "text": "First day at daycare. Your parent is edging toward the door. Twelve small strangers stare at you.",
     "ages": [
       3,
       3
@@ -143,7 +143,7 @@
   , "up": {"label": "Run the room", "effects": {"relationships": 6, "happiness": 4, "career": 0}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 4}, "result": "The staff separate you from all your new friends."}}},
   {
     "id": "k3_nap_time",
-    "text": "Nap time. Everyone is lying down. You are not tired.",
+    "text": "Nap time. Everyone is lying down. You are not tired. The mats are lumpy. The kid next to you is awake.",
     "ages": [
       3,
       4
@@ -173,7 +173,7 @@
   , "up": {"label": "Start a pillow fort uprising", "effects": {"relationships": 6, "happiness": 5, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "The teacher has a voice. The fort is gone."}}},
   {
     "id": "k3_bedtime_stall",
-    "text": "It's bedtime. You need water. And a story. And another water.",
+    "text": "It's bedtime. You need water. And a story. And another water. Your parent sighs in the doorway.",
     "ages": [
       3,
       5
@@ -198,7 +198,7 @@
   },
   {
     "id": "k3_monster_closet",
-    "text": "Something in the closet just moved.",
+    "text": "Something in the closet just moved. The door is open a crack. It might be coats. It might not.",
     "ages": [
       3,
       5
@@ -222,7 +222,7 @@
   , "up": {"label": "Make friends with the monster", "effects": {"happiness": 5, "smarts": 4, "stress": -4}, "risk": {"chance": 0.4, "effects": {"stress": 6, "health": -1}, "result": "It was a coat. The nightmares are worse."}}},
   {
     "id": "k3_picky_peas",
-    "text": "There's a pea touching your potatoes. Unacceptable.",
+    "text": "There's a pea touching your potatoes. Unacceptable. The pea juice is spreading. This is a crisis.",
     "ages": [
       3,
       5
@@ -246,7 +246,7 @@
   , "up": {"label": "Trade the pea for pudding", "effects": {"smarts": 5, "happiness": 4, "health": 0}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "health": -2}, "result": "The deal is not accepted. You eat nothing."}}},
   {
     "id": "k3_mystery_green",
-    "text": "A green thing is on your fork. Nobody will say what it is.",
+    "text": "A green thing is on your fork. Nobody will say what it is. It wobbles. Everyone is watching you.",
     "ages": [
       3,
       5
@@ -277,7 +277,7 @@
   , "up": {"label": "Ask for seconds", "effects": {"health": 5, "karma": 2, "relationships": 3}, "risk": {"chance": 0.4, "effects": {"health": -3, "happiness": -3}, "result": "It was sprouts. A lot of sprouts."}}},
   {
     "id": "k3_playground_slide",
-    "text": "The big slide. The big kids use it.",
+    "text": "The big slide. The big kids use it. It is shiny, steep and tall. A big kid zooms down, screaming.",
     "ages": [
       3,
       5
@@ -306,7 +306,7 @@
   , "up": {"label": "Go down head-first", "effects": {"happiness": 6, "health": 2, "smarts": 1}, "risk": {"chance": 0.5, "effects": {"health": -5, "stress": 3}, "result": "Grit. In both knees. And a loud cry."}}},
   {
     "id": "k3_sandbox_shovel",
-    "text": "A kid in the sandbox has the good shovel.",
+    "text": "A kid in the sandbox has the good shovel. Red, metal, perfect. Yours is a plastic spoon.",
     "ages": [
       3,
       4
@@ -330,7 +330,7 @@
   },
   {
     "id": "k3_first_friend",
-    "text": "A kid on the swings says you're best friends now. Just like that.",
+    "text": "A kid on the swings says you're best friends now. Just like that. They have jam on their face.",
     "ages": [
       3,
       5
@@ -354,7 +354,7 @@
   , "up": {"label": "Swear a secret handshake", "effects": {"relationships": 7, "happiness": 4, "smarts": 2}, "risk": {"chance": 0.4, "effects": {"relationships": -5, "happiness": -3}, "result": "They've told someone else the handshake."}}},
   {
     "id": "k3_bestie_fight",
-    "text": "Your best friend says you can't come to their pretend castle.",
+    "text": "Your best friend says you can't come to their pretend castle. It's made of cushions. It still stings.",
     "ages": [
       4,
       5
@@ -381,7 +381,7 @@
   , "up": {"label": "Invite the whole street to the castle", "effects": {"relationships": 7, "happiness": 5, "smarts": 2}, "risk": {"chance": 0.45, "effects": {"relationships": -5, "stress": 3}, "result": "Too many kings. The castle falls."}}},
   {
     "id": "k3_bestie_sleepover",
-    "text": "Your best friend's parent asks if you want to stay the night.",
+    "text": "Your best friend's parent asks if you want to stay the night. Their house creaks. Their cat is huge.",
     "ages": [
       5,
       5
@@ -416,7 +416,7 @@
   , "up": {"label": "Bring the sleeping bag and a pet frog", "effects": {"relationships": 6, "happiness": 5, "smarts": 1}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 4}, "result": "The frog escapes at 2am. Everyone is up."}}},
   {
     "id": "k3_why_phase",
-    "text": "Why is the sky up? Why are feet? Why why why?",
+    "text": "Why is the sky up? Why are feet? Why why why? Your parent takes a very long sip of coffee.",
     "ages": [
       3,
       5
@@ -439,7 +439,7 @@
   , "up": {"label": "Ask a teacher a very hard why", "effects": {"smarts": 6, "relationships": 2, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -3, "stress": 3}, "result": "The teacher says 'ask your parents.'"}}},
   {
     "id": "k3_haircut",
-    "text": "Haircut day. The scissors are very close to your ears.",
+    "text": "Haircut day. The scissors are very close to your ears. Snip. Cold hair slides down your neck.",
     "ages": [
       3,
       5
@@ -464,7 +464,7 @@
   },
   {
     "id": "k3_bath_time",
-    "text": "Bath time. You have decided you are a fish now.",
+    "text": "Bath time. You have decided you are a fish now. Fish do not need soap. The floor is already wet.",
     "ages": [
       3,
       4
@@ -489,7 +489,7 @@
   , "up": {"label": "Turn it into a pirate ship", "effects": {"happiness": 6, "smarts": 3, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 3}, "result": "A wet floor, a wet ceiling and a wet cat."}}},
   {
     "id": "k3_potty_holdout",
-    "text": "You have to go. But you're SO busy playing.",
+    "text": "You have to go. But you're SO busy playing. The tower is almost done. You do a small, secret dance.",
     "ages": [
       3,
       3
@@ -519,7 +519,7 @@
   , "up": {"label": "Invent a potty song", "effects": {"happiness": 5, "smarts": 4, "health": 2}, "risk": {"chance": 0.4, "effects": {"relationships": -3, "looks": -2}, "result": "You perform it at the supermarket."}}},
   {
     "id": "k3_dress_yourself",
-    "text": "You want to dress yourself today.",
+    "text": "You want to dress yourself today. Boots, a tutu, a cape and one sock. A grown-up checks the clock.",
     "ages": [
       3,
       5
@@ -542,7 +542,7 @@
   , "up": {"label": "Wear a cape, a tutu and nothing else", "effects": {"happiness": 6, "looks": 1, "relationships": 2}, "risk": {"chance": 0.5, "effects": {"looks": -4, "health": -3}, "result": "It is winter. You are cold."}}},
   {
     "id": "k3_new_sibling",
-    "text": "A baby is coming home. Everyone says you're a big kid now.",
+    "text": "A baby is coming home. Everyone says you're a big kid now. You never asked. It gets your old blanket.",
     "ages": [
       3,
       5
@@ -572,7 +572,7 @@
   , "up": {"label": "Appoint yourself chief of babies", "effects": {"relationships": 7, "karma": 4, "happiness": 3}, "risk": {"chance": 0.45, "effects": {"relationships": -4, "stress": 4}, "result": "Chief of babies has opinions about naps."}}},
   {
     "id": "k3_art_masterpiece",
-    "text": "You painted a picture. It is mostly brown.",
+    "text": "You painted a picture. It is mostly brown. You mixed every colour. It is either a dog or a feeling.",
     "ages": [
       3,
       5
@@ -595,7 +595,7 @@
   , "up": {"label": "Charge for it. A biscuit each.", "effects": {"smarts": 5, "relationships": 3, "happiness": 4}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "karma": -2}, "result": "Nobody pays. One person steals it."}}},
   {
     "id": "k3_counting_show",
-    "text": "A grown-up asks you to count to ten in front of everybody.",
+    "text": "A grown-up asks you to count to ten in front of everybody. The family goes quiet. Someone is filming.",
     "ages": [
       3,
       4
@@ -617,7 +617,7 @@
   , "up": {"label": "Count to a hundred", "effects": {"smarts": 7, "relationships": 2, "happiness": 3}, "risk": {"chance": 0.5, "effects": {"stress": 4, "happiness": -3}, "result": "You lose count at forty-seven. Silence."}}},
   {
     "id": "k3_lost_toy",
-    "text": "Your favourite stuffed rabbit is gone.",
+    "text": "Your favourite stuffed rabbit is gone. He has one ear and smells like home. Bedtime is coming fast.",
     "ages": [
       3,
       5
@@ -641,7 +641,7 @@
   , "up": {"label": "Declare a search party", "effects": {"relationships": 5, "smarts": 5, "happiness": 3}, "risk": {"chance": 0.4, "effects": {"stress": 4, "relationships": -3}, "result": "The rabbit was in the bin the whole time."}}},
   {
     "id": "k3_dog_meet",
-    "text": "A big dog trots over in the park.",
+    "text": "A big dog trots over in the park. It is the size of a pony. Its tongue is out. Its tail is going.",
     "ages": [
       3,
       5
@@ -663,7 +663,7 @@
   },
   {
     "id": "k3_bug_collection",
-    "text": "You found a beetle. You'd like to keep it. Forever.",
+    "text": "You found a beetle. You'd like to keep it. Forever. It is shiny and green. You named it Steve.",
     "ages": [
       4,
       5
@@ -686,7 +686,7 @@
   , "up": {"label": "Open a bug museum", "effects": {"smarts": 5, "happiness": 5, "career": 0}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 3}, "result": "The beetle goes missing. So does the jar."}}},
   {
     "id": "k3_show_and_tell",
-    "text": "Show and tell. You have nothing to show.",
+    "text": "Show and tell. You have nothing to show. The kid before you brought a snake skin. Everyone turns.",
     "ages": [
       4,
       5
@@ -709,7 +709,7 @@
   , "up": {"label": "Bring the cat", "effects": {"relationships": 6, "happiness": 5, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -5, "stress": 4}, "result": "The cat is a hit. Then it escapes."}}},
   {
     "id": "k3_pet_fish",
-    "text": "The class fish needs feeding while the teacher is out.",
+    "text": "The class fish needs feeding while the teacher is out. You hold the jar. The fish looks hungry.",
     "ages": [
       4,
       5
@@ -738,7 +738,7 @@
   , "up": {"label": "Take the fish home for safety", "effects": {"karma": 4, "happiness": 4, "smarts": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "karma": -3}, "result": "The fish does not survive the bus."}}},
   {
     "id": "k3_crayon_snack",
-    "text": "A purple crayon looks delicious today.",
+    "text": "A purple crayon looks delicious today. It looks like grape. Nobody is watching the craft table.",
     "ages": [
       3,
       3
@@ -761,7 +761,7 @@
   , "up": {"label": "Eat the whole box", "effects": {"happiness": 6, "smarts": 4, "looks": -1}, "risk": {"chance": 0.6, "effects": {"health": -4, "relationships": -3}, "result": "Colourful nappies for a week."}}},
   {
     "id": "k3_grandparent_visit",
-    "text": "A grandparent arrives with pockets full of something.",
+    "text": "A grandparent arrives with pockets full of something. It rustles. Sweets? Tissues? They smell of mints.",
     "ages": [
       3,
       5
@@ -784,7 +784,7 @@
   , "up": {"label": "Ask them to move in", "effects": {"relationships": 7, "happiness": 4, "smarts": 1}, "risk": {"chance": 0.4, "effects": {"stress": 4, "relationships": -3}, "result": "They think about it and say no. Kindly."}}},
   {
     "id": "k3_doctor_shot",
-    "text": "The doctor has a needle and a sticker.",
+    "text": "The doctor has a needle and a sticker. The sticker is a shiny dinosaur. The needle is a needle.",
     "ages": [
       3,
       5
@@ -808,7 +808,7 @@
   , "up": {"label": "Give the doctor a shot too", "effects": {"smarts": 4, "happiness": 5, "health": 3}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 4}, "result": "You're told off. And you still get it."}}},
   {
     "id": "k3_sharing_song",
-    "text": "Everyone has to hold hands and sing a song.",
+    "text": "Everyone has to hold hands and sing a song. The hand on your left is sticky. The teacher claps hard.",
     "ages": [
       3,
       4
@@ -831,7 +831,7 @@
   , "up": {"label": "Conduct the whole class", "effects": {"relationships": 6, "happiness": 5, "smarts": 2}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "stress": 4}, "result": "The class goes its own way. So does your confidence."}}},
   {
     "id": "k3_king_of_couch",
-    "text": "You declare the couch a kingdom. You are its ruler.",
+    "text": "You declare the couch a kingdom. You are its ruler. Your crown is a saucepan. Dinner is being called.",
     "ages": [
       4,
       5
@@ -854,7 +854,7 @@
   , "up": {"label": "Declare war on the armchair", "effects": {"happiness": 6, "smarts": 3, "health": 1}, "risk": {"chance": 0.5, "effects": {"relationships": -4, "health": -3}, "result": "You fall off the border. Bump."}}},
   {
     "id": "k3_learn_to_ride",
-    "text": "Someone's taking the training wheels off your bike.",
+    "text": "Someone's taking the training wheels off your bike. The spanner clinks. The pavement looks hard.",
     "ages": [
       5,
       5
@@ -883,7 +883,7 @@
   , "up": {"label": "Ride it down the hill, no hands", "effects": {"happiness": 8, "health": 4, "looks": 2}, "risk": {"chance": 0.5, "effects": {"health": -6, "looks": -3}, "result": "The hill is long. The hedge is thorny."}}},
   {
     "id": "k3_nightmare",
-    "text": "You woke up from a bad dream. The hall is dark.",
+    "text": "You woke up from a bad dream. The hall is dark. Your heart is racing. Your parents' door looks far.",
     "ages": [
       3,
       5
