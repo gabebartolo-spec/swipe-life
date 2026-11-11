@@ -21,8 +21,9 @@ Tools: `tools/audit/card_audit.py` (static, all 592 cards), `tools/audit/run.sh 
   adult wage (12k–110k) past 18, they were paying 150 a year to adults.
 
 ## Still open
-1. **25% of cards have a better swipe.** 148 of 592 cards: one side is at least as good on every stat
-   (no risk or flag on it). `python tools/audit/card_audit.py` lists them.
+1. **Fixed: 148 cards had a strictly better swipe.** `tools/audit/fix_dominated.py` gave each always-better
+   swipe a 30% setback (its top gain undone, +2 Stress from age 6), so every card is safe vs gamble. The
+   setback line is one of six generic lines; the card writing pass should replace them with specific ones.
 2. **Super swipes cover 63 of 592 cards (11%).** None in the adult, 60+ or Dynasty sets; 2 of 92 special
    cards. Only 9 swipes carry death odds, one of them a super swipe. See `tools/audit/superswipe_audit.py`.
 3. Flags `gifted` and `juvie_studied` are set by cards and never read.

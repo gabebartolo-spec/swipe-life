@@ -652,7 +652,7 @@
       "effects": {
         "happiness": 3,
         "relationships": 5
-      },
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -4, "stress": 2}, "result": "Then it went a bit wrong."},
       "result": "Respect."
     }
   },
@@ -704,7 +704,7 @@
       "effects": {
         "happiness": 4,
         "relationships": 6
-      }
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -5, "stress": 2}, "result": "There was a catch."}
     }
   },
   {
@@ -725,7 +725,7 @@
       "effects": {
         "relationships": 8,
         "karma": 4
-      }
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -6, "stress": 2}, "result": "Not everything went your way."}
     }
   },
   {
@@ -826,7 +826,7 @@
         "health": 6,
         "looks": 3,
         "stress": -2
-      }
+      }, "risk": {"chance": 0.3, "effects": {"health": -5, "stress": 2}, "result": "You paid for it later."}
     },
     "up": {
       "label": "Train twice a day",
@@ -942,7 +942,7 @@
       "label": "Delete it",
       "effects": {
         "smarts": 2
-      }
+      }, "risk": {"chance": 0.3, "effects": {"smarts": -2, "stress": 2}, "result": "Not everything went your way."}
     },
     "right": {
       "label": "Pay it",
@@ -1030,7 +1030,7 @@
       "effects": {
         "happiness": 3,
         "relationships": 3
-      }
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "Not everything went your way."}
     },
     "up": {
       "label": "Make your own outfit",
@@ -1089,7 +1089,7 @@
       "effects": {
         "happiness": 3,
         "karma": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "Then it went a bit wrong."},
       "result": "It takes the toast and the butter knife."
     },
     "up": {

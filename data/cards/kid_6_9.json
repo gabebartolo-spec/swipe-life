@@ -18,7 +18,7 @@
    "effects": {
     "smarts": 3,
     "stress": 2
-   }
+   }, "risk": {"chance": 0.3, "effects": {"smarts": -2, "stress": 2}, "result": "Not everything went your way."}
   }
  },
  {
@@ -222,7 +222,7 @@
    "effects": {
     "relationships": 4,
     "happiness": 1
-   }
+   }, "risk": {"chance": 0.3, "effects": {"relationships": -3, "stress": 2}, "result": "Mostly fine. Mostly."}
   }
  },
  {
@@ -494,7 +494,7 @@
    "effects": {
     "relationships": 3,
     "happiness": 1
-   }
+   }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "There was a catch."}
   },
   "up": {
    "label": "Pretend to be the ghost",
@@ -553,7 +553,7 @@
    "effects": {
     "karma": 3,
     "relationships": 1
-   },
+   }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "Not everything went your way."},
    "result": "He says nobody has asked him that in years."
   }
  },
@@ -733,7 +733,7 @@
    "effects": {
     "happiness": -1,
     "relationships": 3
-   },
+   }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "Not everything went your way."},
    "result": "You wear it until it falls apart."
   }
  },
@@ -852,7 +852,7 @@
    "effects": {
     "happiness": 2,
     "relationships": 2
-   }
+   }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "You paid for it later."}
   },
   "up": {
    "label": "Ad-lib a line as the tree",
@@ -1018,7 +1018,7 @@
    "effects": {
     "karma": 2,
     "relationships": 1
-   }
+   }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "Not everything went your way."}
   }
  },
  {
