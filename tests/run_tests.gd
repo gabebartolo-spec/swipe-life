@@ -835,7 +835,26 @@ func _test_ribbons() -> void:
 	_check(rb.record(s, path).is_empty(), "second life reported old ribbons")
 	_check(Ribbons.load_profile(path).lives == 2, "lives not counted")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	_test_unlocks(rb, s)
 	s.free()
+
+
+## Careers a ribbon unlocks stay out of the Jobs tab until the profile has the ribbon (GDD 9.2).
+func _test_unlocks(rb: Ribbons, s) -> void:
+	var db := CareerDB.new()
+	db.load_dir()
+	for u in rb.all_unlocks():
+		if u.begins_with("career:"):
+			_check(db.by_id.has(u.trim_prefix("career:")), "ribbon unlocks missing career %s" % u)
+	db.locked = rb.all_unlocks()
+	s.new_life()
+	s.age = 30
+	s.flags["edu_medicine"] = true
+	var ids := func(): return db.available(s).map(func(c): return c.id)
+	_check("doctor" not in ids.call() and "corporate" not in ids.call(), "locked careers offered")
+	_check("cleaner" in ids.call(), "ordinary careers vanished")
+	db.unlocked = ["career:doctor"]
+	_check("doctor" in ids.call(), "unlocked career not offered")
 
 
 ## Every shape, cut, clip and room depth map the living figures need is there, and a figure poses.

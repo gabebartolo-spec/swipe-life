@@ -1,14 +1,14 @@
 [
-	{"id": "long_life", "label": "Long life", "text": "Lived to 80.", "when": {"age_min": 80}, "unlocks": []},
+	{"id": "long_life", "label": "Long life", "text": "Lived to 80.", "when": {"age_min": 80}, "unlocks": ["career:farmer"]},
 	{"id": "centenarian", "label": "Centenarian", "text": "Lived to 100.", "when": {"age_min": 100}, "unlocks": []},
 	{"id": "gone_young", "label": "Gone too soon", "text": "Died before 30.", "when": {"age_max": 29}, "unlocks": []},
-	{"id": "rich", "label": "Comfortable", "text": "Died with $1,000,000.", "when": {"stat": "money", "min": 1000000}, "unlocks": []},
+	{"id": "rich", "label": "Comfortable", "text": "Died with $1,000,000.", "when": {"stat": "money", "min": 1000000}, "unlocks": ["career:banker"]},
 	{"id": "broke", "label": "Flat broke", "text": "Died with nothing.", "when": {"stat": "money", "max": 0, "age_min": 40}, "unlocks": []},
 	{"id": "homeowner", "label": "Homeowner", "text": "Died owning a home.", "when": {"owns_home": true}, "unlocks": []},
 	{"id": "big_family", "label": "Big family", "text": "Had three children or more.", "when": {"children_min": 3}, "unlocks": []},
 	{"id": "partnered", "label": "Never alone", "text": "Died with a partner.", "when": {"partnered": true}, "unlocks": []},
-	{"id": "dynasty", "label": "Dynasty", "text": "Reached the third generation.", "when": {"generation_min": 3}, "unlocks": []},
-	{"id": "heir", "label": "Next in line", "text": "Played on as your child.", "when": {"generation_min": 2}, "unlocks": []},
-	{"id": "saint", "label": "Good soul", "text": "Died with 90 Karma.", "when": {"stat": "karma", "min": 90}, "unlocks": []},
-	{"id": "scholar", "label": "Scholar", "text": "Died with 90 Smarts.", "when": {"stat": "smarts", "min": 90}, "unlocks": []}
+	{"id": "dynasty", "label": "Dynasty", "text": "Reached the third generation.", "when": {"generation_min": 3}, "unlocks": ["cards:dynasty"]},
+	{"id": "heir", "label": "Next in line", "text": "Played on as your child.", "when": {"generation_min": 2}, "unlocks": ["career:corporate"]},
+	{"id": "saint", "label": "Good soul", "text": "Died with 90 Karma.", "when": {"stat": "karma", "min": 90}, "unlocks": ["career:therapist"]},
+	{"id": "scholar", "label": "Scholar", "text": "Died with 90 Smarts.", "when": {"stat": "smarts", "min": 90}, "unlocks": ["career:doctor", "career:lawyer"]}
 ]
