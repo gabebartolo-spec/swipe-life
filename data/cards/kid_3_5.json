@@ -123,7 +123,7 @@
       "effects": {
         "happiness": -1,
         "smarts": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"smarts": -2}, "result": "Not everything went your way."},
       "result": "Gerald waves back. Probably.",
       "clear_flags": [
         "imaginary_friend"
@@ -151,7 +151,7 @@
         "relationships": 3,
         "happiness": 1,
         "stress": 1
-      }
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -2}, "result": "There was a catch."}
     }
   },
   {
@@ -242,7 +242,7 @@
       "effects": {
         "stress": -2,
         "happiness": 1
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "Not everything went your way."},
       "result": "It was a coat. A very rude coat."
     }
   },
@@ -607,7 +607,7 @@
       "effects": {
         "relationships": 5,
         "karma": 2
-      }
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -4}, "result": "There was a catch."}
     }
   },
   {
@@ -629,7 +629,7 @@
       "effects": {
         "relationships": 4,
         "happiness": 1
-      },
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -3}, "result": "You paid for it later."},
       "result": "It goes on the fridge. Honored forever."
     }
   },
@@ -651,7 +651,7 @@
       "effects": {
         "smarts": 3,
         "relationships": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"smarts": -2}, "result": "You paid for it later."},
       "result": "You skip seven. Nobody minds."
     }
   },
@@ -676,7 +676,7 @@
       "effects": {
         "smarts": 3,
         "stress": -1
-      }
+      }, "risk": {"chance": 0.3, "effects": {"smarts": -2}, "result": "There was a catch."}
     }
   },
   {
@@ -697,7 +697,7 @@
       "effects": {
         "happiness": 2,
         "smarts": 1
-      }
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "You paid for it later."}
     },
     "up": {
       "label": "Hug it immediately",
@@ -831,7 +831,7 @@
       "effects": {
         "relationships": 4,
         "happiness": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -3}, "result": "You paid for it later."},
       "result": "Candy. The pockets had candy."
     }
   },
@@ -855,7 +855,7 @@
       "effects": {
         "health": 3,
         "happiness": 1
-      },
+      }, "risk": {"chance": 0.3, "effects": {"health": -2}, "result": "There was a catch."},
       "result": "You get two stickers."
     }
   },

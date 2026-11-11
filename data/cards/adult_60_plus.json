@@ -100,7 +100,7 @@
       "effects": {
         "happiness": 5,
         "health": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -4, "stress": 2}, "result": "It didn't go to plan."},
       "by_trait": {
         "sociability": {
           "happiness": 4
@@ -159,7 +159,7 @@
       "effects": {
         "happiness": 8,
         "relationships": 3
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -6, "stress": 2}, "result": "It didn't go to plan."},
       "result": "There's flour on the ceiling. You'll find it in March."
     }
   },
@@ -330,7 +330,7 @@
         "happiness": -4,
         "relationships": 4,
         "karma": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -3, "stress": 2}, "result": "Mostly fine. Mostly."},
       "result": "They laugh and cry at the same moment. That's the point of it."
     }
   },
@@ -386,7 +386,7 @@
         "happiness": -3,
         "relationships": 5,
         "stress": -3
-      },
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -4, "stress": 2}, "result": "There was a catch."},
       "result": "'Come round for lunch', they say. You were hoping they'd say that."
     }
   },
@@ -444,7 +444,7 @@
       "effects": {
         "happiness": 2,
         "stress": -1
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "You paid for it later."},
       "result": "He rings back in eleven minutes. You put the phone in a drawer."
     }
   },
@@ -604,7 +604,7 @@
         "happiness": 8,
         "relationships": 5,
         "karma": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -6, "stress": 2}, "result": "You paid for it later."},
       "result": "It takes four afternoons. The grandchild takes notes, and a few liberties."
     }
   },
@@ -629,7 +629,7 @@
         "health": 3,
         "happiness": 7,
         "relationships": 4
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -6, "stress": 2}, "result": "It didn't go to plan."},
       "by_trait": {
         "sociability": {
           "happiness": 4
@@ -712,7 +712,7 @@
       "effects": {
         "happiness": 10,
         "karma": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -8, "stress": 2}, "result": "There was a catch."},
       "result": "It makes the front page. Your family have to explain it to the vicar."
     }
   },
@@ -766,7 +766,7 @@
       "effects": {
         "happiness": 5,
         "stress": -3
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -4, "stress": 2}, "result": "There was a catch."},
       "result": "You lose an afternoon. It was well spent."
     }
   },
@@ -842,7 +842,7 @@
       "effects": {
         "smarts": 1,
         "happiness": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "It didn't go to plan."},
       "result": "Nineteen across was 'ennui'. Of course it was."
     }
   },
@@ -893,7 +893,7 @@
       "effects": {
         "relationships": 3,
         "happiness": 3
-      }
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -2, "stress": 2}, "result": "You paid for it later."}
     }
   },
   {
@@ -945,7 +945,7 @@
         "health": 1,
         "stress": -3,
         "happiness": 1
-      }
+      }, "risk": {"chance": 0.3, "effects": {"health": -2, "stress": 2}, "result": "There was a catch."}
     }
   },
   {
@@ -1018,7 +1018,7 @@
       "effects": {
         "happiness": 4,
         "stress": -2
-      }
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -3, "stress": 2}, "result": "Not everything went your way."}
     }
   },
   {

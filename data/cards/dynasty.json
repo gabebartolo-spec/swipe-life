@@ -314,7 +314,7 @@
       "effects": {
         "smarts": 1,
         "happiness": 3
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2, "stress": 2}, "result": "There was a catch."},
       "result": "The last line is about you. It is better than the boiler part."
     },
     "right": {

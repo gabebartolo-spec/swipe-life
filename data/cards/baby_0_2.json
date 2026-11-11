@@ -19,7 +19,7 @@
       "effects": {
         "happiness": 2,
         "health": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "There was a catch."},
       "result": "You fall asleep in a towel."
     }
   },
@@ -61,7 +61,7 @@
       "effects": {
         "relationships": 4,
         "happiness": 1
-      },
+      }, "risk": {"chance": 0.3, "effects": {"relationships": -3}, "result": "Then it went a bit wrong."},
       "result": "The giant makes a noise like a kettle."
     }
   },
@@ -130,7 +130,7 @@
       "effects": {
         "health": 3,
         "stress": 1
-      }
+      }, "risk": {"chance": 0.3, "effects": {"health": -2}, "result": "There was a catch."}
     },
     "up": {
       "label": "Roll over completely",
@@ -211,7 +211,7 @@
         "health": 2,
         "happiness": 1,
         "relationships": 2
-      }
+      }, "risk": {"chance": 0.3, "effects": {"health": -2}, "result": "You paid for it later."}
     }
   },
   {
@@ -441,7 +441,7 @@
       "label": "Eat it",
       "effects": {
         "health": 3
-      }
+      }, "risk": {"chance": 0.3, "effects": {"health": -2}, "result": "Not everything went your way."}
     },
     "up": {
       "label": "Blow raspberries",
@@ -488,7 +488,7 @@
       "effects": {
         "karma": 3,
         "happiness": 1
-      }
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "There was a catch."}
     },
     "right": {
       "label": "Pull it",
@@ -626,7 +626,7 @@
       "label": "Wait",
       "effects": {
         "smarts": 2
-      }
+      }, "risk": {"chance": 0.3, "effects": {"smarts": -2}, "result": "Then it went a bit wrong."}
     },
     "up": {
       "label": "Laugh so hard you hiccup",
@@ -655,7 +655,7 @@
       "effects": {
         "happiness": 2,
         "looks": 1
-      },
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "Mostly fine. Mostly."},
       "result": "The bathroom floor is a lake."
     }
   },
@@ -725,7 +725,7 @@
       "effects": {
         "health": 4,
         "karma": 1
-      },
+      }, "risk": {"chance": 0.3, "effects": {"health": -3}, "result": "Then it went a bit wrong."},
       "result": "You don't flinch. Legend."
     }
   },
@@ -748,7 +748,7 @@
       "effects": {
         "happiness": 2,
         "health": 1
-      }
+      }, "risk": {"chance": 0.3, "effects": {"happiness": -2}, "result": "There was a catch."}
     }
   },
   {
@@ -847,7 +847,7 @@
       "effects": {
         "looks": 2,
         "happiness": 2
-      },
+      }, "risk": {"chance": 0.3, "effects": {"looks": -2}, "result": "There was a catch."},
       "result": "Slobber on glass. Friendship forever."
     }
   }
