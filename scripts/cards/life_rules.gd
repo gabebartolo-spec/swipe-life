@@ -10,7 +10,7 @@ const ILLNESSES := {
 	{
 		"onset": ["stress", 70, 1],  # stat, threshold, direction (+1: at or above)
 		"safe": ["stress", 40, -1],  # recovery is possible only below this
-		"effects": {"stress": 5, "health": -3},
+		"effects": {"stress": 5, "health": -1},
 		"start": "You can't stop worrying. You have anxiety.",
 		"end": "The worrying has eased. Your anxiety is gone.",
 	},
@@ -18,7 +18,7 @@ const ILLNESSES := {
 	{
 		"onset": ["happiness", 30, -1],
 		"safe": ["happiness", 60, 1],
-		"effects": {"happiness": -5, "health": -3},
+		"effects": {"happiness": -5, "health": -1},
 		"start": "Everything feels grey. You have depression.",
 		"end": "Colour is coming back. Your depression has lifted.",
 	},
@@ -28,6 +28,7 @@ const RECOVERY_CHANCE := 0.15
 # pocket money: [from age, $ a year], highest age first (GDD §4.3)
 const POCKET_MONEY := [[10, 20], [6, 10]]
 const POCKET_MONEY_UNTIL := 17
+# Illness drains Health 1 a year (M13: was 3, which killed anyone who ignored Stress by their 40s).
 # adult drift (GDD §6.9): Health a year, highest age first; Stress -2 a year; Joy toward 50.
 const HEALTH_DRIFT := [[75, -3], [60, -2], [40, -1]]
 const ADULT_FROM := 18
