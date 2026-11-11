@@ -52,6 +52,10 @@ static func continue_as_heir(state) -> String:
 	state.flags["generation"] = generation
 	state.flags["heir"] = true
 	state.stats.money = cash
+	# GDD §15.11: fame outlives you; the family name carries half of it, and a quarter of the shame.
+	state.stats.fame = int(old_stats.get("fame", 0) / 2.0)
+	state.stats.infamy = int(old_stats.get("infamy", 0) / 4.0)
+	state.flags["family_fame"] = int(old_stats.get("fame", 0))
 	for s in INHERITED:
 		state.stats[s] = int((50 + old_stats[s]) / 2.0)
 	if not home.is_empty():

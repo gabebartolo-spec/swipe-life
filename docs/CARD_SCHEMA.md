@@ -31,6 +31,8 @@ Cards live in `data/cards/*.json`. Each file holds an array of cards, usually on
 | `weight` | no (10) | Relative draw chance among eligible cards. A rare card is 1–3. |
 | `requires.stats` | no | `{stat: [min, max]}`. Every listed stat must be in range. |
 | `requires.flags` / `not_flags` | no | Flags that must be set or unset (e.g. `has_sibling`). |
+| `requires.fame_tier` | no | `[min, max]` fame tier, 0 (nobody) to 6: local 1, rising 2, known 3, famous 4, star 5, icon 6 (GDD §15.11). Infamy gates with `requires.stats.infamy`. |
+| `requires.since` | no | `{flag: years}`: at least that many years since the flag was set, for multi-year chains (GDD §15.12). The flag must also be in `requires.flags`. |
 | `left`, `right` | yes | The two choices (§3.1). |
 | `up` | no | The super-like choice (§3.2, §3.4). If it is missing, the card cannot be super-liked. |
 | `set` | no | Locked card set this card belongs to (e.g. `dynasty`). It is drawn only once a ribbon unlocks `cards:<set>` (GDD §9.2). |
@@ -43,7 +45,7 @@ Each choice has these fields:
 |---|---|---|
 | `label` | yes | Short text shown while dragging. |
 | `effects` | no | `{stat: delta}`. Money is in the game's unnamed currency (§7.1). |
-| `set_flags` / `clear_flags` | no | Story memory, e.g. `"broke_arm"` unlocks later cards. |
+| `set_flags` / `clear_flags` | no | Story memory, e.g. `"broke_arm"` unlocks later cards. A set flag remembers the age it was set (for `requires.since`). |
 | `result` | no | One line shown after the swipe. |
 | `risk` | no | `{chance, effects, result}`. It applies on top of `effects` when it rolls. |
 | `death` | no | `{chance, cause}`. A rare deadly outcome (§5.3b). |

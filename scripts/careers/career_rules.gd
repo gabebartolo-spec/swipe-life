@@ -11,8 +11,11 @@ const FIRE_AT := 30  # performance at or below this at year end: fired
 const DRIFT := [-12, 10]  # yearly random change in performance
 const HEAT_PER_RANK := 6  # a gang job heats up every year, more at higher ranks
 const ARREST_PER_HEAT := 0.005  # arrest chance per point of heat (heat 100 = 50%)
+const ARREST_INFAMY := 12  # an arrest makes you a name, the wrong kind
 const RECORD := "criminal_record"  # set by an arrest; careers can bar it with not_flags
 const WORK_HARD := {"performance": 10, "stress": 5}
+const FAME_PAY_PER_TIER := 0.04  # +4% pay per fame tier, +24% at icon (GDD §15.11)
+const GS := preload("res://scripts/autoload/game_state.gd")
 const DATE_AT := 60  # crush affinity needed for a flirt to turn into dating
 ## Career menu staff actions: affinity change, stress, and optional cost and performance.
 const STAFF := {
@@ -144,6 +147,8 @@ static func year_end(state, db: CareerDB, rng: RandomNumberGenerator) -> Diction
 static func _year(state, slot, entry, career, rng, results: Array) -> void:
 	var rank: Dictionary = career.ranks[int(entry.rank)]
 	var pay := rank_pay(rank, state.age)
+	if pay > 0:  # GDD §15.11: fame boosts income a little
+		pay += int(pay * FAME_PAY_PER_TIER * GS.tier_of(int(state.stats.get("fame", 0))))
 	state.change_stat("money", pay)
 	state.change_stat("stress", int(rank.stress) / 4)
 	state.change_stat("career", 2 + 2 * int(entry.rank))
@@ -167,6 +172,7 @@ static func _year(state, slot, entry, career, rng, results: Array) -> void:
 					state.used.erase(id)
 			state.flags[RECORD] = true
 			state.change_stat("karma", -10)
+			state.change_stat("infamy", ARREST_INFAMY)  # GDD §15.11: infamy from crime
 			state.change_stat("happiness", -15)
 			results.append("The police picked you up. You're headed to juvie.")
 			return

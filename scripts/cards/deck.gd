@@ -2,6 +2,8 @@ class_name Deck
 extends RefCounted
 ## Draws cards by age, requirements and weight, and applies a chosen side (GDD §2–§3, §5.3b).
 
+const GameStateScript := preload("res://scripts/autoload/game_state.gd")
+
 var cards: Array
 ## Card sets a ribbon has unlocked (GDD §9.2). A card with a "set" stays out until its set is here.
 var open_sets: Array = []
@@ -104,7 +106,7 @@ func _apply(ch: Dictionary, state, slot := "") -> void:
 		for s in ch.by_trait[t]:
 			state.change_stat(s, trait_delta(state.stats[t], int(ch.by_trait[t][s])))
 	for f in ch.get("set_flags", []):
-		state.flags[f] = true
+		state.flags[f] = state.age  # the age it was set: requires.since counts years from it
 	for f in ch.get("clear_flags", []):
 		state.flags.erase(f)
 	if ch.get("partner") == "end":  # a breakup ends the partner record (docs/CAREERS.md)
@@ -166,5 +168,13 @@ static func meets(req: Dictionary, state) -> bool:
 			return false
 	for f in req.get("not_flags", []):
 		if state.flags.has(f):
+			return false
+	if req.has("fame_tier"):  # GDD §15.11
+		var tier: int = GameStateScript.tier_of(int(state.stats.get("fame", 0)))
+		if tier < req.fame_tier[0] or tier > req.fame_tier[1]:
+			return false
+	for f in req.get("since", {}):  # chains (GDD §15.12): years since a flag was set
+		var set_at = state.flags.get(f)
+		if not (set_at is int or set_at is float) or state.age - int(set_at) < req.since[f]:
 			return false
 	return true
