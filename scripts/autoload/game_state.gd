@@ -49,6 +49,7 @@ var fresh_start_until := 0
 var course := {}  # the course in progress; see Finance.enrol
 var loan_years := 0  # course years already put on a student loan; see Finance.loan_open
 var items := []  # ids of bought shop items; see Items
+var home_slots := {}  # slot -> item id the player put there (GDD §15.5)
 var siblings := []  # {name, look}: the heir's brothers and sisters; see Legacy
 
 
@@ -78,6 +79,7 @@ func new_life() -> void:
 	course = {}
 	loan_years = 0
 	items = []
+	home_slots = {}
 	siblings = []
 	stats = {}
 	for s in STATS:
@@ -115,6 +117,7 @@ func to_dict() -> Dictionary:
 		"course": course,
 		"loan_years": loan_years,
 		"items": items,
+		"home_slots": home_slots,
 		"siblings": siblings,
 	}
 
@@ -141,6 +144,7 @@ func from_dict(d: Dictionary) -> void:
 	course = d.get("course", {})
 	loan_years = int(d.get("loan_years", 0))
 	items = d.get("items", [])
+	home_slots = d.get("home_slots", {})
 	siblings = d.get("siblings", [])
 	for entry in careers.values():  # JSON reads numbers back as floats
 		for k in ["rank", "performance", "years", "meter"]:

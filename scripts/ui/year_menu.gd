@@ -85,6 +85,9 @@ func _build() -> void:
 	if tab == "money" and finance:
 		_build_money()
 		return
+	if tab == "shop" and shop and page == ["arrange"]:
+		_build_arrange()
+		return
 	for a in db.available(tab, GameState.age, GameState):
 		var b := Button.new()
 		var cost := int(a.get("cost", 0))
@@ -96,6 +99,8 @@ func _build() -> void:
 		b.pressed.connect(do_action.bind(a))
 		list.add_child(b)
 	if tab == "shop" and shop:
+		if not shop.swappable(GameState).is_empty():
+			_nav("Arrange your home", _go.bind(["arrange"]))
 		for it in shop.available(GameState):
 			_button(
 				"%s   %s" % [it.label, Finance.money_text(int(it.price))],
@@ -212,6 +217,23 @@ func _build_career() -> void:
 				act.capitalize() + ("   $%d" % cost if cost else ""),
 				func(): _did(CareerRules.staff(GameState, slot, role, act)),
 				GameState.stats.money < cost
+			)
+
+
+## Which owned item fills each slot (GDD §15.5): a sofa for the lounge, a bed, a TV. Free.
+func _build_arrange() -> void:
+	_nav("< Back", _go.bind([]))
+	var shown := shop.shown(GameState)
+	var slots := shop.swappable(GameState)
+	for slot: String in slots:
+		_note(slot.capitalize())
+		for it: Dictionary in slots[slot]:
+			var here: bool = it in shown
+			_button(
+				("  %s  (in use)" if here else "  %s") % it.label,
+				func(): _did(shop.place(GameState, it), false),
+				here,
+				false
 			)
 
 

@@ -1,7 +1,8 @@
 """Build one adult home (GDD 10.2) in the childhood home's clay look and 2x2 plan.
 
 Run headless:
-  blender -b --factory-startup --python tools/blender/build_clay_home.py -- <home_id> <out.glb>
+  blender -b --factory-startup --python tools/blender/build_clay_home.py -- <home_id> <out.glb> [<slots.glb>]
+With slots.glb the sofa, TV and bed go there instead (GDD 15.5) and the home is built without them.
 
 Rooms sit where build_clay_house.py puts them: bedroom (x 0..4, z 0..4), bathroom (x 4..8, z 0..4),
 living (x 0..4, z 4..8), kitchen (x 4..8, z 4..8). Coordinates are Godot's.
@@ -617,12 +618,60 @@ for _id, _spec in SPECS.items():
     HOMES[_id] = lambda s=_spec: home(s)
 
 
+## Furniture the player can replace (GDD 15.5): exported apart as live props, left out of the stills.
+SLOT_PARTS = {
+    "sofa": ("living", ("sofa_", "cushion")),
+    "tv": ("living", ("tv",)),
+    "bed": ("bedroom", ("bed_frame", "mattress", "duvet", "pillow", "headboard", "bed_post", "bed_rail")),
+}
+
+
+def slot_objects():
+    """{slot: [objects]} from the baked base layer, by name and by which room they stand in."""
+    out = {}
+    for slot, (room, prefixes) in SLOT_PARTS.items():
+        x0, z0 = ORIGINS[room]
+        for ob in bpy.context.scene.objects:
+            if ob.type != "MESH" or not ob.name.startswith("base__"):
+                continue
+            name = ob.name[len("base__"):]
+            mid = sum((ob.matrix_world @ v.co for v in ob.data.vertices), start=ob.matrix_world.translation * 0)
+            mid /= len(ob.data.vertices)
+            gx, gz = mid.x, -mid.y  # Blender y = -Godot z
+            if name.startswith(prefixes) and x0 <= gx <= x0 + 4 and z0 <= gz <= z0 + 4:
+                out.setdefault(slot, []).append(ob)
+    return out
+
+
+def export_slots(path):
+    """Joins each slot's parts into one mesh named by the slot (world coordinates kept), exports
+    them to `path`, and deletes them so the home export is bare."""
+    groups = slot_objects()
+    for slot, obs in groups.items():
+        bpy.ops.object.select_all(action="DESELECT")
+        for o in obs:
+            o.select_set(True)
+        bpy.context.view_layer.objects.active = obs[0]
+        bpy.ops.object.join()
+        bpy.context.object.name = "slot_" + slot
+    bpy.ops.object.select_all(action="DESELECT")
+    for slot in groups:
+        bpy.data.objects["slot_" + slot].select_set(True)
+    bpy.ops.export_scene.gltf(filepath=path, export_format="GLB", export_vertex_color="ACTIVE", use_selection=True,
+                              export_materials="NONE", export_texcoords=False)
+    for slot in groups:
+        bpy.data.objects.remove(bpy.data.objects["slot_" + slot], do_unlink=True)
+    print("SLOTS", {k: len(v) for k, v in groups.items()})
+
+
 if __name__ == "__main__":
     args = sys.argv[sys.argv.index("--") + 1:]
     OUT = os.path.abspath(args[1])
     bpy.ops.wm.read_factory_settings(use_empty=True)
     HOMES[args[0]]()
     H.bake_groups()
+    if len(args) > 2:  # bare build: replaceable furniture goes to its own GLB
+        export_slots(os.path.abspath(args[2]))
     bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE",
                               export_materials="NONE", export_texcoords=False)
     print("HOME", args[0], {k: len(v) for k, v in H.LAYERS.items()})

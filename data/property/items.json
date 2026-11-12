@@ -10,5 +10,11 @@
 	{"id": "wardrobe", "label": "Wardrobe of nice things", "room": "bedroom", "price": 2500, "min_age": 18, "effects": {"looks": 3, "happiness": 1}},
 	{"id": "espresso", "label": "Espresso machine", "room": "kitchen", "price": 600, "min_age": 18, "effects": {"happiness": 2, "stress": 1}},
 	{"id": "cooker", "label": "Chef's cooker", "room": "kitchen", "price": 4500, "min_age": 18, "effects": {"health": 3, "happiness": 3}},
-	{"id": "spa_bath", "label": "Spa bath", "room": "bathroom", "price": 5000, "min_age": 18, "effects": {"stress": -6, "happiness": 3, "looks": 1}}
+	{"id": "spa_bath", "label": "Spa bath", "room": "bathroom", "price": 5000, "min_age": 18, "effects": {"stress": -6, "happiness": 3, "looks": 1}},
+	{"id": "sofa_leather", "slot": "sofa", "label": "Leather sofa", "room": "living", "price": 4000, "min_age": 18, "effects": {"happiness": 4, "stress": -3, "looks": 1}},
+	{"id": "bed_king", "slot": "mattress", "label": "King bed", "room": "bedroom", "price": 3500, "min_age": 18, "effects": {"health": 3, "stress": -3, "relationships": 1}},
+	{"id": "tv_cinema", "slot": "tv", "label": "Home cinema", "room": "living", "price": 5000, "min_age": 18, "effects": {"happiness": 5, "relationships": 1, "smarts": -1}},
+	{"id": "goldfish", "pet": true, "label": "Goldfish", "room": "kitchen", "price": 30, "min_age": 18, "effects": {"happiness": 1}},
+	{"id": "cat", "pet": true, "label": "Cat", "room": "living", "price": 300, "min_age": 18, "effects": {"happiness": 4, "stress": -3}},
+	{"id": "dog", "pet": true, "label": "Dog", "room": "living", "price": 800, "min_age": 18, "effects": {"happiness": 5, "health": 3, "stress": -2}}
 ]

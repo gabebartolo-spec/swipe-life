@@ -126,6 +126,10 @@ func _pick_look() -> void:
 func _new_life() -> void:
 	GameState.new_life()
 	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--items="):  # captures: start owning these shop items
+			GameState.items.assign(arg.trim_prefix("--items=").split(","))
+		if arg.begins_with("--home="):  # captures: live in this adult home
+			GameState.housing = {"kind": "own", "house": arg.trim_prefix("--home=")}
 		if arg.begins_with("--set="):
 			for pair in arg.trim_prefix("--set=").split(","):
 				var kv := pair.split("=")
@@ -171,7 +175,11 @@ func _deal() -> void:
 		GameState.quarter += 1
 		_deal()
 		return
-	$Dollhouse.show_room(GameState.age, c.get("room", "bedroom"), GameState.housing)
+	var room: String = c.get("room", "bedroom")
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--room="):  # captures: stay in one room
+			room = arg.trim_prefix("--room=")
+	$Dollhouse.show_room(GameState.age, room, GameState.housing)
 	_show_items()
 	swipe_card.show()
 	swipe_card.position = Vector2(MARGIN, MARGIN)
@@ -223,6 +231,7 @@ func _year_end() -> void:
 	out.results.append("Year %d is over." % GameState.age)
 	menu.open("\n".join(out.results))
 	year_button.show()
+	$Dollhouse.set_browsing(true, GameState.age, GameState.housing)
 	if autoplay:
 		for i in randi() % 3:
 			await get_tree().create_timer(0.8).timeout
@@ -235,6 +244,7 @@ func _year_end() -> void:
 
 func _next_year() -> void:
 	menu.hide()
+	$Dollhouse.set_browsing(false)
 	Feel.calendar_flip($Dollhouse, GameState.age, GameState.age + 1)  # GDD §15.3
 	GameState.age += 1
 	GameState.quarter = 0

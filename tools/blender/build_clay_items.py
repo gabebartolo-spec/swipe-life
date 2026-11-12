@@ -184,6 +184,90 @@ def spa_bath():
     box(n("spout"), p(0.62, 0.9, -0.3), (0.2, 0.04, 0.04), "b8bdc4", bevel=0.01)
 
 
+def sofa_leather():
+    at("sofa_leather")
+    c, d = "7a4630", "5e3524"
+    box(n("base"), p(0, 0.24, 0), (2.1, 0.3, 0.9), d, bevel=0.08)
+    box(n("back"), p(0, 0.66, -0.36), (2.1, 0.62, 0.22), c, bevel=0.1)
+    for i, dx in enumerate((-0.98, 0.98)):
+        box(n(f"arm{i}"), p(dx, 0.52, 0.02), (0.26, 0.6, 0.9), c, bevel=0.12)
+        ball(n(f"roll{i}"), p(dx, 0.82, 0.02), 0.15, c, scale=(1, 1, 3.0), seed=i)
+    for i, dx in enumerate((-0.6, 0.0, 0.6)):
+        box(n(f"seat{i}"), p(dx, 0.47, 0.08), (0.58, 0.18, 0.66), "8c5238", bevel=0.07, seed=i)
+        for j, dy in enumerate((0.55, 0.78)):
+            ball(n(f"button{i}_{j}"), p(dx, dy, -0.245), 0.025, d)
+
+
+def bed_king():
+    at("bed_king")
+    box(n("frame"), p(0, 0.14, 0), (2.0, 0.26, 2.2), DARKWOOD, bevel=0.07)
+    box(n("head"), p(0, 0.75, -1.08), (2.1, 1.1, 0.14), "8c6a9a", bevel=0.1)
+    box(n("mat"), p(0, 0.4, 0), (1.9, 0.28, 2.1), CREAM, bevel=0.1)
+    cloth(n("duvet"), p(0, 0.64, 0.3), (2.1, 0.1, 1.6), "c8b6dc", folds=0.025, droop=0.34)
+    cloth(n("throw"), p(0, 0.72, 0.8), (2.15, 0.06, 0.45), "8c6a9a", folds=0.02, droop=0.36)
+    for i, dx in enumerate((-0.6, 0.0, 0.6)):
+        pillow(n(f"pillow{i}"), p(dx, 0.62, -0.78), (0.6, 0.22, 0.42), "fbf6ec", seed=i)
+
+
+def tv_cinema():
+    at("tv_cinema")
+    box(n("unit"), p(0, 0.25, 0), (1.9, 0.5, 0.45), "3a3d42", bevel=0.04)
+    for i, dx in enumerate((-0.45, 0.45)):
+        box(n(f"door{i}"), p(dx, 0.25, 0.23), (0.85, 0.4, 0.02), "4a4e55", bevel=0.01)
+    box(n("screen"), p(0, 1.15, -0.05), (1.8, 0.95, 0.07), "26282d", bevel=0.03)
+    box(n("glass"), p(0, 1.15, -0.01), (1.68, 0.84, 0.02), "4a5868", bevel=0.01, subd=0, lump=0)
+    for i, dx in enumerate((-1.2, 1.2)):
+        box(n(f"speaker{i}"), p(dx, 0.6, 0), (0.32, 1.2, 0.32), "2f3136", bevel=0.05)
+        tube(n(f"cone{i}a"), p(dx, 0.9, 0.17), 0.1, 0.03, "55595f", rot=(math.pi / 2, 0, 0))
+        tube(n(f"cone{i}b"), p(dx, 0.45, 0.17), 0.12, 0.03, "55595f", rot=(math.pi / 2, 0, 0))
+    box(n("soundbar"), p(0, 0.55, 0.1), (1.1, 0.1, 0.14), "2f3136", bevel=0.03)
+
+
+def goldfish():
+    at("goldfish")
+    box(n("stand"), p(0, 0.35, 0), (0.5, 0.7, 0.4), WOOD, bevel=0.04)
+    ball(n("water"), p(0, 0.92, 0), 0.24, "a9d6e8", scale=(1, 0.85, 1))
+    tube(n("rim"), p(0, 1.1, 0), 0.17, 0.04, "d8eef5")
+    ball(n("fish"), p(0.04, 0.93, 0.2), 0.07, "f08a2c", scale=(1.4, 0.9, 0.7))
+    ball(n("fin"), p(-0.07, 0.93, 0.2), 0.045, "f5a24c", scale=(0.6, 1.2, 0.5))
+    ball(n("gravel"), p(0, 0.72, 0), 0.17, "c9b48a", scale=(1, 0.3, 1))
+
+
+def cat():
+    at("cat")
+    g, w = "e09a4c", "f6e2c8"
+    ball(n("body"), p(0, 0.24, 0), 0.2, g, scale=(0.9, 1.2, 1.0))
+    ball(n("chest"), p(0, 0.27, 0.12), 0.12, w, scale=(0.9, 1.3, 0.6))
+    ball(n("head"), p(0, 0.56, 0.06), 0.15, g, scale=(1.1, 0.95, 1.0))
+    ball(n("muzzle"), p(0, 0.52, 0.18), 0.06, w, scale=(1.3, 0.8, 0.7))
+    ball(n("nose"), p(0, 0.55, 0.22), 0.018, "d86a6a")
+    for i, dx in enumerate((-0.07, 0.07)):
+        ball(n(f"ear{i}"), p(dx * 1.3, 0.7, 0.04), 0.06, g, scale=(0.7, 1.3, 0.35), seed=i)
+        ball(n(f"eye{i}"), p(dx * 0.75, 0.59, 0.19), 0.022, "2b2f36")
+        ball(n(f"paw{i}"), p(dx, 0.05, 0.16), 0.055, w, scale=(1, 0.7, 1.4))
+    for i in range(14):
+        a = i / 13.0
+        ball(n(f"tail{i}"), p(0.17 + 0.07 * math.sin(a * 2.5), 0.05 + 0.1 * a, 0.05 - 0.2 * a + 0.3 * a * a), 0.042, g)
+
+
+def dog():
+    at("dog")
+    b, d = "b07848", "7a4e2e"
+    ball(n("body"), p(0, 0.42, -0.05), 0.2, b, scale=(1.0, 0.95, 1.8))
+    ball(n("chest"), p(0, 0.44, 0.22), 0.16, "e8d2b0", scale=(1.0, 1.1, 0.7))
+    ball(n("head"), p(0, 0.72, 0.36), 0.15, b)
+    ball(n("snout"), p(0, 0.67, 0.5), 0.08, "e8d2b0", scale=(0.9, 0.8, 1.2))
+    ball(n("nose"), p(0, 0.7, 0.59), 0.03, "2b2f36")
+    for i, dx in enumerate((-0.13, 0.13)):
+        ball(n(f"ear{i}"), p(dx, 0.68, 0.33), 0.07, d, scale=(0.5, 1.5, 0.9), seed=i)
+        ball(n(f"eye{i}"), p(dx * 0.45, 0.76, 0.48), 0.022, "2b2f36")
+    for i, (dx, dz) in enumerate(((-0.11, 0.2), (0.11, 0.2), (-0.11, -0.3), (0.11, -0.3))):
+        tube(n(f"leg{i}"), p(dx, 0.17, dz), 0.055, 0.34, b)
+        ball(n(f"foot{i}"), p(dx, 0.03, dz + 0.03), 0.065, "e8d2b0", scale=(1, 0.6, 1.3))
+    for i in range(9):
+        ball(n(f"tail{i}"), p(0, 0.5 + 0.027 * i, -0.4 - 0.018 * i), 0.045 - 0.002 * i, b)
+
+
 def bake():
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
@@ -235,7 +319,8 @@ def bake():
 if __name__ == "__main__":
     OUT = os.path.abspath(sys.argv[sys.argv.index("--") + 1])
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    for build in (plant, bookshelf, rug, sofa, tv, piano, mattress, desk, wardrobe, espresso, cooker, spa_bath):
+    for build in (plant, bookshelf, rug, sofa, tv, piano, mattress, desk, wardrobe, espresso, cooker, spa_bath,
+                  sofa_leather, bed_king, tv_cinema, goldfish, cat, dog):
         build()
     bake()
     bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", export_vertex_color="ACTIVE",

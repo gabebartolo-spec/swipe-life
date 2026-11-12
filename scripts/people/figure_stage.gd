@@ -43,8 +43,20 @@ const ITEM_SPACE := {
 	"espresso": 0.3,
 	"cooker": 0.5,
 	"spa_bath": 0.9,
+	"sofa_leather": 0.95,
+	"bed_king": 1.1,
+	"tv_cinema": 0.75,
+	"goldfish": 0.25,
+	"cat": 0.3,
+	"dog": 0.45,
 }
 const FLAT_ITEMS := ["rug"]
+const SLOT_DIR := "res://assets/house/slots"
+## Each home's own sofa, TV and bed are drawn live from its slots file (GDD §15.5), so a bought
+## replacement stands in the same place. Slot -> node in that file, and how a bought item turns
+## to face the same way (items are modelled facing +z).
+const SLOT_NODES := {"sofa": "slot_sofa", "tv": "slot_tv", "mattress": "slot_bed"}
+const SLOT_TURN := {"sofa": PI / 2.0, "tv": -PI / 2.0, "mattress": 0.0}
 const ITEM_GRID := 0.25
 
 var _viewport := SubViewport.new()
@@ -58,6 +70,11 @@ var _actors: Array[Dictionary] = []
 var _item_list: Array = []  # [{id, room}] everything bought; this room's are shown
 var _item_nodes: Array[Node3D] = []
 var _item_spots: Array[Vector3] = []  # x, z, radius of the solid items standing in this room
+var _home := ""
+var _base_depth: Image  # the bare room's baked depth; slot props are merged on top of a copy
+var _bake_vp: SubViewport
+var _bake_root: Node3D
+var _bake_cam := Camera3D.new()
 
 
 func _ready() -> void:
@@ -96,8 +113,13 @@ func set_room(room: String, home: String) -> void:
 	_room = room
 	_centre = ROOM_CENTRE[room]
 	_cam.transform = Transform3D(BASIS_CAM, Vector3(_centre.x, 1.0, _centre.y) + BASIS_CAM.z * 20.0)
-	_depth_tex = load(DEPTH_DIR.path_join("depth_%s_%s.png" % [room, home]))
-	_depth = _depth_tex.get_image()
+	_home = home
+	var baked := load(DEPTH_DIR.path_join("depth_%s_%s.png" % [room, home])) as Texture2D
+	_base_depth = baked.get_image()
+	_base_depth.decompress()
+	_base_depth.convert(Image.FORMAT_RGBA8)
+	_depth = _base_depth.duplicate()
+	_depth_tex = ImageTexture.create_from_image(_depth)
 	_rebuild_items()
 	for a in _actors:
 		_apply_depth(a.fig)
@@ -122,24 +144,121 @@ func _rebuild_items() -> void:
 	_item_spots.clear()
 	if _depth == null:
 		return
+	_depth.copy_from(_base_depth)
 	var scene: Node = (load(ITEM_MODELS) as PackedScene).instantiate()
 	var mine := _item_list.filter(func(it): return it.room == _room)
+	var filled := _slot_props(scene, mine)
+	mine = mine.filter(func(it): return not filled.has(it.get("slot", "")))
 	mine.sort_custom(func(a, b): return ITEM_SPACE.get(a.id, 0.5) > ITEM_SPACE.get(b.id, 0.5))
 	for it: Dictionary in mine:
 		var mi := scene.find_child(it.id, true, false) as MeshInstance3D
 		var at := _item_spot(it.id)
 		if mi == null or at == Vector2.INF:
 			continue
-		var copy := MeshInstance3D.new()
-		copy.mesh = mi.mesh
-		copy.material_override = _item_material()
-		_world.add_child(copy)
-		copy.position = Vector3(at.x, FLOOR_Y, at.y)
-		copy.rotation.y = PI / 4.0  # front toward the viewer
-		_item_nodes.append(copy)
+		_add_item(mi.mesh, Vector3(at.x, FLOOR_Y, at.y), PI / 4.0)  # front toward the viewer
 		if it.id not in FLAT_ITEMS:
 			_item_spots.append(Vector3(at.x, at.y, ITEM_SPACE.get(it.id, 0.5)))
 	scene.free()
+	_bake_props()
+
+
+func _add_item(mesh: Mesh, at: Vector3, turn: float) -> MeshInstance3D:
+	var copy := MeshInstance3D.new()
+	copy.mesh = mesh
+	copy.material_override = _item_material()
+	_world.add_child(copy)
+	copy.position = at
+	copy.rotation.y = turn
+	_item_nodes.append(copy)
+	return copy
+
+
+## Draws this room's slots: the bought item where one is owned, else the home's own piece.
+## Returns {slot: true} for every slot it filled. Homes without a slots file keep baked furniture.
+func _slot_props(scene: Node, mine: Array) -> Dictionary:
+	var done := {}
+	var path := SLOT_DIR.path_join("%s.glb" % _home)
+	if not ResourceLoader.exists(path):
+		return done
+	var slots: Node = (load(path) as PackedScene).instantiate()
+	for slot: String in SLOT_NODES:
+		var own := slots.find_child(SLOT_NODES[slot], true, false) as MeshInstance3D
+		if own == null:
+			continue
+		var mid := (own.transform * own.get_aabb()).get_center()
+		if absf(mid.x - _centre.x) > 2.0 or absf(mid.z - _centre.y) > 2.0:
+			continue
+		done[slot] = true
+		var mi: MeshInstance3D = null
+		for it: Dictionary in mine:
+			if it.get("slot", "") == slot:
+				mi = scene.find_child(it.id, true, false) as MeshInstance3D
+		if mi:
+			_add_item(mi.mesh, Vector3(mid.x, FLOOR_Y, mid.z), SLOT_TURN[slot])
+		else:
+			_add_item(own.mesh, Vector3.ZERO, 0.0).transform = own.transform
+	slots.free()
+	return done
+
+
+## Renders the live props' depth through the stills' camera and merges it into the room's depth,
+## so figures sit on, walk round and hide behind them like baked furniture.
+func _bake_props() -> void:
+	_depth_tex.update(_depth)
+	if _item_nodes.is_empty() or DisplayServer.get_name() == "headless":
+		return
+	if _bake_vp == null:
+		_bake_vp = SubViewport.new()
+		_bake_vp.size = VIEW
+		_bake_vp.own_world_3d = true
+		_bake_vp.transparent_bg = true
+		_bake_vp.use_hdr_2d = true
+		_bake_vp.render_target_update_mode = SubViewport.UPDATE_DISABLED
+		add_child(_bake_vp)
+		_bake_cam.projection = Camera3D.PROJECTION_ORTHOGONAL
+		_bake_cam.size = VIEW_SIZE
+		_bake_vp.add_child(_bake_cam)
+	if _bake_root:
+		_bake_root.free()
+	_bake_root = Node3D.new()
+	_bake_vp.add_child(_bake_root)
+	_bake_cam.transform = _cam.transform
+	var m := ShaderMaterial.new()
+	m.shader = preload("res://shaders/room_depth_bake.gdshader")
+	m.set_shader_parameter("origin", Vector3(_centre.x, 1.0, _centre.y))
+	m.set_shader_parameter("axis", BASIS_CAM.z)
+	m.set_shader_parameter("span", DEPTH_SPAN)
+	for n in _item_nodes:
+		var copy := MeshInstance3D.new()
+		copy.mesh = (n as MeshInstance3D).mesh
+		copy.material_override = m
+		copy.transform = n.transform
+		_bake_root.add_child(copy)
+	_bake_vp.render_target_update_mode = SubViewport.UPDATE_ONCE
+	var room := _room
+	var home := _home
+	await RenderingServer.frame_post_draw
+	if room != _room or home != _home:
+		return
+	_merge_depth(_bake_vp.get_texture().get_image())
+	for a in _actors:
+		_place(a)
+
+
+func _merge_depth(img: Image) -> void:
+	if img == null or img.is_empty():
+		return
+	var used := img.get_used_rect()
+	for y in range(used.position.y, used.end.y):
+		for x in range(used.position.x, used.end.x):
+			var c := img.get_pixel(x, y)
+			if c.a < 0.5:
+				continue
+			var q := int(roundf(clampf(c.r, 0.0, 1.0) * 65535.0))
+			var old := _depth.get_pixel(x, y)
+			if q > int(roundf(old.r * 255.0)) * 256 + int(roundf(old.g * 255.0)):
+				_depth.set_pixel(x, y, Color8(q >> 8, q & 255, 0, 255))
+	_depth_tex.update(_depth)
 
 
 func _item_material() -> ShaderMaterial:
