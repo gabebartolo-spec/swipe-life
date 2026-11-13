@@ -33,6 +33,11 @@ const SETTINGS := {
 	"mansion": "grounds",
 }
 
+## Lifts the setting so its ground meets the drive's surface (top y 0.05).
+const SETTING_LIFT := 0.1
+## Drive pieces that only suit the plain background: the room's raised plinth, the bay's kerb lip.
+const IN_SETTING_HIDE := ["room_driveway__slab", "drive__lip"]
+
 var _house: Node3D
 var _cam: Camera3D
 var _warm := false
@@ -145,8 +150,14 @@ func _render(out: String) -> void:
 			var c: Vector2 = ROOMS[room]
 			_show_room(room, band, c)
 			if _setting:
-				_setting.position = Vector3(c.x, 0, c.y)
+				## Lifted, the lawn sits at y -0.02 and pavements at 0.06, round the drive's
+				## surface (0.05); the plinth and bay lip are hidden: the drive lies on the ground.
+				_setting.position = Vector3(c.x, SETTING_LIFT, c.y)
 				_setting.visible = room == "driveway"
+				for n: String in IN_SETTING_HIDE if room == "driveway" else []:
+					var hide := _house.find_child(n, true, false) as Node3D
+					if hide:
+						hide.visible = false
 			_cam.transform.origin = Vector3(c.x, 1.0, c.y) + _cam.transform.basis.z * 20.0
 			if _depth:
 				_paint_depth(c)

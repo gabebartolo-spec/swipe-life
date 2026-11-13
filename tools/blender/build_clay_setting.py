@@ -41,6 +41,12 @@ def g(x, y, z):
     return R.g2b(x, y, z)
 
 
+# The drive's surface spans x, z within +-DRIVE and tops out at y -0.05 here (render_house.gd lifts the setting
+# 0.1 to the room's 0.05); level pieces round it top out at -0.055 so they meet it without a step.
+DRIVE = 2.05
+LEVEL_H = 0.045  # patch h from y -0.1 to top -0.055
+
+
 def ground(col, y=-0.12, back=HORIZON):
     """A clay board whose far edge is x + z = -back, dense enough to carry baked contact shadows."""
     n = 140
@@ -316,10 +322,18 @@ def lamp(n, x, z, h=2.6):
     ball(f"{n}_bulb", (x, h - 0.16, z), 0.1, "fff3c4", scale=(1.3, 0.5, 0.9), lump=0)
 
 
-def road_x(x0, x1, kerb_col="cfcac0", walk="d8d2c6", tar="74767c", line=True, crack=False):
-    """Pavement from the plot edge to x0, kerb, then the road out to x1 (along z)."""
-    strip_x("pavement", 2.3, x0, walk)
-    strip_x("kerb", x0, x0 + 0.18, kerb_col, h=0.1)
+def road_x(x0, x1, kerb_col="cfcac0", walk="d8d2c6", tar="74767c", line=True, crack=False, drive=None, mouth=DRIVE):
+    """Pavement from the drive's street edge to x0, kerb, then the road out to x1 (along z). `drive` is the drive's
+    surface colour: it runs on across the pavement as a crossover (z within `mouth`) to a dropped kerb."""
+    strip_x("pavement", DRIVE, x0, walk)
+    if drive:
+        lo, hi = (-mouth, mouth) if isinstance(mouth, float) else mouth
+        strip_x("crossover", DRIVE, x0, drive, h=0.065, z0=lo, z1=hi)  # just over the pavement, level with the drive
+        strip_x("kerb_drop", x0, x0 + 0.18, kerb_col, h=0.07, z0=lo, z1=hi)
+        strip_x("kerb", x0, x0 + 0.18, kerb_col, h=0.1, z1=lo)
+        strip_x("kerb_b", x0, x0 + 0.18, kerb_col, h=0.1, z0=hi)
+    else:
+        strip_x("kerb", x0, x0 + 0.18, kerb_col, h=0.1)
     strip_x("road", x0 + 0.18, x1, tar, h=0.02)
     if line:
         mid = (x0 + 0.18 + x1) / 2
@@ -382,18 +396,18 @@ def suburb(young=False):
     """Family house and childhood home: a suburban street with fences, lawns and big trees. Starter house (young):
     the same street newer, with small trees and low fences."""
     ground("86b05e" if young else "7aa85a")
-    road_x(3.9, 12)
+    road_x(3.9, 12, drive="b9b1a3" if young else "c8bfae")
     if young:
-        picket_z("front", 3.3, -7.0, 2.3, h=0.5, col="f4f0e6")
+        picket_z("front", 3.3, -7.0, 2.0, h=0.5, col="f4f0e6")
         home_body("c4785a", 3.2, roof="b5654a")
         tree("tr", -0.4, -3.4, h=4.0, r=0.85, kind="young")
         tree("tr2", 1.8, -4.6, h=3.6, r=0.75, kind="young")
         bush("b0", -4.2, 2.9, 0.3)
     else:
-        picket_z("front", 3.3, -7.0, 2.3)
+        picket_z("front", 3.3, -7.0, 2.0)
         home_body("b8694c", 6.0, roof="8f4f3a", floors=1, chim=-1.0)
         tree("tr", -0.3, -3.4, h=5.5, r=1.5, leaf="5f9447")
-        board_fence_z("back", -4.4, -2.4, 9, h=1.8)
+        board_fence_z("back", -4.4, -2.4, 2.0, h=1.8)  # the plot line, not over the road
         tree("tr2", 3.6, -6.4, h=4.2, r=1.2)
         bush("b0", -4.4, 2.8, 0.36)
         bush("b1", -3.6, 2.85, 0.3, "6a9a4e")
@@ -401,10 +415,11 @@ def suburb(young=False):
 
 def flats():
     """Small flat: brick apartment blocks in town, a pavement and a street tree."""
-    ground("b9b2a6")  # paved courtyard
-    road_x(3.9, 12)
+    ground("b9b2a6")
+    strip_x("forecourt", -9, DRIVE, "b9b2a6", h=LEVEL_H)  # paved, level with the bay
+    road_x(3.9, 12, drive="66676c", mouth=(-1.2, 1.4))  # the bay's width, between its lines
     block("home", -5.25, 1.85, 5.6, 8.3, 6, "e2d6c0", trim="cfc4ac")  # the bay's own block
-    block("br", 1.6, -6.2, 7.0, 3.6, 3, "c27a56", trim="ece4d6")
+    block("br", -1.9, -6.2, 7.6, 3.6, 3, "c27a56", trim="ece4d6")  # x -5.7..1.9, behind the pavement
     # its ground-floor entrance: the frame top cuts the block at ~1.6 m, below its windows, so the door shows
     box("br_doorframe", (-1.2, 1.05, -4.37), (1.1, 2.2, 0.06), "ece4d6", bevel=0.02, lump=0)
     box("br_door", (-1.2, 1.0, -4.33), (0.9, 2.0, 0.05), "2f4858", bevel=0.015, subd=1, lump=0)
@@ -418,42 +433,41 @@ def flats():
 
 
 def lowrise():
-    """Rental: plain two-storey flats round a car park, behind a chain-link fence."""
+    """Rental: the tenant's bay is one of a row in front of the block, in a level car park; a plain aisle runs past
+    the bays' open ends (+x); the car park ends at a kerb, grass and a chain-link boundary fence, then the next block."""
     ground("82a05e")
-    strip_x("carpark", 2.3, 12, "6e7075", h=0.03)
-    for i in range(-5, 4):
-        box(f"bay{i}", (4.8, -0.03, i * 2.4 + 1.2), (4.8, 0.02, 0.09), "f2efe6", bevel=0.01, subd=1, lump=0)
-    chainlink_z("fence", 4.0, -7.0, 2.3, h=1.2)
+    patch("carpark", [(-2.45, -3.9), (12, -3.9), (12, 12), (-2.45, 12)], "6b6b70", h=LEVEL_H)
+    strip_z("wheel_kerb", -4.05, -3.9, "c9c4b8", h=0.1, x0=-2.45, x1=12)
+    for i, z in enumerate((-3.8, 4.0, 6.6, 9.2)):  # the neighbours' bay lines, matching the room's at -1.2 and 1.4
+        box(f"bayline{i}", (0.0, -0.04, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
     block("home", -5.25, 1.85, 5.6, 8.3, 3, "d8cdb8", win="4a5c68", trim="c7bca4")  # the bay's own block
-    chainlink_z("fence_b", -3.0, -2.4, 9)
+    chainlink_z("fence", -4.6, -2.45, 12, h=1.4)
     block("br", 2.0, -7.2, 7.0, 3.2, 2, "d8ccb2", win="4a5c68", trim="c7bca4")
-    bush("b0", -0.8, -3.6, 0.5, "6f8f4a")
-    tufts("weed", ((-6, 2.3), (2.3, 3.2)), 10)
 
 
 def tired_street():
     """Fixer-upper: a tired older street, overgrown lawn, a leaning fence and peeling neighbours."""
     ground("8f9e58")
-    road_x(3.9, 12, kerb_col="bcb5a6", walk="c6bfb0", tar="7c7a76", line=False, crack=True)
-    picket_z("front", 3.3, -7.0, 2.3, col="d8d0bc", lean=0.2)
+    road_x(3.9, 12, kerb_col="bcb5a6", walk="c6bfb0", tar="7c7a76", line=False, crack=True, drive="a49a88")
+    picket_z("front", 3.3, -7.0, 2.0, col="d8d0bc", lean=0.2)
     home_body("b9a58a", 3.2, roof="6d5a4a", chim=-1.2)
     tube("pole", (-0.6, 4.4, -3.2), 0.13, 9.0, "6b5440")
     box("pole_arm", (-0.6, 8.4, -3.2), (1.6, 0.12, 0.14), "6b5440", bevel=0.02)
     tree("tr", 1.8, -4.4, h=5.2, r=1.3, leaf="7a964e")
-    tufts("weed", ((-6.5, 2.3), (2.3, 3.2)), 16, col="9aa850", tall=0.45)
+    tufts("weed", ((-6.5, 2.0), (2.3, 3.2)), 16, col="9aa850", tall=0.45)
     tufts("weed_b", ((-2.5, 2), (-4.5, -2.5)), 18, col="9aa850", tall=0.5, far=HAZE[0])
 
 
 def terrace():
     """Town house: a terraced row in the city, black railings and a street lamp."""
     ground("b7b0a4")
-    road_x(3.9, 12, walk="c9c2b5", tar="65676c")
-    railing_z("rail", 3.2, -7.0, 2.3)
-    lamp("lamp0", 2.65, -1.9, h=5.5)
+    road_x(3.9, 12, walk="c9c2b5", tar="65676c", drive="9c9890")
+    railing_z("rail", 3.2, -7.0, 2.0)
+    lamp("lamp0", 2.65, -2.6, h=5.5)  # clear of the drive mouth
     home_body("8a5a48", 8.9, trim="efe8dc", floors=2, chim=-1.0)
     block("tl1", -4.21, 3.9, 4.38, 3.8, 3, "9b6a52", trim="efe8dc")  # next door in the row
-    block("tr0", 1.8, -5.6, 3.8, 4.0, 3, "86584a", trim="efe8dc")
-    chimney("tr0_chim", 2.8, 3.3, -4.6, "86584a")
+    block("tr0", -4.21, -4.2, 4.38, 3.8, 3, "86584a", trim="efe8dc")  # next door the other way, on the building line
+    chimney("tr0_chim", -5.2, 9.4, -4.6, "86584a")
 
 
 def band(name, s0, s1, col, y=-0.1, h=0.06, across=24):
@@ -469,7 +483,7 @@ def beach():
     """Seaside villa: a coastal road in front, sand and dune grass, the sea out to the horizon behind the villa."""
     shore = -4.8
     ground("e8d7ae")
-    road_x(3.9, 12, kerb_col="e2d8c2", walk="e6d6b0", tar="8a8986")
+    road_x(3.9, 12, kerb_col="e2d8c2", walk="e6d6b0", tar="8a8986", drive="e3d7bd")
     band("wet_sand", shore + 0.6, shore, "d6c094", y=-0.12, h=0.03)
     band("sea", shore, -HORIZON - 0.01, "5f9ec4", y=-0.12, h=0.05)
     band("foam", shore + 0.1, shore - 0.12, "f4f6f2", y=-0.115, h=0.05)
@@ -482,9 +496,9 @@ def beach():
 def grounds():
     """Mansion: big grounds, a mown lawn, a gravel drive, clipped hedges and tall trees."""
     ground("6f9c50")
-    strip_x("gravel", 2.3, 12, "d9cfb8", h=0.04)
+    strip_x("gravel", DRIVE, 12, "d9cfb8", h=0.04)  # the forecourt, level with the drive
     for i in range(-3, 4):  # mown stripes, kept out of the haze
-        strip_z(f"stripe{i}", i * 1.6 + 2.6, i * 1.6 + 3.4, "7aa85a", h=0.01, x0=-HORIZON - 9, x1=2.25)
+        strip_z(f"stripe{i}", i * 1.6 + 2.6, i * 1.6 + 3.4, "7aa85a", h=0.01, x0=-HORIZON - 9, x1=2.0)
     box("hedge_f", (-2.6, 0.22, 3.0), (8.0, 0.65, 0.5), "4f7f3e", bevel=0.18, lump=0.02)
     for i, (x, z) in enumerate(((-3.2, -3.2),)):
         tube(f"cone_pot{i}", (x, 0.1, z), 0.3, 0.4, "d8cfb8")
