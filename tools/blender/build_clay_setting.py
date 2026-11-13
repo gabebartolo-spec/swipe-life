@@ -24,7 +24,9 @@ import build_clay_room as R  # noqa: E402
 
 box, ball, tube = R.box, R.ball, R.tube
 HORIZON = 7.2  # ground ends at x + z = -HORIZON
-HAZE = (-3.4, -HORIZON)  # x + z where the fade starts and where it is complete
+HAZE = (-4.0, -HORIZON)  # x + z where the fade starts and where it is strongest
+HAZE_MAX = 0.18
+STOREY = 2.9  # a real storey at the room's scale (its wall is 2.8 high)  # a light tint toward the horizon colour, never a fog
 SKY = {  # horizon, zenith
     "default": ("eef0ea", "a8c8e0"),
     "beach": ("eef3ef", "93c3e2"),
@@ -281,13 +283,13 @@ def windows_on(n, face, c, w, d, h, floors, per, col="2f4858", frame="f4efe4", y
 
 def house(n, x, z, w, d, col, roof, ridge_x=True, floors=2, door="c0392b", peel=False):
     """A detached house: two floors, gable roof, windows and a door on both camera-facing sides."""
-    h = floors * 1.15 + 0.2
+    h = floors * STOREY + 0.2
     box(f"{n}_body", (x, h / 2 - 0.1, z), (w, h, d), col, bevel=0.08, lump=0.008)
-    prism(f"{n}_roof", (x, h - 0.1 + 0.55, z), (w + 0.4, 1.1, d + 0.4), roof, along_x=ridge_x, bevel=0.05,
+    prism(f"{n}_roof", (x, h - 0.1 + 0.9, z), (w + 0.5, 1.8, d + 0.5), roof, along_x=ridge_x, bevel=0.05,
           lump=0.008)
-    windows_on(n + "x", "x", (x, z), w, d, h, floors, 2, y0=0.05, fh=1.15)
-    windows_on(n + "z", "z", (x, z), w, d, h, floors, 2, y0=0.05, fh=1.15)
-    box(f"{n}_door", (x + w / 2 + 0.02, 0.45, z + d * 0.05), (0.06, 1.0, 0.5), door, bevel=0.02, lump=0)
+    windows_on(n + "x", "x", (x, z), w, d, h, floors, 2, y0=0.05, fh=STOREY)
+    windows_on(n + "z", "z", (x, z), w, d, h, floors, 2, y0=0.05, fh=STOREY)
+    box(f"{n}_door", (x + w / 2 + 0.02, 1.0, z + d * 0.05), (0.06, 2.1, 0.95), door, bevel=0.02, lump=0)
     if peel:
         for i in range(4):
             ball(f"{n}_peel{i}", (x + w / 2 + 0.01, 0.4 + rng.random() * (h - 0.8), z + (rng.random() - 0.5) * d * 0.8),
@@ -296,16 +298,16 @@ def house(n, x, z, w, d, col, roof, ridge_x=True, floors=2, door="c0392b", peel=
 
 def block(n, x, z, w, d, floors, col, win="2f4858", trim="e6dfd2", balcony=False):
     """An apartment block with a flat roof parapet."""
-    fh = 0.95
+    fh = STOREY
     h = floors * fh + 0.25
     box(f"{n}_body", (x, h / 2 - 0.1, z), (w, h, d), col, bevel=0.08, lump=0.008)
     box(f"{n}_parapet", (x, h - 0.05, z), (w + 0.12, 0.16, d + 0.12), trim, bevel=0.04)
-    per_x, per_z = max(2, int(d / 1.1)), max(2, int(w / 1.1))
+    per_x, per_z = max(2, int(d / 1.6)), max(2, int(w / 1.6))
     windows_on(n + "x", "x", (x, z), w, d, h, floors, per_x, col=win, frame=trim, y0=0.15, fh=fh)
     windows_on(n + "z", "z", (x, z), w, d, h, floors, per_z, col=win, frame=trim, y0=0.15, fh=fh)
     if balcony:
         for f in range(1, floors):
-            box(f"{n}_bal{f}", (x + w / 2 + 0.25, 0.15 + f * fh - 0.05, z), (0.5, 0.08, d * 0.5), trim, bevel=0.03)
+            box(f"{n}_bal{f}", (x + w / 2 + 0.45, 0.15 + f * fh - 0.05, z), (0.9, 0.12, d * 0.4), trim, bevel=0.03)
 
 
 def lamp(n, x, z, h=2.6):
@@ -351,6 +353,25 @@ def chimney(n, x, y, z, col="9b5a46"):
     box(f"{n}_cap", (x, y + 0.52, z), (0.55, 0.1, 0.55), "d8d0c0", bevel=0.03, lump=0)
 
 
+def home_body(col, h, roof=None, trim=None, floors=0, win="2f4858", chim=None):
+    """The home the driveway belongs to: its body stands flush behind the room's wall (x -2.3..-2.0, z -2.3..2.0,
+    2.8 high), so that wall reads as the house's garage side and not a lone panel. `floors` window rows above it."""
+    x0, x1, z0, z1 = -6.4, -2.02, -2.3, 2.0
+    w, d, cx, cz = x1 - x0, z1 - z0, (x0 + x1) / 2, (z0 + z1) / 2
+    box("home_body", (cx, h / 2 - 0.1, cz), (w, h, d), col, bevel=0.08, lump=0.008)
+    if roof:
+        prism("home_roof", (cx, h - 0.1 + 0.9, cz), (w + 0.5, 1.8, d + 0.5), roof, along_x=False, bevel=0.05,
+              lump=0.008)
+    if trim:
+        box("home_parapet", (cx, h - 0.05, cz), (w + 0.12, 0.16, d + 0.12), trim, bevel=0.04)
+    if floors:
+        fh = (h - 3.0) / floors
+        windows_on("home_x", "x", (cx, cz), w, d, h, floors, 3, col=win, y0=2.9, fh=fh)
+    windows_on("home_z", "z", (cx, cz), w, d, h, max(1, floors + 1), 2, col=win, y0=0.05, fh=(h - 0.3) / (floors + 1))
+    if chim:
+        chimney("home_chim", -4.6, h + 0.5, chim)
+
+
 def neighbour(n, col, roof, peel=False, x_front=-3.0):
     """The house next door on the left, its roof and chimney rising over the left wall."""
     house(n, x_front - 2.0, 1.6, 4.0, 4.4, col, roof, ridge_x=False, peel=peel)
@@ -361,18 +382,18 @@ def suburb(young=False):
     """Family house and childhood home: a suburban street with fences, lawns and big trees. Starter house (young):
     the same street newer, with small trees and low fences."""
     ground("86b05e" if young else "7aa85a")
-    road_x(3.0, 12)
+    road_x(3.9, 12)
     if young:
         picket_z("front", 3.3, -7.0, 2.3, h=0.5, col="f4f0e6")
-        neighbour("nl", "efe3c8", "b5654a")
-        tree("tr", -0.4, -3.4, h=3.0, r=0.7, kind="young")
-        tree("tr2", 1.8, -4.6, h=2.6, r=0.55, kind="young")
+        home_body("c4785a", 3.2, roof="b5654a")
+        tree("tr", -0.4, -3.4, h=4.0, r=0.85, kind="young")
+        tree("tr2", 1.8, -4.6, h=3.6, r=0.75, kind="young")
         bush("b0", -4.2, 2.9, 0.3)
     else:
         picket_z("front", 3.3, -7.0, 2.3)
-        neighbour("nl", "e9d7bb", "8f4f3a")
-        tree("tr", -0.3, -3.4, h=4.0, r=1.15, leaf="5f9447")
-        board_fence_z("back", -4.4, -2.4, 9)
+        home_body("b8694c", 6.0, roof="8f4f3a", floors=1, chim=-1.0)
+        tree("tr", -0.3, -3.4, h=5.5, r=1.5, leaf="5f9447")
+        board_fence_z("back", -4.4, -2.4, 9, h=1.8)
         tree("tr2", 3.6, -6.4, h=4.2, r=1.2)
         bush("b0", -4.4, 2.8, 0.36)
         bush("b1", -3.6, 2.85, 0.3, "6a9a4e")
@@ -381,12 +402,12 @@ def suburb(young=False):
 def flats():
     """Small flat: brick apartment blocks in town, a pavement and a street tree."""
     ground("b9b2a6")  # paved courtyard
-    road_x(3.0, 12)
-    block("bl", -5.2, 2.0, 4.4, 7.0, 6, "b5654a", trim="e6dccb", balcony=True)
+    road_x(3.9, 12)
+    block("home", -5.25, 1.85, 5.6, 8.3, 6, "e2d6c0", trim="cfc4ac")  # the bay's own block
     block("br", 1.6, -6.2, 7.0, 3.6, 3, "c27a56", trim="ece4d6")
     box("grate", (0.2, -0.04, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
-    tree("st0", 0.2, -3.3, h=3.8, r=0.9, leaf="6a9a4c")
-    lamp("lamp0", 2.65, -1.9, h=3.0)
+    tree("st0", 0.2, -3.3, h=5.0, r=1.2, leaf="6a9a4c")
+    lamp("lamp0", 2.65, -1.9, h=5.5)
     box("planter", (-3.6, 0.15, 3.0), (1.6, 0.5, 0.6), "8a8378", bevel=0.05)
     bush("pb0", -3.9, 3.0, 0.3, "6a9a4a")
     bush("pb1", -3.3, 3.0, 0.28, "5f8f4a")
@@ -397,9 +418,9 @@ def lowrise():
     ground("82a05e")
     strip_x("carpark", 2.3, 12, "6e7075", h=0.03)
     for i in range(-5, 4):
-        box(f"bay{i}", (3.9, -0.03, i * 2.4 + 1.2), (3.0, 0.02, 0.09), "f2efe6", bevel=0.01, subd=1, lump=0)
+        box(f"bay{i}", (4.8, -0.03, i * 2.4 + 1.2), (4.8, 0.02, 0.09), "f2efe6", bevel=0.01, subd=1, lump=0)
     chainlink_z("fence", 4.0, -7.0, 2.3, h=1.2)
-    block("bl", -5.2, 1.6, 3.8, 7.0, 2, "e2d6bc", win="4a5c68", trim="cfc4ac")
+    block("home", -5.25, 1.85, 5.6, 8.3, 3, "d8cdb8", win="4a5c68", trim="c7bca4")  # the bay's own block
     chainlink_z("fence_b", -3.0, -2.4, 9)
     block("br", 2.0, -7.2, 7.0, 3.2, 2, "d8ccb2", win="4a5c68", trim="c7bca4")
     bush("b0", -0.8, -3.6, 0.5, "6f8f4a")
@@ -409,12 +430,12 @@ def lowrise():
 def tired_street():
     """Fixer-upper: a tired older street, overgrown lawn, a leaning fence and peeling neighbours."""
     ground("8f9e58")
-    road_x(3.0, 12, kerb_col="bcb5a6", walk="c6bfb0", tar="7c7a76", line=False, crack=True)
+    road_x(3.9, 12, kerb_col="bcb5a6", walk="c6bfb0", tar="7c7a76", line=False, crack=True)
     picket_z("front", 3.3, -7.0, 2.3, col="d8d0bc", lean=0.2)
-    neighbour("nl", "c7b48e", "6d5a4a", peel=True)
-    tube("pole", (-0.6, 2.4, -3.2), 0.09, 5.0, "6b5440")
-    box("pole_arm", (-0.6, 4.4, -3.2), (1.2, 0.1, 0.12), "6b5440", bevel=0.02)
-    tree("tr", 1.8, -4.4, h=3.8, r=1.0, leaf="7a964e")
+    home_body("b9a58a", 3.2, roof="6d5a4a", chim=-1.2)
+    tube("pole", (-0.6, 4.4, -3.2), 0.13, 9.0, "6b5440")
+    box("pole_arm", (-0.6, 8.4, -3.2), (1.6, 0.12, 0.14), "6b5440", bevel=0.02)
+    tree("tr", 1.8, -4.4, h=5.2, r=1.3, leaf="7a964e")
     tufts("weed", ((-6.5, 2.3), (2.3, 3.2)), 16, col="9aa850", tall=0.45)
     tufts("weed_b", ((-2.5, 2), (-4.5, -2.5)), 18, col="9aa850", tall=0.5, far=HAZE[0])
 
@@ -422,12 +443,11 @@ def tired_street():
 def terrace():
     """Town house: a terraced row in the city, black railings and a street lamp."""
     ground("b7b0a4")
-    road_x(3.0, 12, walk="c9c2b5", tar="65676c")
+    road_x(3.9, 12, walk="c9c2b5", tar="65676c")
     railing_z("rail", 3.2, -7.0, 2.3)
-    lamp("lamp0", 2.65, -1.9, h=3.2)
-    for i, (z, col) in enumerate(((-0.4, "8a5a48"), (3.4, "9b6a52"))):
-        block(f"tl{i}", -5.0, z, 4.0, 3.8, 3, col, trim="efe8dc")
-        chimney(f"tl{i}_chim", -4.0, 3.3, z + 1.2, col)
+    lamp("lamp0", 2.65, -1.9, h=5.5)
+    home_body("8a5a48", 8.9, trim="efe8dc", floors=2, chim=-1.0)
+    block("tl1", -4.21, 3.9, 4.38, 3.8, 3, "9b6a52", trim="efe8dc")  # next door in the row
     block("tr0", 1.8, -5.6, 3.8, 4.0, 3, "86584a", trim="efe8dc")
     chimney("tr0_chim", 2.8, 3.3, -4.6, "86584a")
 
@@ -442,22 +462,17 @@ def band(name, s0, s1, col, y=-0.1, h=0.06, across=24):
 
 
 def beach():
-    """Seaside villa: sand and dune grass running down to the sea, out to the horizon."""
+    """Seaside villa: a coastal road in front, sand and dune grass, the sea out to the horizon behind the villa."""
     shore = -4.8
     ground("e8d7ae")
+    road_x(3.9, 12, kerb_col="e2d8c2", walk="e6d6b0", tar="8a8986")
     band("wet_sand", shore + 0.6, shore, "d6c094", y=-0.12, h=0.03)
     band("sea", shore, -HORIZON - 0.01, "5f9ec4", y=-0.12, h=0.05)
-    for i in range(16):  # waves breaking along the shore
-        a = -10 + i * 1.3 + rng.random() * 0.4
-        b = (shore - 0.15) / math.sqrt(2)
-        f = ball(f"foam{i}", ((a + b) / math.sqrt(2), -0.07, (b - a) / math.sqrt(2)), 0.5, "f4f6f2",
-                 scale=(1.3, 0.06, 0.32), lump=0.01)
-        turn(f, 2, math.radians(45))
-    for i, (x, z, r) in enumerate(((-4.4, 3.4, 0.9), (3.4, -2.8, 0.8))):
-        ball(f"dune{i}", (x, -0.12, z), r, "e2cf9f", scale=(1.6, 0.35, 1.6), lump=0.03)
-        tufts(f"grass{i}_", ((x - r, x + r), (z - r, z + r)), 7, col="9aaa58", tall=0.5)
-    palm("palm0", -3.2, 0.9, h=3.0)
-    box("towel", (3.5, -0.05, 0.3), (0.55, 0.02, 1.1), "5b93b8", bevel=0.01, subd=1, lump=0)
+    band("foam", shore + 0.1, shore - 0.12, "f4f6f2", y=-0.115, h=0.05)
+    home_body("f4f0e6", 6.0, trim="e6e0d2", floors=1, win="4f7f9c")
+    ball("dune0", (-1.0, -0.12, 3.7), 0.9, "e2cf9f", scale=(1.6, 0.35, 1.6), lump=0.03)
+    tufts("grass0_", ((-2.2, 0.2), (2.5, 4.6)), 9, col="9aaa58", tall=0.45)
+    palm("palm0", 0.3, -3.1, h=3.8)  # a young palm: a grown one (6 m+) puts its crown out of frame
 
 
 def grounds():
@@ -470,11 +485,10 @@ def grounds():
     for i, (x, z) in enumerate(((-3.2, -3.2),)):
         tube(f"cone_pot{i}", (x, 0.1, z), 0.3, 0.4, "d8cfb8")
         ball(f"cone{i}", (x, 0.95, z), 0.35, "4a7a3a", scale=(1, 2.4, 1), lump=0.02)
-    for i, z in enumerate((-1.0, 1.4, 3.8)):
-        tree(f"pl{i}", -3.4, z, h=4.6, r=0.7, kind="poplar", leaf="567f42")
-    tree("oak", -0.4, -3.6, h=4.2, r=1.3, leaf="5f8f45")
+    home_body("d8cfb8", 8.9, roof="5a5f66", floors=2, chim=-1.0)
+    tree("oak", -0.4, -3.6, h=6.0, r=1.8, leaf="5f8f45")
     for i, x in enumerate((2.2, 4.2)):
-        tree(f"pr{i}", x, -3.6, h=4.6, r=0.7, kind="poplar", leaf="5a8545")
+        tree(f"pr{i}", x, -3.6, h=8.0, r=1.0, kind="poplar", leaf="5a8545")
 
 
 SETTINGS = {
@@ -548,7 +562,7 @@ def bake_and_haze(horizon):
             p = mw @ ob.data.vertices[i].co
             s = p.x + (-p.y)  # Godot x + z
             t = min(max((s - HAZE[0]) / (HAZE[1] - HAZE[0]), 0.0), 1.0)
-            t = t * t * (3 - 2 * t)
+            t = t * t * (3 - 2 * t) * HAZE_MAX
             ao = 0.35 + 0.65 * d.color[0]
             d.color = tuple(c[k] * ao * (1 - t) + hz[k] * t for k in range(3)) + (1.0,)
         ob.data.materials.clear()

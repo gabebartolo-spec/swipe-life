@@ -748,7 +748,8 @@ def driveway(home_id):
     x0, z0 = 8, 4
     H.layer("room_driveway")
     box("slab", (x0 + 2, -0.2, z0 + 2), (4.3, 0.4, 4.3), grass, bevel=0.14, lump=0.01)
-    box("wall_x", (x0 - 0.15, H.WALL_H / 2, z0 + 1.85), (0.3, H.WALL_H, 4.3), wall, bevel=0.14)
+    if kind == "garage":  # the house's garage side; a flat's bay has no wall, its block stands behind (setting)
+        box("wall_x", (x0 - 0.15, H.WALL_H / 2, z0 + 1.85), (0.3, H.WALL_H, 4.3), wall, bevel=0.14)
     H.tag()
     H.layer("drive")
     # The car is backed in square to the wall (figure_stage.gd: centre x0+2.1, z0+2.1, nose to +x, the street),
@@ -758,13 +759,8 @@ def driveway(home_id):
         for i, z in enumerate((z0 + 0.8, z0 + 3.4)):  # the bay's side lines, either side of the car
             box(f"line{i}", (x0 + 2.0, 0.06, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
         box("lip", (x0 + 4.0, 0.05, z0 + 2.05), (0.2, 0.04, 4.1), "c9c4b8", bevel=0.02)  # dropped kerb to the street
-        tube("pipe", (x0 + 0.08, H.WALL_H / 2, z0 + 0.25), 0.05, H.WALL_H, "7d7f84")
         wheelie_bin("bin", x0 + 0.45, z0 + 3.75, "c0392b")  # general waste
         wheelie_bin("bin2", x0 + 1.2, z0 + 3.75, "e8c040")  # recycling
-        box("lamp_box", (x0 + 0.06, 2.3, z0 + 1.9), (0.12, 0.22, 0.3), "2f3136", bevel=0.04)
-        ball("lamp_glow", (x0 + 0.15, 2.25, z0 + 1.9), 0.09, "fff3c4", scale=(0.8, 1, 1.3))
-        box("plate", (x0 + 0.02, 1.95, z0 + 2.4), (0.04, 0.5, 0.62), "f2efe6", bevel=0.03)  # clear of the HUD text
-        bay_number("12", (x0 + 0.05, 1.95, z0 + 2.4))  # plaque centre
         tube("bollard", (x0 + 3.5, 0.45, z0 + 0.45), 0.11, 0.9, "4a4c52")
         tube("bollard_band", (x0 + 3.5, 0.72, z0 + 0.45), 0.115, 0.1, "e8c040", lump=0)
         ball("bollard_cap", (x0 + 3.5, 0.9, z0 + 0.45), 0.11, "4a4c52", scale=(1, 0.5, 1))
