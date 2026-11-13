@@ -6,6 +6,7 @@ uniform sampler2D room_depth : filter_nearest, repeat_disable;
 uniform vec3 room_origin;
 uniform vec3 room_axis;
 uniform float depth_span = 16.0;
+uniform float strength = 0.38;
 
 varying vec3 wpos;
 
@@ -20,5 +21,5 @@ void fragment() {
 		discard;
 	}
 	ALBEDO = vec3(0.16, 0.11, 0.08);
-	ALPHA = 0.38 * smoothstep(1.0, 0.25, length(UV * 2.0 - 1.0));
+	ALPHA = strength * smoothstep(1.0, 0.25, length(UV * 2.0 - 1.0));
 }

@@ -8,8 +8,10 @@ const ROOMS := {
 	"bedroom": Vector2(0, 0),
 	"bathroom": Vector2(1, 0),
 	"living": Vector2(0, 1),
-	"kitchen": Vector2(1, 1)
+	"kitchen": Vector2(1, 1),
+	"driveway": Vector2(2, 1),
 }
+const ADULT_ONLY := ["driveway"]  # the parents' house has no driveway still
 const PAN_TIME := 0.4
 const MAX_KIDS_SHOWN := 2  # a small room stays readable
 const ROOM_DIR := "res://assets/house/rooms"
@@ -65,9 +67,9 @@ static func texture_path(room_id: String, band_id: String) -> String:
 
 
 func show_room(age: int, room_id: String = "bedroom", housing: Dictionary = {}) -> void:
-	if not ROOMS.has(room_id):
-		room_id = "bedroom"
 	var new_band := home_for(age, housing)
+	if not ROOMS.has(room_id) or (room_id in ADULT_ONLY and new_band in ["baby", "child", "teen"]):
+		room_id = "bedroom"
 	if room_id == room and new_band == band:
 		return
 	var tex := load(texture_path(room_id, new_band)) as Texture2D
@@ -168,5 +170,7 @@ func _step_room(step: int) -> void:
 	if _browse.is_empty():
 		return
 	var ids := ROOMS.keys()
+	if band in ["baby", "child", "teen"]:
+		ids = ids.filter(func(r): return r not in ADULT_ONLY)
 	var i := (ids.find(room) + step + ids.size()) % ids.size()
 	show_room(_browse.age, ids[i], _browse.housing)

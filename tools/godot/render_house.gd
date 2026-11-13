@@ -14,7 +14,8 @@ const ROOMS := {
 	"bedroom": Vector2(2, 2),
 	"bathroom": Vector2(6, 2),
 	"living": Vector2(2, 6),
-	"kitchen": Vector2(6, 6)
+	"kitchen": Vector2(6, 6),
+	"driveway": Vector2(10, 6),
 }
 const ROOM_SIZE := 5.6
 
@@ -107,6 +108,8 @@ func _render(out: String) -> void:
 		await process_frame  # let the GLB transforms settle before reading AABBs
 	for band: String in _bands:
 		for room: String in ROOMS:
+			if room == "driveway" and _bands == BANDS:
+				continue  # adult homes only
 			var c: Vector2 = ROOMS[room]
 			_show_room(room, band, c)
 			_cam.transform.origin = Vector3(c.x, 1.0, c.y) + _cam.transform.basis.z * 20.0

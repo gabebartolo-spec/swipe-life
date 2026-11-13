@@ -126,13 +126,19 @@ def limb_ring(key, a, b, t, rad, n=12, r=0.03):
 
 # Sockets (director 2026-11-03): every piece meeting at a joint ends in a sphere of exactly that joint's
 # radius centred on its pivot, so a turn never shows an edge, gap or bulge where the pieces overlap.
-JR = {"neck": 0.09, "waist": 0.2, "shoulder": 0.1, "elbow": 0.09, "wrist": 0.075, "hip": 0.115, "knee": 0.105,
+# Elbow and knee are as thick as the upper arm (0.095) and thigh (0.11) that end in them, or the bigger end bead
+# shows as a lip on a bent joint (director 2026-11-13). The lower piece's ball is CHILD_GROW bigger still, so it
+# wholly covers the upper end at any bend instead of two equal faceted balls crossing.
+JR = {"neck": 0.09, "waist": 0.2, "shoulder": 0.1, "elbow": 0.095, "wrist": 0.075, "hip": 0.115, "knee": 0.11,
       "ankle": 0.085}
+CHILD_GROW = {"elbow": 0.004, "knee": 0.004}
 WAIST = ARGS[3] if len(ARGS) > 3 else "loose"  # loose: the top hangs over the pelvis; tucked: waistband over the top
 
 
 def socket(layer, piece, joint, s=1, grow=0.0, mask="R"):
     scale = (1.0, 0.9, 0.7) if joint == "waist" else (1, 1, 1)
+    if piece.startswith(("forearm", "shin")):  # the lower piece at its own pivot joint
+        grow += CHILD_GROW.get(joint, 0.0)
     sphere((layer, piece, mask), j(joint, s), JR[joint] + grow, scale)
 
 
@@ -162,16 +168,29 @@ def torso(layer, grow, mask="R"):
     # slim: widest at the ribs, narrowing to the waist (director: the one-ball belly read as fat)
     sphere((layer, "chest", mask), (0, 1.1, 0), 0.29 + grow, (WAIST_W, 0.8, 0.62))
     sphere((layer, "chest", mask), (0, 1.27, 0), 0.22 + grow, (1.05 * SHOULDER_W, 0.42, 0.7))
-    if GROWN:  # flat yoke out to the shoulder: a squared shoulder line, not a ball (director: too rounded)
-        sphere((layer, "chest", mask), (0, 1.3, 0), 0.22 + grow, (1.4 * SHOULDER_W, 0.3, 0.65))
+    if GROWN:  # squared shoulder line, not a ball (director: too rounded). A bar of round beads, not a squashed
+        # disc: the disc's thin rim stuck out past the shoulder like a coat hanger (director 2026-11-13). It runs
+        # from the neck, thinning and dropping, and ends in the shoulder socket, so no rim or ledge shows.
+        sx, sy, _ = j("shoulder")
+        for i in range(29):
+            t = abs(i / 14 - 1)
+            x = (i / 14 - 1) * (sx - 0.02)
+            y = 1.29 + (sy + 0.02 - 1.29) * t ** 2  # level at the neck, curving down onto the shoulder
+            sphere((layer, "chest", mask), (x, y, 0), 0.07 - 0.015 * t + grow, (1, 1, 2.0 - 0.8 * t), 16)
     socket(layer, "chest", "waist", grow=grow, mask=mask)
     if SEX == "f" and AGE in ("teen", "adult"):  # chest beads (PEOPLE.md §2, director: women need breasts)
         # undo the age stretch (tall bodies stretched round beads into vertical footballs): k/SY, k/SX
         k = (SX + SY) / 2
         for s in (-1, 1):
-            # one round bead per side, a clear gap between them (director: "just make them normal")
-            r = 0.075 if AGE == "adult" else 0.06
-            sphere((layer, "chest", mask), (0.1 * s, 1.14, 0.09), r + grow, (k / SX, k / SY, 0.8 * k / SX))
+            # Natural breast shape (director 2026-11-13, "normal breasts"): a teardrop per side. A straight upper
+            # slope starts high on the chest wall, under the shoulder line, and runs down and out to a full,
+            # round lower half that stands clear of the chest, with a fold underneath. Beads grow along it; the upper
+            # ones are wide, so the slope fades into the chest instead of a narrow ridge (a pear from the front).
+            big = 1.0 if AGE == "adult" else 0.8
+            for i in range(7):
+                t = i / 6
+                at = (0.095 * s + 0.012 * s * t, 1.29 - 0.13 * t, 0.075 + 0.055 * t)
+                sphere((layer, "chest", mask), at, (0.035 + 0.045 * t ** 0.8) * big + grow, ((1.9 - 0.9 * t) * k / SX, k / SY, k / SX))  # wide slope
     if layer != "body":  # tops hang straight past the hips, wider than the trousers (director)
         for y in (1.05, 1.02, 0.99, 0.96, 0.93, 0.9, 0.87, 0.84):  # sides from the ribs to the hem: no round belly
             sphere((layer, "chest", mask), (0, y, 0), 0.3 + grow, (top_w(y), 0.35, 0.62))

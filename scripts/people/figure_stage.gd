@@ -16,6 +16,7 @@ const ROOM_CENTRE := {
 	"bathroom": Vector2(6, 2),
 	"living": Vector2(2, 6),
 	"kitchen": Vector2(6, 6),
+	"driveway": Vector2(10, 6),
 }
 const DEPTH_SPAN := 16.0
 const FLOOR_Y := 0.05
@@ -29,6 +30,7 @@ const STAY_MAX := 9.0
 const PERSONAL_SPACE := 0.75  # metres between where two people stop
 const SEAT_STEP := 0.6  # metres between seats along a bed or sofa
 const ITEM_MODELS := "res://assets/house/items/items.glb"
+const CAR_MODELS := "res://assets/house/items/cars.glb"
 ## Floor room an item needs, in metres from its middle. A rug is flat, so people walk over it.
 const ITEM_SPACE := {
 	"plant": 0.3,
@@ -56,8 +58,18 @@ const SLOT_DIR := "res://assets/house/slots"
 ## replacement stands in the same place. Slot -> node in that file, and how a bought item turns
 ## to face the same way (items are modelled facing +z).
 const SLOT_NODES := {"sofa": "slot_sofa", "tv": "slot_tv", "mattress": "slot_bed"}
-const SLOT_TURN := {"sofa": PI / 2.0, "tv": -PI / 2.0, "mattress": 0.0}
+const SLOT_TURN := {"sofa": PI / 2.0, "tv": -PI / 2.0, "mattress": 0.0, "car": PI / 2.0}
+## Slots with nothing of the home's own in them: where a bought item stands.
+## The car is backed in square to the garage wall: rear to the door, nose out to the street (+x).
+const SLOT_SPOTS := {"car": Vector3(10.1, 0.0, 6.1)}
+## Where the first figure stands when free (no car). Hand-picked, so the floor-depth test is
+## skipped (garage paving sits 0.1 above the floor). With a car, it stands by the car's right side.
+const ROOM_STAND := {"driveway": Vector2(11.4, 5.6)}
+const STAND_GAP := 0.4  # from the car's side
+## A car fits the 4.1 m bay when its length <= this; longer ones (limo, RV) shrink.
+const CAR_FIT := 3.9
 const ITEM_GRID := 0.25
+const GROUND_SHADOW := preload("res://shaders/figure_shadow.gdshader")
 
 var _viewport := SubViewport.new()
 var _world := Node3D.new()
@@ -70,6 +82,7 @@ var _actors: Array[Dictionary] = []
 var _item_list: Array = []  # [{id, room}] everything bought; this room's are shown
 var _item_nodes: Array[Node3D] = []
 var _item_spots: Array[Vector3] = []  # x, z, radius of the solid items standing in this room
+var _car_stand := Vector2.INF  # where the figure stands beside the parked vehicle
 var _home := ""
 var _base_depth: Image  # the bare room's baked depth; slot props are merged on top of a copy
 var _bake_vp: SubViewport
@@ -142,6 +155,7 @@ func _rebuild_items() -> void:
 		n.queue_free()
 	_item_nodes.clear()
 	_item_spots.clear()
+	_car_stand = Vector2.INF
 	if _depth == null:
 		return
 	_depth.copy_from(_base_depth)
@@ -173,6 +187,26 @@ func _add_item(mesh: Mesh, at: Vector3, turn: float) -> MeshInstance3D:
 	return copy
 
 
+## A soft dark patch on the floor under a vehicle, so it sits on the ground instead of floating.
+func _add_ground_shadow(item: Node3D, box: AABB) -> void:
+	var quad := QuadMesh.new()
+	quad.size = Vector2(box.size.x * 1.35, box.size.z * 1.2)
+	quad.orientation = PlaneMesh.FACE_Y
+	var patch := MeshInstance3D.new()
+	patch.mesh = quad
+	patch.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var shade := ShaderMaterial.new()
+	shade.shader = GROUND_SHADOW
+	shade.set_shader_parameter("room_depth", _depth_tex)
+	shade.set_shader_parameter("room_origin", Vector3(_centre.x, 1.0, _centre.y))
+	shade.set_shader_parameter("room_axis", BASIS_CAM.z)
+	shade.set_shader_parameter("depth_span", DEPTH_SPAN)
+	shade.set_shader_parameter("strength", 0.6)
+	patch.material_override = shade
+	item.add_child(patch)
+	patch.position = Vector3(box.get_center().x, 0.015, box.get_center().z)
+
+
 ## Draws this room's slots: the bought item where one is owned, else the home's own piece.
 ## Returns {slot: true} for every slot it filled. Homes without a slots file keep baked furniture.
 func _slot_props(scene: Node, mine: Array) -> Dictionary:
@@ -181,6 +215,32 @@ func _slot_props(scene: Node, mine: Array) -> Dictionary:
 	if not ResourceLoader.exists(path):
 		return done
 	var slots: Node = (load(path) as PackedScene).instantiate()
+	for slot: String in SLOT_SPOTS:
+		var spot: Vector3 = SLOT_SPOTS[slot]
+		if absf(spot.x - _centre.x) > 2.0 or absf(spot.z - _centre.y) > 2.0:
+			continue
+		var models: Node = (load(CAR_MODELS) as PackedScene).instantiate()
+		for it: Dictionary in mine:
+			var mi := models.find_child(it.id, true, false) as MeshInstance3D
+			if it.get("slot", "") == slot and mi:
+				done[slot] = true
+				var box := mi.mesh.get_aabb()
+				var fit := minf(1.0, CAR_FIT / box.size.z)
+				var turn: float = SLOT_TURN[slot]
+				var car := _add_item(mi.mesh, Vector3(spot.x, FLOOR_Y, spot.z), turn)
+				car.scale = Vector3.ONE * fit
+				_add_ground_shadow(car, box)
+				var fwd := Vector2(sin(turn), cos(turn))
+				var side := Vector2(-cos(turn), sin(turn))  # the car's left: the side facing the camera
+				var mid := box.get_center() * fit
+				var out := mid.x + box.size.x * fit / 2.0 + STAND_GAP
+				_car_stand = Vector2(spot.x, spot.z) + fwd * (mid.z + 0.5) + side * out
+				var half := box.size * fit / 2.0  # walkers keep off it: three circles down its length
+				for k: float in [-1.0, 0.0, 1.0]:
+					var c := Vector2(spot.x, spot.z) + fwd * (mid.z + k * (half.z - half.x))
+					_item_spots.append(Vector3(c.x, c.y, half.x))
+				break
+		models.free()
 	for slot: String in SLOT_NODES:
 		var own := slots.find_child(SLOT_NODES[slot], true, false) as MeshInstance3D
 		if own == null:
@@ -337,8 +397,17 @@ func _apply_depth(fig: Figure3D) -> void:
 
 func _place(a: Dictionary) -> void:
 	var at := _free_spot(a)
+	var turn := PI / 4.0 + randf_range(-1.2, 1.2)  # roughly toward the viewer
+	var stand: Vector2 = _car_stand
+	if stand == Vector2.INF:
+		stand = ROOM_STAND.get(_room, Vector2.INF)
+	if stand != Vector2.INF:
+		stand = stand.clamp(_centre - Vector2(1.8, 1.8), _centre + Vector2(1.8, 1.8))
+	if stand != Vector2.INF and _has_space(stand, a):
+		at = stand
+		turn = PI / 4.0 + 0.45  # three-quarter on, beside the car
 	a.fig.position = Vector3(at.x, FLOOR_Y, at.y)
-	a.fig.rotation.y = PI / 4.0 + randf_range(-1.2, 1.2)  # roughly toward the viewer
+	a.fig.rotation.y = turn
 	a.fig.set_shadow(true)
 	_settle(a, _floor_clip(a))
 
@@ -388,6 +457,8 @@ func _settle(a: Dictionary, clip: String) -> void:
 func _floor_clip(a: Dictionary) -> String:
 	if a.age <= 3:
 		return "sit_floor"
+	if _room == "driveway":  # proud by the car: Mixamo "Female Standing Pose", hands on hips
+		return "proud"
 	var clips := ["idle", "idle"]
 	if a.age >= 10:
 		clips.append("text")

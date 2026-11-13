@@ -42,7 +42,5 @@
   {"id": "child_gift", "tab": "people", "label": "Give your children a gift", "ages": [18, 99], "cost": 100, "needs": ["child"], "do": "child_gift",
    "effects": {"happiness": 2, "stress": -1}, "result": "They played with the box."},
   {"id": "cheat", "tab": "people", "label": "Cheat on your partner", "ages": [18, 99], "needs": ["partner"], "do": "cheat",
-   "effects": {"karma": -10, "stress": 10}},
-  {"id": "car", "tab": "shop", "label": "Buy a used car", "ages": [18, 99], "cost": 2000,
-   "effects": {"happiness": 10, "stress": 5}, "result": "It rattles, smells like dog, and it's yours."}
+   "effects": {"karma": -10, "stress": 10}}
 ]

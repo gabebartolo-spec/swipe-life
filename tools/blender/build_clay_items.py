@@ -13,6 +13,7 @@ import os
 import sys
 
 import bpy
+from mathutils import Matrix
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_clay_room as R  # noqa: E402
@@ -21,11 +22,61 @@ box, ball, tube, cloth, pillow = R.box, R.ball, R.tube, R.cloth, R.pillow
 WOOD, DARKWOOD, CREAM = "d9935a", "b8743f", "f3ead8"
 SPACING = 3.5
 ITEMS = {}  # id -> origin x
+BUDGET = 1200  # max verts per part after baking
 _current = {"id": None, "x": 0.0}
+
+
+def _prep(ob):
+    """Apply the clay modifiers and the vertex budget, and add the AO colour attribute."""
+    bpy.context.view_layer.objects.active = ob
+    for m in list(ob.modifiers):
+        bpy.ops.object.modifier_apply(modifier=m.name)
+    lim = ob.get("budget", BUDGET)  # parts may carry their own vertex budget
+    if len(ob.data.vertices) > lim:
+        d = ob.modifiers.new("budget", "DECIMATE")
+        d.ratio = lim / len(ob.data.vertices)
+        bpy.ops.object.modifier_apply(modifier="budget")
+    ob.data.shade_smooth()
+    ob.data.color_attributes.new("Col", "FLOAT_COLOR", "POINT")
+    ob.data.attributes.active_color = ob.data.color_attributes["Col"]
+    ob.data.materials.append(bpy.data.materials.new(ob.name))
+
+
+def _park():
+    """Prep and AO-bake the item just built (on its own floor), then move it to an excluded collection.
+    Every bpy.ops call and every bake works on all visible objects, so with finished items left in view a
+    68-vehicle build and its bake both slowed quadratically."""
+    scene = bpy.context.scene
+    coll = bpy.data.collections.get("built")
+    if coll is None:
+        coll = bpy.data.collections.new("built")
+        scene.collection.children.link(coll)
+        bpy.context.view_layer.layer_collection.children["built"].exclude = True
+    parts = [o for o in scene.collection.objects if o.type == "MESH"]
+    if not parts:
+        return
+    scene.render.engine = "CYCLES"
+    scene.cycles.samples = 64
+    scene.render.bake.target = "VERTEX_COLORS"
+    for ob in parts:
+        _prep(ob)
+    floor = box("temp_floor", (_current["x"], -0.05, 0), (SPACING + 2, 0.1, 6), "ffffff", bevel=0, subd=0, lump=0)
+    _prep(floor)
+    bpy.ops.object.select_all(action="DESELECT")
+    for ob in parts:
+        ob.select_set(True)
+    bpy.context.view_layer.objects.active = parts[0]
+    bpy.ops.object.bake(type="AO")
+    bpy.data.objects.remove(floor, do_unlink=True)
+    for ob in parts:
+        coll.objects.link(ob)
+        scene.collection.objects.unlink(ob)
+    print("BAKED", _current["id"], len(parts), flush=True)
 
 
 def at(item):
     """Start an item; returns a helper that offsets props by the item's slot on the work row."""
+    _park()
     x = len(ITEMS) * SPACING
     ITEMS[item] = x
     _current.update(id=item, x=x)
@@ -268,39 +319,39 @@ def dog():
         ball(n(f"tail{i}"), p(0, 0.5 + 0.027 * i, -0.4 - 0.018 * i), 0.045 - 0.002 * i, b)
 
 
+def _car(body, length, width, height, cabin, roof_y, wheel_r=0.3, trim="2f3136"):
+    """A chunky clay car facing +z: body slab, a glass cabin with a roof, four wheels, lights."""
+    hl, hw = length / 2, width / 2
+    box(n("body"), p(0, wheel_r + height / 2, 0), (width, height, length), body, bevel=0.14)
+    c0, c1 = cabin  # cabin from z c0 (back) to c1 (front)
+    cz, cl = (c0 + c1) / 2, c1 - c0
+    cy = wheel_r + height
+    box(n("glass"), p(0, (cy + roof_y) / 2, cz), (width - 0.12, roof_y - cy, cl), "8fb3c8", bevel=0.1)
+    box(n("roof"), p(0, roof_y, cz - 0.03), (width - 0.08, 0.1, cl - 0.12), body, bevel=0.05)
+    for i, dz in enumerate((-cl / 2 + 0.25, cl / 2 - 0.25)):
+        box(n(f"pillar{i}"), p(0, (cy + roof_y) / 2, cz + dz), (width - 0.06, roof_y - cy, 0.12), body, bevel=0.05)
+    for i, (sx, sz) in enumerate(((-1, -1), (1, -1), (-1, 1), (1, 1))):
+        z = sz * (hl - wheel_r - 0.25)
+        tube(n(f"tyre{i}"), p(sx * (hw - 0.08), wheel_r, z), wheel_r, 0.24, "2a2b2e", rot=(0, math.pi / 2, 0))
+        tube(n(f"hub{i}"), p(sx * (hw + 0.03), wheel_r, z), wheel_r * 0.45, 0.04, "c9ccd1", rot=(0, math.pi / 2, 0))
+    for i, sx in enumerate((-1, 1)):
+        ball(n(f"lamp{i}"), p(sx * (hw - 0.22), wheel_r + height * 0.62, hl - 0.04), 0.1, "fff3c4", scale=(1.3, 0.8, 0.5))
+        ball(n(f"tail{i}"), p(sx * (hw - 0.2), wheel_r + height * 0.62, -hl + 0.04), 0.09, "d8443a", scale=(1.3, 0.8, 0.5))
+    for i, sz in enumerate((-1, 1)):
+        box(n(f"bumper{i}"), p(0, wheel_r + 0.08, sz * (hl - 0.02)), (width - 0.1, 0.16, 0.14), trim, bevel=0.06)
+
+
 def bake():
     scene = bpy.context.scene
-    scene.render.engine = "CYCLES"
-    scene.cycles.samples = 64
-    scene.render.bake.target = "VERTEX_COLORS"
-    box("temp_floor", (len(ITEMS) * SPACING / 2, -0.05, 0), (len(ITEMS) * SPACING + 4, 0.1, 6), "ffffff", bevel=0, subd=0, lump=0)
-    obs = [o for o in scene.objects if o.type == "MESH"]
-    for ob in obs:
-        bpy.context.view_layer.objects.active = ob
-        for m in list(ob.modifiers):
-            bpy.ops.object.modifier_apply(modifier=m.name)
-        if len(ob.data.vertices) > 1200:
-            d = ob.modifiers.new("budget", "DECIMATE")
-            d.ratio = 1200 / len(ob.data.vertices)
-            bpy.ops.object.modifier_apply(modifier="budget")
-        ob.data.shade_smooth()
-        ob.data.color_attributes.new("Col", "FLOAT_COLOR", "POINT")
-        ob.data.attributes.active_color = ob.data.color_attributes["Col"]
-        ob.data.materials.append(bpy.data.materials.new(ob.name))
-    props = [o for o in obs if o.name != "temp_floor"]
-    bpy.ops.object.select_all(action="DESELECT")
-    for ob in props:
-        ob.select_set(True)
-    bpy.context.view_layer.objects.active = props[0]
-    bpy.ops.object.bake(type="AO")
+    _park()  # bakes the last item
+    bpy.context.view_layer.layer_collection.children["built"].exclude = False
+    props = [o for o in scene.objects if o.type == "MESH"]
     for ob in props:
         c = R.hexc(ob["clay_color"])
         for d in ob.data.color_attributes["Col"].data:
             ao = 0.35 + 0.65 * d.color[0]
             d.color = (c[0] * ao, c[1] * ao, c[2] * ao, 1.0)
         ob.data.materials.clear()
-    bpy.data.objects["temp_floor"].select_set(False)
-    bpy.data.objects.remove(bpy.data.objects["temp_floor"], do_unlink=True)
     names = [o.name for o in props]
     for item, x in ITEMS.items():
         bpy.ops.object.select_all(action="DESELECT")
@@ -311,9 +362,11 @@ def bake():
         bpy.ops.object.join()
         joined = bpy.context.object
         joined.name = item
-        bpy.context.scene.cursor.location = R.g2b(x, 0, 0)
-        bpy.ops.object.origin_set(type="ORIGIN_CURSOR")
-        joined.location = (0, 0, 0)
+        # Bake the whole transform into the mesh, then move the item's slot to the origin (origin_set is a no-op
+        # headless, and the joined object keeps its first part's rotation).
+        joined.data.transform(joined.matrix_world)
+        joined.matrix_world = Matrix.Identity(4)
+        joined.data.transform(Matrix.Translation(-R.g2b(x, 0, 0)))
 
 
 if __name__ == "__main__":

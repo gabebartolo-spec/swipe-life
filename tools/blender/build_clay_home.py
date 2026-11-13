@@ -664,11 +664,115 @@ def export_slots(path):
     print("SLOTS", {k: len(v) for k, v in groups.items()})
 
 
+## The driveway (GDD 15.5): outside, beside the kitchen (x 8..12, z 4..8), where a bought car parks.
+## kind: "kerb" (a marked bay for flats) or "garage" (paved drive and garage door);
+## (outside wall, ground, drive surface, door or fence colour).
+DRIVES = {
+    "rental": ("kerb", "d8cdb8", "7f9a5c", "6b6b70", "8a8a8f"),
+    "small_flat": ("kerb", "e2d6c0", "86a262", "66676c", "b5b0a6"),
+    "fixer_upper": ("garage", "b9a58a", "8a9a58", "a49a88", "8c7a62"),
+    "starter_house": ("garage", "c4785a", "7fa95e", "b9b1a3", "f2ece0"),
+    "family_house": ("garage", "b8694c", "7aa85a", "c8bfae", "e8e2d4"),
+    "town_house": ("garage", "8a5a48", "7a9f58", "9c9890", "3e4a5a"),
+    "seaside_villa": ("garage", "f4f0e6", "9ab56a", "e3d7bd", "6aa0b8"),
+    "mansion": ("garage", "d8cfb8", "6f9c50", "d9c9a6", "4a2c18"),
+}
+DRIVE_C = (10, 6)
+
+
+def bay_number(text, at):
+    """Painted digits on the +x-facing wall, reading left to right from the game camera."""
+    from mathutils import Matrix
+
+    bpy.ops.object.text_add()
+    ob = bpy.context.object
+    ob.data.body = text
+    ob.data.size = 0.36
+    ob.data.extrude = 0.01
+    ob.data.align_x = "CENTER"
+    ob.data.align_y = "CENTER"
+    lx, ly, lz = H.g2b(*at) if hasattr(H, "g2b") else (at[0], -at[2], at[1])
+    ob.matrix_world = Matrix(((0, 0, 1, lx), (1, 0, 0, ly), (0, 1, 0, lz), (0, 0, 0, 1)))  # text x -> Godot -z
+    bpy.ops.object.convert(target="MESH")
+    ob = bpy.context.object
+    # Centre the digits' own bounds on `at` across the wall (Blender y, z): align_y centres the text line, which
+    # leaves digits low on their plaque.
+    from mathutils import Vector
+
+    pts = [ob.matrix_world @ v.co for v in ob.data.vertices]
+    mid = Vector([(min(q[i] for q in pts) + max(q[i] for q in pts)) / 2 for i in range(3)])
+    ob.location.y += ly - mid.y
+    ob.location.z += lz - mid.z
+    ob.name = "bay_number"
+    ob["clay_color"] = "2f3136"
+    return ob
+
+
+def wheelie_bin(name, x, z, lid):
+    """A council wheelie bin: dark body, coloured lid with a front lip, handle and two wheels at the back (-x, to
+    the wall), so it reads as a bin and not a hedge."""
+    box(name, (x, 0.5, z), (0.6, 0.94, 0.6), "33473c", bevel=0.04, lump=0.003)
+    box(f"{name}_lid", (x + 0.02, 1.0, z), (0.68, 0.06, 0.66), lid, bevel=0.025, lump=0.002)
+    box(f"{name}_lip", (x + 0.35, 0.96, z), (0.04, 0.1, 0.5), lid, bevel=0.015, lump=0)
+    box(f"{name}_handle", (x - 0.33, 0.93, z), (0.06, 0.06, 0.52), "26282d", bevel=0.02, lump=0)
+    for i, dz in enumerate((-0.31, 0.31)):
+        ball(f"{name}_wheel{i}", (x - 0.22, 0.13, z + dz), 0.13, "26282d", scale=(1, 1, 0.35), lump=0)
+
+
+def driveway(home_id):
+    kind, wall, grass, surface, door = DRIVES[home_id]
+    x0, z0 = 8, 4
+    H.layer("room_driveway")
+    box("slab", (x0 + 2, -0.2, z0 + 2), (4.3, 0.4, 4.3), grass, bevel=0.14, lump=0.01)
+    box("wall_x", (x0 - 0.15, H.WALL_H / 2, z0 + 1.85), (0.3, H.WALL_H, 4.3), wall, bevel=0.14)
+    H.tag()
+    H.layer("drive")
+    # The car is backed in square to the wall (figure_stage.gd: centre x0+2.1, z0+2.1, nose to +x, the street),
+    # spanning z0+1.1..3.1, so props keep to the strips either side of it.
+    if kind == "kerb":
+        box("tarmac", (x0 + 2.05, 0.02, z0 + 2.05), (4.1, 0.06, 4.1), surface, bevel=0.02, lump=0.004)
+        for i, z in enumerate((z0 + 0.8, z0 + 3.4)):  # the bay's side lines, either side of the car
+            box(f"line{i}", (x0 + 2.0, 0.06, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
+        box("lip", (x0 + 4.0, 0.05, z0 + 2.05), (0.2, 0.04, 4.1), "c9c4b8", bevel=0.02)  # dropped kerb to the street
+        tube("pipe", (x0 + 0.08, H.WALL_H / 2, z0 + 0.25), 0.05, H.WALL_H, "7d7f84")
+        wheelie_bin("bin", x0 + 0.45, z0 + 3.75, "c0392b")  # general waste
+        wheelie_bin("bin2", x0 + 1.2, z0 + 3.75, "e8c040")  # recycling
+        box("lamp_box", (x0 + 0.06, 2.3, z0 + 1.9), (0.12, 0.22, 0.3), "2f3136", bevel=0.04)
+        ball("lamp_glow", (x0 + 0.15, 2.25, z0 + 1.9), 0.09, "fff3c4", scale=(0.8, 1, 1.3))
+        box("plate", (x0 + 0.02, 1.95, z0 + 2.4), (0.04, 0.5, 0.62), "f2efe6", bevel=0.03)  # clear of the HUD text
+        bay_number("12", (x0 + 0.05, 1.95, z0 + 2.4))  # plaque centre
+        tube("bollard", (x0 + 3.5, 0.45, z0 + 0.45), 0.11, 0.9, "4a4c52")
+        tube("bollard_band", (x0 + 3.5, 0.72, z0 + 0.45), 0.115, 0.1, "e8c040", lump=0)
+        ball("bollard_cap", (x0 + 3.5, 0.9, z0 + 0.45), 0.11, "4a4c52", scale=(1, 0.5, 1))
+        ball("weed", (x0 + 3.85, 0.08, z0 + 0.95), 0.13, "6a9a4a", scale=(1, 0.8, 1), lump=0.03)
+    else:
+        box("paving", (x0 + 2.05, 0.02, z0 + 2.05), (4.1, 0.06, 4.1), surface, bevel=0.03, lump=0.005)
+        box("door", (x0 + 0.03, 1.1, z0 + 2.1), (0.06, 2.2, 2.6), door, bevel=0.04)
+        for i in range(5):
+            box(f"rib{i}", (x0 + 0.07, 0.3 + i * 0.4, z0 + 2.1), (0.03, 0.05, 2.5), door, bevel=0.015)
+        box("lintel", (x0 + 0.05, 2.3, z0 + 2.1), (0.1, 0.12, 2.8), "efe8d8", bevel=0.04)
+        for i, x in enumerate((x0 + 3.8,)):  # hedge in the right corner (the back one showed over car roofs)
+            ball(f"hedge{i}", (x, 0.45, z0 + 0.3), 0.36, "5f8f4a", scale=(1, 1.1, 0.9), lump=0.03)
+        tube("post", (x0 + 3.6, 0.55, z0 + 0.4), 0.05, 1.1, "6b4a32")
+        box("letterbox", (x0 + 3.6, 1.2, z0 + 0.4), (0.35, 0.3, 0.3), "c0392b", bevel=0.05)
+        box("slot", (x0 + 3.78, 1.27, z0 + 0.4), (0.02, 0.04, 0.2), "26282d", bevel=0.01, lump=0)  # street side
+        box("slot_flap", (x0 + 3.79, 1.31, z0 + 0.4), (0.03, 0.05, 0.24), "a82e22", bevel=0.012, lump=0)
+        box("door_seam", (x0 + 3.6, 1.17, z0 + 0.555), (0.26, 0.18, 0.015), "a82e22", bevel=0.01, lump=0)
+        wheelie_bin("bin", x0 + 0.45, z0 + 3.75, "c0392b")
+        ball("lamp_glow", (x0 + 0.12, 2.4, z0 + 0.6), 0.1, "fff3c4", scale=(0.8, 1, 1.3))
+        if home_id in ("seaside_villa", "mansion"):
+            for i, x in enumerate((x0 + 1.0, x0 + 1.65)):  # in the left corner, beside the bin
+                tube(f"pot{i}", (x, 0.25, z0 + 3.75), 0.25, 0.5, "c47a44")
+                ball(f"shrub{i}", (x, 0.75, z0 + 3.75), 0.3, "4f8a46", scale=(1, 1.2, 1), lump=0.03)
+    H.tag()
+
+
 if __name__ == "__main__":
     args = sys.argv[sys.argv.index("--") + 1:]
     OUT = os.path.abspath(args[1])
     bpy.ops.wm.read_factory_settings(use_empty=True)
     HOMES[args[0]]()
+    driveway(args[0])
     H.bake_groups()
     if len(args) > 2:  # bare build: replaceable furniture goes to its own GLB
         export_slots(os.path.abspath(args[2]))
