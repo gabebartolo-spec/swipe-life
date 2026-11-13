@@ -4,6 +4,7 @@ extends SceneTree
 ## Run: godot --path . --resolution 1080x900 -s tools/godot/render_house.gd -- <out_dir>
 ## An adult home: ... -- <out_dir> res://assets/house/homes/<home>.glb <home>
 ## Depth maps instead of stills: add "depth" as the last argument ("" as home for the age bands).
+## One room only: add its name instead (e.g. "driveway"; tools/edit_setting.sh).
 ## An adult home's driveway still sits in the home's setting (GDD 10.9): build it first with
 ## tools/blender/build_clay_setting.py -- <kind> assets/house/homes/setting_<kind>.glb
 ## (render-only, never committed). Depth maps leave it out.
@@ -59,6 +60,7 @@ var _warm := false
 var _bands: Array = BANDS
 var _depth := false
 var _setting: Node3D
+var _only := ""
 
 
 ## Parks cars in a setting's bays, on its surface (setting-local y -0.05, the drive's height).
@@ -85,6 +87,7 @@ func _initialize() -> void:
 	if args.size() > 2 and args[2] != "":
 		_bands = [args[2]]
 	_depth = args.size() > 3 and args[3] == "depth"
+	_only = args[3] if args.size() > 3 and args[3] in ROOMS else ""
 	root.use_hdr_2d = _depth
 	var root3d := Node3D.new()
 	root.add_child(root3d)
@@ -209,6 +212,8 @@ func _render(out: String) -> void:
 		await process_frame  # let the GLB transforms settle before reading AABBs
 	for band: String in _bands:
 		for room: String in ROOMS:
+			if _only != "" and room != _only:
+				continue
 			if room == "driveway" and _bands == BANDS:
 				continue  # adult homes only
 			var c: Vector2 = ROOMS[room]
