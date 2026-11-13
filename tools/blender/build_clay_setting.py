@@ -194,20 +194,49 @@ def railing_x(n, x, z0, z1, col="2f3136", h=0.9):
         box(f"{n}_rail{j}", (x, y, (z0 + z1) / 2), (0.05, 0.05, abs(z1 - z0)), col, bevel=0.015, lump=0)
 
 
-def chainlink_x(n, x, z0, z1, h=1.6):
+def wire_mesh(n, a0, a1, h, to3d, col="b9bec2", cell=0.16):
+    """Diamond chain-link wire between a0 and a1 along the fence, 0..h high; to3d(a, y) gives the Godot point."""
+    lo, hi = min(a0, a1), max(a0, a1)
+    verts, faces = [], []
+    for j in range(int(2 * h / cell) + 1):
+        cy = j * cell / 2
+        if cy - cell / 2 < 0 or cy + cell / 2 > h:
+            continue
+        for i in range(int((hi - lo) / cell) + 1):
+            cx = lo + i * cell + (j % 2) * cell / 2
+            if cx - cell / 2 < lo or cx + cell / 2 > hi:
+                continue
+            k = len(verts)
+            for a, y in ((cx - cell / 2, cy), (cx, cy - cell / 2), (cx + cell / 2, cy), (cx, cy + cell / 2)):
+                verts.append(g(*to3d(a, y - 0.08)))
+            faces.append((k, k + 1, k + 2, k + 3))
+    me = bpy.data.meshes.new(n)
+    me.from_pydata(verts, [], faces)
+    ob = bpy.data.objects.new(n, me)
+    bpy.context.collection.objects.link(ob)
+    bpy.ops.object.select_all(action="DESELECT")
+    ob.select_set(True)
+    bpy.context.view_layer.objects.active = ob
+    bpy.ops.object.mode_set(mode="EDIT")
+    bpy.ops.mesh.remove_doubles(threshold=0.001)
+    bpy.ops.object.mode_set(mode="OBJECT")
+    w = ob.modifiers.new("wire", "WIREFRAME")
+    w.thickness = 0.014
+    return R.finish(ob, col, bevel=0, subd=0, lump=0)
+
+
+def chainlink_x(n, x, z0, z1, h=1.4):
     for i in range(int(abs(z1 - z0) / 2.0) + 1):
-        tube(f"{n}_post{i}", (x, h / 2 - 0.1, min(z0, z1) + i * 2.0), 0.04, h, "9a9ea3", lump=0)
-    box(f"{n}_mesh", (x, h / 2 - 0.1, (z0 + z1) / 2), (0.02, h * 0.95, abs(z1 - z0)), "b9bec2", bevel=0.005,
-        subd=1, lump=0)
-    tube(f"{n}_top", (x, h - 0.12, (z0 + z1) / 2), 0.03, abs(z1 - z0), "9a9ea3", rot=(math.radians(90), 0, 0), lump=0)
+        tube(f"{n}_post{i}", (x, h / 2 - 0.1, min(z0, z1) + i * 2.0), 0.035, h, "8e9297", lump=0)
+    wire_mesh(f"{n}_mesh", z0, z1, h - 0.1, lambda a, y: (x, y, a))
+    tube(f"{n}_top", (x, h - 0.12, (z0 + z1) / 2), 0.025, abs(z1 - z0), "8e9297", rot=(math.radians(90), 0, 0), lump=0)
 
 
-def chainlink_z(n, z, x0, x1, h=1.6):
+def chainlink_z(n, z, x0, x1, h=1.4):
     for i in range(int(abs(x1 - x0) / 2.0) + 1):
-        tube(f"{n}_post{i}", (min(x0, x1) + i * 2.0, h / 2 - 0.1, z), 0.04, h, "9a9ea3", lump=0)
-    box(f"{n}_mesh", ((x0 + x1) / 2, h / 2 - 0.1, z), (abs(x1 - x0), h * 0.95, 0.02), "b9bec2", bevel=0.005,
-        subd=1, lump=0)
-    tube(f"{n}_top", ((x0 + x1) / 2, h - 0.12, z), 0.03, abs(x1 - x0), "9a9ea3", rot=(0, math.radians(90), 0), lump=0)
+        tube(f"{n}_post{i}", (min(x0, x1) + i * 2.0, h / 2 - 0.1, z), 0.035, h, "8e9297", lump=0)
+    wire_mesh(f"{n}_mesh", x0, x1, h - 0.1, lambda a, y: (a, y, z))
+    tube(f"{n}_top", ((x0 + x1) / 2, h - 0.12, z), 0.025, abs(x1 - x0), "8e9297", rot=(0, math.radians(90), 0), lump=0)
 
 
 def windows_on(n, face, c, w, d, h, floors, per, col="2f4858", frame="f4efe4", y0=0.0, fh=1.0):
@@ -317,14 +346,13 @@ def suburb(young=False):
         neighbour("nl", "efe3c8", "b5654a")
         tree("tr", -0.4, -3.4, h=3.0, r=0.7, kind="young")
         tree("tr2", 1.8, -4.6, h=2.6, r=0.55, kind="young")
-        picket_x("back", -2.6, -2.6, -9, h=0.55, col="efe9dc")
+        picket_x("back", -2.6, -2.6, -3.9, h=0.55, col="efe9dc")
         bush("b0", -4.2, 2.9, 0.3)
-        tree("st0", 2.7, 3.6, h=2.0, r=0.4, kind="young")
     else:
         picket_z("front", 3.3, -7.0, 2.3)
         neighbour("nl", "e9d7bb", "8f4f3a")
         tree("tr", -0.3, -3.4, h=4.0, r=1.15, leaf="5f9447")
-        board_fence_z("back", -4.4, -2.6, 9)
+        board_fence_z("back", -4.4, -2.4, 9)
         tree("tr2", 3.6, -6.4, h=4.2, r=1.2)
         bush("b0", -4.4, 2.8, 0.36)
         bush("b1", -3.6, 2.85, 0.3, "6a9a4e")
@@ -335,10 +363,10 @@ def flats():
     ground("b9b2a6")  # paved courtyard
     road_x(3.0, 12)
     block("bl", -5.2, 2.0, 4.4, 7.0, 6, "b5654a", trim="e6dccb", balcony=True)
-    block("br", 1.6, -5.0, 7.0, 3.6, 3, "c27a56", trim="ece4d6")
-    box("grate", (2.65, -0.04, 3.4), (0.7, 0.04, 0.7), "4a4c52", bevel=0.02, lump=0)
-    tree("st0", 2.65, 3.4, h=2.6, r=0.6, kind="young")
-    lamp("lamp0", 2.7, -3.0, h=3.0)
+    block("br", 1.6, -6.2, 7.0, 3.6, 3, "c27a56", trim="ece4d6")
+    box("grate", (0.2, -0.04, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
+    tree("st0", 0.2, -3.3, h=3.8, r=0.9, leaf="6a9a4c")
+    lamp("lamp0", 2.65, -1.9, h=3.0)
     box("planter", (-3.6, 0.15, 3.0), (1.6, 0.5, 0.6), "8a8378", bevel=0.05)
     bush("pb0", -3.9, 3.0, 0.3, "6a9a4a")
     bush("pb1", -3.3, 3.0, 0.28, "5f8f4a")
@@ -367,7 +395,7 @@ def tired_street():
     tube("pole", (-0.6, 2.4, -3.2), 0.09, 5.0, "6b5440")
     box("pole_arm", (-0.6, 4.4, -3.2), (1.2, 0.1, 0.12), "6b5440", bevel=0.02)
     tree("tr", 1.8, -4.4, h=3.8, r=1.0, leaf="7a964e")
-    picket_x("back", -2.6, -2.6, -9, col="cfc6ae", lean=0.16)
+    picket_x("back", -2.6, -2.6, -3.9, col="cfc6ae", lean=0.16)
     tufts("weed", ((-6.5, 2.3), (2.3, 3.2)), 16, col="9aa850", tall=0.45)
     tufts("weed_b", ((-2.5, 6), (-6.5, -2.5)), 30, col="9aa850", tall=0.5)
 
@@ -377,13 +405,12 @@ def terrace():
     ground("b7b0a4")
     road_x(3.0, 12, walk="c9c2b5", tar="65676c")
     railing_z("rail", 3.2, -7.0, 2.3)
-    lamp("lamp0", 2.7, -3.0, h=3.2)
+    lamp("lamp0", 2.65, -1.9, h=3.2)
     for i, (z, col) in enumerate(((-0.4, "8a5a48"), (3.4, "9b6a52"))):
         block(f"tl{i}", -5.0, z, 4.0, 3.8, 3, col, trim="efe8dc")
         chimney(f"tl{i}_chim", -4.0, 3.3, z + 1.2, col)
     block("tr0", 1.8, -5.6, 3.8, 4.0, 3, "86584a", trim="efe8dc")
     chimney("tr0_chim", 2.8, 3.3, -4.6, "86584a")
-    tree("st0", 2.65, 3.6, h=2.6, r=0.6, kind="young")
 
 
 def band(name, s0, s1, col, y=-0.1, h=0.06, across=24):
@@ -473,6 +500,7 @@ def bake_and_haze(horizon):
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
     scene.cycles.samples = 48
+    R.use_gpu(scene)
     scene.render.bake.target = "VERTEX_COLORS"
     # The room itself casts the contact shadows on the ground around it; removed after the bake.
     slab = box("occ_slab", (0, -0.2, 0), (4.3, 0.4, 4.3), "ffffff", bevel=0, subd=0, lump=0)

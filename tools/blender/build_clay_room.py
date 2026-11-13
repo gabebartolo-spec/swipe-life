@@ -24,6 +24,27 @@ def hexc(h):
     return (*lin, 1.0)
 
 
+def use_gpu(scene):
+    """Cycles bakes on the GPU (OptiX, else CUDA, else HIP/oneAPI/Metal); CPU only when there is none."""
+    prefs = bpy.context.preferences.addons["cycles"].preferences
+    for kind in ("OPTIX", "CUDA", "HIP", "ONEAPI", "METAL"):
+        try:
+            prefs.compute_device_type = kind
+        except TypeError:
+            continue
+        prefs.get_devices()
+        gpus = [d for d in prefs.devices if d.type == kind]
+        if gpus:
+            for d in prefs.devices:
+                d.use = d.type == kind
+            scene.cycles.device = "GPU"
+            print("CYCLES GPU", kind, [d.name for d in gpus])
+            return True
+    scene.cycles.device = "CPU"
+    print("CYCLES CPU: no GPU found")
+    return False
+
+
 def g2b(x, y, z):
     """Godot position (y up, z toward camera) to Blender (z up)."""
     return Vector((x, -z, y))
@@ -224,7 +245,7 @@ def bake_ao():
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
     scene.cycles.samples = 64
-    scene.cycles.device = "CPU"
+    use_gpu(scene)
     obs = [o for o in scene.objects if o.type == "MESH"]
     for ob in obs:
         bpy.context.view_layer.objects.active = ob
