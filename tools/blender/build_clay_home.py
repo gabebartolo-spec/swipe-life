@@ -43,13 +43,20 @@ def window(n, x0, z, w=1.4, h=1.15, y=1.6, view="tree", frame="f0ece2"):
         box(f"{n}_trunk", (px - 0.005, y - h * 0.32, z - w * 0.2), (0.01, h * 0.36, 0.09), "7a5c45", bevel=0.003, subd=1, lump=0)
         for i, (dy, dz, r, col) in enumerate(((0.14, -0.2, 0.17, "7fae6a"), (0.0, -0.32, 0.12, "6f9e57"), (0.0, -0.08, 0.12, "8fbc78"))):
             ball(f"{n}_leaves{i}", (px + 0.004, y + h * dy, z + w * dz), w * r, col, scale=(0.05, 1, 1), lump=0)
-    elif view == "street":
-        for i, (dz, top, col, roof) in enumerate(((-0.34, 0.15, "c98f6f", "6f5a55"), (-0.06, -0.08, "e0cfa8", "8a5a4a"))):
+    elif base == "street":
+        tired = view == "street_tired"
+        cols = (("b9a283", "6d5a4a"), ("cfc2a2", "7a5f4f")) if tired else (("c98f6f", "6f5a55"), ("e0cfa8", "8a5a4a"))
+        for i, (dz, top, (col, roof)) in enumerate(zip((-0.34, -0.06), (0.15, -0.08), cols)):
             bh = h * (0.5 + top)
             bc = y - h / 2 + bh / 2
             box(f"{n}_house{i}", (px, bc, z + w * dz), (0.01, bh, w * 0.28), col, bevel=0.003, subd=1, lump=0)
             box(f"{n}_roof{i}", (px + 0.004, y - h / 2 + bh + 0.03, z + w * dz), (0.01, 0.07, w * 0.31), roof, bevel=0.003, subd=1, lump=0)
             box(f"{n}_pane{i}", (px + 0.008, bc + bh * 0.15, z + w * dz), (0.008, 0.11, 0.11), "fbf0c8", bevel=0.002, subd=1, lump=0)
+        if tired:  # an overgrown verge and a fence with pickets missing and sagging
+            box(f"{n}_verge", (px + 0.004, y - h * 0.44, z), (0.01, h * 0.12, w), "8f9e58", bevel=0.003, subd=1, lump=0)
+            for i, k in enumerate((0.2, 0.14, 0.0, 0.18, 0.1, 0.0, 0.16)):
+                if k:
+                    box(f"{n}_picket{i}", (px + 0.008, y - h * (0.5 - k / 2), z - w * 0.45 + i * w * 0.08), (0.008, h * k, 0.05), "d8d0bc", bevel=0.002, subd=1, lump=0)
     elif view == "hills":
         ball(f"{n}_sun", (px, y + h * 0.24, z - w * 0.3), w * 0.09, "f3d36b", scale=(0.05, 1, 1), lump=0)
         box(f"{n}_hill", (px, y - h * 0.32, z), (0.01, h * 0.36, w), "9dbb78", bevel=0.003, subd=1, lump=0)
@@ -78,6 +85,23 @@ def window(n, x0, z, w=1.4, h=1.15, y=1.6, view="tree", frame="f0ece2"):
             for i, d in enumerate((-0.42, -0.02)):
                 box(f"{n}_swing_leg{i}", (px + 0.004, y - h * 0.15, z + w * d), (0.008, h * 0.66, 0.04), "8a6a55", bevel=0.002, subd=1, lump=0)
             box(f"{n}_swing_seat", (px + 0.006, y - h * 0.2, z - w * 0.22), (0.008, 0.03, w * 0.12), "e0694a", bevel=0.002, subd=1, lump=0)
+    elif base == "flats":
+        for i, (dz, top, col) in enumerate(((-0.36, 0.1 + tall, "e2d6bc"), (-0.08, -0.05 - tall, "d8ccb2"))):
+            bh = h * (0.5 + top)
+            bc = y - h / 2 + bh / 2
+            box(f"{n}_flat{i}", (px, bc, z + w * dz), (0.01, bh, w * 0.26), col, bevel=0.003, subd=1, lump=0)
+            box(f"{n}_flat_top{i}", (px + 0.004, y - h / 2 + bh + 0.015, z + w * dz), (0.01, 0.03, w * 0.28), "cfc4ac", bevel=0.002, subd=1, lump=0)
+            for f in range(2):
+                for j in (-1, 1):
+                    box(f"{n}_win{i}_{f}{j}", (px + 0.008, bc + bh * (0.22 - f * 0.4), z + w * (dz + j * 0.06)), (0.008, 0.08, 0.06), "4a5c68", bevel=0.002, subd=1, lump=0)
+    elif base == "carpark":
+        box(f"{n}_flat", (px, y - h * 0.05, z - w * 0.2), (0.01, h * 0.5, w * 0.5), "e2d6bc", bevel=0.003, subd=1, lump=0)
+        for j in range(3):
+            box(f"{n}_win{j}", (px + 0.008, y + h * 0.05, z - w * (0.38 - j * 0.16)), (0.008, 0.08, 0.06), "4a5c68", bevel=0.002, subd=1, lump=0)
+        box(f"{n}_tar", (px + 0.004, y - h * 0.38, z), (0.01, h * 0.24, w), "6e7075", bevel=0.003, subd=1, lump=0)
+        for j in range(4):
+            box(f"{n}_bay{j}", (px + 0.008, y - h * 0.38, z - w * 0.42 + j * w * 0.2), (0.008, h * 0.2, 0.015), "f2efe6", bevel=0.001, subd=1, lump=0)
+        box(f"{n}_car", (px + 0.01, y - h * 0.36, z - w * 0.32), (0.008, h * 0.1, w * 0.14), "8a3f3a", bevel=0.002, subd=1, lump=0)
     elif base == "sea":
         box(f"{n}_water", (px, y - h * 0.2, z), (0.01, h * 0.34, w), "4f9cc4", bevel=0.003, subd=1, lump=0)
         box(f"{n}_sand", (px + 0.003, y - h * 0.42, z), (0.01, h * 0.16, w), "ecd9a8", bevel=0.003, subd=1, lump=0)
@@ -137,9 +161,9 @@ def rental():
                 ["cfc5ae", "b8ae97"][(i + j) % 2], bevel=0.02, subd=1, lump=0.004, seed=i * 7 + j)
         box(f"lplank{i}", (0.25 + i * 0.5, 0.02, 6), (0.46, 0.06, 4), ["b9a07f", "ae9576", "c2a988"][i % 3],
             bevel=0.025, seed=i)
-    window("wb", 0, 1.5, view="tree")
-    window("wl", 0, 6.0, view="street")
-    window("wk", 4, 5.2, w=1.2, h=1.0, y=1.65, view="hills")
+    window("wb", 0, 1.5, view="flats")
+    window("wl", 0, 6.0, view="carpark")
+    window("wk", 4, 5.2, w=1.2, h=1.0, y=1.65, view="flats_b")
     window("wt", 4, 1.7, w=0.7, h=0.6, y=2.05, view="frosted")
     for x, z in ORIGINS.values():
         skirting(x, z)
@@ -552,7 +576,7 @@ SPECS = {
         "floors": {"bedroom": ("plank", ["a58a6a", "977c5c", "ad9272"]), "living": ("plank", ["9c8263", "8e7556", "a78d6d"]),
                    "kitchen": ("tile_big", ["b9a88c", "a4937a"]), "bathroom": ("tile", ["c5b8a0", "b0a38c"])},
         "walls": {"bedroom": "c9b98f", "living": "bfae88", "kitchen": "c6bb94", "bathroom": "b7c0a6"},
-        "bare_back": True, "views": ("hills", "tree", "street"), "bed_w": 1.5, "wood": "8d7358", "duvet": "8c7a5e",
+        "bare_back": True, "views": ("street_tired", "tree", "street_tired"), "bed_w": 1.5, "wood": "8d7358", "duvet": "8c7a5e",
         "art": ("6e5a48", "c9a273", "a58a6a"), "sofa": "a8956c", "sofa_arm": "8f7c58",
         "cab": "b9b18f", "door": "9fb08a", "top": "8a7458", "splash": ("c9c0a0", "a9b596"), "chairs": "8d7358",
         "cabs": 3, "fridge": "cfc9a8", "wash": "tub", "suite": "9fb58a", "seat": "8a9c78", "tile_rows": 2,
@@ -724,46 +748,42 @@ def driveway(home_id):
     x0, z0 = 8, 4
     H.layer("room_driveway")
     box("slab", (x0 + 2, -0.2, z0 + 2), (4.3, 0.4, 4.3), grass, bevel=0.14, lump=0.01)
-    box("wall_x", (x0 - 0.15, H.WALL_H / 2, z0 + 1.85), (0.3, H.WALL_H, 4.3), wall, bevel=0.14)
+    if kind == "garage":  # the house's garage side; a flat's bay has no wall, its block stands behind (setting)
+        box("wall_x", (x0 - 0.15, H.WALL_H / 2, z0 + 1.85), (0.3, H.WALL_H, 4.3), wall, bevel=0.14)
     H.tag()
     H.layer("drive")
     # The car is backed in square to the wall (figure_stage.gd: centre x0+2.1, z0+2.1, nose to +x, the street),
-    # spanning z0+1.1..3.1, so props keep to the strips either side of it.
+    # spanning z0+1.1..3.1. The drive's surface is baked into the setting (build_clay_setting.py: house_drive,
+    # flat); this one is hidden in the setting shot. Props stand where they would in life, off the drive.
     if kind == "kerb":
         box("tarmac", (x0 + 2.05, 0.02, z0 + 2.05), (4.1, 0.06, 4.1), surface, bevel=0.02, lump=0.004)
         for i, z in enumerate((z0 + 0.8, z0 + 3.4)):  # the bay's side lines, either side of the car
             box(f"line{i}", (x0 + 2.0, 0.06, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
         box("lip", (x0 + 4.0, 0.05, z0 + 2.05), (0.2, 0.04, 4.1), "c9c4b8", bevel=0.02)  # dropped kerb to the street
-        tube("pipe", (x0 + 0.08, H.WALL_H / 2, z0 + 0.25), 0.05, H.WALL_H, "7d7f84")
-        wheelie_bin("bin", x0 + 0.45, z0 + 3.75, "c0392b")  # general waste
-        wheelie_bin("bin2", x0 + 1.2, z0 + 3.75, "e8c040")  # recycling
-        box("lamp_box", (x0 + 0.06, 2.3, z0 + 1.9), (0.12, 0.22, 0.3), "2f3136", bevel=0.04)
-        ball("lamp_glow", (x0 + 0.15, 2.25, z0 + 1.9), 0.09, "fff3c4", scale=(0.8, 1, 1.3))
-        box("plate", (x0 + 0.02, 1.95, z0 + 2.4), (0.04, 0.5, 0.62), "f2efe6", bevel=0.03)  # clear of the HUD text
-        bay_number("12", (x0 + 0.05, 1.95, z0 + 2.4))  # plaque centre
-        tube("bollard", (x0 + 3.5, 0.45, z0 + 0.45), 0.11, 0.9, "4a4c52")
-        tube("bollard_band", (x0 + 3.5, 0.72, z0 + 0.45), 0.115, 0.1, "e8c040", lump=0)
-        ball("bollard_cap", (x0 + 3.5, 0.9, z0 + 0.45), 0.11, "4a4c52", scale=(1, 0.5, 1))
-        ball("weed", (x0 + 3.85, 0.08, z0 + 0.95), 0.13, "6a9a4a", scale=(1, 0.8, 1), lump=0.03)
+        # a flat's bins live in the block's bin store, not in a parking bay: nothing stands in the bay
     else:
         box("paving", (x0 + 2.05, 0.02, z0 + 2.05), (4.1, 0.06, 4.1), surface, bevel=0.03, lump=0.005)
         box("door", (x0 + 0.03, 1.1, z0 + 2.1), (0.06, 2.2, 2.6), door, bevel=0.04)
         for i in range(5):
             box(f"rib{i}", (x0 + 0.07, 0.3 + i * 0.4, z0 + 2.1), (0.03, 0.05, 2.5), door, bevel=0.015)
         box("lintel", (x0 + 0.05, 2.3, z0 + 2.1), (0.1, 0.12, 2.8), "efe8d8", bevel=0.04)
-        for i, x in enumerate((x0 + 3.8,)):  # hedge in the right corner (the back one showed over car roofs)
-            ball(f"hedge{i}", (x, 0.45, z0 + 0.3), 0.36, "5f8f4a", scale=(1, 1.1, 0.9), lump=0.03)
-        tube("post", (x0 + 3.6, 0.55, z0 + 0.4), 0.05, 1.1, "6b4a32")
-        box("letterbox", (x0 + 3.6, 1.2, z0 + 0.4), (0.35, 0.3, 0.3), "c0392b", bevel=0.05)
-        box("slot", (x0 + 3.78, 1.27, z0 + 0.4), (0.02, 0.04, 0.2), "26282d", bevel=0.01, lump=0)  # street side
-        box("slot_flap", (x0 + 3.79, 1.31, z0 + 0.4), (0.03, 0.05, 0.24), "a82e22", bevel=0.012, lump=0)
-        box("door_seam", (x0 + 3.6, 1.17, z0 + 0.555), (0.26, 0.18, 0.015), "a82e22", bevel=0.01, lump=0)
-        wheelie_bin("bin", x0 + 0.45, z0 + 3.75, "c0392b")
+        # On the lawn right of the drive (the drive runs z0+0.6..3.6): the letterbox at the front boundary by the
+        # pavement (x0+4.05), 0.3 m off the drive, and a clipped shrub beside it on the plot line.
+        ball("hedge0", (x0 + 3.65, 0.42, z0 - 0.35), 0.36, "5f8f4a", scale=(1, 1.1, 0.9), lump=0.03)
+        tube("post", (x0 + 3.75, 0.6, z0 + 0.3), 0.05, 1.1, "6b4a32")
+        box("letterbox", (x0 + 3.75, 1.25, z0 + 0.3), (0.35, 0.3, 0.3), "c0392b", bevel=0.05)
+        box("slot", (x0 + 3.93, 1.32, z0 + 0.3), (0.02, 0.04, 0.2), "26282d", bevel=0.01, lump=0)  # street side
+        box("slot_flap", (x0 + 3.94, 1.36, z0 + 0.3), (0.03, 0.05, 0.24), "a82e22", bevel=0.012, lump=0)
+        box("door_seam", (x0 + 3.75, 1.22, z0 + 0.455), (0.26, 0.18, 0.015), "a82e22", bevel=0.01, lump=0)
+        # The bin on its own paved pad in the front garden left of the drive, by the boundary: 0.5 m off the
+        # drive, 1.8 m from the garage door's edge.
+        box("bin_pad", (x0 + 3.2, 0.045, z0 + 4.4), (0.85, 0.02, 0.8), "c9c4b8", bevel=0.015, lump=0.003)
+        wheelie_bin("bin", x0 + 3.2, z0 + 4.4, "c0392b")
         ball("lamp_glow", (x0 + 0.12, 2.4, z0 + 0.6), 0.1, "fff3c4", scale=(0.8, 1, 1.3))
         if home_id in ("seaside_villa", "mansion"):
-            for i, x in enumerate((x0 + 1.0, x0 + 1.65)):  # in the left corner, beside the bin
-                tube(f"pot{i}", (x, 0.25, z0 + 3.75), 0.25, 0.5, "c47a44")
-                ball(f"shrub{i}", (x, 0.75, z0 + 3.75), 0.3, "4f8a46", scale=(1, 1.2, 1), lump=0.03)
+            for i, z in enumerate((z0 + 3.8, z0 + 0.25)):  # flanking the garage door, on the paths beside the drive
+                tube(f"pot{i}", (x0 + 0.3, 0.3, z), 0.2, 0.5, "c47a44")
+                ball(f"shrub{i}", (x0 + 0.3, 0.8, z), 0.27, "4f8a46", scale=(1, 1.2, 1), lump=0.03)
     H.tag()
 
 

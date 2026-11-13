@@ -370,6 +370,7 @@ def bake_groups():
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
     scene.cycles.samples = 64
+    R.use_gpu(scene)
     scene.render.bake.target = "VERTEX_COLORS"
     obs = {o.name: o for o in scene.objects if o.type == "MESH"}
     for ob in obs.values():
