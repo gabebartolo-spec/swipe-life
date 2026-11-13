@@ -330,11 +330,11 @@ def road_x(x0, x1, kerb_col="cfcac0", walk="d8d2c6", tar="74767c", line=True, cr
             turn(c, 2, rng.random() - 0.5)
 
 
-def tufts(n, area, count, col="7f9a48", tall=0.35):
+def tufts(n, area, count, col="7f9a48", tall=0.35, far=-HORIZON + 0.4):
     (xa, xb), (za, zb) = area
     for i in range(count):
         x, z = xa + rng.random() * (xb - xa), za + rng.random() * (zb - za)
-        if abs(x) < 2.4 and abs(z) < 2.4 or x + z < -HORIZON + 0.4:
+        if abs(x) < 2.4 and abs(z) < 2.4 or x + z < far:
             continue
         ball(f"{n}{i}", (x, -0.05 + tall * 0.3, z), 0.12, col, scale=(0.8, tall * 5, 0.8), lump=0.02)
 
@@ -416,7 +416,7 @@ def tired_street():
     box("pole_arm", (-0.6, 4.4, -3.2), (1.2, 0.1, 0.12), "6b5440", bevel=0.02)
     tree("tr", 1.8, -4.4, h=3.8, r=1.0, leaf="7a964e")
     tufts("weed", ((-6.5, 2.3), (2.3, 3.2)), 16, col="9aa850", tall=0.45)
-    tufts("weed_b", ((-2.5, 2), (-4.5, -2.5)), 18, col="9aa850", tall=0.5)
+    tufts("weed_b", ((-2.5, 2), (-4.5, -2.5)), 18, col="9aa850", tall=0.5, far=HAZE[0])
 
 
 def terrace():
