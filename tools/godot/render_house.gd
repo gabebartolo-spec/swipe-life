@@ -4,7 +4,7 @@ extends SceneTree
 ## Run: godot --path . --resolution 1080x900 -s tools/godot/render_house.gd -- <out_dir>
 ## An adult home: ... -- <out_dir> res://assets/house/homes/<home>.glb <home>
 ## Depth maps instead of stills: add "depth" as the last argument ("" as home for the age bands).
-## Stills sit in the home's setting (GDD 10.9): build it first with
+## An adult home's driveway still sits in the home's setting (GDD 10.9): build it first with
 ## tools/blender/build_clay_setting.py -- <kind> assets/house/homes/setting_<kind>.glb
 ## (render-only, never committed). Depth maps leave it out.
 
@@ -21,9 +21,8 @@ const ROOMS := {
 	"driveway": Vector2(10, 6),
 }
 const ROOM_SIZE := 5.6
-## Each home's setting (GDD 10.9); the childhood home's age bands sit on the family house's street.
+## Each home's driveway setting (GDD 10.9); indoor rooms keep the plain background.
 const SETTINGS := {
-	"": "suburb",
 	"family_house": "suburb",
 	"starter_house": "new_suburb",
 	"small_flat": "flats",
@@ -93,8 +92,8 @@ func _initialize() -> void:
 	root.msaa_3d = Viewport.MSAA_4X
 	_house = (load(glb) as PackedScene).instantiate()
 	root3d.add_child(_house)
-	if not _depth:
-		var home: String = args[2] if args.size() > 2 and args[2] not in BANDS else ""
+	var home: String = args[2] if args.size() > 2 else ""
+	if not _depth and home in SETTINGS:
 		var path := "res://assets/house/homes/setting_%s.glb" % SETTINGS[home]
 		assert(ResourceLoader.exists(path), "build the setting first: " + path)
 		_setting = (load(path) as PackedScene).instantiate()
@@ -147,6 +146,7 @@ func _render(out: String) -> void:
 			_show_room(room, band, c)
 			if _setting:
 				_setting.position = Vector3(c.x, 0, c.y)
+				_setting.visible = room == "driveway"
 			_cam.transform.origin = Vector3(c.x, 1.0, c.y) + _cam.transform.basis.z * 20.0
 			if _depth:
 				_paint_depth(c)
