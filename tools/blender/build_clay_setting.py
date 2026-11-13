@@ -44,7 +44,8 @@ def g(x, y, z):
 # The drive's surface spans x, z within +-DRIVE and tops out at y -0.05 here (render_house.gd lifts the setting
 # 0.1 to the room's 0.05); level pieces round it top out at -0.055 so they meet it without a step.
 DRIVE = 2.05
-LEVEL_H = 0.025  # top -0.075 (world 0.025): 2.5 cm under the drive top so its clay lumps never poke through
+LEVEL_H = 0.045  # top -0.055: flush with the drive; built round it (level_round), never under it, so no clay pokes
+
 
 
 def ground(col, y=-0.12, back=HORIZON):
@@ -108,6 +109,18 @@ def strip_x(name, x0, x1, col, y=-0.1, h=0.06, z0=-HORIZON - 9, z1=12):
 
 def strip_z(name, z0, z1, col, y=-0.1, h=0.06, x0=-HORIZON - 9, x1=12):
     return patch(name, [(x0, z0), (x1, z0), (x1, z1), (x0, z1)], col, y, h)
+
+
+def level_round(name, x0, x1, z0, z1, col):
+    """A level surface over x0..x1, z0..z1, flush with the drive and cut round it (a ring of four strips). The ring
+    tucks 4 cm under the drive's rounded edge so no ground shows in the seam."""
+    d = DRIVE - 0.04
+    strip_z(f"{name}_back", z0, -d, col, h=LEVEL_H, x0=x0, x1=x1)
+    strip_z(f"{name}_front", d, z1, col, h=LEVEL_H, x0=x0, x1=x1)
+    if x0 < -d:
+        strip_x(f"{name}_side", x0, -d, col, h=LEVEL_H, z0=-d, z1=d)
+    if x1 > d:
+        strip_x(f"{name}_street", d, x1, col, h=LEVEL_H, z0=-d, z1=d)
 
 
 def prism(name, center, size, col, along_x=True, **kw):
@@ -420,7 +433,7 @@ def suburb(young=False):
 def flats():
     """Small flat: brick apartment blocks in town, a pavement and a street tree."""
     ground("b9b2a6")
-    strip_x("forecourt", -9, DRIVE, "b9b2a6", h=LEVEL_H)  # paved, level with the bay
+    level_round("forecourt", -9, DRIVE, -HORIZON - 9, 12, "b9b2a6")  # paved, level with the bay
     road_x(3.9, 12, drive="66676c", mouth=(-1.2, 1.4))  # the bay's width, between its lines
     block("home", -5.25, 1.85, 5.6, 8.3, 6, "e2d6c0", trim="cfc4ac")  # the bay's own block
     block("br", -1.9, -6.2, 7.6, 3.6, 3, "c27a56", trim="ece4d6")  # x -5.7..1.9, behind the pavement
@@ -428,7 +441,7 @@ def flats():
     box("br_doorframe", (-1.2, 1.05, -4.37), (1.1, 2.2, 0.06), "ece4d6", bevel=0.02, lump=0)
     box("br_door", (-1.2, 1.0, -4.33), (0.9, 2.0, 0.05), "2f4858", bevel=0.015, subd=1, lump=0)
     box("br_step", (-1.2, 0.02, -4.1), (1.4, 0.14, 0.5), "cfc8bc", bevel=0.03)
-    box("grate", (0.6, -0.07, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
+    box("grate", (0.6, -0.06, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
     tree("st0", 0.6, -3.3, h=5.0, r=1.2, leaf="6a9a4c")
     lamp("lamp0", 2.65, -1.9, h=5.5)
     box("planter", (-3.6, 0.15, 3.0), (1.6, 0.5, 0.6), "8a8378", bevel=0.05)
@@ -440,10 +453,11 @@ def lowrise():
     """Rental: the tenant's bay is one of a row in front of the block, in a level car park; a plain aisle runs past
     the bays' open ends (+x); the car park ends at a kerb, grass and a chain-link boundary fence, then the next block."""
     ground("82a05e")
-    patch("carpark", [(-2.45, -3.9), (12, -3.9), (12, 12), (-2.45, 12)], "6b6b70", h=LEVEL_H)
+    # the bay's tarmac (6b6b70) bakes 15% lighter in the home than this does in the setting: matched as rendered
+    level_round("carpark", -2.45, 12, -3.9, 12, "7b7b81")
     strip_z("wheel_kerb", -4.05, -3.9, "c9c4b8", h=0.1, x0=-2.45, x1=12)
     for i, z in enumerate((-3.8, 4.0, 6.6, 9.2)):  # the neighbours' bay lines, matching the room's at -1.2 and 1.4
-        box(f"bayline{i}", (0.0, -0.068, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
+        box(f"bayline{i}", (0.0, -0.045, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
     block("home", -5.25, 1.85, 5.6, 8.3, 3, "d8cdb8", win="4a5c68", trim="c7bca4")  # the bay's own block
     chainlink_z("fence", -4.6, -2.45, 12, h=1.4)
     block("br", 2.0, -7.2, 7.0, 3.2, 2, "d8ccb2", win="4a5c68", trim="c7bca4")
