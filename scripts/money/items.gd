@@ -5,8 +5,8 @@ extends RefCounted
 
 const ITEM_FILE := "res://data/property/items.json"
 const KEYS := ["id", "label", "room", "price", "min_age", "effects"]
-const OPTIONAL := ["slot", "pet"]  # slot: items sharing one fill it in turn (GDD §15.5)
-const ROOMS := ["bedroom", "bathroom", "living", "kitchen"]
+const OPTIONAL := ["slot", "pet", "result"]  # result: the line shown on buying
+const ROOMS := ["bedroom", "bathroom", "living", "kitchen", "driveway"]
 const STATS: Array = preload("res://scripts/autoload/game_state.gd").STATS
 
 var items: Array = []
@@ -128,6 +128,8 @@ func buy(state, it: Dictionary) -> String:
 		state.change_stat(s, int(it.effects[s]))
 	state.items.append(it.id)
 	state.home_slots[slot_of(it)] = it.id
+	if it.has("result"):
+		return it.result
 	if it.get("pet", false):
 		return "You bring home the %s. It already owns the place." % it.label.to_lower()
 	return "You buy the %s. It looks right at home." % it.label.to_lower()

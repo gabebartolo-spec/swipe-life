@@ -280,7 +280,7 @@ func _test_dollhouse() -> void:
 	for age in [0, 3, 4, 12, 13, 17]:
 		bands.append(Dollhouse.band_for(age))
 	_check(bands == ["baby", "baby", "child", "child", "teen", "teen"], "age bands %s" % [bands])
-	for room in Dollhouse.ROOMS:
+	for room in Dollhouse.ROOMS.keys().filter(func(r): return r not in Dollhouse.ADULT_ONLY):
 		for band in ["baby", "child", "teen"]:
 			var path := Dollhouse.texture_path(room, band)
 			_check(ResourceLoader.exists(path), "missing room still " + path)
@@ -908,6 +908,8 @@ func _test_figures() -> void:
 	homes.append_array(["starter_house", "town_house", "family_house", "seaside_villa", "mansion"])
 	for home: String in homes:
 		for room: String in Dollhouse.ROOMS:
+			if room in Dollhouse.ADULT_ONLY and home in ["baby", "child", "teen"]:
+				continue
 			var path := "%s/depth_%s_%s.png" % [FigureStage.DEPTH_DIR, room, home]
 			_check(ResourceLoader.exists(path), "no depth map: " + path)
 

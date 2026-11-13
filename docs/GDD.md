@@ -186,7 +186,7 @@ English only for now. I decide content; the director reviews.
   with a calendar flip. Cards get richer text (two to three lines).
 - 15.4 Places: home, workplace (office and law, trades and service first), school, town street. Cards move
   you to their place; menu actions let you pick one. Browsing places is free.
-- 15.5 Home: room switching (bedroom, lounge, kitchen, garage). Bought items auto-fill fixed slots; the player
+- 15.5 Home: room switching (bedroom, lounge, kitchen, driveway or garage, see 15.19). Bought items auto-fill fixed slots; the player
   can swap which item fills a slot (a bought car in the driveway, a couch in the lounge). House size and type
   and furniture quality follow money. Pets appear when acquired.
 - 15.6 Life shows in the scene (§10.7b): career props, trophies and wins, body changes, relationships and kids.
@@ -217,6 +217,18 @@ English only for now. I decide content; the director reviews.
   SFX: clay foley for UI, ambience per place; SFX and grunts from ElevenLabs. Existing credits on both
   accounts may be used freely; ask before buying more.
 - 15.18 UI: full clay redesign of the year menu and stats.
+- 15.19 Cars (director, 2026-11-13): flats, rentals, starter, town and fixer-upper homes park the car on an
+  outdoor driveway; family house, mansion and seaside villa get an indoor garage room instead. Children and
+  teens see the family car, picked by family wealth. A car has a flat yearly upkeep by tier, unlocks driving
+  cards (road trips, crashes, pulled over) and can be sold, losing value each year it is owned (classics hold
+  value). Reckless crash choices can kill. Learner at 16; a driving-test card decides when the licence comes.
+- 15.20 Character creator (director, 2026-11-13): the baby is rolled from both parents' looks (skin, hair
+  colour, eyes are inherited, heirs too), then every part can be tweaked. Skin tone is a continuous slider.
+  Outfits follow context automatically; the player sets what each context wears. Weight and fitness drift
+  the body shape gradually over years. A haircut stays as bought; hair greys and thins with age. Tattoos go
+  on arms, neck and face, torso and back, legs, and the private area (named in text only, never shown).
+- 15.21 Order after the cars PR: M17 Character. The cars update ships to itch bundled with the next
+  milestone. The 9 placeholder menu actions get rewritten by me and reviewed by the director.
 
 ## 13. Open questions (ask the director; do not decide)
 
@@ -258,3 +270,4 @@ None.
 - 2026-11-09: M8 money placeholders in docs/ADULT_MONEY.md stand until balance (M13).
 - 2026-11-09: Adult life turned on: lives run past 18 to death (§5).
 - 2026-11-09: M9 is the homes only (§10.2): bought items move to M11, adult and partner figures to after M5's clothes and hair.
+- 2026-11-13: §15.19-15.21: cars, garage for big homes, character creator, next milestone (director Q&A).
