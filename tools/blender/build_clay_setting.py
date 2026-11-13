@@ -405,8 +405,12 @@ def flats():
     road_x(3.9, 12)
     block("home", -5.25, 1.85, 5.6, 8.3, 6, "e2d6c0", trim="cfc4ac")  # the bay's own block
     block("br", 1.6, -6.2, 7.0, 3.6, 3, "c27a56", trim="ece4d6")
-    box("grate", (0.2, -0.04, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
-    tree("st0", 0.2, -3.3, h=5.0, r=1.2, leaf="6a9a4c")
+    # its ground-floor entrance: the frame top cuts the block at ~1.6 m, below its windows, so the door shows
+    box("br_doorframe", (-1.2, 1.05, -4.37), (1.1, 2.2, 0.06), "ece4d6", bevel=0.02, lump=0)
+    box("br_door", (-1.2, 1.0, -4.33), (0.9, 2.0, 0.05), "2f4858", bevel=0.015, subd=1, lump=0)
+    box("br_step", (-1.2, 0.02, -4.1), (1.4, 0.14, 0.5), "cfc8bc", bevel=0.03)
+    box("grate", (0.6, -0.04, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
+    tree("st0", 0.6, -3.3, h=5.0, r=1.2, leaf="6a9a4c")
     lamp("lamp0", 2.65, -1.9, h=5.5)
     box("planter", (-3.6, 0.15, 3.0), (1.6, 0.5, 0.6), "8a8378", bevel=0.05)
     bush("pb0", -3.9, 3.0, 0.3, "6a9a4a")
