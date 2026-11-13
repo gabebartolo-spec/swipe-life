@@ -35,8 +35,23 @@ const SETTINGS := {
 
 ## Lifts the setting so its ground meets the drive's surface (top y 0.05).
 const SETTING_LIFT := 0.1
-## Drive pieces that only suit the plain background: the room's raised plinth, the bay's kerb lip.
-const IN_SETTING_HIDE := ["room_driveway__slab", "drive__lip"]
+## Drive pieces that only suit the plain background: the room's raised plinth, the bay's kerb
+## lip, and the drive's own surface and bay lines, which the setting bakes with the ground round
+## them so the two match in tone.
+const IN_SETTING_HIDE := [
+	"room_driveway__slab",
+	"drive__lip",
+	"drive__tarmac",
+	"drive__paving",
+	"drive__line0",
+	"drive__line1",
+]
+## Neighbours' cars parked in a setting's other bays (setting-local x, z; nose to the aisle, +x),
+## from the game's own car models.
+const PARKED := {
+	"lowrise": [["car_used", Vector2(0.1, -2.5)], ["car_hatch", Vector2(0.1, 2.7)]],
+}
+const CAR_MODELS := "res://assets/house/items/cars.glb"
 
 var _house: Node3D
 var _cam: Camera3D
@@ -44,6 +59,23 @@ var _warm := false
 var _bands: Array = BANDS
 var _depth := false
 var _setting: Node3D
+
+
+## Parks cars in a setting's bays, on its surface (setting-local y -0.05, the drive's height).
+func _park(cars: Array) -> void:
+	if cars.is_empty():
+		return
+	var models: Node = (load(CAR_MODELS) as PackedScene).instantiate()
+	for it: Array in cars:
+		var src := models.find_child(it[0], true, false) as MeshInstance3D
+		assert(src != null, "no car model " + str(it[0]))
+		var car := MeshInstance3D.new()
+		car.mesh = src.mesh
+		car.name = "parked_" + str(it[0])
+		_setting.add_child(car)
+		car.position = Vector3(it[1].x, -0.05, it[1].y)
+		car.rotation.y = PI / 2.0
+	models.free()
 
 
 func _initialize() -> void:
@@ -103,15 +135,20 @@ func _initialize() -> void:
 		assert(ResourceLoader.exists(path), "build the setting first: " + path)
 		_setting = (load(path) as PackedScene).instantiate()
 		root3d.add_child(_setting)
+		_park(PARKED.get(SETTINGS[home], []))
 	var meshes := _house.find_children("*", "MeshInstance3D", true, false)
 	if _setting:
 		meshes += _setting.find_children("*", "MeshInstance3D", true, false)
 	for mi: MeshInstance3D in meshes:
-		if String(mi.name).contains("sky"):  # the backdrop keeps its own colours, unlit
-			var sky := StandardMaterial3D.new()
-			sky.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-			sky.vertex_color_use_as_albedo = true
-			sky.cull_mode = BaseMaterial3D.CULL_DISABLED
+		## The sky is lit as level ground, so its horizon colour meets the ground's without a line.
+		if String(mi.name).contains("sky"):
+			var sky := ShaderMaterial.new()
+			sky.shader = _sky_shader()
+			sky.set_shader_parameter("albedo", Color.WHITE)
+			sky.set_shader_parameter("use_vertex_color", true)
+			sky.set_shader_parameter("contact_ao", 0.0)
+			sky.set_shader_parameter("boil_fps", 0.0)
+			sky.set_shader_parameter("lump", 0.0)
 			mi.material_override = sky
 			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 			continue
@@ -135,8 +172,35 @@ func _initialize() -> void:
 		for key: String in GLOWS:
 			if key in String(mi.name):
 				m.set_shader_parameter("emission", GLOWS[key])
+		## A setting's level ground pieces lie millimetres apart on different vertex grids: the
+		## shader's lump (up to 1.2 cm) would push the lower ones through the drive's surface.
+		if _setting and _setting.is_ancestor_of(mi) and _top(mi) < 0.0:
+			m.set_shader_parameter("lump", 0.0)
 		mi.material_override = m
 	_render(out)
+
+
+## The clay shader lit as level, unshadowed ground, for the setting's sky card: the same colour
+## then renders the same on the sky as on the ground's far edge, so the horizon shows no line.
+func _sky_shader() -> Shader:
+	var s := Shader.new()
+	var code := CLAY.code.replace(
+		"shader_type spatial;", "shader_type spatial;\nrender_mode cull_disabled, shadows_disabled;"
+	)
+	var up := "NORMAL = normalize((VIEW_MATRIX * vec4(0.0, 1.0, 0.0, 0.0)).xyz);"
+	s.code = code.replace("EMISSION = base * emission;", "EMISSION = base * emission;\n\t" + up)
+	assert(s.code.contains("NORMAL = normalize((VIEW"), "clay shader changed: sky normal not set")
+	return s
+
+
+## A mesh's highest point in its setting's own space (built by hand: the tree isn't live yet).
+func _top(mi: MeshInstance3D) -> float:
+	var t := Transform3D()
+	var n: Node = mi
+	while n != _setting:
+		t = (n as Node3D).transform * t
+		n = n.get_parent()
+	return (t * mi.get_aabb()).end.y
 
 
 func _render(out: String) -> void:

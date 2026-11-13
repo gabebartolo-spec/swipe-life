@@ -23,9 +23,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_clay_room as R  # noqa: E402
 
 box, ball, tube = R.box, R.ball, R.tube
-HORIZON = 7.2  # ground ends at x + z = -HORIZON
+# ground ends at x + z = -HORIZON; a setting with a house or trees standing far back runs its grass on past them
+_KIND = sys.argv[sys.argv.index("--") + 1] if "--" in sys.argv else ""
+HORIZON = 11.0 if _KIND in ("suburb", "new_suburb", "tired_street", "grounds") else 7.2
 HAZE = (-4.0, -HORIZON)  # x + z where the fade starts and where it is strongest
 HAZE_MAX = 0.18
+EDGE = 1.2  # x + z depth over which the ground dissolves into the horizon colour
 STOREY = 2.9  # a real storey at the room's scale (its wall is 2.8 high)  # a light tint toward the horizon colour, never a fog
 SKY = {  # horizon, zenith
     "default": ("eef0ea", "a8c8e0"),
@@ -45,24 +48,47 @@ def g(x, y, z):
 # 0.1 to the room's 0.05); level pieces round it top out at -0.055 so they meet it without a step.
 DRIVE = 2.05
 LEVEL_H = 0.045  # top -0.055: flush with the drive; built round it (level_round), never under it, so no clay pokes
+LAWN_TOP = -0.055  # a raised ground's top: level with the drive (-0.05), so the drive lies in the lawn, not on a step
+LO, HI = -1.4, 1.6  # a house drive's sides (z): the garage door (-1.2..1.4) plus 0.2 either side
 
 
 
-def ground(col, y=-0.12, back=HORIZON):
-    """A clay board whose far edge is x + z = -back, dense enough to carry baked contact shadows."""
-    n = 140
-    bpy.ops.mesh.primitive_grid_add(x_subdivisions=n, y_subdivisions=n, size=1)
-    ob = bpy.context.object
-    ob.name = "ground"
-    for v in ob.data.vertices:
-        a, b = v.co.x * 26, v.co.y * 26  # a across the view, b along it (toward the camera)
-        b += 13 - back / math.sqrt(2) * 1.0
-        gx = (b - a) / math.sqrt(2)
-        gz = (b + a) / math.sqrt(2)
-        v.co = g(gx, y, gz)
+def ground(col, y=-0.12, back=HORIZON, lawn=None):
+    """A clay board whose far edge is x + z = -back, dense enough to carry baked contact shadows. Where
+    `lawn(x, z)` holds its top is LAWN_TOP (level with the drive) instead of y; it slopes down within one cell
+    (0.2 m), which callers keep under a pavement or down a bank."""
+    # cells of 0.2 m on the x and z lines, so the drive's edges (z -1.4 and 1.6) lie on grid lines: a grid at 45
+    # degrees to them bakes their contact shadow as a staircase of dark teeth
+    c = 0.2
+    lo = -round((back / 2 + 9.4) / c)
+    hi = round(13 / c)
+    n = hi - lo + 1
+    verts = []
+    for i in range(n):
+        for k in range(n):
+            gx, gz = (lo + i) * c, (lo + k) * c
+            d = -back - (gx + gz)
+            if d > 0:  # beyond the far edge: pulled on to it
+                gx, gz = gx + d / 2, gz + d / 2
+            verts.append(g(gx, LAWN_TOP if lawn and lawn(gx, gz) else y, gz))
+    faces = []
+    for i in range(n - 1):
+        for k in range(n - 1):
+            if (lo + i + 1) + (lo + k + 1) > -back / c:  # a cell wholly beyond the edge would only collapse
+                faces.append((i * n + k, (i + 1) * n + k, (i + 1) * n + k + 1, i * n + k + 1))
+    me = bpy.data.meshes.new("ground")
+    me.from_pydata(verts, [], faces)
+    if me.polygons[0].normal.z < 0:
+        me.flip_normals()
+    ob = bpy.data.objects.new("ground", me)
+    bpy.context.collection.objects.link(ob)
+    bpy.ops.object.select_all(action="DESELECT")
+    ob.select_set(True)
+    bpy.context.view_layer.objects.active = ob
     m = ob.modifiers.new("solid", "SOLIDIFY")
     m.thickness = 0.3
-    return R.finish(ob, col, bevel=0, subd=0, lump=0.01)
+    # exactly flat: a lumpy lawn rises through the drive's edge and bakes a sawtooth of dark teeth along it
+    return R.finish(ob, col, bevel=0, subd=0, lump=0)
 
 
 def clip_to_horizon(pts):
@@ -96,10 +122,14 @@ def patch(name, verts_xz, col, y=-0.1, h=0.06):
     bpy.context.view_layer.objects.active = ob
     m = ob.modifiers.new("solid", "SOLIDIFY")
     m.thickness = h
+    # cells of ~0.12 m, so a contact shadow baked into the vertex colours stays where it falls, not smeared
+    # over a whole coarse cell
+    span = max(max(x for x, _ in pts) - min(x for x, _ in pts), max(z for _, z in pts) - min(z for _, z in pts))
     sub = ob.modifiers.new("subd", "SUBSURF")
-    sub.levels = sub.render_levels = 3
+    sub.levels = sub.render_levels = min(max(math.ceil(math.log2(span / 0.12)), 3), 6)
     sub.subdivision_type = "SIMPLE"
-    return R.finish(ob, col, bevel=0, subd=0, lump=0.006)
+    # exactly flat: a displaced top dips millimetres under its neighbour and bakes a dark sawtooth at the seam
+    return R.finish(ob, col, bevel=0, subd=0, lump=0)
 
 
 def strip_x(name, x0, x1, col, y=-0.1, h=0.06, z0=-HORIZON - 9, z1=12):
@@ -111,16 +141,40 @@ def strip_z(name, z0, z1, col, y=-0.1, h=0.06, x0=-HORIZON - 9, x1=12):
     return patch(name, [(x0, z0), (x1, z0), (x1, z1), (x0, z1)], col, y, h)
 
 
-def level_round(name, x0, x1, z0, z1, col):
-    """A level surface over x0..x1, z0..z1, flush with the drive and cut round it (a ring of four strips). The ring
-    tucks 4 cm under the drive's rounded edge so no ground shows in the seam."""
+def level_round(name, x0, x1, z0, z1, col, hole=(-DRIVE, DRIVE)):
+    """A level surface over x0..x1, z0..z1, flush with the drive and cut round it (a ring of four strips; `hole` is
+    the drive's z sides). The ring tucks 4 cm under the drive's edge so no ground shows in the seam."""
     d = DRIVE - 0.04
-    strip_z(f"{name}_back", z0, -d, col, h=LEVEL_H, x0=x0, x1=x1)
-    strip_z(f"{name}_front", d, z1, col, h=LEVEL_H, x0=x0, x1=x1)
+    lo, hi = hole[0] + 0.04, hole[1] - 0.04
+    strip_z(f"{name}_back", z0, lo, col, h=LEVEL_H, x0=x0, x1=x1)
+    strip_z(f"{name}_front", hi, z1, col, h=LEVEL_H, x0=x0, x1=x1)
     if x0 < -d:
-        strip_x(f"{name}_side", x0, -d, col, h=LEVEL_H, z0=-d, z1=d)
+        strip_x(f"{name}_side", x0, -d, col, h=LEVEL_H, z0=lo, z1=hi)
     if x1 > d:
-        strip_x(f"{name}_street", d, x1, col, h=LEVEL_H, z0=-d, z1=d)
+        strip_x(f"{name}_street", d, x1, col, h=LEVEL_H, z0=lo, z1=hi)
+
+
+def flat(name, x0, x1, z0, z1, col):
+    """A piece of the drive's own surface (top -0.05, the room's drive height): baked here with the ground round it
+    so the two match in tone; render_house.gd hides the room's own drive surface in the setting shot."""
+    return patch(name, [(x0, z1), (x1, z1), (x1, z0), (x0, z0)], col, y=-0.1, h=0.05)
+
+
+KERB = 3.9  # x of the road's kerb (road_x's x0 in every setting)
+
+
+def house_drive(col, to=DRIVE):
+    """A house's drive: garage-door width (LO..HI) from the house to the pavement (`to`), which runs on across its
+    mouth undisturbed; lawn either side of it, and a path along the house front either side of it (to the side gate
+    on the left, the front door on the right)."""
+    flat("drive", -2.1, to, LO, HI, col)
+    flat("path_l", -2.1, -1.3, HI, 2.0, col)
+    flat("path_r", -2.1, -1.3, -2.3, LO, col)
+
+
+def front_lawn(x, z):
+    """Where a house setting's ground is level with the drive: everything short of the pavement's far half."""
+    return x < DRIVE + 0.25
 
 
 def prism(name, center, size, col, along_x=True, **kw):
@@ -335,17 +389,22 @@ def lamp(n, x, z, h=2.6):
     ball(f"{n}_bulb", (x, h - 0.16, z), 0.1, "fff3c4", scale=(1.3, 0.5, 0.9), lump=0)
 
 
-def road_x(x0, x1, kerb_col="cfcac0", walk="d8d2c6", tar="74767c", line=True, crack=False, drive=None, mouth=DRIVE):
-    """Pavement from the drive's street edge to x0, kerb, then the road out to x1 (along z). `drive` is the drive's
-    surface colour: it runs on across the pavement as a crossover (z within `mouth`) to a dropped kerb."""
-    if drive:
-        # the crossover (top world 0.045, just under the drive's 0.05) is lowered 1.5 cm below the pavement either
-        # side and meets a dropped kerb flush with it, 2.5 cm over the road
+def road_x(x0, x1, kerb_col="cfcac0", walk="d8d2c6", tar="74767c", line=True, crack=False, drive=None, mouth=DRIVE,
+           footpath=True):
+    """Pavement from the drive's street edge to x0, kerb, then the road out to x1 (along z). With `drive` set the
+    kerb drops at the mouth (z within `mouth`); the pavement runs on across it undisturbed (`footpath`), or, for a
+    flat's bay, the caller's surface runs on across the pavement to x0 in one piece, 1 cm under it either side."""
+    if drive and footpath:
+        lo, hi = (-mouth, mouth) if isinstance(mouth, float) else mouth
+        strip_x("pavement", DRIVE, x0, walk)
+        strip_x("kerb_drop", x0, x0 + 0.18, kerb_col, h=0.05, z0=lo, z1=hi)
+        strip_x("kerb", x0, x0 + 0.18, kerb_col, h=0.1, z1=lo)
+        strip_x("kerb_b", x0, x0 + 0.18, kerb_col, h=0.1, z0=hi)
+    elif drive:
         lo, hi = (-mouth, mouth) if isinstance(mouth, float) else mouth
         strip_x("pavement", DRIVE, x0, walk, z1=lo)
         strip_x("pavement_b", DRIVE, x0, walk, z0=hi)
-        strip_x("crossover", DRIVE, x0, drive, h=0.045, z0=lo, z1=hi)
-        strip_x("kerb_drop", x0, x0 + 0.18, kerb_col, h=0.045, z0=lo, z1=hi)
+        strip_x("kerb_drop", x0, x0 + 0.18, kerb_col, h=0.05, z0=lo, z1=hi)
         strip_x("kerb", x0, x0 + 0.18, kerb_col, h=0.1, z1=lo)
         strip_x("kerb_b", x0, x0 + 0.18, kerb_col, h=0.1, z0=hi)
     else:
@@ -361,6 +420,11 @@ def road_x(x0, x1, kerb_col="cfcac0", walk="d8d2c6", tar="74767c", line=True, cr
             c = box(f"crack{i}", (x0 + 0.6 + rng.random() * 0.8, -0.078, -3 + i * 1.5),
                     (0.03, 0.01, 0.5 + rng.random()), "55575c", bevel=0.005, subd=0, lump=0)
             turn(c, 2, rng.random() - 0.5)
+
+
+def bay_lines(zs, x=0.0, length=3.4):
+    for i, z in enumerate(zs):
+        box(f"bayline{i}", (x, -0.045, z), (length, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
 
 
 def tufts(n, area, count, col="7f9a48", tall=0.35, far=-HORIZON + 0.4):
@@ -403,6 +467,12 @@ def home_body(col, h, roof=None, trim=None, floors=0, win="2f4858", chim=None):
         chimney("home_chim", -4.6, h + 0.5, chim)
 
 
+def next_door(n, col, roof, peel=False):
+    """The house next door on the right (beyond the plot line at z -2.3), set back in line with this one, so the
+    ground over the drive's far side runs to a house front and not to open sky."""
+    house(n, -4.6, -5.8, 4.0, 4.4, col, roof, ridge_x=False, peel=peel)  # x -6.6..-2.6, z -8.0..-3.6
+
+
 def neighbour(n, col, roof, peel=False, x_front=-3.0):
     """The house next door on the left, its roof and chimney rising over the left wall."""
     house(n, x_front - 2.0, 1.6, 4.0, 4.4, col, roof, ridge_x=False, peel=peel)
@@ -412,19 +482,23 @@ def neighbour(n, col, roof, peel=False, x_front=-3.0):
 def suburb(young=False):
     """Family house and childhood home: a suburban street with fences, lawns and big trees. Starter house (young):
     the same street newer, with small trees and low fences."""
-    ground("86b05e" if young else "7aa85a")
-    road_x(3.9, 12, drive="b9b1a3" if young else "c8bfae")
+    ground("86b05e" if young else "7aa85a", lawn=front_lawn)
+    drive = "b9b1a3" if young else "c8bfae"
+    house_drive(drive)
+    road_x(KERB, 12, drive=drive, mouth=(LO, HI))
     if young:
         picket_z("front", 3.3, -7.0, 2.0, h=0.5, col="f4f0e6")
         home_body("c4785a", 3.2, roof="b5654a")
         tree("tr", -0.4, -3.4, h=4.0, r=0.85, kind="young")
         tree("tr2", 1.8, -4.6, h=3.6, r=0.75, kind="young")
         bush("b0", -4.2, 2.9, 0.3)
+        next_door("nd", "d9cbb0", "8f6a52")
     else:
         picket_z("front", 3.3, -7.0, 2.0)
         home_body("b8694c", 6.0, roof="8f4f3a", floors=1, chim=-1.0)
         tree("tr", -0.3, -3.4, h=5.5, r=1.5, leaf="5f9447")
-        board_fence_z("back", -4.4, -2.4, 2.0, h=1.8)  # the plot line, not over the road
+        board_fence_z("back", -2.95, -2.4, 2.0, h=1.8)  # the plot line, between the houses, not over the road
+        next_door("nd", "e0d2b8", "7c5a48")
         tree("tr2", 3.6, -6.4, h=4.2, r=1.2)
         bush("b0", -4.4, 2.8, 0.36)
         bush("b1", -3.6, 2.85, 0.3, "6a9a4e")
@@ -433,17 +507,20 @@ def suburb(young=False):
 def flats():
     """Small flat: brick apartment blocks in town, a pavement and a street tree."""
     ground("b9b2a6")
-    level_round("forecourt", -9, DRIVE, -HORIZON - 9, 12, "b9b2a6")  # paved, level with the bay
-    road_x(3.9, 12, drive="66676c", mouth=(-1.2, 1.4))  # the bay's width, between its lines
+    level_round("forecourt", -9, DRIVE, -HORIZON - 9, 12, "b9b2a6", hole=(-1.25, 1.45))  # paved, level with the bay
+    flat("bay", -2.1, KERB, -1.25, 1.45, "66676c")  # the bay's tarmac, on across the pavement to the kerb
+    bay_lines((-1.2, 1.4))
+    road_x(KERB, 12, drive="66676c", mouth=(-1.25, 1.45), footpath=False)
     block("home", -5.25, 1.85, 5.6, 8.3, 6, "e2d6c0", trim="cfc4ac")  # the bay's own block
     block("br", -1.9, -6.2, 7.6, 3.6, 3, "c27a56", trim="ece4d6")  # x -5.7..1.9, behind the pavement
-    # its ground-floor entrance: the frame top cuts the block at ~1.6 m, below its windows, so the door shows
-    box("br_doorframe", (-1.2, 1.05, -4.37), (1.1, 2.2, 0.06), "ece4d6", bevel=0.02, lump=0)
-    box("br_door", (-1.2, 1.0, -4.33), (0.9, 2.0, 0.05), "2f4858", bevel=0.015, subd=1, lump=0)
-    box("br_step", (-1.2, 0.02, -4.1), (1.4, 0.14, 0.5), "cfc8bc", bevel=0.03)
-    box("grate", (0.6, -0.06, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
-    tree("st0", 0.6, -3.3, h=5.0, r=1.2, leaf="6a9a4c")
-    lamp("lamp0", 2.65, -1.9, h=5.5)
+    # its ground-floor entrance, left of the tree's crown (screen x 1.2 vs the crown's 1.7..4.1): the frame top
+    # cuts the door ~0.9 m up, so its foot, frame and step show with the door above them
+    box("br_doorframe", (-2.6, 1.05, -4.37), (1.1, 2.2, 0.06), "ece4d6", bevel=0.02, lump=0)
+    box("br_door", (-2.6, 1.0, -4.33), (0.9, 2.0, 0.05), "2f4858", bevel=0.015, subd=1, lump=0)
+    box("br_step", (-2.6, 0.02, -4.12), (1.4, 0.14, 0.46), "cfc8bc", bevel=0.03)
+    # the forecourt tree stands between the bay and the entrance path, 4.3 m from the door, clear of both
+    box("grate", (1.4, -0.05, -2.7), (0.9, 0.012, 0.9), "4a4c52", bevel=0.004, lump=0)  # 1 cm proud: set in
+    tree("st0", 1.4, -2.7, h=5.0, r=1.2, leaf="6a9a4c")
     box("planter", (-3.6, 0.15, 3.0), (1.6, 0.5, 0.6), "8a8378", bevel=0.05)
     bush("pb0", -3.9, 3.0, 0.3, "6a9a4a")
     bush("pb1", -3.3, 3.0, 0.28, "5f8f4a")
@@ -454,10 +531,9 @@ def lowrise():
     the bays' open ends (+x); the car park ends at a kerb, grass and a chain-link boundary fence, then the next block."""
     ground("82a05e")
     # the bay's tarmac (6b6b70) bakes 15% lighter in the home than this does in the setting: matched as rendered
-    level_round("carpark", -2.45, 12, -3.9, 12, "7b7b81")
+    flat("carpark", -2.45, 12, -3.9, 12, "7b7b81")  # one surface, the tenant's bay included
     strip_z("wheel_kerb", -4.05, -3.9, "c9c4b8", h=0.1, x0=-2.45, x1=12)
-    for i, z in enumerate((-3.8, 4.0, 6.6, 9.2)):  # the neighbours' bay lines, matching the room's at -1.2 and 1.4
-        box(f"bayline{i}", (0.0, -0.045, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
+    bay_lines((-3.8, -1.2, 1.4, 4.0, 6.6, 9.2))  # 2.6 m bays; render_house.gd parks neighbours' cars in two
     block("home", -5.25, 1.85, 5.6, 8.3, 3, "d8cdb8", win="4a5c68", trim="c7bca4")  # the bay's own block
     chainlink_z("fence", -4.6, -2.45, 12, h=1.4)
     block("br", 2.0, -7.2, 7.0, 3.2, 2, "d8ccb2", win="4a5c68", trim="c7bca4")
@@ -465,8 +541,11 @@ def lowrise():
 
 def tired_street():
     """Fixer-upper: a tired older street, overgrown lawn, a leaning fence and peeling neighbours."""
-    ground("8f9e58")
-    road_x(3.9, 12, kerb_col="bcb5a6", walk="c6bfb0", tar="7c7a76", line=False, crack=True, drive="a49a88")
+    ground("8f9e58", lawn=front_lawn)
+    house_drive("a49a88")
+    road_x(KERB, 12, kerb_col="bcb5a6", walk="c6bfb0", tar="7c7a76", line=False, crack=True, drive="a49a88",
+           mouth=(LO, HI))
+    next_door("nd", "c9b99a", "6d5a4a", peel=True)
     picket_z("front", 3.3, -7.0, 2.0, col="d8d0bc", lean=0.2)
     home_body("b9a58a", 3.2, roof="6d5a4a", chim=-1.2)
     tube("pole", (-0.6, 4.4, -3.2), 0.13, 9.0, "6b5440")
@@ -478,8 +557,9 @@ def tired_street():
 
 def terrace():
     """Town house: a terraced row in the city, black railings and a street lamp."""
-    ground("b7b0a4")
-    road_x(3.9, 12, walk="c9c2b5", tar="65676c", drive="9c9890")
+    ground("b7b0a4", lawn=front_lawn)
+    house_drive("9c9890")
+    road_x(KERB, 12, walk="c9c2b5", tar="65676c", drive="9c9890", mouth=(LO, HI))
     railing_z("rail", 3.2, -7.0, 2.0)
     lamp("lamp0", 2.65, -2.6, h=5.5)  # clear of the drive mouth
     home_body("8a5a48", 8.9, trim="efe8dc", floors=2, chim=-1.0)
@@ -500,8 +580,9 @@ def band(name, s0, s1, col, y=-0.1, h=0.06, across=24):
 def beach():
     """Seaside villa: a coastal road in front, sand and dune grass, the sea out to the horizon behind the villa."""
     shore = -4.8
-    ground("e8d7ae")
-    road_x(3.9, 12, kerb_col="e2d8c2", walk="e6d6b0", tar="8a8986", drive="e3d7bd")
+    ground("e8d7ae", lawn=lambda x, z: front_lawn(x, z) and x + z > shore + 0.9)
+    house_drive("e3d7bd")
+    road_x(KERB, 12, kerb_col="e2d8c2", walk="e6d6b0", tar="8a8986", drive="e3d7bd", mouth=(LO, HI))
     band("wet_sand", shore + 0.6, shore, "d6c094", y=-0.12, h=0.03)
     band("sea", shore, -HORIZON - 0.01, "5f9ec4", y=-0.12, h=0.05)
     band("foam", shore + 0.1, shore - 0.12, "f4f6f2", y=-0.115, h=0.05)
@@ -513,11 +594,15 @@ def beach():
 
 def grounds():
     """Mansion: big grounds, a mown lawn, a gravel drive, clipped hedges and tall trees."""
-    ground("6f9c50")
-    strip_x("gravel", DRIVE, 12, "d9cfb8", h=0.04)  # the forecourt, level with the drive
-    for i in range(-3, 4):  # mown stripes, kept out of the haze
-        strip_z(f"stripe{i}", i * 1.6 + 2.6, i * 1.6 + 3.4, "7aa85a", h=0.01, x0=-HORIZON - 9, x1=2.0)
-    box("hedge_f", (-2.6, 0.22, 3.0), (8.0, 0.65, 0.5), "4f7f3e", bevel=0.18, lump=0.02)
+    ground("6f9c50", lawn=front_lawn)
+    house_drive("d9c9a6")  # the gravel forecourt carries it on
+    strip_x("gravel", DRIVE, 12, "d9cfb8", h=0.05)  # the forecourt, level with the drive (top -0.05)
+    for i in range(-3, 4):  # mown stripes on the lawn, kept out of the haze and off the drive and paths
+        z0, z1 = i * 1.6 + 2.6, i * 1.6 + 3.4
+        if z1 > -2.3 and z0 < 2.0:
+            continue
+        strip_z(f"stripe{i}", z0, z1, "7aa85a", y=-0.06, h=0.008, x0=-HORIZON - 9, x1=DRIVE - 0.05)
+    box("hedge_f", (-2.6, 0.22, 3.2), (8.0, 0.65, 0.5), "4f7f3e", bevel=0.18, lump=0.02)
     for i, (x, z) in enumerate(((-3.2, -3.2),)):
         tube(f"cone_pot{i}", (x, 0.1, z), 0.3, 0.4, "d8cfb8")
         ball(f"cone{i}", (x, 0.95, z), 0.35, "4a7a3a", scale=(1, 2.4, 1), lump=0.02)
@@ -525,6 +610,8 @@ def grounds():
     tree("oak", -0.4, -3.6, h=6.0, r=1.8, leaf="5f8f45")
     for i, x in enumerate((2.2, 4.2)):
         tree(f"pr{i}", x, -3.6, h=8.0, r=1.0, kind="poplar", leaf="5a8545")
+    for i, (x, z) in enumerate(((-0.6, -6.2), (-3.4, -4.6), (1.8, -7.4))):  # the belt of trees across the grounds
+        tree(f"belt{i}", x, z, h=7.0, r=1.7, leaf="5a8a44")
 
 
 SETTINGS = {
@@ -544,7 +631,7 @@ SETTINGS = {
 
 def sky_card(horizon, zenith):
     """A card square to the camera, far behind the room, coloured from the horizon line up."""
-    n = 24
+    n = 96  # fine rows, so the colour at the horizon is the horizon colour, not a blend
     bpy.ops.mesh.primitive_grid_add(x_subdivisions=n, y_subdivisions=n, size=1)
     ob = bpy.context.object
     ob.name = "sky"
@@ -555,7 +642,7 @@ def sky_card(horizon, zenith):
     cols = ob.data.color_attributes["Col"].data
     for i, v in enumerate(ob.data.vertices):
         sy = v.co.y * 14
-        t = min(max((sy - horizon_sy) / 1.6, 0.0), 1.0) ** 0.8
+        t = min(max((sy - horizon_sy - 0.15) / 1.6, 0.0), 1.0) ** 0.8  # horizon colour held just past the line
         cols[i].color = tuple(hz[k] + (zn[k] - hz[k]) * t for k in range(3)) + (1.0,)
         p = centre + CAM_X * (v.co.x * 16) + CAM_Y * sy
         v.co = g(p.x, p.y, p.z)
@@ -569,11 +656,9 @@ def bake_and_haze(horizon):
     scene.cycles.samples = 48
     R.use_gpu(scene)
     scene.render.bake.target = "VERTEX_COLORS"
-    # The room itself casts the contact shadows on the ground around it; removed after the bake.
-    slab = box("occ_slab", (0, -0.2, 0), (4.3, 0.4, 4.3), "ffffff", bevel=0, subd=0, lump=0)
-    wx = box("occ_wx", (-2.3, 1.4, 0), (0.3, 2.8, 4.3), "ffffff", bevel=0, subd=0, lump=0)
-    wz = box("occ_wz", (0, 1.4, -2.3), (4.3, 2.8, 0.3), "ffffff", bevel=0, subd=0, lump=0)
-    occ = [slab, wx, wz]
+    # No stand-ins for the room: the drive's surface is baked here now (a slab stand-in would black it out), the
+    # garage wall stands flush against home_body, and a flat's bay has no wall at all.
+    occ = []
     obs = [o for o in scene.objects if o.type == "MESH" and o not in occ and "no_bake" not in o]
     for ob in obs + occ:
         bpy.context.view_layer.objects.active = ob
@@ -594,11 +679,19 @@ def bake_and_haze(horizon):
     for ob in obs:
         c = R.hexc(ob["clay_color"]) if "clay_color" in ob else (0.8, 0.8, 0.8)
         mw = ob.matrix_world
+        # ground pieces (nothing above the drive) dissolve into the sky over the last EDGE before the horizon, so
+        # the ground has no hard far edge; standing things keep the light haze only
+        low = max((mw @ v.co).z for v in ob.data.vertices) < 0.0
+        if low:  # smooth shading bends a slab's top into its cut far edge, darkening the last metre
+            ob.data.set_sharp_from_angle(angle=math.radians(45))
         for i, d in enumerate(ob.data.color_attributes["Col"].data):
             p = mw @ ob.data.vertices[i].co
             s = p.x + (-p.y)  # Godot x + z
             t = min(max((s - HAZE[0]) / (HAZE[1] - HAZE[0]), 0.0), 1.0)
             t = t * t * (3 - 2 * t) * HAZE_MAX
+            if low:
+                e = min(max((s + HORIZON - EDGE) / -EDGE, 0.0), 1.0)
+                t = max(t, e * e * (3 - 2 * e))
             ao = 0.35 + 0.65 * d.color[0]
             d.color = tuple(c[k] * ao * (1 - t) + hz[k] * t for k in range(3)) + (1.0,)
         ob.data.materials.clear()

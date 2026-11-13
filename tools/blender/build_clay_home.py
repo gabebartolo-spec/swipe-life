@@ -753,37 +753,37 @@ def driveway(home_id):
     H.tag()
     H.layer("drive")
     # The car is backed in square to the wall (figure_stage.gd: centre x0+2.1, z0+2.1, nose to +x, the street),
-    # spanning z0+1.1..3.1, so props keep to the strips either side of it.
+    # spanning z0+1.1..3.1. The drive's surface is baked into the setting (build_clay_setting.py: house_drive,
+    # flat); this one is hidden in the setting shot. Props stand where they would in life, off the drive.
     if kind == "kerb":
         box("tarmac", (x0 + 2.05, 0.02, z0 + 2.05), (4.1, 0.06, 4.1), surface, bevel=0.02, lump=0.004)
         for i, z in enumerate((z0 + 0.8, z0 + 3.4)):  # the bay's side lines, either side of the car
             box(f"line{i}", (x0 + 2.0, 0.06, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
         box("lip", (x0 + 4.0, 0.05, z0 + 2.05), (0.2, 0.04, 4.1), "c9c4b8", bevel=0.02)  # dropped kerb to the street
-        wheelie_bin("bin", x0 + 0.45, z0 + 3.75, "c0392b")  # general waste
-        wheelie_bin("bin2", x0 + 1.2, z0 + 3.75, "e8c040")  # recycling
-        tube("bollard", (x0 + 3.5, 0.45, z0 + 0.45), 0.11, 0.9, "4a4c52")
-        tube("bollard_band", (x0 + 3.5, 0.72, z0 + 0.45), 0.115, 0.1, "e8c040", lump=0)
-        ball("bollard_cap", (x0 + 3.5, 0.9, z0 + 0.45), 0.11, "4a4c52", scale=(1, 0.5, 1))
-        ball("weed", (x0 + 3.85, 0.08, z0 + 0.95), 0.13, "6a9a4a", scale=(1, 0.8, 1), lump=0.03)
+        # a flat's bins live in the block's bin store, not in a parking bay: nothing stands in the bay
     else:
         box("paving", (x0 + 2.05, 0.02, z0 + 2.05), (4.1, 0.06, 4.1), surface, bevel=0.03, lump=0.005)
         box("door", (x0 + 0.03, 1.1, z0 + 2.1), (0.06, 2.2, 2.6), door, bevel=0.04)
         for i in range(5):
             box(f"rib{i}", (x0 + 0.07, 0.3 + i * 0.4, z0 + 2.1), (0.03, 0.05, 2.5), door, bevel=0.015)
         box("lintel", (x0 + 0.05, 2.3, z0 + 2.1), (0.1, 0.12, 2.8), "efe8d8", bevel=0.04)
-        for i, x in enumerate((x0 + 3.8,)):  # hedge in the right corner (the back one showed over car roofs)
-            ball(f"hedge{i}", (x, 0.45, z0 + 0.3), 0.36, "5f8f4a", scale=(1, 1.1, 0.9), lump=0.03)
-        tube("post", (x0 + 3.6, 0.55, z0 + 0.4), 0.05, 1.1, "6b4a32")
-        box("letterbox", (x0 + 3.6, 1.2, z0 + 0.4), (0.35, 0.3, 0.3), "c0392b", bevel=0.05)
-        box("slot", (x0 + 3.78, 1.27, z0 + 0.4), (0.02, 0.04, 0.2), "26282d", bevel=0.01, lump=0)  # street side
-        box("slot_flap", (x0 + 3.79, 1.31, z0 + 0.4), (0.03, 0.05, 0.24), "a82e22", bevel=0.012, lump=0)
-        box("door_seam", (x0 + 3.6, 1.17, z0 + 0.555), (0.26, 0.18, 0.015), "a82e22", bevel=0.01, lump=0)
-        wheelie_bin("bin", x0 + 0.45, z0 + 3.75, "c0392b")
+        # On the lawn right of the drive (the drive runs z0+0.6..3.6): the letterbox at the front boundary by the
+        # pavement (x0+4.05), 0.3 m off the drive, and a clipped shrub beside it on the plot line.
+        ball("hedge0", (x0 + 3.65, 0.42, z0 - 0.35), 0.36, "5f8f4a", scale=(1, 1.1, 0.9), lump=0.03)
+        tube("post", (x0 + 3.75, 0.6, z0 + 0.3), 0.05, 1.1, "6b4a32")
+        box("letterbox", (x0 + 3.75, 1.25, z0 + 0.3), (0.35, 0.3, 0.3), "c0392b", bevel=0.05)
+        box("slot", (x0 + 3.93, 1.32, z0 + 0.3), (0.02, 0.04, 0.2), "26282d", bevel=0.01, lump=0)  # street side
+        box("slot_flap", (x0 + 3.94, 1.36, z0 + 0.3), (0.03, 0.05, 0.24), "a82e22", bevel=0.012, lump=0)
+        box("door_seam", (x0 + 3.75, 1.22, z0 + 0.455), (0.26, 0.18, 0.015), "a82e22", bevel=0.01, lump=0)
+        # The bin on its own paved pad in the front garden left of the drive, by the boundary: 0.5 m off the
+        # drive, 1.8 m from the garage door's edge.
+        box("bin_pad", (x0 + 3.2, 0.045, z0 + 4.4), (0.85, 0.02, 0.8), "c9c4b8", bevel=0.015, lump=0.003)
+        wheelie_bin("bin", x0 + 3.2, z0 + 4.4, "c0392b")
         ball("lamp_glow", (x0 + 0.12, 2.4, z0 + 0.6), 0.1, "fff3c4", scale=(0.8, 1, 1.3))
         if home_id in ("seaside_villa", "mansion"):
-            for i, x in enumerate((x0 + 1.0, x0 + 1.65)):  # in the left corner, beside the bin
-                tube(f"pot{i}", (x, 0.25, z0 + 3.75), 0.25, 0.5, "c47a44")
-                ball(f"shrub{i}", (x, 0.75, z0 + 3.75), 0.3, "4f8a46", scale=(1, 1.2, 1), lump=0.03)
+            for i, z in enumerate((z0 + 3.8, z0 + 0.25)):  # flanking the garage door, on the paths beside the drive
+                tube(f"pot{i}", (x0 + 0.3, 0.3, z), 0.2, 0.5, "c47a44")
+                ball(f"shrub{i}", (x0 + 0.3, 0.8, z), 0.27, "4f8a46", scale=(1, 1.2, 1), lump=0.03)
     H.tag()
 
 
