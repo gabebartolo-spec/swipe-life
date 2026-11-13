@@ -44,7 +44,7 @@ def g(x, y, z):
 # The drive's surface spans x, z within +-DRIVE and tops out at y -0.05 here (render_house.gd lifts the setting
 # 0.1 to the room's 0.05); level pieces round it top out at -0.055 so they meet it without a step.
 DRIVE = 2.05
-LEVEL_H = 0.045  # patch h from y -0.1 to top -0.055
+LEVEL_H = 0.025  # top -0.075 (world 0.025): 2.5 cm under the drive top so its clay lumps never poke through
 
 
 def ground(col, y=-0.12, back=HORIZON):
@@ -325,23 +325,27 @@ def lamp(n, x, z, h=2.6):
 def road_x(x0, x1, kerb_col="cfcac0", walk="d8d2c6", tar="74767c", line=True, crack=False, drive=None, mouth=DRIVE):
     """Pavement from the drive's street edge to x0, kerb, then the road out to x1 (along z). `drive` is the drive's
     surface colour: it runs on across the pavement as a crossover (z within `mouth`) to a dropped kerb."""
-    strip_x("pavement", DRIVE, x0, walk)
     if drive:
+        # the crossover (top world 0.045, just under the drive's 0.05) is lowered 1.5 cm below the pavement either
+        # side and meets a dropped kerb flush with it, 2.5 cm over the road
         lo, hi = (-mouth, mouth) if isinstance(mouth, float) else mouth
-        strip_x("crossover", DRIVE, x0, drive, h=0.065, z0=lo, z1=hi)  # just over the pavement, level with the drive
-        strip_x("kerb_drop", x0, x0 + 0.18, kerb_col, h=0.07, z0=lo, z1=hi)
+        strip_x("pavement", DRIVE, x0, walk, z1=lo)
+        strip_x("pavement_b", DRIVE, x0, walk, z0=hi)
+        strip_x("crossover", DRIVE, x0, drive, h=0.045, z0=lo, z1=hi)
+        strip_x("kerb_drop", x0, x0 + 0.18, kerb_col, h=0.045, z0=lo, z1=hi)
         strip_x("kerb", x0, x0 + 0.18, kerb_col, h=0.1, z1=lo)
         strip_x("kerb_b", x0, x0 + 0.18, kerb_col, h=0.1, z0=hi)
     else:
+        strip_x("pavement", DRIVE, x0, walk)
         strip_x("kerb", x0, x0 + 0.18, kerb_col, h=0.1)
-    strip_x("road", x0 + 0.18, x1, tar, h=0.02)
+    strip_x("road", x0 + 0.18, x1, tar, h=0.02)  # top -0.08
     if line:
         mid = (x0 + 0.18 + x1) / 2
         for i in range(-8, 6):
-            box(f"dash{i}", (mid, -0.03, i * 1.6), (0.12, 0.02, 0.8), "f2efe6", bevel=0.01, subd=1, lump=0)
+            box(f"dash{i}", (mid, -0.075, i * 1.6), (0.12, 0.02, 0.8), "f2efe6", bevel=0.01, subd=1, lump=0)
     if crack:
-        for i in range(5):
-            c = box(f"crack{i}", (x0 + 0.3 + rng.random() * 0.8, -0.035, -3 + i * 1.5),
+        for i in range(5):  # on the road, clear of the kerb
+            c = box(f"crack{i}", (x0 + 0.6 + rng.random() * 0.8, -0.078, -3 + i * 1.5),
                     (0.03, 0.01, 0.5 + rng.random()), "55575c", bevel=0.005, subd=0, lump=0)
             turn(c, 2, rng.random() - 0.5)
 
@@ -424,7 +428,7 @@ def flats():
     box("br_doorframe", (-1.2, 1.05, -4.37), (1.1, 2.2, 0.06), "ece4d6", bevel=0.02, lump=0)
     box("br_door", (-1.2, 1.0, -4.33), (0.9, 2.0, 0.05), "2f4858", bevel=0.015, subd=1, lump=0)
     box("br_step", (-1.2, 0.02, -4.1), (1.4, 0.14, 0.5), "cfc8bc", bevel=0.03)
-    box("grate", (0.6, -0.04, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
+    box("grate", (0.6, -0.07, -3.3), (0.9, 0.04, 0.9), "4a4c52", bevel=0.02, lump=0)
     tree("st0", 0.6, -3.3, h=5.0, r=1.2, leaf="6a9a4c")
     lamp("lamp0", 2.65, -1.9, h=5.5)
     box("planter", (-3.6, 0.15, 3.0), (1.6, 0.5, 0.6), "8a8378", bevel=0.05)
@@ -439,7 +443,7 @@ def lowrise():
     patch("carpark", [(-2.45, -3.9), (12, -3.9), (12, 12), (-2.45, 12)], "6b6b70", h=LEVEL_H)
     strip_z("wheel_kerb", -4.05, -3.9, "c9c4b8", h=0.1, x0=-2.45, x1=12)
     for i, z in enumerate((-3.8, 4.0, 6.6, 9.2)):  # the neighbours' bay lines, matching the room's at -1.2 and 1.4
-        box(f"bayline{i}", (0.0, -0.04, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
+        box(f"bayline{i}", (0.0, -0.068, z), (3.4, 0.02, 0.1), "f2efe6", bevel=0.01, subd=1, lump=0)
     block("home", -5.25, 1.85, 5.6, 8.3, 3, "d8cdb8", win="4a5c68", trim="c7bca4")  # the bay's own block
     chainlink_z("fence", -4.6, -2.45, 12, h=1.4)
     block("br", 2.0, -7.2, 7.0, 3.2, 2, "d8ccb2", win="4a5c68", trim="c7bca4")
