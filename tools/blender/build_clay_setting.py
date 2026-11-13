@@ -56,14 +56,35 @@ def ground(col, y=-0.12, back=HORIZON):
     return R.finish(ob, col, bevel=0, subd=0, lump=0.01)
 
 
+def clip_to_horizon(pts):
+    """Clips a polygon of Godot (x, z) points to the ground, x + z >= -HORIZON (nothing hangs in the sky)."""
+    out = []
+    for i, a in enumerate(pts):
+        b = pts[(i + 1) % len(pts)]
+        da, db = a[0] + a[1] + HORIZON, b[0] + b[1] + HORIZON
+        if da >= 0:
+            out.append(a)
+        if (da >= 0) != (db >= 0):
+            t = da / (da - db)
+            out.append((a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t))
+    return out
+
+
 def patch(name, verts_xz, col, y=-0.1, h=0.06):
-    """A flat clay piece (road, path, sand) over the ground, from Godot (x, z) corners."""
-    bpy.ops.mesh.primitive_plane_add(size=1)
-    ob = bpy.context.object
-    ob.name = name
-    bm_verts = ob.data.vertices
-    for v, (x, z) in zip(bm_verts, verts_xz):
-        v.co = g(x, y + h, z)
+    """A flat clay piece (road, path, sand) over the ground, from Godot (x, z) corners in order round the edge."""
+    pts = clip_to_horizon(verts_xz)
+    verts = [g(x, y + h, z) for x, z in pts]
+    face = list(range(len(verts)))
+    me = bpy.data.meshes.new(name)
+    me.from_pydata(verts, [], [face])
+    if me.polygons[0].normal.z < 0:  # face up, so the solidify grows down into the ground
+        me.clear_geometry()
+        me.from_pydata(verts, [], [face[::-1]])
+    ob = bpy.data.objects.new(name, me)
+    bpy.context.collection.objects.link(ob)
+    bpy.ops.object.select_all(action="DESELECT")
+    ob.select_set(True)
+    bpy.context.view_layer.objects.active = ob
     m = ob.modifiers.new("solid", "SOLIDIFY")
     m.thickness = h
     sub = ob.modifiers.new("subd", "SUBSURF")
@@ -313,7 +334,7 @@ def tufts(n, area, count, col="7f9a48", tall=0.35):
     (xa, xb), (za, zb) = area
     for i in range(count):
         x, z = xa + rng.random() * (xb - xa), za + rng.random() * (zb - za)
-        if abs(x) < 2.4 and abs(z) < 2.4:
+        if abs(x) < 2.4 and abs(z) < 2.4 or x + z < -HORIZON + 0.4:
             continue
         ball(f"{n}{i}", (x, -0.05 + tall * 0.3, z), 0.12, col, scale=(0.8, tall * 5, 0.8), lump=0.02)
 
@@ -346,7 +367,6 @@ def suburb(young=False):
         neighbour("nl", "efe3c8", "b5654a")
         tree("tr", -0.4, -3.4, h=3.0, r=0.7, kind="young")
         tree("tr2", 1.8, -4.6, h=2.6, r=0.55, kind="young")
-        picket_x("back", -2.6, -2.6, -3.9, h=0.55, col="efe9dc")
         bush("b0", -4.2, 2.9, 0.3)
     else:
         picket_z("front", 3.3, -7.0, 2.3)
@@ -378,7 +398,7 @@ def lowrise():
     strip_x("carpark", 2.3, 12, "6e7075", h=0.03)
     for i in range(-5, 4):
         box(f"bay{i}", (3.9, -0.03, i * 2.4 + 1.2), (3.0, 0.02, 0.09), "f2efe6", bevel=0.01, subd=1, lump=0)
-    chainlink_z("fence", 3.3, -7.0, 2.3)
+    chainlink_z("fence", 4.0, -7.0, 2.3, h=1.2)
     block("bl", -5.2, 1.6, 3.8, 7.0, 2, "e2d6bc", win="4a5c68", trim="cfc4ac")
     chainlink_z("fence_b", -3.0, -2.4, 9)
     block("br", 2.0, -7.2, 7.0, 3.2, 2, "d8ccb2", win="4a5c68", trim="c7bca4")
@@ -395,7 +415,6 @@ def tired_street():
     tube("pole", (-0.6, 2.4, -3.2), 0.09, 5.0, "6b5440")
     box("pole_arm", (-0.6, 4.4, -3.2), (1.2, 0.1, 0.12), "6b5440", bevel=0.02)
     tree("tr", 1.8, -4.4, h=3.8, r=1.0, leaf="7a964e")
-    picket_x("back", -2.6, -2.6, -3.9, col="cfc6ae", lean=0.16)
     tufts("weed", ((-6.5, 2.3), (2.3, 3.2)), 16, col="9aa850", tall=0.45)
     tufts("weed_b", ((-2.5, 6), (-6.5, -2.5)), 30, col="9aa850", tall=0.5)
 
@@ -438,8 +457,6 @@ def beach():
         ball(f"dune{i}", (x, -0.12, z), r, "e2cf9f", scale=(1.6, 0.35, 1.6), lump=0.03)
         tufts(f"grass{i}_", ((x - r, x + r), (z - r, z + r)), 7, col="9aaa58", tall=0.5)
     palm("palm0", -3.2, 0.9, h=3.0)
-    tube("umb_pole", (3.1, 0.55, 1.2), 0.03, 1.3, "f4f0e6", lump=0)
-    ball("umb", (3.1, 1.2, 1.2), 0.7, "e8805a", scale=(1, 0.32, 1), lump=0.01)
     box("towel", (3.5, -0.05, 0.3), (0.55, 0.02, 1.1), "5b93b8", bevel=0.01, subd=1, lump=0)
 
 
@@ -450,7 +467,7 @@ def grounds():
     for i in range(-8, 4):  # mown stripes
         strip_z(f"stripe{i}", i * 1.6 + 2.6, i * 1.6 + 3.4, "7aa85a", h=0.01, x0=-HORIZON - 9, x1=2.25)
     box("hedge_f", (-2.6, 0.22, 3.0), (8.0, 0.65, 0.5), "4f7f3e", bevel=0.18, lump=0.02)
-    for i, (x, z) in enumerate(((2.75, 3.1), (-3.2, -3.2))):
+    for i, (x, z) in enumerate(((-3.2, -3.2),)):
         tube(f"cone_pot{i}", (x, 0.1, z), 0.3, 0.4, "d8cfb8")
         ball(f"cone{i}", (x, 0.95, z), 0.35, "4a7a3a", scale=(1, 2.4, 1), lump=0.02)
     for i, z in enumerate((-1.0, 1.4, 3.8)):
