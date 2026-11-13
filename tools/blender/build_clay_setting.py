@@ -2,6 +2,8 @@
 
 Run headless:
   blender -b --factory-startup --python tools/blender/build_clay_setting.py -- <kind> <out.glb>
+Hand edits (moved, turned, resized or removed pieces) come from tools/blender/setting_edits/<kind>.json;
+tools/edit_setting.sh opens a setting in Blender to make them (docs/SETTING_EDITS.md).
 
 Coordinates are Godot's, relative to the room's centre: the room's slab covers x, z -2.15..2.15 and its back walls
 stand at x = -2.15 and z = -2.15. render_house.gd places one copy under each room it renders. The street runs along
@@ -21,6 +23,7 @@ from mathutils import Vector
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_clay_room as R  # noqa: E402
+import setting_edit as E  # noqa: E402
 
 box, ball, tube = R.box, R.ball, R.tube
 # ground ends at x + z = -HORIZON; a setting with a house or trees standing far back runs its grass on past them
@@ -704,12 +707,17 @@ if __name__ == "__main__":
     args = sys.argv[sys.argv.index("--") + 1:]
     kind, out = args[0], os.path.abspath(args[1])
     bpy.ops.wm.read_factory_settings(use_empty=True)
+    E.track(globals())
     SETTINGS[kind]()
-    for ob in bpy.context.scene.objects:
-        ob.name = "set__" + ob.name
-    horizon, zenith = SKY.get(kind, SKY["default"])
-    sky_card(horizon, zenith)
-    bake_and_haze(horizon)
-    bpy.ops.export_scene.gltf(filepath=out, export_format="GLB", export_vertex_color="ACTIVE",
-                              export_materials="NONE", export_texcoords=False)
-    print("SETTING", kind, len(bpy.context.scene.objects))
+    if "--edit" in args:  # the director's hand edits (docs/SETTING_EDITS.md): out is the .blend to edit in
+        E.open_for_editing(kind, out, R.hexc)
+    else:
+        E.apply(kind)
+        for ob in bpy.context.scene.objects:
+            ob.name = "set__" + ob.name
+        horizon, zenith = SKY.get(kind, SKY["default"])
+        sky_card(horizon, zenith)
+        bake_and_haze(horizon)
+        bpy.ops.export_scene.gltf(filepath=out, export_format="GLB", export_vertex_color="ACTIVE",
+                                  export_materials="NONE", export_texcoords=False)
+        print("SETTING", kind, len(bpy.context.scene.objects))
