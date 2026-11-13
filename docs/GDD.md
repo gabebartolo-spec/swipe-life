@@ -159,6 +159,15 @@
   the person or the house. Needs a mapping table (event/flag -> prop or body part); see docs/ROADMAP.md.
 - 10.8 Before 18 (Shop locked, §6.7) the scene changes with age (e.g. crib → bed → desk) and with activities,
   which leave props in the house (e.g. a ball from the sports club, books from studying).
+- 10.9 Setting per home (director, 2026-11-13): each room scene sits in its home's own place, never on a flat
+  background: e.g. the small flat among apartment blocks, the seaside villa by the beach, the family house on a
+  suburban street with fences and trees. Each setting fades into a soft sky.
+  Settings (director, 2026-11-13): small flat, brick apartment blocks, pavement and a street tree; rental, plain
+  low-rise flats, car park, chain-link fence; fixer-upper, a tired older street, overgrown lawn, leaning fence;
+  starter house, a newer suburb, small lawns, young trees, low fences; town house, a terraced city row with
+  railings and a street lamp; family house, a suburban street with fences and big trees; seaside villa, sand,
+  dune grass and the sea to the horizon; mansion, big grounds, lawns, clipped hedges, gravel, tall trees; the
+  childhood home, the family house's suburban street.
 
 ## 11. Monetisation
 
@@ -271,3 +280,4 @@ None.
 - 2026-11-09: Adult life turned on: lives run past 18 to death (§5).
 - 2026-11-09: M9 is the homes only (§10.2): bought items move to M11, adult and partner figures to after M5's clothes and hair.
 - 2026-11-13: §15.19-15.21: cars, garage for big homes, character creator, next milestone (director Q&A).
+- 2026-11-13: Each home sits in its own setting fading into a soft sky (§10.9).
