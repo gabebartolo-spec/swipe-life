@@ -43,13 +43,20 @@ def window(n, x0, z, w=1.4, h=1.15, y=1.6, view="tree", frame="f0ece2"):
         box(f"{n}_trunk", (px - 0.005, y - h * 0.32, z - w * 0.2), (0.01, h * 0.36, 0.09), "7a5c45", bevel=0.003, subd=1, lump=0)
         for i, (dy, dz, r, col) in enumerate(((0.14, -0.2, 0.17, "7fae6a"), (0.0, -0.32, 0.12, "6f9e57"), (0.0, -0.08, 0.12, "8fbc78"))):
             ball(f"{n}_leaves{i}", (px + 0.004, y + h * dy, z + w * dz), w * r, col, scale=(0.05, 1, 1), lump=0)
-    elif view == "street":
-        for i, (dz, top, col, roof) in enumerate(((-0.34, 0.15, "c98f6f", "6f5a55"), (-0.06, -0.08, "e0cfa8", "8a5a4a"))):
+    elif base == "street":
+        tired = view == "street_tired"
+        cols = (("b9a283", "6d5a4a"), ("cfc2a2", "7a5f4f")) if tired else (("c98f6f", "6f5a55"), ("e0cfa8", "8a5a4a"))
+        for i, (dz, top, (col, roof)) in enumerate(zip((-0.34, -0.06), (0.15, -0.08), cols)):
             bh = h * (0.5 + top)
             bc = y - h / 2 + bh / 2
             box(f"{n}_house{i}", (px, bc, z + w * dz), (0.01, bh, w * 0.28), col, bevel=0.003, subd=1, lump=0)
             box(f"{n}_roof{i}", (px + 0.004, y - h / 2 + bh + 0.03, z + w * dz), (0.01, 0.07, w * 0.31), roof, bevel=0.003, subd=1, lump=0)
             box(f"{n}_pane{i}", (px + 0.008, bc + bh * 0.15, z + w * dz), (0.008, 0.11, 0.11), "fbf0c8", bevel=0.002, subd=1, lump=0)
+        if tired:  # an overgrown verge and a fence with pickets missing and sagging
+            box(f"{n}_verge", (px + 0.004, y - h * 0.44, z), (0.01, h * 0.12, w), "8f9e58", bevel=0.003, subd=1, lump=0)
+            for i, k in enumerate((0.2, 0.14, 0.0, 0.18, 0.1, 0.0, 0.16)):
+                if k:
+                    box(f"{n}_picket{i}", (px + 0.008, y - h * (0.5 - k / 2), z - w * 0.45 + i * w * 0.08), (0.008, h * k, 0.05), "d8d0bc", bevel=0.002, subd=1, lump=0)
     elif view == "hills":
         ball(f"{n}_sun", (px, y + h * 0.24, z - w * 0.3), w * 0.09, "f3d36b", scale=(0.05, 1, 1), lump=0)
         box(f"{n}_hill", (px, y - h * 0.32, z), (0.01, h * 0.36, w), "9dbb78", bevel=0.003, subd=1, lump=0)
@@ -78,6 +85,23 @@ def window(n, x0, z, w=1.4, h=1.15, y=1.6, view="tree", frame="f0ece2"):
             for i, d in enumerate((-0.42, -0.02)):
                 box(f"{n}_swing_leg{i}", (px + 0.004, y - h * 0.15, z + w * d), (0.008, h * 0.66, 0.04), "8a6a55", bevel=0.002, subd=1, lump=0)
             box(f"{n}_swing_seat", (px + 0.006, y - h * 0.2, z - w * 0.22), (0.008, 0.03, w * 0.12), "e0694a", bevel=0.002, subd=1, lump=0)
+    elif base == "flats":
+        for i, (dz, top, col) in enumerate(((-0.36, 0.1 + tall, "e2d6bc"), (-0.08, -0.05 - tall, "d8ccb2"))):
+            bh = h * (0.5 + top)
+            bc = y - h / 2 + bh / 2
+            box(f"{n}_flat{i}", (px, bc, z + w * dz), (0.01, bh, w * 0.26), col, bevel=0.003, subd=1, lump=0)
+            box(f"{n}_flat_top{i}", (px + 0.004, y - h / 2 + bh + 0.015, z + w * dz), (0.01, 0.03, w * 0.28), "cfc4ac", bevel=0.002, subd=1, lump=0)
+            for f in range(2):
+                for j in (-1, 1):
+                    box(f"{n}_win{i}_{f}{j}", (px + 0.008, bc + bh * (0.22 - f * 0.4), z + w * (dz + j * 0.06)), (0.008, 0.08, 0.06), "4a5c68", bevel=0.002, subd=1, lump=0)
+    elif base == "carpark":
+        box(f"{n}_flat", (px, y - h * 0.05, z - w * 0.2), (0.01, h * 0.5, w * 0.5), "e2d6bc", bevel=0.003, subd=1, lump=0)
+        for j in range(3):
+            box(f"{n}_win{j}", (px + 0.008, y + h * 0.05, z - w * (0.38 - j * 0.16)), (0.008, 0.08, 0.06), "4a5c68", bevel=0.002, subd=1, lump=0)
+        box(f"{n}_tar", (px + 0.004, y - h * 0.38, z), (0.01, h * 0.24, w), "6e7075", bevel=0.003, subd=1, lump=0)
+        for j in range(4):
+            box(f"{n}_bay{j}", (px + 0.008, y - h * 0.38, z - w * 0.42 + j * w * 0.2), (0.008, h * 0.2, 0.015), "f2efe6", bevel=0.001, subd=1, lump=0)
+        box(f"{n}_car", (px + 0.01, y - h * 0.36, z - w * 0.32), (0.008, h * 0.1, w * 0.14), "8a3f3a", bevel=0.002, subd=1, lump=0)
     elif base == "sea":
         box(f"{n}_water", (px, y - h * 0.2, z), (0.01, h * 0.34, w), "4f9cc4", bevel=0.003, subd=1, lump=0)
         box(f"{n}_sand", (px + 0.003, y - h * 0.42, z), (0.01, h * 0.16, w), "ecd9a8", bevel=0.003, subd=1, lump=0)
@@ -137,9 +161,9 @@ def rental():
                 ["cfc5ae", "b8ae97"][(i + j) % 2], bevel=0.02, subd=1, lump=0.004, seed=i * 7 + j)
         box(f"lplank{i}", (0.25 + i * 0.5, 0.02, 6), (0.46, 0.06, 4), ["b9a07f", "ae9576", "c2a988"][i % 3],
             bevel=0.025, seed=i)
-    window("wb", 0, 1.5, view="tree")
-    window("wl", 0, 6.0, view="street")
-    window("wk", 4, 5.2, w=1.2, h=1.0, y=1.65, view="hills")
+    window("wb", 0, 1.5, view="flats")
+    window("wl", 0, 6.0, view="carpark")
+    window("wk", 4, 5.2, w=1.2, h=1.0, y=1.65, view="flats_b")
     window("wt", 4, 1.7, w=0.7, h=0.6, y=2.05, view="frosted")
     for x, z in ORIGINS.values():
         skirting(x, z)
@@ -552,7 +576,7 @@ SPECS = {
         "floors": {"bedroom": ("plank", ["a58a6a", "977c5c", "ad9272"]), "living": ("plank", ["9c8263", "8e7556", "a78d6d"]),
                    "kitchen": ("tile_big", ["b9a88c", "a4937a"]), "bathroom": ("tile", ["c5b8a0", "b0a38c"])},
         "walls": {"bedroom": "c9b98f", "living": "bfae88", "kitchen": "c6bb94", "bathroom": "b7c0a6"},
-        "bare_back": True, "views": ("hills", "tree", "street"), "bed_w": 1.5, "wood": "8d7358", "duvet": "8c7a5e",
+        "bare_back": True, "views": ("street_tired", "tree", "street_tired"), "bed_w": 1.5, "wood": "8d7358", "duvet": "8c7a5e",
         "art": ("6e5a48", "c9a273", "a58a6a"), "sofa": "a8956c", "sofa_arm": "8f7c58",
         "cab": "b9b18f", "door": "9fb08a", "top": "8a7458", "splash": ("c9c0a0", "a9b596"), "chairs": "8d7358",
         "cabs": 3, "fridge": "cfc9a8", "wash": "tub", "suite": "9fb58a", "seat": "8a9c78", "tile_rows": 2,
