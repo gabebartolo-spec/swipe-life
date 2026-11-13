@@ -162,7 +162,7 @@
 - 10.9 Setting per home (director, 2026-11-13): the driveway scene sits in its home's own place, never on a flat
   background: e.g. the small flat among apartment blocks, the seaside villa by the beach, the family house on a
   suburban street with fences and trees. Each setting fades into a soft sky. Indoor rooms keep the plain
-  background (director, 2026-11-13: only the driveway scene needs one).
+  background and tell the outside story through their open windows only (director, 2026-11-13).
   Settings (director, 2026-11-13): small flat, brick apartment blocks, pavement and a street tree; rental, plain
   low-rise flats, car park, chain-link fence; fixer-upper, a tired older street, overgrown lawn, leaning fence;
   starter house, a newer suburb, small lawns, young trees, low fences; town house, a terraced city row with
