@@ -416,7 +416,7 @@ def tired_street():
     box("pole_arm", (-0.6, 4.4, -3.2), (1.2, 0.1, 0.12), "6b5440", bevel=0.02)
     tree("tr", 1.8, -4.4, h=3.8, r=1.0, leaf="7a964e")
     tufts("weed", ((-6.5, 2.3), (2.3, 3.2)), 16, col="9aa850", tall=0.45)
-    tufts("weed_b", ((-2.5, 6), (-6.5, -2.5)), 30, col="9aa850", tall=0.5)
+    tufts("weed_b", ((-2.5, 2), (-4.5, -2.5)), 18, col="9aa850", tall=0.5)
 
 
 def terrace():
@@ -464,7 +464,7 @@ def grounds():
     """Mansion: big grounds, a mown lawn, a gravel drive, clipped hedges and tall trees."""
     ground("6f9c50")
     strip_x("gravel", 2.3, 12, "d9cfb8", h=0.04)
-    for i in range(-8, 4):  # mown stripes
+    for i in range(-3, 4):  # mown stripes, kept out of the haze
         strip_z(f"stripe{i}", i * 1.6 + 2.6, i * 1.6 + 3.4, "7aa85a", h=0.01, x0=-HORIZON - 9, x1=2.25)
     box("hedge_f", (-2.6, 0.22, 3.0), (8.0, 0.65, 0.5), "4f7f3e", bevel=0.18, lump=0.02)
     for i, (x, z) in enumerate(((-3.2, -3.2),)):
